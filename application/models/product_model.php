@@ -478,7 +478,7 @@ class Product_model extends CI_Model{
 						$lazy = '';
 						if ($xx == 0)
 						{
-							$lazy = 'lazyload active';
+							$lazy = 'lazyload';
 							$img_str = CDN_URL . 'assets/products/images/' . $imgR;
 							$img[$xx] = '<img class="' . $lazy . ' vignette" src="' . base_url('/') . 'img/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-src="' .
 								CDN_URL . 'img/timbthumb.php?src=' . CDN_URL . 'assets/products/images/' . $imgR . '&w=360&h=230"/>';
@@ -506,7 +506,7 @@ class Product_model extends CI_Model{
 				else
 				{
 
-					$img[0] = '<img class="lazyload vignette active" src="' . CDN_URL . 'img/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-src="' .
+					$img[0] = '<img class="lazyload" src="' . CDN_URL . 'img/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-src="' .
 						base_url('/') . 'img/timbthumb.php?src=' .CDN_URL. 'img/product_blank.jpg&w=360&h=230" />';
 					$img_str = base_url('/') . 'img/product_blank.jpg';
 				}
@@ -629,11 +629,11 @@ class Product_model extends CI_Model{
 				if ($row->location != '')
 				{
 
-					$location = '<span  itemprop="address" class="badge">' . $row->location . '</span>';
+					$location = '<span  itemprop="address">' . $row->location . '</span>';
 
 					if ($row->suburb != 0 && $row->suburb != '')
 					{
-						$location = '<span  itemprop="address" class="badge">' . $row->location . ' / ' . $row->suburb . '</span>';
+						$location = '<span  itemprop="address" >' . $row->location . ' / ' . $row->suburb . '</span>';
 					}
 
 				}
