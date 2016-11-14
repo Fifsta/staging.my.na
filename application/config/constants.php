@@ -48,6 +48,31 @@ defined('FOPEN_READ_WRITE_CREATE')              OR define('FOPEN_READ_WRITE_CREA
 defined('FOPEN_WRITE_CREATE_STRICT')            OR define('FOPEN_WRITE_CREATE_STRICT', 'xb');
 defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
+
+if($_SERVER['HTTP_HOST'] == 'localhost'){
+
+	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"] .'/beta.my.na/');
+	define('CMS_URL',  'http://localhost/My_cms/');
+	define('CDN_URL',  'http://localhost/clients.my.na/');
+	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
+	
+}elseif($_SERVER['HTTP_HOST'] == 'jelastic.my.na'){
+
+	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"] .'/');
+	define('CMS_URL',  'http://cms.my.na/');
+	define('CDN_URL',  'https://cdn.my.na/');
+	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
+
+}else{
+
+	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"] .'/');
+	define('CMS_URL',  'https://cms.my.na/');
+	define('CDN_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
+	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
+
+}
+
+
 /*
 |--------------------------------------------------------------------------
 | Exit Status Codes
