@@ -25,11 +25,7 @@
 		
 			<!--LEFT-->
 			<div class="left col-sm-8 col-md-9">
-				<section id="latest_products">
-					<?php 
-                    echo $this->my_model->get_items('product');
-                    ?>
-            	</section>
+
 				<section id="nearyou">
 				
 					<div class="row">
@@ -142,8 +138,8 @@
 					</div>
 					
 					<?php 
-                     echo $this->my_model->get_items('product');
-                     ?>
+                    echo $this->my_model->get_items('product', 3408);
+                    ?>
 					
 				</section>
 				
@@ -161,8 +157,8 @@
 					</div>
 					
 					<?php 
-                     echo $this->my_model->get_items('product');
-                     ?>
+                    echo $this->my_model->get_items('product', 348);
+                    ?>
 					
 				</section>
 				
@@ -218,7 +214,7 @@
 
 	<!-- Bootstrap -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
-	
+	<link href="https://s3.amazonaws.com/mynamibia/packages/css/weather-icons.min.css" rel="stylesheet" type="text/css">
 	<!-- Calatz -->
 	<!-- The "browse to" file input fields -->
 	<script src="js/jquery.fileInput.js"></script>
@@ -238,7 +234,8 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
-		
+			
+			get_wethear('na','windhoek');
 			//THUMBS
 			$('figure .cycle-slideshow').cycle('pause');
 			$('figure .cycle-slideshow').mouseenter(function() {
@@ -272,6 +269,27 @@
 			swipeHeight();
 			$('#pre_load').fadeOut();
 		}
+		
+		
+		function get_wethear(cunt,city){
+	
+			$.getJSON( "<?php echo HUB_URL;?>weather/display_block/"+cunt+"/"+city, function( data ) {
+	
+				if(data.success){
+	
+					$('#weather_cont').html(data.html);
+					$('.city-weather').unbind('click').bind('click', function(e){
+						var city = $(this).data('location');
+						//console.log(city);
+						get_wethear('na', city);
+					});
+				}
+	
+			});
+	
+	
+		}
+			
 	</script>
 
 	

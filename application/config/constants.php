@@ -55,21 +55,24 @@ if($_SERVER['HTTP_HOST'] == 'localhost'){
 	define('CMS_URL',  'http://localhost/My_cms/');
 	define('CDN_URL',  'http://localhost/clients.my.na/');
 	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
-	
+	define('NA_URL',  'http://localhost/clients.my.na/');
+	define('HUB_URL',  'http://localhost/nmh/');
 }elseif($_SERVER['HTTP_HOST'] == 'jelastic.my.na'){
 
 	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"] .'/');
 	define('CMS_URL',  'http://cms.my.na/');
 	define('CDN_URL',  'https://cdn.my.na/');
 	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
-
+	define('NA_URL',  'https://www.my.na/');
+	define('HUB_URL',  'https://nmh.my.na/');
 }else{
 
 	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"] .'/');
 	define('CMS_URL',  'https://cms.my.na/');
-	define('CDN_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
+	define('CDN_URL',  'https://cdn.my.na/');
 	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
-
+	define('NA_URL',  'https://www.my.na/');
+	define('HUB_URL',  'https://nmh.my.na/');
 }
 
 

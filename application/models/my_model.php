@@ -8,7 +8,7 @@ class My_model extends CI_Model{
 	 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //+GET ITEMS
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	 public function get_items($type = ''){
+	 public function get_items($type = '', $main_id = 0,$sub_id = 0 ){
 
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
@@ -18,16 +18,24 @@ class My_model extends CI_Model{
 			if($type == 'product'){
 				
 				$this->load->model('product_model');
-				$output = $this->product_model->get_products($query = '', $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = '', $offset = 0, $title = '', $amt = '', $advert = true, $pages = '');
+				$data = $this->product_model->get_product_parameters();
+				
+				if($main_id != 0){
+					
+					$data['main_cat_id'] = $main_id;
+				}
+				$output = $this->product_model->get_products($query = '', $data['main_cat_id'] , $data['sub_cat_id'] , $data['sub_sub_cat_id'], $data['sub_sub_sub_cat_id'] , $data['offset'] , $title = '', $amt = '', $data['limit'] ,$data['q'], $data['location_id'], $data['suburb_id']);
 				
 			}elseif($type == 'news'){
 				
+				$this->load->model('news_model');
 				
+				$output = $this->news_model->get_nmh_news();
 				
 			}
 			
 				
-				//$this->cache->save('namibian_news_'.$type, $output, 3600);
+			///$this->cache->save('namibian_news_'.$type, $output, 3600);
 			
            
 			
