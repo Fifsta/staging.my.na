@@ -3,7 +3,7 @@
 class Trade_model extends CI_Model
 {
 
-	function trade_model()
+	public function __construct()
 	{
 		//parent::CI_model();
 

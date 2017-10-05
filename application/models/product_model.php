@@ -1,7 +1,7 @@
 <?php
 class Product_model extends CI_Model{
-	
- 	function product_model(){
+
+	public function __construct(){
   		//parent::CI_model();
 			
  	}

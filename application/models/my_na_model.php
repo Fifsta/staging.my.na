@@ -1,7 +1,8 @@
 <?php
 class My_model extends CI_Model{
-	
- 	function my_model(){
+
+    public function __construct()
+    {
   		//parent::CI_model();
 			
  	}

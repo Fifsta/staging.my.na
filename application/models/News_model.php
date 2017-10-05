@@ -3,7 +3,7 @@
 class News_model extends CI_Model
 {
 
-    function news_model()
+    public function __construct()
     {
         //parent::CI_model();
 
