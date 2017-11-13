@@ -465,7 +465,7 @@ class Product_model extends CI_Model{
 			$count = '<strong>' . $offset . ' - ' . ($offset + $query->num_rows()) . '</strong> Results shown of <strong>' . (int) $limit . '</strong>';
 
 			$flikstr = '{ "cellSelector":".swipe-item", "wrapAround": false, "lazyLoad":true, "prevNextButtons":true, "pageDots":false, "cellAlign":"left", "contain":true }';
-			$output = $sorting . '<div class="row item-list swipe js-flickity" data-flickity-options='."'".$flikstr."'".'>';
+			$output = $sorting . '<div class="owl-carousel" style="margin-top:20px">';
 			$x2 = 0;
 
 			// var_dump($advert);
@@ -678,9 +678,8 @@ class Product_model extends CI_Model{
 
 				/*$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');*/
 				
-				$output .= '<article class="swipe-item col-sm-6 col-md-3">
+				$output .= '<div>
 							<figure>
-								<p class="list-category"><a href="#">Properties</a></p>
 								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '" class="cycle-slideshow" data-cycle-speed="500" data-cycle-timeout="500">
 									' . implode($img) .implode($imgAa) . '
 								</a>
@@ -701,7 +700,7 @@ class Product_model extends CI_Model{
 									
 								</div>
 							</div>
-						</article>';
+						</div>';
 				$x2++;
 
 

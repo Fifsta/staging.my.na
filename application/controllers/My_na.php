@@ -30,6 +30,23 @@ class My_na extends CI_Controller {
 			
 	}
 
+
+	public function home2()
+	{
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+					
+		if ( ! $output = $this->cache->get('home'))
+		{
+			$output = $this->load->view('home2', '',true);
+			//$this->cache->save('home', $output, 172800);
+		}
+		
+		echo $output;
+			
+	}
+
+
 	public function nav()
 	{
 		if($this->session->userdata('id')){

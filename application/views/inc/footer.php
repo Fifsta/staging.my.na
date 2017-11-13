@@ -1,6 +1,6 @@
 
 	<footer id="footer">
-		<div class="container">
+		<div class="container-fluid">
 			<a href="#" class="logo-footer"><img src="images/logo-footer.png"></a>
 			<div class="row">
 				<aside class="col-sm-3 col-md-3 col-lg-4">

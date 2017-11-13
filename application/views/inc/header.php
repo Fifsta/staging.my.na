@@ -47,6 +47,8 @@
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- css -->
+	<link href="css/owl.carousel.min.css" rel="stylesheet" type="text/css">
+	<link href="css/owl.theme.default.min.css" rel="stylesheet" type="text/css">
 	<link href="css/style.combo.css" rel="stylesheet" type="text/css">
 	<link href="css/icons.css" rel="stylesheet" type="text/css">
 	<link href="css/style.css" rel="stylesheet" type="text/css">
