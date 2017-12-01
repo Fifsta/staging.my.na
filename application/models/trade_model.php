@@ -13,12 +13,12 @@ class Trade_model extends CI_Model
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 	public function get_business_deals()
 	{
 
 
 	}
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//+GET PRODUCT RIBBON
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -30,9 +30,7 @@ class Trade_model extends CI_Model
 		if ($status == 'sold')
 		{
 
-
 			$str = '<div class="product_ribbon' . $size . '"><small>Not Available</small>ITEM HAS SOLD<span></span></div>';
-
 			return $str;;
 
 		}
@@ -1023,13 +1021,13 @@ class Trade_model extends CI_Model
 							$lazy = 'lazy active';
 							$img_str = CDN_URL . 'assets/products/images/' . $imgR;
 							$img[$xx] = '<li><img class="' . $lazy . ' vignette" src="' . base_url('/') . 'img/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="' .
-								base_url('/') . 'img/timbthumb.php?src=' . CDN_URL . 'assets/products/images/' . $imgR . '&w=360&h=230"/></li>';
+								base_url('/') . 'img/timbthumb.php?src=' . S3_URL . 'assets/products/images/' . $imgR . '&w=360&h=230"/></li>';
 						}
 						else
 						{
 
 							$at = '<img class="vignette" alt="' . strip_tags($row->title) . '" src="' .
-								base_url('/') . 'img/timbthumb.php?src=' . CDN_URL. 'assets/products/images/' . $imgR . '&w=360&h=230"/>';
+								base_url('/') . 'img/timbthumb.php?src=' . S3_URL. 'assets/products/images/' . $imgR . '&w=360&h=230"/>';
 							array_push($imgAa, $at);
 
 						}
@@ -1060,11 +1058,11 @@ class Trade_model extends CI_Model
 
 					if (trim($row->BUSINESS_LOGO_IMAGE_NAME) != '')
 					{
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px;z-index:1;position:relative" src="' . base_url('/') . 'img/timbthumb.php?w=50&h=50&src=' . CDN_URL . 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME . '" alt="' . $row->BUSINESS_NAME . '" class="img-polaroid pull-right" />';
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px;z-index:1;position:relative" src="' . base_url('/') . 'img/timbthumb.php?w=50&h=50&src=' . S3_URL . 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME . '" alt="' . $row->BUSINESS_NAME . '" class="img-polaroid pull-right" />';
 					}
 					else
 					{
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px;z-index:1;position:relative" src="' . base_url('/') . 'img/timbthumb.php?w=50&h=50&src=' . CDN_URL . 'img/bus_blank.jpg" alt="' . $row->BUSINESS_NAME . '" class="img-polaroid pull-right" />';
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px;z-index:1;position:relative" src="' . base_url('/') . 'img/timbthumb.php?w=50&h=50&src=' . S3_URL . 'img/bus_blank.jpg" alt="' . $row->BUSINESS_NAME . '" class="img-polaroid pull-right" />';
 					}
 
 				}
@@ -1220,7 +1218,8 @@ class Trade_model extends CI_Model
 				   ';
 				}
 				$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
-				echo ' <div class="span' . $span . ' white_box">
+				echo ' <div>
+							<figure>
 							' . $ribbon . '
 							<div class="slideshow-block">
 								<a href="#" class="link"></a>
@@ -1250,6 +1249,7 @@ class Trade_model extends CI_Model
 								<div class="clearfix"></div>
 							</div>
 										' . $private . '
+							</figure>			
 					  </div>
 					  ';
 

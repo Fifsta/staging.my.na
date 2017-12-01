@@ -680,26 +680,32 @@ class Product_model extends CI_Model{
 				
 				$output .= '<div>
 							<figure>
+								<div class="price">' . $price . '</div>
 								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '" class="cycle-slideshow" data-cycle-speed="500" data-cycle-timeout="500">
 									' . implode($img) .implode($imgAa) . '
 								</a>
 								<div class="more">
-									<p class="price">' . $price . '</p>
+									
 									<p class="social">
 										<a onClick="'.$fb.'" data-icon="fa-facebook"></a>
 										<a href="'.$tweet_url.'" target="_blank" data-icon="fa-twitter"></a>
 										<a href="#" data-icon="fa-bookmark"></a>
 									</p>
 								</div>
-							</figure>
+							
 							<div>
 								<h2><a href="#">' . ucwords(strtolower($this->my_model->shorten_string($row->title, 6))) . '</a></h2>
 								<p class="date">Listed: '.$this->my_model->time_passed(strtotime($row->listing_date)).'</p>
 								<div class="details">
 									'.$extras.' 
-									
 								</div>
+								<div>
+								<p><a href="https://www.my.na/product/9495/3-bedroom-luxurious-townhouse-/" class="btn btn-dark pull-right">Enquire Now</a>&nbsp;
+								<a href="https://www.my.na/product/9495/3-bedroom-luxurious-townhouse-/" class="btn btn-warning pull-right" style="margin-right:5px">View</a></p>
+								</div>
+								<div class="spacer"></div>
 							</div>
+							</figure>
 						</div>';
 				$x2++;
 
@@ -727,7 +733,8 @@ class Product_model extends CI_Model{
 
 		//var_dump($extras);
 		$x = 0;
-		$o = '';
+		$o = '<table class="table table-striped">';
+
 		if ($extras != null)
 		{
 			unset($extras['bus_id']);unset($extras['product_id']);unset($extras['agency']);
@@ -739,8 +746,8 @@ class Product_model extends CI_Model{
 				if(!is_array($value)){
 
 					if($x < $limit ){
-						$o .= '<p><span>'.ucwords(str_replace('_',' ',$row)).'</span>
-							<strong>'.ucwords($value).'</strong></p>';
+						$o .= '<tr><td>'.ucwords(str_replace('_',' ',$row)).'</td>
+							<td>'.ucwords($value).'</td></tr>';
 						$x ++;
 					}
 
@@ -752,8 +759,8 @@ class Product_model extends CI_Model{
 				foreach ($extras['features'] as $row => $value)
 				{
 					if($x < $limit ){
-						$o .= '<p><span>'.ucwords(str_replace('_',' ',$row)).'</span>
-							<strong>'.ucwords($value).'</strong></p>';
+						$o .= '<tr><td>'.ucwords(str_replace('_',' ',$row)).'</td>
+							<td>'.ucwords($value).'</td></tr>';
 						$x ++;
 					}
 				}
@@ -763,14 +770,14 @@ class Product_model extends CI_Model{
 				foreach ($extras['autohaus'] as $row => $value)
 				{
 					if($x < $limit ){
-						$o .= '<p><span>'.ucwords(str_replace('_',' ',$row)).'</span>
-							<strong>'.ucwords($value).'</strong></p>';
+						$o .= '<tr><td>'.ucwords(str_replace('_',' ',$row)).'</td>
+							<td>'.ucwords($value).'</td></tr>';
 						$x ++;
 					}
 				}
 			}
 
-			$o .= '';
+			$o .= '</table>';
 		}
 		return $o;
 		

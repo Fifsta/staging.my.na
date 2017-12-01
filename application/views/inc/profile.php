@@ -4,9 +4,9 @@
 		<a href="#" class="pic"><img src="images/profile-pic.jpg"></a>
 		<a href="#" class="name">Carl-Heinz Benseler Benseler</a>
 		<ul>
-			<li><a href="#" data-icon="fa-bookmark-o"></a><span>10</span></li><!--
-			--><li><a href="#" data-icon="fa-envelope-o"></a><span>5</span></li><!--
-			--><li><a href="#" data-icon="fa-cog"></a><span>2</span></li>
+			<li><a href="#" data-icon="fa-bookmark text-dark"></a><span>10</span></li><!--
+			--><li><a href="#" data-icon="fa-envelope text-dark"></a><span>5</span></li><!--
+			--><li><a href="#" data-icon="fa-cog text-dark"></a><span>2</span></li>
 		</ul>
 		<button id="profile-toggle" class="btn btn-default btn-block" data-icon="fa-angle-double-down">My Account</button>
 	</nav>

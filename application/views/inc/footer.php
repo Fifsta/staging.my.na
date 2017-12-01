@@ -1,4 +1,3 @@
-
 	<footer id="footer">
 		<div class="container-fluid">
 			<a href="#" class="logo-footer"><img src="images/logo-footer.png"></a>
@@ -79,9 +78,9 @@
 			<div class="container">
 				<a href="#" class="logo-bookmark"><img src="images/footer-end.png"></a>
 				<ul>
-					<li><a href="#" data-icon="fa-facebook"></a></li>
-					<li><a href="#" data-icon="fa-twitter"></a></li>
-					<li><li><a href="#" data-icon="fa-youtube"></a></li>
+					<li><a href="#" data-icon="fa-facebook text-dark"></a></li>
+					<li><a href="#" data-icon="fa-twitter text-dark"></a></li>
+					<li><li><a href="#" data-icon="fa-youtube text-dark"></a></li>
 				</ul>
 				<small><a href="#">Terms & Conditions</a> | <a href="#">Contact Us</a> | <a href="#">Privacy policy</a> | 2016 © My Namibia ™</small>
 			</div>
@@ -107,3 +106,26 @@
 			<a href="#" class="expose" data-icon="fa-angle-double-down"></a>
 		</div>
 	</div>
+
+
+	<!-- Bootstrap -->
+	<link href="https://s3.amazonaws.com/mynamibia/packages/css/weather-icons.min.css" rel="stylesheet" type="text/css">
+
+	<!-- Calatz -->
+	<!-- The "browse to" file input fields -->
+	
+	<script src="js/jquery.fileInput.js"></script>
+	<script src="js/owl.carousel.js"></script>
+	<script src="js/jquery.cycle.min.js"></script>
+	<script src="js/jquery.lazysizes.min.js"></script>
+	<script src="js/jquery.fancybox.min.js"></script>
+	<script src="js/jquery.datatables.min.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+
+
+	<!-- Datepicker -->
+	<script src="js/moment.min.js"></script>
+	<script src="js/bootstrap-datetimepicker.min.js"></script>
+	
+	<!-- Custom Js -->
+	<script src="js/jquery.custom.js"></script>

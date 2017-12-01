@@ -1,0 +1,7 @@
+CREATE USER 'mynadb'@'localhost' IDENTIFIED BY '%^&YHU&*_pop';
+
+GRANT ALL PRIVILEGES ON * . * TO 'mynadb'@'localhost';
+
+mysql -h localhost -u 'mynadb' -p'%^&YHU&*_pop' mynamplt_new < /var/www/my.na/public_html/backup/mynamplt_new_2015-04-28.sql
+
+sudo chown -R myna:myna /var/www/my.na/public_html/assets/

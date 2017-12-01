@@ -600,7 +600,7 @@ class CI_Input {
 	protected function _sanitize_globals()
 	{
 		// Is $_GET data allowed? If not we'll set the $_GET to an empty array
-		if ($this->_allow_get_array === FALSE)
+		if ($this->_allow_get_array === TRUE)
 		{
 			$_GET = array();
 		}

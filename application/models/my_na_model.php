@@ -1,11 +1,12 @@
 <?php
-class My_model extends CI_Model{
+class My_na_model extends CI_Model{
 
     public function __construct()
     {
   		//parent::CI_model();
 			
  	}
+
 	 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //+GET NAMIBIAN NEWS
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

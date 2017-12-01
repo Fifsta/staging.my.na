@@ -23,7 +23,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/beta.my.na';
+
+//GOOGLE ANALYTICS
+$UA =  "var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4464808-23']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();";
+
+
+$config['mandrill_api_key'] = 'd3tAlotpZNobGiCfRk3Miw';
+
+//PHANTOM JS CLoud
+$config['phantomjscloudjey'] = 'ak-zvzpr-85c4t-2a4k4-ag4kq-a8j80';
+
+//AWS BEANSTALK TIER
+if(isset($_SERVER['MY_WORKER']) && $_SERVER['MY_WORKER'] == 'YES')
+{
+
+  //AWS WORKER TIER
+  $config['site_url']	= 'http://localhost/index.php';
+  $config['base_url']	= 'http://localhost/';
+  $config['analytics'] = '';
+
+}elseif($_SERVER['HTTP_HOST'] == 'localhost'){
+
+  //lIVE
+  $config['site_url']	= 'http://localhost/beta.my.na';
+  $config['base_url']	= 'http://localhost/beta.my.na/';
+  $config['analytics'] = '<script type="text/javascript"></script>';
+
+}else{
+
+  //lIVE
+  $config['site_url']	= 'https://www.my.na';
+  $config['base_url']	= 'https://www.my.na/';
+  $config['analytics'] = '<script type="text/javascript">'.$UA.'</script>';
+
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +76,7 @@ $config['base_url'] = 'http://localhost/beta.my.na';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
