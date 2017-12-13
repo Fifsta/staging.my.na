@@ -1,40 +1,5 @@
-
-<?php
-
-
-
-	  $x = rand(1,5);
-	  $y = rand(1,5);
-	  
-	  if($x == 1){
-		$x_1 = 'one';  
-	  }elseif($x == 2){
-		$x_1 = 'two';   
-	  }elseif($x == 3){
-		$x_1 = 'three';   
-	  }elseif($x == 4){
-		$x_1 = 'four'; 
-	  }elseif($x == 5){
-		$x_1 = 'five';   
-	  }
-	  
-	  if($y == 1){
-		$y_1 = 'one';  
-	  }elseif($y == 2){
-		$y_1 = 'two';   
-	  }elseif($y == 3){
-		$y_1 = 'three';   
-	  }elseif($y == 4){
-		$y_1 = 'four'; 
-	  }elseif($y == 5){
-		$y_1 = 'five';   
-	  }	    
-  
-	  
-?>	  
-	  
-<div class="row-fluid">
-     <div class="span12">
+  <div class="row">
+     <div class="col-md-12">
        <form action="<?php echo site_url('/')?>trade/contact/" method="post" accept-charset="utf-8" id="contact-us" name="contact-us">
         <input type="hidden" id="x" name="x" value="<?php echo $x;?>"/>
         <input type="hidden" id="y" name="y" value="<?php echo $y;?>"/>
@@ -45,24 +10,18 @@
            <div class="control-group">
             <label class="control-label" for="msg">Message/Enquiry:</label>
             <div class="controls">
-              <textarea rows="3"  class="redactor span12" id="msg" name="msg" placeholder="Ask your Question here."></textarea>
+              <textarea rows="3"  class="form-control" id="msg" name="msg" placeholder="Ask your Question here."></textarea>
             </div>
           </div>
           
           <div class="control-group">
            
-              
-              <label class="control-label" for="captcha">Security question: (<?php echo $x_1 . ' + ' . $y_1 ; ?>)</label>
-               <div class="controls">
-                 <input type="text" id="captcha" class="span2 pull-right" name="captcha" placeholder="<?php echo $x . ' + ' . $y . ' ='; ?>">
-         
-               </div>
               <span class="help-block" style="font-size:11px">To keep automated bots and trawlers from filling the form<br /> please answer the simple security question</span>
               <label class="checkbox">
                     <input type="checkbox" id="chk_human" value="remember-me"> Are you human?
               </label>
               <span class="help-block" style="font-size:11px">Please check the box to activate the form and block out robots</span>
-              <button type="submit" id="contactbut" class="btn pull-right" disabled><i class="icon-envelope"></i> Ask Question</button>
+              <button type="submit" id="contactbut" class="btn btn-dark pull-right" disabled><i class="fa fa-envelope text-light"></i> Ask Question</button>
             
           </div>
         </form>

@@ -6,8 +6,12 @@ class Trade_model extends CI_Model
 	public function __construct()
 	{
 		//parent::CI_model();
+		$this->load->database();	
+		$this->load->library('session');
 
 	}
+
+
 
 
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -40,7 +44,6 @@ class Trade_model extends CI_Model
 		if ($listing_type == 'A')
 		{
 
-
 			//ENDING DATE
 			$now = new DateTime("");
 			$listE = new DateTime(date('Y-m-d H:i:s', strtotime($end_date)));
@@ -71,7 +74,6 @@ class Trade_model extends CI_Model
 
 					return $str;
 
-
 				}
 				else
 				{
@@ -93,7 +95,6 @@ class Trade_model extends CI_Model
 		}
 		else
 		{
-
 
 			//ARRAY FEATURES
 			//SOLE MANDATE
@@ -1078,7 +1079,7 @@ class Trade_model extends CI_Model
 				if ($row->listing_type == 'S')
 				{
 
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">' . $btn_txt . '</a>&nbsp;
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
 								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 
 					if ($row->sub_cat_id == 3410)
@@ -1145,7 +1146,7 @@ class Trade_model extends CI_Model
 					$btn_txt = 'Order Now';
 
 
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">' . $btn_txt . '</a>&nbsp;
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
 								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 				}
 
@@ -1374,7 +1375,7 @@ class Trade_model extends CI_Model
 			$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter'
 			);
 
-			$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-large pull-right btn-inverse">
+			$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-large pull-right btn-dark">
 				<i class="icon-star-empty icon-white"></i> Grab Product
 				</a>';
 			//IF LOGGED IN
@@ -1382,7 +1383,7 @@ class Trade_model extends CI_Model
 			{
 
 
-				$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-large pull-right btn-inverse">
+				$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-large pull-right btn-dark">
 								<i class="icon-star-empty icon-white"></i> Grab Product
 								</a>';
 			}
@@ -1466,7 +1467,7 @@ class Trade_model extends CI_Model
 					{
 
 						$btn = '<div class="pull-right" style="margin-top:10px;">
-									  <a href="#contact_anchor" rel="tooltip" title="Please enquire about the product" class="btn btn-inverse btn-large" >' . $btn_txt . '</a>
+									  <a href="#contact_anchor" rel="tooltip" title="Please enquire about the product" class="btn btn-dark btn-large" >' . $btn_txt . '</a>
 								</div>';
 
 					}
@@ -1479,7 +1480,7 @@ class Trade_model extends CI_Model
 									  <input type="hidden" name="title" value="' . $row->title . '" />
 									  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
 									  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
-									  <button class="btn btn-inverse btn-large" id="buy_now_btn" type="submit">' . $btn_txt . '</button>
+									  <button class="btn btn-dark btn-large" id="buy_now_btn" type="submit">' . $btn_txt . '</button>
 								  </form>
 								</div>';
 					}
@@ -1541,8 +1542,8 @@ class Trade_model extends CI_Model
 					if ($end < $now)
 					{
 
-						$btn = '<div class="row-fluid">
-									<div class="span12"><div class="alert"><h3>Auction has Ended</h3>The auction has ended and all bidding has been suspended. Better luck next time</div></div>
+						$btn = '<div class="row">
+									<div class="col-xl-12"><div class="alert"><h3>Auction has Ended</h3>The auction has ended and all bidding has been suspended. Better luck next time</div></div>
 								</div>';
 					}
 					else
@@ -1637,12 +1638,12 @@ class Trade_model extends CI_Model
 									  <input type="hidden" name="title" value="' . $row->title . '" />
 									  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
 									  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
-									  <button class="btn btn-inverse btn-large" id="order_now_btn" type="submit">' . $btn_txt . '</button>
+									  <button class="btn btn-dark btn-large" id="order_now_btn" type="submit">' . $btn_txt . '</button>
 								  </form>
 								</div>';
 
 			}
-			$agent_ref = '<span class="label" rel="tooltip"  title="Product Reference"  itemprop="sku">MYNA' . $row->product_id . '</span>';
+			$agent_ref = '<span class="badge badge-dark" rel="tooltip"  title="Product Reference"  itemprop="sku">MYNA' . $row->product_id . '</span>';
 			//PROPERTY REFERENCE
 			if (count(json_decode($row->extras)) > 0)
 			{
@@ -1653,7 +1654,7 @@ class Trade_model extends CI_Model
 					if ($exr == 'agency' && $exv != '')
 					{
 
-						$agent_ref = '<span  class="label" rel="tooltip"  title="Product Reference">Ref: <strong itemprop="sku">' . $exv . '</strong></span>';
+						$agent_ref = '<span  class="badge badge-dark" rel="tooltip"  title="Product Reference">Ref: <strong itemprop="sku">' . $exv . '</strong></span>';
 					}
 
 				}
@@ -1674,11 +1675,11 @@ class Trade_model extends CI_Model
 			if ($row->location != '')
 			{
 
-				$location = '<span class="label">' . $row->location . '</span>';
+				$location = '<span class="badge badge-dark"">' . $row->location . '</span>';
 
 				if ($row->suburb != 0 && $row->suburb != '')
 				{
-					$location = '<span class="label">' . $row->location . ' / ' . $row->suburb . '</span>';
+					$location = '<span class="badge badge-dark"">' . $row->location . ' / ' . $row->suburb . '</span>';
 				}
 
 			}
@@ -1688,7 +1689,7 @@ class Trade_model extends CI_Model
 			$bid_btn = "<a href='javascript:void(0)' id='bid_btn_do'  class='btn btn-large btn-block btn-inverse'>Yes Place My Bid</a>";
 			echo '<div itemscope itemtype="http://schema.org/Product">
 						<div class="pull-right">' . $reserve . '</div>
-						<h3 class="upper na_script" itemprop="name">' . $row->title . '</h3>
+						<h2 class="upper na_script" itemprop="name">' . $row->title . '</h2>
 
 						' . $agent_ref . '
 
@@ -1698,25 +1699,23 @@ class Trade_model extends CI_Model
 						</span>	
 						' . $count . '
 
-						<div class="row-fluid">
-							<div class="span6">
+						<div class="row">
+							<div class="col-md-6">
 							 ' . $this->get_review_stars_show($rating, $row->product_id, 0, $total_reviews) . '
 							</div>
-							<div class="span6">
+							<div class="col-md-6">
 							' . $stock_ticker . '
 							</div>
 						</div>
 						<div id="product_msg" class="clearfix"></div>
-						<span class="pull-left" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-							<h1 style="font-size:50px;height:40px;color:#FF9F01;">' . $price['str'] . '</h1>
+						<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+							<h1 style="font-size:50px;height:40px;color:#FF9F01;margin-bottom:30px">' . $price['str'] . '</h1>
 							<meta itemprop="priceCurrency" content="NAD" />
 						</span>
 
 						<div class="clearfix">' . $btn . '</div>
 						
 						<!--<div class="price_label">' . $price['str'] . '</div>-->
-
-
 					</div>';
 
 			//ENDING DATE
@@ -2938,7 +2937,6 @@ class Trade_model extends CI_Model
 		if ($this->session->userdata('id'))
 		{
 
-
 			$this->db->select('product_id, client_id');
 			$this->db->where('product_id', $product_id);
 			$product = $this->db->get('products');
@@ -2960,20 +2958,20 @@ class Trade_model extends CI_Model
 					if ($has->result())
 					{
 
-						echo '<a class="btn btn-inverse" href="' . site_url('/') . 'trade/add_watchlist/' . $product_id . '" id="watch_btn" rel="tooltip" title="You are watching this item" onClick="save_watchlist"><i class="icon-remove-circle icon-white"></i> Watching</a>';
+						echo '<a class="btn btn-dark" href="' . site_url('/') . 'trade/add_watchlist/' . $product_id . '" id="watch_btn" rel="tooltip" title="You are watching this item" onClick="save_watchlist"><i class="fa fa-minus text-light"></i> Watching</a>';
 
 					}
 					else
 					{
 
-						echo '<a class="btn btn-inverse" href="' . site_url('/') . 'trade/add_watchlist/' . $product_id . '" id="watch_btn" rel="tooltip" title="Save this item to your watchlist" onClick="save_watchlist"><i class="icon-plus icon-white"></i> Watchlist</a>';
+						echo '<a class="btn btn-dark" href="' . site_url('/') . 'trade/add_watchlist/' . $product_id . '" id="watch_btn" rel="tooltip" title="Save this item to your watchlist" onClick="save_watchlist"><i class="fa fa-plus text-light"></i> Watchlist</a>';
 
 					}
 				}
 				else
 				{
 
-					echo '<a class="btn btn-inverse" rel="tooltip" title="This is your item" ><i class="icon-plus icon-white"></i> Watchlist</a>';
+					echo '<a class="btn btn-dark" rel="tooltip" title="This is your item" ><i class="fa fa-plus text-light"></i> Watchlist</a>';
 
 				}
 			}
@@ -2983,9 +2981,7 @@ class Trade_model extends CI_Model
 		else
 		{
 
-
-			echo '<a class="btn btn-inverse" href="' . site_url('/') . 'members/register/" rel="tooltip" title="Add to Watchlist" ><i class="icon-plus icon-white"></i> Watchlist</a>';
-
+			echo '<a class="btn btn-dark" href="' . site_url('/') . 'members/register/" rel="tooltip" title="Add to Watchlist" ><i class="fa fa-plus text-light"></i> Watchlist</a>';
 
 		}
 
@@ -3100,7 +3096,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_chk.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_chk.png" width="20" height="20" />
 											' . ucfirst(str_replace('_', ' ', $row)) . '
 											</td>
 										</tr>
@@ -3123,7 +3119,7 @@ class Trade_model extends CI_Model
 						}
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_size.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_size.png" width="20" height="20" />
 											' . ucfirst(str_replace('_', ' ', $row)) . ' ' . ucfirst(number_format((int) $value)) . ' ' . $unit . '
 											</td>
 										</tr>
@@ -3135,7 +3131,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_beds.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_beds.png" width="20" height="20" />
 											' . ucwords($value) . ' ' . '
 											</td>
 										</tr>
@@ -3148,7 +3144,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_baths.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_baths.png" width="20" height="20" />
 											' . ucwords($value) . ' ' . '
 											</td>
 										</tr>
@@ -3161,7 +3157,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_park.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_park.png" width="20" height="20" />
 											' . ucwords($value) . ' ' . '
 											</td>
 										</tr>
@@ -3190,7 +3186,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_car_doors.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_car_doors.png" width="20" height="20" />
 											' . ucfirst(number_format((int) $value)) . ' ' . $row . '
 											</td>
 										</tr>
@@ -3202,7 +3198,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_car_body.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_car_body.png" width="20" height="20" />
 											' . ucfirst($value) . '
 											</td>
 										</tr>
@@ -3214,7 +3210,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_car_petrol.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_car_petrol.png" width="20" height="20" />
 											' . ucfirst($value) . '
 											</td>
 										</tr>
@@ -3226,7 +3222,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_car_transmission.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_car_transmission.png" width="20" height="20" />
 											' . ucfirst($value) . ' ' . $row . '
 											</td>
 										</tr>
@@ -3240,7 +3236,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_car_cylinders.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_car_cylinders.png" width="20" height="20" />
 											' . ucfirst(number_format((int) $value)) . ' ' . $row . '
 											</td>
 										</tr>
@@ -3252,7 +3248,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_car_engine.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_car_engine.png" width="20" height="20" />
 											' . ucfirst(number_format((int) $value)) . ' ' . ucfirst(str_replace('_', ' ', $row)) . '
 											</td>
 										</tr>
@@ -3264,7 +3260,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_car_year.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_car_year.png" width="20" height="20" />
 											' . ucfirst((int) $value) . ' model
 											</td>
 										</tr>
@@ -3276,7 +3272,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_car_kilometers.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_car_kilometers.png" width="20" height="20" />
 											' . ucfirst(number_format((int) $value)) . ' km
 											</td>
 										</tr>
@@ -3288,7 +3284,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_car_color.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_car_color.png" width="20" height="20" />
 											' . ucfirst($value) . ' 
 											</td>
 										</tr>
@@ -3300,7 +3296,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_car_4x4.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_car_4x4.png" width="20" height="20" />
 											' . ucfirst($value) . ' 
 											</td>
 										</tr>
@@ -3314,7 +3310,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_car_owner.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_car_owner.png" width="20" height="20" />
 											' . ucfirst($value) . ' 
 											</td>
 										</tr>
@@ -3326,7 +3322,7 @@ class Trade_model extends CI_Model
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="' . base_url('/') . 'img/icons/trade/icn_cash.png" width="20" height="20" />
+											<img src="' . base_url('/') . 'images/icons/trade/icn_cash.png" width="20" height="20" />
 											N$ ' . ucfirst(number_format((int) $value)) . '
 											</td>
 										</tr>
@@ -3853,7 +3849,76 @@ class Trade_model extends CI_Model
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//GET IMAGES
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	function show_images($product_id, $size)
+	function show_images($product_id)
+	{
+
+			$this->load->model('image_model'); 
+
+			$this->load->library('thumborp');
+			$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+
+		//get images
+		$this->db->order_by('sequence', 'ASC');
+		$this->db->where('product_id', $product_id);
+		$images = $this->db->get('product_images');
+
+		$data = '';
+		//GET MAIN IMAGE				
+		if ($images->result())
+		{
+
+			echo '<div class="owl-carousel" style="margin-top:20px">';
+
+			foreach ($images->result() as $row)
+			{
+
+				//Build image string
+				$format = substr($row->img_file,(strlen($row->img_file) - 4),4);
+				$str = substr($row->img_file,0,(strlen($row->img_file) - 4));
+				
+				$width = 800;
+				$height = 400;
+
+
+				if($row->img_file != ''){
+					
+					if(strpos($row->img_file,'.') == 0){
+			
+						$format = '.jpg';
+						$img_str = 'assets/products/images/' . $row->img_file . '?' . $format;
+						
+					}else{
+						
+						$img_str = 'assets/products/images/' . $row->img_file;
+						
+					}
+					
+				}else{
+					
+					$img_str = base_url('/').'img/bus_blank.jpg';	
+					
+				}
+
+				$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $filter = 'fill(white)', $crop = '');
+
+				echo '<div><img src="'.$img_url.'" style="width:100%;"/></div>';
+
+
+			}
+
+			echo '</div>';
+
+		}
+
+
+	} 	
+
+
+
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	//GET IMAGES
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	function show_images2($product_id, $size)
 	{
 
 		//get images
@@ -4311,40 +4376,39 @@ class Trade_model extends CI_Model
 	public function show_categories_breadcrumb($main_cat_id, $sub_cat_id, $sub_sub_cat_id, $sub_sub_sub_cat_id, $location = '', $suburb = '')
 	{
 
-
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if (! $output = $this->cache->get('trade/show_categories_breadcrumb_' . $main_cat_id . '_' . $sub_cat_id . '_' . $sub_sub_cat_id . '_' . $sub_sub_sub_cat_id . '_' . $location . '_' . $suburb))
 		{
 			$output = '';
-			$output .= '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . '" itemprop="url"><span itemprop="title">My</span></a><span class="divider">/</span></li>';
+			$output .= '<li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . '" itemprop="url"><span itemprop="title">My</span></a></li>';
 
-			$output .= '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . 'trade/" itemprop="url"><span itemprop="title">Trade</span></a><span class="divider">/</span></li>';
+			$output .= '<li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . 'trade/" itemprop="url"><span itemprop="title">Trade</span></a></li>';
 
 			if ($main_cat_id != 0)
 			{
 
-				$output .= '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . 'buy/' . $this->encode_url($this->get_category_name($main_cat_id)) . '/"  itemprop="url"><span itemprop="title">' . $this->get_category_name($main_cat_id) . '</span></a><span class="divider">/</span></li>';
+				$output .= '<li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . 'buy/' . $this->encode_url($this->get_category_name($main_cat_id)) . '/"  itemprop="url"><span itemprop="title">' . $this->get_category_name($main_cat_id) . '</span></a></li>';
 
 				if ($sub_cat_id != 0)
 				{
 
-					$output .= '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . 'buy/' . $this->encode_url($this->get_category_name($main_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_cat_id)) . '/"  itemprop="url"><span itemprop="title">' . $this->get_category_name($sub_cat_id) . '</span></a><span class="divider">/</span></li>';
+					$output .= '<li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . 'buy/' . $this->encode_url($this->get_category_name($main_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_cat_id)) . '/"  itemprop="url"><span itemprop="title">' . $this->get_category_name($sub_cat_id) . '</span></a></li>';
 
 					if ($sub_sub_cat_id != 0)
 					{
 
-						$output .= '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . 'buy/' . $this->encode_url($this->get_category_name($main_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_sub_cat_id)) . '/"  itemprop="url"><span itemprop="title">' . $this->get_category_name($sub_sub_cat_id) . '</span></a><span class="divider">/</span></li>';
+						$output .= '<li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . 'buy/' . $this->encode_url($this->get_category_name($main_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_sub_cat_id)) . '/"  itemprop="url"><span itemprop="title">' . $this->get_category_name($sub_sub_cat_id) . '</span></a></li>';
 
 						if ($sub_sub_sub_cat_id != 0)
 						{
 
-							$output .= '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . 'buy/' . $this->encode_url($this->get_category_name($main_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_sub_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_sub_sub_cat_id)) . '/"  itemprop="url"><span itemprop="title">' . $this->get_category_name($sub_sub_sub_cat_id) . '</span></a><span class="divider">/</span></li>';
+							$output .= '<li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . 'buy/' . $this->encode_url($this->get_category_name($main_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_sub_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_sub_sub_cat_id)) . '/"  itemprop="url"><span itemprop="title">' . $this->get_category_name($sub_sub_sub_cat_id) . '</span></a></li>';
 
 							if ($location != '' && $location != 'national')
 							{
 
-								$output .= '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . 'buy/' . $this->encode_url($this->get_category_name($main_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_sub_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_sub_sub_cat_id)) . '/"  itemprop="url"></a><span itemprop="title">' . ucwords($location) . '</span></li>';
+								$output .= '<li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="' . site_url('/') . 'buy/' . $this->encode_url($this->get_category_name($main_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_sub_cat_id)) . '/' . $this->encode_url($this->get_category_name($sub_sub_sub_cat_id)) . '/"  itemprop="url"></a><span itemprop="title">' . ucwords($location) . '</span></li>';
 							}
 
 						}
@@ -6599,7 +6663,7 @@ class Trade_model extends CI_Model
 				if ($row->listing_type == 'S')
 				{
 
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">' . $btn_txt . '</a>&nbsp;
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
 								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 					$price = '<span style=" font-size:18px">N$</span> ' . $this->smooth_price($row->sale_price);
 					if ($row->por == 'Y')
@@ -7079,7 +7143,7 @@ class Trade_model extends CI_Model
 		else
 		{
 
-			$arr = '<p class="clearfix"><a class="pull-left clearfix"><span class="label label-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</span></a></p>';
+			$arr = '<p class="clearfix"><a class="pull-left clearfix"><span class="badge badge-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</span></a></p>';
 
 			return $arr;
 
@@ -7841,6 +7905,34 @@ class Trade_model extends CI_Model
 	}
 
 
+
+	//+++++++++++++++++++++++++++
+	//GET BUSINESS DETAILS
+	//++++++++++++++++++++++++++
+
+	public function get_business_details($bus_id) {
+
+		if ($bus_id != 0)
+		{
+
+			//$this->db->where('ID', $bus_id);
+			$bus = $this->db->query("SELECT  u_business.*, a_map_location.MAP_LOCATION as city, a_map_region.REGION_NAME as region FROM u_business
+									LEFT JOIN a_map_location ON u_business.BUSINESS_MAP_CITY_ID = a_map_location.ID
+									LEFT JOIN a_map_region ON a_map_location.MAP_REGION_ID = a_map_region.ID
+									WHERE u_business.ID = '" . $bus_id . "'
+									");
+
+			if ($bus->result())
+			{
+
+				return $bus->result();
+
+			}
+		}	
+	}
+
+
+
 	//+++++++++++++++++++++++++++
 	//GET COMPANY DETAILS
 	//++++++++++++++++++++++++++
@@ -7925,6 +8017,17 @@ class Trade_model extends CI_Model
 					$agent = $this->show_estate_agent($client_id, $bus_id, $row->BUSINESS_NAME, false, $sub_cat_id);
 
 				}
+
+
+				echo '
+
+
+
+				';
+
+
+
+
 
 				echo '<div class="white_box padding10">
 							<div class="row-fluid vignette" style="min-height:180px;background:url(' . $cover_str . ') no-repeat;background-size:cover;z-index:88; position:relative">

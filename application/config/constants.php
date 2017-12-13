@@ -57,6 +57,7 @@ if($_SERVER['HTTP_HOST'] == 'localhost'){
 	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
 	define('NA_URL',  'http://localhost/clients.my.na/');
 	define('HUB_URL', 'https://nmh.my.na/');
+	
 }elseif($_SERVER['HTTP_HOST'] == 'jelastic.my.na'){
 
 	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"] .'/');
@@ -74,6 +75,10 @@ if($_SERVER['HTTP_HOST'] == 'localhost'){
 	define('NA_URL',  'https://www.my.na/');
 	define('HUB_URL',  'https://nmh.my.na/');
 }
+
+define('IMG_URL', 'https://img.my.na');
+define('IMG_KEY', 'hwn80200ymF57s2YQU7bd3Y61xnF');
+
 
 
 /*

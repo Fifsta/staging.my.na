@@ -1,5 +1,7 @@
 <?php 
 
+
+
 if(!$bus_details){ show_404(); }
 
 $name =  $bus_details['BUSINESS_NAME'];
@@ -98,12 +100,12 @@ $this->load->view('inc/header');
 
 <nav id="bread">
 	<div class="container">
-		  <ol class="breadcrumb">
-		    <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>"  itemprop="url"><span itemprop="title">My</span></a></li>
-		    <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>a/show/all/all/all/none/" itemprop="url"><span itemprop="title">Businesses</span></a> </li>
-		    <?php echo implode(' ',$cats['breadcrumb']); ?>
-		    <li class="breadcrumb-item active"><?php echo $name;?></li>
-		  </ol>
+		<ol class="breadcrumb">
+		   <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>"  itemprop="url"><span itemprop="title">My</span></a></li>
+		   <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>a/show/all/all/all/none/" itemprop="url"><span itemprop="title">Businesses</span></a> </li>
+		   <?php echo implode(' ',$cats['breadcrumb']); ?>
+		   <li class="breadcrumb-item active"><?php echo $name;?></li>
+		</ol>
 	</div>
 </nav>
 
@@ -117,7 +119,7 @@ $this->load->view('inc/header');
 			
 			<?php $this->load->view('inc/weather'); ?>
 			
-			<?php $this->load->view('inc/adverts');?>
+			<?php $this->load->view('inc/adverts'); ?>
 
 		</div>
 

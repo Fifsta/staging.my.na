@@ -67,7 +67,7 @@ $route["deal/(:any)"] = 'deals/show/$1';
 //$route["^((?!\b".implode('\b|\b', $controller_exceptions)."\b).*)$"] = 'page/$1';
 //CLEAN PRODUCTS
 $route["product"] = 'trade/product/';
-$route["product/(:any)"] = 'trade/product/$1';
+$route["product/(:num)/(:any)"] = 'trade/product/$1';
 //CLEAN PRODUCT CATEGORIES
 $route["cat/(:any)"] = 'trade/cat/$1';
 

@@ -1,13 +1,91 @@
 <?php
 class Image_model extends CI_Model{
 	
- 	function image_model(){
+ 	public function __construct() {
   		//parent::CI_model();
 		//LOAD library
 		$this->load->library('image_lib');	
  	}
 	
 	
+
+	//+++++++++++++++++++++++++++
+	//GET IMG URL
+	//++++++++++++++++++++++++++
+	function get_image_url()
+	{
+		
+		if($file == ''){
+			
+			if(!$file = $this->input->get('file', true)){
+				
+				echo 'error';
+			}
+
+		}
+		$param['file'] = $file;
+		if(!$param['width'] = $this->input->get('width', true)){
+			
+			$param['width'] = 'auto';
+		}
+		if(!$param['height'] = $this->input->get('height', true)){
+			
+			$param['height'] = 'auto';
+		}
+		
+		if(!$param['crop'] = $this->input->get('crop', true)){
+			unset($param['crop']);
+		}
+		if(!$param['filter'] = $this->input->get('filter', true)){
+			unset($param['filter']);
+		}
+		$this->load->library('thumborp');
+		$thumbnailUrlFactory = $this->thumborp->create_factory();
+		$url =  $this->thumborp->get_image_url($thumbnailUrlFactory,$param);
+		
+		echo '<img src="'.$url.'" /><br />';
+		echo $url;
+
+
+	}
+
+	//+++++++++++++++++++++++++++
+	//GET IMG URL BY PARAMETERS
+	//++++++++++++++++++++++++++
+	function get_image_url_param($thumbnailUrlFactory, $file,$width,$height, $filter = '', $crop = '')
+	{
+		
+		if($file == ''){
+
+			echo 'error';
+		}
+		$param['file'] = $file;
+		if(!$param['width'] = $width){
+			
+			$param['width'] = 'auto';
+		}
+		if(!$param['height'] = $height){
+			
+			$param['height'] = 'auto';
+		}
+		
+		if(!$param['crop'] = $crop){
+			unset($param['crop']);
+		}
+		if(!$param['filter'] = $filter){
+			unset($param['filter']);
+		}
+		
+		$url =  $this->thumborp->get_image_url($thumbnailUrlFactory,$param);
+		return $url;
+
+
+	}
+
+
+
+
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//DOWNSIZE THE DRAG N DROP IMAGE UPLOAD
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	

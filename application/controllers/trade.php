@@ -11,9 +11,17 @@ class Trade extends CI_Controller {
     {
          //echo "OldClass constructor\n";
 		 parent::__construct();
-		 $this->load->model('trade_model');
+
+		$this->load->model('trade_model'); 
+		$this->load->model('business_model'); 
+		$this->load->database();	
+		$this->load->library('session');
+
+
     }
 	
+
+
 
 	//+++++++++++++++++++++++++++
 	//TRADE/INDEX
@@ -559,6 +567,8 @@ class Trade extends CI_Controller {
 	public function product($id)
 	{
 
+		$output = '';
+
 		//redirect SEO friendly url
 		if($this->uri->segment(2) == ''){
 
@@ -584,9 +594,17 @@ class Trade extends CI_Controller {
 					      $this->db->join('product_images','product_images.product_id = products.product_id', 'left');
 						  $query = $this->db->get('products');*/
 
-						  $query = $this->db->query("SELECT products.*, product_extras.extras, 
+
+
+
+						  $query = $this->db->query("SELECT products.*, product_extras.extras, u_business.*, a_map_location.MAP_LOCATION as city, a_map_region.REGION_NAME as region,
 						  							(SELECT img_file FROM product_images WHERE product_id = ".$id." ORDER by sequence ASC LIMIT 1) as img_file,
                                                      MAX(product_auction_bids.bid_id) as max_bid, MAX(product_auction_bids.amount) as amount, product_extras.featured, product_extras.property_agent FROM products
+
+                                                    LEFT JOIN u_business on products.bus_id = u_business.ID
+                                                    LEFT JOIN a_map_location ON u_business.BUSINESS_MAP_CITY_ID = a_map_location.ID
+                                                    LEFT JOIN a_map_region ON a_map_location.MAP_REGION_ID = a_map_region.ID
+
 													LEFT JOIN product_extras on products.product_id = product_extras.product_id
 													LEFT JOIN product_images on products.product_id = product_images.product_id
 													LEFT JOIN product_auction_bids ON products.product_id = product_auction_bids.product_id AND product_auction_bids.type = 'bid'
@@ -628,7 +646,7 @@ class Trade extends CI_Controller {
 			}else{
 
 				$name = $this->trade_model->clean_url_str($this->trade_model->get_product_name($id));
-				redirect('/product/'.$id.'/'.$name.'/','location',301);
+				redirect(site_url('/').'product/'.$id.'/'.$name.'/','location',301);   
 
 			}
             //$this->output->enable_profiler(TRUE);
@@ -1781,51 +1799,63 @@ class Trade extends CI_Controller {
 	//+GET PRODUCT QUESTIONS
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-	public function get_product_questions($product_id){
+	public function get_product_questions(){
 
-		$get = $this->input->get();
-		//var_dump($get);
+		$product_id = $this->input->post('product_id');
+		$product_title = $this->input->post('product_title');
+
+		$out = '';
+
 		if($this->session->userdata('id')){
 
 			$this->load->view('trade/inc/contact_inc', $get);
 
-		 }else{
+		}else{
 
-
-		    echo '<div class="alert">
+		    $out.= '<div class="alert">
 				<button type="button" class="close" data-dismiss="alert">×</button>
-				Please login or register to ask the seller a question about '.$get['product_title'].'
+				Please login or register to ask the seller a question about '.$product_title.'
 				</div>
+				<div class="container-fluid">
 					<form class="form-signin" action="'. site_url('/').'members/login/" enctype="application/x-www-form-urlencoded">
 						<input type="hidden" class="input" name="redirect" value="'.current_url().'">
-						<div class="row-fluid">
-							<div class="span12">
-								<input type="text" class="input span12" name="email"  placeholder="Email">
+						<div class="row" style="margin-bottom:10px">
+							<div class="col-md-12">
+								<input type="text" class="form-control" name="email" placeholder="Email">
 							</div>
 						</div>	
-						<div class="row-fluid">
-							<div class="span12">
-								<input type="password" name="pass" class="input span12" placeholder="Password">
+						<div class="row" style="margin-bottom:10px">
+							<div class="col-md-12">
+								<input type="password" name="pass" class="form-control" placeholder="Password">
 							</div>
 						</div>
-						<div class="row-fluid">
-							<div class="span4">
+						<div class="row">
+							<div class="col-md-4">
 								<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-scope="email" onlogin="checkLoginState()" data-auto-logout-link="false"></div>
 							</div>
-							<div class="span4">	
-								<a class="btn btn-block btn-inverse" href="'.site_url('/').'members/register/"><i class="icon-star icon-white"></i> Join</a>
+							<div class="col-md-4">	
+								<a class="btn btn-block btn-dark" href="'.site_url('/').'members/register/"><i class="fa fa-star text-light"></i> Join</a>
 							</div>
-							<div class="span4">	
-								<button type="submit" class="btn btn-block btn-inverse"><i class="icon-lock icon-white"></i> Sign in</button>
+							<div class="col-md-4">	
+								<button type="submit" class="btn btn-block btn-dark"><i class="fa fa-lock text-light"></i> Sign in</button>
 							</div>
 						</div>
 						
-					</form>
-				';
+					</form>';
+
+					$out.= '<h3 class="na_script">Questions Asked</h3>';
+					
+					$out.= $this->trade_model->get_product_questions($product_id);
+
+			$out.= '</div>';
+
+	  	$this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode(array('questions' => $out)));		
 
 		}
-		echo '<h3 class="na_script">Questions Asked</h3>';
-		$this->trade_model->get_product_questions($product_id);
+
+
 	}
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//+GET PRODUCT MAP

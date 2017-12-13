@@ -13,10 +13,13 @@ require(BASE_URL.'application/libraries/Thumbor/Url/BuilderFactory.php');
 require(BASE_URL.'application/libraries/Thumbor/Url/CommandSet.php');
 class Thumborp {
 
-	 public function create_factory($param = array())
+	 /**
+     * See stringify()
+     */
+     public function create_factory($param = array())
     {
-		$server = 'https://img.my.na';
-		$secret = 'hwn80200ymF57s2YQU7bd3Y61xnF';
+		$server = IMG_URL;
+		$secret = IMG_KEY;
 		$thumbnailUrlFactory = Thumbor\Url\BuilderFactory::construct($server, $secret);
 		
 		return $thumbnailUrlFactory;
@@ -38,8 +41,8 @@ class Thumborp {
 		//var_dump($param);
 		if(isset($param['file'])){
 			
-			$server = 'https://img.my.na';
-			$secret = 'hwn80200ymF57s2YQU7bd3Y61xnF';
+			$server = IMG_URL;
+			$secret = IMG_KEY;
 			
 			if(isset($param['filter']) && isset($param['crop'])){
 				
@@ -68,9 +71,7 @@ class Thumborp {
 					->resize($param['width'], $param['height']);
 				
 			}
-			
-			
-				
+	
 			return $url;	
 
 			

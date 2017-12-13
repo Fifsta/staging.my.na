@@ -32,6 +32,8 @@ iframe{border:none;}
     background-position: 97px 39px;
 }
 
+.upper{text-transform: uppercase;font-weight: normal; font-size:18px;}
+
 .twitter {
 
     background-image: url(../images/social1.png);
