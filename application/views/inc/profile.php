@@ -1,12 +1,24 @@
-<!--profile-->
+<?php
+//+++++++++++++++++
+//PROFILE INCLUDE
+//+++++++++++++++++
+
+$section = $this->uri->segment(1);
+?>
+
 <section class="sidenav" id="my_profile">
 	<nav class="profile">
-		<a href="#" class="pic"><img src="images/profile-pic.jpg"></a>
-		<a href="#" class="name">Carl-Heinz Benseler Benseler</a>
+		<a href="#" class="pic"><?php echo $this->my_na_model->get_user_avatar('25', '25'); ?></a>
+		<a href="#" class="name"><?php echo $this->session->userdata('u_name'); ?></a>
 		<ul>
-			<li><a href="#" data-icon="fa-bookmark text-dark"></a><span>10</span></li><!--
-			--><li><a href="#" data-icon="fa-envelope text-dark"></a><span>5</span></li><!--
-			--><li><a href="#" data-icon="fa-cog text-dark"></a><span>2</span></li>
+			<li class="nav-item dropdown">
+				<a href="#" data-icon="fa-bookmark text-dark" class="nav-link dropdown-toggle">
+				<i class="fa fa-bookmark text-dark"></i>
+				</a><span><?php $this->my_na_model->show_points_sml(); ?></span>
+			</li>
+
+			<li><a href="#" data-icon="fa fa-envelope text-dark"><i class="fa fa-envelope text-dark"></i></a><span><?php $this->my_na_model->msg_notifications_count(); ?></span></li>
+			<li><a href="#" data-icon="fa fa-cog text-dark"><i class="fa fa-cog text-dark"></i></a><span>2</span></li>
 		</ul>
 		<button id="profile-toggle" class="btn btn-default btn-block" data-icon="fa-angle-double-down">My Account</button>
 	</nav>

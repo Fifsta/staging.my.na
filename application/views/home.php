@@ -19,9 +19,8 @@
 
 	<div class="row">
 
-		<div class="col-sm-4 col-md-4 col-lg-2 order-md-2 order-sm-1 order-lg-2">
+		<div class="col-sm-4 col-md-4 col-lg-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
 	    
-			<?php $this->load->view('inc/profile');?>
 			
 			<?php $this->load->view('inc/weather');?>
 			

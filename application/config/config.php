@@ -53,7 +53,7 @@ if(isset($_SERVER['MY_WORKER']) && $_SERVER['MY_WORKER'] == 'YES')
 }elseif($_SERVER['HTTP_HOST'] == 'localhost'){
 
   //lIVE
-  $config['site_url']	= 'http://localhost/beta.my.na';
+  $config['site_url']	= 'http://localhost/beta.my.na/index.php';
   $config['base_url']	= 'http://localhost/beta.my.na/';
   $config['analytics'] = '<script type="text/javascript"></script>';
 
@@ -93,7 +93,7 @@ $config['index_page'] = '';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'AUTO';
+$config['uri_protocol']	= 'REQUEST_URI';
 
 /*
 |--------------------------------------------------------------------------
@@ -355,7 +355,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'dsdsd';
 
 /*
 |--------------------------------------------------------------------------

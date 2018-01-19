@@ -11,16 +11,13 @@ class Members extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('members_model');
-		$this->load->library('user_agent');
-		$this->load->library('session');
-	
+		
 	}
 
 	
 	public function index()
 	{
 		
-
 		if($id = $this->session->userdata('id')){
 			 	//REDIRECT AUTH
 				if($url = $this->input->get('redirect_url')){
@@ -62,7 +59,10 @@ class Members extends CI_Controller {
 	public function home()
 	{
 		
-
+		//var_dump($_SERVER['REQUEST_URI']);
+		echo $_SERVER['REQUEST_URI'];
+		//var_dump(uri_string());
+		//echo $this->uri->uri_string();
 		if($this->session->userdata('id')){
 				
 			//echo 'Logged in: '.$this->session->userdata('id'); 
@@ -96,6 +96,7 @@ class Members extends CI_Controller {
 		
 		
 	}
+
 	//+++++++++++++++++++++++++++
 	//LOAD MEMBERS HOME DIREWCTORY SEARCH
 	//++++++++++++++++++++++++++
@@ -2991,6 +2992,8 @@ function un_clean_url($str)
 								//NO MATCHING CREDENTIALS
 			}else{
 				
+
+
 				$data['redirect'] = '';
 				$this->load->view('login' , $data);
 				

@@ -113,9 +113,7 @@ $this->load->view('inc/header');
 
 	<div class="row">
 
-		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 order-md-2 order-sm-1 order-lg-2">
-	    
-			<?php $this->load->view('inc/profile'); ?>
+		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
 			
 			<?php $this->load->view('inc/weather'); ?>
 			
@@ -170,10 +168,7 @@ $this->load->view('inc/header');
 					<div class="details-left">
 						<figure>
 							<a href="#"><img src="<?php echo $img_str; ?>"></a>
-
-
 						</figure>
-
 
 						<div class="rating">
 							<span></span><span></span><span class="active"></span><span></span><span></span>

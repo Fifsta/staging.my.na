@@ -4,7 +4,7 @@ class Business_model extends CI_Model{
 	public function __construct(){
   		//parent::CI_model();
 		$this->load->database();	
-		$this->load->library('session');
+	
  	}
 
 

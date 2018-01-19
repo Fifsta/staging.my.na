@@ -1084,6 +1084,7 @@ class Members_model extends CI_Model
 
 	function add_logo_ajax()
 	{
+		
 		$img = $this->input->post('userfile', true);
 		$user_id = $this->input->post('id', true);
 		$bus_id = $this->input->post('bus_id', true);

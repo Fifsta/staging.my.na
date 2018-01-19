@@ -95,9 +95,9 @@
 			</div>
 			<form class="input-group input-group-lg">
 				<div class="find input-group-addon">Find:</div>
-				<input type="text" class="form-control" id="exampleInputAmount" placeholder="Pizza, Lodge, Plumbing, ... etc">
+				<input type="text" class="form-control" id="search-main-mobile" placeholder="Pizza, Lodge, Plumbing, ... etc">
 				<div class="near input-group-addon">Near:</div>
-				<input type="text" class="near form-control" id="exampleInputAmount" placeholder="Windhoek">
+				<input type="text" class="near form-control" id="search-main2-mobile" placeholder="Windhoek">
 				<span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search"></button></span>
 			</form>
 			
@@ -106,6 +106,75 @@
 			<a href="#" class="expose" data-icon="fa-angle-double-down"></a>
 		</div>
 	</div>
+
+
+	<script  type="text/javascript">
+
+    <?php 
+    //test QUERY STRING
+    $qstr = '';
+    if($qstr = $this->input->get()){
+        $qstr = http_build_query($qstr);
+    }
+
+
+    ?>
+
+	$(document).ready( function(){
+		
+		
+		console.log("Gooooooing <?php echo site_url();?>");
+		$.get( "<?php echo site_url();?>my_na/nav/?url=<?php echo $_SERVER['REQUEST_URI']; ?>", function( data ) {
+		  
+		  	if(data == 'FALSE'){
+
+			}else{
+
+				$('#sidebar').prepend( data );
+			}
+
+		});
+
+	});
+
+	</script>
+
+	 <?php
+	 //$this->output->enable_profiler(TRUE);
+	 if($this->session->flashdata('login')){
+
+	 echo "<script data-cfasync='false'  type='text/javascript'>
+	 		$(document).ready(function(){
+				
+				$.getScript('".base_url('/')."js/jquery.knob.js', function(){setTimeout(do_load, 300);});
+				var cont = $('.na_points');
+				//LOAD POINTS
+				cont.addClass('loading');
+				
+				cont.removeClass('loading');
+	       });
+		   
+		   function do_load(){
+			   
+				$.ajax({
+							  type:'get',
+							  cache: false,
+							  url: '".site_url('/')."win/get_points/".$this->session->userdata('id')."',
+							  success: function(data) {
+								
+								$('.na_points').html(data);
+							  }
+						});
+	 
+			   
+		  }
+	 </script>
+	  <div class='na_points' id='na_points_msg'></div>
+	 ";
+
+	 
+	 }
+	 ?> 
 
 
 	<!-- Bootstrap -->

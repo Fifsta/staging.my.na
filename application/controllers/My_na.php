@@ -10,6 +10,7 @@ class My_na extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->model('my_na_model');
 	
 	}
 	
@@ -18,6 +19,7 @@ class My_na extends CI_Controller {
 	public function index()
 	{
 
+		
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 					
 		if ( ! $output = $this->cache->get('home'))
@@ -27,7 +29,7 @@ class My_na extends CI_Controller {
 		}
 		
 		echo $output;
-			
+
 	}
 
 
@@ -49,17 +51,19 @@ class My_na extends CI_Controller {
 
 	public function nav()
 	{
-		if($this->session->userdata('id')){
 		
+		if($this->session->userdata('id') === null){
+
+			echo 'FALSE';
+			
+		}else{
 			$data['url'] = $this->input->get('url');
 			if($str = $this->input->get('srch_bar')){
 
 				$data['str'] = urldecode($str);
 			}
-			$this->load->view('inc/navigation_ajax', $data);
-		}else{
-			
-			echo 'FALSE';	
+			$this->load->view('inc/profile', $data);
+				
 		}
 
 	}	
@@ -71,7 +75,8 @@ class My_na extends CI_Controller {
 		$this->load->model('search_model');
 		$this->load->view('home_new');			
 
-	}		
+	}	
+
 	public function clean_cats()
 	{
 		
@@ -81,7 +86,7 @@ class My_na extends CI_Controller {
 			$res = $this->db->where('ID', $row->CATEGORY_ID);	
 			$res = $this->db->get('a_tourism_category_sub');
 			
-			echo 'Row: '.$row->ID.' ';
+			echo 'Row: '.$row->ID.' ';	
 			
 			//IF SUB CAT EXISTS
 			if($res->result()){
@@ -130,6 +135,7 @@ class My_na extends CI_Controller {
                 'X-Auth-Email: '.$this->config->item('cloudflare_email'),
                 'Content-Type: application/json'
             );
+            
             $url7 = 'https://api.cloudflare.com/client/v4/zones/'.$this->config->item('zone_id').'/analytics/dashboard?since='.$days7.'&until='.$today.'';
             $url24 = 'https://api.cloudflare.com/client/v4/zones/'.$this->config->item('zone_id').'/analytics/dashboard?since='.$days24.'&until='.$today.'';
             $url30 = 'https://api.cloudflare.com/client/v4/zones/'.$this->config->item('zone_id').'/analytics/dashboard?since='.$days30.'&until='.$today.'';
@@ -566,6 +572,7 @@ class My_na extends CI_Controller {
 	{
 		$this->my_na_model->typehead_users();
 	}
+
 	//++++++++++++++++++++++++++++++
 	//PREFETCH TYPEHEAD
 	//++++++++++++++++++++++++++++++

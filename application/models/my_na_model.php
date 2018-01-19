@@ -452,16 +452,16 @@ class My_na_model extends CI_Model{
 				
 				}elseif($img_file != ''){ 
 				
-					$img = base_url('/').'assets/users/photos/'.$img_file;
+					$img = S3_URL.'assets/users/photos/'.$img_file;
 					
 				}else{
 					
-					$img = base_url('/').'img/user_blank.jpg';
+					$img = S3_URL.'img/user_blank.jpg';
 					
 				}
 				
 				//$avatar = '<img src="'.base_url('/').'img/timbthumb.php?src='.base_url('/').$img.'&q=100&w='.$w.'&h='.$h.'" class="img-polaroid" />';
-				$avatar = '<img src="'.$img.'" style="width:'.$w.'px;height:'.$h.'px;margin:-5px 5px 5px 0px;padding:1px" class="img-polaroid pull-left" />';
+				$avatar = '<img src="'.$img.'"  class="img-polaroid pull-left" />';
 				return $avatar;
 		 }
 		
