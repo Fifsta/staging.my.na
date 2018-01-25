@@ -56,27 +56,31 @@ $route['translate_uri_dashes'] = FALSE;
 //$controller_exceptions = array('a','my_admin','members','business');
 //APP FORGOT PASSWORD
 $route["app/index/hello"] = 'app/forgot-password/';
+
 //$controller_exceptions = array('a','my_admin','members','business');
 //CLEAN PAGES
 $route["page/(:any)"] = 'my_na/pages/$1';
+
 //CLEAN LISTING PAGES
 $route["b/(:num)/(:any)"] = 'business/view/$1/$2';
 $route["b/(:num)"] = 'business/view/$1/';
+
 //CLEAN DEALS
 $route["deal/(:any)"] = 'deals/show/$1';
 //$route["^((?!\b".implode('\b|\b', $controller_exceptions)."\b).*)$"] = 'page/$1';
+
 //CLEAN PRODUCTS
 $route["product"] = 'trade/product/';
 $route["product/(:num)/(:any)"] = 'trade/product/$1';
+
 //CLEAN PRODUCT CATEGORIES
 $route["cat/(:any)"] = 'trade/cat/$1';
 
 //CLEAN PRODUCT CATEGORIES
-$route["buy/(:any)"] = 'trade/results/$1';
+$route["buy/(.+)"] = 'trade/results/$1';
 
 //REDIRECT local assets to S3
 $route["assets/(:any)"] = 'assets/index/$1';
-
 
 //Restauran Guide
 $route["restaurants"] = 'my_na/restaurants';

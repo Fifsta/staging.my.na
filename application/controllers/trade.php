@@ -14,9 +14,7 @@ class Trade extends CI_Controller {
 
 		$this->load->model('trade_model'); 
 		$this->load->model('business_model'); 
-		$this->load->database();	
-		$this->load->library('session');
-
+		$this->load->model('my_na_model'); 
 
     }
 	
@@ -200,23 +198,23 @@ class Trade extends CI_Controller {
 
 		//echo $config['base_url'];
 		//Styling
-		$config['full_tag_open'] = '<div class="pagination pull-right"><ul>';
-		$config['full_tag_close'] = '</ul></div>';
+		$config['full_tag_open'] = '<nav aria-label="Page navigation example"><ul class="pagination">';
+		$config['full_tag_close'] = '</ul></nav>';
 		$config['first_link'] = false;
 		$config['last_link'] = false;
-		$config['first_tag_open'] = '<li>';
+		$config['first_tag_open'] = '<li class="page-item">';
 		$config['first_tag_close'] = '</li>';
-		$config['prev_link'] = '<i class="icon-chevron-left icon-white"></i>';
-		$config['prev_tag_open'] = '<li class="prev">';
+		$config['prev_link'] = '<i class="fa fa-chevron-left icon-light"></i>';
+		$config['prev_tag_open'] = '<li class="page-item prev">';
 		$config['prev_tag_close'] = '</li>';
-		$config['next_link'] = '<i class="icon-chevron-right icon-white"></i>';
-		$config['next_tag_open'] = '<li>';
+		$config['next_link'] = '<i class="fa fa-chevron-right icon-light"></i>';
+		$config['next_tag_open'] = '<li class="page-item">';
 		$config['next_tag_close'] = '</li>';
-		$config['last_tag_open'] = '<li>';
+		$config['last_tag_open'] = '<li class="page-item">';
 		$config['last_tag_close'] = '</li>';
-		$config['cur_tag_open'] =  '<li class="active"><a href="#">';
+		$config['cur_tag_open'] =  '<li class="page-item bg-light text"><a href="#" class="page-link bg-light text-dark">';
 		$config['cur_tag_close'] = '</a></li>';
-		$config['num_tag_open'] = '<li>';
+		$config['num_tag_open'] = '<li class="page-item">';
 		$config['num_tag_close'] = '</li>';
 		$config['uri_segment'] = 18;
 		$this->pagination->initialize($config);
@@ -245,7 +243,6 @@ class Trade extends CI_Controller {
 		$data['key'] = $key;
 		$data['price_to'] = $price_to;
 		$data['price_from'] = $price_from;
-		//var_dump($data);
 
 		if($this->input->is_ajax_request()){
 
@@ -267,6 +264,7 @@ class Trade extends CI_Controller {
 		$data['suburb'] = 'all';
 		$this->load->view('trade/home', $data);
 	}
+	
 	//+++++++++++++++++++++++++++
 	//SORTBY POSTBACK
 	//++++++++++++++++++++++++++

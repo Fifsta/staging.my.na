@@ -22,6 +22,7 @@
   $product['bus_id'] = $bus_id;
   $product['client_id'] = $client_id;
   $product['product_title'] = $title;
+  
 
 
   $name =  $BUSINESS_NAME;
@@ -101,10 +102,10 @@
   <meta property="og:description" content="'.$header['metaD'].'"> 
   <meta property="og:image"       content="'.str_replace('https://','http://',$img_str).'">';
 
-  $this->load->view('inc/header', $header);
+   $this->load->view('inc/header', $header);
    
-  //ADDITIONAL RESOURCES
-  //add css, IE7 js files here before the head tag
+   //ADDITIONAL RESOURCES
+   //add css, IE7 js files here before the head tag
 
   //EXTRA REFERENCE
   $property_ref = '';
@@ -117,13 +118,13 @@
 
 ?>
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('/');?>css/jquery.countdown.css" />
-<link href='<?php echo base_url('/');?>css/jquery.rating.css' type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('/');?>css/jquery.countdown.css" >
+<link href='<?php echo base_url('/');?>css/jquery.rating.css' type="text/css" rel="stylesheet"/>
 </head>
 
 <body id="top">
 
-<?php $this->load->view('inc/top_bar'); ?>
+<?php $this->load->view('inc/top_bar');?>
 
 <nav id="bread">
   <div class="container">
@@ -164,13 +165,21 @@
 
         <!--banner-->
         <div class="container-fluid">
-          <div class="row">
+          <div class="row" style="background: #fff">
             <div class="col-sm-12 col-md-12 col-lg-7 col-xl-6">
-               <?php echo $this->trade_model->show_images($product_id); ?>
+
+               <?php echo $this->trade_model->show_images($product_id);?>
             </div>
             
             <div class="col-sm-12 col-md-12 col-lg-5 col-xl-6" style="padding:20px">
             
+               <div class="text-right">
+                <a href="javascript:void(0);" title="Print this Page" rel="tooltip" class="btn btn-dark btnPrint"><i class="fa fa-print text-light"></i></a>
+               <?php $this->trade_model->watch_list_test($product_id);?>
+               </div>
+
+               <?php $this->trade_model->show_product($product_id); ?>
+
             </div>
           </div>
         </div>
@@ -192,12 +201,28 @@
           <div class="details-right" style="background: #fff">
 
             <div class="spacer"></div>
-               <div class="text-right">
-                <a href="javascript:void(0);" title="Print this Page" rel="tooltip" class="btn btn-dark btnPrint"><i class="fa fa-print text-light"></i></a>
-               <?php $this->trade_model->watch_list_test($product_id);?>
-               </div>                             
-             <?php $this->trade_model->show_product($product_id); ?>
-             <div class="spacer"></div>
+                             
+              <button class="btn btn-dark block"><i data-icon="fa-phone"></i> <?php echo $tel; ?></button>
+            
+              <button class="btn btn-dark block"><i data-icon="fa-fax"></i> <?php echo $fax; ?></button>
+            
+              <button class="btn btn-dark block"><i data-icon="fa-tablet"></i> <?php echo $cell; ?></button>
+
+              <button class="btn btn-dark block"><i data-icon="fa-envelope"></i> <?php echo $email; ?></button>
+                
+              <hr>
+
+              <div itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+                  <span itemprop="street-address"><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
+                  <span itemprop="locality"><?php echo $city ;?></span>
+                  <span itemprop="region"><?php echo $region ;?></span>
+                  <span itemprop="country-name">Namibia</span>
+              </div>
+
+              <hr>
+
+            <p><?php echo $description; ?></p>
+            <div class="spacer"></div>
           </div>
         </div>
         <!--details-->
@@ -209,7 +234,9 @@
         <div class="col-xl-6">
 
           <!--Review Include-->
-          <div class="tab-content loading_img col-md-11" id="reviews_div">
+          <div class="tab-content loading_img span11" id="reviews_div">
+            
+
             
           </div> 
 
@@ -218,14 +245,18 @@
         <div class="col-xl-6">
           
           <!--Question Include-->
-          <div class="tab-content loading_img col-md-11" id="question_div">
-             
+          <div class="tab-content loading_img span11" id="question_div">
+            
+            
           </div> 
 
         </div>  
       </div>
+
     </div>
+
   </div>  
+  
 </div>
 
 

@@ -244,6 +244,17 @@ a:not([href]):not([tabindex]):focus {
   outline: 0;
 }
 
+
+.input-group-prepend {
+    margin-right: -1px;
+}
+
+.input-group-append, .input-group-prepend {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
 pre,
 code,
 kbd,

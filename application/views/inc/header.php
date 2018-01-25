@@ -55,7 +55,7 @@
 	
 	<!-- css -->
 
-	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 	<link href="css/owl.carousel.min.css" rel="stylesheet" type="text/css">
 	<link href="css/owl.theme.default.min.css" rel="stylesheet" type="text/css">
 	<link href="css/style.combo.css" rel="stylesheet" type="text/css">

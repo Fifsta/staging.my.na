@@ -1,4 +1,8 @@
-<?php $this->load->view('inc/header');?>
+<?php 
+
+$this->load->view('inc/header');
+
+?>
 
 </head>
 
@@ -44,13 +48,13 @@
 			<div class="spacer"></div>
 			<?php $cars['type'] = '348'; $this->load->view('inc/products', $cars);?>
 			<div class="spacer"></div>
-			<?php $this->load->view('inc/deals');?>
+			<?php //$this->load->view('inc/deals');?>
 			<div class="spacer"></div>
 			<?php $this->load->view('inc/auctions');?>
 			<div class="spacer"></div>
-			<?php $this->load->view('inc/news');?>	
+			<?php //$this->load->view('inc/news');?>	
 			<div class="spacer"></div>	
-			<?php $this->load->view('inc/trending');?>
+			<?php //$this->load->view('inc/trending');?>
 			<div class="spacer"></div>
 
 		</div>

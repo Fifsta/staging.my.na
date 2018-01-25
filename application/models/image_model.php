@@ -56,7 +56,6 @@ class Image_model extends CI_Model{
 	{
 		
 		if($file == ''){
-
 			echo 'error';
 		}
 		$param['file'] = $file;
@@ -81,8 +80,6 @@ class Image_model extends CI_Model{
 
 
 	}
-
-
 
 
 
