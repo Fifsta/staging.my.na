@@ -66,6 +66,7 @@ if($_SERVER['HTTP_HOST'] == 'localhost'){
 	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
 	define('NA_URL',  'https://www.my.na/');
 	define('HUB_URL',  'https://nmh.my.na/');
+	
 }else{
 
 	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"] .'/');

@@ -1648,36 +1648,33 @@ class Trade_model extends CI_Model
 			$order_now_btn = "<a href='javascript:void(0)' id='order_now_btn_do'  class='btn btn-large btn-block btn-inverse'>Yes Order Now</a>";
 			$buy_now_btn = "<a href='javascript:void(0)' id='buy_now_btn_do'  class='btn btn-large btn-block btn-inverse'>Yes Buy Now</a>";
 			$bid_btn = "<a href='javascript:void(0)' id='bid_btn_do'  class='btn btn-large btn-block btn-inverse'>Yes Place My Bid</a>";
-			echo '<div itemscope itemtype="http://schema.org/Product">
-						<div class="pull-right">' . $reserve . '</div>
-						<h2 class="upper na_script" itemprop="name">' . $row->title . '</h2>
 
-						' . $agent_ref . '
+			echo '
+			<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+				<h1 style="font-size:50px;height:40px;color:#FF9F01;margin-bottom:30px">' . $price['str'] . '</h1>
+				<meta itemprop="priceCurrency" content="NAD" />
+			</span>
+			<div itemscope itemtype="http://schema.org/Product">
+				<div class="pull-right">' . $reserve . '</div>
+				<h2 class="upper na_script" itemprop="name">' . $row->title . '</h2>
+				' . $agent_ref . '
+				' . $location . '
+				<span itemprop="description">
+					<p>' . $row->description . '</p><p>' . $this->show_extras($row->extras) . '</p>
+				</span>	
+				' . $count . '
+				<div class="row">
+					<div class="col-md-6">
+					 ' . $this->get_review_stars_show($rating, $row->product_id, 0, $total_reviews) . '
+					</div>
+					<div class="col-md-6">
+					' . $stock_ticker . '
+					</div>
+				</div>
+				<div id="product_msg" class="clearfix"></div>
 
-						' . $location . '
-						<span itemprop="description">
-							<p>' . $row->description . '</p><p>' . $this->show_extras($row->extras) . '</p>
-						</span>	
-						' . $count . '
-
-						<div class="row">
-							<div class="col-md-6">
-							 ' . $this->get_review_stars_show($rating, $row->product_id, 0, $total_reviews) . '
-							</div>
-							<div class="col-md-6">
-							' . $stock_ticker . '
-							</div>
-						</div>
-						<div id="product_msg" class="clearfix"></div>
-						<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-							<h1 style="font-size:50px;height:40px;color:#FF9F01;margin-bottom:30px">' . $price['str'] . '</h1>
-							<meta itemprop="priceCurrency" content="NAD" />
-						</span>
-
-						<div class="clearfix">' . $btn . '</div>
-						
-						
-					</div>';
+				<div class="clearfix">' . $btn . '</div>
+			</div>';
 
 			//ENDING DATE
 			$listE = new DateTime(date('Y-m-d H:i:s', strtotime($row->end_date)));
@@ -1686,28 +1683,23 @@ class Trade_model extends CI_Model
 			{
 
 				echo '<script data-cfasync="false" type="text/javascript">
-								$(document).ready(function(){
-									$.getScript("' . base_url('/') . 'js/jquery.rating.pack.js", function(){
+						$(document).ready(function(){
+						$.getScript("' . base_url('/') . 'js/jquery.rating.pack.js", function(){
 
-										$("input .star").rating();
+							$("input .star").rating();
 
-									});
-									';
+						});
+						';
 
 			}
 			else
 			{
 
 				echo '<script type="text/javascript">
-								$(document).ready(function(){
-							';
+						$(document).ready(function(){
+					 ';
 
 			}
-
-			echo '	
-
-
-						';
 
 
 			if ($row->listing_type == 'A')
@@ -1715,10 +1707,10 @@ class Trade_model extends CI_Model
 
 				echo '	$(function () {
 									
-										ctdwn_' . $product_id . ' = new Date(' . ($listE->format('Y')) . ', ' . ($listE->format('m') - 1) . ', ' . ($listE->format('d')) . ', ' . ($listE->format('H')) . ', ' . ($listE->format('i')) . ');
-										$(".CT-tmer").countdown({until: ctdwn_' . $product_id . '});
-										
-									});';
+							ctdwn_' . $product_id . ' = new Date(' . ($listE->format('Y')) . ', ' . ($listE->format('m') - 1) . ', ' . ($listE->format('d')) . ', ' . ($listE->format('H')) . ', ' . ($listE->format('i')) . ');
+							$(".CT-tmer").countdown({until: ctdwn_' . $product_id . '});
+							
+						});';
 			}
 
 			echo '
@@ -1857,7 +1849,6 @@ class Trade_model extends CI_Model
 		{
 
 			echo 'Product Not Found';
-
 
 		}
 
@@ -2033,6 +2024,7 @@ class Trade_model extends CI_Model
 							<br />
 							Have a !tna day!<br />
 							My Namibia';
+
 					$data_view['body'] = $body;
 					$body_final = $this->load->view('email/body_news', $data_view, true);
 					$TAGS = array('tags' => 'trade_outbid');

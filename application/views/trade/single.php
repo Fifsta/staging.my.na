@@ -192,7 +192,7 @@
           <div class="details-right" style="background: #fff">
 
             <div class="spacer"></div>
-               <div class="text-right">
+               <div class="pull-right">
                 <a href="javascript:void(0);" title="Print this Page" rel="tooltip" class="btn btn-dark btnPrint"><i class="fa fa-print text-light"></i></a>
                <?php $this->trade_model->watch_list_test($product_id);?>
                </div>                             
@@ -227,8 +227,6 @@
     </div>
   </div>  
 </div>
-
-
 
 <?php $this->load->view('inc/footer');?>  
 <script src="<?php echo base_url('/');?>js/print_page.js"></script>
