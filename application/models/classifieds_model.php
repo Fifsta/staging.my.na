@@ -145,10 +145,11 @@ class Classifieds_model extends CI_Model{
 		 
 	}
 
-	//+++++++++++++++++++++++++++
+
+	//+++++++++++++++++++++++++++++++++
     //CLASSIFIEDS RENDER ? RESULTS PAGE
-    //++++++++++++++++++++++++++
-	public function render_classifieds($query, $size = '12')
+    //+++++++++++++++++++++++++++++++++
+	public function render_classifieds($query)
 	{
 
 		 $this->load->model('my_model');
@@ -195,6 +196,7 @@ class Classifieds_model extends CI_Model{
 				}
 				
 				$subs = '';
+
 				//PUBLICATIONS
 				if(strlen($row->pubs) > 0){
 					
@@ -217,7 +219,7 @@ class Classifieds_model extends CI_Model{
 							<a onClick="' . $fb . '" class="facebook"></a>
 							' . anchor_popup('https://twitter.com/share?url=' . trim($tweet_url), ' ', $tweet) . '
 							</span>
-							<div style="margin-top:20px">
+							<div style="margin-top:80px">
 								<h2 class="font-weight-bold">'.$row->title.'</h2>
 							</div>
 							<div>

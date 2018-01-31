@@ -8,24 +8,22 @@ $this->load->view('inc/header');
 
 <body id="top">
 
-<?php $this->load->view('inc/top_bar');?>
+<?php $this->load->view('inc/top_bar'); ?>
 
 <nav id="bread">
 	<div class="container">
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="#">Home</a></li>
-		    <li class="breadcrumb-item"><a href="#">Library</a></li>
-		    <li class="breadcrumb-item active" aria-current="page">Data</li>
 		  </ol>
 	</div>
 </nav>
+
 <div class="container-fluid">
 
 	<div class="row">
 
 		<div class="col-sm-4 col-md-4 col-lg-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
-	    
-			
+	    	
 			<?php $this->load->view('inc/weather');?>
 			
 			<?php $this->load->view('inc/adverts');?>
@@ -34,7 +32,9 @@ $this->load->view('inc/header');
 
 		<div class="col-sm-8 col-md-8 col-lg-10 order-md-1 order-sm-2">
 
- 			<?php $this->load->view('inc/business');?>
+ 			<?php $this->load->view('inc/featured_business');?>
+			<div class="spacer"></div>
+			<?php $this->load->view('inc/featured_listings');?>
 			<div class="spacer"></div>
 			<?php $this->load->view('inc/near_you');?>
 			<div class="spacer"></div>
@@ -52,7 +52,7 @@ $this->load->view('inc/header');
 			<div class="spacer"></div>
 			<?php $this->load->view('inc/auctions');?>
 			<div class="spacer"></div>
-			<?php //$this->load->view('inc/news');?>	
+			<?php $this->load->view('inc/news');?>	
 			<div class="spacer"></div>	
 			<?php //$this->load->view('inc/trending');?>
 			<div class="spacer"></div>
@@ -65,100 +65,142 @@ $this->load->view('inc/header');
 	
 <?php $this->load->view('inc/footer');?>	
 
-	<script type="text/javascript">
-		$(document).ready(function(){
+<script src='<?php echo base_url('/')?>js/jquery.cycle2.min.js' type="text/javascript" language="javascript"></script>
 
-			$.ajax({
-	            url: '<?php echo site_url('/');?>classifieds/get_latest/',
-	            success: function(data) {
-					var pre = $("#classifieds_content");
-	                pre.removeClass('loading_img min400');
-	                pre.append(data);
-	                
-	            }
-	        });
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+	slideshow = $( '.feature-cycle-slideshow' ).cycle();
+
+    slideshow.on( 'cycle-initialized cycle-before', function( e, opts ) {
+      progress.stop(true).css( 'width', 0 );
+    });
+    
+    slideshow.on( 'cycle-initialized cycle-after', function( e, opts ) {
+      if ( ! slideshow.is('.cycle-paused') )
+        progress.animate({ width: '100%' }, opts.timeout, 'linear' );
+    });
+    
+    slideshow.on( 'cycle-paused', function( e, opts ) {
+       progress.stop(); 
+    });
+    
+    slideshow.on( 'cycle-resumed', function( e, opts, timeoutRemaining ) {
+      progress.animate({ width: '100%' }, timeoutRemaining, 'linear' );
+    });
+
+		// LOAD CLASSIFIEDS
+		$.ajax({
+            url: '<?php echo site_url('/');?>classifieds/get_latest/',
+            dataType: "json",
+            type: "GET",
+            success: function(data) {
+				var pre = $("#classifieds_content");
+                pre.removeClass('loading_img min400');
+                pre.append(data.classifieds);
+                
+            }
+        });
 
 
-			$('.owl-carousel').owlCarousel({
-			    loop:true,
-			    margin:10,
-			    nav: true,
-			    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
-			    responsiveClass:true,
-			    responsive:{
-			        0:{
-			            items:1,
-			            nav:true
-			        },
-			        600:{
-			            items:3,
-			            nav:true
-			        },
-			        1000:{
-			            items:4,
-			            nav:true,
-			            loop:false
-			        }
-			    }
-			});
+		// LOAD FEATURED PROPERTIES
+		$.ajax({
+            url: '<?php echo site_url('/');?>classifieds/get_latest/',
+            dataType: "json",
+            type: "GET",
+            success: function(data) {
+				var pre = $("#classifieds_content");
+                pre.removeClass('loading_img min400');
+                pre.append(data.classifieds);
+                
+            }
+        });
 
-			
-			get_wethear('na','windhoek');
-			//THUMBS
-			$('figure .cycle-slideshow').cycle('pause');
-			$('figure .cycle-slideshow').mouseenter(function() {
-				$(this).cycle('resume').cycle('goto',0);
-				$('.reveal', this).each(function() {
-					var reveal = $(this).attr('data-src');
-					$(this).fadeIn(500).attr('src',reveal);
-				});
-			}).mouseleave(function() {
-				var shown = $('.shown', this).attr('src');
-				$(this).cycle('pause').cycle('goto',0);
-				$('.reveal', this).each(function() {
-					$(this).stop().fadeOut(200).attr('src',shown);
-				});
-			});
-			
+
+		// INITIALIZE OWL
+		$('.owl-carousel').owlCarousel({
+		    loop:true,
+		    margin:10,
+		    nav: true,
+		    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
+		    responsiveClass:true,
+		    responsive:{
+		        0:{
+		            items:1,
+		            nav:true
+		        },
+		        600:{
+		            items:3,
+		            nav:true
+		        },
+		        1000:{
+		            items:4,
+		            nav:true,
+		            loop:false
+		        }
+		    }
 		});
-	
-		//RESOLUTION
-		function windowResize(){
-			windowWidth = $(window).width();
-			windowHeight = $(window).height();
-			$('#resolution').text(windowWidth+' x '+windowHeight);
-		};
-		$(window).resize(windowResize);
-		
-		//PRELOAD
-		window.onload = showBody;
-		function showBody(){
-			windowResize();
-			swipeHeight();
-			$('#pre_load').fadeOut();
-		}
-		
-		
-		function get_wethear(cunt,city){
-	
-			$.getJSON( "<?php echo HUB_URL;?>weather/display_block/"+cunt+"/"+city, function( data ) {
-	
-				if(data.success){
-	
-					$('#weather_cont').html(data.html);
-					$('.city-weather').unbind('click').bind('click', function(e){
-						var city = $(this).data('location');
-						//console.log(city);
-						get_wethear('na', city);
-					});
-				}
-	
-			});
-	
-		}
 
+
+		//THUMBS
+		$('figure .cycle-slideshow').cycle('pause');
+		$('figure .cycle-slideshow').mouseenter(function() {
+			$(this).cycle('resume').cycle('goto',0);
+			$('.reveal', this).each(function() {
+				var reveal = $(this).attr('data-src');
+				$(this).fadeIn(500).attr('src',reveal);
+			});
+		}).mouseleave(function() {
+			var shown = $('.shown', this).attr('src');
+			$(this).cycle('pause').cycle('goto',0);
+			$('.reveal', this).each(function() {
+				$(this).stop().fadeOut(200).attr('src',shown);
+			});
+		});
+		
+	});
+
+
+  function initiate_slides(){
+
+    // Cycle plugin
+    // Pause & play on hover
+    var c = $('.cycle-slideshow').cycle('pause');
+    c.hover(function () {
+      //mouse enter - Resume the slideshow
+      $(this).cycle('resume');
+    },
+
+    function () {
+      //mouse leave - Pause the slideshow
+      $(this).cycle('pause');
+    });
+    
+    //$("input .star").rating();          
+
+  }	
+
+	//RESOLUTION
+	function windowResize(){
+		windowWidth = $(window).width();
+		windowHeight = $(window).height();
+		$('#resolution').text(windowWidth+' x '+windowHeight);
+	};
+	$(window).resize(windowResize);
 	
-	</script>
+	//PRELOAD
+	window.onload = showBody;
+	function showBody(){
+		windowResize();
+		swipeHeight();
+		$('#pre_load').fadeOut();
+	}
+	
+	
+
+
+</script>
 
 
 </body>

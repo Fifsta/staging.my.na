@@ -11,6 +11,7 @@ class A extends CI_Controller {
    		//$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
 		//$this->load->driver('cache', array('adapter'=>'file'));
 	}
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//MAIN SEARCH POST FUNCTION
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
@@ -38,6 +39,7 @@ class A extends CI_Controller {
 			$main_cat_id = 'all';
 			$main_category = 'all';
 			$main_categoryURL = 'all';
+
 		}else{
 								
 			$c = $this->input->post('srch_category', TRUE);
@@ -51,6 +53,7 @@ class A extends CI_Controller {
 			$main_categoryURL = $this->url_encode(trim($main_category));
 						
 		}
+
 		//Location
 		if (!$this->input->post('srch_location')) {
 				
@@ -103,8 +106,10 @@ class A extends CI_Controller {
 
 		
 		
-		
 	}
+
+
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//MAIN SEARCH POST FUNCTION PAGINATION
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
@@ -346,9 +351,9 @@ class A extends CI_Controller {
 		$data['sortby'] = $sort;
 		$this->load->view('results',$data);
 		
-		
-		
 	}
+
+
 
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//SEARCH  BY CATEGORY

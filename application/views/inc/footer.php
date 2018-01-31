@@ -111,19 +111,21 @@
 	<script  type="text/javascript">
 
     <?php 
-    //test QUERY STRING
-    $qstr = '';
-    if($qstr = $this->input->get()){
-        $qstr = http_build_query($qstr);
-    }
-
-
+    	
+	    $qstr = '';
+	    if($qstr = $this->input->get()){
+	        $qstr = http_build_query($qstr);
+	    }
+	    
     ?>
+
 
 	$(document).ready( function(){
 		
-		
-		console.log("Gooooooing <?php echo site_url();?>");
+		// Call weather function
+		get_weather('na','windhoek');
+
+		// Prepend user profile after login
 		$.get( "<?php echo site_url();?>my_na/nav/?url=<?php echo $_SERVER['REQUEST_URI']; ?>", function( data ) {
 		  
 		  	if(data == 'FALSE'){
@@ -137,43 +139,59 @@
 
 	});
 
+	//Call weather from NMH HUB
+	function get_weather(cont,city){
+
+		$.getJSON( "<?php echo HUB_URL;?>weather/display_block/"+cont+"/"+city, function( data ) {
+
+			if(data.success){
+
+				$('#weather_cont').html(data.html);
+				$('.city-weather').unbind('click').bind('click', function(e){
+					var city = $(this).data('location');
+
+					get_weather('na', city);
+				});
+			}
+
+		});
+
+	}
+
 	</script>
 
 	 <?php
-	 //$this->output->enable_profiler(TRUE);
-	 if($this->session->flashdata('login')){
 
-	 echo "<script data-cfasync='false'  type='text/javascript'>
-	 		$(document).ready(function(){
-				
-				$.getScript('".base_url('/')."js/jquery.knob.js', function(){setTimeout(do_load, 300);});
-				var cont = $('.na_points');
-				//LOAD POINTS
-				cont.addClass('loading');
-				
-				cont.removeClass('loading');
-	       });
-		   
-		   function do_load(){
-			   
-				$.ajax({
-							  type:'get',
-							  cache: false,
-							  url: '".site_url('/')."win/get_points/".$this->session->userdata('id')."',
-							  success: function(data) {
-								
+		if($this->session->flashdata('login')){
+
+			echo "<script data-cfasync='false'  type='text/javascript'>
+
+			 		$(document).ready(function(){
+						
+						$.getScript('".base_url('/')."js/jquery.knob.js', function(){setTimeout(do_load, 300);});
+						var cont = $('.na_points');
+						//LOAD POINTS
+						cont.addClass('loading');
+						
+						cont.removeClass('loading');
+			       });
+				   
+				    function do_load(){
+					   
+						$.ajax({
+							type:'get',
+							cache: false,
+							url: '".site_url('/')."win/get_points/".$this->session->userdata('id')."',
+							success: function(data) {
 								$('.na_points').html(data);
-							  }
-						});
-	 
-			   
-		  }
-	 </script>
-	  <div class='na_points' id='na_points_msg'></div>
-	 ";
+							}
+						});  
+				  	}
+				 </script>
 
-	 
-	 }
+			<div class='na_points' id='na_points_msg'></div>
+			";
+	 	}
 	 ?> 
 
 

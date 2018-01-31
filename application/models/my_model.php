@@ -27,7 +27,9 @@ class My_model extends CI_Model{
 				}
 				$output = $this->product_model->get_products($query = '', $data['main_cat_id'] , $data['sub_cat_id'] , $data['sub_sub_cat_id'], $data['sub_sub_sub_cat_id'] , $data['offset'] , $title = '', $amt = '', $data['limit'] ,$data['q'], $data['location_id'], $data['suburb_id']);
 				
-			}elseif($type == 'news'){
+			}
+
+			if($type == 'news'){
 				
 				$this->load->model('news_model');
 				
@@ -36,12 +38,11 @@ class My_model extends CI_Model{
 			}
 			
 				
-			///$this->cache->save('namibian_news_'.$type, $output, 3600);
-			
-           
-			
+			//$this->cache->save('namibian_news_'.$type, $output, 3600);
+			         		
 		}
-		 echo $output;
+
+		echo $output;
 	
 	}
 	 
@@ -113,6 +114,7 @@ class My_model extends CI_Model{
 			return $diff == 1 ? $diff . ' year ago' : $diff . ' years ago';
 		}
 	}
+	
 	//Shorten String
 	function shorten_string($phrase, $max_words) {
 		

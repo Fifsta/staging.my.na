@@ -22,6 +22,8 @@ if($type == '348') {
 		</ul>
 	</div>
 	
-	<?php echo $this->my_model->get_items('product', $type); ?>
+	<div>
+		<?php echo $this->my_model->get_items('product', $type); ?>
+	</div>
 
 </section>

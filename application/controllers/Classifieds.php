@@ -65,9 +65,10 @@ class Classifieds extends CI_Controller {
 	}
 	
 	
-    //+++++++++++++++++++++++++++
+    //++++++++++++++++++++++++++++++
     //CAREERS LANDING ? RESULTS PAGE
-    //++++++++++++++++++++++++++
+    //++++++++++++++++++++++++++++++
+
 	public function get_latest()
 	{
 
@@ -82,9 +83,11 @@ class Classifieds extends CI_Controller {
 			 
 		 }
 
-		 $o = $this->classifieds_model->render_classifieds($query['query'], '3');
+		 $o = $this->classifieds_model->render_classifieds($query['query']);
 		
-		  echo $o;
+		 $this->output
+	        ->set_content_type('application/json')
+	        ->set_output(json_encode(array('classifieds' => $o)));
 		 
 	}
 

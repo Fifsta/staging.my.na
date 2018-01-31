@@ -1,14 +1,11 @@
 <?php
 class Search_model extends CI_Model{
+
 	public function __construct()
     {
         // Constructor's functionality here, if you have any.
     }
 	
- 	function search_model(){
-  		//parent::Model();
-		self::__construct();			
- 	}
 	//MODEL USED FOR SEARCHING FROM THE HOME PAGE
 
 	
@@ -1123,10 +1120,20 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function show_results($query, $main_c_id = '', $main_category = '', $category = '', $heading = ''){
 			
-			//If has results
-			if($query->num_rows() != 0 && $query->row('ID') != null){
 
-				//var_dump($query->row('ID'));
+			$this->load->model('image_model'); 
+
+			$this->load->library('thumborp');
+			$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+			$width = 360;
+			$height = 230;
+
+			$l_width = 100;
+			$l_height = 100;
+
+			//If has results
+			if($query->num_rows() != 0){
+		
 				$x =0;
 				foreach($query->result() as $row){
 
@@ -1150,19 +1157,25 @@ class Search_model extends CI_Model{
 						if(strpos($img,'.') == 0){
 
 							$format = '.jpg';
-							$img_str = base_url('/').'img/timbthumb.php?w=100&h=100&src='.S3_URL.'assets/business/photos/'.$img . $format;
+							$img_str = 'assets/business/photos/'.$img . $format;
+							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
+
+
 							
 						}else{
 							
-							$img_str =  base_url('/').'img/timbthumb.php?w=100&h=100&src='.S3_URL.'assets/business/photos/'.$img;
+							$img_str = 'assets/business/photos/'.$img;
+							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
 							
 						}
 						
 					}else{
 						
-						$img_str = base_url('/').'img/timbthumb.php?w=100&h=100&src='.base_url('/').'img/bus_blank.jpg';	
+						$img_str = base_url('/').'images/bus_blank.jpg';	
+						$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
 						
 					}
+
 					//COVER IMAGE
 					$cover_img = $row->BUSINESS_COVER_PHOTO;
 
@@ -1181,7 +1194,7 @@ class Search_model extends CI_Model{
 
 					}else{
 
-						$cover_str = base_url('/').'img/business_cover_blank.jpg';
+						$cover_str = base_url('/').'images/business_cover_blank.jpg';
 
 					}
 					//get Categories
@@ -1203,21 +1216,24 @@ class Search_model extends CI_Model{
                         }
 
                     }
+
 					//get RATING
-					 //$rating = $this->get_rating($id);
+					///$rating = $this->get_rating($id);
 					
 					$ad ='';
 					if($advertorial != '' || $row->PAID_STATUS == '1'){
 						   
-						   $ad = '<img src="'.base_url('/').'img/bground/reviewed_2_sml.png" class="pull-right" style="margin:-40px 0px 0 0px; position:absolute" />';
+						$ad = '<img src="'.base_url('/').'images/bground/reviewed_2_sml.png" class="pull-right" style="margin:-40px 0px 0 0px; position:absolute" />';
+
 					}
+
 					$sponsor ='';
 					if($row->PAID_STATUS == '1'){
 
 						$sponsor = '<small class="muted">Sponsored Listing</small>';
 					}
 					//get MAP Coordinates
-					 //$cordinates = $this->get_map_coordinates($id);
+					//$cordinates = $this->get_map_coordinates($id);
 					//Build resultset HTML
 					$UA = 'href="javascript:void(0)"';
 					if($this->agent->is_mobile()){
@@ -1232,24 +1248,24 @@ class Search_model extends CI_Model{
 						$temp = ' <a class="btn white_back" onClick="'.$java.'" rel="tooltip" '. $UA.' title="Click for full contact details"><i class="icon-bullhorn"></i> <abbr title="Telephone Number">C:</abbr>'.substr($tel,0,8).'<font style="display:none">'.substr($tel,8,strlen($tel)).'</font></a>';
 					}
 					$des = trim(strip_tags(trim($description)));
-					$html = '<div class="container-fluid results_div" id="business_result_'.$row->ID.'">
+					$html = '<div class="container results_div" id="business_result_'.$row->ID.'">
 
-							 	<div class="row-fluid">
-							 		<div class="span9">
+							 	<div class="row">
+							 		<div class="col-md-9">
 										<div class="corner_ribbon">
-											<div id="'. $id.'" class="my_na_c"></div>
+											<div id="'.$id.'" class="my_na_c"></div>
 										</div>
 
 										<h3 class="upper na_script" style="text-indent:10px;height:25px;">'.$name.'</h3>
 										'.$sponsor.'
-										<p><i class="icon-map-marker"></i><em>'. $address .'</em></p>
+										<p><i class="fa fa-map-marker text-dark"></i> <em>'. $address .'</em></p>
 										<p>'.$this->shorten_string($des, 35).'</p>
 							 		</div>
-							 		<div class="span3">
-							 			<div class="row-fluid">
-							 				<div class="span12 text-center">
+							 		<div class="col-md-3">
+							 			<div class="row">
+							 				<div class="col-md-12 text-center">
 												<a class="pull-right" href="#" style="margin:10px 0px 10px 10px ">
-													<img class="img-polaroid" src="'.$img_str.'" alt="'.$name.'" style="width: 100px; height:100px;">
+													<img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'" style="width: 100px; height:100px;">
 													'.$ad.'
 												</a>
 							 				</div>
@@ -1258,13 +1274,13 @@ class Search_model extends CI_Model{
 
 							 		</div>
 							 	</div>
-							 	<div class="row-fluid">
-							 		<div class="span12">
+							 	<div class="row">
+							 		<div class="col-md-12">
 
 							 		</div>
 							 	</div>
 							 	<div class="row-fluid">
-							 		<div class="span12">
+							 		<div class="col-md-12">
 										<p>'.$this->get_review_stars($row->ID, $row->STAR_RATING,$row->NO_OF_REVIEWS).'
  										'. $catstr.'</p>
 
@@ -1277,7 +1293,7 @@ class Search_model extends CI_Model{
 							 	</div>
 
 							 </div>
-								';
+							 ';
 
 
 						echo $html;
@@ -1294,7 +1310,6 @@ class Search_model extends CI_Model{
 							  <h1>Ooops, no results found for: </h1>
 							  <h3>".$heading."</h3>
 							  <p>We could'nt find any results for the specified criteria. Please try broaden your search results or look under top level categories.</p>
-
 							  <p></p>
 					  </div>";
 
@@ -1558,15 +1573,16 @@ class Search_model extends CI_Model{
 		
 				  
     }
+
 	//GET BUSINESS RATING COUNT
 	public function get_rating_count($id){
       	
 		$query = $this->db->query("SELECT RATING FROM u_business_vote WHERE BUSINESS_ID ='".$id."' AND IS_ACTIVE = 'Y' AND TYPE = 'review'");
 			
-			return $query->num_rows();
-		
-				  
+		return $query->num_rows();
+		  
     }
+
     function get_review_stars_img($rating){
 
         $x = 1;
@@ -1577,7 +1593,7 @@ class Search_model extends CI_Model{
             $rating = 1;
 
         }
-        $str = '<img src="'.base_url('/').'img/icons/star'.$rating.'.png">';
+        $str = '<img src="'.base_url('/').'images/icons/star'.$rating.'.png">';
 
         return $str;
     }
@@ -1594,7 +1610,7 @@ class Search_model extends CI_Model{
                 $rating = 1;
 
             }
-            $str = '<img src="'.base_url('/').'img/icons/star'.$rating.'.png">';
+            $str = '<img src="'.base_url('/').'images/icons/star'.$rating.'.png">';
 			$arr = '<div style="float:right;font-size:10px;margin-bottom:0;font-style:italic;" class="well well-small"><span class="pull-right">'. $str.'<br />Based on: <b>'.$count.'</b> reviews</span></div>';
 			return $arr;
 			

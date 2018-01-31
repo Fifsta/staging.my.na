@@ -9,9 +9,8 @@
 		</ul>
 	</div>
     
-    
-	<?php 
-     echo $this->my_model->get_items('news');
-     ?>
+    <div>
+		<?php  echo $this->my_model->get_items('news'); ?>
+	</div>
                      
 </section>

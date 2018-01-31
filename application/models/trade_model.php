@@ -5,13 +5,9 @@ class Trade_model extends CI_Model
 
 	public function __construct()
 	{
-		//parent::CI_model();
-		$this->load->database();	
-		$this->load->library('session');
+
 
 	}
-
-
 
 
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -20,8 +16,8 @@ class Trade_model extends CI_Model
 	public function get_business_deals()
 	{
 
-
 	}
+
 
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//+GET PRODUCT RIBBON
@@ -35,7 +31,7 @@ class Trade_model extends CI_Model
 		{
 
 			$str = '<div class="product_ribbon' . $size . '"><small>Not Available</small>ITEM HAS SOLD<span></span></div>';
-			return $str;;
+			return $str;
 
 		}
 

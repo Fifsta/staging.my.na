@@ -1,8 +1,8 @@
-<section id="news">
+<section id="business">
 
 	<div class="heading">
 		<h2 data-icon="fa-newspaper-o">Featured <strong>Businesses</strong></h2>
-		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+		<p>Browse all listed featured businesses here.</p>
 		<ul class="options">
 			<li><a href="#" data-icon="fa-edit">Feature my Business</a></li>
 		</ul>
