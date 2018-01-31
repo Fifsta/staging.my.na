@@ -99,7 +99,7 @@ $db['default'] = array(
 	);
 
 
-}elseif($_SERVER['HTTP_HOST'] == 'my.na' || $_SERVER['HTTP_HOST'] == 'www.my.na' ){
+}elseif( $_SERVER['HTTP_HOST'] == 'beta.my.na' ){
 
 
 	$db['default'] = array(
