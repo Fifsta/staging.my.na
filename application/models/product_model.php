@@ -32,6 +32,7 @@ class Product_model extends CI_Model{
 			'sub_sub_cat_id'     => $data['cat3'],
 			'sub_sub_sub_cat_id' => $data['cat4']
 		);
+		
 		$insertdata['client_id'] = $data['client_id'];
 		$insertdata['total_quantity'] = $data['quantity'];
 		$bus_id = $data['bus_id'];

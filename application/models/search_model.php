@@ -3,12 +3,11 @@ class Search_model extends CI_Model{
 
 	public function __construct()
     {
-        // Constructor's functionality here, if you have any.
+        
     }
 	
-	//MODEL USED FOR SEARCHING FROM THE HOME PAGE
 
-	
+	//MODEL USED FOR SEARCHING FROM THE HOME PAGE
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// 1 Category Location & Business
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
@@ -1159,8 +1158,6 @@ class Search_model extends CI_Model{
 							$format = '.jpg';
 							$img_str = 'assets/business/photos/'.$img . $format;
 							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
-
-
 							
 						}else{
 							
@@ -1171,8 +1168,7 @@ class Search_model extends CI_Model{
 						
 					}else{
 						
-						$img_str = base_url('/').'images/bus_blank.jpg';	
-						$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
+						$img_url = base_url('/').'images/bus_blank.jpg';	
 						
 					}
 
@@ -1197,6 +1193,7 @@ class Search_model extends CI_Model{
 						$cover_str = base_url('/').'images/business_cover_blank.jpg';
 
 					}
+
 					//get Categories
 					//$cats = $row->cats;
 					$catstr = '';
@@ -1209,7 +1206,7 @@ class Search_model extends CI_Model{
 
 							if($cx < 6){
 
-								$catstr .= ' <span class="label label-inverse">'.$crow.'</span> ';
+								$catstr .= ' <span class="badge badge-dark text-light">'.$crow.'</span> ';
 							}
 
 							$cx ++;
@@ -1232,6 +1229,7 @@ class Search_model extends CI_Model{
 
 						$sponsor = '<small class="muted">Sponsored Listing</small>';
 					}
+
 					//get MAP Coordinates
 					//$cordinates = $this->get_map_coordinates($id);
 					//Build resultset HTML
@@ -1245,10 +1243,13 @@ class Search_model extends CI_Model{
 					}else{
 
 						$java = "phone_click($(this),'".$id."','phone')";
-						$temp = ' <a class="btn white_back" onClick="'.$java.'" rel="tooltip" '. $UA.' title="Click for full contact details"><i class="icon-bullhorn"></i> <abbr title="Telephone Number">C:</abbr>'.substr($tel,0,8).'<font style="display:none">'.substr($tel,8,strlen($tel)).'</font></a>';
+						$temp = ' <a class="btn btn-secondary" onClick="'.$java.'" rel="tooltip" '. $UA.' title="Click for full contact details" style="margin-bottom:5px"><i class="fa fa-phone text-light"></i> <abbr title="Telephone Number">C:</abbr>'.substr($tel,0,8).'<font style="display:none">'.substr($tel,8,strlen($tel)).'</font></a>';
 					}
+
+
 					$des = trim(strip_tags(trim($description)));
-					$html = '<div class="container results_div" id="business_result_'.$row->ID.'">
+					
+					$html = '<div class="container-fluid results_div" id="business_result_'.$row->ID.'">
 
 							 	<div class="row">
 							 		<div class="col-md-9">
@@ -1264,8 +1265,8 @@ class Search_model extends CI_Model{
 							 		<div class="col-md-3">
 							 			<div class="row">
 							 				<div class="col-md-12 text-center">
-												<a class="pull-right" href="#" style="margin:10px 0px 10px 10px ">
-													<img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'" style="width: 100px; height:100px;">
+												<a class="pull-right" href="#" style="margin:10px 10px 10px 10px ">
+													<img class="img-thumbnail rounded" src="'.$img_url.'" alt="'.$name.'" style="width: 100px; height:100px;">
 													'.$ad.'
 												</a>
 							 				</div>
@@ -1279,14 +1280,13 @@ class Search_model extends CI_Model{
 
 							 		</div>
 							 	</div>
-							 	<div class="row-fluid">
+							 	<div class="row">
 							 		<div class="col-md-12">
-										<p>'.$this->get_review_stars($row->ID, $row->STAR_RATING,$row->NO_OF_REVIEWS).'
- 										'. $catstr.'</p>
+										<p>'.$this->get_review_stars($row->ID, $row->STAR_RATING,$row->NO_OF_REVIEWS).' '. $catstr.'</p>
 
-									 	 <a class="btn white_back" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/"><i class="icon-info-sign"></i> View listing &raquo;</a>
- 										 <a class="btn white_back" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" rel="tooltip" title="Contact: '.$name.'"><i class="icon-envelope"></i> Contact Us</a>
- 										 <a class="btn white_back" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" rel="tooltip" title="View full reviews for '.$name.'"><i class="icon-comment"></i> Reviews</a>
+									 	 <a class="btn btn-secondary" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View listing &raquo;</a>
+ 										 <a class="btn btn-secondary" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="Contact: '.$name.'"><i class="fa fa-envelope text-light"></i> Contact Us</a>
+ 										 <a class="btn btn-secondary" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View full reviews for '.$name.'"><i class="fa fa-comment text-light"></i> Reviews</a>
 							 			'.$temp.'
 
 							 		</div>
@@ -1373,31 +1373,35 @@ class Search_model extends CI_Model{
 			$main_id = $row->CATEGORY_TYPE_ID;
 			$main_name = $row->MAIN_CAT_NAME;
 			
-			echo '<div class="accordion-group">
-						<div class="accordion-heading">
-						  <a class="accordion-toggle" data-toggle="collapse" data-parent="#category_acc" href="#cat'.$main_id.'">
-							'.$main_name.'<i class="icon-zoom-in pull-right"></i>
-						  </a>
-				  </div>
-				  <div id="cat'.$main_id.'" class="accordion-body collapse">
-                      <div class="accordion-inner">
-                        <ul class="nav nav-pills nav-stacked">';
-						//$sub = $this->get_sub_categories($main_id);
-						$subA = explode(',',$row->cats);
-						foreach($subA as $sub_row){
-							//echo $sub_row;
-							$id = substr($sub_row, 0, strpos($sub_row,'_-_', 0));
-							$name = substr($sub_row, stripos($sub_row,'_-_') + 3, strlen($sub_row));
-							
-							echo '<li><a href="'.site_url('/').'a/show/'.$main_id.'/'.$this->url_encode($main_name).'/'.$id.'/'.$this->url_encode($name).'/">'.$name.'<i class="icon-chevron-right pull-right"></i></a></li>';
-							
-						}
+
+			echo '
+			  <div class="card">
+			    <div class="card-header" role="tab" id="headingOne">
+			      <h5 class="mb-0" style="font-size:14px">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#cat_main_'.$main_id.'" aria-expanded="true" aria-controls="collapseOne">
+			          '.$main_name.'<i class="fa fa-search-plus text-dark pull-right"></i>
+			        </a>
+			      </h5>
+			    </div>
+
+			    <div id="cat_main_'.$main_id.'" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+			      <div class="card-block"><ul class="list-group list-group-flush">';
+
+					$subA = explode(',',$row->cats);
+					foreach($subA as $sub_row){
+						//echo $sub_row;
+						$id = substr($sub_row, 0, strpos($sub_row,'_-_', 0));
+						$name = substr($sub_row, stripos($sub_row,'_-_') + 3, strlen($sub_row));
 						
+						echo '<a href="'.site_url('/').'a/show/'.$main_id.'/'.$this->url_encode($main_name).'/'.$id.'/'.$this->url_encode($name).'/"><li class="list-group-item list-group-item-action list-group-item-light">'.$name.'<i class="fa fa-chevron-right text-dark pull-right"></i></li></a>';
 						
-				echo ' </ul>
-                      </div>
-                    </div>
-				  </div>';		
+					}
+
+			 echo '</ul>      
+			      </div>
+			    </div>
+			  </div>
+			';
 	
 			
 		}
@@ -1611,12 +1615,12 @@ class Search_model extends CI_Model{
 
             }
             $str = '<img src="'.base_url('/').'images/icons/star'.$rating.'.png">';
-			$arr = '<div style="float:right;font-size:10px;margin-bottom:0;font-style:italic;" class="well well-small"><span class="pull-right">'. $str.'<br />Based on: <b>'.$count.'</b> reviews</span></div>';
+			$arr = '<div style="float:right;font-size:10px;margin-bottom:0;font-style:italic;" class="card"><div class="card-body"><span class="pull-right">'. $str.'<br />Based on: <b>'.$count.'</b> reviews</span></div></div>';
 			return $arr;
 			
 		}else{
 			
-			$arr = '<a class="pull-right clearfix" href="'.site_url('/') . 'b/'. $id .'/reviews/"><span class="label label-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</span></a>';
+			$arr = '<a class="pull-right clearfix" href="'.site_url('/') . 'b/'. $id .'/reviews/" style="margin-top:20px"><span class="badge badge-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</span></a>';
 			return $arr;
 			
 		}

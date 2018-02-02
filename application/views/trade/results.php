@@ -78,6 +78,7 @@ $this->load->view('inc/header', $header);
          <div class="col-md-12">
 
             <div id="deal_content">
+
               <?php 
               /*Search Results
               Loop through the search results in the query array
@@ -85,7 +86,14 @@ $this->load->view('inc/header', $header);
               $this->trade_model->get_products($query, $main_cat_id, $sub_cat_id, $sub_sub_cat_id, $sub_sub_sub_cat_id, $count, $offset, $title, $amt = '', $advert = TRUE, $pages);
               //LOAD PAGINATION
               ?> 
-            </div>               
+
+            </div>   
+
+            <?php 
+              //LOAD PAGINATION
+              if(isset($pages)){ echo $pages; } 
+            ?>    
+
             <div class="loading_img hidden" style="width:100%" id="pre_loader"></div>
                   
          </div>
@@ -161,7 +169,7 @@ $this->load->view('inc/header', $header);
        
   }
 
-  function initiate_pagination(){
+  /*function initiate_pagination(){
     
     //PAGINATION
     $('.page-link').bind('click', function(e){
@@ -182,7 +190,7 @@ $this->load->view('inc/header', $header);
             
     });
     
-  }
+  }*/
 
 
 </script>

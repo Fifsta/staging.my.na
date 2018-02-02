@@ -1,7 +1,6 @@
 <?php
 class Classifieds_model extends CI_Model{
 
-
 	public function __construct() {
   		//parent::CI_model();
 		$this->load->database();	
@@ -151,6 +150,7 @@ class Classifieds_model extends CI_Model{
     //+++++++++++++++++++++++++++++++++
 	public function render_classifieds($query)
 	{
+		
 
 		 $this->load->model('my_model');
 

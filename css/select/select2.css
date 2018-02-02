@@ -27,19 +27,19 @@ Version: 3.5.1 Timestamp: Tue Jul 22 18:58:56 EDT 2014
 
 .select2-container .select2-choice {
     display: block;
-    height: 26px;
+    width:100%;
 	margin-top:-2px;
-    padding: 2px 0 2px 8px;
+    padding: 0.375rem 0.75rem;
     overflow: hidden;
     position: relative;
-
-    border: 1px solid #aaa;
+    font-size: 1rem;
     white-space: nowrap;
-    line-height: 26px;
+    line-height: 1.5;
     color: #444;
     text-decoration: none;
 
-    border-radius: 4px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
 
     background-clip: padding-box;
 
@@ -49,12 +49,7 @@ Version: 3.5.1 Timestamp: Tue Jul 22 18:58:56 EDT 2014
           -ms-user-select: none;
               user-select: none;
 
-    background-color: #333;
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eee), color-stop(0.5, #fff));
-    background-image: -webkit-linear-gradient(center bottom, #eee 0%, #fff 50%);
-    background-image: -moz-linear-gradient(center bottom, #eee 0%, #fff 50%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#eeeeee', GradientType = 0);
-    background-image: linear-gradient(to top, #eee 0%, #fff 50%);
+    background-color: #fff;
 }
 
 html[dir="rtl"] .select2-container .select2-choice {

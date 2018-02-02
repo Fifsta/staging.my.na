@@ -13,7 +13,7 @@ $this->load->view('inc/header');
 <nav id="bread">
 	<div class="container">
 		  <ol class="breadcrumb">
-		    <li class="breadcrumb-item"><a href="#">Home</a></li>
+		    <li class="breadcrumb-item"><a href="#">My.na</a></li>
 		  </ol>
 	</div>
 </nav>
@@ -24,38 +24,46 @@ $this->load->view('inc/header');
 
 		<div class="col-sm-4 col-md-4 col-lg-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
 	    	
-			<?php $this->load->view('inc/weather');?>
+			<?php $this->load->view('inc/weather'); ?>
 			
-			<?php $this->load->view('inc/adverts');?>
+			<?php $this->load->view('inc/adverts'); ?>
 
 		</div>
 
 		<div class="col-sm-8 col-md-8 col-lg-10 order-md-1 order-sm-2">
 
- 			<?php $this->load->view('inc/featured_business');?>
-			<div class="spacer"></div>
-			<?php $this->load->view('inc/featured_listings');?>
-			<div class="spacer"></div>
-			<?php $this->load->view('inc/near_you');?>
-			<div class="spacer"></div>
-			<?php $this->load->view('inc/categories');?>
-			<div class="spacer"></div>
-			<?php $this->load->view('inc/classifieds');?>
-			<div class="spacer"></div>
-			<?php $this->load->view('inc/map');?>
-			<div class="spacer"></div>
-			<?php $prop['type'] = '3408'; $this->load->view('inc/products', $prop);?>
-			<div class="spacer"></div>
-			<?php $cars['type'] = '348'; $this->load->view('inc/products', $cars);?>
-			<div class="spacer"></div>
-			<?php //$this->load->view('inc/deals');?>
-			<div class="spacer"></div>
-			<?php $this->load->view('inc/auctions');?>
-			<div class="spacer"></div>
-			<?php $this->load->view('inc/news');?>	
-			<div class="spacer"></div>	
-			<?php //$this->load->view('inc/trending');?>
-			<div class="spacer"></div>
+			<div class="row">
+
+				<div class="col-md-12">
+
+		 			<?php $this->load->view('inc/featured_business');?>
+					<div class="spacer"></div>
+					<?php $this->load->view('inc/featured_listings');?>
+					<div class="spacer"></div>
+					<?php $this->load->view('inc/near_you');?>
+					<div class="spacer"></div>
+					<?php $this->load->view('inc/categories');?>
+					<div class="spacer"></div>
+					<?php $this->load->view('inc/classifieds');?>
+					<div class="spacer"></div>
+					<?php $this->load->view('inc/map');?>
+					<div class="spacer"></div>
+					<?php $prop['type'] = '3408'; $this->load->view('inc/products', $prop);?>
+					<div class="spacer"></div>
+					<?php $cars['type'] = '348'; $this->load->view('inc/products', $cars);?>
+					<div class="spacer"></div>
+					<?php //$this->load->view('inc/deals');?>
+					<div class="spacer"></div>
+					<?php $this->load->view('inc/auctions');?>
+					<div class="spacer"></div>
+					<?php $this->load->view('inc/news');?>	
+					<div class="spacer"></div>	
+					<?php //$this->load->view('inc/trending');?>
+					<div class="spacer"></div>
+
+				</div>	
+
+			</div>
 
 		</div>
 
@@ -89,33 +97,6 @@ $this->load->view('inc/header');
     slideshow.on( 'cycle-resumed', function( e, opts, timeoutRemaining ) {
       progress.animate({ width: '100%' }, timeoutRemaining, 'linear' );
     });
-
-		// LOAD CLASSIFIEDS
-		$.ajax({
-            url: '<?php echo site_url('/');?>classifieds/get_latest/',
-            dataType: "json",
-            type: "GET",
-            success: function(data) {
-				var pre = $("#classifieds_content");
-                pre.removeClass('loading_img min400');
-                pre.append(data.classifieds);
-                
-            }
-        });
-
-
-		// LOAD FEATURED PROPERTIES
-		$.ajax({
-            url: '<?php echo site_url('/');?>classifieds/get_latest/',
-            dataType: "json",
-            type: "GET",
-            success: function(data) {
-				var pre = $("#classifieds_content");
-                pre.removeClass('loading_img min400');
-                pre.append(data.classifieds);
-                
-            }
-        });
 
 
 		// INITIALIZE OWL

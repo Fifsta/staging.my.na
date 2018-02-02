@@ -7,9 +7,7 @@ class A extends CI_Controller {
 		parent::__construct();
 		$this->load->model('search_model');
 		$this->load->library('pagination');
-		// should put this in the __construct() of this controller or in your MY_Controller.php
-   		//$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
-		//$this->load->driver('cache', array('adapter'=>'file'));
+
 	}
 
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -294,23 +292,23 @@ class A extends CI_Controller {
 		$config['per_page'] = $limit; 
 		$config['num_links'] = 2; 
 		//Styling
-		$config['full_tag_open'] = '<div class="pagination pull-right"><ul>';
-		$config['full_tag_close'] = '</ul></div>';
+		$config['full_tag_open'] = '<nav aria-label="Page navigation example"><ul class="pagination">';
+		$config['full_tag_close'] = '</ul></nav>';
 		$config['first_link'] = false;
 		$config['last_link'] = false;
-		$config['first_tag_open'] = '<li>';
+		$config['first_tag_open'] = '<li class="page-item">';
 		$config['first_tag_close'] = '</li>';
-		$config['prev_link'] = '<i class="icon-chevron-left"></i>';
-		$config['prev_tag_open'] = '<li class="prev">';
+		$config['prev_link'] = '<i class="fa fa-chevron-left icon-light"></i>';
+		$config['prev_tag_open'] = '<li class="page-item prev">';
 		$config['prev_tag_close'] = '</li>';
-		$config['next_link'] = '<i class="icon-chevron-right"></i>';
-		$config['next_tag_open'] = '<li>';
+		$config['next_link'] = '<i class="fa fa-chevron-right icon-light"></i>';
+		$config['next_tag_open'] = '<li class="page-item">';
 		$config['next_tag_close'] = '</li>';
-		$config['last_tag_open'] = '<li>';
+		$config['last_tag_open'] = '<li class="page-item">';
 		$config['last_tag_close'] = '</li>';
-		$config['cur_tag_open'] =  '<li class="active"><a href="#">';
+		$config['cur_tag_open'] =  '<li class="page-item bg-light text"><a href="#" class="page-link bg-light text-dark">';
 		$config['cur_tag_close'] = '</a></li>';
-		$config['num_tag_open'] = '<li>';
+		$config['num_tag_open'] = '<li class="page-item">';
 		$config['num_tag_close'] = '</li>';
 		$config['uri_segment'] = 11;
 		$this->pagination->initialize($config);

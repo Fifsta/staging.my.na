@@ -18,8 +18,7 @@ class My_na extends CI_Controller {
 	
 	public function index()
 	{
-
-		
+	
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 					
 		if ( ! $output = $this->cache->get('home'))

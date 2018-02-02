@@ -893,6 +893,7 @@ class Trade_model extends CI_Model
 	}
 
 
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//+GET PRODUCTS
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -976,7 +977,7 @@ class Trade_model extends CI_Model
 									  
 									</ul>
 								  </div>
-								<p>'.$count.'</p>
+								  <p>'.$count.'</p>
 								</div>
 							</div>';
 
@@ -1072,8 +1073,9 @@ class Trade_model extends CI_Model
 				if ($row->listing_type == 'S')
 				{
 
+
 					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
-								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
+								 <a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 
 					if ($row->sub_cat_id == 3410)
 					{
@@ -1225,50 +1227,49 @@ class Trade_model extends CI_Model
 
 			echo '</div>';
 
-			echo '<div class="pull-right">'.$pages.'</div><div class="clearfix" style="height:30px;"></div>';
 
 			if ($this->input->is_ajax_request())
 			{
-
 
 				echo '
 				 <script data-cfasync="false" type="text/javascript">
 
 					$(document).ready(function(){
-							$("img.lazy").lazyload({
-								  effect : "fadeIn"
-							  });
-							window.setTimeout(initiate_pagination, 100);
-							$(".cycle-slideshow").cycle();
-							var c = $(".cycle-slideshow").cycle("pause");
-							c.hover(function () {
-								//mouse enter - Resume the slideshow
-								$(this).cycle("resume");
-							},
-							function () {
-								//mouse leave - Pause the slideshow
-								$(this).cycle("pause");
-							});
+						$("img.lazy").lazyload({
+							  effect : "fadeIn"
+						  });
+						//window.setTimeout(initiate_pagination, 100);
+						$(".cycle-slideshow").cycle();
+						var c = $(".cycle-slideshow").cycle("pause");
+						c.hover(function () {
+							//mouse enter - Resume the slideshow
+							$(this).cycle("resume");
+						},
+						function () {
+							//mouse leave - Pause the slideshow
+							$(this).cycle("pause");
+						});
 					});
-				 </script>';
 
+				 </script>';
 
 			}
 			else
 			{
 
-				echo '
+				 echo '
 				 <script type="text/javascript">
 
 					$(document).ready(function(){
-							$("img.lazy").lazyload({
-								  effect : "fadeIn"
-							  });
+						$("img.lazy").lazyload({
+							effect : "fadeIn"
+						});
 
-							//PAGINATION
-							window.setTimeout(initiate_slides, 200);
-							window.setTimeout(initiate_pagination, 400);
+						//PAGINATION
+						window.setTimeout(initiate_slides, 200);
+						//window.setTimeout(initiate_pagination, 400);
 					});
+
 				 </script>';
 
 			}

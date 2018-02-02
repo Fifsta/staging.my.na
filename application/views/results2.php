@@ -110,13 +110,13 @@ margin-right:-100px;
 
                 <div class="span8 results" id="normal_results_div">
             	<?php 
-					/*Search Results
-					Loop through the search results in the query array
-					*/	
+    					/*Search Results
+    					Loop through the search results in the query array
+    					*/	
 							
-						$this->search_model->show_results($query, $main_c_id, $main_category, $category);
+						  $this->search_model->show_results($query, $main_c_id, $main_category, $category);
 					
-				?> 
+				      ?> 
 
          		</div>
                 
