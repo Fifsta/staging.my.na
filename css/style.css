@@ -17,9 +17,7 @@ iframe{border:none;}
     border-radius: 4px; /* future proofing */
 }
 
-
 .facebook {
-
     background-image: url(../images/social1.png);
     display: block;
     background-position: 97px 0px;
@@ -33,13 +31,10 @@ iframe{border:none;}
     transition: background .25s ease-in-out;
     -moz-transition: background .25s ease-in-out;
     -webkit-transition: background .25s ease-in-out;
-
 }
 
 .facebook:hover {
-
     background-position: 97px 39px;
-
 }
 
 img.lazy {
@@ -56,7 +51,6 @@ img.lazy {
 .white{color:#f1f1f1;}.black{color:#1d1d1d}.white_back{background:#fff}.yellow{color:#FF9F01}.yellow_back{background: #FF9F01}
 .upper{text-transform: uppercase;font-weight: normal}
 
-
 .my_na_c {
     margin-top: 15px;
     z-index: 1001;
@@ -72,7 +66,6 @@ img.lazy {
    /* background: url(../img/buttons/na.png) no-repeat;*/
     cursor: default;
     color:#fff;
-
     background-position: 0px -45px;
 }
 
@@ -87,7 +80,6 @@ img.lazy {
     height: 45px;
     color:#fff;
     font-size:20px;
-    
     background: url(../images/buttons/na.png?v1) no-repeat;
     cursor: pointer;
 }
@@ -102,9 +94,8 @@ img.lazy {
     left: 0;
     bottom: 0;
     right: 0;
-   background: url(../images/buttons/na.png?v1) no-repeat;
+    background: url(../images/buttons/na.png?v1) no-repeat;
     background-position: 0px -45px;
-
 }
 
 #msg_my_na_system {
@@ -147,9 +138,6 @@ img.lazy {
     border: 2px solid #fff;
     z-index: 99
 }
-
-
-
 
 .product_ribbon {
     z-index: 899;
