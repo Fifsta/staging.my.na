@@ -24,10 +24,9 @@ class My_na_model extends CI_Model{
 				
 				
 			}
-           
-			
 		}
-		 echo $output;
+
+		echo $output;
 	
 	}
 	
@@ -1380,6 +1379,13 @@ class My_na_model extends CI_Model{
 	//++++++++++++++++++++++++++++++
 	public function instant_search($key , $limit = 10)
 	{
+
+        $this->load->model('image_model'); 
+
+        $this->load->library('thumborp');
+        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+        $width = 300;
+        $height = 300;
 		
 		if($limit == 100){
 			$key = rawurldecode($key);
@@ -1460,7 +1466,7 @@ class My_na_model extends CI_Model{
 		// '".$key."'
 	
 		if($query){
-			echo '<table class="table">';
+
 			foreach($query->result() as $row){
 				$wordsArray = array();
 				$markedWords = array();
@@ -1475,21 +1481,26 @@ class My_na_model extends CI_Model{
 
 				$text = str_ireplace($wordsArray, $markedWords, $body);
 				
-				echo '<tr class="padding10">
-						<td style="width:150px;border:none"><img src="'.base_url('/').'img/timbthumb.php?src='.base_url('/').$row->img_file.'&w=120&h=120" class="img-polaroid"/></td>
-						<td style="min-width:85%;border:none">
+                $img_str = $row->img_file;
+                $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-						    <h3>'.str_replace($key1, $text,$row->title).'</h3>
+				echo '<div class="container-fluid results_div" style="padding:10px">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="'.$img_url.'" class="img-thumbnail"/>
+                            </div>
+                            <div class="col-md-9">
+                                <h2 style="font-size:18px">'.str_replace($key1, $text,$row->title).'</h2>
+                                <p><span class="muted">'.$this->shorten_string($text, 40).'</span></p>
+                                <span class="badge badge-warning" style="font-size:14px">'.ucwords(str_replace("_"," ",$row->type)).'</span><hr>
+                                <a href="'.site_url('/').$row->link.'" class="btn btn-dark btn-lg"><i class="icon-search"></i> View '.ucwords(str_replace("_"," ",$row->type)).'</a>
+                                
+                            </div>
+                        </div>    
 
-						    <p><span class="muted">'.$this->shorten_string($text, 40).'</span></p>
-
-						    <a href="'.site_url('/').$row->link.'" class="btn"><i class="icon-search"></i> View '.ucwords(str_replace("_"," ",$row->type)).'</a>
-						    <span class="badge pull-right">'.ucwords(str_replace("_"," ",$row->type)).'</span>
-						</td>
-
-					  </tr>';
+					  </div>';
 			}
-			echo '</table>';
+
 			
 		}
 		

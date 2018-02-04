@@ -16,13 +16,28 @@
 			</div>
 			<div class="col-sm-8">
 			
-				<form class="input-group input-group-lg">
-					<div class="find input-group-addon">Find:</div>
-					<input type="text" class="form-control" id="search-main" placeholder="Pizza, Lodge, Plumbing, ... etc">
-					<div class="near input-group-addon">Near:</div>
-					<input type="text" class="near form-control" id="search-main2" placeholder="Windhoek">
-					<span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search" role="button"></button></span>
-				</form>
+                <form class="input-group input-group-lg" id="search-main" name="search-main" method="post" action="<?php echo site_url('/'); ?>my_na/search">
+
+                    <div class="find input-group-addon">Find:</div>
+                    <input type="text" class="form-control typeahead" name="srch_bar" type="text"
+                           value="<?php if (isset($str)) {
+                               echo htmlspecialchars($str);
+                           } else {
+                               echo '';
+                           } ?>" autocomplete="off"
+                           placeholder="Search Anything Namibian">
+
+
+    					<div class="near input-group-addon">Near:</div>
+    					<input type="text" class="near form-control" id="search-main2" placeholder="Windhoek">
+    					<span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search" role="button"></button></span>
+    			    
+                    <input type="hidden" value="<?php if (isset($type)) { echo $type; echo 'none'; } ?>" name="type">
+                    <input type="hidden" value="<?php if (isset($location)) { echo $location; } else { echo 'national'; } ?>" name="location">
+                    <input type="hidden" value="<?php if (isset($main_cat_id)) { echo $main_cat_id; } else { echo '0'; } ?>" id="main_cat_id" name="main_cat_id">
+                    <input type="hidden" value="<?php if (isset($sub_cat_id)) { echo $sub_cat_id; } else { echo '0'; } ?>" id="sub_cat_id" name="sub_cat_id">
+                    
+                </form>
 				
 				<div class="history">Search history: <a href="#">pizza</a>, <a href="#">lodge</a>, <a href="#">plumbing</a>, <a href="#">paper towels</a>, <a href="#">shoes</a>,</div>
 			</div>

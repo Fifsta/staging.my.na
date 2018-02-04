@@ -5,16 +5,16 @@
  //+++++++++++++++++
  if(isset($title)){
  
-	 $header['title'] = $title . ' - My Namibia';
-	 $header['metaD'] = 'Buy or Sell '.$title. '. Find ' . $title .' online - My Namibia';
-	 $header['section'] = '';
-	 
+     $header['title'] = $title . ' - My Namibia';
+     $header['metaD'] = 'Buy or Sell '.$title. '. Find ' . $title .' online - My Namibia';
+     $header['section'] = '';
+     
  }else{
-	
-	 $header['title'] = '';
-	 $header['metaD'] = '';
-	 $header['section'] = '';
-	 
+    
+     $header['title'] = '';
+     $header['metaD'] = '';
+     $header['section'] = '';
+     
  }
  $this->load->view('inc/header', $header);
  
@@ -24,121 +24,79 @@
  ?>
 
 </head>
- 
-<body>
 
- <?php 
- //+++++++++++++++++
- //LOAD NAVIGATION
- //+++++++++++++++++
- $nav['section'] = '';
- $this->load->view('inc/navigation', $nav);
- ?>
-    <!-- END Navigation -->
-   <!-- Part 1: Wrap all content here -->
-    <div id="wrap">  
-    
-      <!-- Begin page content -->
-       <div class="container" id="home_container">
-       	 <div class="clearfix"></div>
-		 <div class="row">
+<body id="top">
 
-			  <?php 
-             //+++++++++++++++++
-             //LOAD SEARCH BOX
-             //+++++++++++++++++
-             
-             $this->load->view('inc/home_search');
-			 
-			 //HEading Box
-             ?>
+<?php $this->load->view('inc/top_bar'); ?>
+
+<nav id="bread">
+    <div class="container">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">My.na</a></li>
+          </ol>
+    </div>
+</nav>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-4 col-md-4 col-lg-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
+            
+            <?php $this->load->view('inc/weather'); ?>
+            
+            <?php $this->load->view('inc/adverts'); ?>
 
         </div>
 
-        <div class="clearfix">&nbsp;</div>     
+        <div class="col-sm-8 col-md-8 col-lg-10 order-md-1 order-sm-2">
 
+            <div class="row">
 
-        
-        <div class="row-fluid">
-        	<div class="span7">
-				<h1>Search Index for <?php echo $title;?></h1>
+                <div class="col-md-12">
+                    <?php 
+                    //+++++++++++++++++
+                    //LOAD LOCATION LINKS
+                    //+++++++++++++++++
+                    $this->my_na_model->instant_search($key, '100');
+                    ?>
+                </div>  
+
             </div>
-        	<div class="span5 text-right">
-			
-            </div> 
-        </div> 
-        <div class="row-fluid">
-             <div class="span12">
-                 <ul class="breadcrumb" style="background:transparent">
-                	<li itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
-                    	<a class="badge badge-inverse" href="<?php echo site_url('/');?>" itemprop="url"><span itemprop="title">My</span></a><span class="divider">/</span></li>
-                    <li class="active" style="color:#000"><?php echo $title;?></li>
-                 </ul>
-             </div>
-        </div>	   
-        <div class="row-fluid">
 
-        	<div class="span9">
-				<?php 
-              
-			   //+++++++++++++++++
-               //LOAD LOCATION LINKS
-               //+++++++++++++++++
-               $this->my_na_model->instant_search($key, '100');
-			 
+        </div>
 
-			   
-               ?>
-            </div>
-            <div class="span3">
-            	<?php $this->my_na_model->show_advert('');?>
-            </div>
-             
-        </div>      	
-	 </div> 
-     <!-- /container - end content --> 
-	 <div class="clearfix" style="height:100px;"></div>
-
-
-    <?php 
- //+++++++++++++++++
- //LOAD FOOTER
- //+++++++++++++++++
- $footer['foo'] = '';
-$this->load->view('inc/footer', $footer);
- //$this->output->enable_profiler(TRUE);
- ?>  
- <!-- /home-bak  -->
+    </div>  
+    
 </div>
-    <!-- JAvascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    
+<?php $this->load->view('inc/footer');?>    
 <script src='<?php echo base_url('/')?>js/jquery.cycle.all.min.js' type="text/javascript" language="javascript"></script>
 <script src='<?php echo base_url('/')?>js/jquery.rating.pack.js' type="text/javascript" language="javascript"></script>
- <script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
+<script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		$('[rel=tooltip]').tooltip();
+    $(document).ready(function(){
+        $('[rel=tooltip]').tooltip();
 
-		// Cycle plugin
-		$('.slides').cycle({
-			fx:     'fade',
-			speed:   400,
-			timeout: 200
-		}).cycle("pause");
-	
-		// Pause & play on hover
-		$('.slideshow-block').hover(function(){
+        // Cycle plugin
+        $('.slides').cycle({
+            fx:     'fade',
+            speed:   400,
+            timeout: 200
+        }).cycle("pause");
+    
+        // Pause & play on hover
+        $('.slideshow-block').hover(function(){
 
-			$(this).find('.slides').addClass('active').cycle('resume');
-			$(this).find('.slides li img').each(function (e) {
-				$(this).attr('src', $(this).attr('data-original'));
-			});
+            $(this).find('.slides').addClass('active').cycle('resume');
+            $(this).find('.slides li img').each(function (e) {
+                $(this).attr('src', $(this).attr('data-original'));
+            });
 
-		}, function(){
-			$(this).find('.slides').removeClass('active').cycle('pause');
-		});
-	});      
+        }, function(){
+            $(this).find('.slides').removeClass('active').cycle('pause');
+        });
+    });      
 </script>
 </body>
 </html>
