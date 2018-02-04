@@ -60,7 +60,7 @@ if(isset($_SERVER['MY_WORKER']) && $_SERVER['MY_WORKER'] == 'YES')
 }else{
 
   //lIVE
-  $config['site_url']	= 'http://beta.my.na/index.php';
+  $config['site_url']	= 'http://beta.my.na';
   $config['base_url']	= 'http://beta.my.na/';
   $config['analytics'] = '<script type="text/javascript">'.$UA.'</script>';
 
