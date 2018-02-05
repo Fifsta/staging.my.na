@@ -695,7 +695,6 @@ class Product_model extends CI_Model{
 				
 				$output .= '<div>
 								<figure>
-								' .$ribbon. '
 								<div class="slideshow-block">
 									<a href="#" class="link"></a>
 									<div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides="> li">
