@@ -220,7 +220,7 @@ $this->load->view('inc/header');
 				<!--Contact Include-->
 					<div class="tab-content">
 						
-						<?php $this->load->view('business/inc/business_contact_inc', $bus_details);?>
+						<?php //$this->load->view('business/inc/business_contact_inc', $bus_details);?>
 						
 					</div>	
 				</div>	
