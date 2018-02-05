@@ -79,6 +79,27 @@ $this->load->view('inc/header');
 
 	$(document).ready(function(){
 
+	windowWidth = $(window).width();
+	windowHeight = $(window).height();
+
+	if (windowWidth < 768) {
+		$(document).ready(function(){
+			//HOME SEARCH OVERLAY
+			$('.expose').on('click', function(e) {
+				e.preventDefault();
+				$('.overlay-search').addClass('exit');
+			});
+			$(window).scroll(function(event) {
+				var scrolledY = $(window).scrollTop();
+				if (scrolledY >= 0) {
+					$('.overlay-search').addClass('exit');
+				}else{
+					//$('.overlay-search').removeClass('exit');
+				}
+			});
+		});
+	};		
+
 	slideshow = $( '.feature-cycle-slideshow' ).cycle();
 
     slideshow.on( 'cycle-initialized cycle-before', function( e, opts ) {
