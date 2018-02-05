@@ -86,27 +86,9 @@
 			</div>
 		</div>
 	</footer>
-	
-	<div class="overlay-search animate display-table">
-		<div>
-			<div class="slogo">
-				<a href="#"><img src="images/logo-main.png"></a>
-				<div>find • list • buy • sell</div>
-			</div>
-			<form class="input-group input-group-lg">
-				<div class="find input-group-addon">Find:</div>
-				<input type="text" class="form-control" id="search-main-mobile" placeholder="Pizza, Lodge, Plumbing, ... etc">
-				<div class="near input-group-addon">Near:</div>
-				<input type="text" class="near form-control" id="search-main2-mobile" placeholder="Windhoek">
-				<span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search"></button></span>
-			</form>
-			
-			<div class="history">Search history: <a href="#">pizza</a>, <a href="#">lodge</a>, <a href="#">plumbing</a>, <a href="#">paper towels</a>, <a href="#">shoes</a>,</div>
-			
-			<a href="#" class="expose" data-icon="fa-angle-double-down"></a>
-		</div>
-	</div>
 
+
+	<?php //$this->output->enable_profiler(true); ?>
 
 	<script  type="text/javascript">
 
@@ -157,6 +139,45 @@
 		});
 
 	}
+
+
+	  function initialise_owl() {
+
+
+		// INITIALIZE OWL
+		$('.owl-carousel').owlCarousel({
+		    loop:false,
+		    lazyLoad: true,
+		    navRewind:false,
+		    margin:10,
+		    nav: true,
+		    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
+		    responsiveClass:true,
+		    responsive:{
+		        0:{
+		            items:1,
+		            nav:true
+		        },
+		        600:{
+		            items:1,
+		            nav:true
+		        },
+		        1000:{
+		            items:3,
+		            nav:true,
+		            loop:false
+		        },
+
+		        1600:{
+		            items:4,
+		            nav:true,
+		            loop:false
+		        }		        
+		    }
+		});
+
+
+  }
 
 	</script>
 

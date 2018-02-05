@@ -6,6 +6,6 @@
 
 	</div>
 
-	<iframe src="<?php echo HUB_URL;?>main/products/" allowtransparency="1" frameborder="0" style="width:100%; min-height: 290px; overlow:hidden"></iframe>
+	<!--<iframe src="<?php echo HUB_URL;?>main/products/" allowtransparency="1" frameborder="0" style="width:100%; min-height: 290px; overlow:hidden"></iframe>-->
                      
 </section>

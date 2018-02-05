@@ -40,7 +40,6 @@ class Classifieds_model extends CI_Model{
 	public function get_classifieds($featured = false)
 	{
 
-		
 		 $sql = '';
 		 $query['cat_name'] = '';
 		 $query['cl_cat_id'] = '';
@@ -139,7 +138,6 @@ class Classifieds_model extends CI_Model{
 
 		 $query['query'] = $this->db->query($sqlgo, true);
 		 
-		 //echo $sql;
 		 return $query;
 		 
 	}
@@ -245,6 +243,109 @@ class Classifieds_model extends CI_Model{
 		  
 		  return $o;
 	}
+
+
+
+//+++++++++++++++++++++++++++++++++
+    //CLASSIFIEDS RENDER ? RESULTS PAGE
+    //+++++++++++++++++++++++++++++++++
+	public function render_latest_classifieds($query)
+	{
+		
+
+		 $this->load->model('my_model');
+
+		 $o = '<div class="owl-carousel" style="margin-top:20px">';
+		 if($query->result()){
+			 $x = 0;
+			foreach($query->result() as $row){
+				
+				$b = $this->render_business($row);
+				//$b = '';
+				$fb = "postToFeed(" . $row->classified_id . ", '" . ucwords(trim($this->my_model->clean_url_str($row->title, " ", " "))) . "','" . trim('') . "', '" . ucwords(trim($this->my_model->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->my_model->shorten_string(strip_tags($this->my_model->clean_url_str($row->content, " ", " ")), 50)))) . "', '" . site_url('/') . 'classifieds/view/' . $row->classified_id . '/' . trim($this->my_model->clean_url_str($row->title)) . "')";
+
+				//$fb = "window.open('https://www.facebook.com/sharer/sharer.php?app_id=287335411399195&u=". rawurlencode(site_url('/').'product/'.$row->product_id.'/'.$this->clean_url_str($row->title)) ."', '_blank', 'width=800,height=600,scrollbars=yes,status=yes,resizable=yes,screenx=20%,screeny=20%')";
+
+				$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter');
+				$tweet_url = 'https://twitter.com/share?url=' . site_url('/') .'classifieds/view/'. $this->my_model->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
+				
+
+
+				$loc = '';
+
+				if(is_numeric($row->location_id)){
+					
+					$loc .= '<p><i class="icon-map-marker"></i><em>'. $row->location;
+					
+				}else{
+					
+					$loc .=	'<p><em>';
+				}
+				
+				if($row->BUSINESS_NAME != ''){
+					
+					$loc .= ' - '.$row->BUSINESS_NAME.'</em></p>';
+				}else{
+					
+					$loc .=  '</em></p>';
+				}
+
+				$cat = '';
+				if($row->cat_name != ''){
+					
+					$cat = '<span class="badge badge-inverse">'.$row->cat_name. '</span>';
+				}
+				
+				$subs = '';
+
+				//PUBLICATIONS
+				if(strlen($row->pubs) > 0){
+					
+					$pubA = explode(',',$row->pubs);
+					foreach($pubA as $prow){
+						
+							if($prow != 0 || $prow != 1 || $prow != 2){
+						
+								$subs .= '<img src="'.HUB_URL.'img/publications/'.$prow.'.png" style="width:25px;height:25px; margin:2px; float:left">';
+							}
+						
+					}
+					
+				}
+				
+				$o .= '<div>
+						<figure>
+							<div class="product_ribbon_sml"><small style="color:#ff9900">'.$row->cat_name.' &nbsp;</small>'.date('jS \of F Y',strtotime($row->listing_date)).'<span></span></div>
+							<span class="pull-right" style="margin-top:0px">
+							<a onClick="' . $fb . '" class="facebook"></a>
+							' . anchor_popup('https://twitter.com/share?url=' . trim($tweet_url), ' ', $tweet) . '
+							</span>
+							<div style="margin-top:80px">
+								<h2 class="font-weight-bold">'.$row->title.'</h2>
+							</div>
+							<div>
+								<p>'.$this->my_model->shorten_string(strip_tags($row->content), 30).'</p>
+								<p class="muted">'.$row->adbooking_id.'</p>
+							</div>
+							<div class="text-right">
+								'.$subs.'
+								<a href="'.site_url('/').'classifieds/view/'.$row->classified_id.'/'.$this->my_model->clean_url_str($row->title).'/" class="btn btn-dark">View</a>
+							</div>
+						</figure>
+					   </div>
+				      ';				
+				$x ++;
+			}
+			 
+		 }else{
+			 	 
+			 
+		 }
+
+		 $o .= '</div>';
+		  
+		 return $o;
+	}	
 
 
 

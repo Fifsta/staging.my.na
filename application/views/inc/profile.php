@@ -12,7 +12,7 @@ $section = $this->uri->segment(1);
 		<a href="#" class="name"><?php echo $this->session->userdata('u_name'); ?></a>
 		<ul>
 			<li class="nav-item dropdown">
-				<a href="#" data-icon="fa-bookmark text-dark" class="nav-link dropdown-toggle">
+				<a href="#" data-icon="fa-bookmark text-dark" class="nav-link">
 				<i class="fa fa-bookmark text-dark"></i>
 				</a><span><?php $this->my_na_model->show_points_sml(); ?></span>
 			</li>

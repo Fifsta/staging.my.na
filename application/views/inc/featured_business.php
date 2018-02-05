@@ -8,6 +8,6 @@
 		</ul>
 	</div>
     
-	<iframe src="<?php echo HUB_URL;?>main/business/" allowtransparency="1" forder="0" style="width:100%; min-height: 260px; overlow:hidden"></iframe>
+	<!--<iframe src="<?php echo HUB_URL;?>main/business/" allowtransparency="1" forder="0" style="width:100%; min-height: 260px; overlow:hidden"></iframe>-->
                      
 </section>

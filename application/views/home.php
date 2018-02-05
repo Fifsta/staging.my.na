@@ -4,6 +4,8 @@ $this->load->view('inc/header');
 
 ?>
 
+
+
 </head>
 
 <body id="top">
@@ -18,11 +20,11 @@ $this->load->view('inc/header');
 	</div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
 
 	<div class="row">
 
-		<div class="col-sm-4 col-md-4 col-lg-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
+		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-2 order-xl-3" id="sidebar">
 	    	
 			<?php $this->load->view('inc/weather'); ?>
 			
@@ -30,7 +32,7 @@ $this->load->view('inc/header');
 
 		</div>
 
-		<div class="col-sm-8 col-md-8 col-lg-10 order-md-1 order-sm-2">
+		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
 
 			<div class="row">
 
@@ -39,8 +41,6 @@ $this->load->view('inc/header');
 		 			<?php $this->load->view('inc/featured_business');?>
 					<div class="spacer"></div>
 					<?php $this->load->view('inc/featured_listings');?>
-					<div class="spacer"></div>
-					<?php $this->load->view('inc/near_you');?>
 					<div class="spacer"></div>
 					<?php $this->load->view('inc/categories');?>
 					<div class="spacer"></div>
@@ -73,28 +73,8 @@ $this->load->view('inc/header');
 
 <script type="text/javascript">
 
-	$(document).ready(function(){
+	$(document).ready(function(){	
 
-	windowWidth = $(window).width();
-	windowHeight = $(window).height();
-
-	if (windowWidth < 768) {
-		$(document).ready(function(){
-			//HOME SEARCH OVERLAY
-			$('.expose').on('click', function(e) {
-				e.preventDefault();
-				$('.overlay-search').addClass('exit');
-			});
-			$(window).scroll(function(event) {
-				var scrolledY = $(window).scrollTop();
-				if (scrolledY >= 0) {
-					$('.overlay-search').addClass('exit');
-				}else{
-					//$('.overlay-search').removeClass('exit');
-				}
-			});
-		});
-	};		
 
 	slideshow = $( '.feature-cycle-slideshow' ).cycle();
 
@@ -116,31 +96,6 @@ $this->load->view('inc/header');
     });
 
 
-		// INITIALIZE OWL
-		$('.owl-carousel').owlCarousel({
-		    loop:true,
-		    margin:10,
-		    nav: true,
-		    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
-		    responsiveClass:true,
-		    responsive:{
-		        0:{
-		            items:1,
-		            nav:true
-		        },
-		        600:{
-		            items:3,
-		            nav:true
-		        },
-		        1000:{
-		            items:4,
-		            nav:true,
-		            loop:false
-		        }
-		    }
-		});
-
-
 		//THUMBS
 		$('figure .cycle-slideshow').cycle('pause');
 		$('figure .cycle-slideshow').mouseenter(function() {
@@ -156,6 +111,8 @@ $this->load->view('inc/header');
 				$(this).stop().fadeOut(200).attr('src',shown);
 			});
 		});
+
+		initialise_owl();	
 		
 	});
 

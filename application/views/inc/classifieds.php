@@ -17,6 +17,7 @@
 
 <script>
 	$(document).ready(function(){
+
 		// LOAD CLASSIFIEDS
 		$.ajax({
             url: '<?php echo site_url('/');?>classifieds/get_latest/',
@@ -26,6 +27,8 @@
 				var pre = $("#classifieds_content");
                 pre.removeClass('loading_img min400');
                 pre.append(data.classifieds);
+
+                initialise_owl();
             }
         });
 	});	

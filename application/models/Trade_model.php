@@ -1197,7 +1197,7 @@ class Trade_model extends CI_Model
 								' .implode($img). '
 								</div>
 								' .$img_Cycle. '
-							</div>
+							</div> 
 
 							<div class="padding10">
 								
