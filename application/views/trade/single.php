@@ -170,7 +170,7 @@
             </div>
             
             <div class="col-sm-12 col-md-12 col-lg-5 col-xl-6" style="padding:20px">
-            
+              <img src="<?php echo base_url('/') ?>images/map-temp.jpg" style="width:100%">
             </div>
           </div>
         </div>

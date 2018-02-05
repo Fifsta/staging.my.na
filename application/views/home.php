@@ -46,15 +46,11 @@ $this->load->view('inc/header');
 					<div class="spacer"></div>
 					<?php $this->load->view('inc/classifieds');?>
 					<div class="spacer"></div>
-					<?php $this->load->view('inc/map');?>
-					<div class="spacer"></div>
 					<?php $prop['type'] = '3408'; $this->load->view('inc/products', $prop);?>
 					<div class="spacer"></div>
 					<?php $cars['type'] = '348'; $this->load->view('inc/products', $cars);?>
 					<div class="spacer"></div>
 					<?php //$this->load->view('inc/deals');?>
-					<div class="spacer"></div>
-					<?php $this->load->view('inc/auctions');?>
 					<div class="spacer"></div>
 					<?php $this->load->view('inc/news');?>	
 					<div class="spacer"></div>	
