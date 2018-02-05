@@ -38,7 +38,7 @@
 					$('#menu-trigger').addClass("is-open");
 				}
 				
-				if (window_width < 768) {
+				/*if (window_width < 768) {
 					if ($('#menu-trigger').hasClass("is-open")) {
 						$('body').addClass('overflow-h');
 						$('#mobile-overlay').fadeTo(300,0.5);
@@ -46,7 +46,7 @@
 						$('body').removeClass('overflow-h');
 						$('#mobile-overlay').fadeOut(300);
 					}
-				}
+				}*/
 			}
 			// Settings
 			var settings = $.extend({

@@ -127,10 +127,6 @@
 
 <nav id="bread">
   <div class="container">
-    <ol class="breadcrumb">
-       <?php $this->trade_model->show_categories_breadcrumb($main_cat_id, $sub_cat_id, $sub_sub_cat_id, $sub_sub_sub_cat_id, $location, $suburb); ?>
-       <li class="breadcrumb-item active"><?php echo $title;?></li>
-    </ol>
   </div>
 </nav>
 
