@@ -42,28 +42,27 @@ class News_model extends CI_Model
                 $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
 
-				$o .= '<article class="swipe-item">
-							<figure>
-                                <div class="product_ribbon_sml"><small style="color:#ff9900">'.$row->publication.' &nbsp;</small>Listed: '.$this->my_model->time_passed(strtotime($row->datetime)).'<span></span></div>
-								<a href="" class="shown lazyload">
-									<img class="owl-lazy" data-src="'.$img_url.'" src="images/16x9.png" />
-								</a>
-								
-								<div class="more">
-									<p class="social">
-										<a onClick="" data-icon="fa-facebook"></a>
-										<a href="" target="_blank" data-icon="fa-twitter"></a>
-										<a href="#" data-icon="fa-bookmark"></a>
-									</p>
-								</div>
-							</figure>
-							<div>
-								<h2><a href="#">' . ucwords(strtolower($this->my_model->shorten_string($row->title, 6))) . '</a></h2>
-								<div class="details">
-									<p>'. ucwords(strtolower($this->my_model->shorten_string(strip_tags($row->body), 24))) . '</p>
-								</div>
+				$o .= '<figure>
+                            <div class="product_ribbon_sml"><small style="color:#ff9900">'.$row->publication.' &nbsp;</small>Listed: '.$this->my_model->time_passed(strtotime($row->datetime)).'<span></span></div>
+							<a href="" class="shown lazyload">
+								<img class="owl-lazy" data-src="'.$img_url.'" src="images/16x9.png" />
+							</a>
+							
+							<div class="more">
+								<p class="social">
+									<a onClick="" data-icon="fa-facebook"></a>
+									<a href="" target="_blank" data-icon="fa-twitter"></a>
+									<a href="#" data-icon="fa-bookmark"></a>
+								</p>
 							</div>
-						</article>';
+						</figure>
+						<div>
+							<h2><a href="#">' . ucwords(strtolower($this->my_model->shorten_string($row->title, 6))) . '</a></h2>
+							<div class="details">
+								<p>'. ucwords(strtolower($this->my_model->shorten_string(strip_tags($row->body), 24))) . '</p>
+							</div>
+						</div>
+						';
 			}
 			$o .= '</div>';
 		}
