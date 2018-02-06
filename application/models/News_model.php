@@ -47,14 +47,6 @@ class News_model extends CI_Model
 							<a href="" class="shown lazyload">
 								<img class="owl-lazy" data-src="'.$img_url.'" src="images/16x9.png" />
 							</a>
-							
-							<div class="more">
-								<p class="social">
-									<a onClick="" data-icon="fa-facebook"></a>
-									<a href="" target="_blank" data-icon="fa-twitter"></a>
-									<a href="#" data-icon="fa-bookmark"></a>
-								</p>
-							</div>
                             <div>
                                 <h2><a href="#">' . ucwords(strtolower($this->my_model->shorten_string($row->title, 6))) . '</a></h2>
                                 <div class="details">
@@ -62,7 +54,6 @@ class News_model extends CI_Model
                                 </div>
                             </div>
 						</figure>
-
 						';
 			}
 			$o .= '</div>';
