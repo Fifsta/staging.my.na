@@ -55,13 +55,14 @@ class News_model extends CI_Model
 									<a href="#" data-icon="fa-bookmark"></a>
 								</p>
 							</div>
+                            <div>
+                                <h2><a href="#">' . ucwords(strtolower($this->my_model->shorten_string($row->title, 6))) . '</a></h2>
+                                <div class="details">
+                                    <p>'. ucwords(strtolower($this->my_model->shorten_string(strip_tags($row->body), 24))) . '</p>
+                                </div>
+                            </div>
 						</figure>
-						<div>
-							<h2><a href="#">' . ucwords(strtolower($this->my_model->shorten_string($row->title, 6))) . '</a></h2>
-							<div class="details">
-								<p>'. ucwords(strtolower($this->my_model->shorten_string(strip_tags($row->body), 24))) . '</p>
-							</div>
-						</div>
+
 						';
 			}
 			$o .= '</div>';
