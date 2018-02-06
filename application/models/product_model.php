@@ -513,12 +513,9 @@ class Product_model extends CI_Model{
 						}
 						else
 						{
-
 							$at = '<img class="vignette" alt="' . strip_tags($row->title) . '" src="'.$img_url.'"/>';
 							array_push($imgAa, $at);
-
 						}
-
 
 						$xx++;
 					}

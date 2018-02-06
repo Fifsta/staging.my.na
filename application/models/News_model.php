@@ -13,13 +13,13 @@ class News_model extends CI_Model
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     public function get_nmh_news()
-    {
+    { 
 		$output = file_get_contents(NA_URL.'app/category_content/');
 		
 		if($output){
 			
-			$flikstr = '{ "cellSelector":".swipe-item", "wrapAround": false, "lazyLoad":true, "prevNextButtons":true, "pageDots":false, "cellAlign":"left", "contain":true }';
-			$o = '<div class="row item-list swipe js-flickity" data-flickity-options='."'".$flikstr."'".'>';
+
+			$o = '<div class="owl-carousel" style="margin-top:20px">';
 			
 				
 			foreach(json_decode($output) as $row){
@@ -27,7 +27,7 @@ class News_model extends CI_Model
 				//$imgA = explode(',', $row->image);
 				//$img = CDN_URL.'assets/images/'.$row->image;	
 				$img = CDN_URL . 'my_images/set/256/144/90/?src=assets/images/' . $row->image;
-				$o .= '<article class="swipe-item col-sm-6 col-md-3">
+				$o .= '<article>
 							<figure>
 								<p class="list-category"><a href="#">'.$row->publication.'</a></p>
 								<a href="" class="shown lazyload">
