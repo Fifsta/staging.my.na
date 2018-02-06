@@ -14,6 +14,16 @@ class News_model extends CI_Model
 
     public function get_nmh_news()
     { 
+
+        $this->load->model('image_model'); 
+
+        $this->load->library('thumborp');
+
+        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+        $width = 360;
+        $height = 230;
+
+
 		$output = file_get_contents(NA_URL.'app/category_content/');
 		
 		if($output){
@@ -26,12 +36,17 @@ class News_model extends CI_Model
 				
 				//$imgA = explode(',', $row->image);
 				//$img = CDN_URL.'assets/images/'.$row->image;	
-				$img = CDN_URL . 'my_images/set/256/144/90/?src=assets/images/' . $row->image;
+
+                $img_str = 'my_images/set/256/144/90/?src=assets/images/' . $row->image;
+
+                $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
+
 				$o .= '<article class="swipe-item">
 							<figure>
-								<p class="list-category"><a href="#">'.$row->publication.'</a></p>
+                                <div class="product_ribbon_sml"><small style="color:#ff9900">'.$row->publication.' &nbsp;</small>Listed: '.$this->my_model->time_passed(strtotime($row->datetime)).'<span></span></div>
 								<a href="" class="shown lazyload">
-									<img class="shown lazyload" data-src="' . $img . '" src="images/16x9.png" />
+									<img class="owl-lazy" data-src="'.$img_url.'" src="images/16x9.png" />
 								</a>
 								
 								<div class="more">
@@ -44,7 +59,6 @@ class News_model extends CI_Model
 							</figure>
 							<div>
 								<h2><a href="#">' . ucwords(strtolower($this->my_model->shorten_string($row->title, 6))) . '</a></h2>
-								<p class="date">Listed: '.$this->my_model->time_passed(strtotime($row->datetime)).'</p>
 								<div class="details">
 									<p>'. ucwords(strtolower($this->my_model->shorten_string(strip_tags($row->body), 24))) . '</p>
 								</div>
