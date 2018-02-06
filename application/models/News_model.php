@@ -37,7 +37,7 @@ class News_model extends CI_Model
 				//$imgA = explode(',', $row->image);
 				//$img = CDN_URL.'assets/images/'.$row->image;	
 
-                $img_str = 'my_images/set/256/144/90/?src=assets/images/' . $row->image;
+                $img_str = 'assets/images/' . $row->image;
 
                 $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
