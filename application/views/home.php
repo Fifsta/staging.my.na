@@ -1,10 +1,4 @@
-<?php 
-
-$this->load->view('inc/header');
-
-?>
-
-
+<?php $this->load->view('inc/header'); ?>
 
 </head>
 
@@ -21,21 +15,15 @@ $this->load->view('inc/header');
 </nav>
 
 <div class="container">
-
 	<div class="row">
 
 		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-2 order-xl-3" id="sidebar">
-	    	
 			<?php $this->load->view('inc/weather'); ?>
-			
 			<?php $this->load->view('inc/adverts'); ?>
-
 		</div>
 
 		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
-
 			<div class="row">
-
 				<div class="col-md-12">
 
 		 			<?php $this->load->view('inc/featured_business');?>
@@ -58,13 +46,9 @@ $this->load->view('inc/header');
 					<div class="spacer"></div>
 
 				</div>	
-
 			</div>
-
 		</div>
-
 	</div>	
-	
 </div>
 	
 <?php $this->load->view('inc/footer');?>	
@@ -75,26 +59,24 @@ $this->load->view('inc/header');
 
 	$(document).ready(function(){	
 
+		slideshow = $( '.feature-cycle-slideshow' ).cycle();
 
-	slideshow = $( '.feature-cycle-slideshow' ).cycle();
-
-    slideshow.on( 'cycle-initialized cycle-before', function( e, opts ) {
-      progress.stop(true).css( 'width', 0 );
-    });
-    
-    slideshow.on( 'cycle-initialized cycle-after', function( e, opts ) {
-      if ( ! slideshow.is('.cycle-paused') )
-        progress.animate({ width: '100%' }, opts.timeout, 'linear' );
-    });
-    
-    slideshow.on( 'cycle-paused', function( e, opts ) {
-       progress.stop(); 
-    });
-    
-    slideshow.on( 'cycle-resumed', function( e, opts, timeoutRemaining ) {
-      progress.animate({ width: '100%' }, timeoutRemaining, 'linear' );
-    });
-
+	    slideshow.on( 'cycle-initialized cycle-before', function( e, opts ) {
+	      progress.stop(true).css( 'width', 0 );
+	    });
+	    
+	    slideshow.on( 'cycle-initialized cycle-after', function( e, opts ) {
+	      if ( ! slideshow.is('.cycle-paused') )
+	        progress.animate({ width: '100%' }, opts.timeout, 'linear' );
+	    });
+	    
+	    slideshow.on( 'cycle-paused', function( e, opts ) {
+	       progress.stop(); 
+	    });
+	    
+	    slideshow.on( 'cycle-resumed', function( e, opts, timeoutRemaining ) {
+	      progress.animate({ width: '100%' }, timeoutRemaining, 'linear' );
+	    });
 
 		//THUMBS
 		$('figure .cycle-slideshow').cycle('pause');

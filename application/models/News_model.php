@@ -16,7 +16,6 @@ class News_model extends CI_Model
     { 
 
         $this->load->model('image_model'); 
-
         $this->load->library('thumborp');
 
         $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
@@ -54,8 +53,9 @@ class News_model extends CI_Model
 		}
 		return $o;
 		var_dump(json_decode($output));
-
 	}
+
+
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //+GET MYNA DB NEWS
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
