@@ -23,19 +23,13 @@ class News_model extends CI_Model
         $width = 360;
         $height = 230;
 
-
 		$output = file_get_contents(NA_URL.'app/category_content/');
 		
 		if($output){
 			
-
 			$o = '<div class="owl-carousel" style="margin-top:20px">';
-			
-				
-			foreach(json_decode($output) as $row){
-				
-				//$imgA = explode(',', $row->image);
-				//$img = CDN_URL.'assets/images/'.$row->image;	
+						
+			foreach(json_decode($output) as $row){	
 
                 $img_str = 'assets/images/' . $row->image;
 
