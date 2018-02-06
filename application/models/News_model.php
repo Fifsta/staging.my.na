@@ -27,7 +27,7 @@ class News_model extends CI_Model
 				//$imgA = explode(',', $row->image);
 				//$img = CDN_URL.'assets/images/'.$row->image;	
 				$img = CDN_URL . 'my_images/set/256/144/90/?src=assets/images/' . $row->image;
-				$o .= '<article>
+				$o .= '<article class="swipe-item">
 							<figure>
 								<p class="list-category"><a href="#">'.$row->publication.'</a></p>
 								<a href="" class="shown lazyload">

@@ -11,7 +11,7 @@
 	
 	<div id="classifieds_content" class=""></div>
 
-	<a href="<?php echo site_url('/'); ?>classifieds/" class="btn btn-dark pull-right" title="More Classifieds" rel="tooltip"  style="margin-top:15px;"><i class="icon icon-plus icon-white"></i>View More Classifieds</a>
+	<a href="<?php echo site_url('/'); ?>classifieds/" class="btn btn-dark pull-right" title="More Classifieds" rel="tooltip"  style="margin-top:5px;"><i class="icon icon-plus icon-white"></i>View More Classifieds</a>
 	
 </section> 
 
