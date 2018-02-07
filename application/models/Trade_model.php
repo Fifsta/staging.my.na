@@ -1017,7 +1017,7 @@ class Trade_model extends CI_Model
 
 							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-							$img[$xx] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic vignette" src="' . base_url('/') . 'images/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a>';
+							$img[$xx] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic" src="' . base_url('/') . 'images/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a>';
 						}
 						else
 						{
@@ -1042,7 +1042,7 @@ class Trade_model extends CI_Model
 
 					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-					$img[0] = '<li><a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic vignette" src="' . base_url('/') . 'images/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a></li>';
+					$img[0] = '<li><a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic" src="' . base_url('/') . 'images/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a></li>';
 					
 				}
 
@@ -1054,12 +1054,13 @@ class Trade_model extends CI_Model
 					{
 						$img_str = 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME;
 						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
-
 						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
 					}
 					else
 					{
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px;z-index:1;position:relative;width:80px" src="' . S3_URL . 'images/bus_blank.jpg" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
+						$img_str = 'assets/business/photos/bus_blank.jpg';
+						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
 					}
 				}
 
