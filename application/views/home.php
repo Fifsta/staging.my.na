@@ -16,7 +16,6 @@
 
 <div class="container">
 	<div class="row">
-
 		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-2 order-xl-3" id="sidebar">
 			<?php $this->load->view('inc/weather'); ?>
 			<?php $this->load->view('inc/adverts'); ?>
@@ -25,7 +24,6 @@
 		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
 			<div class="row">
 				<div class="col-md-12">
-
 		 			<?php $this->load->view('inc/featured_business');?>
 					<div class="spacer"></div>
 					<?php $this->load->view('inc/featured_listings');?>
@@ -38,13 +36,8 @@
 					<div class="spacer"></div>
 					<?php $cars['type'] = '348'; $this->load->view('inc/products', $cars);?>
 					<div class="spacer"></div>
-					<?php //$this->load->view('inc/deals');?>
-					<div class="spacer"></div>
 					<?php $this->load->view('inc/news');?>	
-					<div class="spacer"></div>	
-					<?php //$this->load->view('inc/trending');?>
 					<div class="spacer"></div>
-
 				</div>	
 			</div>
 		</div>

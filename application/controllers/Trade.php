@@ -125,7 +125,7 @@ class Trade extends CI_Controller {
 	//PST RESULT REDIRECT my.na/buy/
 	//++++++++++++++++++++++++++	
 
-	public function results($main_cat = '', $sub_cat = '', $sub_sub_cat = '' , $sub_sub_sub_cat = '', $location = '', $suburb = '' , $price_from = '', $price_to = '', $main_cat_id = 0,$sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0,$sort = '' ,$key = '' ,  $bus_id = 0 , $limit = 15 ,$offset = 0)
+	public function results($main_cat = '', $sub_cat = '', $sub_sub_cat = '' , $sub_sub_sub_cat = '', $location = '', $suburb = '' , $price_from = '', $price_to = '', $main_cat_id = 0,$sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0,$sort = '' ,$key = '' ,  $bus_id = 0 , $limit = 40 ,$offset = 0)
 	{
         $this->load->model('trade_search_model');
 		//See if top-level category
@@ -224,7 +224,7 @@ class Trade extends CI_Controller {
 		$data['query'] = $q['query'];
 		$data['count'] = $q['count'];
 		$data['offset'] = $offset;
-		$data['limit'] = $limit;
+		$data['limit'] = 50;
 		$data['sort'] = $sort;
 		$data['title'] = $q['title'];
 		$data['heading'] = $q['heading'];

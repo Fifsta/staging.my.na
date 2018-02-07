@@ -1017,7 +1017,7 @@ class Trade_model extends CI_Model
 
 							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-							$img[$xx] = '<img class="' . $lazy . ' vignette" src="' . base_url('/') . 'images/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/>';
+							$img[$xx] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic vignette" src="' . base_url('/') . 'images/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a>';
 						}
 						else
 						{
@@ -1036,6 +1036,16 @@ class Trade_model extends CI_Model
 				}
 				else
 				{
+
+
+					$img_str = 'assets/products/images/product_blank.jpg';
+
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
+					$img[0] = '<li><a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic vignette" src="' . base_url('/') . 'images/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a></li>';
+					
+
+
 					$img[0] = '<li><img class="lazy vignette active" src="' . base_url('/') . 'images/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="' . base_url('/') . 'img/timbthumb.php?src=' .S3_URL. 'img/product_blank.jpg&w=360&h=230" /></li>';
 					$img_str = base_url('/') . 'img/product_blank.jpg';
 				}
@@ -1044,22 +1054,17 @@ class Trade_model extends CI_Model
 				$b_logo = '';
 				if ($row->IS_ESTATE_AGENT == 'Y')
 				{
-
-
 					if (trim($row->BUSINESS_LOGO_IMAGE_NAME) != '')
 					{
-
 						$img_str = 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME;
 						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
 
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px;z-index:1;position:relative" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
 					}
 					else
 					{
-
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px;z-index:1;position:relative" src="' . S3_URL . 'images/bus_blank.jpg" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px;z-index:1;position:relative;width:80px" src="' . S3_URL . 'images/bus_blank.jpg" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
 					}
-
 				}
 
 				$btn_txt = 'Buy Now';
@@ -1073,42 +1078,46 @@ class Trade_model extends CI_Model
 				if ($row->listing_type == 'S')
 				{
 
-
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
-								 <a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">' . $btn_txt . '</a>&nbsp;
+								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 
 					if ($row->sub_cat_id == 3410)
 					{
-						$price = '<span style=" font-size:18px">N$</span> ' . $this->smooth_price($row->sale_price) . ' pm';
+						$price = 'N$ ' . $this->smooth_price($row->sale_price) . ' pm';
 					}
 					else
 					{
-						$price = '<span style=" font-size:18px">N$</span> ' . $this->smooth_price($row->sale_price);
+						$price = 'N$ ' . $this->smooth_price($row->sale_price);
 					}
 					if ($row->por == 'Y')
 					{
-						$price = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
+
+						$price = 'POR:Price On Request';
+
 					}
-						
+					//Auction	
 				}
 				elseif ($row->listing_type == 'A')
 				{
 
-					//Auction
+					//$price = '<span style=" font-size:18px">N$</span> '.$this->smooth_price($row->sale_price);
 					$price = $this->get_current_bid($row->current_bid);
 
 					if ($price['str'] != 'No Bids')
 					{
-						$price = '<span style=" font-size:10px">BID</span> ' . $price['str'];
+						$price = 'BID: ' . $price['str'];
+
 					}
 					else
 					{
 						$price = $price['str'];
 					}
 
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">Place Bid</a>&nbsp;
-								 <a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">Place Bid</a>&nbsp;
+								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 
+
+					//SERVICE
 				}
 				elseif ($row->listing_type == 'C')
 				{
@@ -1117,23 +1126,27 @@ class Trade_model extends CI_Model
 					$reserve = '';
 					$count = '';
 
+
 					if ($row->sub_cat_id == 3410)
 					{
-						$price = '<span style=" font-size:12px">N$</span><span itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</span> pm';
+						$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div> pm';
 					}
 					else
 					{
-						$price = '<span style=" font-size:12px">N$</span><span itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</span>';
+						$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div>';
 					}
 					if ($row->por == 'Y')
 					{
+
 						$price = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
+
 					}
 
 					$btn_txt = 'Order Now';
 
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
-								 <a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
+
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">' . $btn_txt . '</a>&nbsp;
+								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 				}
 
 				$private = '';
@@ -1155,11 +1168,11 @@ class Trade_model extends CI_Model
 				if ($row->location != '')
 				{
 
-					$location = '<span itemprop="address" class="badge badge-secondary">' . $row->location . '</span>';
+					$location = '<div itemprop="address">' . $row->location . '</div>';
 
 					if ($row->suburb != 0 && $row->suburb != '')
 					{
-						$location = '<span itemprop="address" class="badge badge-secondary">' . $row->location . ' / ' . $row->suburb . '</span>';
+						$location = '<div itemprop="address" >' . $row->location . ' / ' . $row->suburb . '</div>';
 					}
 
 				}
@@ -1181,6 +1194,7 @@ class Trade_model extends CI_Model
 					}
 
 				}
+
 				$a_count = 0;
 				if (isset($advert['count']))
 				{
@@ -1189,34 +1203,21 @@ class Trade_model extends CI_Model
 
 				$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
 				echo ' <div class="col-md-3">
-							<figure>
-							' .$ribbon. '
-							<div class="slideshow-block">
-								<a href="#" class="link"></a>
-								<div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides="> li">
-								' .implode($img). '
-								</div>
-								' .$img_Cycle. '
-							</div> 
+							<figure class="loader">
+								<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
+								<div class="slideshow-block">
+									<a href="#" class="link"></a>
+									<div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides="> li">
+									' .implode($img). '
+									</div>
+									' .$img_Cycle. '
+								</div> 
 
-							<div class="padding10">
+								<div>
 								
-								<div class="price_label">' . $price . '</div>
-								<span class="pull-right" style="margin-top:-55px">
-									<a onClick="' . $fb . '" class="facebook"></a>
-									' . anchor_popup('https://twitter.com/share?url=' . trim($tweet_url), ' ', $tweet) . '
-								</span>
-								<br>
-								<h5 style="font-size:12px" class="upper na_script">' . ucwords(strtolower($this->shorten_string($row->title, 6))) . '</h5>
-								' . $location . '
-								
-								' . $this->get_review_stars_show($rating, $row->product_id, 0, $total_reviews) .'<br>' . $b_logo . '
-								<hr>
-								<div class="clearfix"></div>
-								<p>' . $type_btn . '</p>
-								<div class="clearfix"></div>
-							</div>
-							' . $private . '
+									'. $b_logo . '
+
+								</div>
 							</figure>			
 					  </div>
 					  ';
@@ -1235,7 +1236,7 @@ class Trade_model extends CI_Model
 				 <script data-cfasync="false" type="text/javascript">
 
 					$(document).ready(function(){
-						$("img.lazy").lazyload({
+						$("img.pic").lazyload({
 							  effect : "fadeIn"
 						  });
 						//window.setTimeout(initiate_pagination, 100);
@@ -1261,7 +1262,7 @@ class Trade_model extends CI_Model
 				 <script type="text/javascript">
 
 					$(document).ready(function(){
-						$("img.lazy").lazyload({
+						$("img.pic").lazyload({
 							effect : "fadeIn"
 						});
 

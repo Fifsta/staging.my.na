@@ -509,7 +509,8 @@ class Product_model extends CI_Model{
 
 							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-							$img[$xx] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="owl-lazy" data-src="'.$img_url.'" style="width:100%"/></a>';
+							$img[$xx] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="owl-lazy" data-src="'.$img_url.'" style="width:100%;"/></a>';
+						
 						}
 						else
 						{
@@ -525,8 +526,13 @@ class Product_model extends CI_Model{
 				}
 				else
 				{
-					$img[0] = '<li><img class="lazy vignette active" src="' . base_url('/') . 'images/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="' . base_url('/') . 'img/timbthumb.php?src=' .S3_URL. 'img/product_blank.jpg&w=360&h=230" /></li>';
-					$img_str = base_url('/') . 'img/product_blank.jpg';
+
+					$img_str = 'assets/products/images/product_blank.jpg';
+
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
+					$img[0] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="owl-lazy" data-src="'.$img_url.'"  style="width:100%"/></a>';
+					
 				}
 
 				//CHECK IF AGENCY PROPERTY LISTING
@@ -687,10 +693,9 @@ class Product_model extends CI_Model{
 				//$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
 				
 				$output .= '<div>
-								<figure>
+								<figure class="loader">
 									<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
 									<div class="slideshow-block">
-										<a href="#" class="link"></a>
 										<div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides>
 										' .implode($img). '
 										</div>

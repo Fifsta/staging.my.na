@@ -42,11 +42,11 @@ $this->load->view('inc/header', $header);
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
 
   <div class="row">
 
-    <div class="col-sm-4 col-md-4 col-lg-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
+    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-2 order-xl-3" id="sidebar">
       
       <?php $this->load->view('inc/weather');?>
       
@@ -54,10 +54,10 @@ $this->load->view('inc/header', $header);
 
     </div>
 
-    <div class="col-sm-8 col-md-8 col-lg-10 order-md-1 order-sm-2">
+    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
 
         <!--SEARCH/FILTER SECTION -->
-        <?php $this->load->view('trade/inc/filter/filter_'.$group); ?>
+        <?php $this->load->view('trade/inc/filter/filter_'.$group); ?> 
 
         <div class="spacer"></div>
 
@@ -68,9 +68,7 @@ $this->load->view('inc/header', $header);
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 
         </div>
-
-        <iframe src="<?php echo HUB_URL;?>main/products/" allowtransparency="1" frameborder="0" style="width:100%; min-height: 290px; overlow:hidden"></iframe>
-                     
+        
         </section>
         <hr>
         <section id="products">

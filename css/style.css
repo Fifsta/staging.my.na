@@ -41,6 +41,12 @@ img.lazy {
     min-height: 150px;
 }
 
+.loader {
+
+width:100%; display:block; z-index:0; background: url(../images/image-loader.gif) no-repeat center #ccc; min-height: 150px;
+
+}
+
 .na_script {
    
 }
