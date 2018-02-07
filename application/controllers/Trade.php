@@ -245,10 +245,8 @@ class Trade extends CI_Controller {
 		$data['price_from'] = $price_from;
 
 		if($this->input->is_ajax_request()){
-
 			$this->trade_model->get_products($data['query'], $data['main_cat_id'], $data['sub_cat_id'], $data['sub_sub_cat_id'], $data['sub_sub_sub_cat_id'], $data['count'], $data['offset'], $data['title'], $amt = '', $advert = TRUE, $data['pages']);
 		}else{
-
 			$this->load->view('trade/results', $data);
 		}
 

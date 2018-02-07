@@ -1044,10 +1044,6 @@ class Trade_model extends CI_Model
 
 					$img[0] = '<li><a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic vignette" src="' . base_url('/') . 'images/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a></li>';
 					
-
-
-					$img[0] = '<li><img class="lazy vignette active" src="' . base_url('/') . 'images/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="' . base_url('/') . 'img/timbthumb.php?src=' .S3_URL. 'img/product_blank.jpg&w=360&h=230" /></li>';
-					$img_str = base_url('/') . 'img/product_blank.jpg';
 				}
 
 				//CHECK IF AGENCY PROPERTY LISTING
