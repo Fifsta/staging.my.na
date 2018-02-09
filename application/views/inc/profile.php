@@ -4,6 +4,7 @@
 //+++++++++++++++++
 
 $section = $this->uri->segment(1);
+
 ?>
 
 <section class="sidenav" id="my_profile">

@@ -251,7 +251,7 @@ class Trade extends CI_Controller {
 		}
 
 
-	}
+	} 
 
 	public function home()
 	{
@@ -1797,62 +1797,10 @@ class Trade extends CI_Controller {
 
 	public function get_product_questions(){
 
-		$product_id = $this->input->post('product_id');
-		$product_title = $this->input->post('product_title');
-
-		$out = '';
-
-		if($this->session->userdata('id')){
-
-			$this->load->view('trade/inc/contact_inc', $get);
-
-		}else{
-
-		    $out.= '<div class="alert">
-				<button type="button" class="close" data-dismiss="alert">×</button>
-				Please login or register to ask the seller a question about '.$product_title.'
-				</div>
-				<div class="container-fluid">
-					<form class="form-signin" action="'. site_url('/').'members/login/" enctype="application/x-www-form-urlencoded">
-						<input type="hidden" class="input" name="redirect" value="'.current_url().'">
-						<div class="row" style="margin-bottom:10px">
-							<div class="col-md-12">
-								<input type="text" class="form-control" name="email" placeholder="Email">
-							</div>
-						</div>	
-						<div class="row" style="margin-bottom:10px">
-							<div class="col-md-12">
-								<input type="password" name="pass" class="form-control" placeholder="Password">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-scope="email" onlogin="checkLoginState()" data-auto-logout-link="false"></div>
-							</div>
-							<div class="col-md-4">	
-								<a class="btn btn-block btn-dark" href="'.site_url('/').'members/register/"><i class="fa fa-star text-light"></i> Join</a>
-							</div>
-							<div class="col-md-4">	
-								<button type="submit" class="btn btn-block btn-dark"><i class="fa fa-lock text-light"></i> Sign in</button>
-							</div>
-						</div>
-						
-					</form>';
-
-					$out.= '<h3 class="na_script">Questions Asked</h3>';
-					
-					$out.= $this->trade_model->get_product_questions($product_id);
-
-			$out.= '</div>';
-
-	  	$this->output
-        ->set_content_type('application/json')
-        ->set_output(json_encode(array('questions' => $out)));		
-
-		}
-
+		$this->load->view('trade/inc/questions');
 
 	}
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//+GET PRODUCT MAP
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -42,9 +42,7 @@ img.lazy {
 }
 
 .loader {
-
-width:100%; display:block; z-index:0; background: url(../images/image-loader.gif) no-repeat center #ccc; min-height: 150px;
-
+    width:100%; display:block; z-index:0; background: url(../images/image-loader.gif) no-repeat center #ccc; min-height: 150px;
 }
 
 .na_script {
@@ -277,7 +275,7 @@ width:100%; display:block; z-index:0; background: url(../images/image-loader.gif
 .lazyload {opacity: 0; /*transform: scale(0.8);*/}
 .lazyloaded {opacity: 1; /*transition: all 700ms; transform: scale(1);*/}
 
-figure{display:block; border:5px solid #fff; border-radius:4px; position:relative; background-color: #fff }
+figure{display:block; border:5px solid #fff; border-radius:4px; position:relative; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.3); }
 figure > a{display:block}
 figure > a > img{width:100%; display:block;}
 figure > h2{ font-size:18px; }
@@ -355,7 +353,7 @@ Light Orange ff9900
 	.profile .pic{width:40px; float:left; overflow:hidden; border-radius:4px; margin:5px 0}
 	.profile .name{width:50%; line-height:20px; float:left; padding:10px 5px; font-size:120%; vertical-align:top; margin:5px 0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
 	.profile img{width:100%; display:block;}
-	.profile ul{float:right; list-style:none; padding:5px}
+	.profile ul{list-style:none; padding:5px}
 	.profile li{display:inline-block; position:relative; margin-left:5px}
 	.profile li a{width:35px; height:40px; padding:10px 0; border:1px solid #ddd; display:block; border-radius:4px; text-align:center; }
 	.profile li span{min-width:15px; line-height:15px; padding:0 2px; text-align:center; color:#fff; background:#ff9900; font-size:11px; border-radius:5px; position:absolute; top:-3px; right:-3px; z-index:1}
@@ -439,7 +437,7 @@ Light Orange ff9900
 	.sub.well ul .btn{ padding:2px 2px}
 	.sub.well ul a:before{ font-family:'FontAwesome'; content:'\f114'; margin-right:5px}
 	
-	.rating{direction:rtl; font-size:18px; display:block; text-align:center; white-space:nowrap;}
+	.rating{direction:rtl; font-size:18px; display:block; white-space:nowrap;}
 	.rating span{display:inline-block; font-family:'FontAwesome'; padding:0 1px; cursor:default}
 	.rating span:before{color:#ccc; content:'\f006'; width:10px; height:10px; text-align:center}
 	.rating span:hover:before, .rating span:hover ~ span:before,.rating span.active:before,.rating span.active ~ span:before{color:#ff9900; content:'\f005'}
@@ -451,16 +449,16 @@ Light Orange ff9900
 	.list-map{width:100%; height:100%; display:table; table-layout: fixed; border:5px solid #fff; border-top:none; position:relative; z-index:1}
 	.list-map figure{box-shadow:none; border:none;}
 	.list-map > div{height:100%; display:table-cell; vertical-align:top; }
-		.list-map-left{width:50%; background:#fff; padding-right:5px; border-radius:4px}
-		.list-map-right{width:50%; padding:0; border:1px solid #ddd; border-radius:4px}
+		.list-map-left{width:70%; background:#fff; padding-right:5px; border-radius:4px}
+		.list-map-right{width:30%; padding:0; border:1px solid #ddd; border-radius:4px}
 	#listing .swipe-item{width:100%; height:auto; margin:0;}
 	#listing .swipe-item a{display:block;}
 	#listing .swipe-item img{width:100%; display:block;}
 	#listing iframe{width:100%; height:100%; padding:0;}
-	#listing .list-map .asso{margin:10px; right:0; bottom:0; position:absolute; z-index:1}
+	#listing .list-map .asso{margin:10px; right:0; bottom:0; position:absolute; z-index:99}
 	#listing .list-map .asso > a{width:50px; padding:5px; background:#fff; display:inline-block; border-radius:4px; overflow:hidden; margin-left:5px; vertical-align:top; pointer-events:  auto}
 	#listing .list-map .asso > a img{width:100%; display:block;}
-	#listing .details{margin-bottom:50px}
+	#listing .details{margin-bottom:20px}
 	#listing .details h2{margin:15px 0 5px 0; font-size:120%; color:#000; font-weight:bold}
 	#listing .details figure{margin-top:-50px}
 	#listing .details{width:100%; height:100%; display:table; table-layout: fixed; position:relative; z-index:1}
@@ -469,13 +467,13 @@ Light Orange ff9900
 	#listing .details .details-right{width:80%; padding:0 20px;}
 	#listing .details .rating{margin-top:10px;}
 	#listing .cate,#listing .feat{ margin-bottom:10px;}
-	#listing .cate strong,#listing .feat strong{ display:inline-block; width:40%; }
+	#listing .cate strong,#listing .feat strong{ display:inline-block; }
 	#listing .cate a{padding-right:5px; display:inline-block; color:#666}
 	#listing .cate a:hover{color:#ff6600}
 	#listing .cate a:after{content:','}
 	#listing .cate a:last-of-type:after{content:''}
-	#listing .feat div{ width:25%; margin:0 -2px; padding:3px 10px; display:inline-block; color:#000;}
-	#listing .cost{ font-size:130%; font-weight:bold; color:#000}
+	#listing .feat div{ width:50%; margin:0 -2px; padding:3px 10px; display:inline-block; color:#000;}
+	#listing .cost{ font-size:130%; font-weight:bold; color:#000;}
 	#listing .reveal i{width:20px; height:20px; font-size:16px; text-align:center; display:inline-block}
 	#listing .reveal button{width:100px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; position:relative; padding-right:25px;}
 	#listing .reveal button.active{width:auto;}
@@ -495,7 +493,7 @@ Light Orange ff9900
 	/*TAB ID's and custom styling*/
 	#Deals p{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 	#Submit-Review .rating{text-align:left}
-	#Reviews blockquote .rating{ text-align:left; margin-bottom:5px}
+	#Reviews blockquote .rating{ text-align:left; margin-bottom:5px; }
 	
 	.award{ width:100%; height:80px; display:table; padding:0 35px; margin:auto; text-align:center; position:relative; margin:}
 	.award > div{display:table-cell; vertical-align:middle}
@@ -538,7 +536,7 @@ Light Orange ff9900
 	.namibia-map .panel-body ul a:hover{background:#f5f5f5;}
 	.namibia-map .panel-body li span{min-width:15px; line-height:15px; padding:0 2px; margin:5px 5px 0 5px ; text-align:center; color:#fff; background:#ff6600; font-size:11px; border-radius:5px; float:right; z-index:1}
 
-.owl-prev-next-button{width:30px; height:40px; color:#fff; background:url(../images/grad-black.jpg); background-size:100% 100%; font-family:'FontAwesome'; border-radius:4px; position:absolute; top:70px;}
+.owl-prev-next-button{width:30px; height:40px; color:#fff; background:url(../images/grad-black.jpg); background-size:100% 100%; font-family:'FontAwesome'; border-radius:4px; position:absolute; top:40%;}
 	.owl-prev-next-button:before{font-size:140%}
 	.owl-prev-next-button:hover{background:url(../images/grad-black.jpg); background-size:100% 100%; color:#ff9900}
 	.owl-prev-next-button svg{display:none}
@@ -669,18 +667,23 @@ Dark Orange ff6600
 .dropdown-menu li > a:after{width:20px; line-height:20px; font-family:'FontAwesome'; content: '\f107'; display:inline-block; text-align:center; margin-left:5px;}
 .dropdown-menu li > a:only-child:after{margin-left: 0; content:'';}
 
-blockquote{padding:0 0 0 10px; margin:0 0 5px 0; border-left-color:#ddd}
+blockquote{padding:0 0 0 10px; margin:0 0 5px 0; border-left: 5px solid #eee;}
 blockquote p{ margin-bottom:5px}
 blockquote footer{ font-size:90%; font-style:italic}
 blockquote footer span{font-size:11px; font-weight:normal; color:#999; box-shadow:0 0 3px rgba(0,0,0,0.2) inset; padding:0 5px; display:inline-block; margin:0 5px; border-radius:4px}
 
 .nav-tabs{border:none; height:auto; font-size:120%;}
 .nav-tabs > li{margin:0;}
-.nav-tabs > li > a{background:url(../images/grad-black.jpg); background-size:100% 100%; color:#fff; border:none; margin-right:1px}
 
 .nav-tabs > li > a:hover,
 .nav-tabs > li > a:active,
 .nav-tabs > li > a:focus{color:#ccc}
+
+.nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: #495057;
+    background-color: #fff;
+    border: none;
+}
 
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,

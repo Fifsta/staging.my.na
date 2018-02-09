@@ -160,7 +160,7 @@
             <li><a href="#" data-icon="fa-facebook text-dark"></a></li>
             <li><a href="#" data-icon="fa-twitter text-dark"></a></li>
             <li><a href="#" data-icon="fa-bookmark text-dark"></a></li>
-          </ul>
+          </ul> 
         </div>
 
         <!--banner-->

@@ -15,7 +15,7 @@ if($sub_cat_id == 0){ $sub_cat_id = 3409; }
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
   </div>
     
-<div class="col-md-12" style="background: #fff">
+<div class="col-md-12" style="background: #fff" id="filter">
 
 <form name="search" action="<?php echo site_url('/');?>trade/search" method="post" enctype="multipart/form-data"> 
 

@@ -1054,13 +1054,13 @@ class Trade_model extends CI_Model
 					{
 						$img_str = 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME;
 						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right" />';
 					}
 					else
 					{
 						$img_str = 'assets/business/photos/bus_blank.jpg';
 						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right" />';
 					}
 				}
 
@@ -1407,7 +1407,6 @@ class Trade_model extends CI_Model
 				if ($row->client_id == $this->session->userdata('id'))
 				{
 
-
 					$btn = '<div class="pull-right" style="margin-top:10px;" rel="tooltip" title="Sorry, this is your item!">
 							  <form id="buy_now_frm" method="post" style="margin-bottom:0">
 								   <input type="hidden" name="product_id" value="' . $product_id . '" />
@@ -1416,6 +1415,7 @@ class Trade_model extends CI_Model
 								  <button class="btn btn-inverse btn-large" type="submit" disabled="disabled">' . $btn_txt . '</button>
 							  </form>
 							</div>';
+
 				}
 				else
 				{
@@ -1644,7 +1644,20 @@ class Trade_model extends CI_Model
 			$buy_now_btn = "<a href='javascript:void(0)' id='buy_now_btn_do'  class='btn btn-large btn-block btn-inverse'>Yes Buy Now</a>";
 			$bid_btn = "<a href='javascript:void(0)' id='bid_btn_do'  class='btn btn-large btn-block btn-inverse'>Yes Place My Bid</a>";
 
+
 			echo '
+			<h2>' . $row->title . ' <span>Listed 3 days ago</span><a href="#" data-toggle="tooltip" title="Find out more about getting featured"><span>Featured</span></a></h2>
+            <p class="cost"><span itemprop="offers" itemscope itemtype="http://schema.org/Offer">' . $price['str'] . '</span></p>
+            <p class="desc"><span itemprop="description">' . $row->description . '</span></p>
+            <div class="feat" itemprop="description">
+              ' . $this->show_extras($row->extras) . '
+            </div>
+			';
+
+
+
+
+			/*echo '
 			<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 				<h1 style="font-size:50px;height:40px;color:#FF9F01;margin-bottom:30px">' . $price['str'] . '</h1>
 				<meta itemprop="priceCurrency" content="NAD" />
@@ -1667,7 +1680,7 @@ class Trade_model extends CI_Model
 				<div id="product_msg" class="clearfix"></div>
 
 				<div class="clearfix">' . $btn . '</div>
-			</div>';
+			</div>';*/
 
 			//ENDING DATE
 			$listE = new DateTime(date('Y-m-d H:i:s', strtotime($row->end_date)));
@@ -2961,15 +2974,6 @@ class Trade_model extends CI_Model
 		if ($extras != null)
 		{
 
-			$output .= '<table class="table table-striped table-condensed">
-					   	<thead>
-							<tr>
-								<th style="width:30%"></th>
-								<th style="width:70%"></th>
-							</tr>	
-						</thead>
-						<tbody>
-						';
 
 			foreach ($extras as $row => $value)
 			{
@@ -2986,22 +2990,17 @@ class Trade_model extends CI_Model
 					}
 					elseif (count($value) > 0)
 					{
-						$output .= '<tr>
-												<td>
-												' . ucfirst(str_replace('_', ' ', $row)) . '
-												
-												</td>
-												<td>
-												';
+
+						$output .= '<hr>';
+
+
 						foreach ($value as $finalrow => $final_val)
 						{
 
-							$output .= '<span class="badge">' . $final_val . '</span> ';
+							$output .= '<span class="badge badge-dark"><i data-icon="fa fa-check text-light"></i>' . $final_val . '</span> ';
 
 						}
-						$output .= '	</td>
-											</tr>
-											';
+
 					}
 
 				}
@@ -3020,7 +3019,7 @@ class Trade_model extends CI_Model
 				}
 				elseif ($row == 'features')
 				{
-
+          
 				}
 				elseif ($row == 'seller_contact')
 				{
@@ -3035,27 +3034,22 @@ class Trade_model extends CI_Model
 					{
 
 
-						//INVESTMENT FETAURES PROPERTY
+					//INVESTMENT FETAURES PROPERTY
 					}
 					elseif ($row == 'sole_mandate' || $row == 'cc_registered' || $row == 'PTY_Ltd' || $row == 'negotiable' || $row == 'transfer_costs_included' || $row == 'vat_inclusive' || $row == 'warranty')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_chk.png" width="20" height="20" />
-											' . ucfirst(str_replace('_', ' ', $row)) . '
-											</td>
-										</tr>
-										';
-						//AGENCY	
+						$output .= '<div><strong>Type:</strong> ' . ucfirst(str_replace('_', ' ', $row)) . '</div>';
+
+					//AGENCY	
 					}
 					elseif ($row == 'agency')
 					{
 
 
-						//SIZES PROPERTY
+					//SIZES PROPERTY
 					}
-					elseif ($row == 'erf_size' || $row == 'house_size' || $row == 'property_size' || $row == 'building_size')
+					elseif ($row == 'erf_size')
 					{
 
 						$unit = substr(trim($value), strpos($value, ' '), strlen(trim($value)));
@@ -3063,232 +3057,134 @@ class Trade_model extends CI_Model
 						{
 							$unit = 'm<sup>2</sup>';
 						}
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_size.png" width="20" height="20" />
-											' . ucfirst(str_replace('_', ' ', $row)) . ' ' . ucfirst(number_format((int) $value)) . ' ' . $unit . '
-											</td>
-										</tr>
-										';
-						//BEDROOMS PROPERTY
+						if($row == 'erf_size') { $s_type = 'Erf size:'; }
+						if($row == 'house_size') { $s_type = 'House size:'; }
+						if($row == 'property_size') { $s_type = 'Property size:'; }	
+						if($row == 'building_size') { $s_type = 'Building size:'; }		
+
+						$output .= '<div><strong>'.$s_type.'</strong> ' . ucfirst(str_replace('_', ' ', $row)) . ' ' . ucfirst(number_format((int) $value)) . ' ' . $unit . '</div>';
+
+
+					//BEDROOMS PROPERTY
 					}
 					elseif ($row == 'bedrooms' || $row == 'offices')
 					{
+						if($row == 'bedrooms') { $s_type = 'Bedrooms:'; }
+						if($row == 'offices') { $s_type = 'Offices:'; }	
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_beds.png" width="20" height="20" />
-											' . ucwords($value) . ' ' . '
-											</td>
-										</tr>
-										';
+						$output .= '<div><strong>'.$s_type.'</strong> ' . ucwords($value) . '</div>';	
 
-						//BATHROOMA PROPERTY
+
+					//BATHROOM PROPERTY
 					}
 					elseif ($row == 'bathrooms')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_baths.png" width="20" height="20" />
-											' . ucwords($value) . ' ' . '
-											</td>
-										</tr>
-										';
+						$output .= '<div><strong>Bathrooms:</strong> ' . ucwords($value) . '</div>';	
 
-						//PARKIN PROPERTY
+
+					//PARKING PROPERTY
 					}
 					elseif ($row == 'parking' || $row == 'garages')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_park.png" width="20" height="20" />
-											' . ucwords($value) . ' ' . '
-											</td>
-										</tr>
-										';
+						if($row == 'parking') { $s_type = 'Parking:'; }
+						if($row == 'garages') { $s_type = 'Garages:'; }	
+
+						$output .= '<div><strong>'.$s_type.'</strong> ' . ucwords($value) . '</div>';	
 
 
-						////METRES Squared
-					}
-					elseif ($row == 'erf_size' || $row == 'house_size')
-					{
-
-						$output .= '<tr>
-											<td>
-											' . ucfirst(str_replace('_', ' ', $row)) . '
-											
-											</td>
-											<td>
-											' . ucfirst(number_format((int) $value)) . ' m<sup>2</sup>
-											</td>
-										</tr>
-										';
-						//CAR SPECIFIC - doors
+					//METRES Squared
 					}
 					elseif ($row == 'doors')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_car_doors.png" width="20" height="20" />
-											' . ucfirst(number_format((int) $value)) . ' ' . $row . '
-											</td>
-										</tr>
-										';
-						//CAR SPECIFIC - body style
+						$output .= '<div><strong>Doors:</strong> ' . ucfirst(number_format((int) $value)) . ' ' . $row . '</div>';
+
+
+					//CAR SPECIFIC - body style
 					}
 					elseif ($row == 'body_style')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_car_body.png" width="20" height="20" />
-											' . ucfirst($value) . '
-											</td>
-										</tr>
-										';
-						//CAR SPECIFIC - fuel tyoe
+						$output .= '<div><strong>Body Style:</strong> ' . ucfirst($value) . '</div>';
+
+
+					//CAR SPECIFIC - fuel tyoe
 					}
 					elseif ($row == 'fuel_type')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_car_petrol.png" width="20" height="20" />
-											' . ucfirst($value) . '
-											</td>
-										</tr>
-										';
-						//CAR SPECIFIC - transmission
+						$output .= '<div><strong>Fuel Type:</strong> ' . ucfirst($value) . '</div>';
+
+					//CAR SPECIFIC - transmission
 					}
 					elseif ($row == 'transmission')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_car_transmission.png" width="20" height="20" />
-											' . ucfirst($value) . ' ' . $row . '
-											</td>
-										</tr>
-										';
+						$output .= '<div><strong>Transmission:</strong> ' . ucfirst($value) . ' ' . $row . '</div>';
 
-
-						//CAR SPECIFIC - transmission
+					//CAR SPECIFIC - transmission
 					}
 					elseif ($row == 'cylinders')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_car_cylinders.png" width="20" height="20" />
-											' . ucfirst(number_format((int) $value)) . ' ' . $row . '
-											</td>
-										</tr>
-										';
-						//CAR SPECIFIC - engine size
+						$output .= '<div><strong>Cylinders:</strong> ' . ucfirst(number_format((int) $value)) . ' ' . $row . '</div>';
+
+					//CAR SPECIFIC - engine size
 					}
 					elseif ($row == 'engine_size')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_car_engine.png" width="20" height="20" />
-											' . ucfirst(number_format((int) $value)) . ' ' . ucfirst(str_replace('_', ' ', $row)) . '
-											</td>
-										</tr>
-										';
-						//CAR SPECIFIC - year make
+						$output .= '<div><strong>Engine Size:</strong> ' . ucfirst(number_format((int) $value)) . ' ' . ucfirst(str_replace('_', ' ', $row)) . '</div>';
+
+					//CAR SPECIFIC - year make
 					}
 					elseif ($row == 'year')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_car_year.png" width="20" height="20" />
-											' . ucfirst((int) $value) . ' model
-											</td>
-										</tr>
-										';
-						//CAR SPECIFIC - kilometres
+						$output .= '<div><strong>Model:</strong> ' . ucfirst((int) $value) . ' model</div>';
+
+					//CAR SPECIFIC - kilometres
 					}
 					elseif ($row == 'kilometres')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_car_kilometers.png" width="20" height="20" />
-											' . ucfirst(number_format((int) $value)) . ' km
-											</td>
-										</tr>
-										';
-						//CAR SPECIFIC - color
+						$output .= '<div><strong>Milage:</strong> ' . ucfirst(number_format((int) $value)) . ' km</div>';
+
+					//CAR SPECIFIC - color
 					}
 					elseif ($row == 'color')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_car_color.png" width="20" height="20" />
-											' . ucfirst($value) . ' 
-											</td>
-										</tr>
-										';
-						//CAR SPECIFIC - color
+						$output .= '<div><strong>Color:</strong> ' . ucfirst($value) . '</div>';
+
+					//CAR SPECIFIC - color
 					}
 					elseif ($row == '4wd')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_car_4x4.png" width="20" height="20" />
-											' . ucfirst($value) . ' 
-											</td>
-										</tr>
-										';
+						$output .= '<div><strong>4wd:</strong> ' . ucfirst($value) . '</div>';
 
-
-						//CAR SPECIFIC - color
+					//CAR SPECIFIC - owners
 					}
 					elseif ($row == 'owners')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_car_owner.png" width="20" height="20" />
-											' . ucfirst($value) . ' 
-											</td>
-										</tr>
-										';
-						//MONEY FORMAT	
+						$output .= '<div><strong>Owners:</strong> ' . ucfirst($value) . '</div>';
+
+					//MONEY FORMAT	
 					}
 					elseif ($row == 'valuation')
 					{
 
-						$output .= '<tr>
-											<td colspan="2">
-											<img src="' . base_url('/') . 'images/icons/trade/icn_cash.png" width="20" height="20" />
-											N$ ' . ucfirst(number_format((int) $value)) . '
-											</td>
-										</tr>
-										';
-
+						$output .= '<div><strong>Valuation:</strong> N$ ' . ucfirst(number_format((int) $value)) . '</div>';
 
 					}
 					else
 					{
 
-						$output .= '<tr>
-											<td>
-											' . ucfirst(str_replace('_', ' ', $row)) . '
-											
-											</td>
-											<td>
-											' . ucfirst($value) . '
-											</td>
-										</tr>
-										';
+						$output .= '<div><strong>' . ucfirst(str_replace('_', ' ', $row)) . ':</strong> ' . ucfirst($value) . '</div>';
 
 					}
 
@@ -3297,8 +3193,6 @@ class Trade_model extends CI_Model
 
 
 			}
-			$output .= '</tbody>
-			   			</table>';
 
 			return $output;
 
@@ -3798,10 +3692,10 @@ class Trade_model extends CI_Model
 	function show_images($product_id)
 	{
 
-			$this->load->model('image_model'); 
+		$this->load->model('image_model'); 
 
-			$this->load->library('thumborp');
-			$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$this->load->library('thumborp');
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
 
 		//get images
 		$this->db->order_by('sequence', 'ASC');
@@ -3813,7 +3707,7 @@ class Trade_model extends CI_Model
 		if ($images->result())
 		{
 
-			echo '<div class="owl-carousel" style="margin-top:20px">';
+			echo '<div class="owl-carousel">';
 
 			foreach ($images->result() as $row)
 			{
@@ -3823,7 +3717,7 @@ class Trade_model extends CI_Model
 				$str = substr($row->img_file,0,(strlen($row->img_file) - 4));
 				
 				$width = 800;
-				$height = 400;
+				$height = 450;
 
 
 				if($row->img_file != ''){
@@ -3845,9 +3739,9 @@ class Trade_model extends CI_Model
 					
 				}
 
-				$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $filter = 'fill(white)', $crop = '');
+				$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-				echo '<div><img src="'.$img_url.'" style="width:100%;"/></div>';
+				echo '<div class="loader"><img class="owl-lazy" data-src="'.$img_url.'" style="width:100%;"/></div>';
 
 
 			}
@@ -6756,19 +6650,27 @@ class Trade_model extends CI_Model
 	public function get_product_questions($product_id)
 	{
 
+
+		$this->load->model('image_model'); 
+		$this->load->library('thumborp');
+
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 200;
+		$height = 200;
+
+
 		$id = $this->session->userdata('id');
 
 		$query = $this->db->query("SELECT product_questions.*, u_client.CLIENT_NAME, u_client.CLIENT_SURNAME, u_client.CLIENT_PROFILE_PICTURE_NAME
-                                  FROM product_questions
-                                  JOIN u_client ON u_client.Id = product_questions.asking_client_id
-                                  WHERE product_id = '" . $product_id . "' AND status = 'live'", false);
+                                   FROM product_questions
+                                   JOIN u_client ON u_client.Id = product_questions.asking_client_id
+                                   WHERE product_id = '" . $product_id . "' AND status = 'live'", false);
 
 		if ($query->result())
 		{
 
 			foreach ($query->result() as $row)
 			{
-
 
 				$client_id = $row->client_id;
 				$bus_id1 = $row->bus_id;
@@ -6786,15 +6688,17 @@ class Trade_model extends CI_Model
 				elseif ($img != '')
 				{
 
-					$data['image'] = base_url('/') . 'assets/users/photos/' . $img;
+					$img_str = 'assets/users/photos/' . $img;
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
 				}
 				else
 				{
 
-					$data['image'] = base_url('/') . 'img/user_blank.jpg';
+					$img_url = base_url('/') . 'images/user_blank.jpg';
 
 				}
+
 				$data['user'] = $row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME;
 				$reply = $row->answer;
 
@@ -6802,61 +6706,48 @@ class Trade_model extends CI_Model
 				{
 
 					$answer = '
-							<div id="answer_' . $row->question_id . '">
-
-								<a class="btn btn-inverse pull-right" id="answer_btn_' . $row->question_id . '" onclick="reply_question(' . $row->question_id . ')" >Answer Question</a>
-							</div>	
-									';
+					<div id="answer_' . $row->question_id . '">
+						<a class="btn btn-dark pull-right btn-xs" id="answer_btn_' . $row->question_id . '" onclick="reply_question(' . $row->question_id . ')" >Answer Question</a>
+					</div>	
+					';
 
 				}
 				else
 				{
-
-					$answer = '<div id="answer_' . $row->question_id . '"><strong>A:</strong>' . strip_tags($row->answer) . '</div>';
-
+					$answer = '
+				      <div class="row" style="margin-left:20px" id="answer_' . $row->question_id . '">
+				        <div col-md-12">
+				          <blockquote>
+				            <p><strong>A: </strong>' . strip_tags($row->answer) . '</p>
+				          </blockquote>
+				        </div>
+				      </div>
+					';
 				}
 
-				echo '<div class="media">
-						  <div class="well well-mini">
-						  <a class="pull-left" href="#" title="Reviewed on ' . date('F j, Y', strtotime($q_date)) . '" rel="tooltip">
-							<span class="avatar-overlay60"></span>
-							<img class="media-object" style="border:1px solid #333333;width:60px; margin-right:10px; height:60px" src="' . $data['image'] . '">
-						  </a>
-						  
-						  <div class="media-body">
-						 <span style="font-size:50px;margin-top:15px;" class="pull-right na_script">?</span>
-						  <blockquote style="margin-bottom:0px;font-size:14px;"><strong>Q:</strong>' . strip_tags($question) . '</blockquote>
-						  <div style="font-size:10px;"><span itemprop="reviewer">' . $data['user'] . '</span></div>
-						  <div class="clearfix"></div>
-						  <time itemprop="dtreviewed" style="display:none;font-size:10px;height:30px;font-style:italic" datetime="' . date('m-d-Y', strtotime($q_date)) . '">'
-					. date('F j, Y', strtotime($q_date)) . '</time>
-						   <blockquote style="margin-bottom:0px;font-size:14px">' . $answer . '</blockquote>
-						  
-						  </div>
-						 
-						  
-						  </div>
-					  </div>';
 
-
+				echo '
+			    <div class="review-item">
+			      <div class="row">
+			        <div class="col-xs-3 col-sm-2 col-md-2">
+			          <figure><a href="#"><img class="" src="' . $img_url . '"></a></figure>
+			        </div>
+			        <div class="col-sm-10 col-md-10">
+			          <blockquote>
+			            <p><strong>Q: </strong>' . strip_tags($question) . '</p>
+			            <footer data-icon="fa fa-question-circle text-dark">Question by: '.$data['user'].' <span>' . date('F j, Y', strtotime($q_date)) . '</span></footer>
+			          </blockquote>
+			        </div>
+			      </div>
+			      ' . $answer . '
+			    </div>
+				';
 			}
-
-
 		}
 		else
 		{
-
-
-			echo '<div class="alert">
-					
-					 <h4>No Questions asked</h4> No queries have been made. Ask a question above.
-					 
-					</div>';
-
-
+			echo '<div class="alert alert-warning"><h4><strong>No Questions asked</strong></h4> No queries have been made. Ask a question above.</div>';
 		}
-
-
 	}
 
 
@@ -6868,6 +6759,8 @@ class Trade_model extends CI_Model
 	function rate_product($product_id)
 	{
 
+		echo '<h2 class="tab-head">Submit Review</h2>';
+
 		if ($this->session->userdata('id'))
 		{
 
@@ -6876,18 +6769,42 @@ class Trade_model extends CI_Model
 
 
 			echo ' <p>Your rating (On a scale of 1 to 5, with 5 being the best)</p>
-				   <form id="reviewfrm" name="reviewfrm" enctype="application/x-www-form-urlencoded" method="post" action="' . site_url('/') . 'trade/submit_review/' . $product_id . '/">
-					   <input name="star1" type="radio" value="1" class="star"/>
-					   <input name="star1" type="radio" value="2" class="star"/>
-					   <input name="star1" type="radio" value="3" class="star"/>
-					   <input name="star1" type="radio" value="4" class="star"/>
-					   <input name="star1" type="radio" value="5" class="star"/>
+				   <form name="reviewfrm" enctype="application/x-www-form-urlencoded" method="post" action="' . site_url('/') . 'trade/submit_review/' . $product_id . '/">
 
-					   <br /><br />
-					   <input type="hidden" value="' . $this->session->userdata('id') . '" name="client_id" />
-					   <textarea rows="3" class="redactor span12" id="reviewtxt" name="reviewtxt"  placeholder="Review product here."></textarea>
-					   <br />
-					   <button type="submit" id="reviewbut" class="btn pull-right btn-inverse"><i class="icon-comment icon-white"></i> Submit Review</button>
+				   		  <div class="row">
+					   		  <div class="col-sm-12 col-md-6">
+							   <input name="star1" type="radio" value="1" class="star"/>
+							   <input name="star1" type="radio" value="2" class="star"/>
+							   <input name="star1" type="radio" value="3" class="star"/>
+							   <input name="star1" type="radio" value="4" class="star"/>
+							   <input name="star1" type="radio" value="5" class="star"/>
+							  </div> 
+				   		  </div>
+
+						  <div class="row">
+			                <div class="col-sm-12 col-md-6">
+			                  <input type="hidden" value="' . $this->session->userdata('id') . '" name="client_id" />
+			                  <label data-icon="fa fa-bullhorn text-dark"><strong>Share your experience in a couple of words</strong></label>
+			                  <textarea rows="3" class="form-control" id="reviewtxt" name="reviewtxt"  placeholder="Review product here."></textarea>
+			                  <!--
+			                  <label for="EmailAddress">Security</label>
+			                  ROBOT CAPTCHA!!
+			                  !-->
+			                  <button type="submit" class="btn btn-primary btn-block" data-icon="fa-envelope-o">Send</button>
+			                </div>
+			                <div class="col-sm-12 col-md-6">
+			                  <label data-icon="fa fa-exclamation-triangle text-dark"><strong>Make sure your review will be approved</strong></label>
+			                  <div class="well well-sm">
+			                    <ul>
+			                      <li>be clear & concise</li>
+			                      <li>if you had a bad experience, try to offer constructive suggestions – remember everyone has a bad day</li>
+			                      <li>refrain from using peoples names</li>
+			                      <li>refrain from swearing</li>
+			                    </ul>
+			                  </div>
+			                </div>
+			              </div>
+
 				   </form>
 				   <div class="clearfix" style="height:20px;"></div>
 				   <div id="review_msg"></div>
@@ -6896,56 +6813,29 @@ class Trade_model extends CI_Model
 					$(document).ready(function(){
 						//$("input .star").rating();
 						$("#reviewbut").on("click", function(e) {
-								e.preventDefault();
-								var frm = $("#reviewfrm");
-								console.log(frm);
-								$("#reviewbut").html("' . $button_txt1 . '");
-								$.ajax({
-									type: "POST",
-									url: "' . site_url("/") . 'trade/submit_review/' . $product_id . '/' . rand(9999, 99999) . '" ,
-									data: frm.serializeArray(),
-									success: function (data) {
-										 $("#review_msg").html(data);
-										 $("#reviewbut").html("' . $button_txt2 . '");
-										 $("input .star").rating();
-									}
-								});	
+							e.preventDefault();
+							var frm = $("#reviewfrm");
+							console.log(frm);
+							$("#reviewbut").html("' . $button_txt1 . '");
+							$.ajax({
+								type: "POST",
+								url: "' . site_url("/") . 'trade/submit_review/' . $product_id . '/' . rand(9999, 99999) . '" ,
+								data: frm.serializeArray(),
+								success: function (data) {
+									 $("#review_msg").html(data);
+									 $("#reviewbut").html("' . $button_txt2 . '");
+									 $("input .star").rating();
+								}
+							});	
 						});	
 					});
-
 				   </script>';
 
 		}
 		else
 		{
 
-			echo '<p>Only My.na users can review products. Please register or log in to review the product.</p>
-					<form class="form-signin" action="' . site_url('/') . 'members/login/" enctype="application/x-www-form-urlencoded">
-						<input type="hidden" class="input" name="redirect" value="' . current_url() . '">
-						<div class="row-fluid">
-							<div class="span12">
-								<input type="text" class="input span12" name="email"  placeholder="Email">
-							</div>
-						</div>	
-						<div class="row-fluid">
-							<div class="span12">
-								<input type="password" name="pass" class="input span12" placeholder="Password">
-							</div>
-						</div>
-						<div class="row-fluid">
-							<div class="span4">
-								<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-scope="email" onlogin="checkLoginState()" data-auto-logout-link="false"></div>
-							</div>
-							<div class="span4">	
-								<a class="btn btn-block btn-inverse" href="' . site_url('/') . 'members/register/"><i class="icon-star icon-white"></i> Join</a> 
-							</div>
-							<div class="span4">	
-								<button type="submit" class="btn btn-block btn-inverse"><i class="icon-lock icon-white"></i> Sign in</button>
-							</div>
-						</div>
-						
-					</form>
-					';
+			echo '<div class="alert alert-warning"><h4><strong>Please login to review product</strong></h4>Only My.na users can review products. Please register or log in to review the product.</div>';
 
 		}
 
@@ -6959,12 +6849,22 @@ class Trade_model extends CI_Model
 	function show_reviews($product_id)
 	{
 
+		echo '<h2 class="tab-head">Reviews</h2>';
+
+		$this->load->model('image_model'); 
+		$this->load->library('thumborp');
+
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 200;
+		$height = 200;
+
+
 		$query = $this->db->query("SELECT u_business_vote.*, products.product_id, products.title, u_client.CLIENT_NAME, u_client.CLIENT_SURNAME, u_client.CLIENT_PROFILE_PICTURE_NAME
-                                        FROM u_business_vote
-										JOIN products ON products.product_id = u_business_vote.PRODUCT_ID
-										JOIN u_client ON u_client.ID = u_business_vote.CLIENT_ID
-										WHERE u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND
-										 u_business_vote.REVIEW_TYPE = 'product_review' AND u_business_vote.PRODUCT_ID = '" . $product_id . "'", false);
+                                   FROM u_business_vote
+								   JOIN products ON products.product_id = u_business_vote.PRODUCT_ID
+								   JOIN u_client ON u_client.ID = u_business_vote.CLIENT_ID
+								   WHERE u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND
+								   u_business_vote.REVIEW_TYPE = 'product_review' AND u_business_vote.PRODUCT_ID = '" . $product_id . "'", false);
 
 		if ($query->num_rows() > 0)
 		{
@@ -6980,9 +6880,8 @@ class Trade_model extends CI_Model
 				$review = $row->REVIEW;
 				$review_date = $row->TIME_VOTED;
 				$rating = $row->RATING;
-
-
 				$img = $row->CLIENT_PROFILE_PICTURE_NAME;
+
 
 				if (strstr($img, "http"))
 				{
@@ -6993,53 +6892,56 @@ class Trade_model extends CI_Model
 				elseif ($img != '')
 				{
 
-					$data['image'] = base_url('/') . 'assets/users/photos/' . $img;
+					$img_str = 'assets/users/photos/' . $img;
+
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
 
 				}
 				else
 				{
 
-					$data['image'] = base_url('/') . 'img/user_blank.jpg';
+					$img_url = base_url('/') . 'images/user_blank.jpg';
 
 				}
+
 				$data['user'] = $row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME;
-				echo '<div class="media well well-mini">
-							  <div itemscope itemtype="http://data-vocabulary.org/Review">
-							  <span itemprop="itemreviewed" style="display:none">' . $row->title . '</span>
-							  <a class="pull-left" href="#" title="Reviewed on ' . date('F j, Y', strtotime($review_date)) . '" rel="tooltip">
-							    <span class="avatar-overlay60"></span>
-								<img class="media-object" style="border:1px solid #333333;width:60px; margin-right:10px; height:60px" src="' . $data['image'] . '">
-							  </a>
-							  <span itemprop="summary" style="display:none;height:0px">' . strip_tags($this->shorten_string($review, 8)) . '</span>
-							  <div class="media-body">
-							  ' . implode($this->get_review_stars($rating, $client_id)) . '
-							   <br/>
-							  <span itemprop="description">' . $review . '</span>
-							   <div style="font-size:10px;"><span itemprop="reviewer">' . $data['user'] . '</span></div>
-								
-							  <time itemprop="dtreviewed" style="display:none;font-size:10px;font-style:italic" datetime="' . date('m-d-Y', strtotime($review_date)) . '">'
-					. date('F j, Y', strtotime($review_date)) . '</time>
-							  <span itemprop="rating" style="visibility:hidden">' . ($rating / 2) . '</span>
-							  </div>
-							  </div>
-						  </div>';
+
+
+				echo '
+				<div class="row review-item" itemscope itemtype="http://data-vocabulary.org/Review">
+	              <div class="col-xs-3 col-sm-2 col-md-1">
+	                <figure><a href="#"><img src="'.$img.'" class=""></a></figure>
+	              </div>
+	              <div class="col-sm-10 col-md-11">
+	                <blockquote>
+	                  <div class="rating">' . implode($this->get_review_stars($rating, $client_id)) . '</div>
+	                  <p itemprop="description">' . $review . '</p>
+	                  <footer itemprop="reviewer">' . $data['user'] . ' <span>' . date('F j, Y', strtotime($review_date)) . '</span></footer>
+	                </blockquote>
+	                <time itemprop="dtreviewed" style="display:none;" datetime="' . date('m-d-Y', strtotime($review_date)) . '">'. date('F j, Y', strtotime($review_date)) . '</time>
+	                <span itemprop="summary" style="display:none;">' . strip_tags($this->shorten_string($review, 8)) . '</span>
+	                <span itemprop="rating" style="visibility:hidden">' . ($rating / 2) . '</span>
+	              </div>
+	            </div>
+				';
 
 			}
 			echo '<script type="text/javascript">
-							/*$(function(){
-								$("input .star").rating();
-							});*/
-						</script>';
+					/*$(function(){
+						$("input .star").rating();
+					});*/
+				  </script>';
 
 		}
 		else
 		{
 
-			echo '<div class="alert alert-block">
-						<button type="button" class="close" data-dismiss="alert">×</button>
-						<h4>No Reviews Added</h4>
-						No Reviews have been added for the current product.
-					  </div>';
+			echo '<div class="alert alert-warning">
+					<h4><strong>No Reviews Added</strong></h4>
+					No Reviews have been added for the current product.
+				  </div>
+				  ';
 		}
 
 	}
@@ -7960,92 +7862,12 @@ class Trade_model extends CI_Model
 				if ($row->IS_ESTATE_AGENT == 'Y' && $client_id != 0)
 				{
 
-					$agent = $this->show_estate_agent($client_id, $bus_id, $row->BUSINESS_NAME, false, $sub_cat_id);
+					$agent = $this->show_estate_agent($client_id, $bus_id, $row->BUSINESS_NAME, false, $sub_cat_id, $row->BUSINESS_PHYSICAL_ADDRESS);
 
 				}
 
 
-				echo '
-
-
-
-				';
-
-
-
-
-
-				echo '<div class="white_box padding10">
-							<div class="row-fluid vignette" style="min-height:180px;background:url(' . $cover_str . ') no-repeat;background-size:cover;z-index:88; position:relative">
-							 <div class="row-fluid " style="height:200px;">
-											
-								<div class="span8">
-								
-								
-								</div>
-								
-								<div class="span4">
-								
-								
-								</div>
-						   
-					  
-							</div>
-						  </div>
-						   <div class="row-fluid" style="margin-top:-100px;z-index:9999; position:relative">
-											
-								<div class="span1">
-								
-								</div>
-								<div class="span3">
-	
-										<a href="' . $link . '">
-											<img class="img-polaroid" src="' . $img_str . '" alt="' . $row->BUSINESS_NAME . '" style="width: 110px; height:110px;">
-										</a>	
-						 
-								</div>
-								
-								<div class="span8">
-								
-									 <div class="media">
-										<div class="row-fluid" style="min-height:80px;">
-										
-											<div class="span6">
-											
-											</div>
-											<div class="span6">
-																   
-											 
-											</div>                           
-										
-										</div>
-										
-									 </div>
-									 
-								</div>
-  
-                		 </div><!-- row -->
-						 <div class="row-fluid">
-								<div itemscope style="display:none;padding:0;margin:0" itemtype="http://data-vocabulary.org/Organization"> 
-								<span itemprop="name">' . $row->BUSINESS_NAME . '</span></div>
-
-								<h1 style="font-size:130%;line-height:30px">' . $row->BUSINESS_NAME . '</h1>
-
-								<div itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
-									<span itemprop="street-address"><i class="icon-map-marker"></i> ' . $row->BUSINESS_PHYSICAL_ADDRESS . '</span>
-									<span itemprop="locality">' . $row->city . '</span>
-									<span itemprop="region">' . $row->region . '</span>
-									<span itemprop="country-name">Namibia</span>
-								</div>
-						 </div>
-						 <div class="row-fluid">
-								' . $agent . '
-						 </div>
-						
-					</div>
-					
-					
-					  ';
+				echo $agent;
 
 			}
 			else
@@ -8063,8 +7885,19 @@ class Trade_model extends CI_Model
 	//+++++++++++++++++++++++++++
 	//GET ESTATE AGENT
 	//++++++++++++++++++++++++++
-	public function show_estate_agent($client_id, $bus_id, $bus_name, $val = false, $sub_cat_id)
+	public function show_estate_agent($client_id, $bus_id, $bus_name, $val = false, $sub_cat_id, $address)
 	{
+
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 200;
+		$height = 200;
+
+
+
 		$agent = $this->db->where('ID', $client_id);
 		$agent = $this->db->get('u_client');
 		$res = '';
@@ -8086,48 +7919,73 @@ class Trade_model extends CI_Model
 			if ($img_file != '')
 			{
 
-				$img = base_url('/') . 'assets/users/photos/' . $img_file;
+				$img_str = 'assets/users/photos/' . $img_file;
+
+				$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
 			}
 			else
 			{
 
-				$img = base_url('/') . 'img/user_blank.jpg';
+				$img_url = base_url('/') . 'images/user_blank.jpg';
 
 			}
+
 			$UAagent = 'href="javascript:void(0)"';
+
 			if ($this->agent->is_mobile())
 			{
 				$UAagent = 'href="tel:' . substr($row->CLIENT_CELLPHONE, 0, 8) . substr($row->CLIENT_CELLPHONE, 8, strlen($row->CLIENT_CELLPHONE)) . '"';
 			}
+
 			if ($val)
 			{
-				$res = '<div class="span12">	
-							<div class="clearfix">&nbsp;</div>
-							<img src="' . base_url('/') . 'img/timbthumb.php?src=' . $img . '&w=100&h=100" style="margin-right:10px;" class="img-polaroid pull-left" />
-							<h4>' . ucwords($row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME) . '</h4>
-							<p><a href="' . site_url('/') . 'trade/agent/' . $bus_id . '/' . $row->ID . '/' . $this->encode_url($bus_name) . '/' . $this->encode_url($row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME) . '/" class="btn btn-inverse btn-mini">View Agent ' . $tstr . '</a></p>
-							<p><a ' . $UAagent . ' class="btn btn-inverse btn-mini"><i class="icon-calendar icon-white"></i> ' . $row->CLIENT_CELLPHONE . '</a></p>
-						</div>
-						';
+
+				$res = '
+                 <div>
+                    <figure>
+                      <a href="#"><img src="' . $img_url . '" class="img-responsive"></a>
+                    </figure>
+                  </div>
+                  <div>
+                    <h2><a href="#">' . ucwords($row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME) . '</a> from <a href="#">'.$bus_name.'</a></h2>
+                    <p class="addr" data-icon="fa fa-map-marker text-dark"><a class="fancy-media" href="">'.$address.'</a></p>
+                    <p class="desc"></p>
+                    <div class="row reveal">
+                      <div class="col-sm-12 col-md-6">
+                        <p data-icon="fa fa-tablet text-dark"><button class="btn btn-default"><!--C: -->' . $row->CLIENT_CELLPHONE . '</button></p>
+                      </div>
+                    </div>
+                  </div>
+				';
 
 			}
 			else
 			{
 
-
-				$res = '<div class="span8">	
-							<div class="clearfix">&nbsp;</div>
-							<img src="' . base_url('/') . 'img/timbthumb.php?src=' . $img . '&w=100&h=100" style="margin-right:10px;" class="img-polaroid pull-left" />
-							<h4>' . ucwords($row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME) . '</h4>
-							<p><a href="' . site_url('/') . 'trade/agent/' . $bus_id . '/' . $row->ID . '/' . $this->encode_url($bus_name) . '/' . $this->encode_url($row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME) . '/" class="btn btn-inverse btn-mini">View Agent ' . $tstr . '</a></p>
-							<p><a ' . $UAagent . ' class="btn btn-inverse btn-mini"><i class="icon-calendar icon-white"></i> ' . $row->CLIENT_CELLPHONE . '</a></p>
-						</div>
-						<div class="span4 text-right">
-							<a href="' . site_url('/') . 'trade/agent/' . $bus_id . '/0/' . $this->encode_url($bus_name) . '/" class="btn btn-inverse"><i class="icon-home icon-white"></i> View ' . $tstr . '</a>
-							<a href="' . site_url('/') . 'b/' . $bus_id . '/' . $this->encode_url($bus_name) . '/" class="btn btn-inverse hide hidden-phone hidden-tablet"><i class="icon-share icon-white"></i> View Details</a> 
-						</div>
-						';
+				$res = '
+                 <div>
+                    <figure>
+                      <a href="#"><img src="' . $img_url . '" class="img-responsive"></a>
+                    </figure>
+                  </div>
+                  <div>
+                    <h2><a href="#">' . ucwords($row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME) . '</a> from <a href="#">'.$bus_name.'</a></h2>
+                    <p class="addr" data-icon="fa fa-map-marker text-dark"><a class="fancy-media" href="">'.$address.'</a></p>
+                    <p class="desc"></p>
+                    <div class="row reveal">
+                      <div class="col-sm-12 col-md-6">
+                        <p data-icon="fa fa-tablet text-dark"><button class="btn btn-default"><!--C: -->' . $row->CLIENT_CELLPHONE . '</button></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="revi">
+                      <a href="' . site_url('/') . 'trade/agent/' . $bus_id . '/0/' . $this->encode_url($bus_name) . '/" class="btn btn-default btn-block"><i class="icon-home icon-white"></i> View Agency Products</a>
+                      <a href="' . site_url('/') . 'trade/agent/' . $bus_id . '/' . $row->ID . '/' . $this->encode_url($bus_name) . '/' . $this->encode_url($row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME) . '/" class="btn btn-default btn-block">View Agent Products</a>
+                    </div>
+                  </div>
+				';
 
 			}
 

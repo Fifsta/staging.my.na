@@ -16,7 +16,7 @@
 	 $header['section'] = '';
 	 
  }
-
+ 
   
   $product['product_id'] = $product_id;
   $product['bus_id'] = $bus_id;
@@ -134,28 +134,27 @@
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
 
   <div class="row">
 
-    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
+    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-2 order-xl-3" id="sidebar">
       
+      <?php $this->load->view('inc/login'); ?>
       <?php $this->load->view('inc/weather'); ?>
-      
       <?php $this->load->view('inc/adverts'); ?>
 
     </div>
 
-    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 order-md-1 order-sm-2">
+    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
 
-      <section id="listing">
+       <section id="listing">
 
-        <div class="heading">
+        <div class="heading" style="margin-bottom:15px">
           <h2 data-icon="fa-briefcase"><?php echo $title; ?></h2>
           <ul class="options">    
-            <li><a href="#Contact-Agent" data-icon="fa-envelope text-dark">Contact Agency</a></li>
+            <li><a href="#Contact-Agent" data-icon="fa-envelope text-dark">Contact Agent</a></li>
             <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
-            <li><a href="#Agency-Products" data-icon="fa-shopping-basket text-dark">Agency Products</a></li>
             <li><a href="#" data-icon="fa-facebook text-dark"></a></li>
             <li><a href="#" data-icon="fa-twitter text-dark"></a></li>
             <li><a href="#" data-icon="fa-bookmark text-dark"></a></li>
@@ -163,15 +162,17 @@
         </div>
 
         <!--banner-->
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-7 col-xl-6">
-               <?php echo $this->trade_model->show_images($product_id); ?>
-            </div>
-            
-            <div class="col-sm-12 col-md-12 col-lg-5 col-xl-6" style="padding:20px">
-              <img src="<?php echo base_url('/') ?>images/map-temp.jpg" style="width:100%">
-            </div>
+        <div class="list-map">
+          <div class="list-map-left" style="background:#ccc; position:relative">
+              <div class="asso static-banner">
+                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/han.png"></a>
+                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/ntb.png"></a>
+              </div>
+              <?php echo $this->trade_model->show_images($product_id);?>
+          </div>
+          
+          <div class="list-map-right">
+            <iframe src="" frameborder="0" allowtransparency="true"></iframe>
           </div>
         </div>
         <!--banner-->
@@ -179,51 +180,103 @@
         <!--details-->
         <div class="details">
           <div class="details-left">
-
             <figure>
               <a href="#"><img src="<?php echo $img_str; ?>"></a>
             </figure>
-
             <div class="rating">
               <span></span><span></span><span class="active"></span><span></span><span></span>
               <a class="#">8 Reviews</a>
             </div>
           </div>
-          <div class="details-right" style="background: #fff">
+          <div class="details-right">
+            <?php $this->trade_model->show_product($product_id); ?>
 
-            <div class="spacer"></div>
-               <div class="pull-right">
-                <a href="javascript:void(0);" title="Print this Page" rel="tooltip" class="btn btn-dark btnPrint"><i class="fa fa-print text-light"></i></a>
-               <?php $this->trade_model->watch_list_test($product_id);?>
-               </div>                             
-             <?php $this->trade_model->show_product($product_id); ?>
-             <div class="spacer"></div>
+            <!--watchlist/print-->
+            <div class="text-right">
+              <a href="javascript:void(0);" title="Print this Page" rel="tooltip" class="btn btn-dark btnPrint"><i class="fa fa-print text-light"></i></a>
+              <?php $this->trade_model->watch_list_test($product_id);?>
+            </div>
+            <!--watchlist/print-->
+
           </div>
         </div>
         <!--details-->
 
+        <!--tabs-->
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item" role="presentation"><a href="#Contact-Agent" class="nav-link active" aria-controls="Contact-Agent" role="tab" data-toggle="tab" data-icon="fa fa-envelope-o text-dark">Contact Agent</a></li>
+        </ul>
+        <div class="tab-content">
+          <section role="tabpanel" class="tab-pane active" id="Contact-Agent">
+            <h2 class="tab-head">Agent</h2>
+            <div class="row">
+              <div class="col-sm-12">
+                <section class="results-item">
+                  <?php $this->trade_model->show_company($bus_id, $property_agent, $sub_cat_id); ?>
+                </section>
+              </div>
+            </div>
+            <h2 class="tab-head">Contact Agent</h2>
+            <form>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="FullName">Full Name</label>
+                    <input id="FullName" class="form-control input-sm" placeholder="Full Name">
+                  </div>
+                  <div class="form-group">
+                    <label for="EmailAddress">Email Address</label>
+                    <input id="EmailAddress" class="form-control input-sm" placeholder="Email Address">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="EmailAddress">Message / Enquiry</label>
+                    <textarea class="form-control" rows="5"></textarea>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <label for="EmailAddress">Security</label>
+                  <!--ROBOT CAPTCHA!!!-->
+                  <button type="submit" class="btn btn-primary btn-block" data-icon="fa-envelope-o">Send</button>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+        <!--tabs-->   
 
-      </section>  
-
-      <div class="row">
-        <div class="col-xl-6">
-
-          <!--Review Include-->
-          <div class="tab-content loading_img col-md-11" id="reviews_div">
-            
-          </div> 
-
-        </div>  
-
-        <div class="col-xl-6">
+        <!--tabs-->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="reviews" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa fa-star-o text-dark">Reviews</a></li>
+          <li role="submit-review" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa fa-star text-dark">Submit Review</a></li>
+          <li role="question" class="nav-item"><a href="#Questions" class="nav-link" aria-controls="Question" role="tab" data-toggle="tab" data-icon="fa fa-question text-dark">Ask a Question</a></li>
+        </ul>
+        <div class="tab-content">
+        
+          <section role="tabpanel" class="tab-pane active" id="Reviews"></section>
           
-          <!--Question Include-->
-          <div class="tab-content loading_img col-md-11" id="question_div">
-             
-          </div> 
+          <section role="tabpanel" class="tab-pane" id="Submit-Review"></section>
+          
+          <section role="tabpanel" class="tab-pane" id="Questions">
+            <?php 
 
-        </div>  
-      </div>
+              $pdat['product_id'] = $product_id;
+              $pdat['product_title'] = $title;
+              $pdat['client_id'] = $client_id;
+              $pdat['bus_id'] = $bus_id;
+
+              $this->load->view('trade/inc/questions', $pdat); 
+
+            ?>
+          </section>
+          
+        </div>
+        <!--tabs-->
+
+
+       </section>
+
     </div>
   </div>  
 </div>
@@ -246,12 +299,14 @@ $(document).ready(function(){
 
     window.setTimeout(load_review, 3000);
     window.setTimeout(load_reviews, 2000);
-    window.setTimeout(load_questions, 1000);
+    //window.setTimeout(load_questions, 1000);
 
 
     $('.owl-carousel').owlCarousel({
         loop:true,
         margin:10,
+        lazyLoad: true,
+        navRewind:false,
         nav: true,
         navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
         responsiveClass:true,
@@ -277,7 +332,7 @@ $(document).ready(function(){
 
 function load_review(){
     
-    var cont = $('#review_div');
+    var cont = $('#Submit-Review');
     
     $.ajax({
       type: 'get',
@@ -297,7 +352,7 @@ function load_review(){
 
 function load_reviews(){
     
-    var cont = $('#reviews_div');
+    var cont = $('#Reviews');
     
     $.ajax({
       type: 'get',
@@ -317,22 +372,20 @@ function load_reviews(){
 }
 
 
-function load_questions(){
-    
-    var cont = $('#question_div');
-    
+function save_watchlist(){
+  
+    var btn = $('#watch_btn');
+    btn.html('Saving...');
     $.ajax({
-      type: 'POST',
-      dataType: 'json',
-      data: {product_id: <?php echo $product_id; ?>, product_title: '<?php echo $title; ?>'},
-      url: '<?php echo site_url('/'); ?>trade/get_product_questions/',
+      type: 'get',
+      cache: false,
+      url: '<?php echo site_url('/').'trade/add_watchlist/' .$product_id;?>' ,
       success: function (data) {  
+        btn.html('<i class="icon-remove-circle icon-white"></i> Watching');
         
-        cont.html(data.questions);
-        cont.removeClass('loading_img');
       }
     }); 
-
+  
 }
 
 

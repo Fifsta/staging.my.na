@@ -4,7 +4,7 @@
 		<div class="dot"></div>
 		<div class="dot"></div>
 	</div>
-</div>-->
+</div>--> 
 <header id="header" class="grad-orange">
 	<div class="container-fluid">
 		<div class="row">
@@ -37,60 +37,7 @@
 				<div class="history">Search history: <a href="#">pizza</a>, <a href="#">lodge</a>, <a href="#">plumbing</a>, <a href="#">paper towels</a>, <a href="#">shoes</a>,</div>
 			</div>
 			<div class="col-sm-2 text-right">
-				<div class="dropdown">
-
-				  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    My Account
-				  </button>
-				  
-                  <?php if($this->session->userdata('id')){ ?>
-
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="acc_ul">
-                            <li style="width:290px" class="clearfix">
-                               <a href="<?php echo site_url('/').'members/logout'; ?>">Logout</a>
-                            </li>
-                      </div>
-
-                  <?php } else { ?>
-                  
-    				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="acc_ul">
-    						<li style="width:290px" class="clearfix">
-                                <div style="padding:20px">
-                                    <form class="form-signin" method="post" action="<?php echo site_url('/'); ?>members/login/">
-                                        <input type="hidden" name="redirect" id="redirect" value="<?php echo site_url('/') . uri_string(); ?>">
-
-    									<div class="form-group">
-    										<li class="nav-header">Login to Account</li>
-                                            <input type="text" class="form-control" name="email" id="email_lgn" placeholder="Email address">
-                                        </div>
-
-                                        <div class="form-group">   
-                                                <input type="password" class="form-control" name="pass" id="pass_lgn" placeholder="Password">
-                                        </div>
-
-                                        <label class="checkbox"> <input type="checkbox" value="remember-me"> Remember me </label>
-    									
-    									<div class="form-group">
-                                                <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-scope="email" onlogin="checkLoginState()" data-auto-logout-link="false"></div>
-    									</div>
-
-                                        <button class="btn btn-dark pull-right" type="submit"><i class="fa fa-lock text-white"></i> <b>Sign in</b></button>
-                                        
-                                        <small><a href="<?php echo site_url('/'); ?>members/" class="pull-left muted">Forgot Password?</a></small>
-                                    </form>
-                                </div>
-                            </li>
-                            <li>
-                                <div style="padding:5px 20px">
-                                    <a class="btn btn-block btn-dark" href="<?php echo site_url('/'); ?>members/register"><b class="text-light">Join</b> <img src="<?php echo base_url('/'); ?>images/icons/my-na-favicon.png"></a>
-                                </div>
-                            </li>
-    				  </div>
-
-                  <?php } ?>
-
-
-				</div>
+				
 			</div>
 		</div>
 	</div>
