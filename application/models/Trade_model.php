@@ -6927,11 +6927,14 @@ class Trade_model extends CI_Model
 				';
 
 			}
-			echo '<script type="text/javascript">
-					/*$(function(){
-						$("input .star").rating();
-					});*/
-				  </script>';
+
+			echo '
+			<script type="text/javascript">
+				/*$(function(){
+					$("input .star").rating();
+				});*/
+			</script>
+			';
 
 		}
 		else
