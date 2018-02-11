@@ -1206,7 +1206,7 @@ class Search_model extends CI_Model{
 
 							if($cx < 6){
 
-								$catstr .= ' <span class="badge badge-dark text-light">'.$crow.'</span> ';
+								$catstr .= ' <span class="badge badge-secondary text-light">'.$crow.'</span> ';
 							}
 
 							$cx ++;
@@ -1261,14 +1261,14 @@ class Search_model extends CI_Model{
 		                  </div>
 		                </div>
 		                <div>
-		                  <h2><a href="#">'.$name.'</a> <a href="#" data-toggle="tooltip" title="Find out more about getting featured"><span>Featured</span></a></h2>
+		                  <h2><a href="#">'.$name.'</a></h2>
 		                  '.$sponsor.'
 		                  <p class="addr" data-icon="fa-map-marker text-dark">'. $address .'</p>
 		                  <p class="desc">'.$this->shorten_string($des, 35).'</p>
 
 								<p>'. $catstr.'</p>
 
-							 	 	 <a class="btn btn-secondary btn-sm pull-right" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View listing &raquo;</a>
+							 	 	 <a class="btn btn-dark btn-sm pull-right" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View Business Listing</a>
 
 
 
