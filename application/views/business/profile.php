@@ -176,11 +176,9 @@ $this->load->view('inc/header');
 					<div class="details-left">
 						<figure>
 							<a href="#"><img src="<?php echo $img_url; ?>"></a>
+							<div style="margin-top:10px"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>
 						</figure>
-						<div class="rating">
-							<span></span><span></span><span class="active"></span><span></span><span></span>
-							<a class="#">8 Reviews</a>
-						</div>
+						 
 					</div>
 					<div class="details-right">
 						<h2><?php echo $address ;?><a href="#" data-toggle="tooltip" title="Find out more about getting featured"><span>Featured</span></a></h2>
@@ -206,7 +204,336 @@ $this->load->view('inc/header');
 						</div>
 					</div>
 				</div>
-				<!--details-->		        	
+				<!--details-->
+
+				<!--tabs-->
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#About" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info">About</a></li>
+					<li role="presentation"><a href="#Enquiry-Form" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o">Enquiry Form</a></li>
+					<li role="presentation"><a href="#Deals" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate">Deals</a></li>
+					<li role="presentation"><a href="#Activities" aria-controls="Activities" role="tab" data-toggle="tab" data-icon="fa-bicycle">Activities</a></li>
+					<li role="presentation"><a href="#Gallery" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o">Gallery</a></li>
+				</ul>
+				<div class="tab-content">
+					<section role="tabpanel" class="tab-pane active" id="About">
+						<h2 class="tab-head">About</h2>
+						<p>Ton of Content and stuff</p>
+					</section>
+					<section role="tabpanel" class="tab-pane" id="Enquiry-Form">
+						<h2 class="tab-head">Enquiry Form</h2>
+						<form>
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="FullName">Full Name</label>
+										<input id="FullName" class="form-control input-sm" placeholder="Full Name">
+									</div>
+									<div class="form-group">
+										<label for="EmailAddress">Email Address</label>
+										<input id="EmailAddress" class="form-control input-sm" placeholder="Email Address">
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="EmailAddress">Message / Enquiry</label>
+										<textarea class="form-control input-sm" rows="5"></textarea>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<label for="EmailAddress">Security</label>
+									<!--ROBOT CAPTCHA!!!-->
+									<button type="submit" class="btn btn-primary btn-block" data-icon="fa-envelope-o">Send</button>
+								</div>
+							</div>
+						</form>
+					</section>
+					<section role="tabpanel" class="tab-pane" id="Deals">
+						<h2 class="tab-head">Deals</h2>
+						<div class="row">
+							<div class="col-xs-6 col-sm-3">
+								<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
+								<h3 class="tab-head">Deal title</h3>
+								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+							</div>
+							<div class="col-xs-6 col-sm-3">
+								<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
+								<h3 class="tab-head">Deal title</h3>
+								<p>Book a reservation and get a free car! For free!</p>
+							</div>
+							<div class="col-xs-6 col-sm-3">
+								<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
+								<h3 class="tab-head">Deal title</h3>
+								<p>Book a table with Mathew for free!</p>
+							</div>
+							<div class="col-xs-6 col-sm-3">
+								<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
+								<h3 class="tab-head">Deal title</h3>
+								<p>Just writing stuff in different lengths to see what happens</p>
+							</div>
+							<div class="col-xs-6 col-sm-3">
+								<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
+								<h3 class="tab-head">Deal title</h3>
+								<p>Just writing stuff in different lengths to see what happens</p>
+							</div>
+						</div>
+					</section>
+					<section role="tabpanel" class="tab-pane" id="Activities">
+						<h2 class="tab-head">Activities</h2>
+						<div class="row">
+							<div class="col-sm-12">
+								<section class="results-item">
+									<div>
+										<figure>
+											<a href="#"><img src="images/logo-placeholder.jpg" class="img-responsive"></a>
+										</figure>
+										<div class="rating">
+											<span></span><span></span><span class="active"></span><span></span><span></span>
+											<a class="#">8 Reviews</a>
+										</div>
+									</div>
+									<div>
+										<h2><a href="#">Desert Quad Explorers</a> <a href="#" data-toggle="tooltip" title="Find out more about getting featured"><span>Featured</span></a></h2>
+										<p class="addr" data-icon="fa-map-marker"><a class="fancy-media" href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.8309378265176!2d17.08688731495913!3d-22.548004985195448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1c0b1b39455cc893%3A0xa8e7e9ba0305001a!2sIntouch+interactive+Marketing!5e0!3m2!1sen!2sna!4v1473690598478">Damaraland</a> | <a href="#" data-toggle="tooltip" title="<strong>Fitness Classes:</strong> <br> None Needed - i.e. Relaxing <br> Average - i.e.  Walking <br> Good - i.e. Hiking <br> Very Good - i.e. Running, Cycling <br> Excellent - i.e. Competitive" data-html="true" data-icon="fa-universal-access">Fitness: Average (Quad Biking)</a></p>
+										<p class="desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+									</div>
+									<div>
+										<div class="revi">
+											<h3>Reviews:</h3>
+											<blockquote><a href="#">“Enjoyable way to spend an hour”</a></blockquote>
+											<blockquote><a href="#">“A really amazing site for future generations”</a></blockquote>
+										</div>
+									</div>
+								</section>
+								<section class="results-item">
+									<div>
+										<figure>
+											<a href="#"><img src="images/logo-placeholder.jpg" class="img-responsive"></a>
+										</figure>
+										<div class="rating">
+											<span></span><span></span><span class="active"></span><span></span><span></span>
+											<a class="#">8 Reviews</a>
+										</div>
+									</div>
+									<div>
+										<h2><a href="#">Desert Quad Explorers</a> <a href="#" data-toggle="tooltip" title="Find out more about getting featured"><span>Featured</span></a></h2>
+										<p class="addr" data-icon="fa-map-marker"><a class="fancy-media" href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.8309378265176!2d17.08688731495913!3d-22.548004985195448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1c0b1b39455cc893%3A0xa8e7e9ba0305001a!2sIntouch+interactive+Marketing!5e0!3m2!1sen!2sna!4v1473690598478">Damaraland</a> | <a href="#" data-toggle="tooltip" title="<strong>Fitness Classes:</strong> <br> None Needed - i.e. Relaxing <br> Average - i.e.  Walking <br> Good - i.e. Hiking <br> Very Good - i.e. Running, Cycling <br> Excellent - i.e. Competitive" data-html="true" data-icon="fa-universal-access">Fitness: Average (Quad Biking)</a></p>
+										<p class="desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+									</div>
+									<div>
+										<div class="revi">
+											<h3>Reviews:</h3>
+											<blockquote><a href="#">“Enjoyable way to spend an hour”</a></blockquote>
+											<blockquote><a href="#">“A really amazing site for future generations”</a></blockquote>
+										</div>
+									</div>
+								</section>
+								<button class="btn btn-default btn-block" data-icon="fa-angle-double-down">load all 12 activities <i class="fa fa-angle-double-down"></i></button>
+							</div>
+						</div>
+					</section>
+					<section role="tabpanel" class="tab-pane" id="Gallery">
+						<h2 class="tab-head">Gallery</h2>
+						<div class="row">
+							<div class="col-xs-6 col-sm-3">
+								<figure><a href="#" class="fancy-images" rel="gallery" title="Picture title"><img src="images/sample1.jpg"></a></figure>
+								<h3 class="tab-head">Picture title</h3>
+							</div>
+							<div class="col-xs-6 col-sm-3">
+								<figure><a href="#" class="fancy-images" rel="gallery" title="Picture title"><img src="images/sample1.jpg"></a></figure>
+								<h3 class="tab-head">Picture title</h3>
+							</div>
+							<div class="col-xs-6 col-sm-3">
+								<figure><a href="#" class="fancy-images" rel="gallery" title="Picture title"><img src="images/sample1.jpg"></a></figure>
+								<h3 class="tab-head">Picture title</h3>
+							</div>
+							<div class="col-xs-6 col-sm-3">
+								<figure><a href="#" class="fancy-images" rel="gallery" title="Picture title"><img src="images/sample1.jpg"></a></figure>
+								<h3 class="tab-head">Picture title</h3>
+							</div>
+						</div>
+						<h2 class="tab-head">Submitted Photos (via reviews)</h2>
+						<div class="row">
+							<div class="col-xs-6 col-sm-3">
+								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
+							</div>
+							<div class="col-xs-6 col-sm-3">
+								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
+							</div>
+							<div class="col-xs-6 col-sm-3">
+								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
+							</div>
+						</div>
+					</section>
+				</div>
+				<!--tabs-->
+				
+				<!--tabs-->
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#Reviews" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-star-o">Reviews <span class="badge">8</span></a></li>
+					<li role="presentation"><a href="#Submit-Review" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa-star">Submit Review</a></li>
+				</ul>
+				<div class="tab-content">
+				
+					<section role="tabpanel" class="tab-pane active" id="Reviews">
+						<h2 class="tab-head">Awards</h2>
+						<div class="row">
+							<div class="col-sm-6 col-md-3">
+								<div class="award"><div>
+									<div class="rating"><span></span><span></span><span class="active"></span><span></span><span></span></div>
+									<a href="#">8 Reviews</a>
+								</div></div>
+							</div>
+							<div class="col-sm-6 col-md-3">
+								<div class="award"><div>
+									<div class="split"><img src="images/han.png"></div>
+									<div class="split">Award of Excellence <span class="gold">Gold</span></div>
+								</div></div>
+							</div>
+							<div class="col-sm-6 col-md-3">
+								<div class="award"><div>
+									<div class="split"><img src="images/ntb.png"></div>
+									<div class="split">Award of Excellence <span class="gold">Gold</span></div>
+								</div></div>
+							</div>
+							<div class="col-sm-6 col-md-3">
+								<div class="award"><div>
+									<div class="split"><img src="images/fnb.png"></div>
+									<div class="split">Rated <span>Excellent</span></div>
+								</div></div>
+							</div>
+						</div>
+						
+						<h2 class="tab-head">Reviews</h2>
+						<div class="row review-item">
+							<div class="col-xs-3 col-sm-2 col-md-1">
+								<figure><a href="#"><img src="images/profile-pic.jpg"></a></figure>
+							</div>
+							<div class="col-sm-10 col-md-5">
+								<blockquote>
+									<div class="rating"><span></span><span></span><span></span><span></span><span class="active"></span></div>
+									<header><strong>An amazing experience</strong></header>
+									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+									<footer>Carl-Heinz Benseler <span>2 years ago</span></footer>
+								</blockquote>
+							</div>
+							<div class="col-xs-4 col-sm-4 col-md-2">
+								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
+							</div>
+							<div class="col-xs-4 col-sm-4 col-md-2">
+								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
+							</div>
+							<div class="col-xs-4 col-sm-4 col-md-2">
+								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
+							</div>
+						</div>
+						<div class="row review-item">
+							<div class="col-xs-3 col-sm-2 col-md-1">
+								<figure><a href="#"><img src="images/profile-pic.jpg"></a></figure>
+							</div>
+							<div class="col-sm-10 col-md-5">
+								<blockquote>
+									<div class="rating"><span></span><span></span><span></span><span></span><span class="active"></span></div>
+									<header><strong>An amazing experience</strong></header>
+									<p>Liebes Pasjona-TeamWir versuchen gerade nach den vielen tollen Eindrücken und Erlebnissen wieder in Deutschland anzukommen. Die Reise war perfekt. Der Ablauf und die Unterkünfte waren ein jeder auf Ihre Art interessant und schön. Nach dem Camp in Tsauchab River hat Herr Schatz zu mir gesagt: "Einen so schönen Platz werden wir nicht mehr bekommen." Ich glaube im Camp Gecko haben wir das wieder gedacht. Wir erlebte die Reise insgesamt als abwechslungsreich und spannend und somit als sehr kurzweilig, so sind die 3 Wochen leider wie im Flug an uns vorbeigezogen. Für mich war die "Little 5 Dessert Tour" mit Chris das Highlight. Ansonsten war Swakopmund vom Ort her nicht so prickelnd, aber als Wendepunkt der Reise (von Flora zur Fauna) sehr gut geeignet. Vielen Dank für Ihre Organisation der Reise und weiterhin viel Erfolg. Wenn Sie mal wieder auf einer Messeveranstaltung in München präsentieren, informieren Sie uns bitte. Vielleicht gibt es ja die Möglichkeit, dass wir uns mal persönlich kennen lernen.Herzliche Grüsse vonWolfgang, Tina, Mirjam und Hanna Huber</p>
+									<footer>Carl-Heinz Benseler <span>2 years ago</span></footer>
+								</blockquote>
+							</div>
+							<div class="col-xs-4 col-sm-4 col-md-2">
+								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
+							</div>
+							<div class="col-xs-4 col-sm-4 col-md-2">
+								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
+							</div>
+							<div class="col-xs-4 col-sm-4 col-md-2">
+								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
+							</div>
+						</div>
+					</section>
+					
+					<section role="tabpanel" class="tab-pane" id="Submit-Review">
+						<h2 class="tab-head">Submit Review</h2>
+						<!--<p><strong data-icon="fa-info-circle">Leaving a Review:</strong> Please note that you will only receive your <strong>3x MyNa points</strong> once this your has been authorised! Reviews are authorised according a real experience only! We reserve the rights to block your profile once we find that you are misusing / exploiting this process!</p>-->
+						<!--<p><strong data-icon="fa-info-circle">Example Review:</strong> <em>"My family and I stayed at the guesthouse in July for 3 days and the service we received was fantastic. The guest house facilities where cleaned daily and the food served was great aswell. Will be back."</em></p>-->
+						<div class="row">
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Service <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Value for money	<div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Sleep Quality <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Cleanliness <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Location <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Rooms <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Food &amp; Beverage <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Facilities <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+						</div>
+						<form>
+							<div class="row">
+								<div class="col-sm-12 col-md-6">
+									<label>Share your experience in a couple of words</label>
+									<textarea class="form-control" rows="5"></textarea>
+									<label for="EmailAddress">Security</label>
+									<!--ROBOT CAPTCHA!!!-->
+									<button type="submit" class="btn btn-primary btn-block" data-icon="fa-envelope-o">Send</button>
+								</div>
+								<div class="col-sm-12 col-md-6">
+									<label data-icon="fa-exclamation-triangle">Make sure your review will be approved</label>
+									<div class="well well-sm">
+										<ul>
+											<li>be clear & concise</li>
+											<li>if you had a bad experience, try to offer constructive suggestions – remember everyone has a bad day</li>
+											<li>refrain from using peoples names</li>
+											<li>refrain from swearing</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</form>
+						<p class="tab-head">Submit 3 Photos</p>
+						<div class="row">
+							<div class="col-sm-4 col-md-3">
+								<figure>
+									<a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a>
+									<div class="more">
+										<p><button class="btn btn-default" data-icon="fa-trash"></button><button class="btn btn-default" data-icon="fa-crop"></button></p>
+									</div>
+								</figure>
+							</div>
+							<div class="col-sm-4 col-md-3">
+								<figure>
+									<a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a>
+									<div class="more">
+										<p><button class="btn btn-default" data-icon="fa-trash"></button><button class="btn btn-default" data-icon="fa-crop"></button></p>
+									</div>
+								</figure>
+							</div>
+							<div class="col-sm-4 col-md-3">
+								<figure>
+									<a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a>
+									<div class="more">
+										<p><button class="btn btn-default" data-icon="fa-trash"></button><button class="btn btn-default" data-icon="fa-crop"></button></p>
+									</div>
+								</figure>
+							</div>
+						</div>
+					</section>
+					
+				</div>
+				<!--tabs-->
+
 
 	    	</section>	
 
