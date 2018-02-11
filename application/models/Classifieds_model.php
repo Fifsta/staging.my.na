@@ -312,14 +312,18 @@ class Classifieds_model extends CI_Model{
 					}
 					
 				}
+
+				$social = '<span class="pull-right" style="margin-top:0px">
+							<a onClick="' . $fb . '" class="facebook"></a>
+							' . anchor_popup('https://twitter.com/share?url=' . trim($tweet_url), ' ', $tweet) . '
+						   </span>';
+
+				$social = '';		   
 				
 				$o .= '<div>
 						<figure>
 							<div class="product_ribbon_sml"><small style="color:#ff9900">'.$row->cat_name.' &nbsp;</small>'.date('jS \of F Y',strtotime($row->listing_date)).'<span></span></div>
-							<span class="pull-right" style="margin-top:0px">
-							<a onClick="' . $fb . '" class="facebook"></a>
-							' . anchor_popup('https://twitter.com/share?url=' . trim($tweet_url), ' ', $tweet) . '
-							</span>
+							'.$social.'
 							<div style="margin-top:80px">
 								<h2 class="font-weight-bold">'.$row->title.'</h2>
 							</div>

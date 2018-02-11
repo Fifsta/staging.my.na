@@ -1,7 +1,6 @@
 <section id="classifieds">
 	<div class="heading" style="margin-bottom:10px">
 		<h2 data-icon="fa-newspaper-o">Latest <strong>Classifieds</strong></h2>
-		<p>Browse all latest classified listings here</p>
 		<ul class="options">
 			<li><a href="#" data-icon="fa fa-edit text-dark">List my own</a></li>
 			<li><a href="#" data-icon="fa fa-bullhorn text-dark">Alert me</a></li>
