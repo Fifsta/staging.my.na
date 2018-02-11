@@ -1651,7 +1651,7 @@ class Search_model extends CI_Model{
 			
 		}else{
 			
-			$arr = '<a class="pull-right clearfix" href="'.site_url('/') . 'b/'. $id .'/reviews/" style="margin-top:20px"><span class="badge badge-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</span></a>';
+			$arr = '<a class="clearfix" href="'.site_url('/') . 'b/'. $id .'/reviews/" style="margin-top:20px"><div class="badge badge-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</div></a>';
 			return $arr;
 			
 		}
