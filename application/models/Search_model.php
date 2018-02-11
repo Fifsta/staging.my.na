@@ -1266,17 +1266,6 @@ class Search_model extends CI_Model{
 		                  '.$sponsor.'
 		                  <p class="addr" data-icon="fa-map-marker text-dark">'. $address .'</p>
 		                  <p class="desc">'.$this->shorten_string($des, 35).'</p>
-		                  <div class="asso">
-		                    <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/han.png"></a>
-		                    <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/ntb.png"></a>
-		                  </div>
-		                </div>
-		                <div>
-		                  <div class="revi">
-		                    <h3>Reviews:</h3>
-		                    <blockquote><a href="#">“Enjoyable way to spend an hour”</a></blockquote>
-		                    <blockquote><a href="#">“A really amazing site for future generations”</a></blockquote>
-		                  </div>
 		                </div>
 		              </section>
 					';

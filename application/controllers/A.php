@@ -114,7 +114,7 @@ class A extends CI_Controller {
 	public function show()
 	{
 		//Get Input
-		$limit = 3;
+		$limit = 10;
   		$offset = ($this->uri->segment(11));
   		$offsetorg = ($this->uri->segment(11));
 		//$x = $this->uri->segment(3);
