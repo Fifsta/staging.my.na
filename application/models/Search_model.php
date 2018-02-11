@@ -1257,8 +1257,7 @@ class Search_model extends CI_Model{
 		                    '.$ad.'
 		                  </figure>
 		                  <div class="rating">
-		                    <span></span><span></span><span class="active"></span><span></span><span></span>
-		                    <a class="#">8 Reviews</a>
+							'.$this->get_review_stars($row->ID, $row->STAR_RATING,$row->NO_OF_REVIEWS).'
 		                  </div>
 		                </div>
 		                <div>
@@ -1267,7 +1266,7 @@ class Search_model extends CI_Model{
 		                  <p class="addr" data-icon="fa-map-marker text-dark">'. $address .'</p>
 		                  <p class="desc">'.$this->shorten_string($des, 35).'</p>
 
-								<p>'.$this->get_review_stars($row->ID, $row->STAR_RATING,$row->NO_OF_REVIEWS).' '. $catstr.'</p>
+								<p>'. $catstr.'</p>
 
 							 	 <a class="btn btn-secondary" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View listing &raquo;</a>
 									 <a class="btn btn-secondary" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="Contact: '.$name.'"><i class="fa fa-envelope text-light"></i> Contact Us</a>
@@ -1275,7 +1274,7 @@ class Search_model extends CI_Model{
 					 			'.$temp.'
 
 
-		                  
+
 		                </div>
 		              </section>
 					';
@@ -1647,7 +1646,7 @@ class Search_model extends CI_Model{
 
             }
             $str = '<img src="'.base_url('/').'images/icons/star'.$rating.'.png">';
-			$arr = '<div style="float:right;font-size:10px;margin-bottom:0;font-style:italic;" class="card"><div class="card-body"><span class="pull-right">'. $str.'<br />Based on: <b>'.$count.'</b> reviews</span></div></div>';
+			$arr = . $str.'<br />Based on: <b>'.$count.'</b> reviews';
 			return $arr;
 			
 		}else{
