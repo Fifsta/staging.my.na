@@ -67,45 +67,48 @@ $this->load->view('inc/header', $header);
               
               <?php $this->search_model->bus_categories($query); ?>
 
-            <div id="filter" class="col-sm-12">
-              <form class="input-group input-group-lg">
-                <div class="input-group-addon">Find:</div>
-                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Pizza, Lodge, Plumbing, ... etc">
-                <div class="input-group-addon">Categories:</div>
-                <select class="selectpicker form-control" multiple data-live-search="true" data-none-selected-text="Select categories">
-                  <option>Jaccuzzi</option>
-                  <option>Study</option>
-                  <option>Library</option>
-                  <option>Jaccuzzi</option>
-                  <option>Study</option>
-                  <option>Library</option>
-                </select>
-                <div class="input-group-addon">Near:</div>
-                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Windhoek">
-                <span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search"></button></span>
-              </form>
-            </div>
+              <div id="filter" class="col-sm-12">
+                <form class="input-group input-group-lg">
+                  <div class="input-group-addon">Find:</div>
+                  <input type="text" class="form-control" id="exampleInputAmount" placeholder="Pizza, Lodge, Plumbing, ... etc">
+                  <div class="input-group-addon">Categories:</div>
+                  <select class="selectpicker form-control" multiple data-live-search="true" data-none-selected-text="Select categories">
+                    <option>Jaccuzzi</option>
+                    <option>Study</option>
+                    <option>Library</option>
+                    <option>Jaccuzzi</option>
+                    <option>Study</option>
+                    <option>Library</option>
+                  </select>
+                  <div class="input-group-addon">Near:</div>
+                  <input type="text" class="form-control" id="exampleInputAmount" placeholder="Windhoek">
+                  <span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search"></button></span>
+                </form>
+              </div>
 
-            <div class="results-head col-sm-12">
-              <span><strong>105</strong> Results</span>
-              Sort by:
-              <button class="btn btn-default btn-sm">Alphabet <i class="fa fa-sort"></i></button>
-              <button class="btn btn-default btn-sm">Rating <i class="fa fa-sort"></i></button>
-            </div>
+              <div class="results-head col-sm-12">
+                <span><strong>105</strong> Results</span>
+                Sort by:
+                <div class="btn-group" data-toggle="buttons-radio">
+                  <button type="button" id="sort_desc" class="btn btn-dark <?php if($sortby == 'DESC'){ echo ' active';}?>"><i class="fa fa-arrow-up text-light"></i> Z - A</button>
+                  <button type="button" id="sort_asc" class="btn btn-dark <?php if($sortby == 'ASC'){ echo ' active';}?>"><i class="fa fa-arrow-down text-light"></i> A - Z</button>
+                  <button type="button" id="sort_rate" class="btn btn-dark <?php if($sortby == ''){ echo ' active';}?>"><i class="fa fa-star text-light"></i></button>
+                </div>
+              </div>
             
-            <div class="results-list">
-            
-              <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category); ?>
+              <div class="results-list">
               
-            </div>
-            
+                <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category); ?>
+                
+              </div>
+            </div>  
+
+        </section>  
+
             <?php 
               //LOAD PAGINATION
               if(isset($pages)){  echo $pages ;} 
-            ?>            
-          
-        
-        </section>      
+            ?>     
 
     </div>
 
