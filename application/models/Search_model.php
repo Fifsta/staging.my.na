@@ -1266,8 +1266,8 @@ class Search_model extends CI_Model{
 		                  '.$sponsor.'
 		                  <p class="addr" data-icon="fa-map-marker text-dark">'. $address .'</p>
 		                  <p class="desc">'.$this->shorten_string($des, 35).'</p>
-		                </div>
-                		<div class="row">
+
+		                   <div class="row">
 					 		<div class="col-md-12">
 								<p>'.$this->get_review_stars($row->ID, $row->STAR_RATING,$row->NO_OF_REVIEWS).' '. $catstr.'</p>
 
@@ -1278,6 +1278,8 @@ class Search_model extends CI_Model{
 
 					 		</div>
 					 	</div>
+		                </div>
+
 		              </section>
 					';
 
