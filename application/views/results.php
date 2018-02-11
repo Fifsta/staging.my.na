@@ -117,7 +117,10 @@ $this->load->view('inc/header', $header);
               
             </div>
             
-          
+            <?php 
+              //LOAD PAGINATION
+              if(isset($pages)){  echo $pages ;} 
+            ?>            
           
         
         </section>      
