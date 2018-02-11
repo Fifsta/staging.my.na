@@ -1267,8 +1267,6 @@ class Search_model extends CI_Model{
 		                  <p class="addr" data-icon="fa-map-marker text-dark">'. $address .'</p>
 		                  <p class="desc">'.$this->shorten_string($des, 35).'</p>
 
-		                   <div class="row">
-					 		<div class="col-md-12">
 								<p>'.$this->get_review_stars($row->ID, $row->STAR_RATING,$row->NO_OF_REVIEWS).' '. $catstr.'</p>
 
 							 	 <a class="btn btn-secondary" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View listing &raquo;</a>
@@ -1276,10 +1274,9 @@ class Search_model extends CI_Model{
 									 <a class="btn btn-secondary" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View full reviews for '.$name.'"><i class="fa fa-comment text-light"></i> Reviews</a>
 					 			'.$temp.'
 
-					 		</div>
-					 	</div>
-		                </div>
 
+		                  
+		                </div>
 		              </section>
 					';
 
