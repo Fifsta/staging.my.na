@@ -208,11 +208,10 @@ $this->load->view('inc/header');
 
 				<!--tabs-->
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a href="#About" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info">About</a></li>
-					<li role="presentation"><a href="#Enquiry-Form" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o">Enquiry Form</a></li>
-					<li role="presentation"><a href="#Deals" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate">Deals</a></li>
-					<li role="presentation"><a href="#Activities" aria-controls="Activities" role="tab" data-toggle="tab" data-icon="fa-bicycle">Activities</a></li>
-					<li role="presentation"><a href="#Gallery" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o">Gallery</a></li>
+					<li role="presentation" class="nav-item"><a href="#About" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info text-dark">About</a></li>
+					<li role="presentation" class="nav-item"><a href="#Enquiry-Form" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o text-dark">Enquiry Form</a></li>
+					<li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate text-dark">Deals</a></li>
+					<li role="presentation" class="nav-item"><a href="#Gallery" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o text-dark">Gallery</a></li>
 				</ul>
 				<div class="tab-content">
 					<section role="tabpanel" class="tab-pane active" id="About">
@@ -247,90 +246,38 @@ $this->load->view('inc/header');
 							</div>
 						</form>
 					</section>
-					<section role="tabpanel" class="tab-pane" id="Deals">
-						<h2 class="tab-head">Deals</h2>
-						<div class="row">
-							<div class="col-xs-6 col-sm-3">
-								<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
-								<h3 class="tab-head">Deal title</h3>
-								<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+
+						<section role="tabpanel" class="tab-pane" id="Deals">
+							<h2 class="tab-head">Deals</h2>
+							<div class="row">
+								<div class="col-xs-6 col-sm-3">
+									<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
+									<h3 class="tab-head">Deal title</h3>
+									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+								</div>
+								<div class="col-xs-6 col-sm-3">
+									<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
+									<h3 class="tab-head">Deal title</h3>
+									<p>Book a reservation and get a free car! For free!</p>
+								</div>
+								<div class="col-xs-6 col-sm-3">
+									<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
+									<h3 class="tab-head">Deal title</h3>
+									<p>Book a table with Mathew for free!</p>
+								</div>
+								<div class="col-xs-6 col-sm-3">
+									<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
+									<h3 class="tab-head">Deal title</h3>
+									<p>Just writing stuff in different lengths to see what happens</p>
+								</div>
+								<div class="col-xs-6 col-sm-3">
+									<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
+									<h3 class="tab-head">Deal title</h3>
+									<p>Just writing stuff in different lengths to see what happens</p>
+								</div>
 							</div>
-							<div class="col-xs-6 col-sm-3">
-								<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
-								<h3 class="tab-head">Deal title</h3>
-								<p>Book a reservation and get a free car! For free!</p>
-							</div>
-							<div class="col-xs-6 col-sm-3">
-								<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
-								<h3 class="tab-head">Deal title</h3>
-								<p>Book a table with Mathew for free!</p>
-							</div>
-							<div class="col-xs-6 col-sm-3">
-								<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
-								<h3 class="tab-head">Deal title</h3>
-								<p>Just writing stuff in different lengths to see what happens</p>
-							</div>
-							<div class="col-xs-6 col-sm-3">
-								<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
-								<h3 class="tab-head">Deal title</h3>
-								<p>Just writing stuff in different lengths to see what happens</p>
-							</div>
-						</div>
-					</section>
-					<section role="tabpanel" class="tab-pane" id="Activities">
-						<h2 class="tab-head">Activities</h2>
-						<div class="row">
-							<div class="col-sm-12">
-								<section class="results-item">
-									<div>
-										<figure>
-											<a href="#"><img src="images/logo-placeholder.jpg" class="img-responsive"></a>
-										</figure>
-										<div class="rating">
-											<span></span><span></span><span class="active"></span><span></span><span></span>
-											<a class="#">8 Reviews</a>
-										</div>
-									</div>
-									<div>
-										<h2><a href="#">Desert Quad Explorers</a> <a href="#" data-toggle="tooltip" title="Find out more about getting featured"><span>Featured</span></a></h2>
-										<p class="addr" data-icon="fa-map-marker"><a class="fancy-media" href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.8309378265176!2d17.08688731495913!3d-22.548004985195448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1c0b1b39455cc893%3A0xa8e7e9ba0305001a!2sIntouch+interactive+Marketing!5e0!3m2!1sen!2sna!4v1473690598478">Damaraland</a> | <a href="#" data-toggle="tooltip" title="<strong>Fitness Classes:</strong> <br> None Needed - i.e. Relaxing <br> Average - i.e.  Walking <br> Good - i.e. Hiking <br> Very Good - i.e. Running, Cycling <br> Excellent - i.e. Competitive" data-html="true" data-icon="fa-universal-access">Fitness: Average (Quad Biking)</a></p>
-										<p class="desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
-									</div>
-									<div>
-										<div class="revi">
-											<h3>Reviews:</h3>
-											<blockquote><a href="#">“Enjoyable way to spend an hour”</a></blockquote>
-											<blockquote><a href="#">“A really amazing site for future generations”</a></blockquote>
-										</div>
-									</div>
-								</section>
-								<section class="results-item">
-									<div>
-										<figure>
-											<a href="#"><img src="images/logo-placeholder.jpg" class="img-responsive"></a>
-										</figure>
-										<div class="rating">
-											<span></span><span></span><span class="active"></span><span></span><span></span>
-											<a class="#">8 Reviews</a>
-										</div>
-									</div>
-									<div>
-										<h2><a href="#">Desert Quad Explorers</a> <a href="#" data-toggle="tooltip" title="Find out more about getting featured"><span>Featured</span></a></h2>
-										<p class="addr" data-icon="fa-map-marker"><a class="fancy-media" href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.8309378265176!2d17.08688731495913!3d-22.548004985195448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1c0b1b39455cc893%3A0xa8e7e9ba0305001a!2sIntouch+interactive+Marketing!5e0!3m2!1sen!2sna!4v1473690598478">Damaraland</a> | <a href="#" data-toggle="tooltip" title="<strong>Fitness Classes:</strong> <br> None Needed - i.e. Relaxing <br> Average - i.e.  Walking <br> Good - i.e. Hiking <br> Very Good - i.e. Running, Cycling <br> Excellent - i.e. Competitive" data-html="true" data-icon="fa-universal-access">Fitness: Average (Quad Biking)</a></p>
-										<p class="desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
-									</div>
-									<div>
-										<div class="revi">
-											<h3>Reviews:</h3>
-											<blockquote><a href="#">“Enjoyable way to spend an hour”</a></blockquote>
-											<blockquote><a href="#">“A really amazing site for future generations”</a></blockquote>
-										</div>
-									</div>
-								</section>
-								<button class="btn btn-default btn-block" data-icon="fa-angle-double-down">load all 12 activities <i class="fa fa-angle-double-down"></i></button>
-							</div>
-						</div>
-					</section>
+						</section>
+
 					<section role="tabpanel" class="tab-pane" id="Gallery">
 						<h2 class="tab-head">Gallery</h2>
 						<div class="row">
@@ -369,8 +316,8 @@ $this->load->view('inc/header');
 				
 				<!--tabs-->
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a href="#Reviews" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-star-o">Reviews <span class="badge">8</span></a></li>
-					<li role="presentation"><a href="#Submit-Review" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa-star">Submit Review</a></li>
+					<li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-star-o">Reviews <span class="badge">8</span></a></li>
+					<li role="presentation" class="nav-item"><a href="#Submit-Review" class="nav-link active" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa-star">Submit Review</a></li>
 				</ul>
 				<div class="tab-content">
 				
