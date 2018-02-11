@@ -113,38 +113,7 @@ $this->load->view('inc/header', $header);
             
             <div class="results-list">
             
-              <?php //$this->search_model->show_results($query, $main_c_id, $main_category, $category); ?>
-
-            
-              <section class="results-item">
-                <div>
-                  <figure>
-                    <a href="#"><img src="images/logo-placeholder.jpg" class="img-responsive"></a>
-                  </figure>
-                  <div class="rating">
-                    <span></span><span></span><span class="active"></span><span></span><span></span>
-                    <a class="#">8 Reviews</a>
-                  </div>
-                </div>
-                <div>
-                  <h2><a href="#">AVANI Windhoek Hotel &amp; Casino</a> <a href="#" data-toggle="tooltip" title="Find out more about getting featured"><span>Featured</span></a></h2>
-                  <p class="addr" data-icon="fa-map-marker"><a class="fancy-media" href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.8309378265176!2d17.08688731495913!3d-22.548004985195448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1c0b1b39455cc893%3A0xa8e7e9ba0305001a!2sIntouch+interactive+Marketing!5e0!3m2!1sen!2sna!4v1473690598478">129 Independence Avenue, Gustav Voigts Centre</a>, <a href="#">Windhoek</a></p>
-                  <p class="desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
-                  <div class="asso">
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/han.png"></a>
-                    <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/ntb.png"></a>
-                  </div>
-                </div>
-                <div>
-                  <div class="revi">
-                    <h3>Reviews:</h3>
-                    <blockquote><a href="#">“Enjoyable way to spend an hour”</a></blockquote>
-                    <blockquote><a href="#">“A really amazing site for future generations”</a></blockquote>
-                  </div>
-                </div>
-              </section>
-              
-              <button class="btn btn-default btn-block" data-icon="fa-angle-double-down">load next 10 results <i class="fa fa-angle-double-down"></i></button>
+              <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category); ?>
               
             </div>
             
