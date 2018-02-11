@@ -1646,7 +1646,7 @@ class Search_model extends CI_Model{
 
             }
             $str = '<img src="'.base_url('/').'images/icons/star'.$rating.'.png">';
-			$arr = . $str.'<br />Based on: <b>'.$count.'</b> reviews';
+			$arr = $str.'<br />Based on: <b>'.$count.'</b> reviews';
 			return $arr;
 			
 		}else{
