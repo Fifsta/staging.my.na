@@ -351,9 +351,9 @@ Light Orange ff9900
 .sidenav{background:#fff; border-radius:4px; padding:10px; margin-bottom:40px; }
 	.profile{overflow:auto}
 	.profile .pic{width:40px; float:left; overflow:hidden; border-radius:4px; margin:5px 0}
-	.profile .name{width:50%; line-height:20px; float:left; padding:10px 5px; font-size:120%; vertical-align:top; margin:5px 0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
+	.profile .name{width:40%; line-height:20px; float:left; padding:10px 5px; font-size:120%; vertical-align:top; margin:5px 0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
 	.profile img{width:100%; display:block;}
-	.profile ul{list-style:none; padding:5px}
+	.profile ul{list-style:none; padding:5px; float:right}
 	.profile li{display:inline-block; position:relative; margin-left:5px}
 	.profile li a{width:35px; height:40px; padding:10px 0; border:1px solid #ddd; display:block; border-radius:4px; text-align:center; }
 	.profile li span{min-width:15px; line-height:15px; padding:0 2px; text-align:center; color:#fff; background:#ff9900; font-size:11px; border-radius:5px; position:absolute; top:-3px; right:-3px; z-index:1}
@@ -729,7 +729,7 @@ blockquote footer span{font-size:11px; font-weight:normal; color:#999; box-shado
 	
 	#listing .feat div{ width:50%;}
 	
-	.profile ul{text-align:center; float:none; margin-bottom:5px; clear:both}
+	.profile ul{text-align:center; float:right; margin-bottom:5px; clear:both}
 	.profile .name{font-size:100%;}
 	.weather > .icon i{width:30px; line-height:30px; font-size:20px}
 	.weather table .icon i{width:25px; line-height:25px; font-size:15px}
