@@ -1253,7 +1253,7 @@ class Search_model extends CI_Model{
 		              <section class="results-item">
 		                <div>
 		                  <figure>
-		                    <a href="#"><img class="rounded" src="'.$img_url.'" alt="'.$name.'"></a>
+		                    <a href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/"><img class="rounded" src="'.$img_url.'" alt="'.$name.'"></a>
 		                    '.$ad.'
 		                  </figure>
 		                  <div class="rating">
@@ -1261,14 +1261,14 @@ class Search_model extends CI_Model{
 		                  </div>
 		                </div>
 		                <div>
-		                  <h2><a href="#">'.$name.'</a></h2>
+		                  <h2><a href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/">'.$name.'</a></h2>
 		                  '.$sponsor.'
 		                  <p class="addr" data-icon="fa-map-marker text-dark">'. $address .'</p>
 		                  <p class="desc">'.$this->shorten_string($des, 35).'</p>
 
 								<p>'. $catstr.'</p>
 
-							 	 	 <a class="btn btn-dark btn-sm pull-right" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View Business Listing</a>
+							 	 	 <a class="btn btn-dark btn-sm" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View Business Listing</a>
 
 
 
@@ -1383,7 +1383,7 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//SHOW SIDEBAR - LOOP THROUGH CATEGORIES
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
-	function show_sidebar($query){
+	function bus_categories($query){
 			
 		//Get Main
 		$main = $this->db->query("SELECT i_tourism_category.CATEGORY_ID, COUNT(i_tourism_category.CATEGORY_ID) as num,
@@ -1402,8 +1402,9 @@ class Search_model extends CI_Model{
 			$main_id = $row->CATEGORY_TYPE_ID;
 			$main_name = $row->MAIN_CAT_NAME;
 			
+			echo '<li class="col-sm-6 col-lg-4"><a href="'.site_url('/').'a/show/'.$main_id.'/'.$this->url_encode($main_name).'/'.$id.'/">'.$main_name.' <span class="badge">12</span></a></li>';
 
-			echo '
+			/*echo '
 			  <div class="card">
 			    <div class="card-header" role="tab" id="headingOne">
 			      <h5 class="mb-0" style="font-size:14px">
@@ -1430,7 +1431,7 @@ class Search_model extends CI_Model{
 			      </div>
 			    </div>
 			  </div>
-			';
+			';*/
 	
 			
 		}
