@@ -63,7 +63,7 @@ $this->load->view('inc/header', $header);
           
 
             
-            <div class="sub well card bg-faded" style="background-color:#f5f5f5;">
+            <div class="sub well card bg-faded hide" style="background-color:#f5f5f5;">
               
               <?php $this->search_model->bus_categories($query); ?>
 
@@ -88,7 +88,7 @@ $this->load->view('inc/header', $header);
             </div> 
 
               <div class="results-head">
-                <span><strong>105</strong> Results</span>
+                <?php echo $heading;?> <small> Results: <?php echo $count;?>
                 Sort by:
                 <div class="btn-group" data-toggle="buttons-radio">
                   <button type="button" id="sort_desc" class="btn btn-dark <?php if($sortby == 'DESC'){ echo ' active';}?>"><i class="fa fa-arrow-up text-light"></i> Z - A</button>
