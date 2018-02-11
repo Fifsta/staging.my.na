@@ -1402,7 +1402,7 @@ class Search_model extends CI_Model{
 			$main_id = $row->CATEGORY_TYPE_ID;
 			$main_name = $row->MAIN_CAT_NAME;
 			
-			echo '<li class="col-sm-6 col-lg-4"><a href="'.site_url('/').'a/show/'.$main_id.'/'.$this->url_encode($main_name).'/'.$id.'/">'.$main_name.' <span class="badge">12</span></a></li>';
+			echo '<li class="col-sm-6 col-lg-4"><a href="'.site_url('/').'a/show/'.$main_id.'/'.$this->url_encode($main_name).'/">'.$main_name.' <span class="badge">12</span></a></li>';
 
 			/*echo '
 			  <div class="card">
