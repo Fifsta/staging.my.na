@@ -176,8 +176,10 @@ $this->load->view('inc/header');
 					<div class="details-left">
 						<figure>
 							<a href="#"><img src="<?php echo $img_url; ?>"></a>
-							<div style="margin-top:10px"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>
+							
 						</figure>
+
+						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>
 						 
 					</div>
 					<div class="details-right">
@@ -281,34 +283,7 @@ $this->load->view('inc/header');
 					<section role="tabpanel" class="tab-pane" id="Gallery">
 						<h2 class="tab-head">Gallery</h2>
 						<div class="row">
-							<div class="col-xs-6 col-sm-3">
-								<figure><a href="#" class="fancy-images" rel="gallery" title="Picture title"><img src="images/sample1.jpg"></a></figure>
-								<h3 class="tab-head">Picture title</h3>
-							</div>
-							<div class="col-xs-6 col-sm-3">
-								<figure><a href="#" class="fancy-images" rel="gallery" title="Picture title"><img src="images/sample1.jpg"></a></figure>
-								<h3 class="tab-head">Picture title</h3>
-							</div>
-							<div class="col-xs-6 col-sm-3">
-								<figure><a href="#" class="fancy-images" rel="gallery" title="Picture title"><img src="images/sample1.jpg"></a></figure>
-								<h3 class="tab-head">Picture title</h3>
-							</div>
-							<div class="col-xs-6 col-sm-3">
-								<figure><a href="#" class="fancy-images" rel="gallery" title="Picture title"><img src="images/sample1.jpg"></a></figure>
-								<h3 class="tab-head">Picture title</h3>
-							</div>
-						</div>
-						<h2 class="tab-head">Submitted Photos (via reviews)</h2>
-						<div class="row">
-							<div class="col-xs-6 col-sm-3">
-								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
-							</div>
-							<div class="col-xs-6 col-sm-3">
-								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
-							</div>
-							<div class="col-xs-6 col-sm-3">
-								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
-							</div>
+							<?php $this->business_model->show_gallery($bus_id);?>
 						</div>
 					</section>
 				</div>
@@ -317,7 +292,7 @@ $this->load->view('inc/header');
 				<!--tabs-->
 				<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-star-o">Reviews <span class="badge">8</span></a></li>
-					<li role="presentation" class="nav-item"><a href="#Submit-Review" class="nav-link active" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa-star">Submit Review</a></li>
+					<li role="presentation" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa-star">Submit Review</a></li>
 				</ul>
 				<div class="tab-content">
 				
@@ -526,7 +501,7 @@ $this->load->view('inc/header');
 		            nav:true
 		        },
 		        1000:{
-		            items:4,
+		            items:3,
 		            nav:true,
 		            loop:false
 		        }

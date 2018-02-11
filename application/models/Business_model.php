@@ -1574,6 +1574,15 @@ function show_all_gallery_images($bus_id)
 	
 	//Show Gallery
 	function show_gallery($bus_id){
+
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 800;
+
+		$height = 450;
       	
 		$query = $this->db->where('BUSINESS_ID',$bus_id);
 			$query = $this->db->get('u_gallery_component');
@@ -1606,11 +1615,13 @@ function show_all_gallery_images($bus_id)
 						if(strpos($img_file,'.') == 0){
 				
 							$format = '.jpg';
-							$img_str = S3_URL.'assets/business/gallery/'.$img_file . $format;
+							$img_str = 'assets/business/gallery/'.$img_file . $format;
+							$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 							
 						}else{
 							
-							$img_str =  S3_URL.'assets/business/gallery/'.$img_file;
+							$img_str = 'assets/business/gallery/'.$img_file;
+							$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 							
 						}
 						
@@ -1626,7 +1637,7 @@ function show_all_gallery_images($bus_id)
 //							</li>';
 							
 							//NO TIMBTHUMB
-							echo '<div><img src="'.$img_str.'" style="width:100%;"/></div>';
+							echo '<div><img src="'.$img_url.'" style="width:100%;" class="img-thumbnail" /></div>';
 							$x++;
 						
 					 
@@ -1722,7 +1733,7 @@ function show_all_gallery_images($bus_id)
 				$x++;
 			}
 			
-			$arr = '<div style=";font-size:10px;font-style:italic;" class=""><span class="pull-right">'. implode($arr).'<br />Based on: <b>'.$this->get_rating_count($id).'</b> reviews</span></div>';
+			$arr = '<div style=";font-size:10px;font-style:italic;text-align:center" class=""><span class="text-center">'. implode($arr).'<br />Based on: <b>'.$this->get_rating_count($id).'</b> reviews</span></div>';
 			return $arr;
 			
 		}else{
