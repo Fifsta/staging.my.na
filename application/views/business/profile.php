@@ -65,12 +65,12 @@ if($cover_img != ''){
 	if(strpos($cover_img,'.') == 0){
 
 		$format2 = '.jpg';
-		$cover_str = 'assets/business/photos/'.$cover_img . $format2.'?='.$rand;
+		$cover_str = 'assets/business/photos/'.$cover_img . $format2;
 		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
 		
 	}else{
 		
-		$cover_str =  'assets/business/photos/'.$cover_img.'?='.$rand;
+		$cover_str =  'assets/business/photos/'.$cover_img;
 		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
 		
 	}
