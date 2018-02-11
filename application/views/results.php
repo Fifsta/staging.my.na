@@ -95,20 +95,22 @@ $this->load->view('inc/header', $header);
                   <button type="button" id="sort_rate" class="btn btn-dark <?php if($sortby == ''){ echo ' active';}?>"><i class="fa fa-star text-light"></i></button>
                 </div>
               </div>
-            
-              <div class="results-list">
-              
-                <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category); ?>
-                
-              </div>
-            </div>  
+            </div> 
 
-        </section>  
+            <div class="results-list">
+            
+              <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category); ?>
+              
+            </div>
 
             <?php 
               //LOAD PAGINATION
               if(isset($pages)){  echo $pages ;} 
-            ?>     
+            ?>   
+            
+        </section>  
+
+        <div class="spacer"></div>
 
     </div>
 
