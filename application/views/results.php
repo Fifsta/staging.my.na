@@ -57,51 +57,50 @@ $this->load->view('inc/header', $header);
 
       <section id="results">
             <div class="heading">
-              <h2 data-icon="fa-folder-open-o">Accommodation</h2>
+              <h2 data-icon="fa-folder-open-o"><?php echo $heading; ?></h2>
               <p>Want to list your business here? <a href="#">Try it out for free!</a></p>
-                <a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                  Filter by Category 
+                <a class="btn btn-secondary pull-right" style="margin-top:5px" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  <i class="fa fa-folder"></i>
                 </a>
             </div>    
-            
+
             <div class="collapse" id="collapseExample">
               <div class="sub well card bg-faded" style="background-color:#f5f5f5;">
                 
                 <?php $this->search_model->bus_categories($query); ?>
 
-                <div id="filter" class="col-sm-12">
-                  <form class="input-group input-group-lg">
-                    <div class="input-group-addon">Find:</div>
-                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="Pizza, Lodge, Plumbing, ... etc">
-                    <div class="input-group-addon">Categories:</div>
-                    <select class="selectpicker form-control" multiple data-live-search="true" data-none-selected-text="Select categories">
-                      <option>Jaccuzzi</option>
-                      <option>Study</option>
-                      <option>Library</option>
-                      <option>Jaccuzzi</option>
-                      <option>Study</option>
-                      <option>Library</option>
-                    </select>
-                    <div class="input-group-addon">Near:</div>
-                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="Windhoek">
-                    <span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search"></button></span>
-                  </form>
-                </div>
               </div> 
             </div>          
 
-            
+            <div id="filter" class="col-sm-12">
+              <form class="input-group input-group-lg">
+                <div class="input-group-addon">Find:</div>
+                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Pizza, Lodge, Plumbing, ... etc">
+                <div class="input-group-addon">Categories:</div>
+                <select class="selectpicker form-control" multiple data-live-search="true" data-none-selected-text="Select categories">
+                  <option>Jaccuzzi</option>
+                  <option>Study</option>
+                  <option>Library</option>
+                  <option>Jaccuzzi</option>
+                  <option>Study</option>
+                  <option>Library</option>
+                </select>
+                <div class="input-group-addon">Near:</div>
+                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Windhoek">
+                <span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search"></button></span>
+              </form>
+            </div>      
 
 
-              <div class="results-head">
-                <?php echo $heading;?> <small> Results: <?php echo $count;?>
-                Sort by:
-                <div class="btn-group" data-toggle="buttons-radio">
-                  <button type="button" id="sort_desc" class="btn btn-dark <?php if($sortby == 'DESC'){ echo ' active';}?>"><i class="fa fa-arrow-up text-light"></i> Z - A</button>
-                  <button type="button" id="sort_asc" class="btn btn-dark <?php if($sortby == 'ASC'){ echo ' active';}?>"><i class="fa fa-arrow-down text-light"></i> A - Z</button>
-                  <button type="button" id="sort_rate" class="btn btn-dark <?php if($sortby == ''){ echo ' active';}?>"><i class="fa fa-star text-light"></i></button>
-                </div>
+            <div class="results-head">
+              <span><strong><?php echo $count;?></strong> Results</span>
+              Sort by:
+              <div class="btn-group" data-toggle="buttons-radio">
+                <button type="button" id="sort_desc" class="btn btn-dark <?php if($sortby == 'DESC'){ echo ' active';}?>"><i class="fa fa-arrow-up text-light"></i> Z - A</button>
+                <button type="button" id="sort_asc" class="btn btn-dark <?php if($sortby == 'ASC'){ echo ' active';}?>"><i class="fa fa-arrow-down text-light"></i> A - Z</button>
+                <button type="button" id="sort_rate" class="btn btn-dark <?php if($sortby == ''){ echo ' active';}?>"><i class="fa fa-star text-light"></i></button>
               </div>
+            </div>
 
 
             <div class="results-list">
