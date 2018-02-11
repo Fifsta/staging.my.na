@@ -412,7 +412,7 @@ Light Orange ff9900
 	.results-head span{float:left; padding:5px 0}
 		
 	.results-list{}
-	.results-item{width:100%; display:table; border-bottom:1px solid #ddd; margin-bottom:15px;}
+	.results-item{width:100%; display:table; border-bottom:1px solid #ddd; margin-bottom:30px;}
 	.results-item > div{display:table-cell; vertical-align:top}
 	.results-item > div:nth-child(1){width:15%; text-align:center}
 	.results-item > div:nth-child(2){padding:0 15px}

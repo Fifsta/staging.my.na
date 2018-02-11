@@ -1268,10 +1268,9 @@ class Search_model extends CI_Model{
 
 								<p>'. $catstr.'</p>
 
-							 	 <a class="btn btn-secondary btn-sm" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View listing &raquo;</a>
+							 	 	 <a class="btn btn-secondary btn-sm" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View listing &raquo;</a>
 									 <a class="btn btn-secondary btn-sm" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="Contact: '.$name.'"><i class="fa fa-envelope text-light"></i> Contact Us</a>
 									 <a class="btn btn-secondary btn-sm" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View full reviews for '.$name.'"><i class="fa fa-comment text-light"></i> Reviews</a>
-					 			'.$temp.'
 
 
 
