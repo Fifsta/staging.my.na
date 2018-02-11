@@ -1395,7 +1395,7 @@ class Search_model extends CI_Model{
 								LEFT JOIN a_tourism_category_sub as sub_table ON sub_table.CATEGORY_TYPE_ID = a_tourism_category.ID  
 								GROUP BY a_tourism_category_sub.CATEGORY_TYPE_ID ORDER BY num DESC LIMIT 30", FALSE);
 		
-		echo '<div class="accordion" id="category_acc">';
+		echo '<ul class="row">';
 			
 		foreach($main->result() as $row){
 		
@@ -1435,7 +1435,7 @@ class Search_model extends CI_Model{
 	
 			
 		}
-		echo '</div>';
+		echo '</ul>';
 			
 			
 	}

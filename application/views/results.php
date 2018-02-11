@@ -65,28 +65,8 @@ $this->load->view('inc/header', $header);
             
             <div class="sub well card bg-faded" style="background-color:#f5f5f5;">
               
-              <?php $this->search_model->bus_categoreis($query); ?>
+              <?php $this->search_model->bus_categories($query); ?>
 
-              <ul class="row">
-                <li class="col-sm-6 col-lg-4"><a href="#">Accounting <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">Business and Society <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">Cooperatives <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">Customer Service <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">E-Commerce <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">Education and Training <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">Employment <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">Human Resources <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">Information Services <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">International Business and Trade <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">Investing <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">Major Companies <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">Management <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">Marketing and Advertising <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">Opportunities <span class="badge">12</span></a></li>
-                <li class="col-sm-6 col-lg-4"><a href="#">Small Business <span class="badge">12</span></a></li>
-              </ul>
-            </div>
-          
             <div id="filter" class="col-sm-12">
               <form class="input-group input-group-lg">
                 <div class="input-group-addon">Find:</div>
