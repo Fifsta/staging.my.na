@@ -272,9 +272,18 @@
           </section>
           
         </div>
+
+
+       </section>
+
+       <section style="margin-top: 50px">
         <!--tabs-->
+        <div class="heading">
+          <h2 data-icon="fa-newspaper-o">Similar <strong>Listings</strong></h2>
+        </div>
+        <div id="similar_div">
 
-
+        </div>
        </section>
 
     </div>
@@ -296,13 +305,14 @@ $(document).ready(function(){
       message:"Your document is being created"
     });
 
-
+    window.setTimeout(load_similar, 4000);
     window.setTimeout(load_review, 3000);
     window.setTimeout(load_reviews, 2000);
+
     //window.setTimeout(load_questions, 1000);
 
 
-    $('.owl-carousel').owlCarousel({
+    $('#owl-gallery').owlCarousel({
         loop:true,
         margin:10,
         lazyLoad: true,
@@ -329,6 +339,41 @@ $(document).ready(function(){
 
 });
 
+
+function initialise_similar_owl() {
+
+    $('#similar').owlCarousel({
+        loop:false,
+        lazyLoad: true,
+        navRewind:false,
+        margin:10,
+        nav: true,
+        navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:1,
+                nav:true
+            },
+            600:{
+                items:1,
+                nav:true
+            },
+            1000:{
+                items:3,
+                nav:true,
+                loop:false
+            },
+
+            1600:{
+                items:4,
+                nav:true,
+                loop:false
+            }           
+        }
+    });
+
+}
 
 function load_review(){
     
@@ -366,6 +411,26 @@ function load_reviews(){
           .done(function( script, textStatus ) {
           
           });
+      }
+    }); 
+
+}
+
+function load_similar(){
+    
+    var cont = $('#similar_div');
+    
+    $.ajax({
+      type: 'get',
+      cache: false,
+      url: '<?php echo site_url('/').'trade/get_similar_products/'.$main_cat_id.'/'.$sub_cat_id.'/' .$product_id;?>' ,
+      success: function (data) {  
+        
+        cont.html(data);
+        cont.removeClass('loading_img');
+
+        initialise_similar_owl();
+
       }
     }); 
 

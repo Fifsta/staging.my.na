@@ -11,7 +11,7 @@ if(isset($heading)){
  $header['section'] = '';
 
 }else{
-
+ 
  $header['title'] = '';
  $header['metaD'] = '';
  $header['section'] = '';
@@ -40,97 +40,118 @@ $this->load->view('inc/header', $header);
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
 
 
   <div class="row">
 
-    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
-      
+    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-4 order-md-2 order-sm-1 order-lg-2 order-xl-4" id="sidebar">
+
+      <?php $this->load->view('inc/login'); ?>
       <?php $this->load->view('inc/weather');?>
-      
       <?php $this->load->view('inc/adverts');?>
 
     </div>
 
-    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-10 order-md-1 order-sm-2">
+    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
 
-        <section id="results" id="">
-           <div class="row">     
+      <section id="results">
+            <div class="heading">
+              <h2 data-icon="fa-folder-open-o">Accommodation</h2>
+              <p>Want to list your business here? <a href="#">Try it out for free!</a></p>
+            </div>    
+          
 
-             <div class="col-md-12">
+            
+            <div class="sub well card bg-faded" style="background-color:#f5f5f5;">
+              <p><a href="#" class="btn btn-default" data-icon="fa-angle-double-left">Go back to: Home</a></p>
+              <ul class="row">
+                <li class="col-sm-6 col-lg-4"><a href="#">Accounting <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">Business and Society <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">Cooperatives <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">Customer Service <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">E-Commerce <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">Education and Training <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">Employment <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">Human Resources <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">Information Services <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">International Business and Trade <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">Investing <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">Major Companies <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">Management <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">Marketing and Advertising <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">Opportunities <span class="badge">12</span></a></li>
+                <li class="col-sm-6 col-lg-4"><a href="#">Small Business <span class="badge">12</span></a></li>
+              </ul>
+            </div>
+          
+            <div id="filter" class="col-sm-12">
+              <form class="input-group input-group-lg">
+                <div class="input-group-addon">Find:</div>
+                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Pizza, Lodge, Plumbing, ... etc">
+                <div class="input-group-addon">Categories:</div>
+                <select class="selectpicker form-control" multiple data-live-search="true" data-none-selected-text="Select categories">
+                  <option>Jaccuzzi</option>
+                  <option>Study</option>
+                  <option>Library</option>
+                  <option>Jaccuzzi</option>
+                  <option>Study</option>
+                  <option>Library</option>
+                </select>
+                <div class="input-group-addon">Near:</div>
+                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Windhoek">
+                <span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search"></button></span>
+              </form>
+            </div>
 
-              <div class="heading">
-                <h2 data-icon="fa-newspaper-o">Find Businesses<strong> in Namibia </strong></h2>
-                <p>Browse all business listings here</p>
-                <ul class="options">
-                  <li><a href="#" data-icon="fa-edit">List my own</a></li>
-                  <li><a href="#" data-icon="fa-bullhorn">Alert me</a></li>
-                </ul>
-              </div>
+            <div class="results-head col-sm-12">
+              <span><strong>105</strong> Results</span>
+              Sort by:
+              <button class="btn btn-default btn-sm">Alphabet <i class="fa fa-sort"></i></button>
+              <button class="btn btn-default btn-sm">Rating <i class="fa fa-sort"></i></button>
+            </div>
+            
+            <div class="results-list">
+            
+              <?php //$this->search_model->show_results($query, $main_c_id, $main_category, $category); ?>
 
-              <!--<h1 class="upper text-center"> FIND <span class="na_script yellow big_icon"><?php //echo $businessT;?></span> IN <span class="na_script big_icon"><?php //echo $locationT;?></span></h1>-->
-              <div class="spacer"></div>  
-
-                <div class="container-fluid">
-                  <div class="row">
-
-                    <div class="col-md-12">
-                    <!--SEARCH/FILTER SECTION -->
-                    <?php $this->load->view('business/inc/filter'); ?>
-                    </div>
-                      
-                    <div class="col-md-6">
-                      <h1 class="upper na_script"><?php echo $heading;?> <small> Results: <?php echo $count;?></small></h1>
-                    </div>
-
-                    <div class="col-md-6 text-right">
-
-                      <div class="btn-group" data-toggle="buttons-radio">
-                        <button type="button" id="sort_desc" class="btn btn-dark <?php if($sortby == 'DESC'){ echo ' active';}?>"><i class="fa fa-arrow-up text-light"></i> Z - A</button>
-                        <button type="button" id="sort_asc" class="btn btn-dark <?php if($sortby == 'ASC'){ echo ' active';}?>"><i class="fa fa-arrow-down text-light"></i> A - Z</button>
-                        <button type="button" id="sort_rate" class="btn btn-dark <?php if($sortby == ''){ echo ' active';}?>"><i class="fa fa-star text-light"></i></button>
-                      </div>
-                    </div>
-
-                  </div><hr>
-                  <div class="row">
-
-                    <div class="col-md-4">
-                      <div class="white_box">
-                          <?php
-                          /*Refine Search
-                          Loop through categories
-                          */
-
-                          $this->search_model->show_sidebar($query);
-                          ?>
-                     </div>
-                    </div> 
-
-                    <div class="col-md-8">
-
-                      <!--SEARCH RESULT SECTION -->
-                      <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category); ?>
-
-                      
-
-                      <?php 
-                        //LOAD PAGINATION
-                        if(isset($pages)){  echo $pages ;} 
-                      ?>   
-
-                    </div>
+            
+              <section class="results-item">
+                <div>
+                  <figure>
+                    <a href="#"><img src="images/logo-placeholder.jpg" class="img-responsive"></a>
+                  </figure>
+                  <div class="rating">
+                    <span></span><span></span><span class="active"></span><span></span><span></span>
+                    <a class="#">8 Reviews</a>
                   </div>
                 </div>
-                
-                <div class="loading_img hidden" style="width:100%" id="pre_loader"></div>
-            </div> 
-
-        </div>
-        </section>
-
-        <div class="spacer"></div>
+                <div>
+                  <h2><a href="#">AVANI Windhoek Hotel &amp; Casino</a> <a href="#" data-toggle="tooltip" title="Find out more about getting featured"><span>Featured</span></a></h2>
+                  <p class="addr" data-icon="fa-map-marker"><a class="fancy-media" href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.8309378265176!2d17.08688731495913!3d-22.548004985195448!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1c0b1b39455cc893%3A0xa8e7e9ba0305001a!2sIntouch+interactive+Marketing!5e0!3m2!1sen!2sna!4v1473690598478">129 Independence Avenue, Gustav Voigts Centre</a>, <a href="#">Windhoek</a></p>
+                  <p class="desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+                  <div class="asso">
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/han.png"></a>
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/ntb.png"></a>
+                  </div>
+                </div>
+                <div>
+                  <div class="revi">
+                    <h3>Reviews:</h3>
+                    <blockquote><a href="#">“Enjoyable way to spend an hour”</a></blockquote>
+                    <blockquote><a href="#">“A really amazing site for future generations”</a></blockquote>
+                  </div>
+                </div>
+              </section>
+              
+              <button class="btn btn-default btn-block" data-icon="fa-angle-double-down">load next 10 results <i class="fa fa-angle-double-down"></i></button>
+              
+            </div>
+            
+          
+          
+        
+        </section>      
 
     </div>
 

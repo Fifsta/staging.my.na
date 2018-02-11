@@ -3707,7 +3707,7 @@ class Trade_model extends CI_Model
 		if ($images->result())
 		{
 
-			echo '<div class="owl-carousel">';
+			echo '<div class="owl-carousel" id="owl-gallery">';
 
 			foreach ($images->result() as $row)
 			{
@@ -6391,6 +6391,16 @@ class Trade_model extends CI_Model
 	public function get_similar_products($cat1, $cat2, $product_id)
 	{
 
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 360;
+		$height = 230;
+
+		$l_width = 60;
+		$l_height = 60;
+
 		//$query = $this->db->query("SELECT * FROM products JOIN product_extras ON products.product_id = product_extras.product_id WHERE  (products.sub_cat_id = '".$cat2."' OR products.main_cat_id = '".$cat1."') AND products.product_id <> (".$product_id.")  ORDER BY products.listing_date DESC LIMIT 8 ", FALSE);
 
 		$query = $this->db->query("SELECT products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
@@ -6410,24 +6420,20 @@ class Trade_model extends CI_Model
                                               AND u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND u_business_vote.REVIEW_TYPE = 'product_review'
                                         WHERE products.is_active = 'Y' AND products.status = 'live' AND  (products.sub_cat_id = '" . $cat2 . "' OR products.main_cat_id = '" . $cat1 . "') AND products.product_id <> (" . $product_id . ")
                                         GROUP BY products.product_id
-                                        ORDER BY products.listing_date DESC LIMIT 30", false);
+                                        ORDER BY products.listing_date DESC LIMIT 10", false);
 
 
 		if ($query->result())
 		{
 
 			echo '
-			<h2 class="na_script">You may also be interested in</h2>
-			<div class="row-fluid">
-					<div id="similar_nav_carousel" class="carousel slide">
-					<div class="carousel-inner">	  
+			<div class="owl-carousel" id="similar" style="margin-top:20px">	  
 			 		
 			';
 			$x2 = 0;
 			foreach ($query->result() as $row)
 			{
 
-				//get images
 				$xx = 0;
 				$img = array();
 				$img_Cycle = '';
@@ -6436,156 +6442,216 @@ class Trade_model extends CI_Model
 
 					$imgA = explode(',', $row->images);
 					$imgAa = array();
+
 					foreach ($imgA as $imgR)
 					{
 						$lazy = '';
 						if ($xx == 0)
 						{
 							$lazy = 'lazy active';
-							$img_str = CDN_URL . 'assets/products/images/' . $imgR;
-							$img[$xx] = '<li><img class="' . $lazy . ' vignette" src="' . base_url('/') . 'img/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="' .
-								base_url('/') . 'img/timbthumb.php?src=' . CDN_URL . 'assets/products/images/' . $imgR . '&w=360&h=230"/></li>';
+							$img_str = 'assets/products/images/' . $imgR;
+
+							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
+							$img[$xx] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic" src="'.$img_url.'" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a>';
 						}
 						else
 						{
 
-							$at = '<img class="vignette" alt="' . strip_tags($row->title) . '" src="' .
-								base_url('/') . 'img/timbthumb.php?src=' . CDN_URL . 'assets/products/images/' . $imgR . '&w=360&h=230"/>';
+							$at = '<img class="vignette" alt="' . strip_tags($row->title) . '" src="'.$img_url.'"/>';
 							array_push($imgAa, $at);
 
 						}
-						/*$img[$xx] = '<li><img class="'.$lazy.' vignette" src="'.base_url('/').'img/deal_place_load.gif" alt="'.strip_tags($row->title).'" data-original="'.
-										base_url('/').'img/timbthumb.php?src='. base_url('/').'assets/products/images/'.$imgR.'&w=340&h=200"/></li>';*/
 
 
 						$xx++;
 					}
 
-					$img_Cycle = '<script id="images_' . $row->product_id . '" type="text/cycle">
-								' . json_encode($imgAa) . '
-						 </script>';
-
+					$img_Cycle = '<script id="images_' . $row->product_id . '" type="text/cycle">' . json_encode($imgAa) . '</script>';
 
 				}
 				else
 				{
 
-					$img[0] = '<li><img class="lazy vignette active" src="' . base_url('/') . 'img/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="' .
-						base_url('/') . 'img/timbthumb.php?src=' . CDN_URL . 'img/product_blank.jpg&w=360&h=230" /></li>';
-					$img_str = base_url('/') . 'img/product_blank.jpg';
+
+					$img_str = 'assets/products/images/product_blank.jpg';
+
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
+					$img[0] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic" src="'.$img_url.'" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a>';
+					
 				}
 
 				//CHECK IF AGENCY PROPERTY LISTING
 				$b_logo = '';
 				if ($row->IS_ESTATE_AGENT == 'Y')
 				{
-
 					if (trim($row->BUSINESS_LOGO_IMAGE_NAME) != '')
 					{
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px;z-index:1;position:relative" src="' . base_url('/') . 'img/timbthumb.php?w=50&h=50&src=' . base_url('/') . 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME . '" alt="' . $row->BUSINESS_NAME . '" class="img-polaroid pull-right" />';
+						$img_str = 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME;
+						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right" />';
 					}
 					else
 					{
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px;z-index:1;position:relative" src="' . base_url('/') . 'img/timbthumb.php?w=50&h=50&src=' . base_url('/') . 'img/bus_blank.jpg" alt="' . $row->BUSINESS_NAME . '" class="img-polaroid pull-right" />';
+						$img_str = 'assets/business/photos/bus_blank.jpg';
+						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right" />';
 					}
-
 				}
 
 				$btn_txt = 'Buy Now';
 				if ($row->main_cat_id == 3408)
 				{
-
 					$btn_txt = 'Enquire Now';
-
 				}
+
 				//Check Price
 				//Fixed price
 				if ($row->listing_type == 'S')
 				{
 
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
-								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
-					$price = '<span style=" font-size:18px">N$</span> ' . $this->smooth_price($row->sale_price);
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">' . $btn_txt . '</a>&nbsp;
+								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
+
+					if ($row->sub_cat_id == 3410)
+					{
+						$price = 'N$ ' . $this->smooth_price($row->sale_price) . ' pm';
+					}
+					else
+					{
+						$price = 'N$ ' . $this->smooth_price($row->sale_price);
+					}
 					if ($row->por == 'Y')
 					{
 
-						$price = '<span itemprop="price"> POR</span> <span style=" font-size:14px">Price On Request</span>';
+						$price = 'POR:Price On Request';
 
 					}
 					//Auction	
 				}
-				else
+				elseif ($row->listing_type == 'A')
 				{
+
 					//$price = '<span style=" font-size:18px">N$</span> '.$this->smooth_price($row->sale_price);
 					$price = $this->get_current_bid($row->current_bid);
+
 					if ($price['str'] != 'No Bids')
 					{
-						$price = '<span style=" font-size:10px">BID</span> ' . $price['str'];
+						$price = 'BID: ' . $price['str'];
 
 					}
 					else
 					{
 						$price = $price['str'];
 					}
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">Place Bid</a>&nbsp;
-								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">Place Bid</a>&nbsp;
+								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
+
+
+					//SERVICE
+				}
+				elseif ($row->listing_type == 'C')
+				{
+
+					$btn = '';
+					$reserve = '';
+					$count = '';
+
+
+					if ($row->sub_cat_id == 3410)
+					{
+						$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div> pm';
+					}
+					else
+					{
+						$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div>';
+					}
+					if ($row->por == 'Y')
+					{
+
+						$price = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
+
+					}
+
+					$btn_txt = 'Order Now';
+
+
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">' . $btn_txt . '</a>&nbsp;
+								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
+				}
+
+				$private = '';
+				if ($row->bus_id == 0)
+				{
+
+					$private = '<span class="private" rel="tooltip" title="This item is listed Privately"><i class="icon-star"></i></span>';
 
 				}
-				$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter'
-				);
-				$tweet_url = $this->clean_url_str($row->title) . '&text=' . substr(strip_tags($row->title . ' ' . $row->description), 0, 60) . ' ' . site_url('/') . 'product/' . $row->product_id . '&via=MyNamibia';
+
 				$fb = "postToFeed(" . $row->product_id . ", '" . ucwords(trim($this->clean_url_str($row->title, " ", " "))) . "','" . trim($img_str) . "', '" . ucwords(trim($this->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->shorten_string(strip_tags($this->clean_url_str($row->description, " ", " ")), 50)))) . "', '" . site_url('/') . 'product/' . $row->product_id . '/' . trim($this->clean_url_str($row->title)) . "')";
 
+				$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter');
+				$tweet_url = 'https://twitter.com/share?url=' . site_url('/') . $this->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
 
-				if ($x2 == 0)
+
+				//LOCATION
+				$location = '';
+				if ($row->location != '')
 				{
 
-					echo '
-					  <div class="item active">
-						<div class="row-fluid">
-					   ';
+					$location = '<div itemprop="address">' . $row->location . '</div>';
+
+					if ($row->suburb != 0 && $row->suburb != '')
+					{
+						$location = '<div itemprop="address" >' . $row->location . ' / ' . $row->suburb . '</div>';
+					}
 
 				}
-				elseif ($x2 % 4 == 0)
+
+				//get REVIEWS
+				$rating = 0;
+				$total_reviews = 0;
+				if ($row->TOTAL != null)
 				{
 
-					echo '
-						</div><!--/row-fluid-->
-					  </div><!--/item-->
-					  <div class="item">
-						<div class="row-fluid">
-					   ';
+					$rating = $row->TOTAL;
+					if (isset($row->TOTAL_REVIEWS))
+					{
+						$total_reviews = $row->TOTAL_REVIEWS;
+					}
+					else
+					{
+						$total_reviews = 0;
+					}
+
 				}
-				$ribbon = $this->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
-				echo ' <div class="span3 white_box" >
-							' . $ribbon . '
+
+				$a_count = 0;
+				if (isset($advert['count']))
+				{
+					$a_count = $advert['count'];
+				}
+
+				$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
+				echo '<div>
+						<figure class="loader">
+							<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
 							<div class="slideshow-block">
-								<a href="#" class="link"></a>
-								<ul class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides="> li">
-									' . implode($img) . '
-								</ul>
-								' . $img_Cycle . '
+								<div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides>
+								' .implode($img). '
+								</div>
+								' .$img_Cycle. '
 							</div>
-							<div class="padding10">
-								   <div class="price_label">' . $price . '</div>
-									<span class="pull-right" style="margin-top:-55px">
-									<a onClick="' . $fb . '" class="facebook"></a>
-									' . anchor_popup('https://twitter.com/share?url=' . $tweet_url, ' ', $tweet) . '
-									</span>
-									<h4 class="upper na_script">' . $row->title . '</h4>
-									
-									<div class="clearfix" style="height:5px;"></div>
-									<div style="font-size:13px;margin-bottom:10px;min-height:90px;max-height:180px;overflow:hidden">' . $this->shorten_string(strip_tags($row->description), 10) .
-					$this->show_extras_short($row->extras) . $b_logo .
-					'</div>
-									<div class="clearfix"></div>
-									<p>
-										
-									' . $type_btn . '</p>
-									<div class="clearfix"></div>
-							</div>			
-					  </div>
+
+							<div>
+							
+								'. $b_logo . '
+
+							</div>
+						</figure>			
+			  		</div>
 					  ';
 
 				$x2++;
@@ -6594,43 +6660,7 @@ class Trade_model extends CI_Model
 			}
 
 
-			echo ' </div><!--/row-fluid-->
-					 </div><!--/item-->
-				   </div><!--/carousel-inner-->
-						 
-						<a class="left carousel-control" href="#similar_nav_carousel" data-slide="prev">‹</a>
-						<a class="right carousel-control" href="#similar_nav_carousel" data-slide="next">›</a>
-				</div><!--/thumb_nav_carousel-->
-			
-				<div class="clearfix" style="height:30px;"></div>
-				<script data-cfasync="false" type="text/javascript">
-						
-					$(document).ready(function(){
-						  $("img.lazy").lazyload();
-						   $("[rel=tooltip]").tooltip();
-							$(".cycle-slideshow").cycle();
-							var c = $(".cycle-slideshow").cycle("pause");
-							c.hover(function () {
-								//mouse enter - Resume the slideshow
-								$(this).cycle("resume");
-							},
-							function () {
-								//mouse leave - Pause the slideshow
-								$(this).cycle("pause");
-							});
-						  
-						  $("#similar_nav_carousel").on("slid", function(e) {
-								
-								$("img.lazy").each(function(){
-									$(this).attr("src", $(this).attr("data-original"));
-									$(this).removeClass("lazy");
-									
-								});
-
-						  });
-
-					});
-				</script>';
+			echo ' </div>';
 
 		}
 		else

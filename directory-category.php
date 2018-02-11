@@ -17,7 +17,7 @@
 
 	<!--<meta name="csrf-token" content="{{ csrf_token() }}">-->
 
-	<title>My Namibia - find • list • buy • sell</title>
+	<title>My Namibia - find • list • buy • sell</title> 
 	<meta name="description" content="My Namibia - find • list • buy • sell">
 
 	<link rel="shortcut icon" type="image/ico" href="favicon.ico">

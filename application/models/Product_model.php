@@ -715,22 +715,6 @@ class Product_model extends CI_Model{
 			}
 			$output .= '</div>';
 
-			$output .=' 
-
-				 <script type="text/javascript">
-
-					$(document).ready(function(){
-							$("img.lazy").lazyload({
-								  effect : "fadeIn"
-							  });
-
-							//PAGINATION
-							window.setTimeout(initiate_slides, 200);
-					});
-				 </script>
-
-				 ';
-
 		}
 		else
 		{
