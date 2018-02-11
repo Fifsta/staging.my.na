@@ -191,14 +191,9 @@ $this->load->view('inc/header');
                              <span itemprop="country-name">Namibia</span>
                          </div>
 						<p class="desc"><?php echo $description; ?></p>
-						<div class="cate">Categories: 
-							<a href="#">Campsite Camping and Caravan</a>
-							<a href="#">Lodge</a>
-							<a href="#">Hotel Resort and Casino</a>
-							<a href="#">Guest Farm</a>
-							<a href="#">Hotel Resort and Casino</a>
-							<a href="#">Hotel Resort and Casino</a>
-						</div>
+                         <?php 
+						 echo '<p>'. implode(' ',$cats['links']).'</p>';
+						 ?>
 						<div class="row reveal">
 							<div class="col-sm-12 col-md-6">
 								<p data-icon="fa-phone"><button class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
