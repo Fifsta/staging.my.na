@@ -33,9 +33,8 @@ $this->load->view('inc/header', $header);
 <nav id="bread">
   <div class="container">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Library</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Data</li>
+        <li class="breadcrumb-item"><a href="<?php echo site_url('/'); ?>">My.na</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><?php echo $heading; ?></li>
       </ol>
   </div>
 </nav>
@@ -59,7 +58,7 @@ $this->load->view('inc/header', $header);
             <div class="heading">
               <h2 data-icon="fa-folder-open-o"><?php echo $heading; ?></h2>
               <p>Want to list your business here? <a href="#">Try it out for free!</a></p>
-                <a class="btn btn-secondary pull-right" style="margin-top:5px" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <a class="btn btn-dark pull-right" style="margin-top:5px; margin-right:5px;" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                   <i class="fa fa-folder"></i>
                 </a>
             </div>    
