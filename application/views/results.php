@@ -64,7 +64,9 @@ $this->load->view('inc/header', $header);
 
             
             <div class="sub well card bg-faded" style="background-color:#f5f5f5;">
-              <p><a href="#" class="btn btn-default" data-icon="fa-angle-double-left">Go back to: Home</a></p>
+              
+              <?php $this->search_model->bus_categoreis($query); ?>
+
               <ul class="row">
                 <li class="col-sm-6 col-lg-4"><a href="#">Accounting <span class="badge">12</span></a></li>
                 <li class="col-sm-6 col-lg-4"><a href="#">Business and Society <span class="badge">12</span></a></li>
