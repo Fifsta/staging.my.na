@@ -59,33 +59,39 @@ $this->load->view('inc/header', $header);
             <div class="heading">
               <h2 data-icon="fa-folder-open-o">Accommodation</h2>
               <p>Want to list your business here? <a href="#">Try it out for free!</a></p>
+                <a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  Filter by Category 
+                </a>
             </div>    
-          
+            
+            <div class="collapse" id="collapseExample">
+              <div class="sub well card bg-faded" style="background-color:#f5f5f5;">
+                
+                <?php $this->search_model->bus_categories($query); ?>
+
+                <div id="filter" class="col-sm-12">
+                  <form class="input-group input-group-lg">
+                    <div class="input-group-addon">Find:</div>
+                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="Pizza, Lodge, Plumbing, ... etc">
+                    <div class="input-group-addon">Categories:</div>
+                    <select class="selectpicker form-control" multiple data-live-search="true" data-none-selected-text="Select categories">
+                      <option>Jaccuzzi</option>
+                      <option>Study</option>
+                      <option>Library</option>
+                      <option>Jaccuzzi</option>
+                      <option>Study</option>
+                      <option>Library</option>
+                    </select>
+                    <div class="input-group-addon">Near:</div>
+                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="Windhoek">
+                    <span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search"></button></span>
+                  </form>
+                </div>
+              </div> 
+            </div>          
 
             
-            <div class="sub well card bg-faded hide" style="background-color:#f5f5f5;">
-              
-              <?php $this->search_model->bus_categories($query); ?>
 
-              <div id="filter" class="col-sm-12">
-                <form class="input-group input-group-lg">
-                  <div class="input-group-addon">Find:</div>
-                  <input type="text" class="form-control" id="exampleInputAmount" placeholder="Pizza, Lodge, Plumbing, ... etc">
-                  <div class="input-group-addon">Categories:</div>
-                  <select class="selectpicker form-control" multiple data-live-search="true" data-none-selected-text="Select categories">
-                    <option>Jaccuzzi</option>
-                    <option>Study</option>
-                    <option>Library</option>
-                    <option>Jaccuzzi</option>
-                    <option>Study</option>
-                    <option>Library</option>
-                  </select>
-                  <div class="input-group-addon">Near:</div>
-                  <input type="text" class="form-control" id="exampleInputAmount" placeholder="Windhoek">
-                  <span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search"></button></span>
-                </form>
-              </div>
-            </div> 
 
               <div class="results-head">
                 <?php echo $heading;?> <small> Results: <?php echo $count;?>
