@@ -55,7 +55,9 @@ class Business extends CI_Controller {
 	//++++++++++++++++++++++++++
 	public function view($bus_id)
 	{
+		$this->load->model('image_model'); 
 
+		$this->load->library('thumborp');
 
 		//Temporary Redirect for Car publication 2017-08-29
 		if($bus_id == 9318){

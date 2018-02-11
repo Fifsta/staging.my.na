@@ -2,6 +2,11 @@
 
 
 
+$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+$width = 800;
+
+$height = 450;
+
 if(!$bus_details){ show_404(); }
 
 $name =  $bus_details['BUSINESS_NAME'];
@@ -36,17 +41,19 @@ if($img != ''){
 	if(strpos($img,'.') == 0){
 
 		$format = '.jpg';
-		$img_str = S3_URL.'assets/business/photos/'.$img . $format;
+		$img_str = 'assets/business/photos/'.$img . $format;
+		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
 		
 	}else{
 		
-		$img_str = S3_URL.'assets/business/photos/'.$img;
+		$img_str = 'assets/business/photos/'.$img;
+		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
 		
 	}
 	
 }else{
 	
-	$img_str = base_url('/').'img/timbthumb.php?w=200&h=200&src='.base_url('/').'img/bus_blank.png';	
+	$img_url =  base_url('/').'images/bus_blank.png';	
 	
 }
 
@@ -58,19 +65,26 @@ if($cover_img != ''){
 	if(strpos($cover_img,'.') == 0){
 
 		$format2 = '.jpg';
-		$cover_str = S3_URL.'assets/business/photos/'.$cover_img . $format2.'?='.$rand;
+		$cover_str = 'assets/business/photos/'.$cover_img . $format2.'?='.$rand;
+		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
 		
 	}else{
 		
-		$cover_str =  S3_URL.'assets/business/photos/'.$cover_img.'?='.$rand;
+		$cover_str =  'assets/business/photos/'.$cover_img.'?='.$rand;
+		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
 		
 	}
 	
 }else{
 	
-	$cover_str = base_url('/').'img/business_cover_blank.jpg';	
+	$cover_url = base_url('/').'images/business_cover_blank.jpg';	
 	
 }
+
+
+	
+
+
 
 $header['title'] = $name. ' - My Namibia';
 $header['metaD'] =  strip_tags(implode(' ',$cats['links'])) . ' - ' .$name. ' - a business listed on My Namibia';
@@ -109,42 +123,37 @@ $this->load->view('inc/header');
 	</div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
 
 	<div class="row">
 
-		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
-			
-			<?php $this->load->view('inc/weather'); ?>
-			
-			<?php $this->load->view('inc/adverts'); ?>
+	    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-4 order-md-2 order-sm-1 order-lg-2 order-xl-4" id="sidebar">
 
-		</div>
+	      <?php $this->load->view('inc/login'); ?>
+	      <?php $this->load->view('inc/weather');?>
+	      <?php $this->load->view('inc/adverts');?>
 
-		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 order-md-1 order-sm-2">
+	    </div>
 
-			<section id="listing">
-				
-				<div class="heading">
-					<h2 data-icon="fa-briefcase"><?php echo $name; ?></h2>
-					<ul class="options">		
-						<li><a href="#Contact-Agent" data-icon="fa-envelope text-dark">Contact Agency</a></li>
-						<li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
-						<li><a href="#Agency-Products" data-icon="fa-shopping-basket text-dark">Agency Products</a></li>
-						<li><a href="#" data-icon="fa-facebook text-dark"></a></li>
-						<li><a href="#" data-icon="fa-twitter text-dark"></a></li>
-						<li><a href="#" data-icon="fa-bookmark text-dark"></a></li>
-					</ul>
-				</div>
-			
-			
-				<button id="list-map-toggle" class="btn btn-primary" data-icon="fa-map-o"></button>
+	    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
+
+	    	<section id="listing">
+
+		        <div class="heading" style="margin-bottom:15px">
+		          <h2 data-icon="fa-briefcase"><?php echo $name; ?></h2>
+		          <ul class="options">    
+		            <li><a href="#Contact-Agent" data-icon="fa-envelope text-dark">Contact Agency</a></li>
+		            <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
+		            <li><a href="#" data-icon="fa-facebook text-dark"></a></li>
+		            <li><a href="#" data-icon="fa-twitter text-dark"></a></li>
+		            <li><a href="#" data-icon="fa-bookmark text-dark"></a></li>
+		          </ul>
+		        </div>
 
 				<!--banner-->
-				<div class="list-map">
-					<div class="list-map-left">
-						<div class="asso static-banner">
-
+		        <div class="list-map">
+		          <div class="list-map-left" style="background:#ccc; position:relative">
+		              <div class="asso static-banner">
 						<?php if($bus_details['IS_NTB_MEMBER'] == 'Y'){ ?>
 						<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/ntb.png"></a>
 						<?php } ?>
@@ -152,79 +161,59 @@ $this->load->view('inc/header');
 						<?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
 						<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/han.png"></a>
 						<?php } ?>
+		              </div>
+		              <img src="<?php echo $cover_url; ?>" class="img-fluid">
+		          </div>
+		          
+		          <div class="list-map-right" id="map_container">
+		          	<?php //$this->load->view('business/inc/business_map_inc', $bus_details);?>
+		          </div>
+		        </div>
+		        <!--banner-->
 
-						</div>
-						<img src="<?php echo $cover_str; ?>" class="img-fluid">
-					</div>
-					
-					<div class="list-map-right">
-						<?php $this->load->view('business/inc/business_map_inc', $bus_details);?>
-					</div>
-				</div>
-				<!--banner-->
-				
 				<!--details-->
 				<div class="details">
 					<div class="details-left">
 						<figure>
-							<a href="#"><img src="<?php echo $img_str; ?>"></a>
+							<a href="#"><img src="<?php echo $img_url; ?>"></a>
 						</figure>
-
 						<div class="rating">
 							<span></span><span></span><span class="active"></span><span></span><span></span>
 							<a class="#">8 Reviews</a>
 						</div>
 					</div>
-					<div class="details-right" style="background: #fff">
-
-						<div class="spacer"></div>
-							
-								
-							<button class="btn btn-dark block"><i data-icon="fa-phone"></i> <?php echo $tel; ?></button>
-						
-							<button class="btn btn-dark block"><i data-icon="fa-fax"></i> <?php echo $fax; ?></button>
-						
-							<button class="btn btn-dark block"><i data-icon="fa-tablet"></i> <?php echo $cell; ?></button>
-
-							<button class="btn btn-dark block"><i data-icon="fa-envelope"></i> <?php echo $email; ?></button>
-								
-							<hr>
-
-						 <div itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+					<div class="details-right">
+						<h2><?php echo $address ;?><a href="#" data-toggle="tooltip" title="Find out more about getting featured"><span>Featured</span></a></h2>
+						<div itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
                              <span itemprop="street-address"><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
                              <span itemprop="locality"><?php echo $city ;?></span>
                              <span itemprop="region"><?php echo $region ;?></span>
                              <span itemprop="country-name">Namibia</span>
                          </div>
-                         <hr>
-						<p><?php echo $description; ?></p>
-						<?php $this->business_model->show_gallery($bus_id);?>
-						<div class="spacer"></div>
+						<p class="desc"><?php echo $description; ?></p>
+						<div class="cate">Categories: 
+							<a href="#">Campsite Camping and Caravan</a>
+							<a href="#">Lodge</a>
+							<a href="#">Hotel Resort and Casino</a>
+							<a href="#">Guest Farm</a>
+							<a href="#">Hotel Resort and Casino</a>
+							<a href="#">Hotel Resort and Casino</a>
+						</div>
+						<div class="row reveal">
+							<div class="col-sm-12 col-md-6">
+								<p data-icon="fa-phone"><button class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
+								<p data-icon="fa-fax"><button class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>
+							</div>
+							<div class="col-sm-12 col-md-6">
+								<p data-icon="fa-tablet"><button class="btn btn-default"><!--C: -->+<?php echo $cell; ?></button></p>
+								<p data-icon="fa-globe"><a href="http://www.website.com.na" class="btn btn-default" target="_blank"><!--W: --><?php echo $email; ?></a></p>
+							</div>
+						</div>
 					</div>
 				</div>
-				<!--details-->
-					
-			</section>
+				<!--details-->		        	
 
-			<div class="row">
-				<div class="col-xl-6">
-				<!--Contact Include-->
-					<div class="tab-content">
-						
-						<?php $this->load->view('business/inc/business_reviews_inc', $bus_details);?>
-						
-					</div>	
-				</div>	
-
-				<div class="col-xl-6">
-				<!--Contact Include-->
-					<div class="tab-content">
-						
-						<?php //$this->load->view('business/inc/business_contact_inc', $bus_details);?>
-						
-					</div>	
-				</div>	
-			</div>
+	    	</section>	
 
 		</div>
 
