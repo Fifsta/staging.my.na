@@ -85,8 +85,9 @@ $this->load->view('inc/header', $header);
                   <span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search"></button></span>
                 </form>
               </div>
+            </div> 
 
-              <div class="results-head col-sm-12">
+              <div class="results-head">
                 <span><strong>105</strong> Results</span>
                 Sort by:
                 <div class="btn-group" data-toggle="buttons-radio">
@@ -95,7 +96,7 @@ $this->load->view('inc/header', $header);
                   <button type="button" id="sort_rate" class="btn btn-dark <?php if($sortby == ''){ echo ' active';}?>"><i class="fa fa-star text-light"></i></button>
                 </div>
               </div>
-            </div> 
+
 
             <div class="results-list">
             
@@ -107,7 +108,7 @@ $this->load->view('inc/header', $header);
               //LOAD PAGINATION
               if(isset($pages)){  echo $pages ;} 
             ?>   
-            
+
         </section>  
 
         <div class="spacer"></div>
