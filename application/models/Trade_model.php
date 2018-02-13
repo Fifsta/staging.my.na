@@ -7848,6 +7848,7 @@ class Trade_model extends CI_Model
 	{
 
 
+
 		if ($bus_id != 0)
 		{
 
@@ -7927,7 +7928,8 @@ class Trade_model extends CI_Model
 
 				}
 
-				//echo $agent;
+				//echo $agent; 
+
 
 			}
 			else
@@ -8002,21 +8004,28 @@ class Trade_model extends CI_Model
 			{
 
 				$res = '
-                 <div>
-                    <figure>
-                      <a href="#"><img src="' . $img_url . '" class="img-responsive"></a>
-                    </figure>
-                  </div>
-                  <div>
-                    <h2><a href="#">' . ucwords($row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME) . '</a> from <a href="#">'.$bus_name.'</a></h2>
-                    <p class="addr" data-icon="fa fa-map-marker text-dark"><a class="fancy-media" href="">'.$address.'</a></p>
-                    <p class="desc"></p>
-                    <div class="row reveal">
-                      <div class="col-sm-12 col-md-6">
-                        <p data-icon="fa fa-tablet text-dark"><button class="btn btn-default"><!--C: -->' . $row->CLIENT_CELLPHONE . '</button></p>
-                      </div>
-                    </div>
-                  </div>
+	            <h2 class="tab-head">Agent</h2>
+	            <div class="row">
+	              <div class="col-sm-12">
+	                <section class="results-item">
+	                 <div>
+	                    <figure>
+	                      <a href="#"><img src="' . $img_url . '" class="img-responsive"></a>
+	                    </figure>
+	                  </div>
+	                  <div>
+	                    <h2><a href="#">' . ucwords($row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME) . '</a> from <a href="#">'.$bus_name.'</a></h2>
+	                    <p class="addr" data-icon="fa fa-map-marker text-dark"><a class="fancy-media" href="">'.$address.'</a></p>
+	                    <p class="desc"></p>
+	                    <div class="row reveal">
+	                      <div class="col-sm-12 col-md-6">
+	                        <p data-icon="fa fa-tablet text-dark"><button class="btn btn-default"><!--C: -->' . $row->CLIENT_CELLPHONE . '</button></p>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </section>
+	              </div>
+	            </div>
 				';
 
 			}

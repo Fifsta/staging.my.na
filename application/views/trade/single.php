@@ -24,6 +24,7 @@
   $product['client_id'] = $client_id;
   $product['product_title'] = $title;
 
+  $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
 
   $name =  $BUSINESS_NAME;
   $email = $BUSINESS_EMAIL;
@@ -56,13 +57,13 @@
 
       $format = '.jpg';
       $img_str = 'assets/business/photos/'.$img . $format;
-      $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str, $crop = '');
+      $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'300','300', $crop = '');
       
       
     }else{
       
       $img_str = 'assets/business/photos/'.$img;
-      $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str, $crop = '');
+      $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'300','300', $crop = '');
       
       
     }
@@ -192,15 +193,10 @@
         </ul>
         <div class="tab-content">
           <section role="tabpanel" class="tab-pane active" id="Contact-Agent">
-            <h2 class="tab-head">Agent</h2>
-            <div class="row">
-              <div class="col-sm-12">
-                <section class="results-item">
-                  <?php $this->trade_model->show_company($bus_id, $property_agent, $sub_cat_id); ?>
-                </section>
-              </div>
-            </div>
-            <h2 class="tab-head">Contact Agent</h2>
+
+            <?php $this->trade_model->show_company($bus_id, $property_agent, $sub_cat_id); ?>
+
+            <h2 class="tab-head">Contact Agent/Seller</h2>
             <form>
               <div class="row">
                 <div class="col-sm-4">
