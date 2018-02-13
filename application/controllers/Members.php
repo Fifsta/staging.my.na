@@ -10,7 +10,7 @@ class Members extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('members_model');
+		$this->load->model('members_model');	
 		
 	}
 
@@ -19,37 +19,38 @@ class Members extends CI_Controller {
 	{
 		
 		if($id = $this->session->userdata('id')){
-			 	//REDIRECT AUTH
-				if($url = $this->input->get('redirect_url')){
 
-					
-					$d['my_na_id'] = $id;
-					$d['u_name'] = $this->session->userdata('u_name');
-					$d['u_email'] = $this->session->userdata('u_email');
-					$d['img_file'] = $this->session->userdata('img_file');
-					$d['city'] = $this->session->userdata('city');
-					$d['country'] = $this->session->userdata('country');
-					$d['points'] = $this->session->userdata('points');
-					$d['register_date'] = $this->session->userdata('register_date');
-					echo "<script>window.location.href = '".$url.'&sess='.$this->encrypt->encode(json_encode($d))."';</script>";
-					
-					//echo $url.'&sess='.$this->encrypt->encode(json_encode($d))."&url=";
-					
-					//var_dump($this->input->get());
-					die();
-				}
+		 	//REDIRECT AUTH
+			if($url = $this->input->get('redirect_url')){
+
 				
-				$data['id'] = $id;
-				$this->load->view('members/home', $data);	
+				$d['my_na_id'] = $id;
+				$d['u_name'] = $this->session->userdata('u_name');
+				$d['u_email'] = $this->session->userdata('u_email');
+				$d['img_file'] = $this->session->userdata('img_file');
+				$d['city'] = $this->session->userdata('city');
+				$d['country'] = $this->session->userdata('country');
+				$d['points'] = $this->session->userdata('points');
+				$d['register_date'] = $this->session->userdata('register_date');
+				echo "<script>window.location.href = '".$url.'&sess='.$this->encrypt->encode(json_encode($d))."';</script>";
+				
+				//echo $url.'&sess='.$this->encrypt->encode(json_encode($d))."&url=";
+				
+				//var_dump($this->input->get());
+				die();
+			}
+			
+			$data['id'] = $id;
+			$this->load->view('members/home', $data);	
 		
 		}else{
 
-				if($data['redirect'] = $this->input->get('redirect_url')){
-					 
+			if($data['redirect'] = $this->input->get('redirect_url')){
+				 
 
-				}
-				$data['error'] = 'Please login below';
-			    $this->load->view('login', $data);
+			}
+			$data['error'] = 'Please login below';
+		    $this->load->view('login', $data);
 		 }
 	}
 	
@@ -317,6 +318,8 @@ class Members extends CI_Controller {
 
 	public function register()
 	{
+
+		$this->load->model('my_na_model');
 
         $data = $this->my_na_model->get_ip_location();
 

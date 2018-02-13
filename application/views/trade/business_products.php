@@ -129,9 +129,8 @@ if($cover_img != ''){
 <nav id="bread">
 	<div class="container">
 		<ol class="breadcrumb">
-		   <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>"  itemprop="url"><span itemprop="title">My</span></a></li>
+		   <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>" itemprop="url"><span itemprop="title">My</span></a></li>
 		   <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>a/show/all/all/all/none/" itemprop="url"><span itemprop="title">Businesses</span></a> </li>
-		   <?php echo implode(' ',$cats['breadcrumb']); ?>
 		   <li class="breadcrumb-item active"><?php echo $name;?></li>
 		</ol>
 	</div>
@@ -233,7 +232,7 @@ if($cover_img != ''){
 	        <?php } ?>
 	          
 	    	<div class="spacer"></div>
-	    	
+
 	        <section id="products">
 	          
 	        <div class="heading" style="margin-bottom:15px">
@@ -327,6 +326,7 @@ if($cover_img != ''){
         window.setTimeout(initiate_rating, 100);
 
     }
+
 	function initiate_rating(){
 		
 		$.getScript("<?php echo base_url('/')?>js/jquery.rating.pack.js", function(){
@@ -334,7 +334,6 @@ if($cover_img != ''){
 		 	$("input .star").rating();
 		 
 		});
-		
 		
 	}
 

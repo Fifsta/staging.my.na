@@ -1669,7 +1669,7 @@ class Trade_model extends CI_Model
 	              ' . $this->show_extras($row->extras) . '
 	            </div>
 	            <!--watchlist/print-->
-	            <div class="text-right">
+	            <div class="text-left">
 	              <a href="javascript:void(0);" title="Print this Page" rel="tooltip" class="btn btn-dark btnPrint"><i class="fa fa-print text-light"></i></a>
 	              '.$watchlist.'
 	            </div>
@@ -1678,10 +1678,7 @@ class Trade_model extends CI_Model
 	          </div>
 	        </div>
 
-
 			';
-
-
 
 
 			/*echo '
@@ -2865,7 +2862,6 @@ class Trade_model extends CI_Model
 
 				echo '<div class="alert alert-error">' . $err . '</div>';
 
-
 			}
 
 
@@ -2901,6 +2897,8 @@ class Trade_model extends CI_Model
 					$this->db->where('watch_id', $has_row->watch_id);
 					$this->db->delete('products_watchlist');
 
+					echo 'add';
+
 				}
 				else
 				{
@@ -2909,13 +2907,15 @@ class Trade_model extends CI_Model
 					$data['product_id'] = $product_id;
 					$this->db->insert('products_watchlist', $data);
 
+					echo 'remove';
+
 				}
 			}
 		}
-
 	}
+
 	//+++++++++++++++++++++++++++
-	//ADD TO WATHCLIST  TEST
+	//ADD TO WATHCLIST TEST
 	//++++++++++++++++++++++++++	
 	function watch_list_test($product_id)
 	{
@@ -2944,13 +2944,13 @@ class Trade_model extends CI_Model
 					if ($has->result())
 					{
 
-						return '<a class="btn btn-dark" href="' . site_url('/') . 'trade/add_watchlist/' . $product_id . '" id="watch_btn" rel="tooltip" title="You are watching this item" onClick="save_watchlist"><i class="fa fa-minus text-light"></i> Watching</a>';
+						return '<a class="btn btn-dark" href="' . site_url('/') . 'trade/add_watchlist/' . $product_id . '" id="watch_btn" rel="tooltip" title="You are watching this item" onClick="save_watchlist"><i class="fa fa-times-circle text-light"></i> Watching</a>';
 
 					}
 					else
 					{
 
-						return '<a class="btn btn-dark" href="' . site_url('/') . 'trade/add_watchlist/' . $product_id . '" id="watch_btn" rel="tooltip" title="Save this item to your watchlist" onClick="save_watchlist"><i class="fa fa-plus text-light"></i> Watchlist</a>';
+						return '<a class="btn btn-dark" href="' . site_url('/') . 'trade/add_watchlist/' . $product_id . '" id="watch_btn" rel="tooltip" title="Save this item to your watchlist" onClick="save_watchlist"><i class="fa fa-plus-circle text-light"></i> Watchlist</a>';
 
 					}
 				}
@@ -2961,8 +2961,6 @@ class Trade_model extends CI_Model
 
 				}
 			}
-
-
 		}
 		else
 		{
@@ -2971,8 +2969,8 @@ class Trade_model extends CI_Model
 
 		}
 
-
 	}
+
 
 	function get_payment_instruction($product_id)
 	{

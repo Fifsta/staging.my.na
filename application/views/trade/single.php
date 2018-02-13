@@ -277,6 +277,12 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
+    $('#watch_btn').bind('click', function(e){
+        e.preventDefault();
+        save_watchlist();
+        
+    });
+
     //PRINT PAGE//
     $(".btnPrint").printPage({
       url: "<?php echo site_url('/');?>trade/print_product/"+<?php print $product_id; ?>,
@@ -317,6 +323,23 @@ $(document).ready(function(){
     });
 
 });
+
+
+function save_watchlist(){
+  
+    var btn = $('#watch_btn');
+    btn.html('Saving...');
+    $.ajax({
+      type: 'get',
+      cache: false,
+      url: '<?php echo site_url('/').'trade/add_watchlist/' .$product_id;?>' ,
+      success: function (data) {  
+        btn.html('<i class="icon-remove-circle icon-white"></i> Watching');
+        
+      }
+    }); 
+  
+}
 
 
 function initialise_similar_owl() {
@@ -425,7 +448,18 @@ function save_watchlist(){
       cache: false,
       url: '<?php echo site_url('/').'trade/add_watchlist/' .$product_id;?>' ,
       success: function (data) {  
-        btn.html('<i class="icon-remove-circle icon-white"></i> Watching');
+
+        if(data == 'add') {
+
+          btn.html('<i class="fa fa-plus-circle text-light"></i> Watchlist');
+
+        }
+
+        if(data == 'remove') {
+
+          btn.html('<i class="fa fa-times-circle text-light"></i> Watching');
+
+        }        
         
       }
     }); 
