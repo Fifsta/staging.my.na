@@ -56,18 +56,20 @@
 
       $format = '.jpg';
       $img_str = 'assets/business/photos/'.$img . $format;
+      $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str, $crop = '');
       
       
     }else{
       
       $img_str = 'assets/business/photos/'.$img;
+      $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str, $crop = '');
       
       
     }
     
   }else{
     
-    $img_str = base_url('/').'images/bus_blank.png';  
+    $img_url = base_url('/').'images/bus_blank.png';  
     
   }
 
@@ -181,7 +183,7 @@
         <!--banner-->
 
         <!--details-->
-            <?php $this->trade_model->show_product($product_id,$img_str); ?>
+            <?php $this->trade_model->show_product($product_id,$img_url); ?>
         <!--details-->
 
         <!--tabs-->

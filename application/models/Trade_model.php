@@ -1297,16 +1297,9 @@ class Trade_model extends CI_Model
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//SHOW SINGLE PRODUCT
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
-	function show_product($product_id, $img_str)
+	function show_product($product_id, $img_url)
 	{
 
-		$this->load->model('image_model'); 
-
-		$this->load->library('thumborp');
-
-		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();		
-
-		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
 
 		//Get Main
 		$query = $this->db->query("SELECT products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
@@ -7854,6 +7847,7 @@ class Trade_model extends CI_Model
 	public function show_company($bus_id, $client_id, $sub_cat_id = 3408)
 	{
 
+
 		if ($bus_id != 0)
 		{
 
@@ -7933,8 +7927,7 @@ class Trade_model extends CI_Model
 
 				}
 
-
-				echo $agent;
+				//echo $agent;
 
 			}
 			else
