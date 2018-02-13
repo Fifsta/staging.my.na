@@ -30,7 +30,7 @@ class Trade_model extends CI_Model
 		if ($status == 'sold')
 		{
 
-			$str = '<div class="product_ribbon' . $size . '"><small>Not Available</small>ITEM HAS SOLD<span></span></div>';
+			$str = '<span>ITEM SOLD</span>';
 			return $str;
 
 		}
@@ -59,7 +59,7 @@ class Trade_model extends CI_Model
 				if ($intervalE->days > 0)
 				{
 
-					$str = '<div class="badge' . $size . '"><small>Ends in ' . $intervalE->days . ' days</small> START BIDDING NOW<span></span></div>';
+					$str = '<span>Ends in ' . $intervalE->days . ' days - START BIDDING NOW</span>';
 
 					return $str;
 
@@ -102,7 +102,7 @@ class Trade_model extends CI_Model
 				if (array_key_exists("sole_mandate", $arr) && $featured == 'Y')
 				{
 
-					$str = '<div class="badge' . $size . '"><small class="clearfix">&nbsp;</small> FEATURED SOLE MANDATE<span></span></div>';
+					$str = '<span>FEATURED SOLE MANDATE</span>';
 
 					return $str;
 
@@ -111,7 +111,7 @@ class Trade_model extends CI_Model
 				elseif (array_key_exists("sole_mandate", $arr))
 				{
 
-					$str = '<div class="badge' . $size . '"><small class="clearfix">&nbsp;</small> SOLE MANDATE<span></span></div>';
+					$str = '<span>SOLE MANDATE</span>';
 
 					return $str;
 
@@ -124,7 +124,7 @@ class Trade_model extends CI_Model
 				if ($featured == 'Y')
 				{
 
-					$str = '<div class="badge' . $size . '"><small  class="clearfix">&nbsp;</small> FEATURED<span></span></div>';
+					$str = '<span>FEATURED</span>';
 
 					return $str;
 
@@ -150,7 +150,7 @@ class Trade_model extends CI_Model
 			if ($intervalL->days < 2)
 			{
 
-				$str = '<div class="badge' . $size . '"><small>' . $this->time_passed(strtotime($listing_date)) . '</small> LISTED TODAY<span></span></div>';
+				$str = '<span>' . $this->time_passed(strtotime($listing_date)) . ' LISTED TODAY</span>';
 
 				return $str;
 				//RECENTLY LISTED
@@ -158,7 +158,7 @@ class Trade_model extends CI_Model
 			elseif ($intervalL->days < 14)
 			{
 
-				$str = '<div class="badge' . $size . '"><small>' . $this->time_passed(strtotime($listing_date)) . '</small> RECENTLY LISTED<span></span></div>';
+				$str = '<span>' . $this->time_passed(strtotime($listing_date)) . ' RECENTLY LISTED</span>';
 
 				return $str;
 
