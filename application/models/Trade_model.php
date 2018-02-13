@@ -7928,7 +7928,7 @@ class Trade_model extends CI_Model
 
 				}
 
-				//echo $agent; 
+				echo $agent; 
 
 
 			}

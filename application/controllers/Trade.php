@@ -567,8 +567,6 @@ class Trade extends CI_Controller {
 
 		$this->load->library('thumborp');
 
-		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-
 		$output = '';
 
 		//redirect SEO friendly url
