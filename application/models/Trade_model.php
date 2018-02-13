@@ -1300,6 +1300,14 @@ class Trade_model extends CI_Model
 	function show_product($product_id, $img_str)
 	{
 
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();		
+
+		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
+
 		//Get Main
 		$query = $this->db->query("SELECT products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
                                         u_business.IS_ESTATE_AGENT, u_business.BUSINESS_NAME, u_business.BUSINESS_LOGO_IMAGE_NAME,group_concat(product_images.img_file) as images,
@@ -1653,14 +1661,15 @@ class Trade_model extends CI_Model
 	        <div class="details">
 	          <div class="details-left">
 	            <figure>
-	              <a href="#"><img src="'.$img_str.'"></a>
+	              <a href="#"><img src="'.$img_url.'"></a>
 	            </figure>
 	            <div class="rating">
 	              '.$this->get_review_stars_show($rating, $product_id, 0, $total_reviews).'
 	            </div>
 	          </div>
-	          <div class="details-right">			
-				<h2>' . $row->title . ' '.$ribbon.'</h2>
+	          <div class="details-right">
+	          	'.$ribbon.'			
+				<h2>' . $row->title . '</h2>
 	            <p class="cost"><span itemprop="offers" itemscope itemtype="http://schema.org/Offer">' . $price['str'] . '</span></p>
 	            <p class="desc"><span itemprop="description">' . $row->description . '</span></p>
 	            <div class="feat" itemprop="description">
@@ -7049,7 +7058,7 @@ class Trade_model extends CI_Model
 		else
 		{
 
-			$arr = '<p class="clearfix"><a class="text-center clearfix"><div class="badge badge-warning block" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</div></a></p>';
+			$arr = '<div style="text-align:center; font-size:10px">No reviews yet. Be the first</div></a></p>';
 
 			return $arr;
 

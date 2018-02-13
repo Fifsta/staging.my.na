@@ -399,7 +399,6 @@ class Product_model extends CI_Model{
 	public function get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $offset = 0, $title = '', $amt = '', $limit = 4,$q = '',$location = 0,$suburb = 0)
 	{
 
-
 		$this->load->model('image_model'); 
 
 		$this->load->library('thumborp');

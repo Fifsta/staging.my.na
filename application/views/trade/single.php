@@ -18,7 +18,7 @@
 	 
  }
  
-  
+
   $product['product_id'] = $product_id;
   $product['bus_id'] = $bus_id;
   $product['client_id'] = $client_id;
@@ -55,11 +55,13 @@
     if(strpos($img,'.') == 0){
 
       $format = '.jpg';
-      $img_str = S3_URL.'assets/business/photos/'.$img . $format;
+      $img_str = 'assets/business/photos/'.$img . $format;
+      
       
     }else{
       
-      $img_str = S3_URL.'assets/business/photos/'.$img;
+      $img_str = 'assets/business/photos/'.$img;
+      
       
     }
     
