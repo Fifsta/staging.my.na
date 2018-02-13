@@ -1,4 +1,5 @@
 <?php 
+
  //+++++++++++++++++
  //LOAD HEADER
  //Prepare Variables array to pass into header
@@ -165,8 +166,8 @@
         <div class="list-map">
           <div class="list-map-left" style="background:#ccc; position:relative">
               <div class="asso static-banner">
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/han.png"></a>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/ntb.png"></a>
+                <!--<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/han.png"></a>
+                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/ntb.png"></a>-->
               </div>
               <?php echo $this->trade_model->show_images($product_id);?>
           </div>
@@ -178,28 +179,7 @@
         <!--banner-->
 
         <!--details-->
-        <div class="details">
-          <div class="details-left">
-            <figure>
-              <a href="#"><img src="<?php echo $img_str; ?>"></a>
-            </figure>
-            <div class="rating">
-              <span></span><span></span><span class="active"></span><span></span><span></span>
-              <a class="#">8 Reviews</a>
-            </div>
-          </div>
-          <div class="details-right">
-            <?php $this->trade_model->show_product($product_id); ?>
-
-            <!--watchlist/print-->
-            <div class="text-right">
-              <a href="javascript:void(0);" title="Print this Page" rel="tooltip" class="btn btn-dark btnPrint"><i class="fa fa-print text-light"></i></a>
-              <?php $this->trade_model->watch_list_test($product_id);?>
-            </div>
-            <!--watchlist/print-->
-
-          </div>
-        </div>
+            <?php $this->trade_model->show_product($product_id,$img_str); ?>
         <!--details-->
 
         <!--tabs-->

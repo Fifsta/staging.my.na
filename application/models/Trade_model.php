@@ -1297,7 +1297,7 @@ class Trade_model extends CI_Model
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//SHOW SINGLE PRODUCT
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
-	function show_product($product_id)
+	function show_product($product_id, $img_str)
 	{
 
 		//Get Main
@@ -1644,14 +1644,39 @@ class Trade_model extends CI_Model
 			$buy_now_btn = "<a href='javascript:void(0)' id='buy_now_btn_do'  class='btn btn-large btn-block btn-inverse'>Yes Buy Now</a>";
 			$bid_btn = "<a href='javascript:void(0)' id='bid_btn_do'  class='btn btn-large btn-block btn-inverse'>Yes Place My Bid</a>";
 
+			$watchlist = $this->watch_list_test($product_id);
+
+			$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
 
 			echo '
-			<h2>' . $row->title . ' <span>Listed 3 days ago</span><a href="#" data-toggle="tooltip" title="Find out more about getting featured"><span>Featured</span></a></h2>
-            <p class="cost"><span itemprop="offers" itemscope itemtype="http://schema.org/Offer">' . $price['str'] . '</span></p>
-            <p class="desc"><span itemprop="description">' . $row->description . '</span></p>
-            <div class="feat" itemprop="description">
-              ' . $this->show_extras($row->extras) . '
-            </div>
+
+	        <div class="details">
+	          <div class="details-left">
+	            <figure>
+	              <a href="#"><img src="'.$img_str.'"></a>
+	            </figure>
+	            <div class="rating">
+	              '.$this->get_review_stars_show($rating, $product_id, 0, $total_reviews).'
+	            </div>
+	          </div>
+	          <div class="details-right">			
+				<h2>' . $row->title . ' '.$ribbon.'</h2>
+	            <p class="cost"><span itemprop="offers" itemscope itemtype="http://schema.org/Offer">' . $price['str'] . '</span></p>
+	            <p class="desc"><span itemprop="description">' . $row->description . '</span></p>
+	            <div class="feat" itemprop="description">
+	              ' . $this->show_extras($row->extras) . '
+	            </div>
+	            <!--watchlist/print-->
+	            <div class="text-right">
+	              <a href="javascript:void(0);" title="Print this Page" rel="tooltip" class="btn btn-dark btnPrint"><i class="fa fa-print text-light"></i></a>
+	              '.$watchlist.'
+	            </div>
+	            <!--watchlist/print-->
+
+	          </div>
+	        </div>
+
+
 			';
 
 
@@ -2917,20 +2942,20 @@ class Trade_model extends CI_Model
 					if ($has->result())
 					{
 
-						echo '<a class="btn btn-dark" href="' . site_url('/') . 'trade/add_watchlist/' . $product_id . '" id="watch_btn" rel="tooltip" title="You are watching this item" onClick="save_watchlist"><i class="fa fa-minus text-light"></i> Watching</a>';
+						return '<a class="btn btn-dark" href="' . site_url('/') . 'trade/add_watchlist/' . $product_id . '" id="watch_btn" rel="tooltip" title="You are watching this item" onClick="save_watchlist"><i class="fa fa-minus text-light"></i> Watching</a>';
 
 					}
 					else
 					{
 
-						echo '<a class="btn btn-dark" href="' . site_url('/') . 'trade/add_watchlist/' . $product_id . '" id="watch_btn" rel="tooltip" title="Save this item to your watchlist" onClick="save_watchlist"><i class="fa fa-plus text-light"></i> Watchlist</a>';
+						return '<a class="btn btn-dark" href="' . site_url('/') . 'trade/add_watchlist/' . $product_id . '" id="watch_btn" rel="tooltip" title="Save this item to your watchlist" onClick="save_watchlist"><i class="fa fa-plus text-light"></i> Watchlist</a>';
 
 					}
 				}
 				else
 				{
 
-					echo '<a class="btn btn-dark" rel="tooltip" title="This is your item" ><i class="fa fa-plus text-light"></i> Watchlist</a>';
+					return '<a class="btn btn-dark" rel="tooltip" title="This is your item" ><i class="fa fa-plus text-light"></i> Watchlist</a>';
 
 				}
 			}
@@ -2940,7 +2965,7 @@ class Trade_model extends CI_Model
 		else
 		{
 
-			echo '<a class="btn btn-dark" href="' . site_url('/') . 'members/register/" rel="tooltip" title="Add to Watchlist" ><i class="fa fa-plus text-light"></i> Watchlist</a>';
+			return '<a class="btn btn-dark" href="' . site_url('/') . 'members/register/" rel="tooltip" title="Add to Watchlist" ><i class="fa fa-plus text-light"></i> Watchlist</a>';
 
 		}
 
@@ -7024,7 +7049,7 @@ class Trade_model extends CI_Model
 		else
 		{
 
-			$arr = '<p class="clearfix"><a class="pull-left clearfix"><span class="badge badge-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</span></a></p>';
+			$arr = '<p class="clearfix"><a class="text-center clearfix"><div class="badge badge-warning block" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</div></a></p>';
 
 			return $arr;
 

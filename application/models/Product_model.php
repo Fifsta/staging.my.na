@@ -603,7 +603,7 @@ class Product_model extends CI_Model{
 								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 
 
-					//SERVICE
+				//SERVICE
 				}
 				elseif ($row->listing_type == 'C')
 				{
