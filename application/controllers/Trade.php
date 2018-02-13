@@ -468,8 +468,12 @@ class Trade extends CI_Controller {
 	//++++++++++++++++++++++++++
 	public function agent( $bus_id, $agent_id, $agency, $name = '')
 	{
-		if($agent_id == '0'){
 
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+
+		if($agent_id == '0'){
 
 			$this->load->model('business_model');
 			//Temp redirect for NMH print edition

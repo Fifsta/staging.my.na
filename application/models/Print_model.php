@@ -23,6 +23,14 @@ class Print_model extends CI_Model{
 	public function show_company($bus_id, $client_id)
 	{
 		
+
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+
+
 		if($bus_id != 0){
 			
 			$this->db->where('ID', $bus_id);
@@ -41,17 +49,19 @@ class Print_model extends CI_Model{
 					if(strpos($img,'.') == 0){
 			
 						$format = '.jpg';
-						$img_str = base_url('/').'img/timbthumb.php?w=200&h=200&src='.S3_URL.'assets/business/photos/'.$img . $format;
+						$img_str = 'assets/business/photos/'.$img . $format;
+						$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'200','200', $crop = '');
 						
 					}else{
 						
-						$img_str =  base_url('/').'img/timbthumb.php?w=200&h=200&src='.S3_URL.'assets/business/photos/'.$img;
+						$img_str =  'assets/business/photos/'.$img;
+						$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'200','200', $crop = '');
 						
 					}
 					
 				}else{
 					
-					$img_str = base_url('/').'img/timbthumb.php?w=200&h=200&src='.S3_URL.'img/bus_blank.png';	
+					$img_str = base_url('/').'images/bus_blank.png';	
 					
 				}
 				//COVER IMAGE
@@ -62,11 +72,13 @@ class Print_model extends CI_Model{
 						if(strpos($cover_img,'.') == 0){
 				
 							$format2 = '.jpg';
-							$cover_str = S3_URL.'assets/business/photos/'.$cover_img . $format2;
+							$cover_str = 'assets/business/photos/'.$cover_img . $format2;
+							$cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'800','600', $crop = '');
 							
 						}else{
 							
-							$cover_str =  S3_URL.'assets/business/photos/'.$cover_img;
+							$cover_str =  'assets/business/photos/'.$cover_img;
+							$cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'800','600', $crop = '');
 							
 						}
 					
@@ -85,14 +97,14 @@ class Print_model extends CI_Model{
 				
 				echo '<table class="table" border="0">
 						<tr>
-							<td colspan="1" style="width:120px;padding:10px 0px"><img class="img-polaroid" src="'.$img_str.'" alt="'.$row->BUSINESS_NAME.'" style="width: 110px; height:110px;"></td>
+							<td colspan="1" style="width:120px;padding:10px 0px"><img class="img-polaroid" src="'.$img_url.'" alt="'.$row->BUSINESS_NAME.'" style="width: 110px; height:110px;"></td>
 							<td colspan="2" style="width:280px;"><div itemscope style="display:none;padding:0;margin:0" itemtype="http://data-vocabulary.org/Organization">
 								<span itemprop="name">'.$row->BUSINESS_NAME.'</span></div>
 								<h4>'.$row->BUSINESS_NAME.'</h4>
 								<p><span itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">'.$row->BUSINESS_PHYSICAL_ADDRESS.'</span></p>
 								<p><span itemprop="phone" itemscope itemtype="http://data-vocabulary.org/Address">'.$row->BUSINESS_TELEPHONE.'</span></p>
 							</td>
-							<td colspan="2" align="right" style="padding:10px 0px"><img class="img-polaroid" src="'.$cover_str.'" style="width:auto; height:110px;"></td>
+							<td colspan="2" align="right" style="padding:10px 0px"><img class="img-thumbnail" src="'.$cover_url.'" style="width:auto; height:110px;"></td>
 
 						</tr>
 						<tr>
@@ -121,6 +133,17 @@ class Print_model extends CI_Model{
 	//++++++++++++++++++++++++++
 	public function show_estate_agent($client_id, $bus_id, $bus_name, $val = FALSE)
 	{
+
+
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 200;
+		$height = 200;
+
+
 		$agent = $this->db->where('ID', $client_id);
 		$agent = $this->db->get('u_client');
 		$res = '';
@@ -131,18 +154,18 @@ class Print_model extends CI_Model{
 			
 			if($img_file != ''){ 
 			
-				$img = S3_URL.'assets/users/photos/'.$img_file;
+				$img_str = 'assets/users/photos/'.$img_file;
+				$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 				
 			}else{
 				
-				$img = base_url('/').'img/user_blank.jpg';
+				$img_url = 'images/user_blank.jpg';
 				
 			}
 
 				
 				
-			$res = '
-					<table class="table table-striped" border="0"  style="border:none">
+			$res = '<table class="table table-striped" border="0"  style="border:none">
 						<tr>
 							<td colspan="1"  class="text-right" style="text-align:right">
 								<h4>'.ucwords($row->CLIENT_NAME. ' ' .$row->CLIENT_SURNAME).'</h4>
@@ -150,11 +173,10 @@ class Print_model extends CI_Model{
 								<p>'.$row->CLIENT_EMAIL.'</p>
 							</td>
 							<td colspan="1" style="width:110px">
-								<img src="'.base_url('/').'img/timbthumb.php?src='.$img.'&w=100&h=100" style="width:100px;height:100px;margin-left:0px;float:right" class="img-polaroid pull-right" />
+								<img src="'.$img_url.'" style="width:100px;height:100px;margin-left:0px;float:right" class="img-thumbnail pull-right" />
 							</td>
 						</tr>
-
-					 </table>';
+					</table>';
 
 		}
 		return $res;
@@ -1040,6 +1062,16 @@ class Print_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	function show_images_print($product_id, $size, $limit){
 		
+			$this->load->model('image_model'); 
+
+			$this->load->library('thumborp');
+
+			$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+
+			$width = 400;
+			$height = 200;
+
+
 			//get images
 			$this->db->order_by('sequence', 'ASC');
 			$this->db->where('product_id', $product_id);
@@ -1068,20 +1100,29 @@ class Print_model extends CI_Model{
 						$temp = $row->edited;
 					}
 
+					$img_str = 'assets/products/images/'.$row->img_file;
+
 					if($size != ''){
 
-						$str .= '<img alt="" class="img-polaroid" src="'.base_url('/').'img/timbthumb.php?src='.S3_URL.'assets/products/images/'.$row->img_file.'&w=400&h=200&q=100'.$rand.'" style="width: 250px; height: 150px; ">';
+						$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'400','200', $crop = '');
+						$str .= '<img alt="" class="img-thumbnail" src="'.$img_url.'" style="width: 250px; height: 150px; ">';
+
 					}else{
 						//FIRST BIG SPAN
 						if($x == 0){
-							$str .= '<div><img class="img-polaroid" src="'.base_url('/').'img/timbthumb.php?src='.S3_URL.'assets/products/images/'.$row->img_file.'&w=330&h=250&q=100'.$rand.'" style="width: 330px; height: 250px; margin-right:20px"></div>';
+
+							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'330','250', $crop = '');
+							$str .= '<div><img class="img-thumbnail" src="'.$img_url.'" style="width: 330px; height: 250px; margin-right:20px"></div>';
+
 						}elseif($x % 2 == 0){
-							$str .= '<img class="img-polaroid" src="'.base_url('/').'img/timbthumb.php?src='.S3_URL.'assets/products/images/'.$row->img_file.'&w=150&h=120'.$rand.'" style="width: 150px; height: 120px; margin-top:5px;margin-right:0px"><br />
-								 ';
+
+							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'150','120', $crop = '');
+							$str .= '<img class="img-thumbnail" src="'.$img_url.'" style="width: 150px; height: 120px; margin-top:5px;margin-right:0px"><br />';
+
 						}else{
 
-							$str .= '<img class="img-polaroid" src="'.base_url('/').'img/timbthumb.php?src='.S3_URL.'assets/products/images/'.$row->img_file.'&w=150&h=120'.$rand.'" style="width: 150px; height: 120px; margin-top:5px;margin-right:16px">
-								 ';
+							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'150','120', $crop = '');
+							$str .= '<img class="img-thumbnail" src="'.$img_url.'" style="width: 150px; height: 120px; margin-top:5px;margin-right:16px">';
 
 						}
 
@@ -1095,10 +1136,10 @@ class Print_model extends CI_Model{
 			}else{
 				if($size != ''){
 
-					$str = '<img alt="" class="white_box padding2 img-polaroid" src="'.base_url('/').'img/product_blank.jpg" style="width: 250x; height: 150px; float:left;margin-right:20px">';
+					$str = '<img alt="" class="white_box padding2 img-thumbnail" src="'.base_url('/').'img/product_blank.jpg" style="width: 250x; height: 150px; float:left;margin-right:20px">';
 				}else{
 
-					$str = '<img alt="" class="white_box padding2 img-polaroid" src="'.base_url('/').'img/product_blank.jpg" style="width: 325px; height: 250px; float:left;margin-right:20px">';
+					$str = '<img alt="" class="white_box padding2 img-thumbnail" src="'.base_url('/').'img/product_blank.jpg" style="width: 325px; height: 250px; float:left;margin-right:20px">';
 				}
 
 				

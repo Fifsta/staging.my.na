@@ -1054,13 +1054,13 @@ class Trade_model extends CI_Model
 					{
 						$img_str = 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME;
 						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right" />';
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right img-thumbnail" />';
 					}
 					else
 					{
 						$img_str = 'assets/business/photos/bus_blank.jpg';
 						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right" />';
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right img-thumbnail" />';
 					}
 				}
 
@@ -6421,6 +6421,7 @@ class Trade_model extends CI_Model
 		$this->load->model('image_model'); 
 
 		$this->load->library('thumborp');
+
 		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
 		$width = 360;
 		$height = 230;
@@ -6517,13 +6518,13 @@ class Trade_model extends CI_Model
 					{
 						$img_str = 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME;
 						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right" />';
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
 					}
 					else
 					{
 						$img_str = 'assets/business/photos/bus_blank.jpg';
 						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right" />';
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
 					}
 				}
 
@@ -7924,7 +7925,7 @@ class Trade_model extends CI_Model
 				if ($row->IS_ESTATE_AGENT == 'Y' && $client_id != 0)
 				{
 
-					$agent = $this->show_estate_agent($client_id, $bus_id, $row->BUSINESS_NAME, false, $sub_cat_id, $row->BUSINESS_PHYSICAL_ADDRESS);
+					$agent = $this->show_estate_agent($client_id, $bus_id, $row->BUSINESS_NAME, false, $row->BUSINESS_PHYSICAL_ADDRESS);
 
 				}
 
@@ -7947,7 +7948,7 @@ class Trade_model extends CI_Model
 	//+++++++++++++++++++++++++++
 	//GET ESTATE AGENT
 	//++++++++++++++++++++++++++
-	public function show_estate_agent($client_id, $bus_id, $bus_name, $val = false, $sub_cat_id, $address)
+	public function show_estate_agent($client_id, $bus_id, $bus_name, $val = false, $address)
 	{
 
 		$this->load->model('image_model'); 
@@ -7959,18 +7960,17 @@ class Trade_model extends CI_Model
 		$height = 200;
 
 
-
 		$agent = $this->db->where('ID', $client_id);
 		$agent = $this->db->get('u_client');
 		$res = '';
 
-		$tstr = 'Properties';
+		/*$tstr = 'Properties';
 		if ($sub_cat_id != 3408)
 		{
 
 			$tstr = 'Products';
 
-		}
+		}*/
 
 		if ($agent->result())
 		{

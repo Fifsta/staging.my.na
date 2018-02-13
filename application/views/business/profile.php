@@ -196,12 +196,12 @@ $this->load->view('inc/header');
 						 ?>
 						<div class="row reveal">
 							<div class="col-sm-12 col-md-6">
-								<p data-icon="fa-phone"><button class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
-								<p data-icon="fa-fax"><button class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>
+								<p data-icon="fa-phone text-dark"><button class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
+								<p data-icon="fa-fax text-dark"><button class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>
 							</div>
 							<div class="col-sm-12 col-md-6">
-								<p data-icon="fa-tablet"><button class="btn btn-default"><!--C: -->+<?php echo $cell; ?></button></p>
-								<p data-icon="fa-globe"><a href="http://www.website.com.na" class="btn btn-default" target="_blank"><!--W: --><?php echo $email; ?></a></p>
+								<p data-icon="fa-tablet text-dark"><button class="btn btn-default"><!--C: --><?php echo $cell; ?></button></p>
+								<p data-icon="fa-globe text-dark"><a href="http://www.website.com.na" class="btn btn-default" target="_blank"><!--W: --><?php echo $email; ?></a></p>
 							</div>
 						</div>
 					</div>
