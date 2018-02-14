@@ -1074,7 +1074,7 @@ class Trade_model extends CI_Model
 				if ($row->listing_type == 'S')
 				{
 
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">' . $btn_txt . '</a>&nbsp;
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
 								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 
 					if ($row->sub_cat_id == 3410)
@@ -1109,7 +1109,7 @@ class Trade_model extends CI_Model
 						$price = $price['str'];
 					}
 
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">Place Bid</a>&nbsp;
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">Place Bid</a>&nbsp;
 								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 
 
@@ -1141,7 +1141,7 @@ class Trade_model extends CI_Model
 					$btn_txt = 'Order Now';
 
 
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">' . $btn_txt . '</a>&nbsp;
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
 								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 				}
 
@@ -1331,7 +1331,7 @@ class Trade_model extends CI_Model
 			$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter'
 			);
 
-			$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-lg pull-right btn-inverse">
+			$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-lg pull-right btn-dark">
 						<i class="fa-star-o text-light"></i> Grab Product
 					</a>';
 
@@ -1339,7 +1339,7 @@ class Trade_model extends CI_Model
 			if ($this->session->userdata('id'))
 			{
 
-				$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-lg pull-right btn-inverse">
+				$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-lg pull-right btn-dark">
 							<i class="fa-star-o text-light"></i> Grab Product
 						</a>';
 			}
@@ -1415,7 +1415,7 @@ class Trade_model extends CI_Model
 								  <input type="hidden" name="product_id" value="' . $product_id . '" />
 								  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
 								  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
-								  <button class="btn btn-inverse btn-lg" type="submit" disabled="disabled">' . $btn_txt . '</button>
+								  <button class="btn btn-dark btn-lg" type="submit" disabled="disabled">' . $btn_txt . '</button>
 							  </form>
 							</div>';
 
@@ -1426,7 +1426,7 @@ class Trade_model extends CI_Model
 					{
 
 						$btn = '<div class="pull-right" style="margin-top:10px;">
-									  <a href="#contact_anchor" rel="tooltip" title="Please enquire about the product" class="btn btn-inverse btn-large" >' . $btn_txt . '</a>
+									  <a href="#contact_anchor" rel="tooltip" title="Please enquire about the product" class="btn btn-dark btn-lg" >' . $btn_txt . '</a>
 								</div>';
 
 					}
@@ -1439,7 +1439,7 @@ class Trade_model extends CI_Model
 									  <input type="hidden" name="title" value="' . $row->title . '" />
 									  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
 									  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
-									  <button class="btn btn-inverse btn-lg" id="buy_now_btn" type="submit">' . $btn_txt . '</button>
+									  <button class="btn btn-dark btn-lg" id="buy_now_btn" type="submit">' . $btn_txt . '</button>
 								  </form>
 								</div>';
 					}
@@ -1488,7 +1488,7 @@ class Trade_model extends CI_Model
 								  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
 								  <input type="hidden" name="reserve" value="' . $row->reserve . '" />
 								  <input type="hidden" name="current_bid" value="' . $price['current'] . '" />
-								  <button class="btn btn-inverse btn-lg disabled" id="auction_btn1" type="submit">N$ Bid Now</button>
+								  <button class="btn btn-dark btn-lg disabled" id="auction_btn1" type="submit">N$ Bid Now</button>
 							  </form>
 							</div>';
 				}
@@ -1524,7 +1524,7 @@ class Trade_model extends CI_Model
 											  <input type="hidden" name="auto_bid" value="0" />
 											  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
 											  <input type="hidden" name="current_bid" value="' . $price['current'] . '" />
-											  <button class="btn btn-inverse btn-lg" id="auction_btn" type="submit">N$ Bid Now</button>
+											  <button class="btn btn-dark btn-lg" id="auction_btn" type="submit">N$ Bid Now</button>
 										  </form>
 										</div>
 
@@ -1538,11 +1538,11 @@ class Trade_model extends CI_Model
 											  <input type="hidden" name="auto_bid" value="1" />
 											  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
 											  <input type="hidden" name="current_bid" value="' . $price['current'] . '" />
-											  <button class="btn btn-inverse btn-lg" id="auction_btn_auto" type="submit">N$ Auto Bid</button>
+											  <button class="btn btn-dark btn-lg" id="auction_btn_auto" type="submit">N$ Auto Bid</button>
 										</div>
 									</div>
 									<div class="col-md-4">
-										<a href="javascript:void(0)" onClick="switch_auto_bid()" class="btn btn-inverse pull-right">Auto Bid</a>
+										<a href="javascript:void(0)" onClick="switch_auto_bid()" class="btn btn-dark pull-right">Auto Bid</a>
 									</div>
 								</div>
 								<div class="alert alert-block clearfix hide" id="auto_help_txt"><strong>Please Note:</strong> Auto bid will automatically place your bid until your auto bid value is met.</div>
@@ -1598,7 +1598,7 @@ class Trade_model extends CI_Model
 									  <input type="hidden" name="title" value="' . $row->title . '" />
 									  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
 									  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
-									  <button class="btn btn-inverse btn-large" id="order_now_btn" type="submit">' . $btn_txt . '</button>
+									  <button class="btn btn-dark btn-lg" id="order_now_btn" type="submit">' . $btn_txt . '</button>
 								  </form>
 								</div>';
 
@@ -1644,9 +1644,9 @@ class Trade_model extends CI_Model
 
 			}
 
-			$order_now_btn = "<a href='javascript:void(0)' id='order_now_btn_do'  class='btn btn-large btn-block btn-inverse'>Yes Order Now</a>";
-			$buy_now_btn = "<a href='javascript:void(0)' id='buy_now_btn_do'  class='btn btn-large btn-block btn-inverse'>Yes Buy Now</a>";
-			$bid_btn = "<a href='javascript:void(0)' id='bid_btn_do'  class='btn btn-large btn-block btn-inverse'>Yes Place My Bid</a>";
+			$order_now_btn = "<a href='javascript:void(0)' id='order_now_btn_do'  class='btn btn-lg btn-block btn-dark'>Yes Order Now</a>";
+			$buy_now_btn = "<a href='javascript:void(0)' id='buy_now_btn_do'  class='btn btn-lg btn-block btn-dark'>Yes Buy Now</a>";
+			$bid_btn = "<a href='javascript:void(0)' id='bid_btn_do'  class='btn btn-lg btn-block btn-dark'>Yes Place My Bid</a>";
 
 			$watchlist = $this->watch_list_test($product_id);
 
@@ -3632,7 +3632,7 @@ class Trade_model extends CI_Model
 			$data .= '
 						 ';
 
-			$btnhtml = '["<a class=' . "'btn btn-inverse pull-left clearfix'>Prev</a>" . '","<a class=' . "'btn btn-inverse pull-right clearfix'" . '>Next</a>"]';
+			$btnhtml = '["<a class=' . "'btn btn-dark pull-left clearfix'>Prev</a>" . '","<a class=' . "'btn btn-dark pull-right clearfix'" . '>Next</a>"]';
 			$data .= "<script src='" . base_url('/') . "js/owl-carousel/owl.carousel.min.js'></script>
 							<script data-cfasync='false'>
 							$(document).ready(function() {
@@ -4112,7 +4112,7 @@ class Trade_model extends CI_Model
 					<div>
 
 					  <a href="#" title="Placed on ' . date('F j, Y', strtotime($row->datetime)) . '" rel="tooltip">
-						<img src="' . $client['image'] . ' class="img-thumbnail rounded">
+						<img src="' . $client['image'] . '" class="img-thumbnail rounded">
 					  </a>
 
 					</div>
@@ -4407,9 +4407,9 @@ class Trade_model extends CI_Model
 							'
 					. $active .
 					'
-							<!--<a onclick="update_product(' . $row->product_id . ');" class="btn btn-mini btn-inverse"><i class="icon-pencil icon-white"></i></a> 
-							<a onclick="delete_product(' . $row->product_id . ');" class="btn btn-mini btn-inverse"><i class="icon-trash icon-white"></i></a>-->
-							<a href="' . site_url('/') . 'product/' . $row->product_id . '/" target="_blank" class="btn btn-mini btn-inverse"> View</a></td>
+							<!--<a onclick="update_product(' . $row->product_id . ');" class="btn btn-mini btn-dark"><i class="icon-pencil icon-white"></i></a> 
+							<a onclick="delete_product(' . $row->product_id . ');" class="btn btn-mini btn-dark"><i class="icon-trash icon-white"></i></a>-->
+							<a href="' . site_url('/') . 'product/' . $row->product_id . '/" target="_blank" class="btn btn-mini btn-dark"> View</a></td>
 					  </tr>';
 			}
 			$exit_str = "javascript:$('#modal-product-delete').modal('hide')";
@@ -4829,10 +4829,10 @@ class Trade_model extends CI_Model
 		{
 
 			$query = $this->db->query("SELECT cat_id as ID, main_cat_id, sub_cat_id, sub_sub_cat_id, sub_sub_sub_cat_id, category_name as CATEGORY_NAME FROM product_categories  WHERE sub_sub_sub_cat_id = '" . trim($cat4) . "'", false);
-			$type = '<a href="#" class="btn btn-inverse disabled"> ' . $cat1name . ' <i class="icon-chevron-right icon-white"></i></a> 
-					 <a href="#" class="btn btn-inverse disabled"> ' . $cat2name . ' <i class="icon-chevron-right icon-white"></i></a> 
-					 <a href="#" class="btn btn-inverse disabled"> ' . $cat3name . ' <i class="icon-chevron-right icon-white"></i></a>
-					 <a href="#" class="btn btn-inverse disabled">' . $cat4name . '</a>';
+			$type = '<a href="#" class="btn btn-dark disabled"> ' . $cat1name . ' <i class="icon-chevron-right icon-white"></i></a> 
+					 <a href="#" class="btn btn-dark disabled"> ' . $cat2name . ' <i class="icon-chevron-right icon-white"></i></a> 
+					 <a href="#" class="btn btn-dark disabled"> ' . $cat3name . ' <i class="icon-chevron-right icon-white"></i></a>
+					 <a href="#" class="btn btn-dark disabled">' . $cat4name . '</a>';
 
 		}
 		elseif ($cat3 > 0)
@@ -4840,9 +4840,9 @@ class Trade_model extends CI_Model
 
 			$query = $this->db->query("SELECT cat_id as ID, main_cat_id, sub_cat_id, sub_sub_cat_id, category_name as CATEGORY_NAME FROM product_categories  WHERE sub_sub_cat_id = '" . $cat3 . "' AND sub_sub_sub_cat_id = '0'", false);
 			$type = '
-					 <a href="#" class="btn btn-inverse disabled"> ' . $cat1name . ' <i class="icon-chevron-right icon-white"></i></a> 
-					 <a href="#" class="btn btn-inverse disabled"> ' . $cat2name . ' <i class="icon-chevron-right icon-white"></i></a> 
-					 <a href="#" class="btn btn-inverse disabled">' . $cat3name . '</a>';
+					 <a href="#" class="btn btn-dark disabled"> ' . $cat1name . ' <i class="icon-chevron-right icon-white"></i></a> 
+					 <a href="#" class="btn btn-dark disabled"> ' . $cat2name . ' <i class="icon-chevron-right icon-white"></i></a> 
+					 <a href="#" class="btn btn-dark disabled">' . $cat3name . '</a>';
 
 		}
 		elseif ($cat2 > 0)
@@ -4850,8 +4850,8 @@ class Trade_model extends CI_Model
 
 			$query = $this->db->query("SELECT cat_id as ID, sub_cat_id, main_cat_id, category_name as CATEGORY_NAME FROM product_categories  WHERE sub_cat_id = '" . $cat2 . "'  AND sub_sub_cat_id = '0'", false);
 			$type = '
-			          <a href="#" class="btn btn-inverse disabled"> ' . $cat1name . ' <i class="icon-chevron-right icon-white"></i></a> 
-					  <a href="#" class="btn btn-inverse disabled">' . $cat2name . ' <i class="icon-chevron-right icon-white"></i></a>';
+			          <a href="#" class="btn btn-dark disabled"> ' . $cat1name . ' <i class="icon-chevron-right icon-white"></i></a> 
+					  <a href="#" class="btn btn-dark disabled">' . $cat2name . ' <i class="icon-chevron-right icon-white"></i></a>';
 
 		}
 		elseif ($cat1 > 0)
@@ -4859,7 +4859,7 @@ class Trade_model extends CI_Model
 
 			$query = $this->db->query("SELECT cat_id as ID, main_cat_id, category_name as CATEGORY_NAME FROM product_categories WHERE main_cat_id = '" . $cat1 . "' AND sub_cat_id = '0'", false);
 			$type = ' 
-					 <a href="#" class="btn btn-inverse disabled">' . $cat1name . ' <i class="icon-chevron-right icon-white"></i></a>';
+					 <a href="#" class="btn btn-dark disabled">' . $cat1name . ' <i class="icon-chevron-right icon-white"></i></a>';
 		}
 		else
 		{
@@ -4877,7 +4877,7 @@ class Trade_model extends CI_Model
 		{
 			$btn_next = $cat1 . ", '" . $cat1name . "', " . $cat2 . ", '" . $cat2name . "', " . $cat3 . ", '" . $cat3name . "', " . $cat4 . ", '" . $cat4name . "'";
 			$btn_back = $cat1 . ", '" . $cat1name . "', " . $cat2 . ", '" . $cat2name . "', " . $cat3 . ", '" . $cat3name . "', " . $cat4 . ", '" . $cat4name . "','" . $ltype . "'";
-			echo '<a href="javascript:back_(' . $btn_back . ');" class="btn btn-inverse" style="margin:5px"><i class="icon-chevron-left icon-white"></i> Back</a>';
+			echo '<a href="javascript:back_(' . $btn_back . ');" class="btn btn-dark" style="margin:5px"><i class="icon-chevron-left icon-white"></i> Back</a>';
 
 		}
 		echo $type . '';
@@ -6093,9 +6093,9 @@ class Trade_model extends CI_Model
 						<a class="btn btn-mini btn-success" title="The item is live and not expired" rel="tooltip" href="javascript:void(0)"><i class="icon-ok icon-white"></i></a>
 						<a href="javascript:void(0)" class="btn btn-mini btn-warning" title="Listing date. Is product expired" rel="tooltip"><i class="icon-pause icon-white"></i></a>
 						<a class="btn btn-mini btn-success" href="javascript:void(0)" title="Mark item as sold" rel="tooltip"><i class="icon-star-empty icon-white"></i></a>
-						<a href="javascript:void(0)" class="btn btn-mini btn-inverse" title="Update the current item details" rel="tooltip"><i class="icon-pencil icon-white"></i></a> 
-						<a href="javascript:void(0)" class="btn btn-mini btn-inverse" title="Delete the item" rel="tooltip"><i class="icon-trash icon-white"></i></a>
-						<a href="javascript:void(0)" class="btn btn-mini btn-inverse" title="Preview the current item" rel="tooltip"> View</a>
+						<a href="javascript:void(0)" class="btn btn-mini btn-dark" title="Update the current item details" rel="tooltip"><i class="icon-pencil icon-white"></i></a> 
+						<a href="javascript:void(0)" class="btn btn-mini btn-dark" title="Delete the item" rel="tooltip"><i class="icon-trash icon-white"></i></a>
+						<a href="javascript:void(0)" class="btn btn-mini btn-dark" title="Preview the current item" rel="tooltip"> View</a>
 					</div>	
 				 </div>';
 
@@ -6272,9 +6272,9 @@ class Trade_model extends CI_Model
 					. $active . ' ' .
 					$soldBTN .
 					'
-							<a onclick="update_product(' . $row->product_id . ');" class="btn btn-mini btn-inverse"><i class="icon-pencil icon-white"></i></a> 
-							<a onclick="delete_product(' . $row->product_id . ');" class="btn btn-mini btn-inverse"><i class="icon-trash icon-white"></i></a>
-							<a href="' . site_url('/') . 'product/' . $row->product_id . '/" target="_blank" class="btn btn-mini btn-inverse"> View</a></td>
+							<a onclick="update_product(' . $row->product_id . ');" class="btn btn-mini btn-dark"><i class="icon-pencil icon-white"></i></a> 
+							<a onclick="delete_product(' . $row->product_id . ');" class="btn btn-mini btn-dark"><i class="icon-trash icon-white"></i></a>
+							<a href="' . site_url('/') . 'product/' . $row->product_id . '/" target="_blank" class="btn btn-mini btn-dark"> View</a></td>
 					  </tr>';
 			}
 			$exit_str = "javascript:$('#modal-product-delete').modal('hide')";
@@ -6399,7 +6399,7 @@ class Trade_model extends CI_Model
 				echo '<div class="alert">
 						
 						 <h4>No ' . $bstr . ' Products added</h4> No items have been added. Please add a new product below.<br /><br />
-						 <a href="javascript:void(0)" onclick="load_trade(' . $str . ')" class="btn btn-inverse"><i class="icon-plus icon-white"></i> Add a New Product</a>
+						 <a href="javascript:void(0)" onclick="load_trade(' . $str . ')" class="btn btn-dark"><i class="icon-plus icon-white"></i> Add a New Product</a>
 						</div>';
 			}
 
@@ -6536,7 +6536,7 @@ class Trade_model extends CI_Model
 				if ($row->listing_type == 'S')
 				{
 
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">' . $btn_txt . '</a>&nbsp;
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
 								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 
 					if ($row->sub_cat_id == 3410)
@@ -6571,7 +6571,7 @@ class Trade_model extends CI_Model
 						$price = $price['str'];
 					}
 
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">Place Bid</a>&nbsp;
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">Place Bid</a>&nbsp;
 								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 
 
@@ -6603,7 +6603,7 @@ class Trade_model extends CI_Model
 					$btn_txt = 'Order Now';
 
 
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right">' . $btn_txt . '</a>&nbsp;
+					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
 								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 				}
 
@@ -7470,7 +7470,7 @@ class Trade_model extends CI_Model
 							    <a href="javascript:void(0)" onclick="' . $fb . '" class="facebook"></a>
 							' . $b_logo . '
 							</div>
-							<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-inverse pull-right" ><i class="icon-share icon-white"></i> View</a>
+							<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . '/" class="btn btn-dark pull-right" ><i class="icon-share icon-white"></i> View</a>
 					  		<div class="clearfix">&nbsp;</div>
 						</div>
 					   </div>
@@ -7529,7 +7529,7 @@ class Trade_model extends CI_Model
 					$main_name = $row->category_name;
 
 					//echo '<a class="btn" onclick="load_sub_cats('.$row->ID.')" style="margin:5px" id="'.$main_id.'-m_cat"> '.$main_name.' <i class="icon-chevron-right"></i></a>';
-					$output .= '<a class="btn btn-mini btn-inverse" href="' . site_url('/') . 'buy/' . $this->encode_url($main_name) . '/" style="margin:5px"> ' . $main_name . ' <i class="icon-chevron-right icon-white"></i></a>';
+					$output .= '<a class="btn btn-mini btn-dark" href="' . site_url('/') . 'buy/' . $this->encode_url($main_name) . '/" style="margin:5px"> ' . $main_name . ' <i class="icon-chevron-right icon-white"></i></a>';
 
 				}
 
@@ -7566,7 +7566,7 @@ class Trade_model extends CI_Model
 						//$main_name = $this->get_category_name($row->main_cat_id).' - '.$row->category_name;
 
 						//echo '<a class="btn" onclick="load_sub_cats('.$row->ID.')" style="margin:5px" id="'.$main_id.'-m_cat"> '.$main_name.' <i class="icon-chevron-right"></i></a>';
-						$output .= '<a class="btn btn-mini btn-inverse" href="' . site_url('/') . 'buy/' . $this->encode_url($this->get_category_name($row->main_cat_id)) . '/' . $this->encode_url($row->category_name) . '/" style="margin:5px"> ' . $row->category_name . ' <i class="icon-chevron-right icon-white"></i></a>';
+						$output .= '<a class="btn btn-mini btn-dark" href="' . site_url('/') . 'buy/' . $this->encode_url($this->get_category_name($row->main_cat_id)) . '/' . $this->encode_url($row->category_name) . '/" style="margin:5px"> ' . $row->category_name . ' <i class="icon-chevron-right icon-white"></i></a>';
 
 					}
 
@@ -7591,7 +7591,7 @@ class Trade_model extends CI_Model
 						$sub_id = $row2->sub_cat_id;
 						$sub_name = $this->get_category_name($row2->sub_cat_id);
 						//echo '<a class="btn" onclick="load_sub_cats('.$row->ID.')" style="margin:5px" id="'.$main_id.'-m_cat"> '.$main_name.' <i class="icon-chevron-right"></i></a>';
-						$output .= '<a class="btn btn-mini btn-inverse" href="' . site_url('/') . 'buy/' . $this->encode_url($main_name) . '/' . $this->encode_url($sub_name) . '/' . $this->encode_url($row2->category_name) . '/" style="margin:5px"> ' . $row2->category_name . ' <i class="icon-chevron-right icon-white"></i></a>';
+						$output .= '<a class="btn btn-mini btn-dark" href="' . site_url('/') . 'buy/' . $this->encode_url($main_name) . '/' . $this->encode_url($sub_name) . '/' . $this->encode_url($row2->category_name) . '/" style="margin:5px"> ' . $row2->category_name . ' <i class="icon-chevron-right icon-white"></i></a>';
 
 					}
 
@@ -7618,7 +7618,7 @@ class Trade_model extends CI_Model
 						$sub_sub_id = $row3->sub_sub_cat_id;
 						$sub_sub_name = $this->get_category_name($row3->sub_sub_cat_id);
 						//echo '<a class="btn" onclick="load_sub_cats('.$row->ID.')" style="margin:5px" id="'.$main_id.'-m_cat"> '.$main_name.' <i class="icon-chevron-right"></i></a>';
-						$output .= '<a class="btn btn-mini btn-inverse" href="' . site_url('/') . 'buy/' . $this->encode_url($main_name) . '/' . $this->encode_url($sub_name) . '/' . $this->encode_url($sub_sub_name) . '/' . $this->encode_url($row3->category_name) . '/" style="margin:5px"> ' . $row3->category_name . ' <i class="icon-chevron-right icon-white"></i></a>';
+						$output .= '<a class="btn btn-mini btn-dark" href="' . site_url('/') . 'buy/' . $this->encode_url($main_name) . '/' . $this->encode_url($sub_name) . '/' . $this->encode_url($sub_sub_name) . '/' . $this->encode_url($row3->category_name) . '/" style="margin:5px"> ' . $row3->category_name . ' <i class="icon-chevron-right icon-white"></i></a>';
 
 					}
 
@@ -7718,7 +7718,7 @@ class Trade_model extends CI_Model
 				foreach ($query->result() as $row)
 				{
 					$link = $this->encode_url($this->get_category_name($row->main_cat_id)) . '/' . $this->encode_url($this->get_category_name($row->sub_cat_id)) . '/no-name/no-name/' . $this->encode_url($row->location) . '/all/n/n/' . $row->main_cat_id . '/' . $row->sub_cat_id . '/0/0/';
-					$output .= '<a href="' . site_url('/') . 'buy/' . $link . '/" class="btn btn-mini btn-inverse" style="margin:5px">' . $row->location . ' <span class="badge badge-inverse">' . $row->count_ . '</span> <i class="icon-chevron-right icon-white"></i></a> ';
+					$output .= '<a href="' . site_url('/') . 'buy/' . $link . '/" class="btn btn-mini btn-dark" style="margin:5px">' . $row->location . ' <span class="badge badge-dark">' . $row->count_ . '</span> <i class="icon-chevron-right icon-white"></i></a> ';
 
 				}
 
@@ -7926,7 +7926,7 @@ class Trade_model extends CI_Model
 
 				}
 				$link = site_url('/') . 'b/' . $bus_id . '/' . $this->encode_url($row->BUSINESS_NAME) . '/';
-				$agent = '<a href="' . $link . '" class="btn btn-inverse pull-right"><i class="icon-share icon-white"></i> View Details</a>';
+				$agent = '<a href="' . $link . '" class="btn btn-dark pull-right"><i class="icon-share icon-white"></i> View Details</a>';
 				if ($row->IS_ESTATE_AGENT == 'Y' && $client_id != 0)
 				{
 
