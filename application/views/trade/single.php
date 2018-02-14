@@ -17,7 +17,6 @@
 	 $header['section'] = '';
 	 
  }
- 
 
   $product['product_id'] = $product_id;
   $product['bus_id'] = $bus_id;

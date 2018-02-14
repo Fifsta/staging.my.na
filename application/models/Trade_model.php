@@ -6,7 +6,6 @@ class Trade_model extends CI_Model
 	public function __construct()
 	{
 
-
 	}
 
 
@@ -1332,17 +1331,17 @@ class Trade_model extends CI_Model
 			$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter'
 			);
 
-			$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-large pull-right btn-dark">
-				<i class="icon-star-empty icon-white"></i> Grab Product
-				</a>';
+			$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-lg pull-right btn-inverse">
+						<i class="fa-star-o text-light"></i> Grab Product
+					</a>';
+
 			//IF LOGGED IN
 			if ($this->session->userdata('id'))
 			{
 
-
-				$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-large pull-right btn-dark">
-								<i class="icon-star-empty icon-white"></i> Grab Product
-								</a>';
+				$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-lg pull-right btn-inverse">
+							<i class="fa-star-o text-light"></i> Grab Product
+						</a>';
 			}
 
 
@@ -1355,15 +1354,17 @@ class Trade_model extends CI_Model
 
 				$t_stock = $row->total_quantity;
 				$s_perc = ($row->quantity / $t_stock) * 100;
-				$stock_ticker = '<div class="well well-mini" style="padding:2px 10px 0px 10px"><small>' . $row->quantity . ' Currently In Stock </small>
+				$stock_ticker = '
+
+				<div class="card" style="padding:2px 10px 0px 10px"><small>' . $row->quantity . ' Currently In Stock </small>
 				    <div class="progress  progress-warning" title="' . $row->quantity . ' of ' . $row->total_quantity . ' products are available" rel="tooltip">
 					  <div class="bar" style="width:' . $s_perc . '%"></div>
-					</div><small class="pull-right"><em>Stock Counter</em></small></div>';
+					</div><small class="pull-right"><em>Stock Counter</em></small>
+				</div>';
 
 			}
 			else
 			{
-
 				$stock_ticker = '';
 			}
 
@@ -1410,10 +1411,10 @@ class Trade_model extends CI_Model
 
 					$btn = '<div class="pull-right" style="margin-top:10px;" rel="tooltip" title="Sorry, this is your item!">
 							  <form id="buy_now_frm" method="post" style="margin-bottom:0">
-								   <input type="hidden" name="product_id" value="' . $product_id . '" />
+								  <input type="hidden" name="product_id" value="' . $product_id . '" />
 								  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
 								  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
-								  <button class="btn btn-inverse btn-large" type="submit" disabled="disabled">' . $btn_txt . '</button>
+								  <button class="btn btn-inverse btn-lg" type="submit" disabled="disabled">' . $btn_txt . '</button>
 							  </form>
 							</div>';
 
@@ -1424,7 +1425,7 @@ class Trade_model extends CI_Model
 					{
 
 						$btn = '<div class="pull-right" style="margin-top:10px;">
-									  <a href="#contact_anchor" rel="tooltip" title="Please enquire about the product" class="btn btn-dark btn-large" >' . $btn_txt . '</a>
+									  <a href="#contact_anchor" rel="tooltip" title="Please enquire about the product" class="btn btn-inverse btn-large" >' . $btn_txt . '</a>
 								</div>';
 
 					}
@@ -1432,12 +1433,12 @@ class Trade_model extends CI_Model
 					{
 						$btn = '<div class="pull-right" style="margin-top:10px;">
 								  <form action="' . site_url('/') . 'trade/buy_now/" id="buy_now_frm" method="post"  style="margin-bottom:0">
-									   <input type="hidden" name="product_id" value="' . $product_id . '" />
+									  <input type="hidden" name="product_id" value="' . $product_id . '" />
 									  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
 									  <input type="hidden" name="title" value="' . $row->title . '" />
 									  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
 									  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
-									  <button class="btn btn-dark btn-large" id="buy_now_btn" type="submit">' . $btn_txt . '</button>
+									  <button class="btn btn-inverse btn-lg" id="buy_now_btn" type="submit">' . $btn_txt . '</button>
 								  </form>
 								</div>';
 					}
@@ -1478,14 +1479,15 @@ class Trade_model extends CI_Model
 				if ($row->client_id == $this->session->userdata('id'))
 				{
 
-					$btn = '' . $resT . '<div class="input-append">
+					$btn = '' . $resT . '
+							<div class="input-append">
 							  <form action="' . current_url() . '" id="auction_frm" method="post"  rel="tooltip" title="Sorry, this is your item!">
-								  <input class="span4" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold" name="bid_amount" value="Not Allowed"  disabled>
+								  <input class="col-md-4" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold" name="bid_amount" value="Not Allowed"  disabled>
 								  <input type="hidden" name="product_id" value="' . $product_id . '" />
 								  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
 								  <input type="hidden" name="reserve" value="' . $row->reserve . '" />
 								  <input type="hidden" name="current_bid" value="' . $price['current'] . '" />
-								  <button class="btn btn-inverse btn-large disabled" id="auction_btn1" type="submit">N$ Bid Now</button>
+								  <button class="btn btn-dark btn-lg disabled" id="auction_btn1" type="submit">N$ Bid Now</button>
 							  </form>
 							</div>';
 				}
@@ -1509,11 +1511,11 @@ class Trade_model extends CI_Model
 
 						$btn = '<div style="min-height:100px; ">
 								' . $resT . '
-								<div class="row-fluid">
-									<div class="span8">
+								<div class="row">
+									<div class="col-md-8">
 										<div class="input-append" id="bid_box">
 										  <form action="' . site_url('/') . 'trade/place_bid/" id="auction_frm" method="post">
-											  <input class="span3" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold; width:30%" name="bid_amount" value="' . $price['price'] . '">
+											  <input class="col-md-3" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold; width:30%" name="bid_amount" value="' . $price['price'] . '">
 											  <input type="hidden" name="product_id" value="' . $product_id . '" />
 											  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
 											  <input type="hidden" name="reserve" value="' . $row->reserve . '" />
@@ -1521,13 +1523,13 @@ class Trade_model extends CI_Model
 											  <input type="hidden" name="auto_bid" value="0" />
 											  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
 											  <input type="hidden" name="current_bid" value="' . $price['current'] . '" />
-											  <button class="btn btn-inverse btn-large" id="auction_btn" type="submit">N$ Bid Now</button>
+											  <button class="btn btn-inverse btn-lg" id="auction_btn" type="submit">N$ Bid Now</button>
 										  </form>
 										</div>
 
 										<div class="input-append hide" id="auto_bid_box">
 										  <form action="' . site_url('/') . 'trade/place_bid/" id="auction_frm_auto" method="post">
-											  <input class="span3" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold;width:30%" name="bid_amount" value="' . $price['price'] . '">
+											  <input class="col-md-3" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold;width:30%" name="bid_amount" value="' . $price['price'] . '">
 											  <input type="hidden" name="product_id" value="' . $product_id . '" />
 											  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
 											  <input type="hidden" name="reserve" value="' . $row->reserve . '" />
@@ -1535,10 +1537,10 @@ class Trade_model extends CI_Model
 											  <input type="hidden" name="auto_bid" value="1" />
 											  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
 											  <input type="hidden" name="current_bid" value="' . $price['current'] . '" />
-											  <button class="btn btn-inverse btn-large" id="auction_btn_auto" type="submit">N$ Auto Bid</button>
+											  <button class="btn btn-inverse btn-lg" id="auction_btn_auto" type="submit">N$ Auto Bid</button>
 										</div>
 									</div>
-									<div class="span4">
+									<div class="col-md-4">
 										<a href="javascript:void(0)" onClick="switch_auto_bid()" class="btn btn-inverse pull-right">Auto Bid</a>
 									</div>
 								</div>
@@ -1590,12 +1592,12 @@ class Trade_model extends CI_Model
 
 				$btn = '<div class="pull-right" style="margin-top:10px;">
 								  <form action="' . site_url('/') . 'trade/order_service/" id="order_now_frm" method="post"  style="margin-bottom:0">
-									   <input type="hidden" name="product_id" value="' . $product_id . '" />
+									  <input type="hidden" name="product_id" value="' . $product_id . '" />
 									  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
 									  <input type="hidden" name="title" value="' . $row->title . '" />
 									  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
 									  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
-									  <button class="btn btn-dark btn-large" id="order_now_btn" type="submit">' . $btn_txt . '</button>
+									  <button class="btn btn-inverse btn-large" id="order_now_btn" type="submit">' . $btn_txt . '</button>
 								  </form>
 								</div>';
 
@@ -1650,7 +1652,6 @@ class Trade_model extends CI_Model
 			$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
 
 			echo '
-
 	        <div class="details">
 	          <div class="details-left">
 	            <figure>
@@ -1677,7 +1678,6 @@ class Trade_model extends CI_Model
 
 	          </div>
 	        </div>
-
 			';
 
 
@@ -4117,7 +4117,6 @@ class Trade_model extends CI_Model
 
 			foreach ($bid->result() as $row)
 			{
-
 
 				$prev = $row->amount;
 				if ($x == 0)
