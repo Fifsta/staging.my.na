@@ -1667,6 +1667,9 @@ class Trade_model extends CI_Model
 	          	'.$ribbon.'			
 				<h2>' . $row->title . '</h2>
 	            <p class="cost"><span itemprop="offers" itemscope itemtype="http://schema.org/Offer">' . $price['str'] . '</span></p>
+				' . $agent_ref . '
+
+				' . $location . '	            
 	            <p class="desc"><span itemprop="description">' . $row->description . '</span></p>
 	            <div class="feat" itemprop="description">
 	              ' . $this->show_extras($row->extras) . '
