@@ -4112,7 +4112,7 @@ class Trade_model extends CI_Model
 					<div>
 
 					  <a href="#" title="Placed on ' . date('F j, Y', strtotime($row->datetime)) . '" rel="tooltip">
-						<imgsrc="' . $client['image'] . ' class="img-thumbnail rounded">
+						<img src="' . $client['image'] . ' class="img-thumbnail rounded">
 					  </a>
 
 					</div>
