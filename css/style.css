@@ -421,7 +421,7 @@ Light Orange ff9900
 	.results-item .rating{font-size:13px; margin:5px 0}
 	.results-item h2{margin:0 0 5px 0; font-size:120%;}
 	.results-item h2 a:nth-child(1),#listing .details h2 a:nth-child(1){ font-weight:bold}
-	.results-item h2 span,#listing .details h2 span{font-size:11px; font-weight:normal; color:#999; box-shadow:0 0 3px rgba(0,0,0,0.2) inset; padding:0 5px; display:inline-block; margin:0 5px; border-radius:4px}
+	.results-item h2 span,#listing .details h2 span{font-size:11px; font-weight:normal; color:#333; box-shadow:0 0 3px rgba(0,0,0,0.6) inset; background-color:#dcdcdc; padding:0 5px; display:inline-block; margin-right:5px; border-radius:4px}
 	.results-item p{margin-bottom:5px}
 	.results-item .addr,#listing .addr{margin-bottom:10px; font-style:italic}
 	.results-item .addr a, #listing .addr a{color:#666;}
