@@ -268,6 +268,33 @@
   </div>  
 </div>
 
+ <div class="modal hide fade in" id="img_modal_div" style="width:auto">
+    <img style="display*: inline;display:inline-block" src="<?php echo base_url('/');?>images/deal_place_load.gif" id="img_modal" />
+ </div>
+
+ <div class="modal hide fade" id="notification_modal">
+
+     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin:5px 10px 0 0">&times;</button>
+     <div class="modal-body" id="notification_modal_body">
+
+          <img src="<?php echo base_url('/');?>images/bground/stick_man.png" class="pull-right" alt="List and buy anything namibian" />
+          <h2>New Bid</h2>
+          <p>A new bid has just been placed. Act quick to avoid disappointment</p>
+          <div class="container-fluid">
+              <div class="row-fluid">
+                  <div class="col-md-10">
+                      <div class="CT-tmer"></div>
+                      <p>Current Bid is: </p>
+                      <div id="current_bid_div"><h1 class="yellow big_icon"><small class="yellow">N$ </small></h1></div>
+                  </div>
+              </div>
+          </div>
+
+     </div>
+
+ </div>
+
+
 <?php $this->load->view('inc/footer');?>  
 <script src="<?php echo base_url('/');?>js/print_page.js"></script>
 <script src="<?php echo base_url('/');?>js/custom/fb.js?v=2"></script>
@@ -479,12 +506,14 @@ function switch_auto_bid(){
 }
 
 
-var current_bid = <?php if($current_bid != ''){echo $current_bid;}else{echo '0';}?>;
-var bid_id = <?php if($bid_id != ''){echo $bid_id;}else{echo '0';}?>;
+var current_bid = <?php if($current_bid != ''){ echo $current_bid; }else{ echo '0'; } ?>;
+
+var bid_id = <?php if($bid_id != ''){ echo $bid_id;}else{ echo '0'; } ?>;
+
 //SERVER EVENTS TO CHANGE CONTENT
 if(typeof(EventSource) !== "undefined") {
 
-    var source = new EventSource("<?php echo site_url('/');?>sse/product/<?php echo $product_id;?>/"+bid_id);
+    var source = new EventSource("<?php echo site_url('/');?>sse/product/<?php echo $product_id; ?>/"+bid_id);
 
     // NEW BID PLACED
     source.addEventListener('new_bid', function(e)
@@ -495,7 +524,6 @@ if(typeof(EventSource) !== "undefined") {
         if(data){
             //NEW BID
             if(data.max_bid > current_bid){
-
 
                 $('#current_bid_div').html('<h1 class="yellow big_icon"><small class="yellow">N$ </small> '+data.amount+'</h1>');
                 $('#notification_modal').modal('show');

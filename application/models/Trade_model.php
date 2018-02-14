@@ -1463,7 +1463,7 @@ class Trade_model extends CI_Model
 
 
 				$count = '<div class="card"><div class="card-block" style="padding-bottom:10px; padding-left:15px;"><div id="ctdwn_' . $product_id . '" class="CT-tmer"></div></div></div>';
-				$reserve = '<div class="well well-mini text-center"><span style=" font-size:12px">Reserve</span> <span style=" font-size:12px">N$</span> <br /><span style="font-size:20px;color:#FF9F01; font-weight:bold;">' . $row->reserve . '</span></div>';
+				$reserve = '<div class="card text-center"><div class="card-block"><span style=" font-size:12px">Reserve</span> <span style=" font-size:12px">N$</span> <br /><span style="font-size:20px;color:#FF9F01; font-weight:bold;">' . $row->reserve . '</span></div></div>';
 				$price = $this->get_current_bid($row->current_bid);
 
 				//TEST RESERVE
