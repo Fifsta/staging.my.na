@@ -4107,7 +4107,7 @@ class Trade_model extends CI_Model
 				$bid = $row->amount;
 				$amount = $bid - $prev;
 
-				$output .= '
+				/*$output .= '
 				<div class="review-item">
 					<div class="row">
 						<div class="col-xs-3 col-sm-2 col-md-2">
@@ -4126,9 +4126,9 @@ class Trade_model extends CI_Model
 						</div>
 					</div>
 				</div>
-				';
+				';*/
 
-				/*$output .= '
+				$output .= '
 						<div class="review-item">
 							  <a class="pull-left" href="#" title="Placed on ' . date('F j, Y', strtotime($row->datetime)) . '" rel="tooltip">
 							    <span class="avatar-overlay60"></span>
@@ -4145,7 +4145,7 @@ class Trade_model extends CI_Model
 							  <br />Current Bid: N$ = ' . $bid . '
 							  </div>
 							 
-						 </div>';*/
+						 </div>';
 				$x++;
 
 
