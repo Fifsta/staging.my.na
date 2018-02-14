@@ -466,6 +466,74 @@ function save_watchlist(){
   
 }
 
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+
+function switch_auto_bid(){
+  $("#bid_box").toggle();
+  $("#auto_bid_box").delay(100).toggle();
+  $("#auto_help_txt").fadeToggle();
+}
+
+
+var current_bid = <?php if($current_bid != ''){echo $current_bid;}else{echo '0';}?>;
+var bid_id = <?php if($bid_id != ''){echo $bid_id;}else{echo '0';}?>;
+//SERVER EVENTS TO CHANGE CONTENT
+if(typeof(EventSource) !== "undefined") {
+
+    var source = new EventSource("<?php echo site_url('/');?>sse/product/<?php echo $product_id;?>/"+bid_id);
+
+    // NEW BID PLACED
+    source.addEventListener('new_bid', function(e)
+    {
+        var data = JSON.parse(e.data);
+        //console.log(e.data);
+        //console.log(current_bid+' Wohooooo '+data.max_bid);
+        if(data){
+            //NEW BID
+            if(data.max_bid > current_bid){
+
+
+                $('#current_bid_div').html('<h1 class="yellow big_icon"><small class="yellow">N$ </small> '+data.amount+'</h1>');
+                $('#notification_modal').modal('show');
+                load_product_details();
+            }
+            current_bid = data.max_bid;
+        }
+
+
+    }, false);
+
+<?php //IF EXPIRED
+
+$now = date('Y-m-d H:i:s');
+$end = date('Y-m-d H:i:s', strtotime($end_date));
+if($end > $now){ ?>
+
+  // ENDING SOON
+  source.addEventListener('ending_soon', function(e)
+  {
+      var data = JSON.parse(e.data);
+      console.log('ended');
+
+      if(data){
+          window.location.reload();
+      }
+
+
+  }, false);
+  
+<?php } ?>
+
+
+} else {
+  // Sorry! No server-sent events support..
+}
+
 
 </script>
 
