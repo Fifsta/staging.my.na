@@ -29,7 +29,7 @@ class Trade_model extends CI_Model
 		if ($status == 'sold')
 		{
 
-			$str = '<span badge' . $size . '>ITEM SOLD</span>';
+			$str = '<h2><span>ITEM SOLD</span></h2>';
 			return $str;
 
 		}
@@ -58,21 +58,21 @@ class Trade_model extends CI_Model
 				if ($intervalE->days > 0)
 				{
 
-					$str = '<span badge' . $size . '>Ends in ' . $intervalE->days . ' days - START BIDDING NOW</span>';
+					$str = '<h2><span>Ends in ' . $intervalE->days . ' days - START BIDDING NOW</span></h2>';
 
 					return $str;
 
 				}
 				elseif ($minutes > 60)
 				{
-					$str = '<div class="badge' . $size . '"><small>Only ' . $intervalE->h . ' hours left</small>AUCTION ENDING SOON<span></span></div>';
+					$str = '<h2><span>Only ' . $intervalE->h . ' hours left</small>AUCTION ENDING SOON</span></h2>';
 
 					return $str;
 
 				}
 				else
 				{
-					$str = '<div class="badge' . $size . '"><small>Only ' . $minutes . ' minutes</small> HURRY ENDING SOON<span></span></div>';
+					$str = '<h2><span><small>Only ' . $minutes . ' minutes</small> HURRY ENDING SOON</span></h2>';
 
 					return $str;
 				}
@@ -80,7 +80,7 @@ class Trade_model extends CI_Model
 			else
 			{
 
-				$str = '<div class="badge' . $size . '"><small>Closed</small> AUCTION HAS ENDED<span></span></div>';
+				$str = '<h2><span><small>Closed</small> AUCTION HAS ENDED</span></h2>';
 
 				return $str;
 
@@ -101,7 +101,7 @@ class Trade_model extends CI_Model
 				if (array_key_exists("sole_mandate", $arr) && $featured == 'Y')
 				{
 
-					$str = '<span>FEATURED SOLE MANDATE</span>';
+					$str = '<h2>span>FEATURED SOLE MANDATE</span></h2>';
 
 					return $str;
 
@@ -110,7 +110,7 @@ class Trade_model extends CI_Model
 				elseif (array_key_exists("sole_mandate", $arr))
 				{
 
-					$str = '<span>SOLE MANDATE</span>';
+					$str = '<h2><span>SOLE MANDATE</span></h2>';
 
 					return $str;
 
@@ -123,7 +123,7 @@ class Trade_model extends CI_Model
 				if ($featured == 'Y')
 				{
 
-					$str = '<span>FEATURED</span>';
+					$str = '<h2><span>FEATURED</span></h2>';
 
 					return $str;
 
@@ -149,7 +149,7 @@ class Trade_model extends CI_Model
 			if ($intervalL->days < 2)
 			{
 
-				$str = '<span>' . $this->time_passed(strtotime($listing_date)) . ' LISTED TODAY</span>';
+				$str = '<h2><span>' . $this->time_passed(strtotime($listing_date)) . ' LISTED TODAY</span></h2>';
 
 				return $str;
 				//RECENTLY LISTED
@@ -157,7 +157,7 @@ class Trade_model extends CI_Model
 			elseif ($intervalL->days < 14)
 			{
 
-				$str = '<span>' . $this->time_passed(strtotime($listing_date)) . ' RECENTLY LISTED</span>';
+				$str = '<h2><span>' . $this->time_passed(strtotime($listing_date)) . ' RECENTLY LISTED</span></h2>';
 
 				return $str;
 
