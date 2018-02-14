@@ -1354,13 +1354,14 @@ class Trade_model extends CI_Model
 
 				$t_stock = $row->total_quantity;
 				$s_perc = ($row->quantity / $t_stock) * 100;
-				$stock_ticker = '
 
+				$stock_ticker = '
 				<div class="card" style="padding:2px 10px 0px 10px"><small>' . $row->quantity . ' Currently In Stock </small>
 				    <div class="progress  progress-warning" title="' . $row->quantity . ' of ' . $row->total_quantity . ' products are available" rel="tooltip">
 					  <div class="bar" style="width:' . $s_perc . '%"></div>
 					</div><small class="pull-right"><em>Stock Counter</em></small>
-				</div>';
+				</div>
+				';
 
 			}
 			else
@@ -1479,7 +1480,7 @@ class Trade_model extends CI_Model
 				if ($row->client_id == $this->session->userdata('id'))
 				{
 
-					$btn = '' . $resT . '
+					$btn =  $resT . '
 							<div class="input-append">
 							  <form action="' . current_url() . '" id="auction_frm" method="post"  rel="tooltip" title="Sorry, this is your item!">
 								  <input class="col-md-4" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold" name="bid_amount" value="Not Allowed"  disabled>
@@ -1487,7 +1488,7 @@ class Trade_model extends CI_Model
 								  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
 								  <input type="hidden" name="reserve" value="' . $row->reserve . '" />
 								  <input type="hidden" name="current_bid" value="' . $price['current'] . '" />
-								  <button class="btn btn-dark btn-lg disabled" id="auction_btn1" type="submit">N$ Bid Now</button>
+								  <button class="btn btn-inverse btn-lg disabled" id="auction_btn1" type="submit">N$ Bid Now</button>
 							  </form>
 							</div>';
 				}
@@ -1502,7 +1503,7 @@ class Trade_model extends CI_Model
 					{
 
 						$btn = '<div class="row">
-									<div class="col-xl-12"><div class="alert"><h3>Auction has Ended</h3>The auction has ended and all bidding has been suspended. Better luck next time</div></div>
+									<div class="col-xl-12"><div class="alert alert-info" role="alert"><h3 style="font-size:20px">Auction has Ended</h3>The auction has ended and all bidding has been suspended. Better luck next time</div></div>
 								</div>';
 					}
 					else
@@ -1680,31 +1681,6 @@ class Trade_model extends CI_Model
 	        </div>
 			';
 
-
-			/*echo '
-			<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-				<h1 style="font-size:50px;height:40px;color:#FF9F01;margin-bottom:30px">' . $price['str'] . '</h1>
-				<meta itemprop="priceCurrency" content="NAD" />
-			</span>
-			<div itemscope itemtype="http://schema.org/Product">
-				<div class="pull-right">' . $reserve . '</div>
-				<h2 class="upper na_script" itemprop="name">' . $row->title . '</h2>
-				<span itemprop="description">
-					<p>' . $row->description . '</p><p>' . $this->show_extras($row->extras) . '</p>
-				</span>	
-				' . $count . '
-				<div class="row">
-					<div class="col-md-6">
-					 ' . $this->get_review_stars_show($rating, $row->product_id, 0, $total_reviews) . '
-					</div>
-					<div class="col-md-6">
-					' . $stock_ticker . '
-					</div>
-				</div>
-				<div id="product_msg" class="clearfix"></div>
-
-				<div class="clearfix">' . $btn . '</div>
-			</div>';*/
 
 			//ENDING DATE
 			$listE = new DateTime(date('Y-m-d H:i:s', strtotime($row->end_date)));
@@ -4153,7 +4129,7 @@ class Trade_model extends CI_Model
 
 
 			}
-			$head = '<h3 class="na_script">Bid History</h3>';
+			$head = '<h3 style="font-size:20px">Bid History</h3>';
 
 			$auto_bid_txt = $this->get_auto_bid_note($product_id, $max);
 
@@ -4162,24 +4138,26 @@ class Trade_model extends CI_Model
 			{
 
 
-				$head = '<h3 class="na_script">Bid History</h3>
+				$head = '
+				<h3 style="font-size:20px">Bid History</h3>
 				<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>
 						<h3 class="na_script">You are leading this auction</h3>
 						Your <strong>leading bid</strong> is currently at N$ ' . $max . '<br />' .
 					$auto_bid_txt . '
-				</div>';
+				</div>
+				';
 
 			}
 			else
 			{
-				$head = '<h3 class="na_script">Bid History</h3>';
+				$head = '<h3 style="font-size:20px">Bid History</h3>';
 				if ($auto_bid_txt != '')
 				{
 
-					$head .= '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>
-						' .
-						$auto_bid_txt . '
-							</div>';
+					$head .= '<div class="alert alert-success">
+							 	<button type="button" class="close" data-dismiss="alert">&times;</button>
+							 	' .$auto_bid_txt . '
+							  </div>';
 				}
 
 
