@@ -4110,12 +4110,12 @@ class Trade_model extends CI_Model
 				$output .= '
 				<section class="results-item">
 					<div>
-						<figure>
-							  <a href="#" title="Placed on ' . date('F j, Y', strtotime($row->datetime)) . '" rel="tooltip">
-							    <span class="avatar-overlay60"></span>
-								<img class="media-object" style="border:1px solid #333333;width:60px; margin-right:10px; height:60px" src="' . $client['image'] . '">
-							  </a>
-						</figure>
+
+						  <a href="#" title="Placed on ' . date('F j, Y', strtotime($row->datetime)) . '" rel="tooltip">
+						    <span class="avatar-overlay60"></span>
+							<img class="media-object" style="border:1px solid #333333;width:60px; margin-right:10px; height:60px" src="' . $client['image'] . '">
+						  </a>
+
 					</div>
 					<div>
 					  <a title="' . $client['name'] . ' placed a bid of ' . $bid . '" rel="tooltip" class="btn btn-success pull-right"><i class="icon icon-plus icon-white"></i>' . $bid . '</a> 
