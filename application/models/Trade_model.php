@@ -1661,6 +1661,7 @@ class Trade_model extends CI_Model
 	            <div class="rating">
 	              '.$this->get_review_stars_show($rating, $product_id, 0, $total_reviews).'
 	            </div>
+	            <div>' . $reserve . '</div>
 	          </div>
 	          <div class="details-right">
 	          	'.$ribbon.'			
