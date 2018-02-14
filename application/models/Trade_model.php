@@ -1782,7 +1782,6 @@ class Trade_model extends CI_Model
 
 						function place_bid(){
 
-
 								var frm = $("#auction_frm"), btn = $("#auction_btn"), bbtn = $("#bid_btn_do");
 								btn.html("Adding Bid...");
 								bbtn.html("<img src=' . "'" . base_url('/') . 'img/load_black.gif' . "'" . '> Please Wait...");
@@ -1801,7 +1800,6 @@ class Trade_model extends CI_Model
 						}
 						function buy_now(){
 
-
 								var frm = $("#buy_now_frm"), btn = $("#buy_now_btn");
 								btn.html("Purchasing...");
 								$.ajax({
@@ -1819,7 +1817,6 @@ class Trade_model extends CI_Model
 						}
 						function place_bid_auto(){
 
-
 								var frm = $("#auction_frm_auto"), btn = $("#auction_btn_auto");
 								btn.html("Adding Bid...");
 								$.ajax({
@@ -1836,7 +1833,6 @@ class Trade_model extends CI_Model
 
 						}
 						function order_now(){
-
 
 								var frm = $("#order_now_frm"), btn = $("#order_now_btn");
 								btn.html("Ordering...");

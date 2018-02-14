@@ -429,6 +429,7 @@ class My_na extends CI_Controller {
 			$this->trade_model->get_products($query, 4);
 			
 	}
+
 	//LOAD TRADE HOME PAGE
 	public function load_auction_home()
 	{
@@ -453,9 +454,11 @@ class My_na extends CI_Controller {
                                         WHERE products.is_active = 'Y' AND products.listing_type = 'A'
                                         GROUP BY products.product_id
                                         ORDER BY products.end_date DESC LIMIT 4";
+                                        
 			$this->trade_model->get_products($query, 4);
 			
 	}
+
 	//LOAD PROPERTIES HOME PAGE
 	public function load_properties_new_home()
 	{

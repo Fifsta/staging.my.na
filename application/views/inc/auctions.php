@@ -8,5 +8,11 @@
 			<li><a href="#" data-icon="fa-bullhorn">Alert me</a></li>
 		</ul>
 	</div>
+
+	<div>
+		<?php echo $this->my_model->get_items('product', $type); ?>
+	</div>
+
+	<a href="" class="btn btn-dark pull-right" title="More Auction Items" rel="tooltip" ><i class="icon icon-plus icon-white"></i>View More Products</a>	
 		
 </section>
