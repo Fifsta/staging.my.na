@@ -1675,7 +1675,7 @@ class Trade_model extends CI_Model
 	              '.$watchlist.'
 	            </div>
 	            <!--watchlist/print-->
-
+	            <div class="clearfix">' . $btn . '</div>
 	          </div>
 	        </div>
 			';
