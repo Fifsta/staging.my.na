@@ -4107,28 +4107,30 @@ class Trade_model extends CI_Model
 				$bid = $row->amount;
 				$amount = $bid - $prev;
 
-				/*$output .= '
-				<div class="review-item">
-					<div class="row">
-						<div class="col-xs-3 col-sm-2 col-md-2">
-							<figure>
-								<a href="#" title="Placed on ' . date('F j, Y', strtotime($row->datetime)) . '" rel="tooltip"><img src="' . $client['image'] . '"></a>
-							</figure>
-						</div>
-						<div class="col-sm-10 col-md-10">
-							<blockquote>
-							   <a title="' . $client['name'] . ' placed a bid of ' . $bid . '" rel="tooltip" class="btn btn-success pull-right"><i class="fa-plus"></i>' . $bid . '</a> 
-							   <font style="font-size:14px;">' . $client['name'] . '</font>	<br/>
-							   <font style="font-size:10px;">' . date('g:i a F j, Y', strtotime($row->datetime)) . '</font>
-							   <br />
-							   Current Bid: N$ = ' . $bid . '
-							</blockquote>
-						</div>
-					</div>
-				</div>
-				';*/
-
 				$output .= '
+				<section class="results-item">
+					<div>
+						<figure>
+							  <a class="pull-left" href="#" title="Placed on ' . date('F j, Y', strtotime($row->datetime)) . '" rel="tooltip">
+							    <span class="avatar-overlay60"></span>
+								<img class="media-object" style="border:1px solid #333333;width:60px; margin-right:10px; height:60px" src="' . $client['image'] . '">
+							  </a>
+						</figure>
+					</div>
+					<div>
+					  <a title="' . $client['name'] . ' placed a bid of ' . $bid . '" rel="tooltip" class="btn btn-success pull-right"><i class="icon icon-plus icon-white"></i>' . $bid . '</a> 
+				
+					  
+					   <font style="font-size:14px;">' . $client['name'] . '</font>	<br/>
+						
+					   <font style="font-size:10px;">
+					  ' . date('g:i a F j, Y', strtotime($row->datetime)) . '</font>
+					  <br />Current Bid: N$ = ' . $bid . '
+					</div>
+				</section>
+				';
+
+				/*$output .= '
 						<div class="media well well-mini">
 							  <a class="pull-left" href="#" title="Placed on ' . date('F j, Y', strtotime($row->datetime)) . '" rel="tooltip">
 							    <span class="avatar-overlay60"></span>
@@ -4145,7 +4147,7 @@ class Trade_model extends CI_Model
 							  <br />Current Bid: N$ = ' . $bid . '
 							  </div>
 							 
-						 </div>';
+						 </div>';*/
 				$x++;
 
 
