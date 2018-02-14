@@ -29,7 +29,7 @@ class Trade_model extends CI_Model
 		if ($status == 'sold')
 		{
 
-			$str = '<span>ITEM SOLD</span>';
+			$str = '<span badge' . $size . '>ITEM SOLD</span>';
 			return $str;
 
 		}
@@ -58,7 +58,7 @@ class Trade_model extends CI_Model
 				if ($intervalE->days > 0)
 				{
 
-					$str = '<span>Ends in ' . $intervalE->days . ' days - START BIDDING NOW</span>';
+					$str = '<span badge' . $size . '>Ends in ' . $intervalE->days . ' days - START BIDDING NOW</span>';
 
 					return $str;
 
