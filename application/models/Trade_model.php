@@ -4111,10 +4111,9 @@ class Trade_model extends CI_Model
 				<section class="results-item">
 					<div>
 
-						  <a href="#" title="Placed on ' . date('F j, Y', strtotime($row->datetime)) . '" rel="tooltip">
-						    <span class="avatar-overlay60"></span>
-							<img class="media-object" style="border:1px solid #333333;width:60px; margin-right:10px; height:60px" src="' . $client['image'] . '">
-						  </a>
+					  <a href="#" title="Placed on ' . date('F j, Y', strtotime($row->datetime)) . '" rel="tooltip">
+						<imgsrc="' . $client['image'] . ' class="img-thumbnail rounded">
+					  </a>
 
 					</div>
 					<div>
