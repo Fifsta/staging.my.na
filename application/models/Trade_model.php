@@ -4117,7 +4117,7 @@ class Trade_model extends CI_Model
 
 					</div>
 					<div>
-					  <a title="' . $client['name'] . ' placed a bid of ' . $bid . '" rel="tooltip" class="btn btn-success pull-right"><i class="icon icon-plus icon-white"></i>' . $bid . '</a> 
+					  <a title="' . $client['name'] . ' placed a bid of ' . $bid . '" rel="tooltip" class="btn btn-success pull-right text-light"><i class="fa-plus"></i> ' . $bid . '</a> 
 				
 					  
 					   <font style="font-size:14px;">' . $client['name'] . '</font>	<br/>
