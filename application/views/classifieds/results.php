@@ -24,25 +24,22 @@ $this->load->view('inc/header', $header);
   <div class="container">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Library</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Data</li>
+        <li class="breadcrumb-item active" aria-current="page">Classifieds</li>
       </ol>
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
 
   <div class="row">
 
-    <div class="col-sm-4 col-md-4 col-lg-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
-      
-      <?php $this->load->view('inc/weather');?>
-      
-      <?php $this->load->view('inc/adverts');?>
+		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-4 order-md-2 order-sm-1 order-lg-2 order-xl-3" id="sidebar">
+			<?php $this->load->view('inc/login'); ?>
+			<?php $this->load->view('inc/weather'); ?>
+			<?php $this->load->view('inc/adverts'); ?>
+		</div>
 
-    </div>
-
-    <div class="col-sm-8 col-md-8 col-lg-10 order-md-1 order-sm-2">
+		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
 
 		<div class="card text-center">
 			<a href="https://www.my.na/sell/featured?type=featured_product"><img alt="Feature Your Listing Online" src="https://www.my.na/img/adverts/featured_listing_banner.png" class="img-fluid"></a>	
@@ -58,8 +55,6 @@ $this->load->view('inc/header', $header);
 
         </div>
 
-        <div class="spacer"></div>	
-
          <?php
 	        //++++++++++++++++++++++
 	        //LOAD CAREER SEARCH BOX
@@ -68,8 +63,7 @@ $this->load->view('inc/header', $header);
          ?>
                      
         </section>
-        <hr>
-        <section id="products">
+        <section id="products" style="margin-top:10px">
           
          <div class="col-md-12">
 
@@ -78,7 +72,6 @@ $this->load->view('inc/header', $header);
             </div>   
 
 			<?php if(isset($html)){ echo $html;}
-			
 				echo $pages;	
 			?>   
 

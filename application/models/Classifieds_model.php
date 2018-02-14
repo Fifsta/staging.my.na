@@ -210,7 +210,7 @@ class Classifieds_model extends CI_Model{
 					
 				}
 				
-				$o .= '<div class="col-sm-12 col-md-12 col-lg-4 col-xl-3">
+				$o .= '<div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
 						<figure>
 							<div class="product_ribbon_sml"><small>'.$row->cat_name.' &nbsp;</small>'.date('jS \of F Y',strtotime($row->listing_date)).'<span></span></div>
 							<span class="pull-right" style="margin-top:0px">

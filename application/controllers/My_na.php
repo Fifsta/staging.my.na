@@ -368,16 +368,7 @@ class My_na extends CI_Controller {
 	//LOAD LATEST AUCTIONS
 	public function load_auctions_home()
 	{
-             echo '<div class="row-fluid">
-                    <div class="span6">
-                        <h3 class="na_script upper">Current Hot Auctions</h3>
-
-                    </div>
-                    <div class="span6 text-right">
-                        <a href="'.site_url('/').'trade/auctions/" class="btn btn-inverse" title="More Properties" rel="tooltip"  style="margin-top:15px;"><i class="icon icon-plus icon-white"></i> More Auctions</a>
-
-                    </div>
-                  </div>';
+        
 			$this->load->model('trade_model');
 			$query =  $this->db->query("SELECT products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
                                         u_business.IS_ESTATE_AGENT, u_business.BUSINESS_NAME, u_business.BUSINESS_LOGO_IMAGE_NAME,group_concat(product_images.img_file) as images,
@@ -398,8 +389,11 @@ class My_na extends CI_Controller {
                                         WHERE products.listing_type = 'A' AND products.is_active = 'Y'
                                         GROUP BY products.product_id
                                         ORDER BY products.listing_date DESC LIMIT 4");
-			$this->trade_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 3, $offset = 0, $title = '', $amt = 4 , FALSE);
+		 $o = $this->trade_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 3, $offset = 0, $title = '', $amt = 4 , FALSE);
 
+		 $this->output
+	        ->set_content_type('application/json')
+	        ->set_output(json_encode(array('auctions' => $o)));			
 			
 	}
 	//LOAD TRADE HOME PAGE
