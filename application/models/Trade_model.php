@@ -4099,7 +4099,7 @@ class Trade_model extends CI_Model
 				{
 
 					$max = $row->amount;
-					$prev = '';
+					$prev = 0;
 					$client_id = $row->client_id;
 				}
 
