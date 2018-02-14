@@ -1676,6 +1676,7 @@ class Trade_model extends CI_Model
 	              '.$watchlist.'
 	            </div>
 	            <!--watchlist/print-->
+	            <div class="spacer"></div>
 	            <div class="clearfix">' . $btn . '</div>
 	          </div>
 	        </div>
@@ -4129,28 +4130,9 @@ class Trade_model extends CI_Model
 				</section>
 				';
 
-				/*$output .= '
-						<div class="media well well-mini">
-							  <a class="pull-left" href="#" title="Placed on ' . date('F j, Y', strtotime($row->datetime)) . '" rel="tooltip">
-							    <span class="avatar-overlay60"></span>
-								<img class="media-object" style="border:1px solid #333333;width:60px; margin-right:10px; height:60px" src="' . $client['image'] . '">
-							  </a>
-							  <div class="media-body">
-							  <a title="' . $client['name'] . ' placed a bid of ' . $bid . '" rel="tooltip" class="btn btn-success pull-right"><i class="icon icon-plus icon-white"></i>' . $bid . '</a> 
-						
-							  
-							   <font style="font-size:14px;">' . $client['name'] . '</font>	<br/>
-								
-							   <font style="font-size:10px;">
-							  ' . date('g:i a F j, Y', strtotime($row->datetime)) . '</font>
-							  <br />Current Bid: N$ = ' . $bid . '
-							  </div>
-							 
-						 </div>';*/
-				$x++;
-
 
 			}
+
 			$head = '<h3 style="font-size:20px">Bid History</h3>';
 
 			$auto_bid_txt = $this->get_auto_bid_note($product_id, $max);
@@ -4164,8 +4146,7 @@ class Trade_model extends CI_Model
 				<h3 style="font-size:20px">Bid History</h3>
 				<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>
 						<h3 class="na_script">You are leading this auction</h3>
-						Your <strong>leading bid</strong> is currently at N$ ' . $max . '<br />' .
-					$auto_bid_txt . '
+						Your <strong>leading bid</strong> is currently at N$ ' . $max . '<br />' . $auto_bid_txt . '
 				</div>
 				';
 
