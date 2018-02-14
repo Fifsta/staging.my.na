@@ -4112,15 +4112,14 @@ class Trade_model extends CI_Model
 					<div class="row">
 						<div class="col-xs-3 col-sm-2 col-md-2">
 							<figure>
-								<a class="pull-left" href="#" title="Placed on ' . date('F j, Y', strtotime($row->datetime)) . '" rel="tooltip"><img src="' . $client['image'] . '"></a>
+								<a href="#" title="Placed on ' . date('F j, Y', strtotime($row->datetime)) . '" rel="tooltip"><img src="' . $client['image'] . '"></a>
 							</figure>
 						</div>
 						<div class="col-sm-10 col-md-10">
 							<blockquote>
 							   <a title="' . $client['name'] . ' placed a bid of ' . $bid . '" rel="tooltip" class="btn btn-success pull-right"><i class="fa-plus"></i>' . $bid . '</a> 
 							   <font style="font-size:14px;">' . $client['name'] . '</font>	<br/>
-							   <font style="font-size:10px;">
-							   ' . date('g:i a F j, Y', strtotime($row->datetime)) . '</font>
+							   <font style="font-size:10px;">' . date('g:i a F j, Y', strtotime($row->datetime)) . '</font>
 							   <br />
 							   Current Bid: N$ = ' . $bid . '
 							</blockquote>
