@@ -1603,7 +1603,7 @@ class Trade_model extends CI_Model
 								</div>';
 
 			}
-			$agent_ref = '<span class="badge badge-dark" rel="tooltip"  title="Product Reference"  itemprop="sku">MYNA' . $row->product_id . '</span>';
+			$agent_ref = '<span class="badge badge-secondary" rel="tooltip"  title="Product Reference"  itemprop="sku">MYNA' . $row->product_id . '</span>';
 			//PROPERTY REFERENCE
 			if (count(json_decode($row->extras)) > 0)
 			{
@@ -1614,7 +1614,7 @@ class Trade_model extends CI_Model
 					if ($exr == 'agency' && $exv != '')
 					{
 
-						$agent_ref = '<span  class="badge badge-dark" rel="tooltip"  title="Product Reference">Ref: <strong itemprop="sku">' . $exv . '</strong></span>';
+						$agent_ref = '<span  class="badge badge-secondary" rel="tooltip"  title="Product Reference">Ref: <strong itemprop="sku">' . $exv . '</strong></span>';
 					}
 
 				}
@@ -1635,11 +1635,11 @@ class Trade_model extends CI_Model
 			if ($row->location != '')
 			{
 
-				$location = '<span class="badge badge-dark"">' . $row->location . '</span>';
+				$location = '<span class="badge badge-secondary">' . $row->location . '</span>';
 
 				if ($row->suburb != 0 && $row->suburb != '')
 				{
-					$location = '<span class="badge badge-dark"">' . $row->location . ' / ' . $row->suburb . '</span>';
+					$location = '<span class="badge badge-secondary">' . $row->location . ' / ' . $row->suburb . '</span>';
 				}
 
 			}
