@@ -7081,6 +7081,13 @@ class Trade_model extends CI_Model
 	function get_user_avatar($id)
 	{
 
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 60;
+		$height = 60;
 
 		if ($id != '0')
 		{
@@ -7104,13 +7111,14 @@ class Trade_model extends CI_Model
 				elseif ($img != '')
 				{
 
-					$data['image'] = base_url('/') . 'assets/users/photos/' . $img;
+					$img_str = 'assets/users/photos/' . $img;
+					$data['image'] = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
 				}
 				else
 				{
 
-					$data['image'] = base_url('/') . 'img/user_blank.jpg';
+					$data['image'] = base_url('/') . 'images/user_blank.jpg';
 
 				}
 
@@ -7122,7 +7130,7 @@ class Trade_model extends CI_Model
 			else
 			{
 
-				$data['image'] = base_url('/') . 'img/user_blank.jpg';
+				$data['image'] = base_url('/') . 'images/user_blank.jpg';
 				$data['name'] = 'user';
 
 				return $data;
