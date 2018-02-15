@@ -218,7 +218,7 @@ $this->load->view('inc/header');
 				<div class="tab-content">
 					<section role="tabpanel" class="tab-pane active" id="About">
 						<h2 class="tab-head">About</h2>
-						<p>Ton of Content and stuff</p>
+						<p><?php echo $description; ?></p>
 					</section>
 					<section role="tabpanel" class="tab-pane" id="Enquiry-Form">
 						<h2 class="tab-head">Enquiry Form</h2>
@@ -252,7 +252,8 @@ $this->load->view('inc/header');
 						<section role="tabpanel" class="tab-pane" id="Deals">
 							<h2 class="tab-head">Deals</h2>
 							<div class="row">
-								<div class="col-xs-6 col-sm-3">
+
+								<!--<div class="col-xs-6 col-sm-3">
 									<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
 									<h3 class="tab-head">Deal title</h3>
 									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
@@ -276,7 +277,8 @@ $this->load->view('inc/header');
 									<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
 									<h3 class="tab-head">Deal title</h3>
 									<p>Just writing stuff in different lengths to see what happens</p>
-								</div>
+								</div>-->
+								No deals currently listed
 							</div>
 						</section>
 
@@ -473,6 +475,12 @@ $this->load->view('inc/header');
 
 <script type="text/javascript">
 	$(document).ready(function(){
+
+
+
+		//ADD RESPONSIVE to images
+		$('#details-right').find('img').addClass('img-fluid');
+
 
 		$.ajax({
             url: '<?php echo site_url('/');?>classifieds/get_latest/',
