@@ -58,16 +58,16 @@ $this->load->view('inc/header', $header);
             <div class="heading">
               <h2 data-icon="fa-folder-open-o"><?php echo $heading; ?></h2>
               <p>Want to list your business here? <a href="#">Try it out for free!</a></p>
-                <a class="btn btn-dark pull-right" style="margin-top:5px; margin-right:5px;" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <a class="btn btn-dark pull-right" style="margin-top:5px; margin-right:5px;" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" rel="tooltip" title="" data-original-title="Show business categories">
                   <i class="fa fa-folder"></i>
                 </a>
             </div>    
 
             <div class="collapse" id="collapseExample">
               <div class="sub well card bg-faded" style="background-color:#f5f5f5;">
-                
-                <?php $this->search_model->bus_categories($query); ?>
-
+                <div class="row" style="padding:10px">
+                  <?php $this->search_model->bus_categories($query); ?>
+                </div>
               </div> 
             </div>          
 

@@ -1249,20 +1249,17 @@ class Search_model extends CI_Model{
 
 					$des = trim(strip_tags(trim($description)));
 
+					if($row->IS_NTB_MEMBER == 'Y'){ 
+						$ntb = '<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/ntb_sml.png" alt="'.$name.' - NTB Member" style="width:60px"></a>';
+					} else { $ntb = ''; }
 
+					if($row->IS_HAN_MEMBER == 'Y'){ 
+						$han = '<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/han_sml.png" alt="'.$name.' -  HAN Member" style="width:60px"></a>';
+					} else { $han = ''; }
 
-						if($row->IS_NTB_MEMBER == 'Y'){ 
-							$ntb = '<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/ntb_sml.png" alt="<?php echo $name;?> - NTB Member" style="width:60px"></a>';
-						} else { $ntb = ''; }
-
-						if($row->IS_HAN_MEMBER == 'Y'){ 
-							$han = '<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/han_sml.png" alt="<?php echo $name;?> - HAN Member" style="width:60px"></a>';
-						} else { $han = ''; }
-
-					
 					$html = '
 		              <section class="results-item">
-		                <div>
+		                <div style="position:relative">
 		                  <figure>
 		                    <a href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/"><img class="rounded" src="'.$img_url.'" alt="'.$name.'"></a>
 		                    '.$ad.'
@@ -1271,73 +1268,21 @@ class Search_model extends CI_Model{
 							'.$this->get_review_stars($row->ID, $row->STAR_RATING,$row->NO_OF_REVIEWS).'
 		                  </div>
 		                </div>
+
 		                <div>
 		                  <h2><a href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/">'.$name.'</a></h2>
 		                  '.$sponsor.'
 		                  <p class="addr" data-icon="fa-map-marker text-dark">'. $address .'</p>
 		                  <p class="desc">'.$this->shorten_string($des, 35).'</p>
-
 							<p>'. $catstr.'</p>
-
 							<a class="btn btn-dark btn-sm" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View Business Listing</a>
-
-							<div class="text-right">'.$ntb.$han.'</div>
-
+							<div class="text-right pull-right">'.$ntb.$han.'</div>
 		                </div>
 		              </section>
 					';
 
-
-					/*$html = '<div class="container-fluid results_div" id="business_result_'.$row->ID.'">
-
-							 	<div class="row">
-							 		<div class="col-md-9">
-										<div class="corner_ribbon">
-											<div id="'.$id.'" class="my_na_c"></div>
-										</div>
-
-										<h3 class="upper na_script" style="text-indent:10px;height:25px;">'.$name.'</h3>
-										'.$sponsor.'
-										<p><i class="fa fa-map-marker text-dark"></i> <em>'. $address .'</em></p>
-										<p>'.$this->shorten_string($des, 35).'</p>
-							 		</div>
-							 		<div class="col-md-3">
-							 			<div class="row">
-							 				<div class="col-md-12 text-center">
-												<a class="pull-right" href="#" style="margin:10px 10px 10px 10px ">
-													<img class="img-thumbnail rounded" src="'.$img_url.'" alt="'.$name.'" style="width: 100px; height:100px;">
-													'.$ad.'
-												</a>
-							 				</div>
-
-							 			</div>
-
-							 		</div>
-							 	</div>
-							 	<div class="row">
-							 		<div class="col-md-12">
-
-							 		</div>
-							 	</div>
-							 	<div class="row">
-							 		<div class="col-md-12">
-										<p>'.$this->get_review_stars($row->ID, $row->STAR_RATING,$row->NO_OF_REVIEWS).' '. $catstr.'</p>
-
-									 	 <a class="btn btn-secondary" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View listing &raquo;</a>
- 										 <a class="btn btn-secondary" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="Contact: '.$name.'"><i class="fa fa-envelope text-light"></i> Contact Us</a>
- 										 <a class="btn btn-secondary" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View full reviews for '.$name.'"><i class="fa fa-comment text-light"></i> Reviews</a>
-							 			'.$temp.'
-
-							 		</div>
-							 	</div>
-
-							 </div>
-							 ';*/
-
-
-						echo $html;
-					
-					 
+					echo $html;
+						 
 					$x ++;
 				}
 
@@ -1395,82 +1340,63 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function bus_categories($query){
 			
-		//Get Main
-		$main = $this->db->query("SELECT i_tourism_category.CATEGORY_ID, COUNT(i_tourism_category.CATEGORY_ID) as num,
-								a_tourism_category_sub.*,a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME,
-								group_concat(DISTINCT(sub_table.ID),'_-_',sub_table.CATEGORY_NAME) as cats
-								 FROM i_tourism_category 
-								JOIN a_tourism_category_sub ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID 
-								JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
-								LEFT JOIN a_tourism_category_sub as sub_table ON sub_table.CATEGORY_TYPE_ID = a_tourism_category.ID  
-								GROUP BY a_tourism_category_sub.CATEGORY_TYPE_ID ORDER BY num DESC LIMIT 30", FALSE);
-		
-		echo '<ul class="row">';
-			
-		foreach($main->result() as $row){
-		
-			$main_id = $row->CATEGORY_TYPE_ID;
-			$main_name = $row->MAIN_CAT_NAME;
-			
-			echo '<li class="col-sm-6 col-lg-4"><a href="'.site_url('/').'a/show/'.$main_id.'/'.$this->url_encode($main_name).'/">'.$main_name.'</a></li>';
+        //Get Main
+        $main = $this->db->query("SELECT i_tourism_category.CATEGORY_ID, COUNT(i_tourism_category.CATEGORY_ID) as num,
+                                a_tourism_category_sub.*,a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME,a_tourism_category.CATEGORY_ICON as CAT_ICON,
+                                group_concat(DISTINCT(sub_table.ID),'_-_',sub_table.CATEGORY_NAME) as cats
+                                 FROM i_tourism_category 
+                                JOIN a_tourism_category_sub ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID 
+                                JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
+                                LEFT JOIN a_tourism_category_sub as sub_table ON sub_table.CATEGORY_TYPE_ID = a_tourism_category.ID  
+                                GROUP BY a_tourism_category_sub.CATEGORY_TYPE_ID ORDER BY num DESC", FALSE);
+        
+            
+        foreach($main->result() as $row){
+        
+            $main_id = $row->CATEGORY_TYPE_ID;
+            $main_name = $row->MAIN_CAT_NAME;
+            $icon = $row->CAT_ICON;
 
-			/*echo '
-			  <div class="card">
-			    <div class="card-header" role="tab" id="headingOne">
-			      <h5 class="mb-0" style="font-size:14px">
-			        <a data-toggle="collapse" data-parent="#accordion" href="#cat_main_'.$main_id.'" aria-expanded="true" aria-controls="collapseOne">
-			          '.$main_name.'<i class="fa fa-search-plus text-dark pull-right"></i>
-			        </a>
-			      </h5>
-			    </div>
-
-			    <div id="cat_main_'.$main_id.'" class="collapse" role="tabpanel" aria-labelledby="headingOne">
-			      <div class="card-block"><ul class="list-group list-group-flush">';
-
-					$subA = explode(',',$row->cats);
-					foreach($subA as $sub_row){
-						//echo $sub_row;
-						$id = substr($sub_row, 0, strpos($sub_row,'_-_', 0));
-						$name = substr($sub_row, stripos($sub_row,'_-_') + 3, strlen($sub_row));
-						
-						echo '<a href="'.site_url('/').'a/show/'.$main_id.'/'.$this->url_encode($main_name).'/'.$id.'/'.$this->url_encode($name).'/"><li class="list-group-item list-group-item-action list-group-item-light">'.$name.'<i class="fa fa-chevron-right text-dark pull-right"></i></li></a>';
-						
-					}
-
-			 echo '</ul>      
-			      </div>
-			    </div>
-			  </div>
-			';*/
+            $subs = $this->show_sub_cats($main_id);
+            
+            echo '
+            <div class="col-xs-6 col-sm-6 col-md-4 category">
+                <a href="#" data-icon="'.$icon.' text-dark"></a>
+                <h3>'.$row->MAIN_CAT_NAME.'</h3>
+                <p>'.$subs.'</p>
+            </div>
+            ';
+            
+        }
 	
 			
-		}
-		echo '</ul>';
-					
-	}
-
-
-
-
-
-
-
-
-	//SHOW SUB CATEGORIES ON HOME PAGE
-	function show_sub_cats($id){
-			
-		$sub = $this->get_sub_categories($id);	
 		
-			foreach($sub->result() as $sub_row){
-				
-				$sub_id = $sub_row->ID;
-				$sub_name = $sub_row->CATEGORY_NAME;
-				echo '<a class="btn" style="margin:5px" href="'.site_url('/').'a/cat/'.$sub_id.'/'.$this->clean_url_str($sub_name).'/">'.$sub_name.' <i class="icon-share-alt"></i></a>';
-				
-			}
-		echo '<br /><a class="btn btn-mini btn-inverse pull-right" id="reload_main"><i class="icon-arrow-left"></i> Go Back</a>';	
-			
 	}
+
+
+
+    //SHOW SUB CATEGORIES ON HOME PAGE
+    function show_sub_cats($id){
+            
+        $o = '';    
+        $sub = $this->get_sub_categories($id);  
+            
+            $i = 1;
+            foreach($sub->result() as $sub_row){
+                
+                if($i==5) { $comma = ''; }else{ $comma = ', '; }
+
+                $sub_id = $sub_row->ID;
+                $sub_name = $sub_row->CATEGORY_NAME;
+
+                $o .= '<a href="'.site_url('/').'a/cat/'.$sub_id.'/'.$this->clean_url_str($sub_name).'">'.$sub_name.'</a>'.$comma.' ';
+                $i++;
+            }
+
+         return $o;   
+            
+    }    
+
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 //GET BUSINESS CATEGORIES
