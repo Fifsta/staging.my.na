@@ -147,15 +147,6 @@ $this->load->view('inc/header');
 				<!--banner-->
 		        <div class="list-map">
 		          <div class="list-map-left" style="background:#ccc; position:relative">
-		              <div class="asso static-banner">
-						<?php if($bus_details['IS_NTB_MEMBER'] == 'Y'){ ?>
-						<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/ntb.png"></a>
-						<?php } ?>
-
-						<?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
-						<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/han.png"></a>
-						<?php } ?>
-		              </div>
 		              <img src="<?php echo $cover_url; ?>" class="img-fluid">
 		          </div>
 		          
@@ -188,15 +179,29 @@ $this->load->view('inc/header');
 						 echo '<p>'. implode(' ',$cats['links']).'</p>';
 						 ?>
 						<div class="row reveal">
-							<div class="col-sm-12 col-md-6">
+							<div class="col-sm-12 col-md-6 col-lg-4">
 								<p data-icon="fa-phone text-dark"><button class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
 								<p data-icon="fa-fax text-dark"><button class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>
+								
 							</div>
-							<div class="col-sm-12 col-md-6">
+							<div class="col-sm-12 col-md-6 col-lg-4">
 								<p data-icon="fa-tablet text-dark"><button class="btn btn-default"><!--C: --><?php echo $cell; ?></button></p>
-								<p data-icon="fa-globe text-dark"><a href="http://www.website.com.na" class="btn btn-default" target="_blank"><!--W: --><?php echo $email; ?></a></p>
+								<p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><?php echo $email; ?></button></p>
+								
 							</div>
+							<div class="col-sm-12 col-md-6 col-lg-4">
+								<p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><?php echo $website; ?></button></p>
+							</div>							
 						</div>
+
+						<?php if($bus_details['IS_NTB_MEMBER'] == 'Y'){ ?>
+						<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/ntb_sml.png" alt="<?php echo $name;?> - NTB Member"></a>
+						<?php } ?>
+
+						<?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
+						<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/han_sml.png" alt="<?php echo $name;?> - HAN Member"></a>
+						<?php } ?>
+
 					</div>
 				</div>
 				<!--details-->

@@ -1121,8 +1121,8 @@ class Search_model extends CI_Model{
 			
 
 			$this->load->model('image_model'); 
-
 			$this->load->library('thumborp');
+
 			$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
 			$width = 360;
 			$height = 230;
@@ -1248,6 +1248,17 @@ class Search_model extends CI_Model{
 
 
 					$des = trim(strip_tags(trim($description)));
+
+
+
+						if($bus_details['IS_NTB_MEMBER'] == 'Y'){ 
+							$ntb = '<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/ntb_sml.png" alt="<?php echo $name;?> - NTB Member"></a>';
+						} else { $ntb = ''; }
+
+						if($bus_details['IS_HAN_MEMBER'] == 'Y'){ 
+							$han = '<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/han_sml.png" alt="<?php echo $name;?> - HAN Member"></a>';
+						} else { $han = ''; }
+
 					
 					$html = '
 		              <section class="results-item">
@@ -1269,6 +1280,8 @@ class Search_model extends CI_Model{
 							<p>'. $catstr.'</p>
 
 							<a class="btn btn-dark btn-sm" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View Business Listing</a>
+
+							<div class="text-right">'.$ntb.$han.'</div>
 
 		                </div>
 		              </section>

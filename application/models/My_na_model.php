@@ -51,14 +51,17 @@ class My_na_model extends CI_Model{
             
         $o = '';    
         $sub = $this->get_sub_categories($id);  
-        
+            
+            $i = 1;
             foreach($sub->result() as $sub_row){
                 
+                if($i==5) { $comma = ''; }else{ $comma = ', '; }
+
                 $sub_id = $sub_row->ID;
                 $sub_name = $sub_row->CATEGORY_NAME;
 
-                $o .= '<a href="'.site_url('/').'a/cat/'.$sub_id.'/'.$this->clean_url_str($sub_name).'">'.$sub_name.'</a>,';
-                
+                $o .= '<a href="'.site_url('/').'a/cat/'.$sub_id.'/'.$this->clean_url_str($sub_name).'">'.$sub_name.'</a>'.$comma.' ';
+                $i++;
             }
 
          return $o;   
