@@ -1251,12 +1251,12 @@ class Search_model extends CI_Model{
 
 
 
-						if($bus_details['IS_NTB_MEMBER'] == 'Y'){ 
-							$ntb = '<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/ntb_sml.png" alt="<?php echo $name;?> - NTB Member"></a>';
+						if($row->IS_NTB_MEMBER == 'Y'){ 
+							$ntb = '<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/ntb_sml.png" alt="<?php echo $name;?> - NTB Member" style="width:60px"></a>';
 						} else { $ntb = ''; }
 
-						if($bus_details['IS_HAN_MEMBER'] == 'Y'){ 
-							$han = '<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/han_sml.png" alt="<?php echo $name;?> - HAN Member"></a>';
+						if($row->IS_HAN_MEMBER == 'Y'){ 
+							$han = '<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/han_sml.png" alt="<?php echo $name;?> - HAN Member" style="width:60px"></a>';
 						} else { $han = ''; }
 
 					
