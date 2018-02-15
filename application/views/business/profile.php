@@ -97,7 +97,7 @@ $header['og'] ='
 <meta property="og:url"         content="'.site_url('/').'b/'.$bus_id.'/'.$this->uri->segment(3).'/"> 
 <meta property="og:title"       content="'.$header['title'].'"> 
 <meta property="og:description" content="'.$header['metaD'].'"> 
-<meta property="og:image"       content="'.$img_str.'">'; 
+<meta property="og:image"       content="'.$img_url.'">'; 
 
 $this->load->view('inc/header');
 
