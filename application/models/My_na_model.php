@@ -12,13 +12,13 @@ class My_na_model extends CI_Model{
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //GET HOME CATEGORIES
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     
-    function home_categories(){
+    function home_categories($typ){
             
         //Get Main
         $main = $this->db->query("SELECT i_tourism_category.CATEGORY_ID, COUNT(i_tourism_category.CATEGORY_ID) as num,
                                 a_tourism_category_sub.*,a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME,a_tourism_category.CATEGORY_ICON as CAT_ICON,
                                 group_concat(DISTINCT(sub_table.ID),'_-_',sub_table.CATEGORY_NAME) as cats
-                                 FROM i_tourism_category 
+                                FROM i_tourism_category 
                                 JOIN a_tourism_category_sub ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID 
                                 JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
                                 LEFT JOIN a_tourism_category_sub as sub_table ON sub_table.CATEGORY_TYPE_ID = a_tourism_category.ID  
@@ -35,7 +35,7 @@ class My_na_model extends CI_Model{
             
             echo '
             <div class="col-xs-6 col-sm-6 col-md-4 category">
-                <a href="#" data-icon="'.$icon.' text-dark"></a>
+                <a href="#" data-icon="'.$icon.' text-'.$typ.'"></a>
                 <h3>'.$row->MAIN_CAT_NAME.'</h3>
                 <p>'.$subs.'</p>
             </div>

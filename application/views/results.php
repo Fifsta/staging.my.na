@@ -71,24 +71,7 @@ $this->load->view('inc/header', $header);
               </div> 
             </div>          
 
-            <div id="filter" class="col-sm-12">
-              <form class="input-group input-group-lg">
-                <div class="input-group-addon">Find:</div>
-                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Pizza, Lodge, Plumbing, ... etc">
-                <div class="input-group-addon">Categories:</div>
-                <select class="selectpicker form-control" multiple data-live-search="true" data-none-selected-text="Select categories">
-                  <option>Jaccuzzi</option>
-                  <option>Study</option>
-                  <option>Library</option>
-                  <option>Jaccuzzi</option>
-                  <option>Study</option> 
-                  <option>Library</option>
-                </select>
-                <div class="input-group-addon">Near:</div>
-                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Windhoek">
-                <span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search"></button></span>
-              </form>
-            </div>      
+            <?php $this->load->view('business/inc/filter'); ?>   
 
 
             <div class="results-head">

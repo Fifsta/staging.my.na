@@ -1220,7 +1220,7 @@ class Search_model extends CI_Model{
 					$ad ='';
 					if($advertorial != '' || $row->PAID_STATUS == '1'){
 						   
-						$ad = '<img src="'.base_url('/').'images/bground/reviewed_2_sml.png" class="pull-right" style="margin:-40px 0px 0 0px; position:absolute" />';
+						$ad = '<img src="'.base_url('/').'images/bground/reviewed_2_sml.png" class="pull-right" style="top:-20px; left:-20px; position:absolute" />';
 
 					}
 
@@ -1592,7 +1592,7 @@ class Search_model extends CI_Model{
 			
 		}else{
 			
-			$arr = '<a class="clearfix" href="'.site_url('/') . 'b/'. $id .'/reviews/" style="margin-top:20px"><div class="badge badge-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</div></a>';
+			$arr = '<a class="clearfix" href="'.site_url('/') . 'b/'. $id .'/reviews/" style="margin-top:10px; font-ssize:10px"><div title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</div></a>';
 			return $arr;
 			
 		}
