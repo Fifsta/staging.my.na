@@ -3600,6 +3600,7 @@ tbody.collapse.show {
 
 .tab-content > .active {
   display: block;
+  overflow:hidden;
 }
 
 .navbar {

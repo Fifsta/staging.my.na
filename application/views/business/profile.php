@@ -1,7 +1,5 @@
 <?php 
 
-
-
 $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
 $width = 800;
 
@@ -82,10 +80,6 @@ if($cover_img != ''){
 }
 
 
-	
-
-
-
 $header['title'] = $name. ' - My Namibia';
 $header['metaD'] =  strip_tags(implode(' ',$cats['links'])) . ' - ' .$name. ' - a business listed on My Namibia';
 $header['section'] = 'home';
@@ -117,7 +111,7 @@ $this->load->view('inc/header');
 		<ol class="breadcrumb">
 		   <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>"  itemprop="url"><span itemprop="title">My</span></a></li>
 		   <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>a/show/all/all/all/none/" itemprop="url"><span itemprop="title">Businesses</span></a> </li>
-		   <?php echo implode(' ',$cats['breadcrumb']); ?>
+		   
 		   <li class="breadcrumb-item active"><?php echo $name;?></li>
 		</ol>
 	</div>
@@ -183,14 +177,13 @@ $this->load->view('inc/header');
 						 
 					</div>
 					<div class="details-right">
-						<h2><?php echo $address ;?><a href="#" data-toggle="tooltip" title="Find out more about getting featured"><span>Featured</span></a></h2>
+						<h2><?php echo $address ;?></h2>
 						<div itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
                              <span itemprop="street-address"><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
                              <span itemprop="locality"><?php echo $city ;?></span>
                              <span itemprop="region"><?php echo $region ;?></span>
                              <span itemprop="country-name">Namibia</span>
                          </div>
-						<p class="desc"><?php echo $description; ?></p>
                          <?php 
 						 echo '<p>'. implode(' ',$cats['links']).'</p>';
 						 ?>
@@ -218,7 +211,8 @@ $this->load->view('inc/header');
 				<div class="tab-content">
 					<section role="tabpanel" class="tab-pane active" id="About">
 						<h2 class="tab-head">About</h2>
-						<p><?php echo $description; ?></p>
+						<p id="b-about"><?php echo $description; ?></p>
+
 					</section>
 					<section role="tabpanel" class="tab-pane" id="Enquiry-Form">
 						<h2 class="tab-head">Enquiry Form</h2>
@@ -281,6 +275,7 @@ $this->load->view('inc/header');
 								No deals currently listed
 							</div>
 						</section>
+						<div class="clear:both"> </div>
 
 					<section role="tabpanel" class="tab-pane" id="Gallery">
 						<h2 class="tab-head">Gallery</h2>
@@ -289,89 +284,31 @@ $this->load->view('inc/header');
 						</div>
 					</section>
 				</div>
+
 				<!--tabs-->
 				
 				<!--tabs-->
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-star-o">Reviews <span class="badge">8</span></a></li>
-					<li role="presentation" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa-star">Submit Review</a></li>
+					<li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-star-o text-dark">Reviews</a></li>
+					<li role="presentation" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa-star text-dark">Submit Review</a></li>
 				</ul>
 				<div class="tab-content">
 				
 					<section role="tabpanel" class="tab-pane active" id="Reviews">
-						<h2 class="tab-head">Awards</h2>
+						<!--<h2 class="tab-head">Awards</h2>
 						<div class="row">
-							<div class="col-sm-6 col-md-3">
-								<div class="award"><div>
-									<div class="rating"><span></span><span></span><span class="active"></span><span></span><span></span></div>
-									<a href="#">8 Reviews</a>
-								</div></div>
-							</div>
-							<div class="col-sm-6 col-md-3">
-								<div class="award"><div>
-									<div class="split"><img src="images/han.png"></div>
-									<div class="split">Award of Excellence <span class="gold">Gold</span></div>
-								</div></div>
-							</div>
-							<div class="col-sm-6 col-md-3">
-								<div class="award"><div>
-									<div class="split"><img src="images/ntb.png"></div>
-									<div class="split">Award of Excellence <span class="gold">Gold</span></div>
-								</div></div>
-							</div>
-							<div class="col-sm-6 col-md-3">
-								<div class="award"><div>
-									<div class="split"><img src="images/fnb.png"></div>
-									<div class="split">Rated <span>Excellent</span></div>
-								</div></div>
-							</div>
-						</div>
+							<div class="alert alert-warning">
+								<h4><strong>No Reviews Added</strong></h4>
+								No Reviews have been added for the current product.
+							  </div>
+						</div>-->
 						
 						<h2 class="tab-head">Reviews</h2>
-						<div class="row review-item">
-							<div class="col-xs-3 col-sm-2 col-md-1">
-								<figure><a href="#"><img src="images/profile-pic.jpg"></a></figure>
-							</div>
-							<div class="col-sm-10 col-md-5">
-								<blockquote>
-									<div class="rating"><span></span><span></span><span></span><span></span><span class="active"></span></div>
-									<header><strong>An amazing experience</strong></header>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									<footer>Carl-Heinz Benseler <span>2 years ago</span></footer>
-								</blockquote>
-							</div>
-							<div class="col-xs-4 col-sm-4 col-md-2">
-								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
-							</div>
-							<div class="col-xs-4 col-sm-4 col-md-2">
-								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
-							</div>
-							<div class="col-xs-4 col-sm-4 col-md-2">
-								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
-							</div>
-						</div>
-						<div class="row review-item">
-							<div class="col-xs-3 col-sm-2 col-md-1">
-								<figure><a href="#"><img src="images/profile-pic.jpg"></a></figure>
-							</div>
-							<div class="col-sm-10 col-md-5">
-								<blockquote>
-									<div class="rating"><span></span><span></span><span></span><span></span><span class="active"></span></div>
-									<header><strong>An amazing experience</strong></header>
-									<p>Liebes Pasjona-TeamWir versuchen gerade nach den vielen tollen Eindrücken und Erlebnissen wieder in Deutschland anzukommen. Die Reise war perfekt. Der Ablauf und die Unterkünfte waren ein jeder auf Ihre Art interessant und schön. Nach dem Camp in Tsauchab River hat Herr Schatz zu mir gesagt: "Einen so schönen Platz werden wir nicht mehr bekommen." Ich glaube im Camp Gecko haben wir das wieder gedacht. Wir erlebte die Reise insgesamt als abwechslungsreich und spannend und somit als sehr kurzweilig, so sind die 3 Wochen leider wie im Flug an uns vorbeigezogen. Für mich war die "Little 5 Dessert Tour" mit Chris das Highlight. Ansonsten war Swakopmund vom Ort her nicht so prickelnd, aber als Wendepunkt der Reise (von Flora zur Fauna) sehr gut geeignet. Vielen Dank für Ihre Organisation der Reise und weiterhin viel Erfolg. Wenn Sie mal wieder auf einer Messeveranstaltung in München präsentieren, informieren Sie uns bitte. Vielleicht gibt es ja die Möglichkeit, dass wir uns mal persönlich kennen lernen.Herzliche Grüsse vonWolfgang, Tina, Mirjam und Hanna Huber</p>
-									<footer>Carl-Heinz Benseler <span>2 years ago</span></footer>
-								</blockquote>
-							</div>
-							<div class="col-xs-4 col-sm-4 col-md-2">
-								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
-							</div>
-							<div class="col-xs-4 col-sm-4 col-md-2">
-								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
-							</div>
-							<div class="col-xs-4 col-sm-4 col-md-2">
-								<figure><a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a></figure>
-							</div>
-						</div>
+						<?php //echo $this->rating_model->show_reviews($bus_id);?>
+							  <div class="alert alert-warning">
+								<h4><strong>No Reviews Added</strong></h4>
+								No Reviews have been added for the current product.
+							  </div>
 					</section>
 					
 					<section role="tabpanel" class="tab-pane" id="Submit-Review">
@@ -426,33 +363,7 @@ $this->load->view('inc/header');
 								</div>
 							</div>
 						</form>
-						<p class="tab-head">Submit 3 Photos</p>
-						<div class="row">
-							<div class="col-sm-4 col-md-3">
-								<figure>
-									<a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a>
-									<div class="more">
-										<p><button class="btn btn-default" data-icon="fa-trash"></button><button class="btn btn-default" data-icon="fa-crop"></button></p>
-									</div>
-								</figure>
-							</div>
-							<div class="col-sm-4 col-md-3">
-								<figure>
-									<a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a>
-									<div class="more">
-										<p><button class="btn btn-default" data-icon="fa-trash"></button><button class="btn btn-default" data-icon="fa-crop"></button></p>
-									</div>
-								</figure>
-							</div>
-							<div class="col-sm-4 col-md-3">
-								<figure>
-									<a href="#" class="fancy-images" rel="user"><img src="images/sample1.jpg"></a>
-									<div class="more">
-										<p><button class="btn btn-default" data-icon="fa-trash"></button><button class="btn btn-default" data-icon="fa-crop"></button></p>
-									</div>
-								</figure>
-							</div>
-						</div>
+					
 					</section>
 					
 				</div>
@@ -477,9 +388,7 @@ $this->load->view('inc/header');
 	$(document).ready(function(){
 
 
-
-		//ADD RESPONSIVE to images
-		$('#details-right').find('img').addClass('img-fluid');
+		$('#b-about img').addClass('img-fluid');
 
 
 		$.ajax({

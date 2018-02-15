@@ -1455,7 +1455,7 @@ function show_all_gallery_images($bus_id)
 			foreach($test->result() as $row){
 				
 				$cat_id = $row->SUBCAT_ID;
-				$x['links'][$y] = '<a href="'.site_url('/').'a/cat/'.$cat_id.'/'.$this->clean_url_str($row->CATEGORY).'/"><span class="label">'.$row->CATEGORY.'</span></a>';
+				$x['links'][$y] = '<a href="'.site_url('/').'a/cat/'.$cat_id.'/'.$this->clean_url_str($row->CATEGORY).'/"><span class="badge badge-secondary">'.$row->CATEGORY.'</span></a>';
 				
 				if($y == 0){
 					
