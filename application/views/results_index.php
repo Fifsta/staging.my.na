@@ -32,37 +32,44 @@
 <nav id="bread">
     <div class="container">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">My.na</a></li>
+            <li itemtype="http://data-vocabulary.org/Breadcrumb" class="breadcrumb-item"><a href="#">My.na</a></li>
+            <li class="breadcrumb-item active">Search index for: <?php echo $title;?></li>
           </ol>
     </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
 
     <div class="row">
 
-        <div class="col-sm-4 col-md-4 col-lg-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
-            
+        <div class="col-sm-4 col-md-4 col-lg-3 col-xl-4 order-md-2 order-sm-1 order-lg-2 order-xl-3" id="sidebar">
+            <?php $this->load->view('inc/login'); ?>
             <?php $this->load->view('inc/weather'); ?>
-            
             <?php $this->load->view('inc/adverts'); ?>
-
         </div>
 
-        <div class="col-sm-8 col-md-8 col-lg-10 order-md-1 order-sm-2">
+        <div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
 
-            <div class="row">
+            <section id="results">
 
-                <div class="col-md-12">
-                    <?php 
-                    //+++++++++++++++++
-                    //LOAD LOCATION LINKS
-                    //+++++++++++++++++
-                    $this->my_na_model->instant_search($key, '100');
-                    ?>
-                </div>  
+                    <div class="heading" style="margin-bottom:20px">
+                      <h2 data-icon="fa-newspaper-o">Search Index for <strong><?php echo $title;?></strong></h2>
+                    </div> 
 
-            </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <?php 
+                        //+++++++++++++++++
+                        //LOAD LOCATION LINKS
+                        //+++++++++++++++++
+                        $this->my_na_model->instant_search($key, '100');
+                        ?>
+                    </div>  
+
+                </div>
+
+            </section>    
 
         </div>
 

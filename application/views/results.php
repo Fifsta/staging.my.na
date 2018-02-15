@@ -81,7 +81,7 @@ $this->load->view('inc/header', $header);
                   <option>Study</option>
                   <option>Library</option>
                   <option>Jaccuzzi</option>
-                  <option>Study</option>
+                  <option>Study</option> 
                   <option>Library</option>
                 </select>
                 <div class="input-group-addon">Near:</div>

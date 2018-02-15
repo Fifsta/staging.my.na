@@ -599,22 +599,31 @@ class My_na extends CI_Controller {
 	//++++++++++++++++++++++++++++++
 	public function search()
 	{
-		/*$type = $this->input->post('type', TRUE);
+		$type = $this->input->post('type', TRUE);
 		$location = $this->input->post('location', TRUE);
 		$main_cat_id = $this->input->post('main_cat_id', TRUE);
 		$sub_cat_id = $this->input->post('sub_cat_id', TRUE);
 		$sub_sub_cat_id = $this->input->post('sub_sub_cat_id', TRUE);
 		$sub_sub_sub_cat_id = $this->input->post('sub_sub_sub_cat_id', TRUE);
-		$key = $this->input->post('srch_bar', TRUE);
-		$key = $this->db->escape_like_str($key);*/
-		redirect(site_url('/').'my_na/results/?'.http_build_query($this->input->post()), 301);
+
+ 		$q = $this->input->post('srch_bar',TRUE);
+
+		$data['title'] = rawurldecode($q);
+		$data['key'] = $data['title'];
+		$data['str'] = $q;
+		$this->load->view('results_index', $data);
+
 	}
 	//++++++++++++++++++++++++++++++
 	//GLOBAL RESULTS
 	//++++++++++++++++++++++++++++++
 	public function results()
 	{
+
+
+
  		$q = $this->input->get('srch_bar',TRUE);
+
 		$data['title'] = rawurldecode($q);
 		$data['key'] = $data['title'];
 		$data['str'] = $q;

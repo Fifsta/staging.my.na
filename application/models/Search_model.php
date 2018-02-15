@@ -1266,12 +1266,9 @@ class Search_model extends CI_Model{
 		                  <p class="addr" data-icon="fa-map-marker text-dark">'. $address .'</p>
 		                  <p class="desc">'.$this->shorten_string($des, 35).'</p>
 
-								<p>'. $catstr.'</p>
+							<p>'. $catstr.'</p>
 
-							 	 	 <a class="btn btn-dark btn-sm" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View Business Listing</a>
-
-
-
+							<a class="btn btn-dark btn-sm" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View Business Listing</a>
 
 		                </div>
 		              </section>
@@ -1436,9 +1433,15 @@ class Search_model extends CI_Model{
 			
 		}
 		echo '</ul>';
-			
-			
+					
 	}
+
+
+
+
+
+
+
 
 	//SHOW SUB CATEGORIES ON HOME PAGE
 	function show_sub_cats($id){

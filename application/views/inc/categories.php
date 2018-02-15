@@ -10,9 +10,12 @@
 	</div>
 
 	<div class="row" style="margin-top:20px">
-		<div class="col-xs-6 col-sm-6 col-md-4 category">
+
+		<?php $this->my_na_model->home_categories(); ?>
+
+		<!--<div class="col-xs-6 col-sm-6 col-md-4 category">
 			<a href="#" data-icon="fa-briefcase text-dark"></a>
-			<h3><a href="#">Business</a></h3>
+			<h3><a href="#">Business Services</a></h3>
 			<p><a href="#">Property</a>, <a href="#">Cars</a>, <a href="#">Services</a>, <a href="#">Building</a>, <a href="#">Architect</a>, <a href="#">Internet</a>, <a href="#">Finance</a>, <a href="#">Labelling Services</a>, </p>
 		</div>
 		<div class="col-xs-6 col-sm-6 col-md-4 category">
@@ -69,6 +72,6 @@
 			<a href="#" data-icon="fa-bus text-dark"></a>
 			<h3><a href="#">Transport</a></h3>
 			<p><a href="#">Property</a>, <a href="#">Cars</a>, <a href="#">Services</a>, <a href="#">Building</a>, <a href="#">Architect</a>, <a href="#">Internet</a>, <a href="#">Finance</a>, <a href="#">Labelling Services</a>, </p>
-		</div>
+		</div>-->
 	</div>
 </section>

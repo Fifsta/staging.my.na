@@ -7,6 +7,77 @@ class My_na_model extends CI_Model{
 			
  	}
 
+
+
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //GET HOME CATEGORIES
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     
+    function home_categories(){
+            
+        //Get Main
+        $main = $this->db->query("SELECT i_tourism_category.CATEGORY_ID, COUNT(i_tourism_category.CATEGORY_ID) as num,
+                                a_tourism_category_sub.*,a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME,
+                                group_concat(DISTINCT(sub_table.ID),'_-_',sub_table.CATEGORY_NAME) as cats
+                                 FROM i_tourism_category 
+                                JOIN a_tourism_category_sub ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID 
+                                JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
+                                LEFT JOIN a_tourism_category_sub as sub_table ON sub_table.CATEGORY_TYPE_ID = a_tourism_category.ID  
+                                GROUP BY a_tourism_category_sub.CATEGORY_TYPE_ID ORDER BY num DESC LIMIT 12", FALSE);
+        
+            
+        foreach($main->result() as $row){
+        
+            $main_id = $row->CATEGORY_TYPE_ID;
+            $main_name = $row->MAIN_CAT_NAME;
+
+            $subs = $this->show_sub_cats($main_id);
+            
+            echo '
+            <div class="col-xs-6 col-sm-6 col-md-4 category">
+                <a href="#" data-icon="fa-briefcase text-dark"></a>
+                <h3>'.$row->MAIN_CAT_NAME.'</h3>
+                <p>'.$subs.'</p>
+            </div>
+            ';
+            
+        }
+                    
+    }
+
+
+    //SHOW SUB CATEGORIES ON HOME PAGE
+    function show_sub_cats($id){
+            
+        $o = '';    
+        $sub = $this->get_sub_categories($id);  
+        
+            foreach($sub->result() as $sub_row){
+                
+                $sub_id = $sub_row->ID;
+                $sub_name = $sub_row->CATEGORY_NAME;
+
+                $o .= '<a href="'.site_url('/').'a/cat/'.$sub_id.'/'.$this->clean_url_str($sub_name).'">'.$sub_name.'</a>,';
+                
+            }
+
+         return $o;   
+            
+    }    
+
+
+    //GEt sub Categories
+    function get_sub_categories($cat_id){
+        
+        $test = $this->db->query("SELECT a_tourism_category_sub.CATEGORY_NAME, a_tourism_category_sub.ID
+                                    FROM a_tourism_category_sub
+                                    JOIN a_tourism_category ON a_tourism_category_sub.CATEGORY_TYPE_ID = a_tourism_category.ID
+                                    WHERE a_tourism_category_sub.CATEGORY_TYPE_ID = '".$cat_id."' LIMIT 5", FALSE);
+        return $test;
+                  
+    }    
+
+
+
 	 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //+GET NAMIBIAN NEWS
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1465,7 +1536,7 @@ class My_na_model extends CI_Model{
         }
 		// '".$key."'
 	
-		if($query){
+		if($query){ 
 
 			foreach($query->result() as $row){
 				$wordsArray = array();
@@ -1484,27 +1555,28 @@ class My_na_model extends CI_Model{
                 $img_str = $row->img_file;
                 $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-				echo '<div class="container-fluid results_div" style="padding:10px">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <img src="'.$img_url.'" class="img-thumbnail"/>
-                            </div>
-                            <div class="col-md-9">
-                                <h2 style="font-size:18px">'.str_replace($key1, $text,$row->title).'</h2>
-                                <p><span class="muted">'.$this->shorten_string($text, 40).'</span></p>
-                                <span class="badge badge-warning" style="font-size:14px">'.ucwords(str_replace("_"," ",$row->type)).'</span><hr>
-                                <a href="'.site_url('/').$row->link.'" class="btn btn-dark btn-lg"><i class="icon-search"></i> View '.ucwords(str_replace("_"," ",$row->type)).'</a>
-                                
-                            </div>
-                        </div>    
 
-					  </div>';
-			}
+                echo '
+                  <section class="results-item">
+                    <div>
+                      <figure>
+                        <a href="'.site_url('/').$row->link.'"><img class="rounded" src="'.$img_url.'" alt="'.$row->title.'"></a>
+                      </figure>
+                    </div>
+                    <div>
+                      <h2><a href="'.site_url('/').$row->link.'/">'.$row->title.'</a></h2>
+                      <p class="desc">'.$this->shorten_string($text, 40).'</p>
 
-			
+                        <p><span class="badge badge-secondary">'.ucwords(str_replace("_"," ",$row->type)).'</span></p>
+
+                        <a class="btn btn-dark btn-sm" href="'.site_url('/').$row->link.'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$row->title.'"><i class="fa fa-info text-light"></i>  View '.ucwords(str_replace("_"," ",$row->type)).'</a>
+
+                    </div>
+                  </section>
+                ';
+
+			}		
 		}
-		
-		//echo $key . ' ' . $str;
 	}
 	
 

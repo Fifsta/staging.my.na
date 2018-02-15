@@ -33,6 +33,8 @@
 					<div class="spacer"></div>
 					<?php $this->load->view('inc/classifieds');?>
 					<div class="spacer"></div>
+					<?php $prop['type'] = '3408'; $this->load->view('inc/auctions');?>
+					<div class="spacer"></div>
 					<?php $prop['type'] = '3408'; $this->load->view('inc/products', $prop);?>
 					<div class="spacer"></div>
 					<?php $cars['type'] = '348'; $this->load->view('inc/products', $cars);?>
@@ -48,6 +50,7 @@
 <?php $this->load->view('inc/footer');?>	
 
 <script src='<?php echo base_url('/')?>js/jquery.cycle2.min.js' type="text/javascript" language="javascript"></script>
+<script type="text/javascript" src="<?php echo base_url('/'); ?>js/custom/home1.js"></script>
 
 <script type="text/javascript">
 
