@@ -1332,15 +1332,15 @@ class Search_model extends CI_Model{
 			//No Results	
 			}else{
 				
-				echo "<div class='alert text-center'>
+				/*echo "<div class='alert text-center'>
 							  <h1>Ooops, no results found for: </h1>
 							  <h3>".$heading."</h3>
 							  <p>We could'nt find any results for the specified criteria. Please try broaden your search results or look under top level categories.</p>
 							  <p></p>
-					  </div>";
+					  </div>";*/
 
 				if($main_c_id != ''){
-					echo '<h3 class="upper na_script">But Here are some other great business results in '.$main_category.'</h3>';
+					//echo '<h3 class="upper na_script">But Here are some other great business results in '.$main_category.'</h3>';
 					//SHOW OTHER TOP LEVEL MATCHES
 					$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
                             group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
@@ -1353,7 +1353,7 @@ class Search_model extends CI_Model{
                             WHERE u_business.ISACTIVE = 'Y' AND cat_names.CATEGORY_TYPE_ID = '".$main_c_id."'
 							GROUP BY u_business.ID ORDER BY RAND(), TOTAL DESC LIMIT 10"   ;
 				}else{
-					echo '<h3 class="upper na_script">But Here are some other great business results</h3>';
+					//echo '<h3 class="upper na_script">But Here are some other great business results</h3>';
 					//SHOW RANDOM RESULTS
 					$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
                             group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
