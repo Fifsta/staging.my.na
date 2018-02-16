@@ -109,10 +109,10 @@ $this->load->view('inc/header', $header);
 <?php $this->load->view('inc/footer');?>  
 
 <script src='<?php echo base_url('/')?>js/jquery.rating.pack.js' type="text/javascript" language="javascript"></script>
-<script type="text/javascript" src="<?php echo base_url('/');?>js/custom/results_page.js?v2"></script>
 
 
-<script type="text/javascript" src="<?php echo base_url('/');?>js/select2.min.js"></script>
+
+
 <script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
 
 <script type="text/javascript">

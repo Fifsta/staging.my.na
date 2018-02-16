@@ -16,7 +16,6 @@ class A extends CI_Controller {
 	public function results($offset = '')
 	{
 
-		echo $this->input->post('srch_business');
 
 		//Get Input
 		//SORT
@@ -30,8 +29,12 @@ class A extends CI_Controller {
 			$sort = $this->input->post('sortby', TRUE);
 			$sortURL = $this->input->post('sortby', TRUE); 					
 		}
+
+
+		$scat = $this->input->post('srch_category', TRUE);
+
 		//Category
-		if (!$this->input->post('srch_category')) {
+		if (!$scat || $scat == 'all') {
 				
 			$category = '';
 			$categoryURL = 'all';

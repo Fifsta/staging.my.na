@@ -410,7 +410,7 @@ Light Orange ff9900
 	#filter .input-group .btn-primary{font-size:12px}
 	#filter .input-group .btn-primary:after{content:' Search'}
 	#filter .input-group .input-group-addon{padding-left:5px; padding-right:5px; font-weight:bold; box-shadow:none; border:none; background:#fff;}
-	#filter .input-group .form-control{padding-left:0; background:#fff; box-shadow:2px 0 2px rgba(0,0,0,0.1); }
+	#filter .input-group .form-control{padding-left:0; background:#fff; padding-left:5px; padding-right:5px; }
 	#filter .input-group .btn-default{background:none; border:none !important; font-size:inherit; padding-left:5px; padding-right:15px}
 	#filter .filter-option{max-width:100px; text-overflow:ellipsis}
 	#filter .caret{right:5px}

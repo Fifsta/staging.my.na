@@ -37,7 +37,7 @@
 				<div class="history">Search history: <a href="#">pizza</a>, <a href="#">lodge</a>, <a href="#">plumbing</a>, <a href="#">paper towels</a>, <a href="#">shoes</a>,</div>
 			</div>
 			<div class="col-sm-2 text-right">
-				
+
 			</div>
 		</div>
 	</div>
