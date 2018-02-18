@@ -51,7 +51,8 @@ if($img != ''){
 	
 }else{
 	
-	$img_url =  base_url('/').'images/bus_blank.png';	
+	$img_str =  'assets/business/photos/listing-placeholder.jpg';
+	$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
 	
 }
 
