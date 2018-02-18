@@ -51,8 +51,7 @@ if($img != ''){
 	
 }else{
 	
-	$img_str =  'assets/business/photos/listing-placeholder.jpg';
-	$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
+	$img_url =  'assets/business/photos/listing-placeholder.jpg';
 	
 }
 
@@ -76,7 +75,8 @@ if($cover_img != ''){
 	
 }else{
 	
-	$cover_url = base_url('/').'images/business_cover_blank.jpg';	
+	$cover_str =  'assets/business/photos/listing-placeholder.jpg';
+	$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
 	
 }
 
