@@ -77,6 +77,7 @@ class Business_model extends CI_Model{
       	
 		$test = $this->get_current_cats($bus_id);
 		$count = $test->num_rows();
+
 		if($count > 5){
 			
 			$limit = 1;
@@ -94,6 +95,7 @@ class Business_model extends CI_Model{
 			$limit = 5;
 			
 		}
+		echo '<div class="owl-carousel" id="similar" style="margin-top:20px">';
 		
 		foreach($test->result() as $row){
 			//Get Cat ID
@@ -108,8 +110,7 @@ class Business_model extends CI_Model{
 			$result = $this->db->get();
 			$x=0;
 			
-			echo '<div id="similarCarousel" class="carousel slide vertical">
-					<div class="carousel-inner">';
+			
 			foreach($result->result() as $row2){
 				
 				$business_id = $row2->BUSINESS_ID;
@@ -117,20 +118,30 @@ class Business_model extends CI_Model{
 				$x++;
 			}
 			
-			//return $	
-			echo '</div></div>';
 		}
-		echo "<script data-cfasync='false' type='text/javascript'>$('.carousel').carousel();</script>";
+		echo '</div>';
     }		
 	
 	function show_similar_list($bus_id){
+
+		$this->load->model('image_model'); 
+		$this->load->library('thumborp');
+
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 360;
+		$height = 230;
+
+		$l_width = 60;
+		$l_height = 60;
+
       	
 		$details = $this->get_business_details($bus_id);
 		
 		if($details)
 		{
 			$name = $details['BUSINESS_NAME'];
-			$img = $details['BUSINESS_LOGO_IMAGE_NAME'];
+			$logo = $details['BUSINESS_LOGO_IMAGE_NAME'];
+			$cover = $details['BUSINESS_COVER_PHOTO'];
 			$id = $details['ID'];
 			$email = $details['BUSINESS_EMAIL'];
 			$tel = $details['BUSINESS_TELEPHONE'];
@@ -139,40 +150,92 @@ class Business_model extends CI_Model{
 			$address = $details['BUSINESS_PHYSICAL_ADDRESS'];
 
 			//Build image string
-			$format = substr($img, (strlen($img) - 4), 4);
-			$str = substr($img, 0, (strlen($img) - 4));
+			//$format = substr($img, (strlen($img) - 4), 4);
+			//$str = substr($img, 0, (strlen($img) - 4));
 
-			if ($img != '')
+			if ($logo != '')
 			{
 
-				if (strpos($img, '.') == 0)
+				if (strpos($logo, '.') == 0)
 				{
 
 					$format = '.jpg';
-					$img_str = base_url('/') . 'img/timbthumb.php?w=100&h=100&src=' . S3_URL . 'assets/business/photos/' . $img . $format;
-
+					$logo_str = 'assets/business/photos/' . $logo . $format;
+					$logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+					$b_logo = '<img title="Product is listed by ' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';
 				}
 				else
 				{
 
-					$img_str = base_url('/') . 'img/timbthumb.php?w=100&h=100&src=' . S3_URL . 'assets/business/photos/' . $img;
+					$logo_str = 'assets/business/photos/' . $logo;
+					$logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+					$b_logo = '<img title="Product is listed by ' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';
 
 				}
 
 			}
 			else
 			{
-
-				$img_str = base_url('/') . 'img/timbthumb.php?w=100&h=100&src=' . base_url('/') . 'img/bus_blank.jpg';
+				$logo_url = base_url('/').'images/bus_blank.png';
+				$b_logo = '<img title="' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';
 
 			}
 
-			//get Categories
+
+			if ($cover != '')
+			{
+
+				if (strpos($cover, '.') == 0)
+				{
+
+					$format = '.jpg';
+					$cover_str = 'assets/business/photos/' . $cover . $format;
+					$cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+
+				}
+				else
+				{
+
+					$cover_str = 'assets/business/photos/' . $cover;
+					$cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+
+				}
+
+			}
+			else
+			{
+				$cover_str = 'assets/business/photos/listing-placeholder.jpg';
+				$cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+
+			}
+
+
+
+			//get Categories 
 			$cats = $this->get_current_categories($id);
 
 			//Build resultset HTML
 
-			$html = '<div class="item">
+
+			$html = '<div>
+						<figure class="loader">
+							<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$name.'</small>
+							</div>
+							<div class="slideshow-block">
+								<a href="' . site_url('/') . 'b/' . $id . '/' . $this->clean_url_str($name) . '/"><img class="" src="' . $cover_url . '" alt="' . $name . '"></a>
+							</div>
+
+							<div>
+							
+								'.$b_logo.'	
+
+							</div>
+						</figure>			
+			  		</div>
+					  ';
+
+
+			/*$html = '<div class="item">
 							<div class="" style="height:190px;">
 							   <a class="pull-right" href="#">
 								<img class="img-polaroid" src="' . $img_str . '" alt="' . $name . '" style="width: 100px; height:100px;">
@@ -184,7 +247,7 @@ class Business_model extends CI_Model{
 							      <a class="btn btn-inverse" href="' . site_url('/') . 'b/' . $id . '/' . $this->clean_url_str($name) . '/"><i class="icon-info-sign icon-white"></i> View listing &raquo;</a>
 							  	  
 							</div>
-						</div>';
+						</div>';*/
 
 			echo $html;
 

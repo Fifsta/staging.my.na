@@ -377,6 +377,17 @@ $this->load->view('inc/header');
 
 	    	</section>	
 
+	       <section style="margin-top: 50px">
+	        <!--tabs-->
+	        <div class="heading">
+	          <h2 data-icon="fa-newspaper-o">Similar <strong>Listings</strong></h2>
+	        </div>
+	        <div id="similar_div">
+
+	        </div>
+	       </section>
+
+
 		</div>
 
 	</div>	
@@ -407,28 +418,7 @@ $this->load->view('inc/header');
         });
 
 
-		$('.owl-carousel').owlCarousel({
-		    loop:true,
-		    margin:10,
-		    nav: true,
-		    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
-		    responsiveClass:true,
-		    responsive:{
-		        0:{
-		            items:1,
-		            nav:true
-		        },
-		        600:{
-		            items:3,
-		            nav:true
-		        },
-		        1000:{
-		            items:3,
-		            nav:true,
-		            loop:false
-		        }
-		    }
-		});
+		initialise_owl();
 
 		
 		get_wethear('na','windhoek');
@@ -544,9 +534,11 @@ function load_similar(){
 		type: 'get',
 		url: '<?php echo site_url('/').'business/load_similar/'.$bus_id.'/';?>' ,
 		success: function (data) {
-			
+
 			 $('#similar_div').html(data);
 			 load_deals();
+			 initialise_owl();
+
 		}
 	});	
 
@@ -651,7 +643,7 @@ function my_na_yes(id){
 
 }
 
-function my_na_effect(){
+/*function my_na_effect(){
 
 	//$('.my_na_c').removeClass('loading_img');
 	$(function() {
@@ -668,7 +660,7 @@ function my_na_effect(){
 		});
 	});	
 
-}
+}*/
 
 
 </script>

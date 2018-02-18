@@ -856,7 +856,7 @@ class Business extends CI_Controller {
 	//setlocale(LC_ALL, 'en_US.UTF8');
 	function load_similar($id) {
 		
-		$this->business_model->show_similar($id);
+		$this->business_model->show_similar($id); 
 	}
 
 	
