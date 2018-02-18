@@ -67,12 +67,3 @@ function initialise_map() {
 
 	
 </script>
-
-<h4>Where to find us</h4>
-
-	
-		<div style="display:block;position:relative;background:url(<?php echo base_url('/');?>img/load.gif) no-repeat center center;height:100%;width:100%;max-width:none">
-		    <div id="map" style="display:block;position:relative;width:100%;height:100%;max-width:none"></div>
-        </div>
-        <br />
-		<a class="btn pull-right" href="#contact" data-toggle="tab" rel="tooltip" title="Contact Us"><i class="icon-envelope"></i> Contact Us</a>	

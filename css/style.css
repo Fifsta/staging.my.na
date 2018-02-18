@@ -441,10 +441,10 @@ Light Orange ff9900
 	.results-item .revi h3{margin:0 0 5px 0; font-weight:bold}
 	.results-item .revi a{font-style:italic;}
 	
-	.sub.well ul{padding-left:0; list-style:none;}
-	.sub.well ul a{ display:inline-block; padding:5px 10px; position:relative}
-	.sub.well ul .btn{ padding:2px 2px}
-	.sub.well ul a:before{ font-family:'FontAwesome'; content:'\f114'; margin-right:5px}
+	.sub.card ul{padding-left:0; list-style:none;}
+	.sub.card ul a{ display:inline-block; padding:5px 10px; position:relative}
+	.sub.card ul .btn{ padding:2px 2px}
+	.sub.card ul a:before{ font-family:'FontAwesome'; content:'\f114'; margin-right:5px; list-style:none; }
 	
 	.rating{direction:rtl; font-size:18px; display:block; white-space:nowrap;}
 	.rating span{display:inline-block; font-family:'FontAwesome'; padding:0 1px; cursor:default}

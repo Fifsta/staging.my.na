@@ -43,7 +43,7 @@ class Members extends CI_Controller {
 			$data['id'] = $id;
 			$this->load->view('members/home', $data);	
 		
-		}else{
+		}else{ 
 
 			if($data['redirect'] = $this->input->get('redirect_url')){
 				 
