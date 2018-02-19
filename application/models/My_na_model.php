@@ -743,7 +743,6 @@ class My_na_model extends CI_Model{
                     $x = 0;
                     $x1 = 0;
                     $x2 = 0;
-                    $output .= '<li class="nav-header">My Business</li>';
                     foreach ($query->result_array() as $row) {
                         $output .= '<li><a href="' . site_url('/') . 'members/business/' . $row['ID'] . '/?">' . $this->shorten_string($row['BUSINESS_NAME'], 5) . '</a></li>';
                         $x++;

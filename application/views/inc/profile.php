@@ -3,7 +3,17 @@
 //PROFILE INCLUDE
 //+++++++++++++++++
 
-$section = $this->uri->segment(1);
+$section_1 = $this->uri->segment(1);
+$section_2 = $this->uri->segment(2);
+
+echo $section_1;
+
+if($section_1 == 'members') {
+
+	echo 'hello';
+
+}
+
 
 ?>
 
@@ -27,38 +37,33 @@ $section = $this->uri->segment(1);
 	<div class="panel-group" id="profile-accordion" role="tablist" aria-multiselectable="true">
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab">
-				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#MyDashboard" aria-expanded="false" aria-controls="MyDashboard" data-icon="fa-list-alt">My Dashboard</a></h3>
+				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#MyAccount" aria-expanded="false" aria-controls="MyAccount" data-icon="fa-list-alt">My Account</a></h3>
 			</div>
-			<div id="MyDashboard" class="panel-collapse collapse" role="tabpanel" aria-labelledby="MyDashboard">
+			<div id="MyAccount" class="panel-collapse collapse" role="tabpanel" aria-labelledby="MyAccount">
 				<div class="panel-body">
 					<ul>
-						<li><a href="#" data-icon="fa-user">My Profile</a> <span>Change my profile information.</span></li>
-						<li><a href="#" data-icon="fa-money">My For Sale Items</a> <span>All my item listings.</span></li>
-						<li><a href="#" data-icon="fa-arrow-circle-o-up">My Sold Items</a> <span>All my sold listings.</span></li>
-						<li><a href="#" data-icon="fa-arrow-circle-o-down">Items Ive Bought</a> <span>All my sold listings.</span></li>
-						<li><a href="#" data-icon="fa-briefcase">Manage my busninesses</a> <span>Add, delete and manage my businesses.</span></li>
-						<li><a href="#" data-icon="fa-bullhorn">Manage my alerts</a> <span>Manage how you would like to be alerted.</span></li>
+						<li><a href="#">My Dashboard</a> <span>My account overview</span></li>
+						<li><a href="#">My Profile</a> <span>Change my profile information.</span></li>
+						<li><a href="#">My Deals</a> <span>Add, delete and manage my deals.</span></li>
+						<li><a href="#">Scratch & Win</a> <span>Win great prizes with my.na</span></li>
+						<li><a href="#">Messages</a> <span>All my my.na messages</span></li>
+						<li><a href="#">My Sports</a> <span>My sport news.</span></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab">
-				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#ListAnything" aria-expanded="false" aria-controls="ListAnything" data-icon="fa-edit">List Anything</a></h3>
+				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#MyBusiness" aria-expanded="false" aria-controls="MyBusiness" data-icon="fa-edit">My Business</a></h3>
 			</div>
-			<div id="ListAnything" class="panel-collapse collapse" role="tabpanel" aria-labelledby="ListAnything">
+			<div id="MyBusiness" class="panel-collapse collapse" role="tabpanel" aria-labelledby="MyBusiness">
 				<div class="panel-body">
 					<ul>
-						<li><a href="#">List a Business Service</a> <span>List your great business service for FREE.</span></li>
-						<li><a href="#">List Business</a> <span>Advertise your business for FREE.</span></li>
-						<li><a href="#">Sell a Car</a> <span>List a vehicle and sell it online, in no time.</span></li>
-						<li><a href="#">Sell a Property</a> <span>List and sell your property today.</span></li>
-						<li><a href="#">Sell Anything</a> <span>Have you got any unwanted items?</span></li>
-						<li><a href="#">Create an Auction</a> <span>Set a reserve value and see what you could get.</span></li>
+						<?php echo $this->my_na_model->get_businesses_nav(); ?>
 					</ul>
 				</div>
 			</div>
-		</div>
+		</div>		
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab">
 				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#NamibiaMap" aria-expanded="false" aria-controls="NamibiaMap" data-icon="fa-map-marker">Namibia Map</a></h3>

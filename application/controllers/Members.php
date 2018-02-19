@@ -11,7 +11,8 @@ class Members extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('members_model');	
-		
+	    $this->section_1 = $this->uri->segment(1);
+	    $this->section_2 = $this->uri->segment(2);				
 	}
 
 	
@@ -23,7 +24,8 @@ class Members extends CI_Controller {
 		 	//REDIRECT AUTH
 			if($url = $this->input->get('redirect_url')){
 
-				
+				$d['section_1'] = $this->section_1;
+				$d['section_2'] = $this->section_2;
 				$d['my_na_id'] = $id;
 				$d['u_name'] = $this->session->userdata('u_name');
 				$d['u_email'] = $this->session->userdata('u_email');
@@ -61,7 +63,7 @@ class Members extends CI_Controller {
 	{
 		
 		//var_dump($_SERVER['REQUEST_URI']);
-		echo $_SERVER['REQUEST_URI'];
+		//echo $_SERVER['REQUEST_URI'];
 		//var_dump(uri_string());
 		//echo $this->uri->uri_string();
 		if($this->session->userdata('id')){

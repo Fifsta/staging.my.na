@@ -11,11 +11,9 @@ $this->load->view('members/inc/header', $header);
 
 //ADDITIONAL RESOURCES
 //add css, IE7 js files here before the head tag
-
 ?>
 
 </head>
-
 <body id="top">
 
 <?php $this->load->view('inc/top_bar'); ?>
@@ -40,29 +38,24 @@ $this->load->view('members/inc/header', $header);
       <div class="row">
         <div class="col-md-12">
 
-        <section id="listing">
-
-          <div class="heading">
-            <h2 data-icon="fa-bullhorn">Alerts</h2>
-            <p>There are <strong>new and unseen listings</strong> available in the following categories:</p>
-          </div>
-
-         
-            <div class="sub card">
-              <div class="card-body">
-
-                <ul class="row">
-                  <li class="col-sm-6 col-lg-4"><a href="#">Accounting (12)</a><button class="btn btn-default"><span class="fa-stack"><i class="fa fa-bullhorn fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x text-orange"></i></span></button></li>
-                  <li class="col-sm-6 col-lg-4"><a href="#">Business and Society (12)</a><button class="btn btn-default"><span class="fa-stack"><i class="fa fa-bullhorn fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x text-orange"></i></span></button></li>
-                  <li class="col-sm-6 col-lg-4"><a href="#">Cooperatives (12)</a><button class="btn btn-default"><span class="fa-stack"><i class="fa fa-bullhorn fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x text-orange"></i></span></button></li>
-                  <li class="col-sm-6 col-lg-4"><a href="#">Customer Service (12)</a><button class="btn btn-default"><span class="fa-stack"><i class="fa fa-bullhorn fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x text-orange"></i></span></button></li>
-                </ul>
-
+          <section id="listing">
+              <div class="heading">
+                <h2 data-icon="fa-bullhorn">Alerts</h2>
+                <p>There are <strong>new and unseen listings</strong> available in the following categories:</p>
               </div>
-            </div>
-          
-          
-        </section>
+              <div class="sub card" style="background:#f5f5f5">
+                <div class="card-body">
+                  <ul class="row">
+                    <li class="col-sm-6 col-lg-4"><a href="#">Accounting (12)</a><button class="btn btn-default"><span class="fa-stack"><i class="fa fa-bullhorn fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x text-orange"></i></span></button></li>
+                    <li class="col-sm-6 col-lg-4"><a href="#">Business and Society (12)</a><button class="btn btn-default"><span class="fa-stack"><i class="fa fa-bullhorn fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x text-orange"></i></span></button></li>
+                    <li class="col-sm-6 col-lg-4"><a href="#">Cooperatives (12)</a><button class="btn btn-default"><span class="fa-stack"><i class="fa fa-bullhorn fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x text-orange"></i></span></button></li>
+                    <li class="col-sm-6 col-lg-4"><a href="#">Customer Service (12)</a><button class="btn btn-default"><span class="fa-stack"><i class="fa fa-bullhorn fa-stack-1x"></i><i class="fa fa-ban fa-stack-2x text-orange"></i></span></button></li>
+                  </ul>
+                </div>
+              </div>
+          </section>
+
+
 
         </div>  
       </div>
