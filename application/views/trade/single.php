@@ -304,7 +304,7 @@
 $(document).ready(function(){
 
 
-    var h = '$('#map_container').height();'
+    var h = $('#map_container').height();
 
     $('#map-canvas').css({'height':(h)+'px'});
 
