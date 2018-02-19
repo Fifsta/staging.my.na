@@ -321,13 +321,7 @@ class Trade_model extends CI_Model
 
 					return $result;
 
-				}
-
-
-			}
-
-
-		} else {
+				}else {
 
 						$result = '
 						<div class="white_box padding10">
@@ -372,11 +366,17 @@ class Trade_model extends CI_Model
 							  <script src="//maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=initialize" type="text/javascript"></script>
 						 </div>	  
 							  ';
-
+							  
 					return $result;
 		
 
 		}
+
+
+			}
+
+
+		} 
 
 	}
 
