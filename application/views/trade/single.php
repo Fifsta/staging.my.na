@@ -304,12 +304,6 @@
 $(document).ready(function(){
 
 
-    var h = $('#map_container').height();
-
-    $('#map-canvas').css({'height':(h)+'px'});
-
-    console.log(h);
-
     $('#watch_btn').bind('click', function(e){
         e.preventDefault();
         save_watchlist();
