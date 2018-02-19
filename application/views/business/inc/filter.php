@@ -14,7 +14,7 @@ if($this->agent->browser() == 'Internet Explorer'){
 
 ?>
 
-<div id="filter" class="col-sm-12">
+<div id="filter" class="col-sm-12 hidden-xs hidden-sm">
     <form id="search-main_b" name="search-main-b" method="post" action="<?php echo site_url('/');?>a/results/" class="input-group input-group-lg" style="margin:5px">
         <div class="btn-group bootstrap-select show-tick input-group-btn form-control"> 
         <input class="form-control" name="srch_business" id="srch_business" type="text" value="" autocomplete="off" placeholder="Keywords">
