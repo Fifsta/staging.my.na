@@ -8,7 +8,7 @@ $section_2 = $this->uri->segment(2);
 
 //echo $section_2;
 
-echo $url;
+echo $section_1;
 
 if($section_1 == 'members') {
 
