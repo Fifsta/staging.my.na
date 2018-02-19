@@ -327,6 +327,55 @@ class Trade_model extends CI_Model
 			}
 
 
+		} else {
+
+						$result = '
+						<div class="white_box padding10">
+							<div id="map-canvas" class="clearfix" style="height:300px"></div>
+							<script data-cfasync="false" type="text/javascript">
+									var geocoder;
+									var map;
+									function initialize() {
+					
+										  geocoder = new google.maps.Geocoder();
+										  var myLatlng = new google.maps.LatLng( "-22.5518843","17.0272066,13");
+										 
+										  var myOptions = {
+											zoom:14,
+											center: myLatlng,
+											mapTypeControl: true,
+											mapTypeId: google.maps.MapTypeId.ROADMAP,
+											scrollwheel: false,
+											zoomControl: true,
+											zoomControlOptions: {
+												style: google.maps.ZoomControlStyle.LARGE,
+												position: google.maps.ControlPosition.LEFT_CENTER
+											},
+											streetViewControl:true,
+											scaleControl:false
+										  }
+										  var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+											
+										  var marker = new google.maps.Marker({
+												position: myLatlng,
+												map: map,
+												animation: google.maps.Animation.DROP
+												
+								
+										  });
+											  
+								
+									}
+											
+									
+							  </script>
+							  <script src="//maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=initialize" type="text/javascript"></script>
+						 </div>	  
+							  ';
+
+					return $result;
+		
+
 		}
 
 	}
