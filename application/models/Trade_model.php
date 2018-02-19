@@ -332,7 +332,7 @@ class Trade_model extends CI_Model
 									function initialize() {
 					
 										  geocoder = new google.maps.Geocoder();
-										  var myLatlng = new google.maps.LatLng( "-22.5518843","17.0272066,13");
+										  var myLatlng = new google.maps.LatLng( -22.5518843,17.0272066,13);
 										 
 										  var myOptions = {
 											zoom:14,
