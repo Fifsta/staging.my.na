@@ -6,7 +6,9 @@
 $section_1 = $this->uri->segment(1);
 $section_2 = $this->uri->segment(2);
 
-echo $section_1;
+//echo $section_2;
+
+echo $url;
 
 if($section_1 == 'members') {
 
