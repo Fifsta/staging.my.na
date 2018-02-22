@@ -7,6 +7,9 @@
 
 $uris = explode('/', $url);
 
+$section_1 = '';
+$section_2 = '';
+
 if($uris[2] != '') {
 	$section_1 = $uris[2];
 }
