@@ -7,7 +7,9 @@
 
 $uris = explode('/', $url);
 
-$section_1 = $uris[2];
+if(isset($uris[2])) {
+	$section_1 = $uris[2];
+}
 
 if(isset($uris[3])) {
 	$section_2 = $uris[3];
@@ -19,7 +21,6 @@ if($section_1 == 'members' && ($section_2 == 'home' || $section_2 == 'my_profile
 
 //Toggle My Business
 if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } else { $my_bus = ''; }
-
 
 ?>
 

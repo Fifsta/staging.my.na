@@ -422,19 +422,8 @@ class Tna_mail extends CI_Controller {
 			$nameTO = $this->input->post('name_to',TRUE);
 			$nameFROM = $this->input->post('name_from',TRUE);
 			$status = $this->input->post('cur_state',TRUE);
-			//INSERT SENT MESSAGE DATABASE
-			//$data2['bus_id_logo'] = $bus_id;
-//			$data2['bus_id'] = $bus_id;
-//			$data2['client_id'] = $client_id;
-//			$data2['email'] = $emailFROM;
-//			$data2['nameTO'] = $name;
-//			$data2['subject'] = $subject;
-//			$data2['body'] = $body;
-//			$data2['status'] = 'unread';
-//			$data2['status_client'] = 'sent';
-//			$data2['emailTO'] = $emailTO;
-		
-			//$this->db->insert('u_business_messages',$data2);
+
+
 			//BUSINESS SENT TO CLIENT
 			if($status == 'sent'){
 				
@@ -453,6 +442,7 @@ class Tna_mail extends CI_Controller {
 			//BUSINESS REPLIED TO CLIENT	
 			}elseif($status == 'replied'){
 				
+
 				//UPDATE EXISTING MSG IF USER IS REGISTERED	
 				$dataUpdate['status_client'] = 'replied';
 				$dataUpdate['status'] = 'unread';
@@ -483,7 +473,7 @@ class Tna_mail extends CI_Controller {
 			}
 			
 			
-			$emailTO = 'christian@intouch.com.na';
+			//$emailTO = 'christian@intouch.com.na';
 			
 			$this->email_model->send_email($emailTO, $emailFROM  , $nameTO , $body , $subject );
 			
@@ -491,26 +481,17 @@ class Tna_mail extends CI_Controller {
 			$str = "<div class='alert alert-success'>
 					<button type='button' class='close' data-dismiss='alert'>×</button>Your reply was sent successfully.</div>";		
 			echo $str;
-			//REDIRECT BUSINESS
-			if($bus_id != '0'){
-				
-				echo '<script data-cfasync="false" type="text/javascript">
-						window.location = "'.site_url('/').$redirect.'";
-					  </script>';
 
-			//REDIRECT MEMBER	
-			}else{
-				
-				echo '<script data-cfasync="false" type="text/javascript">
-						window.location = "'.site_url('/').$redirect.'";
-					  </script>';
-			}
-			
+			//REDIRECT BUSINESS
+			/*echo '<script data-cfasync="false" type="text/javascript">
+					window.location = "'.site_url('/').$redirect.'";
+				  </script>';*/
+
 		
 		//NOT LOGGED IN
 		}else{
 			
-				//redirect('/members/logout/', 'refresh');	
+				redirect('/members/logout/', 'refresh');	
 			  
 		 }
 		
