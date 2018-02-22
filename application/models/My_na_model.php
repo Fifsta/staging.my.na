@@ -389,14 +389,12 @@ class My_na_model extends CI_Model{
                 echo '<select class="'.$class.'" name="'.$id.'"  id="'.$id.'">';
                 foreach($q->result() as $row){
 
-                    if($selected == $row->phonecode){
 
+                    if($selected == $row->phonecode){
                         echo '<option value="'.strtolower($row->phonecode).'" selected>'.$row->nicename.' +'.$row->phonecode.'</option>';
                     }else{
-
                         echo '<option value="'.strtolower($row->phonecode).'">'.$row->nicename.' +'.$row->phonecode.'</option>';
                     }
-
 
                 }
                 echo '</select>';
@@ -437,7 +435,7 @@ class My_na_model extends CI_Model{
 
                         echo '<input type="hidden" id="dial_code"  name="dial_code"  value="' . $row1->phonecode . '">
                             <div class="btn-group">
-                              <button class="btn" id="fl_select"><img src="' . base_url('/') . 'img/blank.gif" class="flag flag-' . strtolower($row1->iso) . '" > +' . $row1->phonecode . ' </button>
+                              <button class="btn btn-secondary" id="fl_select"><img src="' . base_url('/') . 'images/blank.gif" class="flag flag-' . strtolower($row1->iso) . '" > +' . $row1->phonecode . ' </button>
                               <button class="btn dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                               </button>
@@ -449,7 +447,7 @@ class My_na_model extends CI_Model{
                    
                     echo '<input type="hidden" id="dial_code"  name="dial_code"  value="'.$row1->phonecode.'">
                             <div class="btn-group">
-                              <button class="btn" id="fl_select"><img src="'.base_url('/').'img/blank.gif" class="flag flag-'.strtolower($row1->iso).'" > +'.$row1->phonecode.' </button>
+                              <button class="btn btn-secondary" id="fl_select"><img src="'.base_url('/').'images/blank.gif" class="flag flag-'.strtolower($row1->iso).'" > +'.$row1->phonecode.' </button>
                               <button class="btn dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                               </button>
@@ -465,7 +463,7 @@ class My_na_model extends CI_Model{
             if(!($found)){
                 echo '<input type="hidden" id="dial_code"  name="dial_code"  value="264">
                         <div class="btn-group">
-                              <button class="btn" id="fl_select">+264 <img src="'.base_url('/').'img/blank.gif" class="flag flag-na" ></button>
+                              <button class="btn" id="fl_select">+264 <img src="'.base_url('/').'images/blank.gif" class="flag flag-na" ></button>
                               <button class="btn dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                               </button>
@@ -478,7 +476,7 @@ class My_na_model extends CI_Model{
 
                 echo '<li role="presentation">
                             <a id="fl_select_'.$row->id.'" href="javascript:select_country('.$row->id.');" data-phone="'.$row->phonecode.'" data-code="'.strtolower($row->iso).'" tabindex="-1">
-                                <img src="'.base_url('/').'img/blank.gif" class="flag flag-'.strtolower($row->iso).'" > '.$row->nicename.' +' .$row->phonecode.'
+                                <img src="'.base_url('/').'images/blank.gif" class="flag flag-'.strtolower($row->iso).'" > '.$row->nicename.' +' .$row->phonecode.'
                             </a>
                       </li>';
 
@@ -495,7 +493,7 @@ class My_na_model extends CI_Model{
                         dial = document.getElementById("dial_code"),
                         code = sl.getAttribute("data-code"),
                         phone = sl.getAttribute("data-phone"),
-                        out = "<img src='."'".base_url('/')."img/blank.gif' class='flag flag-".'"+code+"'."'".'> +"+phone;
+                        out = "<img src='."'".base_url('/')."images/blank.gif' class='flag flag-".'"+code+"'."'".'> +"+phone;
                         but.innerHTML = out;
                         dial.value = phone;
 

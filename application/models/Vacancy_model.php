@@ -4757,7 +4757,7 @@ class Vacancy_model extends CI_Model{
 				
 				if (($width > 850) || ($height > 700)){
 						 
-						$this->downsize_image($file,$user_id);
+						$this->image_model->downsize_image($file,$user_id);
 								
 				}
 				

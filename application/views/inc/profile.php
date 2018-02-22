@@ -3,18 +3,22 @@
 //PROFILE INCLUDE
 //+++++++++++++++++
 
-$section_1 = $this->uri->segment(1);
-$section_2 = $this->uri->segment(2);
+//echo $url;
 
-//echo $section_2;
+$uris = explode('/', $url);
 
-echo $section_1;
+$section_1 = $uris[2];
 
-if($section_1 == 'members') {
-
-	echo 'hello';
-
+if(isset($uris[3])) {
+	$section_2 = $uris[3];
 }
+
+
+//Toggle My Account
+if($section_1 == 'members' && ($section_2 == 'home' || $section_2 == 'my_profile' || $section_2 == 'my_messages' || $section_2 == '')) { $my_account = 'show'; } else { $my_account = ''; }
+
+//Toggle My Business
+if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } else { $my_bus = ''; }
 
 
 ?>
@@ -41,15 +45,12 @@ if($section_1 == 'members') {
 			<div class="panel-heading" role="tab">
 				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#MyAccount" aria-expanded="false" aria-controls="MyAccount" data-icon="fa-list-alt">My Account</a></h3>
 			</div>
-			<div id="MyAccount" class="panel-collapse collapse" role="tabpanel" aria-labelledby="MyAccount">
+			<div id="MyAccount" class="panel-collapse collapse <?php echo $my_account; ?>" role="tabpanel" aria-labelledby="MyAccount">
 				<div class="panel-body">
 					<ul>
-						<li><a href="#">My Dashboard</a> <span>My account overview</span></li>
-						<li><a href="#">My Profile</a> <span>Change my profile information.</span></li>
-						<li><a href="#">My Deals</a> <span>Add, delete and manage my deals.</span></li>
-						<li><a href="#">Scratch & Win</a> <span>Win great prizes with my.na</span></li>
-						<li><a href="#">Messages</a> <span>All my my.na messages</span></li>
-						<li><a href="#">My Sports</a> <span>My sport news.</span></li>
+						<li><a href="<?php echo site_url('/');?>members/home/">My Dashboard</a> <span>My account overview</span></li>
+						<li><a href="<?php echo site_url('/');?>members/my_profile/">My Profile</a> <span>Change my profile information.</span></li>
+						<li><a href="<?php echo site_url('/');?>members/my_messages/">My Messages</a> <span>All my.na messages</span></li>
 					</ul>
 				</div>
 			</div>
@@ -58,7 +59,7 @@ if($section_1 == 'members') {
 			<div class="panel-heading" role="tab">
 				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#MyBusiness" aria-expanded="false" aria-controls="MyBusiness" data-icon="fa-edit">My Business</a></h3>
 			</div>
-			<div id="MyBusiness" class="panel-collapse collapse" role="tabpanel" aria-labelledby="MyBusiness">
+			<div id="MyBusiness" class="panel-collapse collapse <?php echo $my_bus; ?>" role="tabpanel" aria-labelledby="MyBusiness">
 				<div class="panel-body">
 					<ul>
 						<?php echo $this->my_na_model->get_businesses_nav(); ?>

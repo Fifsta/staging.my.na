@@ -5,7 +5,10 @@ var _throttleDelay = 1500;
 var _scroll_news = 0;
 var _scroll_feed = 0;
 var home_feed = true;
-var base = 'https://www.my.na/';
+//var base = 'https://www.my.na/';
+var base = '';
+
+
 function site_wizard(){
 		
 		$.getScript(base_+"js/bootstrap-tour.js", function(data, textStatus, jqxhr) {
@@ -20,37 +23,40 @@ function site_wizard(){
 function load_whizz(){
 	
 	$.ajax({
-					type: 'get',
-					cache: false,
-					dataType: "script",
-					url: base_+'js/site-wizard/home_member.js' ,
-					success: function (data) {
-	
-					}
-				});	
+		type: 'get',
+		cache: false,
+		dataType: "script",
+		url: base_+'js/site-wizard/home_member.js' ,
+		success: function (data) {
+
+		}
+	});	
 	
 	
 }
 
 
-   function load_trade(str, bus_id, section){
-	   
-	    home_feed = false;
-		var n =$('#admin_content');
-		n.empty().addClass('loading_img');		  
-		$.ajax({
-				type: 'get',
-				cache: false,
-				url: base+'trade/'+str+'/'+bus_id+"/"+section ,
-				success: function (data) {
-					n.removeClass('loading_img');	
-					n.html(data);	
-						
-				}
-			});	 
-	 
+//LOAD TRADE
+function load_trade(str, bus_id, section){
+   
+    home_feed = false;
+	var n =$('#admin_content');
+	n.empty().addClass('loading_img');		  
+	$.ajax({
+			type: 'get',
+			cache: false,
+			url: base+'trade/'+str+'/'+bus_id+"/"+section ,
+			success: function (data) {
+				n.removeClass('loading_img');	
+				n.html(data);	
+					
+			}
+		});	 	 
  }
 
+
+
+//CLAIM A BUSINESS
 function claim_a_business(){
 	
 	$('#modal-claim').unbind('show').bind('show', function() {
@@ -69,226 +75,234 @@ function claim_a_business(){
 }
 
 
+//LOAD HOME FEED
 function load_home_feed(x){
 		
-		var cont = $('#admin_content'), loader = $('#feed_loader');
-		$('i.id_arr').hide();
-		if(x == 0){ 
-			cont.empty();
-		}
-		
-		if(home_feed == true){
-				loader.addClass('loading_img');
-				$.ajax({
-					type: 'get',
-					cache: false,
-					url: base+'members/load_home_feed/'+x ,
-					success: function (data) {	
-						
-						cont.append(data).fadeIn('300');
-						loader.removeClass('loading_img');
-						_scroll_feed ++;
-						//console.log(_scroll_feed);
-					}
-				});	
-		}
-}
-
-function load_news(x, limit, type){
-		
-		$('i.id_arr').hide();
-		var cont = $('#admin_content'), loader = $('#feed_loader');
-		if(x == 0){ 
-			cont.empty();
-		}
-		_scroll_news ++;
-		if(limit == 6){ 
-			_scroll_news ++;
-			//console.log(_scroll_news);
-		}
-		
-		$(".nav-collapse>ul.nav>li.active").removeClass("active");
-		$("li#news_btn").addClass("active");
-		loader.addClass('loading_img');
-		$.ajax({
-			type: 'get',
-			cache: false,
-			url: base+'members/load_world_news/'+x+'/'+limit+'/'+type ,
-			success: function (data) {	
-				
-				cont.append(data).fadeIn('300');
-				loader.removeClass('loading_img');
-				
-				//console.log(x);
-			}
-		});	
-
-}
-
-function load_entertainment(x, limit, type){
-		
-		$('i.id_arr').hide();
-		var cont = $('#admin_content'), loader = $('#feed_loader');
-		if(x == 0){ 
-			cont.empty();
-		}
-		_scroll_news ++;
-		if(limit == 6){ 
-			_scroll_news ++;
-			//console.log(_scroll_news);
-		}
-		
-		$(".nav-collapse>ul.nav>li.active").removeClass("active");
-		$("li.entertainment_btn").addClass("active");
-		loader.addClass('loading_img');
-		$.ajax({
-			type: 'get',
-			cache: false,
-			url: base+'members/load_entertainment/'+x+'/'+limit+'/'+type ,
-			success: function (data) {	
-				
-				cont.append(data).fadeIn('300');
-				loader.removeClass('loading_img');
-				
-				//console.log(x);
-			}
-		});	
-
-}
-
-function load_sky_news(x, limit, type){
-		
-		$('i.id_arr').hide();
-		var cont = $('#admin_content'), loader = $('#feed_loader');
-		if(x == 0){ 
-			cont.empty();
-		}
-		_scroll_news ++;
-		if(limit == 6){ 
-			_scroll_news ++;
-			//console.log(_scroll_news);
-		}
-		
-		$(".nav-collapse>ul.nav>li.active").removeClass("active");
-		$("li#sky_news_btn").addClass("active");
-		loader.addClass('loading_img');
-		$.ajax({
-			type: 'get',
-			cache: false,
-			url: base+'members/load_sky_sports_news/'+x+'/'+limit+'/'+type ,
-			success: function (data) {	
-				
-				cont.append(data).fadeIn('300');
-				loader.removeClass('loading_img');
-				
-				//console.log(x);
-			}
-		});	
-
-}
-function load_deals(x, limit, type){
-		
-		$('i.id_arr').hide();
-		var cont = $('#admin_content'), loader = $('#feed_loader');
-		if(x == 0){ 
-			cont.empty();
-		}
-		_scroll_news ++;
-		if(limit == 6){ 
-			_scroll_news ++;
-			//console.log(_scroll_news);
-		}
-		
-		$(".nav-collapse>ul.nav>li.active").removeClass("active");
-		$(".nav-collapse>ul.nav>li.deals").addClass("active");
-		loader.addClass('loading_img');
-		$.ajax({
-			type: 'get',
-			cache: false,
-			url: base+'members/load_deals/'+x+'/'+limit+'/'+type ,
-			success: function (data) {	
-				
-				cont.append(data).fadeIn('300');
-				loader.removeClass('loading_img');
-				
-				//console.log(x);
-			}
-		});	
-
-}
-
-function load_ajax(str){
-		
-		var n = $('#admin_content');
-		n.empty();
-		n.addClass('loading_img');
-
-		if(str == 'msgs'){
-			$('.'+str).addClass('active');
-			$(".nav-collapse>ul.nav>li.active").removeClass("active");
-			load_mail('all');
-			home_feed = false;
-			
-		}else{
-			$(".nav-collapse>ul.nav>li.active").removeClass("active");
-			$('.'+str).addClass('active');
+	var cont = $('#admin_content'), loader = $('#feed_loader');
+	$('i.id_arr').hide();
+	if(x == 0){ 
+		cont.empty();
+	}
+	
+	if(home_feed == true){
+			loader.addClass('loading_img');
 			$.ajax({
 				type: 'get',
 				cache: false,
-				url: base+'members/load_ajax_'+str+'/' ,
+				url: base+'members/load_home_feed/'+x ,
 				success: function (data) {	
-
-					n.html(data);
-					n.removeClass('loading_img');
+					
+					cont.append(data).fadeIn('300');
+					loader.removeClass('loading_img');
+					_scroll_feed ++;
+					//console.log(_scroll_feed);
 				}
 			});	
-		}
+	}
 }
 
 
+//LOAD NEWS
+function load_news(x, limit, type){
+		
+	$('i.id_arr').hide();
+	var cont = $('#admin_content'), loader = $('#feed_loader');
+	if(x == 0){ 
+		cont.empty();
+	}
+	_scroll_news ++;
+	if(limit == 6){ 
+		_scroll_news ++;
+		//console.log(_scroll_news);
+	}
+	
+	$(".nav-collapse>ul.nav>li.active").removeClass("active");
+	$("li#news_btn").addClass("active");
+	loader.addClass('loading_img');
+	$.ajax({
+		type: 'get',
+		cache: false,
+		url: base+'members/load_world_news/'+x+'/'+limit+'/'+type ,
+		success: function (data) {	
+			
+			cont.append(data).fadeIn('300');
+			loader.removeClass('loading_img');
+			
+			//console.log(x);
+		}
+	});	
+}
+
+
+//LOAD ENTERTAINMENT
+function load_entertainment(x, limit, type){
+		
+	$('i.id_arr').hide();
+	var cont = $('#admin_content'), loader = $('#feed_loader');
+	if(x == 0){ 
+		cont.empty();
+	}
+	_scroll_news ++;
+	if(limit == 6){ 
+		_scroll_news ++;
+		//console.log(_scroll_news);
+	}
+	
+	$(".nav-collapse>ul.nav>li.active").removeClass("active");
+	$("li.entertainment_btn").addClass("active");
+	loader.addClass('loading_img');
+	$.ajax({
+		type: 'get',
+		cache: false,
+		url: base+'members/load_entertainment/'+x+'/'+limit+'/'+type ,
+		success: function (data) {	
+			
+			cont.append(data).fadeIn('300');
+			loader.removeClass('loading_img');
+			
+			//console.log(x);
+		}
+	});	
+}
+
+
+//LOAD SKY NEWS
+function load_sky_news(x, limit, type){
+		
+	$('i.id_arr').hide();
+	var cont = $('#admin_content'), loader = $('#feed_loader');
+	if(x == 0){ 
+		cont.empty();
+	}
+	_scroll_news ++;
+	if(limit == 6){ 
+		_scroll_news ++;
+		//console.log(_scroll_news);
+	}
+	
+	$(".nav-collapse>ul.nav>li.active").removeClass("active");
+	$("li#sky_news_btn").addClass("active");
+	loader.addClass('loading_img');
+	$.ajax({
+		type: 'get',
+		cache: false,
+		url: base+'members/load_sky_sports_news/'+x+'/'+limit+'/'+type ,
+		success: function (data) {	
+			
+			cont.append(data).fadeIn('300');
+			loader.removeClass('loading_img');
+			
+			//console.log(x);
+		}
+	});	
+}
+
+
+
+// LOAD DEALS
+function load_deals(x, limit, type){
+		
+	$('i.id_arr').hide();
+	var cont = $('#admin_content'), loader = $('#feed_loader');
+	if(x == 0){ 
+		cont.empty();
+	}
+	_scroll_news ++;
+	if(limit == 6){ 
+		_scroll_news ++;
+		//console.log(_scroll_news);
+	}
+	
+	$(".nav-collapse>ul.nav>li.active").removeClass("active");
+	$(".nav-collapse>ul.nav>li.deals").addClass("active");
+	loader.addClass('loading_img');
+	$.ajax({
+		type: 'get',
+		cache: false,
+		url: base+'members/load_deals/'+x+'/'+limit+'/'+type ,
+		success: function (data) {	
+			
+			cont.append(data).fadeIn('300');
+			loader.removeClass('loading_img');
+			
+			//console.log(x);
+		}
+	});	
+}
+
+
+//LOAD AJAX
+function load_ajax(str){
+		
+	var n = $('#admin_content');
+	n.empty();
+	n.addClass('loading_img');
+
+	if(str == 'msgs'){
+		$('.'+str).addClass('active');
+		$(".nav-collapse>ul.nav>li.active").removeClass("active");
+		load_mail('all');
+		home_feed = false;
+		
+	}else{
+		$(".nav-collapse>ul.nav>li.active").removeClass("active");
+		$('.'+str).addClass('active');
+		$.ajax({
+			type: 'get',
+			cache: false,
+			url: base+'members/load_ajax_'+str+'/' ,
+			success: function (data) {	
+
+				n.html(data);
+				n.removeClass('loading_img');
+			}
+		});	
+	}
+}
+
+
+//LOAD MESSAGE
 function load_msg(id, bus_id, status){
 	
-		home_feed = false;
-		var n =$('#admin_content');
-		n.addClass('loading_img');		  
-		$.ajax({
-				type: 'get',
-				cache: false,
-				url: base+'tna_mail/view_msg/'+id+'/'+bus_id+'/'+status ,
-				success: function (data) {
-					n.removeClass('loading_img');	
-					n.html(data);	
-				}
-			});	 
+	home_feed = false;
+	var n =$('#message-block');
+	n.addClass('loading_img');
+
+	$.ajax({
+		type: "POST",
+		url: base+"tna_mail/view_msg/",
+		data: { msg_id: id, bus_id: bus_id, status: status },
+		success: function(data){
+
+			n.removeClass('loading_img');	
+			$(n).html(data);
+
+		}
+	});		 
 		 
  }
  
- 
-   function load_mail(str){
-		var n =$('#admin_content');
-		n.empty().addClass('loading_img');		  
-		$.ajax({
-				type: 'get',
-				cache: false,
-				url: base+'tna_mail/load_mail_member/'+str ,
-				success: function (data) {
-					n.removeClass('loading_img');	
-					n.html(data);	
-					$('#example1').dataTable( {
-								"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
-								"sPaginationType": "bootstrap",
-								"oLanguage": {
-									"sLengthMenu": "_MENU_"
-								},
-								"aaSorting":[],
-								"bSortClasses": false
-		
-							} );
-					load_notification();		
-				}
-			});	 
-	 
- }
+
+//LOAD INBOX 
+function load_mail(status){
+
+	var n =$('#inbox-body');
+	n.empty().addClass('loading_img');		
+
+	$.ajax({
+		type: "POST",
+		url: base+"tna_mail/load_mail_member",
+		data: { status: status },
+		dataType: "json",
+		success: function(data){
+
+			n.removeClass('loading_img');
+			$(n).html(data.inbox);
+
+		}
+	});
+
+}
  
  function load_notification(){
 	 

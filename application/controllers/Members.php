@@ -95,10 +95,115 @@ class Members extends CI_Controller {
 				$data['error'] = 'Please login below';
 			    $this->load->view('login', $data);
 			  
-		 }
-		
-		
+		 }	
 	}
+
+
+	//+++++++++++++++++++++++++++
+	//MEMBERS PROFILE
+	//++++++++++++++++++++++++++
+	public function my_profile()
+	{
+		
+		if($this->session->userdata('id')){
+				
+			$redirect = $this->un_clean_url($this->uri->segment(3));
+			
+			if($redirect != ''){
+				$data['redirect'] = $redirect;
+			}
+			
+			if($redirect == 'message'){
+				
+				$data['msg_id'] = $this->uri->segment(4);	
+			}
+
+			
+			$data['id'] = $this->session->userdata('id');
+			$this->load->view('members/my_profile', $data);
+				
+		}else{
+			
+			$data['error'] = 'Please login below';
+		    $this->load->view('login', $data);
+			  
+		 }
+			
+	}
+
+
+
+	//+++++++++++++++++++++++++++
+	//MEMBERS MESSAGES
+	//++++++++++++++++++++++++++
+	public function my_messages()
+	{
+		
+		if($this->session->userdata('id')){
+				
+			$redirect = $this->un_clean_url($this->uri->segment(3));
+			
+			if($redirect != ''){
+				$data['redirect'] = $redirect;
+			}
+			
+			if($redirect == 'message'){
+				
+				$data['msg_id'] = $this->uri->segment(4);	
+			}
+			
+			$data['id'] = $this->session->userdata('id');
+			$this->load->view('members/my_messages', $data);
+				
+		}else{
+			
+			$data['error'] = 'Please login below';
+		    $this->load->view('login', $data);
+			  
+		 }
+			
+	}	
+
+
+	//+++++++++++++++++++++++++++
+	//POPULATE MESSAGES
+	//++++++++++++++++++++++++++
+	public function populate_inbox()
+	{
+		
+		if($this->session->userdata('id')){
+				
+			$redirect = $this->un_clean_url($this->uri->segment(3));
+			
+			if($redirect != ''){
+				$data['redirect'] = $redirect;
+			}
+			
+			if($redirect == 'message'){
+				
+				$data['msg_id'] = $this->uri->segment(4);	
+			}
+			
+			$id = $this->session->userdata('id');
+			$status = $this->input->post('status', TRUE);
+			
+			$this->load->model('email_model');	
+
+			$o = $this->email_model->get_member_messages($id,$status);
+
+			$this->output
+		       ->set_content_type('application/json')
+		       ->set_output(json_encode(array('inbox' => $o)));			
+				
+		} else {
+			
+			$data['error'] = 'Please login below';
+		    $this->load->view('login', $data);
+			  
+		}
+			
+	}	
+
 
 	//+++++++++++++++++++++++++++
 	//LOAD MEMBERS HOME DIREWCTORY SEARCH

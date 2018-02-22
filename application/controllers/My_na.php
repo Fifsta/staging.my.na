@@ -56,11 +56,14 @@ class My_na extends CI_Controller {
 			echo 'FALSE';
 			
 		}else{
-			$data['url'] = $this->input->get('url');
+			$data['url'] = $type = $this->input->post('url', TRUE);;
+
 			if($str = $this->input->get('srch_bar')){
 
 				$data['str'] = urldecode($str);
 			}
+
+
 			$this->load->view('inc/profile', $data);
 				
 		}

@@ -51,7 +51,7 @@
 		get_weather('na','windhoek');
 
 		// Prepend user profile after login
-		$.get( "<?php echo site_url();?>my_na/nav/?url=<?php echo $_SERVER['REQUEST_URI']; ?>", function( data ) {
+		/*$.get( "<?php echo site_url();?>my_na/nav/?url=<?php echo $_SERVER['REQUEST_URI']; ?>", function( data ) {
 		  
 		  	if(data == 'FALSE'){
 
@@ -60,7 +60,20 @@
 				$('#sidebar').prepend( data );
 			}
 
+		});*/
+
+		$.post('<?php echo site_url();?>my_na/nav/', { url: "<?php echo $_SERVER['REQUEST_URI']; ?>"}, function(data){
+
+
+		  	if(data == 'FALSE'){
+
+			}else{
+
+				$('#sidebar').prepend( data );
+			}
+
 		});
+
 
 	});
 

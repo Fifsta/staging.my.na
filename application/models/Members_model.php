@@ -470,18 +470,16 @@ class Members_model extends CI_Model
 				if ($this->agent->referrer() == site_url('/') . 'members/register/' || $this->agent->referrer() == site_url('/') . 'members/register' || $this->agent->referrer() == site_url('/') . 'my_admin/home/')
 				{
 
-					$span = 'span4';
 
 				}
 				else
 				{
 
-					$span = 'span8';
 				}
 				echo '<div class="control-group">
 					  <label class="control-label" for="city">City</label>
 					  <div class="controls">
-							<select onchange="populateSuburb(this.value);" id="city" name="city"  class="' . $span . '">
+							<select onchange="populateSuburb(this.value);" id="city" name="city"  class="form-control">
 							<option value="0">Please Select your City</option>';
 
 				foreach ($query->result() as $row)
@@ -511,7 +509,7 @@ class Members_model extends CI_Model
 			else
 			{
 
-				return;
+
 			}
 		}
 	}
@@ -532,19 +530,16 @@ class Members_model extends CI_Model
 			if ($this->agent->referrer() == site_url('/') . 'members/register/' || $this->agent->referrer() == site_url('/') . 'members/register')
 			{
 
-				$span = 'span4';
-
 			}
 			else
 			{
 
-				$span = 'span8';
 			}
 
 			echo '<div class="control-group">
                   <label class="control-label" for="suburb">Suburb</label>
                   <div class="controls">
-              			<select id="suburb" name="suburb" class="' . $span . '">
+              			<select id="suburb" name="suburb" class="form-control">
 						<option value="0">Please Select your Suburb</option>';
 
 			foreach ($query->result() as $row)
