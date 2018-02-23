@@ -10,11 +10,11 @@ $uris = explode('/', $url);
 $section_1 = '';
 $section_2 = '';
 
-if($uris[2] != '') {
+if(isset($uris[2])) {
 	$section_1 = $uris[2];
 }
 
-if($uris[3] != '') {
+if(isset($uris[3])) {
 	$section_2 = $uris[3];
 }
 
