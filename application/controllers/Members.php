@@ -11,6 +11,7 @@ class Members extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('members_model');	
+		$this->load->model('business_model');	
 	    $this->section_1 = $this->uri->segment(1);
 	    $this->section_2 = $this->uri->segment(2);				
 	}
@@ -1457,11 +1458,12 @@ class Members extends CI_Controller {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //BUSINESS 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
-	//+++++++++++++++++++++++++++
+	//+++++++++++++++++++++++++++ 
 	//BUSINESS DETAILS EDIT
 	//++++++++++++++++++++++++++
 	public function business($bus_id, $section = '',$msg_id = '')
 	{
+
 		
 		if($this->members_model->check_business_user($bus_id)){
 				
@@ -1469,6 +1471,24 @@ class Members extends CI_Controller {
 				$data['bus_id'] = $bus_id;
 				$data['msg_id'] = $msg_id;
 				$data['section'] = $section;
+
+			$this->load->model('image_model'); 
+
+			$this->load->library('thumborp');
+
+
+				$this->load->model('rating_model');
+				$data['bus_id'] = $bus_id;
+				$this->load->model('trade_model');
+				//ADD a VIEW LISTING COUNTER
+				$this->business_model->add_business_view($bus_id);
+
+				$data['bus_details'] = $this->business_model->get_business_details($bus_id);
+				$data['cats'] = $this->business_model->get_current_categories($bus_id);
+				//get RATING
+				$data['rating'] = $this->business_model->get_rating($bus_id);
+				//$this->load->view('trade/business_products', $data);
+
 			
 				$this->load->view('members/business_details', $data);	
 		
@@ -1478,6 +1498,7 @@ class Members extends CI_Controller {
 			  
 		 }
 	
+
 	}
 	
 	

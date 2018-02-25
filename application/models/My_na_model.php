@@ -8,6 +8,12 @@ class My_na_model extends CI_Model{
  	}
 
 
+    function get_location_select() {
+
+        
+    }
+
+
 
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //GET HOME CATEGORIES
@@ -400,7 +406,7 @@ class My_na_model extends CI_Model{
                 echo '</select>';
 
             }else{
-                echo '<select class="'.$class.'"  id="'.$id.'">';
+                echo '<select class="form-control '.$class.'"  id="'.$id.'">';
                 foreach($q->result() as $row){
 
 

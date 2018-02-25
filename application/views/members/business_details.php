@@ -1,615 +1,338 @@
-<?php
+ <?php 
 //+++++++++++++++++
-//My.Na Business Details
+//LOAD HEADER
+//Prepare Variables array to pass into header
+//+++++++++++++++++
+
+//+++++++++++++++++
+//My.Na Business Detailsb
 //+++++++++++++++++
 //Roland Ihms
 //Get Business Details
-$bus_details = $this->members_model->get_business_details($bus_id);
-$name = ucwords($bus_details['BUSINESS_NAME']);
+
+$bus_id =  $bus_details['ID'];
+$name =  $bus_details['BUSINESS_NAME'];
 $email = $bus_details['BUSINESS_EMAIL'];
-$tel = $bus_details['BUSINESS_TELEPHONE'];
-$fax = $bus_details['BUSINESS_FAX'];
-$cell = $bus_details['BUSINESS_CELLPHONE'];
+$tel = '+'.$bus_details['TEL_DIAL_CODE'].' '.$bus_details['BUSINESS_TELEPHONE'];
+$fax = '+'.$bus_details['FAX_DIAL_CODE'].' '.$bus_details['BUSINESS_FAX'];
+$cell = '+'.$bus_details['CEL_DIAL_CODE'].' '.$bus_details['BUSINESS_CELLPHONE'];
 $description = $bus_details['BUSINESS_DESCRIPTION'];
 $pobox = $bus_details['BUSINESS_POSTAL_BOX'];
-$website = $bus_details['BUSINESS_URL'];
+$website = $bus_details['BUSINESS_URL']; 
 $address = $bus_details['BUSINESS_PHYSICAL_ADDRESS'];
+$city = $bus_details['city'];
+$region = $bus_details['region'];
+$latitude = $bus_details['latitude'];
+$longitude = $bus_details['longitude'];
 $startdate = $bus_details['BUSINESS_DATE_CREATED'];
 //$city = $bus_details['CLIENT_CITY'];
 $img = $bus_details['BUSINESS_LOGO_IMAGE_NAME'];
- //+++++++++++++++++
- //LOAD HEADER
- //Prepare Variables array to pass into header
- //+++++++++++++++++
- $header['title'] = $name. ' - Business Dashboard';
- $header['metaD'] = '';
- $this->load->view('inc/header', $header);
- 
- //ADDITIONAL RESOURCES
- //add css, IE7 js files here before the head tag
+$vt = $bus_details['BUSINESS_VIRTUAL_TOUR_NAME'];
+$advertorial = $bus_details['ADVERTORIAL'];
+//Get categories
+$cats = $this->business_model->get_current_categories($bus_id);
+$rand = rand(0,9999);
+//Build image string
+//$city = $bus_details['CLIENT_CITY'];
+$img = $bus_details['BUSINESS_LOGO_IMAGE_NAME'];
+
+$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+$width = 800;
+
+$height = 450;
+
+if($img != ''){
+  
+  if(strpos($img,'.') == 0){
+
+    $format = '.jpg';
+    $img_str = 'assets/business/photos/'.$img . $format;
+    $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
+    
+  }else{
+    
+    $img_str = 'assets/business/photos/'.$img;
+    $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
+    
+  }
+  
+}else{
+  
+  $img_url =  'assets/business/photos/listing-placeholder.jpg';
+  
+}
+
+//COVER IMAGE
+$cover_img = $bus_details['BUSINESS_COVER_PHOTO'];
+
+if($cover_img != ''){
+  
+  if(strpos($cover_img,'.') == 0){
+
+    $format2 = '.jpg';
+    $cover_str = 'assets/business/photos/'.$cover_img . $format2;
+    $cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
+    
+  }else{
+    
+    $cover_str =  'assets/business/photos/'.$cover_img;
+    $cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
+    
+  }
+  
+}else{
+  
+  $cover_str =  'assets/business/photos/listing-placeholder.jpg';
+  $cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+  
+}
 
 
- ?>
- <link href="<?php echo base_url('/');?>css/datatables.min.css" rel="stylesheet" type="text/css" /> 
+
+//+++++++++++++++++
+//LOAD HEADER
+//Prepare Variables array to pass into header
+//+++++++++++++++++
+$header['title'] = $name. ' - Business Dashboard';
+$header['metaD'] = '';
+$this->load->view('inc/header', $header);
+
+//ADDITIONAL RESOURCES
+//add css, IE7 js files here before the head tag
+?>
+
+<link href="<?php echo base_url('/');?>css/datatables.min.css" rel="stylesheet" type="text/css" /> 
 <link rel="stylesheet" href="<?php echo base_url('/');?>redactor/redactor/redactor.css?v=1" />
 </head>
-<body>
+<body id="top">
 
- <?php 
- //+++++++++++++++++
- //LOAD NAVIGATION
- //+++++++++++++++++
- $nav['section'] = 'account';
- $this->load->view('inc/navigation', $nav);
- 
+<?php $this->load->view('inc/top_bar'); ?>
 
-	?>	
-    <!-- END Navigation -->
-   <!-- Part 1: Wrap all content here -->
-    <div id="wrap">
-		<div class="container-fluid" id="home_container">
-         	<div class="clearfix" style="height:30px;"></div>
-		 		<div class="row">
-				<?php 
-                 //+++++++++++++++++
-                 //LOAD HOME SEARCH BOX
-                 //+++++++++++++++++
-                 
-                 //$this->load->view('inc/home_search');
-                 ?>
+<nav id="bread">
+  <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">My.na</a></li>
+      </ol>
+  </div>
+</nav>
 
-         		</div>
+<div class="container">
 
-      <!-- Begin page content -->
-      <div class="padding10">
-      
-	   <div class="row-fluid">
-      	
-        <div class="span12">
-            <?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
-                <img src="<?php echo base_url('/');?>img/icons/han_sml.png" style="width:80px" title="Proud HAN Member" rel="tooltip" class="pull-right" />
-            <?php } ?>
-            <?php if($bus_details['IS_NTB_MEMBER'] == 'Y'){ ?>
-                <img src="<?php echo base_url('/');?>img/icons/ntb_sml.png" style="width:80px" title="Namibia Tourism Board Member" rel="tooltip" class="pull-right" />
-            <?php } ?>
-          <img src="<?php echo $this->my_na_model->get_business_logo($bus_id, '60','60', $img);?>" style="width:60px;height:60px;margin:10px 10px 10px 0px" class="img-polaroid pull-left" />
+  <div class="row">
 
-          <h3 class="upper na_script"><?php echo $name;?></h3><?php echo date('l F jS');?>
-          <div class="clearfix" style="height:10px"></div> 
-             <ul class="breadcrumb">
-              <li><a href="<?php echo site_url('/');?>members/home/">My Account</a> <span class="divider">/</span></li>
-               <li><a href="<?php echo site_url('/');?>members/business/<?php echo $bus_id;?>/"><?php echo $name;?> </a> <span class="divider">/</span></li>
-              <li><?php if($this->session->userdata('u_name')){ echo ucfirst($this->session->userdata('u_name'));}?></li>
-            </ul>
-        </div>
-		      
-      </div>
-      
-      <div class="row-fluid">
-      
-              	<div class="popover top" id="map_info" style="margin:90px 0px 0px 41%">
-                  <div class="arrow"></div>
-                    <h3 class="popover-title">Update your map<i class="icon-info-sign" style="float:right"></i></h3>
-                    <div class="popover-content">
-                      You have not set your map yet. Please click on the map tab and pinpoint your location
-                 </div>
-              </div>
-			
-             <div class="navbar">
-              <div class="navbar-inner" style="margin:0;padding:0">
-                <div class="container">
-                  <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </a>
-                  
-                  <div class="nav-collapse navbar-responsive-collapse in collapse" style="height: auto;">
-                    <ul class="nav">
-                      <li class="active"><a href="#info" data-toggle="tab">General</a></li>
-                      <li><a href="#analytics" onClick="load_analytics(<?php echo $bus_id;?>, 'MONTH')" data-toggle="tab" title="View the statistics of your listing" rel="tooltip"><i class="icon-random"></i> Analytics</a></li>
-                      <li><a href="#load_qr" onClick="load_tab(<?php echo $bus_id;?>,'load_qr')" data-toggle="tab" title="Utilize your quick response code" rel="tooltip"><i class="icon-qrcode"></i> QR code</a></li>
-                      <li><a href="#enquiries"  onClick="load_mail(<?php echo $bus_id;?>,'all')" data-toggle="tab" title="Go to your message inbox" rel="tooltip"><div class="notification_bus_msg_count">
-					  <?php $this->my_na_model->msg_notifications_business($bus_id);?></div>
-                      <i class="icon-envelope"></i> Enquiries</a></li>
-                      <li class="dropdown" title="Connect with your fans and check your messages" rel="tooltip">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><i class="icon-thumbs-up"></i> <span class="na_script" style="font-size:15px">!na</span> <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                          <li class="nav-header">My !na</li>
-                          <li><a href="#load_tna" onClick="load_tab(<?php echo $bus_id;?>,'load_tna')" data-toggle="tab"><i class="icon-glass"></i> My <span class="na_script" style="font-size:20px">!na</span>'s</a></li>
-                     	  <li><a href="<?php echo site_url('/').'members/tna_mail/'.$bus_id.'/';?>"><i class="icon-glass"></i> <span class="na_script" style="font-size:20px">!na</span> - mail</a></li>
-                          <li class="divider"></li>
-                          <li class="nav-header">Messages</li>
-						  <li><a href="#enquiries"  onClick="load_mail(<?php echo $bus_id;?>,'all')" data-toggle="tab"><i class="icon-envelope"></i> Inbox</a></li>
-                        </ul>
-                      </li>
-                      <li><a href="#map-tab" onClick="initialise_map()" data-toggle="tab"><i class="icon-map-marker"></i> Map</a></li>
-                      <li><a href="#gallery" data-toggle="tab"><i class="icon-picture"></i> Gallery</a></li>
-                      <li><a href="#categories" data-toggle="tab"><i class="icon-folder-open"></i> Categories</a></li>
-                      <?php //if($bus_details['IS_ESTATE_AGENT'] == 'Y' ||  $bus_id == '9333' || $bus_id == '9228' || $bus_id == '1290' || $bus_id == '2666' || $bus_id == '8226' || $bus_id == '1807' || $bus_id == '8785' || $bus_id == '8842' || $bus_id == '8840' || $bus_id == '8848' || $bus_id == '8966' || $bus_id == '8974' || $bus_id == '980' || $bus_id == '2706' || $bus_id == '9014' || $bus_id == '9015' || $bus_id == '9016' || $bus_id == '4608' || $bus_id == '5959' || $bus_id == '9123' || $bus_id == '9120'){ ?>
-                        <li id="trade_btn" class="dropdown trade">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-shopping-cart"></i> Buy/Sell <b class="caret"></b></a>
-                          <ul class="dropdown-menu" style="width:290px;">
-                            
-                            <?php if($bus_details['IS_ESTATE_AGENT'] == 'Y'){ ?>
-                             <li class="nav-header">My Properties</li>
-                              <li><a href="<?php echo site_url('/').'sell/index/'.$bus_id.'/';?>"><i class="icon-home"></i> List a Agency Product <span style="font-size:10px;"><br> List products you want to sell</span></a></li>
-                              <?php // JOUBERT BALT IS PRIVATE
-                              		if($bus_id != 8848){?>
-                              			<li><a href="<?php echo site_url('/').'sell/my_trade/'.$bus_id.'/live/';?>"><i class="icon-hdd"></i> Agency Products <span style="font-size:10px;"><br> Items listed under the agency</span></a></li>
-                              <?php } ?>
-                              <li><a href="<?php echo site_url('/').'sell/my_trade/'.$bus_id.'/live_agent/';?>" ><i class="icon-user"></i> My Products <span style="font-size:10px;"><br> Items you are currently selling</span></a></li>
-                              <li><a href="<?php echo site_url('/').'sell/my_trade/'.$bus_id.'/sold_agent/';?>"><i class="icon-flag"></i> Items I've Sold <span style="font-size:10px;"><br> Find the items you have sold</span></a></li>
-						      <li><a href="<?php echo site_url('/').'sell/my_trade/'.$bus_id.'/';?>">New Dashboard <i class="icon-flag"></i><span style="font-size:10px;"><br> Check out the new Buy and Sell Dashboard</span></a></li>
-                             <?php }else{ ?>
-                             <li class="nav-header">Company Products</li>
-                              <li><a href="<?php echo site_url('/').'sell/index/'.$bus_id.'/';?>">Sell an Item <span style="font-size:10px;"><br> List items you want to sell</span></a></li>
-                              <li><a href="<?php echo site_url('/').'sell/my_trade/'.$bus_id.'/live/';?>">My Items <span style="font-size:10px;"><br> Items you are currently selling</span></a></li>
-                             <li><a href="<?php echo site_url('/').'sell/my_trade/'.$bus_id.'/sld/';?>">Items I've Sold <span style="font-size:10px;"><br> Find the items you have sold</span></a></li>
-                             <li><a href="<?php echo site_url('/').'sell/my_trade/'.$bus_id.'/';?>">New Dashboard <i class="icon-flag"></i><span style="font-size:10px;"><br> Check out the new Buy and Sell Dashboard</span></a></li>
-                            <?php } ?>
-                          </ul>
-                        </li>
-                        <?php //}?>
-                       <li><a href="#deals" onClick="load_tab(<?php echo $bus_id;?>, 'deals')" data-toggle="tab" title="Maintain your business deals" rel="tooltip"><i class="icon-certificate"></i> Deals</a></li>
-                       <li><a href="#users" onClick="load_tab(<?php echo $bus_id;?>, 'users')" data-toggle="tab" title="Manage your listing administrators" rel="tooltip"><i class="icon-user"></i> Users</a></li>
-                       <li><a href="#reviews" onClick="load_tab(<?php echo $bus_id;?>, 'reviews')" data-toggle="tab" title="Monitor your business reviews" rel="tooltip"><i class="icon-comment"></i> Reviews</a></li>
+    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-4 order-md-2 order-sm-1 order-lg-2 order-xl-3" id="sidebar">
+      <?php $this->load->view('inc/login'); ?>
+      <?php $this->load->view('inc/weather'); ?>
+      <?php $this->load->view('inc/adverts'); ?>
+    </div>
 
-                       <?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
-              			<!--<li><a href="#han_evaluations" onClick="load_tab(<?php /*echo $bus_id;*/?>, 'han_evaluations')" data-toggle="tab" title="View your HAN evaluations" rel="tooltip"><i class="icon-list-alt"></i> HAN Evaluations</a></li>-->
-             		   <?php } ?>	
-                       <?php if($bus_details['IS_CMS'] == 'Y'){ ?>
-              			<li><a href="#my_cms" onClick="load_tab(<?php echo $bus_id;?>, 'my_cms')" data-toggle="tab" title="Update your website" rel="tooltip"><i class="icon-wrench"></i> My CMS</a></li>
-             		   <?php } ?>	
-                        					  
-                    </ul>
-                   
-                    
-                  </div><!-- /.nav-collapse -->
-                </div>
-              </div><!-- /navbar-inner -->
+    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
+
+      <div class="row">
+        <div class="col-md-12">
+
+          <section id="listing">
+
+
+            <div class="heading" style="margin-bottom:15px">
+              <h2 data-icon="fa-briefcase"><?php echo $name; ?></h2>
+              <ul class="options"> 
+                <li><a href="#Contact-Agent" data-icon="fa-envelope text-dark">Details</a></li>
+                <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
+                <li><a href="#Analytics" data-icon="fa-briefcase text-dark">Analytics</a></li>
+                <li><a href="#Products" data-icon="fa-graph text-dark">Products</a></li>
+              </ul>
             </div>
-      
-      </div>
-      
-      
-       	
-      <div class="row-fluid">
-      
-       <div class="span3">
-            <?php 
-                 //+++++++++++++++++
-                 //LOAD MEMBERS NAVIGATION
-                 //+++++++++++++++++
-                 $subnav['subsection'] = 'add_bus';
-				 //$this->load->view('members/inc/account_nav', $subnav);
-
-				
-             ?>
-               <div id="timeline-anchor"></div>
-               <div id="timeline" style="margin:0;padding:0">
-                   <div>
-                       <ul class="nav nav-tabs nav-stacked">
-                           <li class="nav-header">My Account</li>
-                           <li class="home"><a href="<?php echo site_url('/');?>members/home/">Dashboard<i class="icon-chevron-right pull-right"></i></a></li>
-                           <li class="general"><a  href="javascript:load_ajax('general')">My Profile<i class="icon-chevron-right pull-right"></i></a></li>
-                           <!-- <li class="nav-header">Scratch &amp; Win</li>
-                           <li id="general_scratch" <?php /*if ($subsection == 'scratch') {  echo 'class="active"'; }*/?>>
-                               <a href="<?php /*echo site_url('/');*/?>win/scratch_and_win/">
-                                   <img src="<?php /*echo base_url('/');*/?>img/scratch_n_win_sml.png" style="width:100%"/></a></li>-->
-                           <?php echo $this->my_na_model->get_businesses_nav();?>
-                           <li <?php if ($subnav['subsection'] == 'add_business') {  echo 'class="active"'; }?>><a href="<?php echo site_url('/');?>members/add_business/">Add a business<i class="icon-chevron-right pull-right"></i></a></li>
-                           <li><a href="javascript:void(0);" onclick="claim_a_business()">Claim a business<i class="icon-chevron-right pull-right"></i></a></li>
-                       </ul>
-
-                   </div>
-               </div>
-               <div class="clearfix" style="height:10px;"></div>
-
-        </div>
-      
-      
-        <div class="span9">
 
 
-
-
-
-             <div class="alert alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <h4><span class="na_script" style="font-size:20px">My Business Dashboard</span></h4> 
-                    This is the administration dashboard for <?php echo $name;?>. You can manage all business details, update the business location on the map, view business
-                    analytics, publish deals, send customised business emails to every user who has <span class="na_script">!na'd</span> your business and manage users who have access.
-             </div>   
-
-
-             <?php if(isset($error)){ ?>
-              <div class="alert alert-error">
-               <button type="button" class="close" data-dismiss="alert">×</button>
-                  <?php echo $error; ?>
+            <div class="list-map">
+              <div class="list-map-left" style="background:#ccc; position:relative">
+                  <img src="<?php echo $cover_url; ?>" class="img-fluid">
               </div>
-              <?php
-              }//end error
-              if(isset($basicmsg)){ ?>
-              <div class="alert alert-success">
-               <button type="button" class="close" data-dismiss="alert">×</button>
-                  <?php echo $basicmsg; ?>
-              </div>
-              <?php
-              }
-              ?>
-             
-                <div class="clearfix" style="height:5px;"></div>
-                <div class="tab-content">
-                  <div class="tab-pane<?php if($section != 'message'){ echo ' active';}?>" id="info">
-                      <?php $this->load->view('members/inc/rating_widget');?>
-					  <?php $this->load->view('members/inc/business_details', $bus_details);?></div>
-                  <div class="tab-pane" id="map-tab"><?php $this->load->view('members/inc/business_map_inc', $bus_details);?></div>
-                  <div class="tab-pane" id="categories"><?php $this->load->view('members/inc/business_categories_inc', $bus_details);?></div>
-                   <div class="tab-pane" id="amenities"><?php $this->load->view('admin/inc/business_amenities_inc', $bus_details);?></div>
-                  <div class="tab-pane" id="gallery"><?php $this->load->view('members/inc/business_gallery', $bus_details);?></div>
-                  <div class="tab-pane" id="analytics" style="min-height:500px;background:url(<?php echo base_url('/');?>img/load.gif) no-repeat center center"><h3>Analytics <small><?php echo $name;?></small></h3>
-                    <div class="clearfix"></div>
-                    <div id="analytics_div" style="height:auto;background:url(<?php echo base_url('/');?>img/load.gif) no-repeat center center"></div>
-                  </div>
-                  <div class="tab-pane loading_img" style="min-height:300px;" id="admin_content"></div>
-                  <div class="tab-pane loading_img" style="min-height:300px;" id="load_tna"></div>
-                  <div class="tab-pane" id="load_tna_mail"></div>
-                  <div class="tab-pane loading_img" style="min-height:300px;" id="load_qr"></div>
-                  <div class="tab-pane loading_img <?php if(isset($section) && $section == 'message'){ echo 'active';}?>" style="min-height:300px;width:100%" id="enquiries"></div>
-                  <div class="tab-pane loading_img <?php if(isset($section) && $section == 'deals'){ echo 'active';}?>" style="min-height:300px;width:100%" id="deals"></div>
-                  <div class="tab-pane loading_img <?php if(isset($section) && $section == 'users'){ echo 'active';}?>" style="min-height:300px;width:100%" id="users"></div>
-                  <div class="tab-pane loading_img" id="reviews" style="min-height:300px;width:100%"></div>
-                  <?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
-              	  <div class="tab-pane loading_img" id="han_evaluations"></div>
-             	  <?php } ?>	
-                  <?php if($bus_details['IS_CMS'] == 'Y'){ ?>
-              	  <div class="tab-pane loading_img" id="my_cms"></div>
-             	  <?php } ?>	
-                </div>
               
-        </div>
-       
-       
-       
+              <div class="list-map-right" id="map_container">
+           
+              </div>
+            </div>
+
+            <!--details-->
+            <div class="details">
+              <div class="details-left">
+                <figure>
+                  <a href="#"><img src="<?php echo $img_url; ?>"></a>
+                  
+                </figure>
+
+                <div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>
+                 
+              </div>
+              <div class="details-right">
+                <h2><?php echo $address ;?></h2>
+                <div itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+                                 <span itemprop="street-address"><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
+                                 <span itemprop="locality"><?php echo $city ;?></span>
+                                 <span itemprop="region"><?php echo $region ;?></span>
+                                 <span itemprop="country-name">Namibia</span>
+                             </div>
+                             <?php 
+                 echo '<p>'. implode(' ',$cats['links']).'</p>';
+                 ?>
+                <div class="row reveal">
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <p data-icon="fa-phone text-dark"><button class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
+                    <p data-icon="fa-fax text-dark"><button class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>
+                    
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <p data-icon="fa-tablet text-dark"><button class="btn btn-default"><!--C: --><?php echo $cell; ?></button></p>
+                    <p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><?php echo $email; ?></button></p>
+                    
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-4">
+                    <p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><?php echo $website; ?></button></p>
+                  </div>              
+                </div>
+
+                <?php if($bus_details['IS_NTB_MEMBER'] == 'Y'){ ?>
+                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/ntb_sml.png" alt="<?php echo $name;?> - NTB Member"></a>
+                <?php } ?>
+
+                <?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
+                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/han_sml.png" alt="<?php echo $name;?> - HAN Member"></a>
+                <?php } ?>
+
+              </div>
+            </div>
+            <!--details-->   
+
+
+            <!--tabs business details-->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="nav-item"><a href="#Details" class="nav-link active" aria-controls="Details" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o text-dark">Details</a></li>
+              <li role="presentation" class="nav-item"><a href="#Description" class="nav-link" aria-controls="Description" role="tab" data-toggle="tab" data-icon="fa-file-text-o text-dark">Description</a></li>
+              <li role="presentation" class="nav-item"><a href="#Gallery" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o text-dark">Gallery</a></li>
+              <li role="presentation" class="nav-item"><a href="#Categories" class="nav-link" aria-controls="Categories" role="tab" data-toggle="tab" data-icon="fa-list text-dark">Categories</a></li>
+            </ul>
+
+            <div class="tab-content">
+
+              <section role="tabpanel" class="tab-pane active" id="Details">
+                <h2 class="tab-head">Manage Business Details</h2>
+                <?php $this->load->view('members/inc/business_details', $bus_details);?>
+              </section>
+
+              <section role="tabpanel" class="tab-pane" id="Description">
+                <h2 class="tab-head">Manage Business Description</h2>
+                <?php $this->load->view('members/inc/business_description', $bus_details);?>
+              </section>
+
+              <section role="tabpanel" class="tab-pane" id="Gallery">
+                <h2 class="tab-head">Gallery</h2>
+                <div class="row">
+                  <?php $this->business_model->show_gallery($bus_id);?>
+                </div>
+              </section>
+
+
+              <section role="tabpanel" class="tab-pane" id="Categories">
+                <h2 class="tab-head">Categories</h2>
+                <div class="row">
+                  <?php $this->load->view('members/inc/business_categories_inc', $bus_details);?>
+                </div>
+              </section>
+
+              <div class="clear:both"> </div>
+
+            </div>
+            <!--tabs business details-->
+
+
+            <!--tabs review/rating details-->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="nav-item"><a href="#Rating" class="nav-link active" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o text-dark">Rating Widget</a></li>
+              <li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-file-text-o text-dark">Reviews</a></li>
+              <li role="presentation" class="nav-item"><a href="#QR" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-file-text-o text-dark">QR Code</a></li>
+            </ul>
+
+            <div class="tab-content">
+
+              <section role="tabpanel" class="tab-pane active" id="Rating">
+                <h2 class="tab-head">Official Namibian Rating Widget</h2>
+                <?php $this->load->view('members/inc/rating_widget', $bus_details);?>
+              </section>
+
+              <section role="tabpanel" class="tab-pane" id="Reviews">
+                <h2 class="tab-head">Business Reviews</h2>
+              </section>
+
+              <section role="tabpanel" class="tab-pane active" id="QR">
+                <h2 class="tab-head">QR Code</h2>
+                <?php $this->load->view('members/inc/business_qr_code', $bus_details);?>
+              </section>
+
+              <div class="clear:both"> </div>
+
+            </div>
+            <!--tabs review/rating details-->
+
+
+            <!--tabs review/rating details-->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="nav-item"><a href="#Analytics" class="nav-link active" aria-controls="Analytics" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o text-dark">Analytics</a></li>
+
+            </ul>
+
+            <div class="tab-content">
+
+              <section role="tabpanel" class="tab-pane active" id="Analytics">
+                <h2 class="tab-head">Analytics</h2>
+              </section>
+
+              <div class="clear:both"> </div>
+
+            </div>
+            <!--tabs review/rating details-->            
+
+            
+          </section>          
+
+        </div> 
+
       </div>
-     	
-	 </div> 
-     <!-- /container - end content --> 
-		<div class="clearfix" style="height:40px;"></div>
-      
-     </div><!-- /bak--> 
-   
-
- <?php 
- //+++++++++++++++++
- //LOAD FOOTER
- //+++++++++++++++++
- $footer['foo'] = '';
- $this->load->view('inc/footer', $footer);
- ?>  
-</div><!-- /wrap-->
-
- <?php /**
-++++++++++++++++++++++++++++++++++++++++++++
-//DELETE IMAGE MODAL
-//Functions
-++++++++++++++++++++++++++++++++++++++++++++	
- */
- ?>
-
- <div id="modal-respond" class="modal fade">
-    <div class="loading_img"></div>
- </div>
- <div id="modal-claim" class="modal hide fade">
-     <div class="modal-header">
-         <a href="javascript:void(0)" onClick="javascript:$('#modal-claim').modal('hide')" class="close">&times;</a>
-         <h3>Claim a business listing</h3>
-     </div>
-
-     <div class="modal-body" >
-         <div id="claim_modal" class="loading_img" style="width:100%; min-height:300px"></div>
-
-     </div>
-
-     <div class="modal-footer">
-         <a data-dismiss="modal" aria-hidden="true" class="btn btn-secondary">Cancel</a>
-     </div>
- </div>
-
- <div class="modal hide fade" id="modal-delete">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Delete Messages</h3>
-  </div>
-  <div class="modal-body">
-    <p>Are you sure you want to completely remove the selected messages?</p>
-  </div>
-  <div class="modal-footer">
-      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <a href="#" class="btn btn-primary">Remove</a>
-  </div>
+    </div>
+  </div>  
 </div>
- <link rel="stylesheet" href="<?php echo base_url('/')?>css/font-awesome.min.css">
-    <!-- JAvascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-     <script src="<?php echo base_url('/')?>redactor/redactor/redactor.min.js?v=1"></script>
-	 <script src="<?php echo base_url('/')?>redactor/redactor/video.js"></script>
-	 <script src="<?php echo base_url('/')?>redactor/redactor/table.js"></script>
-     <script type="text/javascript" language="javascript" src="<?php echo base_url('/');?>js/jquery.dataTables.min.js"></script>
-     <script src="<?php echo base_url('/');?>js/custom/fb.js"></script>
-    <script src="<?php echo base_url('/');?>js/custom/members_home.js"></script>
-<script type="text/javascript">
-<?php 
-
-
-  /**
-++++++++++++++++++++++++++++++++++++++++++++
-//FIRE EDITOR
-++++++++++++++++++++++++++++++++++++++++++++	
- */
-   
- ?>
   
+<?php $this->load->view('inc/footer');?>  
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="<?php echo base_url('/')?>redactor/redactor/redactor.min.js?v=1"></script>
+<script src="<?php echo base_url('/')?>redactor/redactor/video.js"></script>
+<script src="<?php echo base_url('/')?>redactor/redactor/table.js"></script>
+<script type="text/javascript" language="javascript" src="<?php echo base_url('/');?>js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url('/');?>js/custom/fb.js"></script>
+<script src="<?php echo base_url('/');?>js/custom/members_home.js"></script>
+
+<script data-cfasync="false" type="text/javascript">
+
 $(document).ready(function(){
-		
-		//REDIRECT MESSAGES
-		<?php if(isset($section)){
-			
-				if($section == 'message'){
-				
-					echo "load_msg(".$msg_id.",".$bus_id.",'unread');";
-				
-				}elseif($section == 'deals'){
-					
-					echo "load_tab(".$bus_id.",'deals');";
-					
-				}
-			
-			}
-		?>
-
-		  $('#redactor_content').redactor({ 	
-			  imageUpload: '<?php echo site_url('/')?>my_images/redactor_add_image',
-			  imageGetJson: '<?php echo site_url('/')?>my_images/show_upload_images_json/<?php echo $bus_id;?>',
-			  buttons: ['html', '|', 'formatting', '|', 'bold', 'italic', 'deleted', '|', 
-			  'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
-			  'video','image', 'table','|',
-			   'alignment', '|', 'horizontalrule'],
-			   cleanOnPaste: true,
-			  plugins: ['table', 'video']
-		  });
-		$('[rel=tooltip]').tooltip();
-	 
-	}
-);
-
-
-   function load_trade(str, bus_id, section){
-	   
-	   // home_feed = false;
-		var n =$('#admin_content');
-		n.empty().addClass('loading_img');		  
-		$.ajax({
-				type: 'get',
-				cache: false,
-				url: '<?php echo site_url('/');?>trade/'+str+'/'+bus_id+"/"+section ,
-				success: function (data) {
-					n.removeClass('loading_img');	
-					n.html(data);	
-						
-				}
-			});	 
-	 
- }
-
- function copyToClipboard(type) {
-    if(type == 1){
-        var txt = 'https://www.my.na/rate/rateme/<?php echo $bus_id;?>/plugin/external';
-
-    }else{
-
-        var txt = '<iframe src="https://www.my.na/rate/rateme/<?php echo $bus_id;?>/embed/external" allowtransparency="true" frameborder="0" style="width:100%; min-height:600px;"></iframe>';
-
-    }
-
-    window.prompt("Copy to clipboard: Ctrl+C, Enter", txt);
-  }
-
-
-function load_ajax(str){
-		
-		window.location = '<?php echo site_url('/');?>members/home/'+str;
-} 
-
  
- function load_analytics(id,period){
-	 
-	$.ajax({
-			type: 'get',
-			cache: false,
-			url: '<?php echo site_url('/').'members/get_business_analytics/';?>'+id+'/'+period ,
-			success: function (data) {
-
-				     $('#analytics_div').html(data);	   	
-			}
-		});	 
-	 
- }
-  function load_analytics_30(id){
-	
-	$('#analytics').addClass('loading'); 
-	$('#analytics_div').html('');	  
-	$.ajax({
-			type: 'get',
-			cache: false,
-			url: '<?php echo site_url('/').'members/get_business_analytics_month/';?>'+id ,
-			success: function (data) {
-
-				     $('#analytics_div').html(data);	   	
-			}
-		});	 
-	 
- }
+  $('#redactor_content').redactor({   
+    imageUpload: '<?php echo site_url('/')?>my_images/redactor_add_image',
+    imageGetJson: '<?php echo site_url('/')?>my_images/show_upload_images_json/<?php echo $bus_id;?>',
+    buttons: ['html', '|', 'formatting', '|', 'bold', 'italic', 'deleted', '|', 
+    'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
+    'video','image', 'table','|',
+    'alignment', '|', 'horizontalrule'],
+    cleanOnPaste: true,
+    plugins: ['table', 'video']
+  });
+  $('[rel=tooltip]').tooltip(); 
   
-  function load_tab(id, str){
-	var cont = $('#'+str);
-    if(str == 'reviews'){
-
-          $.getScript('<?php echo base_url('/');?>js/jquery.knob.js', function(){
-              setTimeout(load_review_report(id, str), 300);
-          });
-    }else{
-
-        cont.addClass('loading_img');
-        cont.empty();
-        $.ajax({
-            type: 'get',
-            cache: false,
-            url: '<?php echo site_url('/').'members/';?>'+str+'/'+id ,
-            success: function (data) {
-                cont.removeClass('loading_img');
-                cont.html(data);
-
-                if(str == 'han_evaluations'){
-                    $('#example').dataTable( {
-                        "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
-                        "sPaginationType": "bootstrap",
-                        "oLanguage": {
-                            "sLengthMenu": "_MENU_"
-                        },
-                        "aaSorting":[],
-                        "bSortClasses": false
-
-                    } );
-                }
-
-            }
-        });
-
-    }
-
-
-	 
- }
-
-function load_review_report(id,str){
-    var cont = $('#'+str);
-    cont.addClass('loading_img');
-    cont.empty();
-
-    $.ajax({
-        type: 'get',
-        cache: false,
-        url: '<?php echo site_url('/').'members/';?>'+str+'/'+id ,
-        success: function (data) {
-            cont.removeClass('loading_img');
-            cont.html(data);
-
-
-
-        }
-    });
-
-}
-
-
-   function load_msg(id,bus_id,status){
-		$('#enquiries').addClass('loading_img');		  
-		$.ajax({
-				type: 'get',
-				cache: false,
-				url: '<?php echo site_url('/').'tna_mail/view_msg_business/';?>'+id+'/'+bus_id+'/'+status ,
-				success: function (data) {
-					$('#enquiries').removeClass('loading_img');	
-					$('#enquiries').html(data);	
-				}
-			});	 
-		 
- }
- 
- 
-    function load_mail(bus_id,str){
-		var x = $('#enquiries');
-		x.empty();
-		x.addClass('loading_img');		  
-		$.ajax({
-				type: 'get',
-				cache: false,
-				url: '<?php echo site_url('/').'tna_mail/load_mail/';?>'+bus_id+'/'+str ,
-				success: function (data) {
-					x.removeClass('loading_img');	
-					x.html(data);	
-					$('#example1').dataTable( {
-								"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
-								"sPaginationType": "bootstrap",
-								"oLanguage": {
-									"sLengthMenu": "_MENU_"
-								},
-								"aaSorting":[],
-								"bSortClasses": false
-		
-							} );
-					load_notification();		
-				}
-			});	 
-	 
- }
- 
- function load_notification(){
-	 
-	 $.ajax({
-				type: 'get',
-				cache: false,
-				url: '<?php echo site_url('/').'tna_mail/reload_notify_count/';?>',
-				success: function (data) {
-					$('.notification_msg_count').html(data);	
-					
-				}
-			});
-			
-		 $.ajax({
-				type: 'get',
-				cache: false,
-				url: '<?php echo site_url('/').'tna_mail/reload_notify_count_business/'.$bus_id;?>',
-				success: function (data) {
-					$('.notification_bus_msg_count').html(data);	
-					
-				}
-			});	
-				 
- }
- 
-function delete_msg(){
-	
-	$('#modal-delete').bind('show', function() {
-
-			var removeBtn = $(this).find('.btn-primary');
-				
-			removeBtn.click(function(e) { 
-					
-				e.preventDefault();
-
-						var postdata = $("input[type=checkbox]").serialize();
-						$.ajax({
-							type: 'post',
-							url: '<?php echo site_url('/').'tna_mail/delete_msg/';?>' ,
-							data: postdata,
-							success: function (data) {
-								 
-								 $('#modal-delete').modal('hide');
-								 $('#inbox_msg').html(data);
-								 load_mail(<?php echo $bus_id;?>,'all');
-							}
-						});
-			});
-			
-	}).modal({ backdrop: true });	
-	
-}
+});
 
 </script>
+
 
 </body>
 </html>
