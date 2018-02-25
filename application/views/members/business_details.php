@@ -267,7 +267,7 @@ $this->load->view('inc/header', $header);
 
               <section role="tabpanel" class="tab-pane active" id="QR">
                 <h2 class="tab-head">QR Code</h2>
-                <?php $this->load->view('members/inc/business_qr_code', $bus_details);?>
+                <?php //$this->load->view('members/inc/business_qr_code', $bus_details);?>
               </section>
 
               <div class="clear:both"> </div>
