@@ -31,8 +31,11 @@ if(strstr($img, "http")){
 }elseif($img != ''){
 
   $fake_file = S3_URL.'assets/users/photos/'.$img; 
+
 }else{ 
-  $fake_file =  base_url('/').'img/user_blank.jpg';
+
+  $fake_file =  base_url('/').'images/user_blank.jpg';
+
 }
 
 $verified = $acc_details['VERIFIED'];
