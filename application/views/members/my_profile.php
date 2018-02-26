@@ -25,9 +25,12 @@ $daily_mail = $acc_details['EMAIL_NOTIFICATION'];
 $d_code = $acc_details['DIAL_CODE'];
 
 if(strstr($img, "http")){
+
   $fake_file = $img.'?type=large';
+
 }elseif($img != ''){
-  $fake_file = CDN_URL.'assets/users/photos/'.$img; 
+
+  $fake_file = S3_URL.'assets/users/photos/'.$img; 
 }else{ 
   $fake_file =  base_url('/').'img/user_blank.jpg';
 }
