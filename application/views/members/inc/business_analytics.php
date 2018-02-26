@@ -82,8 +82,6 @@
 <?php if ($this->input->get('embedded')){
 ?>
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="<?php echo base_url('/');?>css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo base_url('/');?>css/skin1-front.css?v5">
 	<script src="<?php echo base_url('/');?>js/bootstrap.min.js?v=1"></script>
 <?php 	
 }

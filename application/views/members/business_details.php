@@ -10,7 +10,7 @@
 //Roland Ihms
 //Get Business Details
 
-$bus_id =  $bus_details['ID'];
+$bus_id = $bus_details['ID'];
 $name =  $bus_details['BUSINESS_NAME'];
 $email = $bus_details['BUSINESS_EMAIL'];
 $tel = '+'.$bus_details['TEL_DIAL_CODE'].' '.$bus_details['BUSINESS_TELEPHONE'];
@@ -139,8 +139,9 @@ $this->load->view('inc/header', $header);
               <ul class="options"> 
                 <li><a href="#Contact-Agent" data-icon="fa-envelope text-dark">Details</a></li>
                 <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
-                <li><a href="#Analytics" data-icon="fa-briefcase text-dark">Analytics</a></li>
-                <li><a href="#Products" data-icon="fa-graph text-dark">Products</a></li>
+                <li><a href="#Analytics" data-icon="fa-bar-chart text-dark">Analytics</a></li>
+                <li><a href="#Products" data-icon="fa-briefcase text-dark">Products</a></li>
+                <li><a href="#Users" data-icon="fa-users text-dark">Users</a></li>
               </ul>
             </div>
 
@@ -237,7 +238,7 @@ $this->load->view('inc/header', $header);
               <section role="tabpanel" class="tab-pane" id="Categories">
                 <h2 class="tab-head">Categories</h2>
                 <div class="row">
-                  <?php $this->load->view('members/inc/business_categories_inc', $bus_details);?>
+                  <?php //$this->load->view('members/inc/business_categories_inc', $bus_details);?>
                 </div>
               </section>
 
@@ -265,9 +266,9 @@ $this->load->view('inc/header', $header);
                 <h2 class="tab-head">Business Reviews</h2>
               </section>
 
-              <section role="tabpanel" class="tab-pane active" id="QR">
+              <section role="tabpanel" class="tab-pane" id="QR">
                 <h2 class="tab-head">QR Code</h2>
-                <?php //$this->load->view('members/inc/business_qr_code', $bus_details);?>
+                <div id="load_qr"></div>
               </section>
 
               <div class="clear:both"> </div>
@@ -286,12 +287,33 @@ $this->load->view('inc/header', $header);
 
               <section role="tabpanel" class="tab-pane active" id="Analytics">
                 <h2 class="tab-head">Analytics</h2>
+                <div id="analytics-div"></div>
               </section>
 
               <div class="clear:both"> </div>
 
             </div>
-            <!--tabs review/rating details-->            
+            <!--tabs review/rating details-->     
+
+
+            <!--tabs review/rating details-->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="nav-item"><a href="#Users" class="nav-link active" aria-controls="Users" role="tab" data-toggle="tab" data-icon="fa-users text-dark">Users</a></li>
+
+            </ul>
+
+            <div class="tab-content">
+
+              <section role="tabpanel" class="tab-pane active" id="Users">
+                <h2 class="tab-head">Users</h2>
+                <?php $dat['bus_id'] = $bus_id; $this->load->view('members/inc/business_users', $dat); ?>
+
+              </section>
+
+              <div class="clear:both"> </div>
+
+            </div>
+            <!--tabs review/rating details-->                        
 
             
           </section>          
@@ -327,9 +349,66 @@ $(document).ready(function(){
     cleanOnPaste: true,
     plugins: ['table', 'video']
   });
-  $('[rel=tooltip]').tooltip(); 
+  $('[rel=tooltip]').tooltip();
+
+  //load_analytics(<?php echo $bus_id;?>, 'MONTH'); 
   
 });
+
+function load_tab(id, str){
+
+  var cont = $('#'+str);
+
+    if(str == 'reviews'){
+
+          $.getScript('<?php echo base_url('/');?>js/jquery.knob.js', function(){
+              setTimeout(load_review_report(id, str), 300);
+          });
+    }else{
+
+        cont.addClass('loading_img');
+        cont.empty();
+        $.ajax({
+            type: 'get',
+            cache: false,
+            url: '<?php echo site_url('/').'members/';?>'+str+'/'+id ,
+            success: function (data) {
+                cont.removeClass('loading_img');
+                cont.html(data);
+
+                if(str == 'han_evaluations'){
+                    $('#example').dataTable( {
+                        "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+                        "sPaginationType": "bootstrap",
+                        "oLanguage": {
+                            "sLengthMenu": "_MENU_"
+                        },
+                        "aaSorting":[],
+                        "bSortClasses": false
+
+                    } );
+                }
+
+            }
+        });
+
+    }
+   
+ }
+
+function load_analytics(id,period){
+ 
+$.ajax({
+    type: 'get',
+    cache: false,
+    url: '<?php echo site_url('/').'members/get_business_analytics/';?>'+id+'/'+period ,
+    success: function (data) {
+
+           $('#analytics-div').html(data);      
+    }
+  });  
+ 
+}
 
 </script>
 

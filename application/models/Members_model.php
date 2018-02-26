@@ -42,22 +42,7 @@ class Members_model extends CI_Model
 									FROM u_client JOIN i_client_business ON u_client.ID = i_client_business.CLIENT_ID
 									WHERE  i_client_business.BUSINESS_ID = '" . $bus_id . "'", false);
 
-		echo '
-			<a class="btn pull-right" href="javascript:void(0)" onclick="add_user()"><i class="icon-plus-sign"></i> Add User</a>
-			<h4>Users<small> Your current business  listing users</small></h4>
-			<div class="clearfix" style="height:20px"></div>
-			<table cellpadding="0" cellspacing="0" style="font-size:12px" border="0" class="table table-striped" id="user_tbl" width="100%">
-				<thead>
-					<tr style="font-weight:bold">
-						<th style="width:5%;min-width:40px"></th>
-           				<th style="width:30%">Name</th>
-						<th style="width:10%">User Type</th>
-						<th style="width:25%">Location</th>
-						<th style="width:20%">Date of Birth</th>
-						<th style="width:10%;min-width:100px;text-align:right"></th>
-					</tr>
-				</thead>
-				<tbody>';
+
 		if ($query->num_rows() > 0)
 		{
 			$x = 0;
@@ -101,144 +86,9 @@ class Members_model extends CI_Model
 		{
 
 			$data = '';
-			//return $data;
-
 
 		}
-		$load_img = "<img src='" . base_url('/') . "img/load.gif' />";
-		$exit_str = "javascript:$('#modal-user-delete').modal('hide')";
-		$exit_str1 = "javascript:$('#modal-user-add').modal('hide')";
-		echo '	</tbody>
-				</table>
-				<hr />
-				<div id="modal-user-add" class="modal hide fade">
-					<div class="modal-header">
-					  <a href="javascript:void(0)" onclick="' . $exit_str1 . '" class="close">&times;</a>
-					  <h3>Add User</h3>
-					</div>
-					 <div class="modal-body">
-					   <p>To add a new user please start typing their name</p>
-					   <input type="text" style="width:95%;" placeholder="start typing name" id="user_name_srch"/>
-					   <div id="add_user_div" style="width:100%;min-height:30px;display:none;" class="loading_img"></div>
-					</div>
-					<div class="modal-footer">
-					  <a href="javascript:void(0)" onclick="' . $exit_str1 . '" class="btn btn-secondary">Cancel</a>
-					</div>
-				</div>
-				
-				<div id="modal-user-delete" class="modal hide fade">
-					<div class="modal-header">
-					  <a href="' . $exit_str . '" onclick="' . $exit_str . '" class="close">&times;</a>
-					  <h3>Remove User</h3>
-					</div>
-					 <div class="modal-body">
-					   <p>Are you sure you want to remove the user from the business?</p>
-					</div>
-					<div class="modal-footer">
-					  <a href="javascript:void(0)"  onclick="' . $exit_str . '" class="btn btn-primary">Remove</a>
-					  <a href="javascript:void(0)" onclick="' . $exit_str . '" class="btn btn-secondary">No</a>
-					</div>
-				</div>
-				
-				<script type="text/javascript">
 
-
-					function add_user(){
-	
-						$("#modal-user-add").appendTo("body").bind("show", function() {
-							var Btn = $(this).find(".btn-primary");
-								
-								Btn.click(function(e) { 
-										
-									$("#modal-user-add").modal("hide");
-												
-								});
-						}).modal({ backdrop: true });
-						
-					}  
-					
-					function add_user_do(id){
-						var btn = $("#add-"+id);
-						btn.html("' . $load_img . '");
-						$.ajax({
-							type: "get",
-							url: "' . site_url('/') . 'members/add_user_business/"+id+"/"+' . $bus_id . ' ,
-							success: function (data) {
-								 btn.html("Add");
-								 $("#modal-user-add").modal("hide");
-								 load_tab(' . $bus_id . ',"users");
-							}
-						});	
-					}  
-					
-					var delay = 1000;
-					var isLoading = false;
-					var isDirty = false;
-					function reloadSearch() {
-					  if(!isLoading){
-						  var q = $("#user_name_srch").val();
-						   if (q.length >= 3) {
-							  isLoading = true;
-							   var div = $("#add_user_div");
-							   div.show();
-							   div.addClass("loading_img");	
-  
-							   $.get("' . site_url('/') . 'members/instant_user/"+encodeURIComponent(q), function(data) {
-								  div.html(data);
-								  div.removeClass("loading_img");
-								});
-							   
-							   // enforce the delay
-							   setTimeout(function(){
-								 isLoading=false;
-								 if(isDirty){
-								   isDirty = false;
-								   reloadSearch();
-								 }
-							   }, delay);
-						   }
-						 }
-					};
-					
-
-					$(document).ready(function() {
-						reloadSearch();
-					  
-						$("#user_name_srch").keyup(function(){
-						  isDirty = true;
-						  reloadSearch();
-					  });
-					  $("[rel=tooltip]").tooltip();
-					});
-					
-
-					function remove_user(id){
-	
-						$("#modal-user-delete").appendTo("body").bind("show", function() {
-							var removeBtn = $(this).find(".btn-primary"),
-								href = removeBtn.attr("href");
-								
-								removeBtn.click(function(e) { 
-										
-									e.preventDefault();
-									removeBtn.html("Removing");
-											$.ajax({
-												type: "get",
-												url: "' . site_url('/') . 'members/delete_user_business/"+id+"/"+' . $bus_id . ' ,
-												success: function (data) {
-													 removeBtn.html("Remove");
-													 $("#modal-user-delete").modal("hide");
-													 $("#deals").html(data);
-													 load_tab(' . $bus_id . ',"users");
-												}
-											});
-								});
-						}).modal({ backdrop: true });
-						
-					}  
-							
-	
-				</script>';
 
 	}
 
