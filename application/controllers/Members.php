@@ -319,6 +319,25 @@ class Members extends CI_Controller {
 		$query = $this->db->query("SELECT * FROM u_special_component WHERE IS_ACTIVE = 'Y' AND SPECIALS_EXPIRE_DATE > NOW() ORDER BY RAND() LIMIT 10" ,FALSE);
 		$this->deal_model->show_deals($query );
 	}
+
+	//+++++++++++++++++++++++++++
+	//LOAD BUSINESS PRODUCTS
+	//++++++++++++++++++++++++++
+	public function load_bus_products()
+	{
+
+		$bus_id = trim($this->input->post('bus_id', TRUE));
+		$section = trim($this->input->post('section', TRUE));
+
+		$this->load->model('sell_model');
+
+		$o = $this->sell_model->get_client_products($bus_id, $section);
+
+
+	}
+
+
+
 	//+++++++++++++++++++++++++++
 	//SCRATCH & WIN
 	//++++++++++++++++++++++++++
@@ -1508,6 +1527,9 @@ class Members extends CI_Controller {
 	function update_business_do()
 	{
 			
+
+
+
 			$this->output->set_header("Access-Control-Allow-Origin: http://cms.my.na");
 			$email = trim($this->input->post('email', TRUE));
 			$name = $this->input->post('name', TRUE);
@@ -1520,7 +1542,7 @@ class Members extends CI_Controller {
 			$web = prep_url($this->input->post('url', TRUE));
 			$pobox = $this->input->post('pobox', TRUE);
 			$address = $this->input->post('address', TRUE);
-			$description =  html_entity_decode(str_replace('&nbsp;', ' ',$this->input->post('content', TRUE)));
+			//$description =  html_entity_decode(str_replace('&nbsp;', ' ',$this->input->post('content', TRUE)));
 			$bus_id = $this->input->post('bus_id', TRUE);
 			$id = $this->input->post('id', TRUE);
 			$country = $this->input->post('country', TRUE);
@@ -1567,12 +1589,6 @@ class Members extends CI_Controller {
 				   $val = TRUE;	
 				}
 			
-			}elseif(str_word_count($description) < 30){
-				$val = FALSE;
-				$error = 'Please provide a minimum of 30 words for your business description. Currently: '.str_word_count($description).' words.';	
-				
-			}else{
-				$val = TRUE;
 			}
 			
 		
@@ -1590,7 +1606,6 @@ class Members extends CI_Controller {
 								  'BUSINESS_CELLPHONE'=> $cell,
 								  'FAX_DIAL_CODE'=> $faxcode,
 								  'BUSINESS_FAX'=> $fax2,
-								  'BUSINESS_DESCRIPTION'=> $description,
 								  'BUSINESS_POSTAL_BOX'=> $pobox,
 								  'BUSINESS_URL' => $web,
 								  'BUSINESS_COUNTRY_ID' => $country,
@@ -1635,7 +1650,7 @@ class Members extends CI_Controller {
 			$web = prep_url($this->input->post('url', TRUE));
 			$pobox = $this->input->post('pobox', TRUE);
 			$address = $this->input->post('address', TRUE);
-			$description =  html_entity_decode(str_replace('&nbsp;', ' ',$this->input->post('content', FALSE)));
+			//$description =  html_entity_decode(str_replace('&nbsp;', ' ',$this->input->post('content', FALSE)));
 			$bus_id = $this->input->post('bus_id', TRUE);
 			$id = $this->input->post('id', TRUE);
 			$country = $this->input->post('country', TRUE);
@@ -1681,12 +1696,6 @@ class Members extends CI_Controller {
 				   $val = TRUE;	
 				}
 			
-			}elseif(str_word_count($description) < 30){
-				$val = FALSE;
-				$error = 'Please provide a minimum of 30 words for your business description. Currently: '.str_word_count($description).' words.';	
-				
-			}else{
-				$val = TRUE;
 			}
 			
 		
@@ -1704,7 +1713,6 @@ class Members extends CI_Controller {
 								  'BUSINESS_CELLPHONE'=> $cell,
 								  'FAX_DIAL_CODE'=> $faxcode,
 								  'BUSINESS_FAX'=> $fax2,
-								  'BUSINESS_DESCRIPTION'=> $description,
 								  'BUSINESS_POSTAL_BOX'=> $pobox,
 								  'BUSINESS_URL' => $web,
 								  'BUSINESS_PHYSICAL_ADDRESS' => $address,
@@ -1717,29 +1725,89 @@ class Members extends CI_Controller {
 			
 			if($val == TRUE){
 				
-					$this->db->where('ID' , $bus_id);
-					$this->db->update('u_business', $insertdata);
-					
-					//$this->sync_tourism_db($insertdata, $bus_id);
-					//success redirect	
-					$data['bus_id'] = $bus_id;
-					$data['id'] = $this->session->userdata('id');
-					$data['basicmsg'] = $name . ' has been updated successfully';
-					echo '<div class="alert alert-success">
-         			<button type="button" class="close" data-dismiss="alert">×</button>
-            		'.$data['basicmsg'].'</div>';
-					$this->output->set_header("HTTP/1.0 200 OK");
-			}else{
-					$data['id'] = $this->session->userdata('id');
-					$data['bus_id'] = $bus_id;
-					$data['error'] = $error;
-					echo '<div class="alert alert-error">
-         			<button type="button" class="close" data-dismiss="alert">×</button>
-            		'.$data['error'].'</div>';
-					$this->output->set_header("HTTP/1.0 200 OK");
+				$this->db->where('ID' , $bus_id);
+				$this->db->update('u_business', $insertdata);
 				
+				//$this->sync_tourism_db($insertdata, $bus_id);
+				//success redirect	
+				$data['bus_id'] = $bus_id;
+				$data['id'] = $this->session->userdata('id');
+				$data['basicmsg'] = $name . ' has been updated successfully';
+				echo '<div class="alert alert-success">
+     			<button type="button" class="close" data-dismiss="alert">×</button>
+        		'.$data['basicmsg'].'</div>';
+				$this->output->set_header("HTTP/1.0 200 OK");
+
+			}else{
+
+				$data['id'] = $this->session->userdata('id');
+				$data['bus_id'] = $bus_id;
+				$data['error'] = $error;
+				echo '<div class="alert alert-danger">
+     			<button type="button" class="close" data-dismiss="alert">×</button>
+        		'.$data['error'].'</div>';
+				$this->output->set_header("HTTP/1.0 200 OK");
+	
 			}
 	}
+
+
+   //+++++++++++++++++++++++++++
+	//UPDATE BUSINESS DETAILS
+	//++++++++++++++++++++++++++	
+	function business_desc_update_do_ajax()
+	{
+			$name = $this->input->post('name', TRUE);
+			$description =  html_entity_decode(str_replace('&nbsp;', ' ',$this->input->post('content', FALSE)));
+			$bus_id = $this->input->post('bus_id', TRUE);
+			$id = $this->input->post('id', TRUE);
+			
+			//VALIDATE INPUT
+			if($description == ''){
+				$val = FALSE;
+				$error = 'Please provide us with your business description.';	
+
+        	}else{
+        		$val = TRUE;
+        	}
+			
+				
+			$insertdata = array(
+				'BUSINESS_DESCRIPTION'=> $description
+			);
+		
+	
+			
+			if($val == TRUE){
+				
+				$this->db->where('ID' , $bus_id);
+				$this->db->update('u_business', $insertdata);
+				
+				//$this->sync_tourism_db($insertdata, $bus_id);
+				//success redirect	
+				$data['bus_id'] = $bus_id;
+				$data['id'] = $this->session->userdata('id');
+				$data['basicmsg'] = $name . 'description has been updated successfully';
+				echo '<div class="alert alert-success">
+     			<button type="button" class="close" data-dismiss="alert">×</button>
+        		'.$data['basicmsg'].'</div>';
+				$this->output->set_header("HTTP/1.0 200 OK");
+
+			}else{
+
+				$data['id'] = $this->session->userdata('id');
+				$data['bus_id'] = $bus_id;
+				$data['error'] = $error;
+				echo '<div class="alert alert-danger">
+     			<button type="button" class="close" data-dismiss="alert">×</button>
+        		'.$data['error'].'</div>';
+				$this->output->set_header("HTTP/1.0 200 OK");
+	
+			}
+	}
+
+
+
 		
 	//+++++++++++++++++++++++++++
 	//SYNC HAN/TOURISM LISTING
@@ -2340,9 +2408,13 @@ class Members extends CI_Controller {
 	//+++++++++++++++++++++++++++
 	//DEL:ETE USERS FOR THE BUSINESS
 	//++++++++++++++++++++++++++
-	public function delete_user_business($id, $bus_id)
+	public function delete_user_business()
 	{
 		 
+
+		$id = $this->input->post('user_id', TRUE); 
+		$bus_id = $this->input->post('bus_id', TRUE); 
+
 		if($this->members_model->check_business_user($bus_id)){
 			 	
 				$this->db->where('ID', $id);

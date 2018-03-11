@@ -1,4 +1,5 @@
 <form id="business-update" name="business-update" method="post" action="<?php echo site_url('/');?>members/update_business_do">
+  <input type="hidden" name="bus_id" value="<?php if(isset($ID)){echo $ID;}?>">
   <div class="row">
 
     <div class="col-sm-4">
@@ -11,14 +12,14 @@
     <div class="col-sm-4">
       <div class="form-group">
         <label for="EmailAddress">Email Address</label>
-        <input class="form-control input-sm" name="name" placeholder="Business Name" value="<?php if(isset($BUSINESS_EMAIL)){echo $BUSINESS_EMAIL;}?>">
+        <input class="form-control input-sm" name="email" placeholder="Business Email" value="<?php if(isset($BUSINESS_EMAIL)){echo $BUSINESS_EMAIL;}?>">
       </div>
     </div>
 
     <div class="col-sm-4">
       <div class="form-group">
         <label for="Website">Website</label>
-        <input class="form-control input-sm" name="urls" placeholder="Website" value="<?php if(isset($BUSINESS_URL)){echo $BUSINESS_URL;}?>">
+        <input class="form-control input-sm" name="url" placeholder="Website" value="<?php if(isset($BUSINESS_URL)){echo $BUSINESS_URL;}?>">
       </div>
     </div>    
 
@@ -98,10 +99,19 @@
     <div class="col-sm-4">
       <div class="form-group">
         <label for="countries">Update Details</label>
-        <button type="submit" class="btn btn-primary btn-lg btn-block" data-icon="fa-envelope-o">Update</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block details-update" data-icon="fa-envelope-o">Update</button>
 
       </div>
     </div>           
 
   </div>
 </form>
+
+<div id="details-progress" style="display:none; text-align:center">
+  Working...
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 100%" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+</div>
+
+<div id="details-result"></div>

@@ -321,7 +321,7 @@ Light Orange ff9900
 }
 
 
-#header{width:100%; position:relative; padding:10px 0; position:fixed; z-index:9999}
+#header{width:100%; position:relative; padding:10px 0; position:fixed; z-index:900}
 	#header .slogo{display:inline-block;}
 	#header .slogo a{display:block; margin-bottom:5px}
 	#header .slogo img{height:50px; width:auto; display:block}

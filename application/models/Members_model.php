@@ -39,8 +39,8 @@ class Members_model extends CI_Model
 	public function get_business_users($bus_id)
 	{
 		$query = $this->db->query("SELECT u_client.*, i_client_business.USER_TYPE, i_client_business.ID as cID
-									FROM u_client JOIN i_client_business ON u_client.ID = i_client_business.CLIENT_ID
-									WHERE  i_client_business.BUSINESS_ID = '" . $bus_id . "'", false);
+								   FROM u_client JOIN i_client_business ON u_client.ID = i_client_business.CLIENT_ID
+								   WHERE  i_client_business.BUSINESS_ID = '" . $bus_id . "'", false);
 
 
 		if ($query->num_rows() > 0)
@@ -58,23 +58,22 @@ class Members_model extends CI_Model
 					$dob = date('Y-m-d', strtotime($row->CLIENT_DATE_OF_BIRTH));
 
 				}
-				$type = '<span class="badge">Employee</span>';
+
+				$type = '<span class="badge badge-secondary">Employee</span>';
 				if ($row->USER_TYPE == 'MANAGER')
 				{
 
-					$type = '<span class="badge badge-important">Manager</span>';
+					$type = '<span class="badge badge-secondary">Manager</span>';
 
 				}
-				$str = 'remove_user(' . $row->cID . ')';
-				echo '<tr>
-						<td style="width:5%;min-width:40px"><img src="' . $this->get_avatar($row->ID) . '" alt="" style="width:25px;height:25px" class="img-polaroid"/> </td>
-						<td style="width:30%">' . $row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME . '</td>
-						<td style="width:10%">' . $type . '</td>
-						<td style="width:25%">' . $location . '</td>
-						<td style="width:20%">' . $dob . '</td>
-					  	<td style="width:10%; text-align:right;min-width:100px;">
-						   <a class="btn btn-mini btn-inverse" onclick="' . $str . '"><i class="icon-remove icon-white"></i></a>
-						   
+
+				echo '<tr id="usr-row-'.$row->cID.'">
+						<td style="width:8%;"><img src="' . $this->get_avatar($row->ID) . '" alt="" class="img-thumbnail"/> </td>
+						<td style="width:32%" valign="middle">' . $row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME . '</td>
+						<td style="width:20%">' . $type . '</td>
+						<td style="width:30%">' . $location . '</td>				  	
+						<td style="width:10%; text-align:right;min-width:100px;">
+						   <a class="btn btn-sm btn-dark usr-remove" data-id="'.$row->cID.'" data-bus="'.$bus_id.'"><i class="fa fa-trash-o"></i></a>
 						</td>
 					  </tr>';
 
@@ -89,6 +88,7 @@ class Members_model extends CI_Model
 
 		}
 
+		
 
 	}
 
@@ -2597,7 +2597,14 @@ class Members_model extends CI_Model
 	//GET USER AVATAR
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public function get_avatar($id)
-	{
+	{ 
+
+		$this->load->model('image_model'); 
+		$this->load->library('thumborp');
+
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 60;
+		$height = 60;
 
 		$this->db->select('ID , CLIENT_PROFILE_PICTURE_NAME as PIC');
 		$this->db->where('ID', $id);
@@ -2621,13 +2628,15 @@ class Members_model extends CI_Model
 			{
 
 				$format = '.jpg';
-				$avatar =  S3_URL . 'assets/users/photos/' . $row['PIC'] . $format;
+				$avatar =  'assets/users/photos/' . $row['PIC'] . $format;
+				$avatar_url = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar,$width,$height,$crop = '');
 
 			}
 			else
 			{
 
-				$avatar =  S3_URL . 'assets/users/photos/' . $row['PIC'];
+				$avatar =  'assets/users/photos/' . $row['PIC'];
+				$avatar_url = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar,$width,$height,$crop = '');
 
 			}
 
@@ -2636,11 +2645,12 @@ class Members_model extends CI_Model
 		else
 		{
 
-			$avatar = base_url('/') . 'img/user_blank.jpg';
+			$avatar = 'assets/users/photos/user_blank.jpg';
+			$avatar_url = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar,$width,$height,$crop = '');
 
 		}
 
-		return $avatar;
+		return $avatar_url;
 	}
 
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	

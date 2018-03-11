@@ -340,7 +340,8 @@ class Sell_model extends CI_Model{
 				
 				//get images
 
-				$image_path = reset(explode(',', $row->images));
+				$t = explode(',', $row->images);
+				$image_path = reset($t);
 
 				if($image_path != ''){
 					
@@ -602,6 +603,8 @@ class Sell_model extends CI_Model{
 
                 }else{
 
+echo 'weeee';
+
                     echo    $active. ' '. $extend.' '
 
                             .'<div class="btn-group text-left">
@@ -633,6 +636,7 @@ class Sell_model extends CI_Model{
 
 			$exit_str = "javascript:$('#modal-product-delete').modal('hide')"; 
 			$table_str = "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>";
+
 			echo '</tbody>
 				</table>
 				<hr />

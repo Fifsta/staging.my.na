@@ -122,7 +122,7 @@ class Classifieds extends CI_Controller {
 		$config['num_links'] = 2; 
 		$config['page_query_string'] = true;
 		$config['query_string_segment'] = 'offset';
-		//Styling
+		//Styling 
 		$config['full_tag_open'] = '<nav aria-label="Page navigation example"><ul class="pagination">';
 		$config['full_tag_close'] = '</ul></nav>';
 		$config['first_link'] = false;

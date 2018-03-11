@@ -9,6 +9,104 @@ var home_feed = true;
 var base = '';
 
 
+
+//load products
+$(document).on('click', '.load-products', function(e) {
+
+
+
+}); 
+
+
+
+
+
+//Update Business Details
+$(document).on('click', '.details-update', function(e) {
+
+	$('#details-progress').show();
+
+    $.ajax({
+        type: "POST",
+        url: base+'members/business_update_do_ajax/',
+        cache: false,
+        data: $('#business-update').serialize(),
+        success: function (result) {
+
+        	$('#details-progress').hide();
+        	$('#details-result').html(result);
+           
+        },
+        error: function (err) {
+            
+        }
+    });
+
+}); 
+
+
+
+//Update Business Description
+$(document).on('click', '.desc-update', function(e) {
+
+	$('#desc-progress').show();
+
+    $.ajax({
+        type: "POST",
+        url: base+'members/business_desc_update_do_ajax/',
+        cache: false,
+        data: $('#bus-desc-update').serialize(),
+        success: function (result) {
+
+        	$('#desc-progress').hide();
+        	$('#desc-result').html(result);
+           
+        },
+        error: function (err) {
+            
+        }
+    });
+
+}); 
+
+
+//Remove Business User
+$(document).on('click', '.usr-remove', function(e) {
+
+	var id = $(this).attr("data-id");
+	var bus_id = $(this).attr("data-bus");
+
+	$("#modal-user-delete").appendTo("body").bind("show", function() {}).modal({ backdrop: true });
+
+	$('.btn-rmv').attr('data-id', id);
+	$('.btn-rmv').attr('data-bus', bus_id);
+
+
+}); 
+
+$(document).on('click', '.btn-rmv', function(e) {
+
+	var id = $(this).attr("data-id");
+	var bus_id = $(this).attr("data-bus");
+
+	$.ajax({
+		type: "POST",
+		url: base+"members/delete_user_business/",
+	    data: { 
+	        'user_id': id, 
+	        'bus_id': bus_id
+	    },		
+		success: function (data) {
+
+			 $("#modal-user-delete").modal("hide");
+			 $('#usr-row-'+id).remove();
+		}
+	});	
+
+}); 
+
+
+
 function site_wizard(){
 		
 		$.getScript(base_+"js/bootstrap-tour.js", function(data, textStatus, jqxhr) {
@@ -17,7 +115,7 @@ function site_wizard(){
 			
 		});	
 	    //console.log('run_whizz');
-	}
+}
 
 
 function load_whizz(){

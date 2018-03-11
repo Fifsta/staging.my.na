@@ -102,6 +102,7 @@ $this->load->view('inc/header', $header);
 ?>
 
 <link href="<?php echo base_url('/');?>css/datatables.min.css" rel="stylesheet" type="text/css" /> 
+
 <link rel="stylesheet" href="<?php echo base_url('/');?>redactor/redactor/redactor.css?v=1" />
 </head>
 <body id="top">
@@ -207,7 +208,9 @@ $this->load->view('inc/header', $header);
             <!--details-->   
 
 
+            
             <!--tabs business details-->
+            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-top:30px; margin-bottom:30px"><strong>MANAGE DETAILS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item"><a href="#Details" class="nav-link active" aria-controls="Details" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o text-dark">Details</a></li>
               <li role="presentation" class="nav-item"><a href="#Description" class="nav-link" aria-controls="Description" role="tab" data-toggle="tab" data-icon="fa-file-text-o text-dark">Description</a></li>
@@ -249,6 +252,7 @@ $this->load->view('inc/header', $header);
 
 
             <!--tabs review/rating details-->
+            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-top:30px; margin-bottom:30px"><strong>MANAGE RATINGS & REVIEWS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item"><a href="#Rating" class="nav-link active" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o text-dark">Rating Widget</a></li>
               <li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-file-text-o text-dark">Reviews</a></li>
@@ -264,6 +268,7 @@ $this->load->view('inc/header', $header);
 
               <section role="tabpanel" class="tab-pane" id="Reviews">
                 <h2 class="tab-head">Business Reviews</h2>
+                <?php //$this->load->view('members/inc/business_reviews', $bus_details);?>
               </section>
 
               <section role="tabpanel" class="tab-pane" id="QR">
@@ -277,7 +282,39 @@ $this->load->view('inc/header', $header);
             <!--tabs review/rating details-->
 
 
-            <!--tabs review/rating details-->
+            <!--tabs products-->
+            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-top:30px; margin-bottom:30px"><strong>MANAGE BUSINESS PRODUCTS</strong></h1>
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="nav-item"><a href="#Latest" class="nav-link active" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-clock-o text-dark">Latest Items</a></li>
+              <li role="presentation" class="nav-item"><a href="#Sold" class="nav-link" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-exclamation-circle text-dark">Sold Items</a></li>
+              <li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-tags text-dark">Deals</a></li>
+            </ul>
+
+            <div class="tab-content">
+
+              <section role="tabpanel" class="tab-pane active" id="Latest">
+                <h2 class="tab-head">Latest Products</h2>
+                <div id="products-result"></div>
+              </section>
+
+              <section role="tabpanel" class="tab-pane" id="Sold">
+                <h2 class="tab-head">Sold Products</h2>
+              </section>
+
+              <section role="tabpanel" class="tab-pane" id="Deals">
+                <h2 class="tab-head">Deals</h2>
+              </section>
+
+              <div class="clear:both"> </div>
+
+            </div>
+            <!--products -->
+
+
+
+
+            <!--tabs analytics -->
+            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-top:30px; margin-bottom:30px"><strong>MANAGE ANALYTICS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item"><a href="#Analytics" class="nav-link active" aria-controls="Analytics" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o text-dark">Analytics</a></li>
 
@@ -293,10 +330,11 @@ $this->load->view('inc/header', $header);
               <div class="clear:both"> </div>
 
             </div>
-            <!--tabs review/rating details-->     
+            <!--tabs analytics -->   
 
 
-            <!--tabs review/rating details-->
+            <!--tabs users-->
+            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-top:30px; margin-bottom:30px"><strong>MANAGE BUSINESS USERS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item"><a href="#Users" class="nav-link active" aria-controls="Users" role="tab" data-toggle="tab" data-icon="fa-users text-dark">Users</a></li>
 
@@ -305,15 +343,15 @@ $this->load->view('inc/header', $header);
             <div class="tab-content">
 
               <section role="tabpanel" class="tab-pane active" id="Users">
-                <h2 class="tab-head">Users</h2>
+                <h2 class="tab-head">YOUR CURRENT BUSINESS LISTING USERS</h2>
                 <?php $dat['bus_id'] = $bus_id; $this->load->view('members/inc/business_users', $dat); ?>
-
+                <div id='usr-result'><
               </section>
 
               <div class="clear:both"> </div>
 
             </div>
-            <!--tabs review/rating details-->                        
+            <!--tabs users-->                        
 
             
           </section>          
@@ -352,8 +390,36 @@ $(document).ready(function(){
   $('[rel=tooltip]').tooltip();
 
   //load_analytics(<?php echo $bus_id;?>, 'MONTH'); 
+
+  load_products_do(<?php echo $bus_id; ?>, 'latest');
   
 });
+
+
+function load_products_do(bus_id, section) {
+
+    $.ajax({
+        type: "POST",
+        url: base+'members/load_bus_products/',
+        cache: false,
+      data: { 
+          'bus_id': bus_id,
+          'section': 'live'
+      },  
+        success: function (result) {
+
+          $('#products-result').html(result);
+          $('.datatable').DataTable();
+           
+        },
+        error: function (err) {
+            
+        }
+    });
+
+}
+
+
 
 function load_tab(id, str){
 

@@ -332,7 +332,7 @@ class Sell extends CI_Controller {
 	//HOME
 	//++++++++++++++++++++++++++++++++++++
 	public function my_trade($bus_id = 0, $section = '')
-	{
+	{ 
 		if($this->session->userdata('id')){
 			$data['business_name'] = '';
 			if($bus_id != 0){
