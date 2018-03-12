@@ -18,21 +18,27 @@
 	}
 
 ?>
-	<div id="anchor_me"></div>
-    <div class="text-center">
+<div id="anchor_me"></div>
 
-        <a href="#" class="btn btn-warning disabled  step1" style="margin:5px"> 1 Select Category <i class="icon-ok icon-white"></i></a> 
-        <a href="<?php echo site_url('/').'sell/update_product/'.$product_id.'/';?>" class="btn btn-warning disabled  step2" style="margin:5px"> 2 Details <i class="icon-ok icon-white"></i></a>
-        <a href="<?php echo site_url('/').'sell/step3/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-warning disabled step3" style="margin:5px"> 3 Attach Photos <i class="icon-ok icon-white"></i></a>
-        <a href="<?php echo site_url('/').'sell/step4/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-warning disabled step4" style="margin:5px"> 4 Extras <i class="icon-ok icon-white"></i></a>
-        <a href="<?php echo site_url('/').'sell/step5/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-success btn-large step5" style="margin:5px"> 5 Confirm and Publish <i class="icon-chevron-right icon-white"></i></a>
-    
+<div class="col-md-12">
+    <div class="heading">
+        <h2 data-icon="fa-list">Publish the <strong>Product</strong></h2>
+        <ul class="options">
+
+        </ul>
     </div>
-    <div class="clearfix">&nbsp;</div>
-    <div class="product_ribbon"><small class="clearfix">Publish the product</small>PUBLISH THE PRODUCT<span></span></div>
-    <div class="white_box padding10">
-        <div class="clearfix" style="height:100px">&nbsp;</div>
-       
+</div>
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-body">
+	        <a href="#" class="btn btn-warning disabled  step1" style="margin:5px"> 1 Select Category <i class="icon-ok icon-white"></i></a> 
+	        <a href="<?php echo site_url('/').'sell/update_product/'.$product_id.'/';?>" class="btn btn-warning disabled  step2" style="margin:5px"> 2 Details <i class="icon-ok icon-white"></i></a>
+	        <a href="<?php echo site_url('/').'sell/step3/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-warning disabled step3" style="margin:5px"> 3 Attach Photos <i class="icon-ok icon-white"></i></a>
+	        <a href="<?php echo site_url('/').'sell/step4/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-warning disabled step4" style="margin:5px"> 4 Extras <i class="icon-ok icon-white"></i></a>
+	        <a href="<?php echo site_url('/').'sell/step5/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-success btn-large step5" style="margin:5px"> 5 Confirm and Publish <i class="icon-chevron-right icon-white"></i></a>
+	        <hr>
+
 		<?php if($is_active != 'Y'){ ?>
             <div class="alert alert-block">
                 <h2>Publish your item</h2>
@@ -47,77 +53,79 @@
                 <p>The product is live and showing on the website. You can automatically publish the item to the My Namibia facebook page to get that extra exposure.</p>
 	            <div class="clearfix">&nbsp;</div>
 	            <?php echo $fb_btn;?>
-	            <div class="btn btn-warning fb-share-button" data-href="<?php echo site_url('/').'product/'.$product_id;?>/" data-layout="button_count"></div>
-	            <a href="<?php echo site_url('/').'product/'.$product_id;?>/" class="btn btn-inverse clearfix"  target="_blank">Preview <?php echo $title;?></a>
+	            <div class="btn btn-warning fb-share-button" data-href="<?php echo site_url('/').'product/'.$product_id; ?>/" data-layout="button_count"></div>
+	            <a href="<?php echo site_url('/').'product/'.$product_id;?>/" class="btn btn-dark clearfix"  target="_blank">Preview <?php echo $title;?></a>
 
             </div>
 
            <div>
        <?php }?>
-	       <a href="<?php echo site_url('/').'sell/my_trade/'.$bus_id.'/';?>" id="back_to_all" class="btn btn-inverse pull-right" style="margin-right:5px"><i class="icon-list icon-white"></i> All Products</a>
 
-           <a href="javascript:void(0)" onclick="back_to_4()" id="back_to_4" class="btn btn-warning pull-right" style="margin-right:5px"><i class="icon-chevron-left icon-white"></i> Back</a>
-        <div class="clearfix">&nbsp;</div>
+	       <a href="<?php echo site_url('/').'sell/my_trade/'.$bus_id.'/';?>" id="back_to_all" class="btn btn-dark pull-right" style="margin-right:5px">All Products</a>
+
+           <a href="javascript:void(0)" onclick="back_to_4()" id="back_to_4" class="btn btn-warning pull-right" style="margin-right:5px">Back</a>
+
         </div>
-    </div>
+    </div>    
+</div>
 
-    <script data-cfasync="false" type="text/javascript">
-	
-		$(document).ready(function(e) {
-			//window.scrollTo(0,$('#anchor_me').offset().top);
-			var ad = $('#advert_content');
-			ad.removeClass('loading_img').attr("src", '<?php echo site_url('/'). 'adverts/buy_sell/';?>');
+<script data-cfasync="false" type="text/javascript">
+
+	$(document).ready(function(e) {
+		//window.scrollTo(0,$('#anchor_me').offset().top);
+		var ad = $('#advert_content');
+		ad.removeClass('loading_img').attr("src", '<?php echo site_url('/'). 'adverts/buy_sell/';?>');
 
 
+	});
+
+	function publish(){
+
+			var cont = $('#admin_content');
+			  $.get('<?php echo site_url('/'). 'trade/publish_item/'.$product_id.'/'.$bus_id;?>', function(data) {
+					cont.removeClass('slideLeft').html(data);
+
+			  });
+
+	}
+
+
+	function publish_facebook_page(){
+
+
+		//frm.submit();
+		$('#pub_fb_btn').html('<img src="<?php echo base_url('/').'img/load.gif';?>" /> Working...');
+		$.ajax({
+			type: 'post',
+			url: '<?php echo site_url('/').'fb/post_product_to_my_page/'.$product_id.'/';?>',
+			success: function (data) {
+
+				$('#result_msg').html(data);
+				$('#pub_fb_btn').html('<i class="icon-share icon-search"></i> View on Facebook').attr("href", data);
+
+			}
 		});
 
-		function publish(){
+	}
 
-				var cont = $('#admin_content');
-				  $.get('<?php echo site_url('/'). 'trade/publish_item/'.$product_id.'/'.$bus_id;?>', function(data) {
-						cont.removeClass('slideLeft').html(data);
-
-				  });
-
-		}
-
-
-		function publish_facebook_page(){
-
-
-			//frm.submit();
-			$('#pub_fb_btn').html('<img src="<?php echo base_url('/').'img/load.gif';?>" /> Working...');
-			$.ajax({
-				type: 'post',
-				url: '<?php echo site_url('/').'fb/post_product_to_my_page/'.$product_id.'/';?>',
-				success: function (data) {
-
-					$('#result_msg').html(data);
-					$('#pub_fb_btn').html('<i class="icon-share icon-search"></i> View on Facebook').attr("href", data);
-
-				}
-			});
-
-		}
-
-	<?php
-	   /**
-	  ++++++++++++++++++++++++++++++++++++++++++++
-	  //BACK
-	  ++++++++++++++++++++++++++++++++++++++++++++	
-	   */
-	   ?> 
+<?php
+   /**
+  ++++++++++++++++++++++++++++++++++++++++++++
+  //BACK
+  ++++++++++++++++++++++++++++++++++++++++++++	
+   */
+   ?> 
+  
+  function back_to_4(){
 	  
-	  function back_to_4(){
-		  
-			  var cont = $('#admin_content').addClass('slideLeft'), btn = $('#back_to_4');
-			  btn.html('Working...');
-			  $.get('<?php echo site_url('/'). 'sell/step4/'.$product_id.'/'.$bus_id;?>', function(data) {
-					cont.removeClass('slideLeft').html(data);
-					btn.html('<i class="icon-chevron-left icon-white"></i> Back');
-			  });
-		  
-	  }
-	</script>
-	<script src="<?php echo base_url('/');?>js/custom/fb.js"></script>
+		  var cont = $('#admin_content').addClass('slideLeft'), btn = $('#back_to_4');
+		  btn.html('Working...');
+		  $.get('<?php echo site_url('/'). 'sell/step4/'.$product_id.'/'.$bus_id;?>', function(data) {
+				cont.removeClass('slideLeft').html(data);
+				btn.html('<i class="icon-chevron-left icon-white"></i> Back');
+		  });
+	  
+  }
+</script>
+<script src="<?php echo base_url('/');?>js/custom/fb.js"></script>
 

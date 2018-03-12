@@ -159,11 +159,113 @@ class Sell_model extends CI_Model{
 		
 		
 	}
+
+
+
+	public function get_client_products($bus_id, $section){
+
+
+
+
+		$id = $this->session->userdata('id');
+		
+		if($section == ''){
+			$section = 'live';	
+		}
+
+
+		//JOUBERT BALT PRIVATE && JUST PROPERTY
+		$strSQL = '';
+		if($bus_id == 8848 || $bus_id == 9016){
+			
+			$strSQL= " AND products.client_id = '".$id."'";
+			
+		}
+
+
+        $pSQL = "SELECT products.*,products_buy_now.amount,products_buy_now.buy_now_id, trade_rating.rating, trade_rating.review, trade_rating.created_at,
+                                      product_extras.*,product_images.img_file, product_questions.question_id, product_categories.category_name,
+                                      group_concat(product_images.img_file ORDER BY product_images.sequence ASC) as images,
+                                      group_concat(trade_rating.rating,'-_-',trade_rating.type,'-_-',REPLACE(trade_rating.review, ',', ' '),'-_-',trade_rating.created_at) as rating_a,
+                                      MAX(product_auction_bids.amount) as current_bid
+                                      FROM products
+                                      JOIN product_extras ON products.product_id = product_extras.product_id
+                                      LEFT JOIN products_buy_now ON products.product_id = products_buy_now.product_id
+                                      LEFT JOIN product_categories ON product_categories.cat_id = products.sub_sub_cat_id
+                                      LEFT JOIN trade_rating ON trade_rating.buy_now_id = products_buy_now.buy_now_id
+                                      LEFT JOIN product_images ON products.product_id = product_images.product_id
+                                      LEFT JOIN product_questions ON product_questions.product_id = products.product_id
+                                      LEFT JOIN product_auction_bids ON product_auction_bids.product_id = products.product_id AND product_auction_bids.type = 'bid'
+                                      ";
+
+        if($section == 'bought') {
+            $data['col4H'] = '<th style="width:12%">Q</th>';
+            $data['bstr'] = '';
+            $query = $this->db->query($pSQL."
+                                      WHERE products_buy_now.client_id = '".$id."' AND products.bus_id = '0' AND products.status = 'sold'
+                                      GROUP BY products.product_id ORDER BY products.product_id DESC" ,FALSE);
+
+        }elseif($bus_id == 0){
+			$data['col4H'] = '<th style="width:12%">Q</th>';
+			$data['bstr'] = '';$xtraSQL = '';
+            if($section == 'live'){
+               $xtraSQL = "OR products.status = 'moderate'";
+
+            }
+			$query = $this->db->query($pSQL."
+                                      WHERE products.client_id = '".$id."' AND products.bus_id = '0' AND (products.status = '".$section."' ".$xtraSQL.")
+                                      GROUP BY products.product_id ORDER BY products.product_id DESC " ,FALSE);
+		
+		}elseif($section == 'live_agent'){
+			$data['col4H'] = '<th style="width:12%">Agent</th>';
+			$data['bstr'] = 'Agency';
+			$query = $this->db->query($pSQL."
+                                       WHERE product_extras.property_agent = '".$id."' AND products.bus_id = '".$bus_id."'  AND products.status = 'live'
+                                       GROUP BY products.product_id ORDER BY products.product_id DESC " ,FALSE);
+		
+		}elseif($section == 'sold_agent'){
+			$data['col4H'] = '<th style="width:12%">Agent</th>';
+			$data['bstr'] = 'Agency';
+			$query = $this->db->query($pSQL." WHERE product_extras.property_agent = '".$id."' AND products.bus_id = '".$bus_id."'  AND products.status = 'sold'
+                                       GROUP BY products.product_id ORDER BY products.product_id DESC " ,FALSE);
+
+		}else{
+			$data['col4H'] = '<th style="width:12%">Agent</th>';
+			$data['bstr'] = 'Business';
+			$query = $this->db->query($pSQL." WHERE products.bus_id = '".$bus_id."' AND products.status = '".$section."' ".$strSQL."
+                                         GROUP BY products.product_id ORDER BY products.product_id DESC" ,FALSE);
+		}
+
+		if($query->result()){
+
+			$data['section'] = $section;
+			$data['id'] = $id;
+			$data['bus_id'] = $bus_id;	
+
+			$this->load->model('image_model'); 
+			$this->load->library('thumborp');		
+
+			$data['products'] = $query;
+			$out = $this->load->view('members/inc/business_products', $data, true);
+
+		}	
+
+		echo $out;
+
+	}
+
+
+
+
+
+
+
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//+GET PRODUCTS FOR EDIT
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
-	public function get_client_products($bus_id, $section){
+	public function get_client_products2($bus_id, $section){
 		
 		$id = $this->session->userdata('id');
 		
@@ -603,7 +705,6 @@ class Sell_model extends CI_Model{
 
                 }else{
 
-echo 'weeee';
 
                     echo    $active. ' '. $extend.' '
 

@@ -345,7 +345,7 @@ $this->load->view('inc/header', $header);
               <section role="tabpanel" class="tab-pane active" id="Users">
                 <h2 class="tab-head">YOUR CURRENT BUSINESS LISTING USERS</h2>
                 <?php $dat['bus_id'] = $bus_id; $this->load->view('members/inc/business_users', $dat); ?>
-                <div id='usr-result'><
+                <div id='usr-result'></div>
               </section>
 
               <div class="clear:both"> </div>

@@ -550,26 +550,33 @@ class My_na_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public function get_user_avatar_str($w, $h){
 		
+        $this->load->model('image_model'); 
+        $this->load->library('thumborp'); 
+
+        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();  
+
 		 if($this->session->userdata('id')){ 
 			 		
 				$img_file = $this->session->userdata('img_file');
 				
 				if(strstr($img_file, "http")){
 					
-					$img = $img_file.'?width='.$w.'&height='.$h;
+					$img_url = $img_file.'?width='.$w.'&height='.$h;
 				
 				}elseif($img_file != ''){ 
 				
-					$img = base_url('/').'assets/users/photos/'.$img_file;
+					$img_str = 'assets/users/photos/'.$img_file;
+                    $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$w,$h, $crop = '');
 					
 				}else{
 					
-					$img = base_url('/').'img/user_blank.jpg';
+					$img_str = 'assets/users/photosuser_blank.jpg';
+                    $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$w,$h, $crop = '');
 					
 				}
 				
 				//$avatar = base_url('/').'img/timbthumb.php?src='.base_url('/').$img.'&q=100&w='.$w.'&h='.$h;
-				$avatar = $img;
+				$avatar = $img_url;
 				return $avatar;
 		 }
 		
@@ -653,11 +660,11 @@ class My_na_model extends CI_Model{
 
                 if($current == $row1['ID']){
 
-                    $output .= '<img src="'. $this->my_na_model->get_business_logo($row1['ID'], 60, 60, $row1['BUSINESS_LOGO_IMAGE_NAME']).'" style="width:60px;height:60px;margin:10px 10px 10px 0px" class="img-polaroid img-circle" />
+                    $output .= '<img src="'. $this->my_na_model->get_business_logo($row1['ID'], 60, 60, $row1['BUSINESS_LOGO_IMAGE_NAME']).'" style="width:60px;height:60px;margin:10px 10px 10px 0px" class="img-thumbnail" />
                                       ';
 
                     $output .= '<div class="btn-group">
-                                  <a class="btn dropdown-toggle  btn-inverse" data-toggle="dropdown" href="#">
+                                  <a class="btn dropdown-toggle btn-dark" data-toggle="dropdown" href="#">
                                      '.$row1['BUSINESS_NAME'].'
                                     <span class="caret"></span>
                                   </a>
@@ -674,11 +681,11 @@ class My_na_model extends CI_Model{
 
                     if($x2 == 0){
 
-                        $output .= '<img src="'. $this->my_na_model->get_business_logo($row2['ID'], 60, 60, $row2['BUSINESS_LOGO_IMAGE_NAME']).'" style="width:60px;height:60px;margin:10px 10px 10px 0px" class="img-polaroid img-circle" />
+                        $output .= '<img src="'. $this->my_na_model->get_business_logo($row2['ID'], 60, 60, $row2['BUSINESS_LOGO_IMAGE_NAME']).'" style="width:60px;height:60px;margin:10px 10px 10px 0px" class="img-thumbnail" />
                                       ';
 
                         $output .= '<div class="btn-group">
-                                  <a class="btn dropdown-toggle  btn-inverse" data-toggle="dropdown" href="#">
+                                  <a class="btn dropdown-toggle btn-dark" data-toggle="dropdown" href="#">
                                      '.$row2['BUSINESS_NAME'].'
                                     <span class="caret"></span>
                                   </a>
@@ -765,6 +772,12 @@ class My_na_model extends CI_Model{
 
 	function get_business_logo($id, $w, $h, $img){
 
+        $this->load->model('image_model'); 
+        $this->load->library('thumborp'); 
+
+        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+        $width = 60;
+        $height = 60;           
 
 		if($id != '0'){
 
@@ -801,22 +814,25 @@ class My_na_model extends CI_Model{
 				if(strpos($img,'.') == 0){
 
 					$format = '.jpg';
-					$img_str = base_url('/').'img/timbthumb.php?w=60&h=60&src='.base_url('/').'assets/business/photos/'.$img . $format;
+					$img_str = 'assets/business/photos/'.$img . $format;
+                    $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
 				}else{
 
-					$img_str =  base_url('/').'img/timbthumb.php?w=60&h=60&src='.base_url('/').'assets/business/photos/'.$img;
+					$img_str = 'assets/business/photos/'.$img;
+                    $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
 				}
 
 			}else{
 
-				$img_str = base_url('/').'img/timbthumb.php?w=60&h=60&src='.base_url('/').'img/bus_blank.png';
+				$img_str = 'assets/business/photos/bus_blank.png';
+                $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
 			}
 
 
-			return $img_str;
+			return $img_url;
 
 		}
 

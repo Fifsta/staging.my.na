@@ -4915,7 +4915,7 @@ class Trade_model extends CI_Model
 		if ($query->result())
 		{
 
-			echo '<select style="height:300px;" onchange="bypass(this)" class="span12" multiple="multiple">';
+			echo '<select style="height:300px;" onchange="bypass(this)" class="form-control" multiple="multiple">';
 			foreach ($query->result() as $row)
 			{
 
@@ -5043,6 +5043,17 @@ class Trade_model extends CI_Model
 		$reserve = $this->input->post('reserve', true);
 		$item_loc = $this->input->post('item_loc', true);
 		$item_suburb = $this->input->post('suburb', true);
+
+		if($this->input->post('suburb', true)) {
+
+			
+
+		} else {
+
+$item_suburb == 'all';
+
+		}
+
 		$item_email = $this->input->post('item_email', true);
 		$listing_type = $this->input->post('listing_type', true);
 		$quantity = $this->input->post('quantity', true);
@@ -5768,6 +5779,16 @@ class Trade_model extends CI_Model
 	//SHOW ALL PRODUCT IMAGES IMAGE MANAGER		
 	function show_all_product_images($product_id)
 	{
+
+        $this->load->model('image_model'); 
+        $this->load->library('thumborp'); 
+
+        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();  
+
+        $width = 190;
+        $height = 130;
+
+
 		if($this->input->get('classifieds')){
 
 			//$query = $this->db->order_by('sequence', 'ASC');
@@ -5813,14 +5834,18 @@ class Trade_model extends CI_Model
 					{
 
 						$format = '.jpg';
-						$img_str = CDN_URL . 'assets/products/images/' . $img_file . $format;
+						$img_str = 'assets/products/images/' . $img_file . $format;
+						$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
 						$file = $img_file . $format;
 
 					}
 					else
 					{
 
-						$img_str = CDN_URL . 'assets/products/images/' . $img_file;
+						$img_str = 'assets/products/images/' . $img_file;
+						$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
 						$file = $img_file;
 					}
 
@@ -5828,7 +5853,8 @@ class Trade_model extends CI_Model
 				else
 				{
 
-					$img_str = CDN_URL . 'img/bus_blank.jpg';
+					$img_str = 'assets/products/images/bus_blank.jpg';
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 					$file = '';
 
 				}
@@ -5863,7 +5889,7 @@ class Trade_model extends CI_Model
 				}
 
 				//NO TIMBTHUMB
-				echo '<div id="img_' . $id . '" class="span3 col-xs-3 thumbnail" ><img id="pro_img_att_' . $id . '" onclick="make_primary(' . $id . ');" src="' . base_url('/') . 'img/timbthumb.php?src=' . $img_str . '&w=190&h=130' . $rand . '" />
+				echo '<div id="img_' . $id . '" class="span3 col-xs-3 thumbnail" ><img id="pro_img_att_' . $id . '" onclick="make_primary(' . $id . ');" src="' . base_url('/') . 'img/timbthumb.php?src=' . $img_url. '&w=190&h=130' . $rand . '" />
 								<input type="hidden" value="' . $imgsequence . '" name="img_sequence" />
 								<a style="float:left;margin:5px 5px 0 0" onclick="delete_product_img(' . $id . ');" class="btn btn-mini btn-danger" href="javascript:void(0)"><i class="icon-trash icon-white"></i></a>
 								 ' . $sequence . '
@@ -7217,7 +7243,7 @@ class Trade_model extends CI_Model
 		{
 
 
-			echo '<select id="suburb" name="suburb" class="span12">
+			echo '<select id="suburb" name="suburb" class="form-control">
 						<option value="all">Please Select</option>';
 
 			foreach ($query->result() as $row)
@@ -7246,7 +7272,7 @@ class Trade_model extends CI_Model
 		else
 		{
 
-			echo '<select id="suburb" name="suburb" class="span12" disabled="disabled"></select>';
+			echo '<select id="suburb" name="suburb" class="form-control" disabled="disabled"></select>';
 		}
 	}
 

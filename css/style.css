@@ -26,6 +26,21 @@ img {
     border-radius: 4px; /* future proofing */
 }
 
+.white_box {
+
+    background-color: #fff;
+    margin-bottom: 10px;
+    background: #fff;
+    -moz-box-shadow: 0 0 1px #000;
+    -webkit-box-shadow: 0 0 1px #000;
+    box-shadow: 0 0 1px #000;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px; /* future proofing */
+    -khtml-border-radius: 0px; /* for old Konqueror browsers */
+    border-bottom:3px solid  #FF9F01;
+}
+
 .facebook {
     background-image: url(../images/social1.png);
     display: block;

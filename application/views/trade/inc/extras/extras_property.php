@@ -441,7 +441,7 @@ function test_extras_size($existing, $val , $extra, $product_id, $type){
                                           <div class="control-group">
                                               <label class="control-label" for="farm_location">Location</label>
                                               <div class="controls">
-                                                  <textarea name="farm_location" class="span12" placeholder="Location"><?php test_extras_output($existing['extras'] ,'farm_location', $product_id,  'output');?></textarea>
+                                                  <textarea name="farm_location" class="form-control" placeholder="Location"><?php test_extras_output($existing['extras'] ,'farm_location', $product_id,  'output');?></textarea>
                                                 <span class="help-block"  style="font-size:11px">
                                                 Describe the farm location</span>
                                               </div>
@@ -449,7 +449,7 @@ function test_extras_size($existing, $val , $extra, $product_id, $type){
                                           <div class="control-group">
                                               <label class="control-label" for="farm_house">Farm house</label>
                                               <div class="controls">
-                                                  <textarea name="farm_house" class="span12" placeholder="Farm house"><?php test_extras_output($existing['extras'] ,'farm_house', $product_id,  'output');?></textarea>
+                                                  <textarea name="farm_house" class="form-control" placeholder="Farm house"><?php test_extras_output($existing['extras'] ,'farm_house', $product_id,  'output');?></textarea>
                                                 <span class="help-block"  style="font-size:11px">
                                                 Describe the farm house</span>
                                               </div>
@@ -457,7 +457,7 @@ function test_extras_size($existing, $val , $extra, $product_id, $type){
                                           <div class="control-group">
                                               <label class="control-label" for="guest_facilities">Guest Facilities</label>
                                               <div class="controls">
-                                                  <textarea name="guest_facilities" class="span12" placeholder="Guest Facilities"><?php test_extras_output($existing['extras'] ,'guest_facilities', $product_id,  'output');?></textarea>
+                                                  <textarea name="guest_facilities" class="form-control" placeholder="Guest Facilities"><?php test_extras_output($existing['extras'] ,'guest_facilities', $product_id,  'output');?></textarea>
                                                 <span class="help-block"  style="font-size:11px">
                                                 Describe the Guest utilities</span>
                                               </div>
@@ -465,7 +465,7 @@ function test_extras_size($existing, $val , $extra, $product_id, $type){
                                           <div class="control-group">
                                               <label class="control-label" for="outbuildings">Outbuildings</label>
                                               <div class="controls">
-                                                  <textarea name="outbuildings" class="span12" placeholder="Outbuildings"><?php test_extras_output($existing['extras'] ,'outbuildings', $product_id,  'output');?></textarea>
+                                                  <textarea name="outbuildings" class="form-control" placeholder="Outbuildings"><?php test_extras_output($existing['extras'] ,'outbuildings', $product_id,  'output');?></textarea>
                                                 <span class="help-block"  style="font-size:11px">
                                                 Describe the farm Outbuildings</span>
                                               </div>
@@ -473,7 +473,7 @@ function test_extras_size($existing, $val , $extra, $product_id, $type){
                                           <div class="control-group">
                                               <label class="control-label" for="staff_quarters">Staff Quarters</label>
                                               <div class="controls">
-                                                  <textarea name="staff_quarters" class="span12" placeholder="Staff Quarters"><?php test_extras_output($existing['extras'] ,'staff_quarters', $product_id,  'output');?></textarea>
+                                                  <textarea name="staff_quarters" class="form-control" placeholder="Staff Quarters"><?php test_extras_output($existing['extras'] ,'staff_quarters', $product_id,  'output');?></textarea>
                                                 <span class="help-block"  style="font-size:11px">
                                                 Describe the Staff Quarters</span>
                                               </div>
@@ -583,7 +583,7 @@ function test_extras_size($existing, $val , $extra, $product_id, $type){
                                           <div class="control-group">
                                               <label class="control-label" for="game_type">What type of Game</label>
                                               <div class="controls">
-                                                  <textarea name="game_type" class="span12" placeholder="Game Situation"><?php test_extras_output($existing['extras'] ,'game_type', $product_id,  'output');?></textarea>
+                                                  <textarea name="game_type" class="form-control" placeholder="Game Situation"><?php test_extras_output($existing['extras'] ,'game_type', $product_id,  'output');?></textarea>
                                                 <span class="help-block"  style="font-size:11px">
                                                 Describe the Game situation on the farm</span>
                                               </div>
@@ -662,7 +662,7 @@ function test_extras_size($existing, $val , $extra, $product_id, $type){
                                       <div class="control-group">
                                             <label class="control-label" for="location_amenities">Location Amenities</label>
                                             <div class="controls">
-												<textarea name="location_amenities" class="span12" placeholder="Location Amenities"><?php test_extras_output($existing['extras'] ,'location_amenities', $product_id,  'output');?></textarea>
+												<textarea name="location_amenities" class="form-control" placeholder="Location Amenities"><?php test_extras_output($existing['extras'] ,'location_amenities', $product_id,  'output');?></textarea>
                                                 <span class="help-block"  style="font-size:11px">
                                                 What amenities are located in the area? Shopping mall, bakery etc.</span>
                                             </div>

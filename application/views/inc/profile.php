@@ -58,7 +58,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 					</ul>
 				</div>
 			</div>
-		</div>
+		</div> 
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab">
 				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#MyBusiness" aria-expanded="false" aria-controls="MyBusiness" data-icon="fa-edit">My Business</a></h3>
@@ -70,7 +70,23 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 					</ul>
 				</div>
 			</div>
-		</div>		
+		</div>	
+		<div class="panel panel-default">
+			<div class="panel-heading" role="tab">
+				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#MyProducts" aria-expanded="false" aria-controls="MyProducts" data-icon="fa-edit">My Products</a></h3>
+			</div>
+			<div id="MyProducts" class="panel-collapse collapse <?php echo $my_bus; ?>" role="tabpanel" aria-labelledby="MyProducts">
+				<div class="panel-body">
+					<ul>
+						<li><a href="<?php echo site_url('/'); ?>sell/index/0/?type=motor">Sell a Car</a></li>
+						<li><a href="<?php echo site_url('/'); ?>sell/index/0/?type=property">Sell a Property</a></li>
+						<li><a href="<?php echo site_url('/'); ?>sell/index/0/">Sell Anything</a></li>
+						<li><a href="<?php echo site_url('/'); ?>sell/index/0/?auction=true">Create an Auction</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>	
+
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab">
 				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#NamibiaMap" aria-expanded="false" aria-controls="NamibiaMap" data-icon="fa-map-marker">Namibia Map</a></h3>

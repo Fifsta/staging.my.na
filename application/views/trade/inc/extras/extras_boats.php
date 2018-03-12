@@ -90,7 +90,7 @@
                                       <div class="control-group">
                                         <label class="control-label" for="year">Year</label>
                                         <div class="controls">
-                                                <input type="text" class="span12" value="<?php test_extras_output($existing ,'year', $product_id,  'output');?>" name="year" placeholder="Year make of the boat">
+                                                <input type="text" class="form-control" value="<?php test_extras_output($existing ,'year', $product_id,  'output');?>" name="year" placeholder="Year make of the boat">
                                                 <span class="help-block" style="font-size:11px">What year model is the boat? What year was it built</span>
                                         </div>
                                       </div>
@@ -98,7 +98,7 @@
                                       <div class="control-group">
                                         <label class="control-label" for="length">Length</label>
                                         <div class="controls">
-                                                <input type="text" class="span12" name="length" placeholder="Length" value="<?php test_extras_output($existing ,'length', $product_id,  'output');?>">
+                                                <input type="text" class="form-control" name="length" placeholder="Length" value="<?php test_extras_output($existing ,'length', $product_id,  'output');?>">
                                                 <span class="help-block" style="font-size:11px">The boats’s length in metres. </span>
                                         </div>
                                       </div>
@@ -107,7 +107,7 @@
                                             <label class="control-label" for="color">Color</label>
                                             <div class="controls">
                                                 
-                                                <input type="text" class="span12" name="color" value="<?php test_extras_output($existing ,'color', $product_id,  'output');?>" placeholder="Color"> 
+                                                <input type="text" class="form-control" name="color" value="<?php test_extras_output($existing ,'color', $product_id,  'output');?>" placeholder="Color"> 
                                                 <span class="help-block"  style="font-size:11px">
                                                 What colour is the item? eg: blue, red, metallic silver</span>
                                             </div>
@@ -115,7 +115,7 @@
                                       <div class="control-group">
                                             <label class="control-label" for="engine_type">Engine Type</label>
                                             <div class="controls">
-                                                <select name="engine_type" data-placeholder="Please Select" class="extra_slect span12">
+                                                <select name="engine_type" data-placeholder="Please Select" class="extra_slect form-control">
                                                     <option value="" <?php test_extras($existing ,'Dont Know', $product_id,  'selected');?>>Dont Know</option>
                                                     <option value="Outboard" <?php test_extras($existing ,'Outboard', $product_id,  'selected');?>>Outboard</option>
                                                     <option value="Inboard" <?php test_extras($existing ,'Inboard', $product_id,  'selected');?>>Inboard</option>
@@ -133,7 +133,7 @@
                                             <label class="control-label" for="engine_hours">Engine hours</label>
                                             <div class="controls">
                                                 
-                                                <input type="text" class="span12" name="engine_hours" value="<?php test_extras_output($existing ,'engine_hours', $product_id,  'output');?>" placeholder="Color"> 
+                                                <input type="text" class="form-control" name="engine_hours" value="<?php test_extras_output($existing ,'engine_hours', $product_id,  'output');?>" placeholder="Color"> 
                                                 <span class="help-block"  style="font-size:11px">
                                                 How many hours has the engine run?</span>
                                             </div>
@@ -143,7 +143,7 @@
                                             <label class="control-label" for="engine_size">Engine Size</label>
                                             <div class="controls">
                                                 
-                                                <input class="span12" type="text" name="engine_size" value="<?php test_extras_output($existing ,'engine_size', $product_id,  'output');?>" placeholder="Engine Size cc"> 
+                                                <input class="form-control" type="text" name="engine_size" value="<?php test_extras_output($existing ,'engine_size', $product_id,  'output');?>" placeholder="Engine Size cc"> 
                                                 <span class="help-block"  style="font-size:11px">
                                                 How much cubic capacity is the engine in HP</span>
                                             </div>
@@ -160,7 +160,7 @@
                                        <div class="control-group">
                                             <label class="control-label" for="owners">Number of Owners</label>
                                             <div class="controls">
-                                                <select name="owners" data-placeholder="Please Select" class="extra_slect span12">
+                                                <select name="owners" data-placeholder="Please Select" class="extra_slect form-control">
                                                     <option selected="selected" value="">Don't Know</option>
                                                     <option value="New" <?php test_extras($existing ,'New', $product_id,  'selected');?>>New</option>
                                                     <option value="1 owner" <?php test_extras($existing ,'1 owner', $product_id,  'selected');?>>1 owner</option>
@@ -182,7 +182,7 @@
                                       <div class="control-group">
                                             <label class="control-label" for="autohaus">Autohaus Windhoek</label>
                                             <div class="controls">
-                                                <select name="autohaus[]" data-placeholder="Please Select" class="extra_slect span12" multiple="" size="6">
+                                                <select name="autohaus[]" data-placeholder="Please Select" class="extra_slect form-control" multiple="" size="6">
                                                     
                                                     <option value="Mastercars" <?php test_extras($existing ,'Mastercars', $product_id,  'selected');?>>Mastercars</option>
                                                     <option value="New" <?php test_extras($existing ,'New', $product_id,  'selected');?>>New</option>

@@ -1,4 +1,3 @@
-
 <?php
 //+++++++++++++++++++++++++++++++++
 //STEP 1 Categories
@@ -14,31 +13,46 @@
     $data['type'] = $type;
 
 ?>
-        <div class="text-center">
+<div class="text-center">
+
+
+
+</div>
+
+<div class="col-md-12">
+    <div class="heading">
+        <h2 data-icon="fa-list">Please Choose a <strong>Product Category</strong></h2>
+        <ul class="options">
+
+        </ul>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-body">
 
             <a href="#" class="btn btn-success btn-large step1" style="margin:5px"> 1 Select Category <i class="icon-chevron-right icon-white"></i></a> 
-            <a href="#" class="btn btn-inverse disabled step2" style="margin:5px"> 2 Details <i class="icon-chevron-right icon-white"></i></a>
-            <a href="#" class="btn btn-inverse disabled step3" style="margin:5px"> 3 Attach Photos <i class="icon-chevron-right icon-white"></i></a>
-            <a href="#" class="btn btn-inverse disabled step4" style="margin:5px"> 4 Extras <i class="icon-chevron-right icon-white"></i></a>
-            <a href="#" class="btn btn-inverse disabled step5" style="margin:5px"> 5 Confirm and Publish <i class="icon-chevron-right icon-white"></i></a>
-        
-        </div>
-        <div class="product_ribbon"><small class="clearfix">Please Choose a</small>PRODUCT CATEGORY<span></span></div>
-        <div class="white_box padding10">
-            
-			<div class="clearfix" style="height:120px">&nbsp;</div>
+            <a href="#" class="btn btn-dark disabled step2" style="margin:5px"> 2 Details <i class="icon-chevron-right icon-white"></i></a>
+            <a href="#" class="btn btn-dark disabled step3" style="margin:5px"> 3 Attach Photos <i class="icon-chevron-right icon-white"></i></a>
+            <a href="#" class="btn btn-dark disabled step4" style="margin:5px"> 4 Extras <i class="icon-chevron-right icon-white"></i></a>
+            <a href="#" class="btn btn-dark disabled step5" style="margin:5px"> 5 Confirm and Publish <i class="icon-chevron-right icon-white"></i></a>
+            <hr>
+            <form id="search-cat_b">
+                <input type="text" class="form-control typeahead keyboard-normal" id="search_category" name="search_category" type="text"
+                       value="<?php if(isset($str)){ echo $str;}else{ echo '';}?>" style="margin-bottom:0px" autocomplete="off"
+                       placeholder="Start typing here">
+            </form>
 
-                <form id="search-cat_b">
-                    <input type="text" class="span12 typeahead keyboard-normal" id="search_category" name="search_category" type="text"
-                           value="<?php if(isset($str)){ echo $str;}else{ echo '';}?>" style="margin-bottom:0px" autocomplete="off"
-                           placeholder="Start typing here">
-                </form>
             <div id="select_cats" style="min-height:200px;">
-            <?php $this->trade_model->load_product_categories($bus_id, $type);?>
+                <?php $this->trade_model->load_product_categories($bus_id, $type);?>
             </div>
-		</div>
 
-    <div class="clearfix" style="height:200px;"></div>
+        </div> 
+    </div>      
+</div>
+
+<div class="clearfix" style="height:200px;"></div>
 
 <script data-cfasync="false" type="text/javascript">
 	$(document).ready(function(){

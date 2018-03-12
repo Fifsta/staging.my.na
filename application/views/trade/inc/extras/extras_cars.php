@@ -88,44 +88,44 @@ function test_extras_output($existing, $extra, $product_id, $type)
 ?>
 
 <div class="control-group">
-    <label class="control-label" for="year">Year</label>
+    <label class="control-label" for="year"><strong>Year</strong></label>
 
     <div class="controls">
-        <input type="text" class="span12"
+        <input type="text" class="form-control"
                value="<?php test_extras_output($existing['extras'], 'year', $product_id, 'output'); ?>" name="year"
                placeholder="Year make of the car">
         <span class="help-block" style="font-size:11px">What year model is the car? What year was it built</span>
     </div>
 </div>
+<br>
 
 <div class="control-group">
-    <label class="control-label" for="kilometres">Kilometers</label>
+    <label class="control-label" for="kilometres"><strong>Kilometers</strong></label>
 
     <div class="controls">
-        <input type="text" class="span12" name="kilometres" placeholder="Kilometres"
+        <input type="text" class="form-control" name="kilometres" placeholder="Kilometres"
                value="<?php test_extras_output($existing['extras'], 'kilometres', $product_id, 'output'); ?>">
         <span class="help-block" style="font-size:11px">The vehicle’s odometer reading in kilometres. </span>
     </div>
 </div>
+<br>
 
 <div class="control-group">
-    <label class="control-label" for="color">Color</label>
+    <label class="control-label" for="color"><strong>Color</strong></label>
 
     <div class="controls">
-
-        <input type="text" class="span12" name="color"
-               value="<?php test_extras_output($existing['extras'], 'color', $product_id, 'output'); ?>"
-               placeholder="Color">
-                                                <span class="help-block" style="font-size:11px">
-                                                What colour is the item? eg: blue, red, metallic silver</span>
+        <input type="text" class="form-control" name="color" value="<?php test_extras_output($existing['extras'], 'color', $product_id, 'output'); ?>" placeholder="Color">
+        <span class="help-block" style="font-size:11px">What colour is the item? eg: blue, red, metallic silver</span>
     </div>
 </div>
+<br>
+
 <div class="control-group">
-    <label class="control-label" for="doors">Doors</label>
+    <label class="control-label" for="doors"><strong>Doors</strong></label>
 
     <div class="controls">
 
-        <select name="doors" data-placeholder="Please Select" class="extra_slect span12">
+        <select name="doors" data-placeholder="Please Select" class="extra_slect">
             <option value="" <?php test_extras($existing, 'Dont Know', $product_id, 'selected'); ?>>Don't Know</option>
             <option value="1 door" <?php test_extras($existing, '1 door', $product_id, 'selected'); ?>>1 door</option>
             <option value="2 door" <?php test_extras($existing, '2 door', $product_id, 'selected'); ?>>2 door</option>
@@ -135,90 +135,73 @@ function test_extras_output($existing, $extra, $product_id, $type)
             <option value="6 door" <?php test_extras($existing, '6 door', $product_id, 'selected'); ?>>6 door</option>
             <option value="7 door" <?php test_extras($existing, '7 door', $product_id, 'selected'); ?>>7 door</option>
         </select>
-                                                <span class="help-block" style="font-size:11px">
-                                               How many doors does the vehicle have </span>
+        <span class="help-block" style="font-size:11px">How many doors does the vehicle have </span>
     </div>
 </div>
+<br>
+
 <div class="control-group">
-    <label class="control-label" for="body_style">Body Style</label>
+    <label class="control-label" for="body_style"><strong>Body Style</strong></label>
 
     <div class="controls">
-        <select name="body_style" data-placeholder="Please Select" class="extra_slect span12">
+        <select name="body_style" data-placeholder="Please Select" class="extra_slect">
             <option value="" <?php test_extras($existing, 'Dont know', $product_id, 'selected'); ?>>Don't Know</option>
-            <option value="Convertible" <?php test_extras($existing, 'Convertible', $product_id, 'selected'); ?>>
-                Convertible
-            </option>
+            <option value="Convertible" <?php test_extras($existing, 'Convertible', $product_id, 'selected'); ?>>Convertible</option>
             <option value="Coupe" <?php test_extras($existing, 'Coupe', $product_id, 'selected'); ?>>Coupe</option>
-            <option value="Hatchback" <?php test_extras($existing, 'Hatchback', $product_id, 'selected'); ?>>Hatchback
-            </option>
+            <option value="Hatchback" <?php test_extras($existing, 'Hatchback', $product_id, 'selected'); ?>>Hatchback</option>
             <option value="Sedan" <?php test_extras($existing, 'Sedan', $product_id, 'selected'); ?>>Sedan</option>
-            <option value="Station Wagon" <?php test_extras($existing, 'Station Wagon', $product_id, 'selected'); ?>>
-                Station Wagon
-            </option>
+            <option value="Station Wagon" <?php test_extras($existing, 'Station Wagon', $product_id, 'selected'); ?>>Station Wagon</option>
             <option value="RV/SUV" <?php test_extras($existing, 'RV/SUV', $product_id, 'selected'); ?>>RV/SUV</option>
             <option value="Bakkie" <?php test_extras($existing, 'Bakkie', $product_id, 'selected'); ?>>Bakkie</option>
-            <option value="Panel Van" <?php test_extras($existing, 'Panel Van', $product_id, 'selected'); ?>>Panel Van
-            </option>
+            <option value="Panel Van" <?php test_extras($existing, 'Panel Van', $product_id, 'selected'); ?>>Panel Van</option>
             <option value="Other" <?php test_extras($existing, 'Other', $product_id, 'selected'); ?>>Other</option>
         </select>
-                                                <span class="help-block" style="font-size:11px">
-                                               What body type is the vehicle</span>
+        <span class="help-block" style="font-size:11px">What body type is the vehicle</span>
     </div>
 </div>
+<br>
+
 <div class="control-group">
-    <label class="control-label" for="fuel_type">Fuel Type</label>
+    <label class="control-label" for="fuel_type"><strong>Fuel Type</strong></label>
 
     <div class="controls">
-        <select name="fuel_type" data-placeholder="Please Select" class="extra_slect span12">
-            <option value=""  <?php test_extras($existing, 'Dont know', $product_id, 'selected'); ?>>Don't Know</option>
+        <select name="fuel_type" data-placeholder="Please Select" class="extra_slect">
+            <option value="" <?php test_extras($existing, 'Dont know', $product_id, 'selected'); ?>>Don't Know</option>
             <option value="Petrol"  <?php test_extras($existing, 'Petrol', $product_id, 'selected'); ?>>Petrol</option>
             <option value="Diesel" <?php test_extras($existing, 'Diesel', $product_id, 'selected'); ?>>Diesel</option>
             <option value="CNG" <?php test_extras($existing, 'CNG', $product_id, 'selected'); ?>>CNG</option>
             <option value="LPG" <?php test_extras($existing, 'LPG', $product_id, 'selected'); ?>>LPG</option>
-            <option value="Alternative" <?php test_extras($existing, 'Alternative', $product_id, 'selected'); ?>>
-                Alternative
-            </option>
+            <option value="Alternative" <?php test_extras($existing, 'Alternative', $product_id, 'selected'); ?>>Alternative</option>
         </select>
-                                                <span class="help-block" style="font-size:11px">
-                                               What fuel does it run on</span>
+        <span class="help-block" style="font-size:11px">What fuel does it run on</span>
     </div>
 </div>
+<br>
+
 <div class="control-group">
-    <label class="control-label" for="cylinders">Cylinders</label>
+    <label class="control-label" for="cylinders"><strong>Cylinders</strong></label>
 
     <div class="controls">
-        <select name="cylinders" data-placeholder="Please Select" class="extra_slect span12">
+        <select name="cylinders" data-placeholder="Please Select" class="extra_slect">
             <option selected="selected" value="">Don't Know</option>
             <option value="Rotary" <?php test_extras($existing, 'Rotary', $product_id, 'selected'); ?>>Rotary</option>
-            <option value="4 cylinder" <?php test_extras($existing, '4 cylinder', $product_id, 'selected'); ?>>4
-                cylinder
-            </option>
-            <option value="5 cylinder" <?php test_extras($existing, '5 cylinder', $product_id, 'selected'); ?>>5
-                cylinder
-            </option>
-            <option value="6 cylinder" <?php test_extras($existing, '6 cylinder', $product_id, 'selected'); ?>>6
-                cylinder
-            </option>
-            <option value="8 cylinder" <?php test_extras($existing, '8 cylinder', $product_id, 'selected'); ?>>8
-                cylinder
-            </option>
-            <option value="10 cylinder" <?php test_extras($existing, '10 cylinder', $product_id, 'selected'); ?>>10
-                cylinder
-            </option>
-            <option value="12 cylinder" <?php test_extras($existing, '12 cylinder', $product_id, 'selected'); ?>>12
-                cylinder
-            </option>
+            <option value="4 cylinder" <?php test_extras($existing, '4 cylinder', $product_id, 'selected'); ?>>4 cylinder</option>
+            <option value="5 cylinder" <?php test_extras($existing, '5 cylinder', $product_id, 'selected'); ?>>5 cylinder</option>
+            <option value="6 cylinder" <?php test_extras($existing, '6 cylinder', $product_id, 'selected'); ?>>6 cylinder</option>
+            <option value="8 cylinder" <?php test_extras($existing, '8 cylinder', $product_id, 'selected'); ?>>8 cylinder</option>
+            <option value="10 cylinder" <?php test_extras($existing, '10 cylinder', $product_id, 'selected'); ?>>10 cylinder</option>
+            <option value="12 cylinder" <?php test_extras($existing, '12 cylinder', $product_id, 'selected'); ?>>12 cylinder</option>
         </select>
-                                                <span class="help-block" style="font-size:11px">
-                                               How many cylinders does the engine have</span>
+        <span class="help-block" style="font-size:11px">How many cylinders does the engine have</span>
     </div>
 </div>
+<br>
 <div class="control-group">
     <label class="control-label" for="engine_size">Engine Size</label>
 
     <div class="controls">
 
-        <input class="span12" type="text" name="engine_size"
+        <input class="form-control" type="text" name="engine_size"
                value="<?php test_extras_output($existing['extras'], 'engine_size', $product_id, 'output'); ?>"
                placeholder="Engine Size cc">
                                                 <span class="help-block" style="font-size:11px">
@@ -229,7 +212,7 @@ function test_extras_output($existing, $extra, $product_id, $type)
     <label class="control-label" for="transmission">Transmission</label>
 
     <div class="controls">
-        <select name="transmission" data-placeholder="Please Select" class="extra_slect span12">
+        <select name="transmission" data-placeholder="Please Select" class="extra_slect">
             <option value="" <?php test_extras($existing, 'Dont Know', $product_id, 'selected'); ?>>Dont Know</option>
             <option value="Manual" <?php test_extras($existing, 'Manual', $product_id, 'selected'); ?>>Manual</option>
             <option value="Automatic" <?php test_extras($existing, 'Automatic', $product_id, 'selected'); ?>>Automatic
@@ -244,8 +227,7 @@ function test_extras_output($existing, $extra, $product_id, $type)
             <option value="M/tronic" <?php test_extras($existing, 'M/tronic', $product_id, 'selected'); ?>>M/tronic
             </option>
         </select>
-                                                <span class="help-block" style="font-size:11px">
-                                               What transmission is the vehicle</span>
+        <span class="help-block" style="font-size:11px">What transmission is the vehicle</span>
     </div>
 </div>
 <div class="control-group">
@@ -254,8 +236,7 @@ function test_extras_output($existing, $extra, $product_id, $type)
     <div class="controls">
         <input type="checkbox" name="4wd"
                value="4 Wheel Drive" <?php test_extras_output($existing['extras'], '4wd', $product_id, 'checked'); ?>>
-                                                <span class="help-block" style="font-size:11px">
-                                               Is the vehicle 4 Wheel Drive</span>
+               <span class="help-block" style="font-size:11px">Is the vehicle 4 Wheel Drive</span>
     </div>
 </div>
 
@@ -264,7 +245,7 @@ function test_extras_output($existing, $extra, $product_id, $type)
 
     <div class="controls">
 
-        <input type="text" class="span12" name="agency"
+        <input type="text" class="form-control" name="agency"
                value="<?php test_extras_output($existing['extras'], 'agency', $product_id, 'output'); ?>"
                placeholder="John Deere">
                                                                                         <span class="help-block"
@@ -310,7 +291,7 @@ if ($agents != FALSE || $bus_id == 2706 || $bus_id == 2709 || $bus_id == 2666 ||
         <label class="control-label" for="seller_contact">Internal Notes</label>
 
         <div class="controls">
-            <textarea name="seller_contact" class="span12" placeholder="Sellers Contact Details" cols="2"
+            <textarea name="seller_contact" class="form-control" placeholder="Sellers Contact Details" cols="2"
                       rows="4"><?php echo $existing['seller_contact'];?></textarea>
                      <span class="help-block" style="font-size:11px">The sellers contact details and other notes. NB only for your Reference!</span>
         </div>
@@ -337,7 +318,7 @@ if ($agents != FALSE || $bus_id == 2706 || $bus_id == 2709 || $bus_id == 2666 ||
     <label class="control-label" for="owners">New or Used</label>
 
     <div class="controls">
-        <select name="owners" data-placeholder="Please Select" class="extra_slect span12">
+        <select name="owners" data-placeholder="Please Select" class="extra_slect form-control">
             <option selected="selected" value="">Don't Know</option>
             <option value="New" <?php test_extras($existing, 'New', $product_id, 'selected'); ?>>New</option>
             <option value="1 owner" <?php test_extras($existing, '1 owner', $product_id, 'selected'); ?>>1 owner
@@ -361,7 +342,7 @@ if ($agents != FALSE || $bus_id == 2706 || $bus_id == 2709 || $bus_id == 2666 ||
     <label class="control-label" for="features">Features</label>
 
     <div class="controls">
-        <select name="features[]" data-placeholder="Please Select" class="extra_slect span12" multiple="" size="6">
+        <select name="features[]" data-placeholder="Please Select" class="extra_slect form-control" multiple="" size="6">
 
             <option
                 value="ABS brakes" <?php test_extras($existing['extras'], 'ABS brakes', $product_id, 'selected'); ?>>ABS
@@ -632,7 +613,7 @@ if ($bus_id == 2666) {
         <label class="control-label" for="autohaus">Autohaus Windhoek</label>
 
         <div class="controls">
-            <select name="autohaus[]" data-placeholder="Please Select" class="extra_slect span12" multiple="" size="6">
+            <select name="autohaus[]" data-placeholder="Please Select" class="extra_slect form-control" multiple="" size="6">
 
                 <option
                     value="Mastercars" <?php test_extras($existing['extras'], 'Mastercars', $product_id, 'selected');?>>
@@ -714,7 +695,7 @@ if ($bus_id == 2706 || $bus_id == 2709 || $bus_id == 4274 || $bus_id == 9333) {
         <label class="control-label" for="mz_motors ">M+Z Motors</label>
 
         <div class="controls">
-            <select name="mz_motors[]" data-placeholder="Please Select" class="extra_slect span12" multiple="" size="6">
+            <select name="mz_motors[]" data-placeholder="Please Select" class="extra_slect form-control" multiple="" size="6">
 
                 <option
                     value="Certified_pre_owned" <?php test_extras($existing['extras'], 'Certified_pre_owned', $product_id, 'selected');?>>
@@ -755,7 +736,7 @@ if ($bus_id == 4608) {
         <label class="control-label" for="spes_bona">Spes Bona</label>
 
         <div class="controls">
-            <select name="spes_bona[]" data-placeholder="Please Select" class="extra_slect span12" multiple="" size="6">
+            <select name="spes_bona[]" data-placeholder="Please Select" class="extra_slect form-control" multiple="" size="6">
 
                 <option
                     value="Certified_pre_owned" <?php test_extras($existing['extras'], 'Certified_pre_owned', $product_id, 'selected');?>>
