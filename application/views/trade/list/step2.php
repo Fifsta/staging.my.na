@@ -426,10 +426,8 @@ if(!isset($type)){
                         $java = 'onclick="back_to_1()"';
                     }
                     ?>
-                    <a href="<?php echo site_url('/') . 'sell/my_trade/' . $bus_id . '/'; ?>" onclick="back_to_all();"
-                       id="back_to_all" class="btn btn-dark pull-right" style="margin-right:5px"> All Products</a>
-                    <a href="javascript:void(0)" <?php echo $java; ?>
-                       class="btn btn-warning pull-right <?php echo $str; ?>" style="margin-right:5px"> Back</a>
+                    <a href="<?php echo site_url('/') . 'members/business/' . $bus_id . '/'; ?>" onclick="back_to_all();" id="back_to_all" class="btn btn-dark pull-right" style="margin-right:5px"> All Products</a>
+                    <a href="javascript:void(0)" <?php echo $java; ?> class="btn btn-warning pull-right <?php echo $str; ?>" style="margin-right:5px"> Back</a>
                 </fieldset>
             </form>
         </div>

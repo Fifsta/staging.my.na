@@ -48,7 +48,7 @@
             </div>
             <div>
                <a href="javascript:void(0)" onclick="proceed_to_5()" id="proceed_to_5" class="btn btn-success pull-right">Next</a>
-               <a href="<?php echo site_url('/').'sell/my_trade/'.$bus_id.'/';?>" onclick="back_to_all();" id="back_to_all" class="btn btn-dark pull-right" style="margin-right:5px">All Products</a>
+               <a href="<?php echo site_url('/').'members/business/'.$bus_id.'/';?>" onclick="back_to_all();" id="back_to_all" class="btn btn-dark pull-right" style="margin-right:5px">All Products</a>
                <a href="javascript:void(0)"onclick="back_to_3()" id="back_to_3" class="btn btn-warning pull-right" style="margin-right:5px">Back</a>
            		<div class="clearfix">&nbsp;</div>	
             </div>

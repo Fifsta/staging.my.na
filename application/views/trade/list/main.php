@@ -275,7 +275,7 @@ if($this->input->get('nmh_classifieds')){ ?>
 
 function populateSuburb(cityID)
   {
-      $("#suburb_div").html('<div class="span8" style="text-align:center;"><img src="<?php echo base_url('/').'img/load.gif';?>" /> Getting Suburbs...</div>');
+      $("#suburb_div").html('<div class="span8" style="text-align:center;"><img src="<?php echo base_url('/').'images/load.gif';?>" /> Getting Suburbs...</div>');
       $.ajax({
          url: "<?php echo site_url('/');?>trade/populate_suburb_name/"+cityID+"/0",
         success: function(data) {
@@ -315,7 +315,7 @@ function togglecheck(val){
 function load_ajax_product_cat(cat1, cat1name, cat2, cat2name, cat3, cat3name , cat4, cat4name, bus_id, typel){
         
         var n = $('#select_cats');
-        n.html('<div class="span3" style="text-align:center;margin-top:125px;width:100%"><img src="<?php echo base_url('/').'img/load.gif';?>" /><br /> Getting Categories...</div>');
+        n.html('<div class="span3" style="text-align:center;margin-top:125px;width:100%"><img src="<?php echo base_url('/').'images/load.gif';?>" /><br /> Getting Categories...</div>');
 
         $.ajax({
             type: 'post',
@@ -339,7 +339,7 @@ function load_ajax_product_cat(cat1, cat1name, cat2, cat2name, cat3, cat3name , 
 function go_step_3(cat1, cat1name, cat2, cat2name, cat3, cat3name , cat4, cat4name,bus_id, typel){
     
     var cont = $('#admin_content');
-    cont.html('<div class="span3" style="text-align:center;margin-top:125px;width:100%"><img src="<?php echo base_url('/').'img/load.gif';?>" /><br /> Loading...</div>');
+    cont.html('<div class="span3" style="text-align:center;margin-top:125px;width:100%"><img src="<?php echo base_url('/').'images/load.gif';?>" /><br /> Loading...</div>');
     
         //console.log(cat1+"-"+cat2+"-"+ cat3+"-"+cat4);
         $.ajax({
@@ -420,7 +420,7 @@ function isNumberKey(evt){
 
   function populateSuburb(cityID)
   {
-      $("#suburb_div").html('<div class="span8" style="text-align:center;"><img src="<?php echo base_url('/').'img/load.gif';?>" /> Getting Suburbs...</div>');
+      $("#suburb_div").html('<div class="span8" style="text-align:center;"><img src="<?php echo base_url('/').'images/load.gif';?>" /> Getting Suburbs...</div>');
       $.ajax({
          url: "<?php echo site_url('/');?>trade/populate_suburb_name/"+cityID+"/0",
         success: function(data) {
@@ -522,30 +522,31 @@ function back_to_1(){
     
     function rotate_img(angle, filename, id, str){
             
-            $("#rotate_btn_"+id).addClass('disabled');
-            $('#pro_img_att_'+id).attr('src', '<?php echo base_url('/');?>img/deal_place_load.gif').css('height','130px');
-            if(str == ''){
-                final1 = 'src=<?php echo base_url('/').'assets/products/images/';?>'+filename+'&w=190&h=130';
-                delete_thumb_cache(final1);
-            }else{
-                
-                final1 = 'src=<?php echo base_url('/').'assets/products/images/';?>'+filename+'&w=190&h=130&ed='+str;
-                delete_thumb_cache(final1);
-                
-            }
+        $("#rotate_btn_"+id).addClass('disabled');
+        $('#pro_img_att_'+id).attr('src', '<?php echo base_url('/');?>images/deal_place_load.gif').css('height','130px');
+        if(str == ''){
+            final1 = 'src=<?php echo base_url('/').'assets/products/images/';?>'+filename+'&w=190&h=130';
+            delete_thumb_cache(final1);
+        }else{
             
-            final = 'src=<?php echo base_url('/').'assets/products/images/';?>'+filename+'&w=190&h=130';
-            delete_thumb_cache(final);
+            final1 = 'src=<?php echo base_url('/').'assets/products/images/';?>'+filename+'&w=190&h=130&ed='+str;
+            delete_thumb_cache(final1);
+            
+        }
+        
+        final = 'src=<?php echo base_url('/').'assets/products/images/';?>'+filename+'&w=190&h=130';
+        delete_thumb_cache(final);
 
-            $.ajax({
-                type: 'get',
-                url: '<?php echo site_url('/').'my_images/rotate_trade/';?>'+angle+'/'+filename+'/'+str ,
-                success: function (data) {
-                    var obj = jQuery.parseJSON( data );
-                    $('#pro_img_att_'+id).attr('src', obj.src);
-                    $("#rotate_btn_"+id).attr("onclick", "rotate_img(90, '"+obj.new_filename+"', "+id+", '"+obj.old+"')").removeClass('disabled');
-                }
-            }); 
+        $.ajax({
+            type: 'get',
+            url: '<?php echo site_url('/').'my_images/rotate_trade/';?>'+angle+'/'+filename+'/'+str ,
+            success: function (data) {
+                var obj = jQuery.parseJSON( data );
+                $('#pro_img_att_'+id).attr('src', obj.src);
+                $("#rotate_btn_"+id).attr("onclick", "rotate_img(90, '"+obj.new_filename+"', "+id+", '"+obj.old+"')").removeClass('disabled');
+            }
+        });
+            
     }
         
     function delete_thumb_cache(str){
@@ -553,7 +554,7 @@ function back_to_1(){
                 
                 $.ajax({
                     type: 'get',
-                    url: '<?php echo base_url('/').'img/delete_thumb.php?';?>'+str ,
+                    url: '<?php echo base_url('/').'images/delete_thumb.php?';?>'+str ,
                     success: function (data) {
                         
                         $('#msg').html(data);
