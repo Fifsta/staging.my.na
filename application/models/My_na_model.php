@@ -636,7 +636,7 @@ class My_na_model extends CI_Model{
     //++++++++++++++++++++++++++++++++++++++++++++
 
 
-    function get_businesses($current = 0, $typestr ='', $auction = '')
+    function get_businesses($current = 0, $typestr ='', $auction = '', $selected = '')
     {
         $id = $this->session->userdata('id');
         //
@@ -650,6 +650,8 @@ class My_na_model extends CI_Model{
             $type ='sell/my_trade/';
 
         }
+
+        if($selected == 'Yes') { $sel = 'selected'; } else { $sel = ''; }
 
         $output = '';
         $c = false;

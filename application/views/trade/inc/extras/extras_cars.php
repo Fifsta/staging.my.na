@@ -27,10 +27,7 @@ function test_extras($existing, $extra, $product_id, $type)
                             echo $type;
 
                         }
-
-
                     }
-
                 }
 
             } else {
@@ -47,16 +44,13 @@ function test_extras($existing, $extra, $product_id, $type)
                         echo $type;
 
                     }
-
                 }
-
             }
-
-
         }
-
     }
 }
+
+
 
 //+++++++++++++++++++++++++++
 //TEST PRODUCT EXTRAS
@@ -78,14 +72,12 @@ function test_extras_output($existing, $extra, $product_id, $type)
                 echo $type;
 
             }
-
         }
-
-
     }
 }
 
 ?>
+
 
 <div class="control-group">
     <label class="control-label" for="year"><strong>Year</strong></label>
@@ -125,7 +117,7 @@ function test_extras_output($existing, $extra, $product_id, $type)
 
     <div class="controls">
 
-        <select name="doors" data-placeholder="Please Select" class="extra_slect">
+        <select name="doors" data-placeholder="Please Select" class="extra_slect" style="width:100%">
             <option value="" <?php test_extras($existing, 'Dont Know', $product_id, 'selected'); ?>>Don't Know</option>
             <option value="1 door" <?php test_extras($existing, '1 door', $product_id, 'selected'); ?>>1 door</option>
             <option value="2 door" <?php test_extras($existing, '2 door', $product_id, 'selected'); ?>>2 door</option>
@@ -144,7 +136,7 @@ function test_extras_output($existing, $extra, $product_id, $type)
     <label class="control-label" for="body_style"><strong>Body Style</strong></label>
 
     <div class="controls">
-        <select name="body_style" data-placeholder="Please Select" class="extra_slect">
+        <select name="body_style" data-placeholder="Please Select" class="extra_slect" style="width:100%">
             <option value="" <?php test_extras($existing, 'Dont know', $product_id, 'selected'); ?>>Don't Know</option>
             <option value="Convertible" <?php test_extras($existing, 'Convertible', $product_id, 'selected'); ?>>Convertible</option>
             <option value="Coupe" <?php test_extras($existing, 'Coupe', $product_id, 'selected'); ?>>Coupe</option>
@@ -165,7 +157,7 @@ function test_extras_output($existing, $extra, $product_id, $type)
     <label class="control-label" for="fuel_type"><strong>Fuel Type</strong></label>
 
     <div class="controls">
-        <select name="fuel_type" data-placeholder="Please Select" class="extra_slect">
+        <select name="fuel_type" data-placeholder="Please Select" class="extra_slect" style="width:100%">
             <option value="" <?php test_extras($existing, 'Dont know', $product_id, 'selected'); ?>>Don't Know</option>
             <option value="Petrol"  <?php test_extras($existing, 'Petrol', $product_id, 'selected'); ?>>Petrol</option>
             <option value="Diesel" <?php test_extras($existing, 'Diesel', $product_id, 'selected'); ?>>Diesel</option>
@@ -182,7 +174,7 @@ function test_extras_output($existing, $extra, $product_id, $type)
     <label class="control-label" for="cylinders"><strong>Cylinders</strong></label>
 
     <div class="controls">
-        <select name="cylinders" data-placeholder="Please Select" class="extra_slect">
+        <select name="cylinders" data-placeholder="Please Select" class="extra_slect" style="width:100%">
             <option selected="selected" value="">Don't Know</option>
             <option value="Rotary" <?php test_extras($existing, 'Rotary', $product_id, 'selected'); ?>>Rotary</option>
             <option value="4 cylinder" <?php test_extras($existing, '4 cylinder', $product_id, 'selected'); ?>>4 cylinder</option>
@@ -196,71 +188,60 @@ function test_extras_output($existing, $extra, $product_id, $type)
     </div>
 </div>
 <br>
+
 <div class="control-group">
-    <label class="control-label" for="engine_size">Engine Size</label>
-
+    <label class="control-label" for="engine_size"><strong>Engine Size</strong></label>
     <div class="controls">
-
-        <input class="form-control" type="text" name="engine_size"
-               value="<?php test_extras_output($existing['extras'], 'engine_size', $product_id, 'output'); ?>"
-               placeholder="Engine Size cc">
-                                                <span class="help-block" style="font-size:11px">
-                                                How much cubic capacity is the engine in cc</span>
+        <input class="form-control" type="text" name="engine_size" value="<?php test_extras_output($existing['extras'], 'engine_size', $product_id, 'output'); ?>" placeholder="Engine Size cc">
+        <span class="help-block" style="font-size:11px">How much cubic capacity is the engine in cc</span>
     </div>
 </div>
+<br>
+
 <div class="control-group">
-    <label class="control-label" for="transmission">Transmission</label>
+    <label class="control-label" for="transmission"><strong>Transmission</strong></label>
 
     <div class="controls">
-        <select name="transmission" data-placeholder="Please Select" class="extra_slect">
+        <select name="transmission" data-placeholder="Please Select" class="extra_slect" style="width:100%">
             <option value="" <?php test_extras($existing, 'Dont Know', $product_id, 'selected'); ?>>Dont Know</option>
             <option value="Manual" <?php test_extras($existing, 'Manual', $product_id, 'selected'); ?>>Manual</option>
-            <option value="Automatic" <?php test_extras($existing, 'Automatic', $product_id, 'selected'); ?>>Automatic
-            </option>
-            <option value="Tiptronic" <?php test_extras($existing, 'Tiptronic', $product_id, 'selected'); ?>>Tiptronic
-            </option>
-            <option value="Tiptronic" <?php test_extras($existing, '8 Speed Tiptronic', $product_id, 'selected'); ?>>8
-                Speed Tiptronic
-            </option>
-            <option value="S/tronic" <?php test_extras($existing, 'S/tronic', $product_id, 'selected'); ?>>S/tronic
-            </option>
-            <option value="M/tronic" <?php test_extras($existing, 'M/tronic', $product_id, 'selected'); ?>>M/tronic
-            </option>
+            <option value="Automatic" <?php test_extras($existing, 'Automatic', $product_id, 'selected'); ?>>Automatic</option>
+            <option value="Tiptronic" <?php test_extras($existing, 'Tiptronic', $product_id, 'selected'); ?>>Tiptronic</option>
+            <option value="Tiptronic" <?php test_extras($existing, '8 Speed Tiptronic', $product_id, 'selected'); ?>>8 Speed Tiptronic</option>
+            <option value="S/tronic" <?php test_extras($existing, 'S/tronic', $product_id, 'selected'); ?>>S/tronic</option>
+            <option value="M/tronic" <?php test_extras($existing, 'M/tronic', $product_id, 'selected'); ?>>M/tronic</option>
         </select>
         <span class="help-block" style="font-size:11px">What transmission is the vehicle</span>
     </div>
 </div>
-<div class="control-group">
-    <label class="control-label" for="4wd">4WD</label>
+<br>
 
+<div class="col-md-12">
+  <div class="form-check form-check-inline">
+      <input type="checkbox" class="form-check-input" name="4wd" value="4 Wheel Drive" <?php test_extras_output($existing['extras'], '4wd', $product_id, 'checked'); ?>>
+      <label class="form-check-label" for="4wd">4WD</label>
+  </div>
+  <br><span class="help-block" style="font-size:11px">Is the vehicle 4 Wheel Drive</span>
+</div>
+<br>
+
+<div class="control-group">
+    <label class="control-label" for="agency"><strong>Car Reference</strong></label>
     <div class="controls">
-        <input type="checkbox" name="4wd"
-               value="4 Wheel Drive" <?php test_extras_output($existing['extras'], '4wd', $product_id, 'checked'); ?>>
-               <span class="help-block" style="font-size:11px">Is the vehicle 4 Wheel Drive</span>
+        <input type="text" class="form-control" name="agency" value="<?php test_extras_output($existing['extras'], 'agency', $product_id, 'output'); ?>" placeholder="John Deere">
+        <span class="help-block" style="font-size:11px">Your unique car identification or SKU eg: #REF453</span>
     </div>
 </div>
-
-<div class="control-group">
-    <label class="control-label" for="agency">Car Reference</label>
-
-    <div class="controls">
-
-        <input type="text" class="form-control" name="agency"
-               value="<?php test_extras_output($existing['extras'], 'agency', $product_id, 'output'); ?>"
-               placeholder="John Deere">
-                                                                                        <span class="help-block"
-                                                                                              style="font-size:11px">
-                                                                                       Your unique car identification or SKU eg: #REF453</span>
-    </div>
-</div>
+<br>
 
 <?php //TEST IF ESTATE AGENT
 
 $agents = $this->trade_model->property_agents($bus_id, $existing['property_agent']);
 
 if ($agents != FALSE || $bus_id == 2706 || $bus_id == 2709 || $bus_id == 2666 || $bus_id == 5959 || $bus_id == 9120 || $bus_id == 4404 || $bus_id == 4608) { ?>
+
     <div class="control-group">
-        <label class="control-label" for="featured">Is the Car Featured</label>
+        <label class="control-label" for="featured"><strong>Is the Car Featured</strong></label>
 
         <div class="controls">
             <div class="btn-group" data-toggle="buttons-radio">
@@ -281,294 +262,118 @@ if ($agents != FALSE || $bus_id == 2706 || $bus_id == 2709 || $bus_id == 2666 ||
             } else {
                 echo $existing['featured'];
             }?>"/>
-            <span class="help-block"
-                  style="font-size:11px">Should the car be displayed as a featured vehicle?</span>
-
+            <span class="help-block" style="font-size:11px">Should the car be displayed as a featured vehicle?</span>
         </div>
     </div>
+    <br>
 
     <div class="control-group">
-        <label class="control-label" for="seller_contact">Internal Notes</label>
-
+        <label class="control-label" for="seller_contact"><strong>Internal Notes</strong></label>
         <div class="controls">
-            <textarea name="seller_contact" class="form-control" placeholder="Sellers Contact Details" cols="2"
-                      rows="4"><?php echo $existing['seller_contact'];?></textarea>
-                     <span class="help-block" style="font-size:11px">The sellers contact details and other notes. NB only for your Reference!</span>
+            <textarea name="seller_contact" class="form-control" placeholder="Sellers Contact Details" cols="2" rows="4"><?php echo $existing['seller_contact'];?></textarea>
+            <span class="help-block" style="font-size:11px">The sellers contact details and other notes. NB only for your Reference!</span>
         </div>
     </div>
-<?php
 
-}
+<?php } ?>
 
-
-?>
-
-
-<div class="control-group">
-    <label class="control-label" for="warranty">Warranty</label>
-
-    <div class="controls">
-        <input type="checkbox" name="warranty"
-               value="Warranty" <?php test_extras_output($existing['extras'], 'warranty', $product_id, 'checked'); ?>>
-                                                <span class="help-block" style="font-size:11px">
-                                               Does the vehicle come with a warranty</span>
-    </div>
+<div class="col-md-12">
+  <div class="form-check form-check-inline">
+      <input type="checkbox" class="form-check-input" name="warranty" value="Warranty" <?php test_extras_output($existing ,'warranty', $product_id,  'checked');?>>
+      <label class="form-check-label" for="warranty">Warranty</label>
+  </div>
+  <br><span class="help-block" style="font-size:11px">Does the vehicle come with a warranty</span>
 </div>
+<br>
+
 <div class="control-group">
     <label class="control-label" for="owners">New or Used</label>
 
     <div class="controls">
-        <select name="owners" data-placeholder="Please Select" class="extra_slect form-control">
+        <select name="owners" data-placeholder="Please Select" class="extra_slect" style="width:100%">
             <option selected="selected" value="">Don't Know</option>
             <option value="New" <?php test_extras($existing, 'New', $product_id, 'selected'); ?>>New</option>
-            <option value="1 owner" <?php test_extras($existing, '1 owner', $product_id, 'selected'); ?>>1 owner
-            </option>
-            <option value="2 owners" <?php test_extras($existing, '2 owners', $product_id, 'selected'); ?>>2 owners
-            </option>
-            <option value="3 owners" <?php test_extras($existing, '3 owners', $product_id, 'selected'); ?>>3 owners
-            </option>
-            <option value="4 owners" <?php test_extras($existing, '4 owners', $product_id, 'selected'); ?>>4 owners
-            </option>
-            <option
-                value="5 owners or more" <?php test_extras($existing, '5 owners or more', $product_id, 'selected'); ?>>5
-                owners or more
-            </option>
+            <option value="1 owner" <?php test_extras($existing, '1 owner', $product_id, 'selected'); ?>>1 owner</option>
+            <option value="2 owners" <?php test_extras($existing, '2 owners', $product_id, 'selected'); ?>>2 owners</option>
+            <option value="3 owners" <?php test_extras($existing, '3 owners', $product_id, 'selected'); ?>>3 owners</option>
+            <option value="4 owners" <?php test_extras($existing, '4 owners', $product_id, 'selected'); ?>>4 owners</option>
+            <option value="5 owners or more" <?php test_extras($existing, '5 owners or more', $product_id, 'selected'); ?>>5 owners or more </option>
         </select>
-                                                <span class="help-block" style="font-size:11px">
-                                               How many people have owned the vehicle or is it New</span>
+        <span class="help-block" style="font-size:11px"> How many people have owned the vehicle or is it New</span>
     </div>
 </div>
+<br>
+
 <div class="control-group">
     <label class="control-label" for="features">Features</label>
 
     <div class="controls">
-        <select name="features[]" data-placeholder="Please Select" class="extra_slect form-control" multiple="" size="6">
+        <select name="features[]" data-placeholder="Please Select" class="extra_slect" multiple="" size="6" style="width:100%">
 
-            <option
-                value="ABS brakes" <?php test_extras($existing['extras'], 'ABS brakes', $product_id, 'selected'); ?>>ABS
-                brakes
-            </option>
-            <option
-                value="Air conditioning" <?php test_extras($existing['extras'], 'Air conditioning', $product_id, 'selected'); ?>>
-                Air conditioning
-            </option>
-            <option
-                value="Alloy wheels" <?php test_extras($existing['extras'], 'Alloy wheels', $product_id, 'selected'); ?>>
-                Alloy wheels
-            </option>
-            <option
-                value="Central locking" <?php test_extras($existing['extras'], 'Central locking', $product_id, 'selected'); ?>>
-                Central locking
-            </option>
-            <option
-                value="Driver airbag" <?php test_extras($existing['extras'], 'Driver airbag', $product_id, 'selected'); ?>>
-                Driver airbag
-            </option>
-            <option
-                value="Passenger airbag" <?php test_extras($existing['extras'], 'Passenger airbag', $product_id, 'selected'); ?>>
-                Passenger airbag
-            </option>
-            <option
-                value="Passenger airbag" <?php test_extras($existing['extras'], 'Curtain Airbags', $product_id, 'selected'); ?>>
-                Curtain Airbags
-            </option>
-            <option value="Sunroof" <?php test_extras($existing['extras'], 'Sunroof', $product_id, 'selected'); ?>>
-                Sunroof
-            </option>
-            <option
-                value="Power steering" <?php test_extras($existing['extras'], 'Power Steering', $product_id, 'selected'); ?>>
-                Power steering
-            </option>
-            <option value="Towbar" <?php test_extras($existing['extras'], 'Towbar', $product_id, 'selected'); ?>>
-                Towbar
-            </option>
-            <option value="Alarm" <?php test_extras($existing['extras'], 'Alarm', $product_id, 'selected'); ?>>Alarm
-            </option>
+            <option value="ABS brakes" <?php test_extras($existing['extras'], 'ABS brakes', $product_id, 'selected'); ?>>ABS brakes</option>
+            <option value="Air conditioning" <?php test_extras($existing['extras'], 'Air conditioning', $product_id, 'selected'); ?>>Air conditioning</option>
+            <option value="Alloy wheels" <?php test_extras($existing['extras'], 'Alloy wheels', $product_id, 'selected'); ?>>Alloy wheels</option>
+            <option value="Central locking" <?php test_extras($existing['extras'], 'Central locking', $product_id, 'selected'); ?>>Central locking</option>
+            <option value="Driver airbag" <?php test_extras($existing['extras'], 'Driver airbag', $product_id, 'selected'); ?>>Driver airbag</option>
+            <option value="Passenger airbag" <?php test_extras($existing['extras'], 'Passenger airbag', $product_id, 'selected'); ?>>Passenger airbag</option>
+            <option value="Passenger airbag" <?php test_extras($existing['extras'], 'Curtain Airbags', $product_id, 'selected'); ?>>Curtain Airbags</option>
+            <option value="Sunroof" <?php test_extras($existing['extras'], 'Sunroof', $product_id, 'selected'); ?>>Sunroof</option>
+            <option value="Power steering" <?php test_extras($existing['extras'], 'Power Steering', $product_id, 'selected'); ?>>Power steering</option>
+            <option value="Towbar" <?php test_extras($existing['extras'], 'Towbar', $product_id, 'selected'); ?>>Towbar</option>
+            <option value="Alarm" <?php test_extras($existing['extras'], 'Alarm', $product_id, 'selected'); ?>>Alarm</option>
             <option value="PDC" <?php test_extras($existing['extras'], 'PDC', $product_id, 'selected'); ?>>PDC</option>
-            <option value="TPMS" <?php test_extras($existing['extras'], 'TPMS', $product_id, 'selected'); ?>>TPMS
-            </option>
-            <option
-                value="Xenon Lights" <?php test_extras($existing['extras'], 'Xenon Lights', $product_id, 'selected'); ?>>
-                Xenon Lights
-            </option>
-            <option
-                value="Navigation System" <?php test_extras($existing['extras'], 'Navigation System', $product_id, 'selected'); ?>>
-                Navigation System
-            </option>
-            <option
-                value="Leather Seats" <?php test_extras($existing['extras'], 'Leather Seats', $product_id, 'selected'); ?>>
-                Leather Seats
-            </option>
-            <option
-                value="CD Changer" <?php test_extras($existing['extras'], 'CD Changer', $product_id, 'selected'); ?>>CD
-                Changer
-            </option>
-            <option
-                value="Climate Control" <?php test_extras($existing['extras'], 'Climate Control', $product_id, 'selected'); ?>>
-                Climate Control
-            </option>
-            <option
-                value="Cruise Control" <?php test_extras($existing['extras'], 'Cruise Control', $product_id, 'selected'); ?>>
-                Cruise Control
-            </option>
-            <option
-                value="Electronic Stability Control" <?php test_extras($existing['extras'], 'Electronic Stability Control', $product_id, 'selected'); ?>>
-                Electronic Stability Control
-            </option>
-            <option
-                value="Multi Function Steering" <?php test_extras($existing['extras'], 'Multi Function Steering', $product_id, 'selected'); ?>>
-                Multi Function Steering
-            </option>
-            <option value="Fog Lamps" <?php test_extras($existing['extras'], 'Fog Lamps', $product_id, 'selected'); ?>>
-                Fog Lamps
-            </option>
-            <option
-                value="Electric Seats" <?php test_extras($existing['extras'], 'Electric Seats', $product_id, 'selected'); ?>>
-                Electric Seats
-            </option>
-            <option
-                value="Rear Diff Lock" <?php test_extras($existing['extras'], 'Rear Diff Lock', $product_id, 'selected'); ?>>
-                Rear Diff Lock
-            </option>
-            <option
-                value="Adaptive Cruise Control" <?php test_extras($existing['extras'], 'Adaptive Cruise Control', $product_id, 'selected'); ?>>
-                Adaptive Cruise Control
-            </option>
-            <option
-                value="Keyless Entry" <?php test_extras($existing['extras'], 'Keyless Entry', $product_id, 'selected'); ?>>
-                Keyless Entry
-            </option>
-            <option
-                value="Rear Mount Spare" <?php test_extras($existing['extras'], 'Rear Mount Spare', $product_id, 'selected'); ?>>
-                Rear Mount Spare
-            </option>
-            <option
-                value="Bang Olufsen Sound" <?php test_extras($existing['extras'], 'Bang Olufsen Sound', $product_id, 'selected'); ?>>
-                Bang Olufsen Sound
-            </option>
-            <option
-                value="Blue Tooth" <?php test_extras($existing['extras'], 'Blue Tooth', $product_id, 'selected'); ?>>
-                Blue Tooth
-            </option>
-            <option
-                value="3 Row Seats" <?php test_extras($existing['extras'], '3 Row Seats', $product_id, 'selected'); ?>>3
-                Row Seats
-            </option>
-            <option
-                value="Sport Pack" <?php test_extras($existing['extras'], 'Sport Pack', $product_id, 'selected'); ?>>
-                Sport Pack
-            </option>
-            <option
-                value="Full Spare Wheel" <?php test_extras($existing['extras'], 'Full Spare Wheel', $product_id, 'selected'); ?>>
-                Full Spare Wheel
-            </option>
-            <option value="Bull Bar" <?php test_extras($existing['extras'], 'Bull Bar', $product_id, 'selected'); ?>>
-                Bull Bar
-            </option>
-            <option value="Tow Bar" <?php test_extras($existing['extras'], 'Tow Bar', $product_id, 'selected'); ?>>Tow
-                Bar
-            </option>
-            <option value="Canopy" <?php test_extras($existing['extras'], 'Canopy', $product_id, 'selected'); ?>>
-                Canopy
-            </option>
-            <option
-                value="Spotlights" <?php test_extras($existing['extras'], 'Spotlights', $product_id, 'selected'); ?>>
-                Spotlights
-            </option>
-            <option value="IPOP Kit" <?php test_extras($existing['extras'], 'IPOP Kit', $product_id, 'selected'); ?>>
-                IPOP Kit
-            </option>
-            <option value="Mud Flaps" <?php test_extras($existing['extras'], 'Mud Flaps', $product_id, 'selected'); ?>>
-                Mud Flaps
-            </option>
-            <option value="Nudge Bar" <?php test_extras($existing['extras'], 'Nudge Bar', $product_id, 'selected'); ?>>
-                Nudge Bar
-            </option>
-            <option
-                value="Running Boards" <?php test_extras($existing['extras'], 'Running Boards', $product_id, 'selected'); ?>>
-                Running Boards
-            </option>
-            <option value="Tralies" <?php test_extras($existing['extras'], 'Tralies', $product_id, 'selected'); ?>>
-                Tralies
-            </option>
-            <option
-                value="Tinted Windows" <?php test_extras($existing['extras'], 'Tinted Windows', $product_id, 'selected'); ?>>
-                Tinted Windows
-            </option>
-            <option
-                value="After Market Bumper" <?php test_extras($existing['extras'], 'After Market Bumper', $product_id, 'selected'); ?>>
-                After Market Bumper
-            </option>
-            <option
-                value="Auto Armor" <?php test_extras($existing['extras'], 'Auto Armor', $product_id, 'selected'); ?>>
-                Auto Armor
-            </option>
+            <option value="TPMS" <?php test_extras($existing['extras'], 'TPMS', $product_id, 'selected'); ?>>TPMS</option>
+            <option value="Xenon Lights" <?php test_extras($existing['extras'], 'Xenon Lights', $product_id, 'selected'); ?>>Xenon Lights</option>
+            <option value="Navigation System" <?php test_extras($existing['extras'], 'Navigation System', $product_id, 'selected'); ?>>Navigation System</option>
+            <option value="Leather Seats" <?php test_extras($existing['extras'], 'Leather Seats', $product_id, 'selected'); ?>>Leather Seats</option>
+            <option value="CD Changer" <?php test_extras($existing['extras'], 'CD Changer', $product_id, 'selected'); ?>>CD Changer</option>
+            <option value="Climate Control" <?php test_extras($existing['extras'], 'Climate Control', $product_id, 'selected'); ?>>Climate Control</option>
+            <option value="Cruise Control" <?php test_extras($existing['extras'], 'Cruise Control', $product_id, 'selected'); ?>>Cruise Control</option>
+            <option value="Electronic Stability Control" <?php test_extras($existing['extras'], 'Electronic Stability Control', $product_id, 'selected'); ?>>Electronic Stability Control</option>
+            <option value="Multi Function Steering" <?php test_extras($existing['extras'], 'Multi Function Steering', $product_id, 'selected'); ?>>Multi Function Steering</option>
+            <option value="Fog Lamps" <?php test_extras($existing['extras'], 'Fog Lamps', $product_id, 'selected'); ?>>Fog Lamps</option>
+            <option value="Electric Seats" <?php test_extras($existing['extras'], 'Electric Seats', $product_id, 'selected'); ?>>Electric Seats</option>
+            <option value="Rear Diff Lock" <?php test_extras($existing['extras'], 'Rear Diff Lock', $product_id, 'selected'); ?>>Rear Diff Lock</option>
+            <option value="Adaptive Cruise Control" <?php test_extras($existing['extras'], 'Adaptive Cruise Control', $product_id, 'selected'); ?>>Adaptive Cruise Control</option>
+            <option value="Keyless Entry" <?php test_extras($existing['extras'], 'Keyless Entry', $product_id, 'selected'); ?>>Keyless Entry</option>
+            <option value="Rear Mount Spare" <?php test_extras($existing['extras'], 'Rear Mount Spare', $product_id, 'selected'); ?>>Rear Mount Spare</option>
+            <option value="Bang Olufsen Sound" <?php test_extras($existing['extras'], 'Bang Olufsen Sound', $product_id, 'selected'); ?>>Bang Olufsen Sound</option>
+            <option value="Blue Tooth" <?php test_extras($existing['extras'], 'Blue Tooth', $product_id, 'selected'); ?>>Blue Tooth</option>
+            <option value="3 Row Seats" <?php test_extras($existing['extras'], '3 Row Seats', $product_id, 'selected'); ?>>3 Row Seats</option>
+            <option value="Sport Pack" <?php test_extras($existing['extras'], 'Sport Pack', $product_id, 'selected'); ?>>Sport Pack</option>
+            <option value="Full Spare Wheel" <?php test_extras($existing['extras'], 'Full Spare Wheel', $product_id, 'selected'); ?>>Full Spare Wheel</option>
+            <option value="Bull Bar" <?php test_extras($existing['extras'], 'Bull Bar', $product_id, 'selected'); ?>>Bull Bar</option>
+            <option value="Tow Bar" <?php test_extras($existing['extras'], 'Tow Bar', $product_id, 'selected'); ?>>Tow Bar</option>
+            <option value="Canopy" <?php test_extras($existing['extras'], 'Canopy', $product_id, 'selected'); ?>>Canopy</option>
+            <option value="Spotlights" <?php test_extras($existing['extras'], 'Spotlights', $product_id, 'selected'); ?>>Spotlights</option>
+            <option value="IPOP Kit" <?php test_extras($existing['extras'], 'IPOP Kit', $product_id, 'selected'); ?>>IPOP Kit</option>
+            <option value="Mud Flaps" <?php test_extras($existing['extras'], 'Mud Flaps', $product_id, 'selected'); ?>>Mud Flaps</option>
+            <option value="Nudge Bar" <?php test_extras($existing['extras'], 'Nudge Bar', $product_id, 'selected'); ?>>Nudge Bar</option>
+            <option value="Running Boards" <?php test_extras($existing['extras'], 'Running Boards', $product_id, 'selected'); ?>>Running Boards</option>
+            <option value="Tralies" <?php test_extras($existing['extras'], 'Tralies', $product_id, 'selected'); ?>>Tralies</option>
+            <option value="Tinted Windows" <?php test_extras($existing['extras'], 'Tinted Windows', $product_id, 'selected'); ?>>Tinted Windows</option>
+            <option value="After Market Bumper" <?php test_extras($existing['extras'], 'After Market Bumper', $product_id, 'selected'); ?>>After Market Bumper</option>
+            <option value="Auto Armor" <?php test_extras($existing['extras'], 'Auto Armor', $product_id, 'selected'); ?>>Auto Armor</option>
             <option value="VPS" <?php test_extras($existing['extras'], 'VPS', $product_id, 'selected'); ?>>VPS</option>
-            <option
-                value="Park Assist" <?php test_extras($existing['extras'], 'Park Assist', $product_id, 'selected'); ?>>
-                Park Assist
-            </option>
-            <option
-                value="Keyless Start" <?php test_extras($existing['extras'], 'Keyless Start', $product_id, 'selected'); ?>>
-                Keyless Start
-            </option>
-            <option
-                value="Front Camera" <?php test_extras($existing['extras'], 'Front Camera', $product_id, 'selected'); ?>>
-                Front Camera
-            </option>
-            <option
-                value="Rear Camera" <?php test_extras($existing['extras'], 'Rear Camera', $product_id, 'selected'); ?>>
-                Rear Camera
-            </option>
-            <option
-                value="After Market Bumper" <?php test_extras($existing['extras'], 'After Market Bumper', $product_id, 'selected'); ?>>
-                After Market Bumper
-            </option>
-
-            <option
-                value="EBD Electronic Brake-Pressure Distribution" <?php test_extras($existing['extras'], 'EBD Electronic Brake-Pressure Distribution', $product_id, 'selected'); ?>>
-                EBD Electronic Brake-Pressure Distribution
-            </option>
-            <option
-                value="ESP Electronic Stability Programme" <?php test_extras($existing['extras'], 'ESP Electronic Stability Programme', $product_id, 'selected'); ?>>
-                ESP Electronic Stability Programme
-            </option>
-            <option
-                value="ASR Anti Spin Regulation" <?php test_extras($existing['extras'], 'ASR Anti Spin Regulation', $product_id, 'selected'); ?>>
-                ASR Anti Spin Regulation
-            </option>
-            <option
-                value="EDL Electronic Differential lock" <?php test_extras($existing['extras'], 'EDL Electronic Differential lock', $product_id, 'selected'); ?>>
-                EDL Electronic Differential lock
-            </option>
-            <option
-                value="Disc Brakes" <?php test_extras($existing['extras'], 'Disc Brakes', $product_id, 'selected'); ?>>
-                Disc Brakes
-            </option>
-            <option
-                value="Keyless Access" <?php test_extras($existing['extras'], 'Keyless Access', $product_id, 'selected'); ?>>
-                Keyless Access
-            </option>
-            <option
-                value="Bluemotion Technology" <?php test_extras($existing['extras'], 'Bluemotion Technology', $product_id, 'selected'); ?>>
-                Bluemotion Technology
-            </option>
-            <option
-                value="Climate Control" <?php test_extras($existing['extras'], 'Climate Control', $product_id, 'selected'); ?>>
-                Climate Control
-            </option>
-            <option
-                value="Sport Seats" <?php test_extras($existing['extras'], 'Sport Seats', $product_id, 'selected'); ?>>
-                Sport Seats
-            </option>
-        </select>
-												
-                                                <span class="help-block" style="font-size:11px">
-                                               Please select additional features</span>
-
+            <option value="Park Assist" <?php test_extras($existing['extras'], 'Park Assist', $product_id, 'selected'); ?>>Park Assist</option>
+            <option value="Keyless Start" <?php test_extras($existing['extras'], 'Keyless Start', $product_id, 'selected'); ?>>Keyless Start</option>
+            <option value="Front Camera" <?php test_extras($existing['extras'], 'Front Camera', $product_id, 'selected'); ?>>Front Camera</option>
+            <option value="Rear Camera" <?php test_extras($existing['extras'], 'Rear Camera', $product_id, 'selected'); ?>>Rear Camera</option>
+            <option value="After Market Bumper" <?php test_extras($existing['extras'], 'After Market Bumper', $product_id, 'selected'); ?>>After Market Bumper</option>
+            <option value="EBD Electronic Brake-Pressure Distribution" <?php test_extras($existing['extras'], 'EBD Electronic Brake-Pressure Distribution', $product_id, 'selected'); ?>>EBD Electronic Brake-Pressure Distribution</option>
+            <option value="ESP Electronic Stability Programme" <?php test_extras($existing['extras'], 'ESP Electronic Stability Programme', $product_id, 'selected'); ?>>ESP Electronic Stability Programme</option>
+            <option value="ASR Anti Spin Regulation" <?php test_extras($existing['extras'], 'ASR Anti Spin Regulation', $product_id, 'selected'); ?>>ASR Anti Spin Regulation</option>
+            <option value="EDL Electronic Differential lock" <?php test_extras($existing['extras'], 'EDL Electronic Differential lock', $product_id, 'selected'); ?>>EDL Electronic Differential lock</option>
+            <option value="Disc Brakes" <?php test_extras($existing['extras'], 'Disc Brakes', $product_id, 'selected'); ?>>Disc Brakes</option>
+            <option value="Keyless Access" <?php test_extras($existing['extras'], 'Keyless Access', $product_id, 'selected'); ?>>Keyless Access</option>
+            <option value="Bluemotion Technology" <?php test_extras($existing['extras'], 'Bluemotion Technology', $product_id, 'selected'); ?>>Bluemotion Technology</option>
+            <option value="Climate Control" <?php test_extras($existing['extras'], 'Climate Control', $product_id, 'selected'); ?>>Climate Control</option>
+            <option value="Sport Seats" <?php test_extras($existing['extras'], 'Sport Seats', $product_id, 'selected'); ?>>Sport Seats</option>
+        </select>					
+        <span class="help-block" style="font-size:11px">Please select additional features</span>
     </div>
 </div>
-
+<br>
 
 <?php //CAR FEATUIRED
 if ($bus_id == 2706 || $bus_id == 2709 || $bus_id == 2666 || $bus_id == 5959 || $bus_id == 9120 || $bus_id == 4404 || $bus_id == 4608) {
@@ -605,163 +410,72 @@ if ($bus_id == 2706 || $bus_id == 2709 || $bus_id == 2666 || $bus_id == 5959 || 
 
 <?php //TEST IF AUTOHAUS - SHOW SPECIFICS
 
-if ($bus_id == 2666) {
-    ?>
-
+if ($bus_id == 2666) { ?>
 
     <div class="control-group">
-        <label class="control-label" for="autohaus">Autohaus Windhoek</label>
+        <label class="control-label" for="autohaus"><strong>Autohaus Windhoek</strong></label>
 
         <div class="controls">
-            <select name="autohaus[]" data-placeholder="Please Select" class="extra_slect form-control" multiple="" size="6">
-
-                <option
-                    value="Mastercars" <?php test_extras($existing['extras'], 'Mastercars', $product_id, 'selected');?>>
-                    Mastercars
-                </option>
-                <option
-                    value="Audi Pre-owned" <?php test_extras($existing['extras'], 'Audi Pre-owned', $product_id, 'selected');?>>
-                    Audi Pre-owned
-                </option>
-                <option value="Used" <?php test_extras($existing['extras'], 'Used', $product_id, 'selected');?>>Used
-                </option>
-                <option
-                    value="Factory Warranty" <?php test_extras($existing['extras'], 'Factory Warranty', $product_id, 'selected');?>>
-                    Factory Warranty
-                </option>
-                <option
-                    value="Service Plan" <?php test_extras($existing['extras'], 'Service Plan', $product_id, 'selected');?>>
-                    Service Plan
-                </option>
-                <option
-                    value="Motor Plan" <?php test_extras($existing['extras'], 'Motor Plan', $product_id, 'selected');?>>
-                    Motor Plan
-                </option>
-                <option value="Motorite" <?php test_extras($existing['extras'], 'Motorite', $product_id, 'selected');?>>
-                    Motorite
-                </option>
-                <option
-                    value="Optimum Warranty" <?php test_extras($existing['extras'], 'Optimum Warranty', $product_id, 'selected');?>>
-                    Optimum Warranty
-                </option>
-                <option
-                    value="Remainder of Service Plan" <?php test_extras($existing['extras'], 'Remainder of Service Plan', $product_id, 'selected');?>>
-                    Remainder of Service Plan
-                </option>
-                <option
-                    value="Remainder of Motor Plan" <?php test_extras($existing['extras'], 'Remainder of Motor Plan', $product_id, 'selected');?>>
-                    Remainder of Motor Plan
-                </option>
-                <option
-                    value="3-Year 120 000km Warranty" <?php test_extras($existing['extras'], '3-Year 120 000km Warranty', $product_id, 'selected');?>>
-                    3-Year 120 000km Warranty
-                </option>
-                <option
-                    value="12 Year Anti-Corrosion Warranty" <?php test_extras($existing['extras'], '12 Year Anti-Corrosion Warranty', $product_id, 'selected');?>>
-                    12 Year Anti-Corrosion Warranty
-                </option>
-                <option
-                    value="15 000 Service Intervals" <?php test_extras($existing['extras'], '15 000 Service Intervals', $product_id, 'selected');?>>
-                    15 000 Service Intervals
-                </option>
-                <option
-                    value="5-Year 100 000km AutoMotion Maintenance Plan" <?php test_extras($existing['extras'], '5-Year 100 000km AutoMotion Maintenance Plan', $product_id, 'selected');?>>
-                    5-Year 100 000km AutoMotion Maintenance Plan
-                </option>
-                <option
-                    value="3-Year 90 000km AutoMotion Maintenance Plan" <?php test_extras($existing['extras'], '3-Year 90 000km AutoMotion Maintenance Plan', $product_id, 'selected');?>>
-                    3-Year 90 000km AutoMotion Maintenance Plan
-                </option>
+            <select name="autohaus[]" data-placeholder="Please Select" class="extra_slect" multiple="" size="6" style="width:100%">
+                <option value="Mastercars" <?php test_extras($existing['extras'], 'Mastercars', $product_id, 'selected');?>>Mastercars</option>
+                <option value="Audi Pre-owned" <?php test_extras($existing['extras'], 'Audi Pre-owned', $product_id, 'selected');?>>Audi Pre-owned</option>
+                <option value="Used" <?php test_extras($existing['extras'], 'Used', $product_id, 'selected');?>>Used</option>
+                <option va value="Service Plan" <?php test_extras($existing['extras'], 'Service Plan', $product_id, 'selected');?>>Service Plan</option>
+                <option value="Motor Plan" <?php test_extras($existing['extras'], 'Motor Plan', $product_id, 'selected');?>>Motor Plan</option>
+                <option value="Motorite" <?php test_extras($existing['extras'], 'Motorite', $product_id, 'selected');?>>Motorite</option>
+                <option value="Optimum Warranty" <?php test_extras($existing['extras'], 'Optimum Warranty', $product_id, 'selected');?>>Optimum Warranty</option>
+                <option value="Remainder of Service Plan" <?php test_extras($existing['extras'], 'Remainder of Service Plan', $product_id, 'selected');?>>Remainder of Service Plan</option>
+                <option value="Remainder of Motor Plan" <?php test_extras($existing['extras'], 'Remainder of Motor Plan', $product_id, 'selected');?>>Remainder of Motor Plan</option>
+                <option value="3-Year 120 000km Warranty" <?php test_extras($existing['extras'], '3-Year 120 000km Warranty', $product_id, 'selected');?>>3-Year 120 000km Warranty</option>
+                <option value="12 Year Anti-Corrosion Warranty" <?php test_extras($existing['extras'], '12 Year Anti-Corrosion Warranty', $product_id, 'selected');?>>12 Year Anti-Corrosion Warranty</option>
+                <option value="15 000 Service Intervals" <?php test_extras($existing['extras'], '15 000 Service Intervals', $product_id, 'selected');?>>15 000 Service Intervals</option>
+                <option value="5-Year 100 000km AutoMotion Maintenance Plan" <?php test_extras($existing['extras'], '5-Year 100 000km AutoMotion Maintenance Plan', $product_id, 'selected');?>>5-Year 100 000km AutoMotion Maintenance Plan</option>
+                <option value="3-Year 90 000km AutoMotion Maintenance Plan" <?php test_extras($existing['extras'], '3-Year 90 000km AutoMotion Maintenance Plan', $product_id, 'selected');?>>3-Year 90 000km AutoMotion Maintenance Plan</option>
             </select>
                                                     
-                                                    <span class="help-block" style="font-size:11px">
-                                                   Please select specific Autohaus Windhoek features</span>
+            <span class="help-block" style="font-size:11px">Please select specific Autohaus Windhoek features</span>
 
         </div>
     </div>
 
-<?php
-}
-
-?>
+<?php } ?>
 
 <?php //TEST IF M+Z MOTORS - SHOW SPECIFICS
 
-if ($bus_id == 2706 || $bus_id == 2709 || $bus_id == 4274 || $bus_id == 9333) {
-    ?>
-
+if ($bus_id == 2706 || $bus_id == 2709 || $bus_id == 4274 || $bus_id == 9333) { ?>
 
     <div class="control-group">
-        <label class="control-label" for="mz_motors ">M+Z Motors</label>
+        <label class="control-label" for="mz_motors "><strong>M+Z Motors</strong></label>
 
         <div class="controls">
-            <select name="mz_motors[]" data-placeholder="Please Select" class="extra_slect form-control" multiple="" size="6">
-
-                <option
-                    value="Certified_pre_owned" <?php test_extras($existing['extras'], 'Certified_pre_owned', $product_id, 'selected');?>>
-                    Certfified Pre-Owned
-                </option>
-                <!--<option
-                    value="Commercial" <?php /*test_extras($existing['extras'], 'Commercial', $product_id, 'selected');*/?>>
-                    Commercial Vehicle
-                </option>-->
-                <option
-                    value="Pre_owned" <?php test_extras($existing['extras'], 'Pre_owned', $product_id, 'selected');?>>
-                    Pre-Owned
-                </option>
-                <option
-                    value="New_demo" <?php test_extras($existing['extras'], 'New_demo', $product_id, 'selected');?>>
-                    New / Demo
-                </option>
-            </select>
-                                                    
-            <span class="help-block" style="font-size:11px">
-           Please select specific M+Z features</span>
-
+            <select name="mz_motors[]" data-placeholder="Please Select" class="extra_slect" multiple="" size="6" style="width:100%">
+                <option value="Certified_pre_owned" <?php test_extras($existing['extras'], 'Certified_pre_owned', $product_id, 'selected');?>>Certfified Pre-Owned</option>
+                <option value="Pre_owned" <?php test_extras($existing['extras'], 'Pre_owned', $product_id, 'selected');?>>Pre-Owned</option>
+                <option value="New_demo" <?php test_extras($existing['extras'], 'New_demo', $product_id, 'selected');?>>New / Demo</option>
+            </select>                          
+            <span class="help-block" style="font-size:11px">Please select specific M+Z features</span>
         </div>
     </div>
 
-<?php
-}
-
-?>
+<?php } ?>
 
 <?php //TEST IF SPES BONA
 
-if ($bus_id == 4608) {
-    ?>
-
+if ($bus_id == 4608) {  ?>
 
     <div class="control-group">
-        <label class="control-label" for="spes_bona">Spes Bona</label>
+        <label class="control-label" for="spes_bona"><strong>Spes Bona</strong></label>
 
         <div class="controls">
-            <select name="spes_bona[]" data-placeholder="Please Select" class="extra_slect form-control" multiple="" size="6">
-
-                <option
-                    value="Certified_pre_owned" <?php test_extras($existing['extras'], 'Certified_pre_owned', $product_id, 'selected');?>>
-                    Certfified Pre-Owned
-                </option>
-                <option value="Platinum" <?php test_extras($existing['extras'], 'Platinum', $product_id, 'selected');?>>
-                    Platinum
-                </option>
-
-            </select>
-                                                    
-                                                    <span class="help-block" style="font-size:11px">
-                                                   Please select specific Spes Bona features</span>
-
+            <select name="spes_bona[]" data-placeholder="Please Select" class="extra_slect" multiple="" size="6" style="width:100%">
+                <option value="Certified_pre_owned" <?php test_extras($existing['extras'], 'Certified_pre_owned', $product_id, 'selected');?>>Certfified Pre-Owned</option>
+                <option value="Platinum" <?php test_extras($existing['extras'], 'Platinum', $product_id, 'selected');?>>Platinum</option>
+            </select>                                  
+            <span class="help-block" style="font-size:11px">Please select specific Spes Bona features</span>
         </div>
     </div>
 
-<?php
-}
-
-
-
-
-?>
-
+<?php } ?>
 
 <script type="text/javascript">
 
@@ -772,4 +486,5 @@ if ($bus_id == 4608) {
 
 
     }
+
 </script>

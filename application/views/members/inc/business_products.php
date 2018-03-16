@@ -4,8 +4,9 @@
         <h4>Listings<small> Your current Products items</small></h4>
       </div>
 
-      <div class="clearfix" style="height:20px"></div>
-      <table cellpadding="0" cellspacing="0" style="font-size:12px" border="0" id="product_table" class="table table-striped datatable" id="" width="100%">
+
+      
+      <table id="product_table" class="table datatable table-striped" id="" style="width:100%">
         <thead>
           <tr style="font-weight:bold">
             <th style=""></th>
@@ -61,22 +62,6 @@
               
             }
             
-            if($row->is_active == 'Y'){
-              if($bus_id != 0){
-                $active = '<a onclick="activate_product('.$row->product_id.', '. "'N'".');" id="act_'.$row->product_id.'" class="btn btn-mini btn-success" title="Product is live - click to deactivate" rel="tooltip"><i class="icon-play icon-white"></i></a>';
-              }else{
-                
-                $active = '<a class="btn btn-mini btn-success" title="Product is live" id="act_'.$row->product_id.'" rel="tooltip"><i class="icon-play icon-white"></i></a>';
-              }
-            }else{
-              if($bus_id != 0){
-                $active = '<a onclick="activate_product('.$row->product_id.', '. "'Y'".');" id="act_'.$row->product_id.'" class="btn btn-mini btn-warning" title="Not approved - Click to make it live" rel="tooltip"><i class="icon-pause icon-white"></i></a>';
-              }else{
-                
-                $active = '<a class="btn btn-mini btn-warning" id="act_'.$row->product_id.'" title="Not approved" rel="tooltip"><i class="icon-pause icon-white"></i></a>';
-              }
-            }
-            $extend = '';
 
             echo '
               <tr>
@@ -93,5 +78,121 @@
 
         ?> 
         </tbody>
-      </table>  
-</div>               
+      </table>
+
+      </div>  
+
+
+        <script type="text/javascript">
+
+          function update_product(id){
+  
+              var cont = $("#admin_content");
+              $.get("'.site_url('/'). 'trade/update_product/"+id, function(data) {
+                    cont.removeClass("loading_img").html(data);
+                    
+              });
+              
+          }
+          function get_questions(id){
+
+                            var cont = $("#admin_content");
+              $.get("'.site_url('/'). 'trade/product_questions/"+id, function(data) {
+                    cont.removeClass("loading_img").html(data);
+
+
+              });
+
+          }
+          function review_participant(id){
+
+              var cont = $("#modal-review-participant > .modal-body");
+              $.get("'.site_url('/'). 'trade/review_participant/"+id, function(data) {
+
+
+                                    $("#modal-review-participant").appendTo("body").unbind("show").bind("show", function()  {
+
+                                        cont.removeClass("loading_img").html(data);
+
+                                    }).modal({ backdrop: true });
+
+              });
+
+          }
+          function update_product_status(id, str){
+
+            var cont = $("#admin_content");
+            cont.addClass("loading_img").css("background-color","white");  
+            $.ajax({
+                type: "get",
+                cache: false,
+                url: "'.site_url('/').'trade/update_product_status/"+id+"/"+str ,
+                success: function (data) {
+                  cont.removeClass("loading_img"); 
+                  cont.html(data);  
+                   window.setInterval(window.location.reload(), 1500);
+                }
+              });  
+            
+          }
+          function extend_product(id, type){
+
+            var cont = $("#admin_content");
+
+            cont.addClass("loading_img").css("background-color","white");
+            $.ajax({
+                type: "get",
+                cache: false,
+                url: "'.site_url('/').'trade/extend_product_status/"+id+"/"+type ,
+                success: function (data) {
+                  //cont.removeClass("loading_img");
+                  //cont.html(data);
+                   window.setInterval(window.location.reload(), 1500);
+                  cont.removeClass("loading_img");
+                }
+              });
+
+          }
+
+          function activate_product(id, str){
+
+            var cont = $("#admin_content");
+
+            cont.addClass("loading_img").css("background-color","white");
+            $.ajax({
+                type: "get",
+                cache: false,
+                url: "'.site_url('/').'trade/activate_product_status/"+id+"/"+str ,
+                success: function (data) {
+                  //cont.removeClass("loading_img");
+                  //cont.html(data);
+                   window.setInterval(window.location.reload(), 1500);
+                  cont.removeClass("loading_img");
+                }
+              });
+
+          }
+          function delete_product(id){
+  
+            $("#modal-product-delete").appendTo("body").unbind("show").bind("show", function()  {
+              var removeBtn = $(this).find(".btn-primary"),
+                href = removeBtn.attr("href");
+                
+                removeBtn.click(function(e) { 
+                    
+                  e.preventDefault();
+          
+                      $.ajax({
+                        type: "get",
+                        url: "'.site_url('/').'trade/delete_product/"+id ,
+                        success: function (data) {
+                           $("#row_"+id).fadeOut();
+                           $("#modal-product-delete").modal("hide");
+                           $("#msg").html(data).fadeIn().delay(3000).fadeOut();
+                           //window.setInterval(window.location.reload(), 3500);  
+                        }
+                      });
+                });
+            }).modal({ backdrop: true });
+          }
+</script>             

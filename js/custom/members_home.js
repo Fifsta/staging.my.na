@@ -82,7 +82,7 @@ $(document).on('click', '.usr-remove', function(e) {
 	$('.btn-rmv').attr('data-bus', bus_id);
 
 
-}); 
+});
 
 $(document).on('click', '.btn-rmv', function(e) {
 

@@ -3,7 +3,6 @@
 //PROFILE INCLUDE
 //+++++++++++++++++
 
-//echo $url;
 
 $uris = explode('/', $url);
 
@@ -78,10 +77,10 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 			<div id="MyProducts" class="panel-collapse collapse <?php echo $my_bus; ?>" role="tabpanel" aria-labelledby="MyProducts">
 				<div class="panel-body">
 					<ul>
-						<li><a href="<?php echo site_url('/'); ?>sell/index/0/?type=motor">Sell a Car</a></li>
-						<li><a href="<?php echo site_url('/'); ?>sell/index/0/?type=property">Sell a Property</a></li>
-						<li><a href="<?php echo site_url('/'); ?>sell/index/0/">Sell Anything</a></li>
-						<li><a href="<?php echo site_url('/'); ?>sell/index/0/?auction=true">Create an Auction</a></li>
+						<li><a href="<?php echo site_url('/'); ?>sell/index/0/motor">Sell a Car</a></li>
+						<li><a href="<?php echo site_url('/'); ?>sell/index/0/property">Sell a Property</a></li>
+						<li><a href="<?php echo site_url('/'); ?>sell/index/0/general">Sell Anything</a></li>
+						<li><a href="<?php echo site_url('/'); ?>sell/index/0/auction">Create an Auction</a></li>
 					</ul>
 				</div>
 			</div>

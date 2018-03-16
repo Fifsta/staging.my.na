@@ -4860,10 +4860,10 @@ class Trade_model extends CI_Model
 		{
 
 			$query = $this->db->query("SELECT cat_id as ID, main_cat_id, sub_cat_id, sub_sub_cat_id, sub_sub_sub_cat_id, category_name as CATEGORY_NAME FROM product_categories  WHERE sub_sub_sub_cat_id = '" . trim($cat4) . "'", false);
-			$type = '<a href="#" class="btn btn-dark disabled"> ' . $cat1name . ' <i class="icon-chevron-right icon-white"></i></a> 
-					 <a href="#" class="btn btn-dark disabled"> ' . $cat2name . ' <i class="icon-chevron-right icon-white"></i></a> 
-					 <a href="#" class="btn btn-dark disabled"> ' . $cat3name . ' <i class="icon-chevron-right icon-white"></i></a>
-					 <a href="#" class="btn btn-dark disabled">' . $cat4name . '</a>';
+			$type = '<a href="#" class="btn btn-dark btn-sm disabled"> ' . $cat1name . ' <i class="fa fa-chevron-right text-light"></i></a> 
+					 <a href="#" class="btn btn-dark btn-sm disabled"> ' . $cat2name . ' <i class="fa fa-chevron-right text-light"></i></a> 
+					 <a href="#" class="btn btn-dark btn-sm disabled"> ' . $cat3name . ' <i class="fa fa-chevron-right text-light"></i></a>
+					 <a href="#" class="btn btn-dark btn-sm disabled">' . $cat4name . '</a>';
 
 		}
 		elseif ($cat3 > 0)
@@ -4871,9 +4871,9 @@ class Trade_model extends CI_Model
 
 			$query = $this->db->query("SELECT cat_id as ID, main_cat_id, sub_cat_id, sub_sub_cat_id, category_name as CATEGORY_NAME FROM product_categories  WHERE sub_sub_cat_id = '" . $cat3 . "' AND sub_sub_sub_cat_id = '0'", false);
 			$type = '
-					 <a href="#" class="btn btn-dark disabled"> ' . $cat1name . ' <i class="icon-chevron-right icon-white"></i></a> 
-					 <a href="#" class="btn btn-dark disabled"> ' . $cat2name . ' <i class="icon-chevron-right icon-white"></i></a> 
-					 <a href="#" class="btn btn-dark disabled">' . $cat3name . '</a>';
+					 <a href="#" class="btn btn-dark btn-sm disabled"> ' . $cat1name . ' <i class="fa fa-chevron-right text-light"></i></a> 
+					 <a href="#" class="btn btn-dark btn-sm disabled"> ' . $cat2name . ' <i class="fa fa-chevron-right text-light"></i></a> 
+					 <a href="#" class="btn btn-dark btn-sm disabled">' . $cat3name . '</a>';
 
 		}
 		elseif ($cat2 > 0)
@@ -4881,8 +4881,8 @@ class Trade_model extends CI_Model
 
 			$query = $this->db->query("SELECT cat_id as ID, sub_cat_id, main_cat_id, category_name as CATEGORY_NAME FROM product_categories  WHERE sub_cat_id = '" . $cat2 . "'  AND sub_sub_cat_id = '0'", false);
 			$type = '
-			          <a href="#" class="btn btn-dark disabled"> ' . $cat1name . ' <i class="icon-chevron-right icon-white"></i></a> 
-					  <a href="#" class="btn btn-dark disabled">' . $cat2name . ' <i class="icon-chevron-right icon-white"></i></a>';
+			          <a href="#" class="btn btn-dark btn-sm disabled"> ' . $cat1name . ' <i class="fa fa-chevron-right text-light"></i></a> 
+					  <a href="#" class="btn btn-dark btn-sm disabled">' . $cat2name . ' <i class="fa fa-chevron-right text-light"></i></a>';
 
 		}
 		elseif ($cat1 > 0)
@@ -4890,7 +4890,7 @@ class Trade_model extends CI_Model
 
 			$query = $this->db->query("SELECT cat_id as ID, main_cat_id, category_name as CATEGORY_NAME FROM product_categories WHERE main_cat_id = '" . $cat1 . "' AND sub_cat_id = '0'", false);
 			$type = ' 
-					 <a href="#" class="btn btn-dark disabled">' . $cat1name . ' <i class="icon-chevron-right icon-white"></i></a>';
+					 <a href="#" class="btn btn-dark btn-sm disabled">' . $cat1name . ' <i class="fa fa-chevron-right text-light"></i></a>';
 		}
 		else
 		{
@@ -4908,7 +4908,7 @@ class Trade_model extends CI_Model
 		{
 			$btn_next = $cat1 . ", '" . $cat1name . "', " . $cat2 . ", '" . $cat2name . "', " . $cat3 . ", '" . $cat3name . "', " . $cat4 . ", '" . $cat4name . "'";
 			$btn_back = $cat1 . ", '" . $cat1name . "', " . $cat2 . ", '" . $cat2name . "', " . $cat3 . ", '" . $cat3name . "', " . $cat4 . ", '" . $cat4name . "','" . $ltype . "'";
-			echo '<a href="javascript:back_(' . $btn_back . ');" class="btn btn-dark" style="margin:5px"><i class="icon-chevron-left icon-white"></i> Back</a>';
+			echo '<a href="javascript:back_(' . $btn_back . ');" class="btn btn-dark btn-sm" style="margin:5px"><i class="fa fa-chevron-left text-light"></i> Back</a>';
 
 		}
 		echo $type . '';
@@ -4970,7 +4970,7 @@ class Trade_model extends CI_Model
 
 			echo '</select>
 			 	<hr />
-   				<a id="add_cat" href="javascript:void(0)" class="btn btn-success pull-right disabled"> Next <i class="icon-chevron-right icon-white"></i></a>
+   				<a id="add_cat" href="javascript:void(0)" class="btn btn-success btn-lg pull-right disabled"> Next <i class="fa fa-chevron-right text-light"></i></a>
 				<div class="clearfix">&nbsp;</div>
 				';
 			echo '<script data-cfasync="false" type="text/javascript">
@@ -4994,7 +4994,7 @@ class Trade_model extends CI_Model
 			    <div class="alert">
 				  <i class="icon-thumbs-up"></i> Category selected, please proceed by clicking the next button below</div>
 			 	<hr />
-   				<a id="add_cat" onclick="go_step_3(' . $btn_next . ', ' . $bus_id . ",'" . $ltype . "'" . ')" href="javascript:void(0)" class="btn btn-success pull-right"> Next <i class="icon-chevron-right icon-white"></i></a>
+   				<a id="add_cat" onclick="go_step_3(' . $btn_next . ', ' . $bus_id . ",'" . $ltype . "'" . ')" href="javascript:void(0)" class="btn btn-success btn-lg pull-right"> Next <i class="fa fa-chevron-right text-light"></i></a>
 				<div class="clearfix">&nbsp;</div>';
 
 		}
@@ -5030,11 +5030,12 @@ class Trade_model extends CI_Model
 		$price = $this->input->post('price', true);
 		$cents = $this->input->post('price_c', true);
 		$price = $price . '.' . $cents;
+
 		//IF POR
 		$por = 'N';
+
 		if ($this->input->post('por'))
 		{
-
 			$price = 'POR';
 			$por = 'Y';
 		}
@@ -5044,13 +5045,9 @@ class Trade_model extends CI_Model
 		$item_loc = $this->input->post('item_loc', true);
 		$item_suburb = $this->input->post('suburb', true);
 
-		if($this->input->post('suburb', true)) {
+		if(!$this->input->post('suburb')) {
 
-			
-
-		} else {
-
-$item_suburb == 'all';
+			$item_suburb = 'all';
 
 		}
 
@@ -5388,8 +5385,8 @@ $item_suburb == 'all';
 							$file = $file_no_ext . '.jpg';
 						};
 
-
 					}
+
 
 					if (($width > 1200) || ($height > 1200))
 					{
@@ -5398,12 +5395,11 @@ $item_suburb == 'all';
 						$this->downsize_image($file);
 
 					}
+
 					//WATERMARK IMAGE	
 					$this->watermark_image($file);
 
 					//populate array with values
-	
-					
 					if($this->input->get('classifieds')){
 						$data = array(
 
@@ -5451,8 +5447,6 @@ $item_suburb == 'all';
 					$val = true;
 					$image = CDN_URL . 'assets/products/images/' . $file;
 
-					//$this->output->set_header("HTTP/1.0 200 OK");
-
 
 				}
 				else
@@ -5469,31 +5463,26 @@ $item_suburb == 'all';
 			{
 				$data['success'] = true;
 				$data['basicmsg'] = $i . ' Photos added successfully!'.$data['out'];
-				/*return '<div class="alert alert-success">
-						 <button type="button" class="close" data-dismiss="alert">×</button>
-						' . $data['basicmsg'] . '
-						 </div>
-					';*/
+
 
 			}
 			else
 			{
 				$data['success'] = false;
 				$data['basicmsg'] = $data['error'];
-				/*echo '<div class="alert alert-error">
-							<button type="button" class="close" data-dismiss="alert">×</button>'
-					. $data['error'] . '
-							 </div>';*/
+
 			}
 		}
 		else
 		{
 			$data['success'] = false;
 			
-			$data['basicmsg'] = '<div class="alert alert-error">
-						<button type="button" class="close" data-dismiss="alert">×</button>
-						 No Files Selected - Please select some files and try again
-						 </div>';
+			$data['basicmsg'] = '
+				<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				No Files Selected - Please select some files and try again
+				</div>
+				';
 						 
 
 		}
@@ -5723,55 +5712,47 @@ $item_suburb == 'all';
 		if ($row['img_file'] != '0')
 		{
 
-			$file_large = BASE_URL . 'assets/products/images/' . $img_file; # build the full path		
+			$file_large = S3_URL.'assets/products/images/'.$img_file; # build the full path		
 
 			if (file_exists($file_large))
 			{
 
 				if (unlink($file_large))
 				{
-
 					//delete image
-
 					$this->db->where('img_id', $img_id);
 					$this->db->delete('product_images');
 
 					echo
 					'<div class="alert alert-success">
-									<button type="button" class="close" data-dismiss="alert">×</button><p>Image Deleted successfully!</p>
-									';
-
-
+					 	<button type="button" class="close" data-dismiss="alert">×</button><p>Image Deleted successfully!</p>
+					 </div>
+					';
 				}
-
 
 			}
 			else
 			{
-
 				//delete image
 				$this->db->where('img_id', $img_id);
 				$this->db->delete('product_images');
 
-
 				echo
-				'<div class="alert alert-error">
-									<button type="button" class="close" data-dismiss="alert">×</button><p>Image Deleted successfully</p>
-									 </div>
-									 ';
-
+				'<div class="alert alert-success">
+					<button type="button" class="close" data-dismiss="alert">×</button><p>Image Deleted successfully</p>
+				 </div>
+				';
 			}
 
-
-			//no existing image	
+		//no existing image	
 		}
 		else
 		{
-
 			echo
-			'<div class="alert alert-error">
-						<button type="button" class="close" data-dismiss="alert">×</button><p>Image could not be deleted!</p>
-						';
+			'<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert">×</button><p>Image could not be deleted!</p>
+			 </div>			
+			';
 		}
 
 	}
@@ -5791,9 +5772,8 @@ $item_suburb == 'all';
 
 		if($this->input->get('classifieds')){
 
-			//$query = $this->db->order_by('sequence', 'ASC');
-			//$query = $this->db->where('classified_id', $product_id);
 			$query = $this->db->query("SELECT classified_id as product_id, classifieds_images.* FROM classifieds_images WHERE classified_id = ".$product_id."");
+
 		}else{
 
 			$query = $this->db->order_by('sequence', 'ASC');
@@ -5808,7 +5788,7 @@ $item_suburb == 'all';
 		if ($query->num_rows() > 0)
 		{
 
-			echo '<div class="row-fluid">';
+			echo '<div class="row">';
 			$x = 0;
 			foreach ($query->result() as $row)
 			{
@@ -5819,11 +5799,10 @@ $item_suburb == 'all';
 				if ($x2 % $amt == 0 && $x2 != 0)
 				{
 
-
 					echo '
 					   </div>
 					   <div class="clearfix">&nbsp;</div>
-					   <div class="row-fluid">
+					   <div class="row">
 					   ';
 				}
 
@@ -5858,13 +5837,14 @@ $item_suburb == 'all';
 					$file = '';
 
 				}
+
 				$sequence = '';
 				$imgsequence = $row->sequence;
+
 				if ($row->sequence == 0 && $x2 == 0)
 				{
 
-					$sequence = '<a class="btn btn-mini btn-success" style="margin:5px 5px 0 0;"><i class="icon-ok icon-white"></i> FEATURED</a>';
-
+					$sequence = '<a class="btn btn-xs btn-success" style="margin:5px 5px 0 0;"><i class="icon-ok icon-white"></i> FEATURED</a>';
 
 				}
 
@@ -5874,10 +5854,7 @@ $item_suburb == 'all';
 					$imgsequence = $x2;
 
 				}
-				//TIMBTHUMB
-				//echo '<li class="thumbnail"><img src="'.base_url('/').'img/timbthumb.php?src='.base_url('/').'assets/business/gallery/'.$img_file.'&q=100&w=180&h=100" />
-//							<a style="float:right;margin:0 3px;" onclick="delete_gallery_img('.$id .');" href="#"><i class="icon-remove"></i></a>
-//							</li>';
+
 
 				//IF IMAGE IS EDITED
 				$rand = '';
@@ -5889,12 +5866,15 @@ $item_suburb == 'all';
 				}
 
 				//NO TIMBTHUMB
-				echo '<div id="img_' . $id . '" class="span3 col-xs-3 thumbnail" ><img id="pro_img_att_' . $id . '" onclick="make_primary(' . $id . ');" src="' . base_url('/') . 'img/timbthumb.php?src=' . $img_url. '&w=190&h=130' . $rand . '" />
-								<input type="hidden" value="' . $imgsequence . '" name="img_sequence" />
-								<a style="float:left;margin:5px 5px 0 0" onclick="delete_product_img(' . $id . ');" class="btn btn-mini btn-danger" href="javascript:void(0)"><i class="icon-trash icon-white"></i></a>
-								 ' . $sequence . '
-								 <a style="float:left;margin:5px 5px 0 0" id="rotate_btn_' . $id . '" onclick="rotate_img(90, ' . "'" . $file . "'" . ', ' . $id . ',' . "'" . $temp . "'" . ');" class="btn btn-mini btn-warning" href="javascript:void(0)"><i class="icon-refresh icon-white"></i></a>
-						  	 </div>';
+				echo '<div id="img_' . $id . '" class="col-xs-3 img-thumbnail" >
+						<img id="pro_img_att_' . $id . '" onclick="make_primary(' . $id . ');" src="'.$img_url.'" />
+						<input type="hidden" value="' . $imgsequence . '" name="img_sequence" />
+						<div style="clear:both;"></div>
+						<a style="float:left;margin:5px 5px 0 0" data-id="'.$id.'" class="btn btn-xs btn-danger btn-del"><i class="fa fa-trash-o text-light"></i></a>
+						 ' . $sequence . '
+						 <a style="float:left;margin:5px 5px 0 0" id="rotate_btn_' . $id . '" onclick="rotate_img(90, ' . "'" . $file . "'" . ', ' . $id . ',' . "'" . $temp . "'" . ');" class="btn btn-xs btn-warning" href="javascript:void(0)"><i class="fa fa-refresh text-light"></i></a>
+				  	  </div>';
+
 				$x++;
 				$x2++;
 
@@ -5907,7 +5887,7 @@ $item_suburb == 'all';
 		else
 		{
 
-			echo '<div class="alert alert-block">
+			echo '<div class="alert alert-warning text-dark">
 					<button type="button" class="close" data-dismiss="alert">×</button>
 					<h4>No Product Images Added</h4>
 					Please add some product images to enhance your listing by clicking on the select images button below

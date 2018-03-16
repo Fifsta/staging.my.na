@@ -20,34 +20,35 @@
 ?>
 <div id="anchor_me"></div>
 
-<div class="col-md-12">
+<div class="spacer"></div>
+
     <div class="heading">
         <h2 data-icon="fa-list">Publish the <strong>Product</strong></h2>
         <ul class="options">
 
         </ul>
     </div>
-</div>
 
-<div class="col-md-12">
+
+
     <div class="card">
         <div class="card-body">
-	        <a href="#" class="btn btn-warning disabled  step1" style="margin:5px"> 1 Select Category <i class="icon-ok icon-white"></i></a> 
-	        <a href="<?php echo site_url('/').'sell/update_product/'.$product_id.'/';?>" class="btn btn-warning disabled  step2" style="margin:5px"> 2 Details <i class="icon-ok icon-white"></i></a>
-	        <a href="<?php echo site_url('/').'sell/step3/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-warning disabled step3" style="margin:5px"> 3 Attach Photos <i class="icon-ok icon-white"></i></a>
-	        <a href="<?php echo site_url('/').'sell/step4/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-warning disabled step4" style="margin:5px"> 4 Extras <i class="icon-ok icon-white"></i></a>
-	        <a href="<?php echo site_url('/').'sell/step5/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-success btn-large step5" style="margin:5px"> 5 Confirm and Publish <i class="icon-chevron-right icon-white"></i></a>
+	        <a href="#" class="btn btn-warning disabled  step1" style="margin:5px"> 1 Select Category <i class="fa fa-check text-dark"></i></a> 
+	        <a href="<?php echo site_url('/').'sell/update_product/'.$product_id.'/';?>" class="btn btn-warning disabled  step2" style="margin:5px"> 2 Details <i class="fa fa-check text-dark"></i></a>
+	        <a href="<?php echo site_url('/').'sell/step3/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-warning disabled step3" style="margin:5px"> 3 Attach Photos <i class="fa fa-check text-dark"></i></a>
+	        <a href="<?php echo site_url('/').'sell/step4/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-warning disabled step4" style="margin:5px"> 4 Extras <i class="fa fa-check text-dark"></i></a>
+	        <a href="<?php echo site_url('/').'sell/step5/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-success btn-large step5" style="margin:5px"> 5 Confirm and Publish <i class="fa fa-chevron-right text-light"></i></a>
 	        <hr>
 
 		<?php if($is_active != 'Y'){ ?>
-            <div class="alert alert-block">
+            <div class="alert alert-secondary">
                 <h2>Publish your item</h2>
                 Please publish your item so we can approve it and make it live.</div>
             <div>
-           <a href="javascript:void(0)" onclick="publish()" class="btn btn-success pull-right">Publish <i class="icon-chevron-right icon-white"></i></a>
+           <a href="javascript:void(0)" onclick="publish()" class="btn btn-lg btn-success pull-right">Publish <i class="fa fa-chevron-right text-light"></i></a>
         <?php }else{ ?>
 	        <iframe class="loading_img" style="width:100%; min-height:400px" id="advert_content"></iframe>
-            <div class="alert alert-block">
+            <div class="alert alert-secondary">
 
 	            <h2>Item is Live</h2>
                 <p>The product is live and showing on the website. You can automatically publish the item to the My Namibia facebook page to get that extra exposure.</p>
@@ -61,13 +62,13 @@
            <div>
        <?php }?>
 
-	       <a href="<?php echo site_url('/').'members/business/'.$bus_id.'/';?>" id="back_to_all" class="btn btn-dark pull-right" style="margin-right:5px">All Products</a>
+	       <a href="<?php echo site_url('/').'members/business/'.$bus_id.'/';?>" id="back_to_all" class="btn btn-lg btn-dark pull-right" style="margin-right:5px">All Products</a>
 
-           <a href="javascript:void(0)" onclick="back_to_4()" id="back_to_4" class="btn btn-warning pull-right" style="margin-right:5px">Back</a>
+           <a href="javascript:void(0)" onclick="back_to_4()" id="back_to_4" class="btn btn-lg btn-warning pull-right" style="margin-right:5px"><i class="fa fa-chevron-left text-dark"></i> Back</a>
 
         </div>
     </div>    
-</div>
+
 
 <script data-cfasync="false" type="text/javascript">
 

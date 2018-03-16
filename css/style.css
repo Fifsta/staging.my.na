@@ -9,6 +9,64 @@ a,button,.animate{-webkit-transition:all 0.2s ease; -moz-transition:all 0.2s eas
 iframe{border:none;}
 
 
+.vignette {
+    -webkit-box-shadow: inset 0px 0px 85px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: inset 0px 0px 85px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0px 0px 85px rgba(0, 0, 0, 0.4);
+
+    line-height: 0; /* ensure no space between bottom */
+
+    display: inline-block; /* don't go wider than image */
+}
+
+.private{position:absolute; width:30px; padding:10px 0 0 10px; height:30px;margin:-33px 0 0 5px; background:url('../img/icons/private.png'); z-index:999;}
+#results_div, .tt-dropdown-menu {
+    position: absolute;
+    width: 100%;
+    display: none;
+    background-color: #fff;
+    opacity: 0.9;
+    margin-top: 0px;
+    z-index: 1099;
+    padding: 0px;
+    -moz-box-shadow: 0 0 5px #666;
+    -webkit-box-shadow: 0 0 5px #666;
+    box-shadow: 0 0 5px #666;
+    -moz-border-radius: 0px 0px 5px 5px;
+    -webkit-border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
+    -khtml-border-radius: 0px 0px 5px 5px;
+}
+.tt-dropdown-menu a{font-size:12px; line-height:15px; text-decoration:none;}
+.tt-dropdown-menu p{font-size:12px; line-height:20px;vertical-align:top;clear:both;}
+.tt-dropdown-menu a span.bold{margin:0px;font-weight:bold;font-size:12px; line-height:14px;padding-top:5px;display: table-cell; text-decoration:none}
+.tt-dropdown-menu a span.muted{font-size:10px; padding:2px 0px;}
+.tt-dropdown-menu a p img{display: table-cell;float:left; clear:right; margin:5px}
+.tt-dropdown-menu .alert{font-size:10px; padding:2px;margin:10px;text-align:center}
+.tt-hint, .typeahead, .twitter-typeahead {
+    margin:0px;
+
+}
+.tt-dropdown-menu a:hover,.tt-dropdown-menu a:hover span ,.tt-dropdown-menu a.bold:hover{color:#fff;background-color: #FF9F01;}
+
+.tt-dropdown-menu a.bold p{line-height:30px; font-size:14px; margin:0 5px}
+
+
+.tt-suggestion:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #FF9F01;
+}
+
+.tt-suggestion.tt-cursor {
+    color: #fff;
+    background-color: #FF9F01;
+
+}
+
+
+
+
 img {
     max-width: 100%;
     width: auto\9;
