@@ -1065,11 +1065,13 @@ class Trade extends CI_Controller {
 	}
 
 	//DELETE PRODUCT CATEGORIES	
-	function product_img_delete($img_id){
+	function product_img_delete(){
+
+		$img_id = $this->input->post('img_id', TRUE);
 
 		$query = $this->trade_model->product_img_delete($img_id);
 
-
+ 
 	}
 
 	//++++++++++++++++++++++++++++++++++++
@@ -1079,50 +1081,48 @@ class Trade extends CI_Controller {
 	{
 		if($this->session->userdata('id')){
 
-				$this->db->where('product_id', $product_id);
-				$query = $this->db->get('products');
+			$this->db->where('product_id', $product_id);
+			$query = $this->db->get('products');
 
-				if($query->result()){
+			if($query->result()){
 
-					$row = $query->row_array();
+				$row = $query->row_array();
 
-					if($row['bus_id'] != 0){
-						$this->load->model('members_model');
-						if(!$this->members_model->check_business_user($row['bus_id'])){
-							$data['error'] = 'Sorry, please login to continue';
-							$this->load->view('login' , $data);
-							return;
-						}
-
+				if($row['bus_id'] != 0){
+					$this->load->model('members_model');
+					if(!$this->members_model->check_business_user($row['bus_id'])) {
+						$data['error'] = 'Sorry, please login to continue';
+						$this->load->view('login' , $data);
+						return;
 					}
-
-
-					$row['step'] = 2;
-					$row['cat1'] = $row['main_cat_id'];
-					$row['cat1name'] = '';
-					$row['cat2'] = $row['sub_cat_id'];
-					$row['cat2name'] = '';
-					$row['cat3'] = $row['sub_sub_cat_id'];
-					$row['cat3name'] = '';
-					$row['cat4'] = $row['sub_sub_sub_cat_id'];
-					$row['cat4name'] = '';
-
-					$row['catname'] = $this->trade_model->get_cat_names($row);
-
-					$this->load->view('trade/inc/sell_general_item', $row);
-
-				}else{
-
-
-
 				}
+
+
+				$row['step'] = 2;
+				$row['cat1'] = $row['main_cat_id'];
+				$row['cat1name'] = '';
+				$row['cat2'] = $row['sub_cat_id'];
+				$row['cat2name'] = '';
+				$row['cat3'] = $row['sub_sub_cat_id'];
+				$row['cat3name'] = '';
+				$row['cat4'] = $row['sub_sub_sub_cat_id'];
+				$row['cat4name'] = '';
+
+				$row['catname'] = $this->trade_model->get_cat_names($row);
+
+				$this->load->view('trade/inc/sell_general_item', $row);
+
+			}else{
+
+			}
+
 		}else{
-				$data['redirect'] = current_url('/');
-				$data['error'] = 'Sorry, please login to continue';
-				$this->load->view('login' , $data);
+
+			$data['redirect'] = current_url('/');
+			$data['error'] = 'Sorry, please login to continue';
+			$this->load->view('login' , $data);
 
 		}
-
 	}
 
 	//+++++++++++++++++++++++
