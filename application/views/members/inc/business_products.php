@@ -1,15 +1,17 @@
-<div class="row">
-
-      <div class="col-md-12">
-        <h4>Listings<small> Your current Products items</small></h4>
-      </div>
-
-
+<style>
+#appadd {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 200px;
+    height: 30px;
+    text-overflow: ellipsis; 
+}
+</style>
       
-      <table id="product_table" class="table datatable table-striped" id="" style="width:100%">
+      <table id="product_table" class="table datatable table-striped" id="" width="100%" style="table-layout:fixed;">
         <thead>
           <tr style="font-weight:bold">
-            <th style=""></th>
+            <th style="width:100px"></th>
             <th style="">Title</th>
             <th style="">Price</th>
             <th style="">End</th>
@@ -43,7 +45,6 @@
             }
             
 
-            
             //Check Price
             //Fixed price
             if($row->listing_type == 'S'){
@@ -64,13 +65,33 @@
             
 
             echo '
-              <tr>
-                <td style=""><img rel="tooltip"src="' . $img_url . '" alt="' . $row->title . '" class="pull-right img-thumbnail" /></td>
-                <td style="">'.$row->title .'</td>
+              <tr id="row-'.$row->product_id.'">
+                <td style="width:100px"><img rel="tooltip"src="' . $img_url . '" alt="' . $row->title . '" class="pull-right img-thumbnail" /></td>
+                <td id="appadd">'.$row->title.'</td>
                 <td style="">'.$price.'</td>
                 <td style="">'.date('Y-m-d',strtotime($row->end_date)).'</td>
                 <td></td>
-                <td style=""></td>
+                <td class="text-right">
+
+                    <div class="btn-group dropleft text-left">
+                        <button class="btn btn-sm btn-dark dropdown-toggle" title="Open the print options" rel="tooltip" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-flip="false"><i class="fa fa-download"></i> <span class="caret"></span></button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="'.site_url('/').'trade/print_product/'.$row->product_id.'/" data-id="'.$row->product_id.'" class="btnPrint_single"><i class="icon-print"></i> Print Option 1</a>
+                          <a class="dropdown-item" href="'.site_url('/').'trade/print_product2/'.$row->product_id.'/" data-id2="'.$row->product_id.'" class="btnPrint_single"><i class="icon-print"></i> Print Option 2</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="'.site_url('/').'trade/print_pdf/'.$row->product_id.'/" target="_blank"><i class="icon-share"></i> Export PDF 1</a>
+                          <a class="dropdown-item" href="'.site_url('/').'trade/print_pdf/'.$row->product_id.'/2" target="_blank"><i class="icon-share"></i> Export PDF 2</a>
+                        </div>
+                    </div>
+                    <div class="btn-group dropleft text-left">
+                        <button class="btn btn-sm btn-dark dropdown-toggle" title="Open the product menu" rel="tooltip" data-toggle="dropdown"><i class="fa fa-cog"></i></button>
+                        <div class="dropdown-menu">
+                          <a href="'.site_url('/').'sell/update_product/'.$row->product_id.'/" id="upd_'.$row->product_id.'" onclick="update_product('.$row->product_id.');" class="dropdown-item"><i class="icon-pencil"></i> Update Item</a>
+                          <a href="javascript:void(0)" data-id="'.$row->product_id.'" class="dropdown-item dbtn"><i class="icon-trash"></i> Remove Item</a>
+                          <a href="'.site_url('/').'product/'.$row->product_id.'/" target="_blank" class="dropdown-item"><i class="icon-search"></i> View Item</a>
+                        </div>
+                    </div>
+                </td>
               </tr>
             ';
 
@@ -80,7 +101,26 @@
         </tbody>
       </table>
 
-      </div>  
+      <!-- Delete Product -->
+      <div class="modal fade" id="modal-product-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Remove Product</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to remove the user from the business?</p>
+            </div>
+            <div class="modal-footer mdl-cont">
+              <button type="button" class="btn btn-secondary p-btn-rmv">Remove</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
         <script type="text/javascript">
@@ -94,6 +134,7 @@
               });
               
           }
+
           function get_questions(id){
 
                             var cont = $("#admin_content");
@@ -104,6 +145,7 @@
               });
 
           }
+
           function review_participant(id){
 
               var cont = $("#modal-review-participant > .modal-body");
@@ -135,6 +177,7 @@
               });  
             
           }
+
           function extend_product(id, type){
 
             var cont = $("#admin_content");
@@ -172,27 +215,42 @@
               });
 
           }
-          function delete_product(id){
-  
-            $("#modal-product-delete").appendTo("body").unbind("show").bind("show", function()  {
-              var removeBtn = $(this).find(".btn-primary"),
-                href = removeBtn.attr("href");
-                
-                removeBtn.click(function(e) { 
-                    
-                  e.preventDefault();
-          
-                      $.ajax({
-                        type: "get",
-                        url: "'.site_url('/').'trade/delete_product/"+id ,
-                        success: function (data) {
-                           $("#row_"+id).fadeOut();
-                           $("#modal-product-delete").modal("hide");
-                           $("#msg").html(data).fadeIn().delay(3000).fadeOut();
-                           //window.setInterval(window.location.reload(), 3500);  
-                        }
-                      });
-                });
-            }).modal({ backdrop: true });
-          }
-</script>             
+
+
+
+
+//Remove Business User
+$(document).on('click', '.dbtn', function(e) {
+
+  var id = $(this).attr("data-id");
+
+  $("#modal-product-delete").appendTo("body").bind("show", function() {}).modal({ backdrop: true });
+
+  $('.p-btn-rmv').attr('data-id', id);
+
+});
+
+
+$(document).on('click', '.p-btn-rmv', function(e) {
+
+  var id = $(this).attr("data-id");
+  var bus_id = $(this).attr("data-bus");
+
+  $.ajax({
+    type: "POST",
+    url: "<?php echo site_url('/'); ?>trade/delete_product/",
+      data: { 
+          'id': id
+      },    
+    success: function (data) {
+
+       $("#modal-product-delete").modal("hide");
+       $('#row-'+id).remove();
+       $("#msg").html(data).fadeIn().delay(3000).fadeOut();
+    }
+  }); 
+
+});
+
+
+</script>       

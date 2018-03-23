@@ -331,7 +331,7 @@ class Members extends CI_Controller {
 
 		$this->load->model('sell_model');
 
-		$o = $this->sell_model->get_client_products($bus_id, $section);
+		$o = $this->sell_model->get_client_products($bus_id, $section); 
 
 
 	}

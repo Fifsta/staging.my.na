@@ -6067,7 +6067,7 @@ class Trade_model extends CI_Model
 
 			$row = $query->row_array();
 			$emailTO = 'roland@my.na';
-			$emailTO = array(array('email' => $emailTO), array('email' => 'ernst@my.na'), array('email' => 'info@my.na'), array('email' => 'wilko@my.na'));
+			$emailTO = array(array('email' => $emailTO), array('email' => 'christian@intouch.com.na'), array('email' => 'info@my.na'));
 			$emailFROM = 'trade@my.na';
 			$name = 'My Namibia Trade';
 			$subject = 'New Product Listed - ' . $row['title'];
@@ -6080,6 +6080,18 @@ class Trade_model extends CI_Model
 
 			$this->email_model->send_email($emailTO, $emailFROM, $name, $body, $subject);
 
+			//Check if business or private
+			if(isset($bus_id) && $bus_id != 0) {
+
+				$link = site_url('/') . 'members/business/' . $bus_id;
+
+			} else {
+			
+				$link = site_url('/') . 'members/my_products';
+
+			}
+
+
 			echo '<div class="alert alert-success">
 						<button type="button" class="close" data-dismiss="alert">×</button>
 						<h4>Your listing has been Added</h4>
@@ -6087,7 +6099,7 @@ class Trade_model extends CI_Model
 				  <script type="text/javascript">
 						window.setTimeout(function(){
 
-						    window.location = "' . site_url('/') . 'sell/my_trade/' . $bus_id . '/";
+						    window.location = "' . $link . '/";
                         }
 						, 2000);
 				  </script>';

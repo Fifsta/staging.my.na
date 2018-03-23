@@ -145,6 +145,10 @@ if($step == 'step0'){
         $head = '<h2 data-icon="fa-list">List an <strong>Item as</strong></h2>';
     }
 
+} else {
+
+        $head = '<h2 data-icon="fa-list">List an <strong>Item as</strong></h2>';
+    
 }
 
 $next_hide = 'd-none';
@@ -501,7 +505,7 @@ $content_hide = '';
         var cont = $('#admin_content');
         $.get('<?php echo site_url('/'). 'sell/step1/'.$bus_id.'/?'.$type_str;?>', function(data) {
               cont.removeClass('loading_img').html(data);
-              
+              document.getElementById('#anchor_me').scrollIntoView();
         });  
     }
 

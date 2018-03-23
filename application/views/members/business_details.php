@@ -101,7 +101,7 @@ $this->load->view('inc/header', $header);
 //add css, IE7 js files here before the head tag
 ?>
 
-<link href="<?php echo base_url('/');?>css/datatables.min.css" rel="stylesheet" type="text/css" /> 
+</div><link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.css"/>
 
 <link rel="stylesheet" href="<?php echo base_url('/');?>redactor/redactor/redactor.css?v=1" />
 </head>
@@ -285,20 +285,21 @@ $this->load->view('inc/header', $header);
             <!--tabs products-->
             <h1 style="font-size:16px; border-bottom:1px solid #999; margin-top:30px; margin-bottom:30px"><strong>MANAGE BUSINESS PRODUCTS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="nav-item"><a href="#Latest" class="nav-link active" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-clock-o text-dark">Latest Items</a></li>
-              <li role="presentation" class="nav-item"><a href="#Sold" class="nav-link" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-exclamation-circle text-dark">Sold Items</a></li>
-              <li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-tags text-dark">Deals</a></li>
+              <li role="presentation" class="nav-item"><a href="#Latest" data-type="live" data-bus="<?php echo $bus_id; ?>" class="nav-link active pbtn" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-clock-o text-dark">Latest Items</a></li>
+              <li role="presentation" class="nav-item"><a href="#Sold" data-type="bought" data-bus="<?php echo $bus_id; ?>" class="nav-link pbtn" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-exclamation-circle text-dark">Sold Items</a></li>
+              <li role="presentation" class="nav-item"><a href="#Deals" data-type="deals" data-bus="<?php echo $bus_id; ?>" class="nav-link pbtn" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-tags text-dark">Deals</a></li>
             </ul>
 
             <div class="tab-content">
 
-              <section role="tabpanel" class="tab-pane active" id="Latest">
+              <section role="tabpanel" class="tab-pane active" id="Latest" style="overflow: visible">
                 <h2 class="tab-head">Latest Products</h2>
-                <div id="products-result"></div>
+                <div id="products-result-live"></div>
               </section>
 
               <section role="tabpanel" class="tab-pane" id="Sold">
                 <h2 class="tab-head">Sold Products</h2>
+                <div id="products-result-bought"></div>
               </section>
 
               <section role="tabpanel" class="tab-pane" id="Deals">
@@ -309,8 +310,6 @@ $this->load->view('inc/header', $header);
 
             </div>
             <!--products -->
-
-
 
 
             <!--tabs analytics -->
@@ -361,7 +360,9 @@ $this->load->view('inc/header', $header);
       </div>
     </div>
   </div>  
-</div>
+
+ 
+
   
 <?php $this->load->view('inc/footer');?>  
 
@@ -369,7 +370,7 @@ $this->load->view('inc/header', $header);
 <script src="<?php echo base_url('/')?>redactor/redactor/redactor.min.js?v=1"></script>
 <script src="<?php echo base_url('/')?>redactor/redactor/video.js"></script>
 <script src="<?php echo base_url('/')?>redactor/redactor/table.js"></script>
-<script type="text/javascript" language="javascript" src="<?php echo base_url('/');?>js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js"></script>
 <script src="<?php echo base_url('/');?>js/custom/fb.js"></script>
 <script src="<?php echo base_url('/');?>js/custom/members_home.js"></script>
 
@@ -391,24 +392,36 @@ $(document).ready(function(){
 
   //load_analytics(<?php echo $bus_id;?>, 'MONTH'); 
 
-  load_products_do(<?php echo $bus_id; ?>, 'latest');
+  load_products_do(<?php echo $bus_id; ?>, 'live');
   
 });
 
 
+  $(document).on('click', '.pbtn', function(e) {
+
+      var section = $(this).attr("data-type");
+      var bus_id = $(this).attr("data-bus");
+
+      load_products_do(bus_id, section);
+
+  });
+
+
 function load_products_do(bus_id, section) {
+
+  $('#products-result-'+section).html("<img src='<?php echo base_url('/').'images/load.gif';?>");
 
     $.ajax({
         type: "POST",
-        url: base+'members/load_bus_products/',
+        url: base+'members/load_bus_products/', 
         cache: false,
       data: { 
           'bus_id': bus_id,
-          'section': 'live'
+          'section': section
       },  
         success: function (result) {
 
-          $('#products-result').html(result);
+          $('#products-result-'+section).html(result);
           $('.datatable').DataTable();
            
         },

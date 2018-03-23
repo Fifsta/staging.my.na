@@ -164,15 +164,12 @@ class Sell_model extends CI_Model{
 
 	public function get_client_products($bus_id, $section){
 
-
-
-
 		$id = $this->session->userdata('id');
+		$out = '';
 		
 		if($section == ''){
 			$section = 'live';	
 		}
-
 
 		//JOUBERT BALT PRIVATE && JUST PROPERTY
 		$strSQL = '';
@@ -181,7 +178,6 @@ class Sell_model extends CI_Model{
 			$strSQL= " AND products.client_id = '".$id."'";
 			
 		}
-
 
         $pSQL = "SELECT products.*,products_buy_now.amount,products_buy_now.buy_now_id, trade_rating.rating, trade_rating.review, trade_rating.created_at,
                                       product_extras.*,product_images.img_file, product_questions.question_id, product_categories.category_name,
@@ -208,10 +204,11 @@ class Sell_model extends CI_Model{
         }elseif($bus_id == 0){
 			$data['col4H'] = '<th style="width:12%">Q</th>';
 			$data['bstr'] = '';$xtraSQL = '';
+
             if($section == 'live'){
                $xtraSQL = "OR products.status = 'moderate'";
-
             }
+
 			$query = $this->db->query($pSQL."
                                       WHERE products.client_id = '".$id."' AND products.bus_id = '0' AND (products.status = '".$section."' ".$xtraSQL.")
                                       GROUP BY products.product_id ORDER BY products.product_id DESC " ,FALSE);
@@ -248,7 +245,11 @@ class Sell_model extends CI_Model{
 			$data['products'] = $query;
 			$out = $this->load->view('members/inc/business_products', $data, true);
 
-		}	
+		} else {
+
+			$out = 'There are no '.$section.' product items';
+
+		}
 
 		echo $out;
 

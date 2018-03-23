@@ -74,7 +74,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 			<div class="panel-heading" role="tab">
 				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#MyProducts" aria-expanded="false" aria-controls="MyProducts" data-icon="fa-edit">My Products</a></h3>
 			</div>
-			<div id="MyProducts" class="panel-collapse collapse <?php echo $my_bus; ?>" role="tabpanel" aria-labelledby="MyProducts">
+			<div id="MyProducts" class="panel-collapse collapse" role="tabpanel" aria-labelledby="MyProducts">
 				<div class="panel-body">
 					<ul>
 						<li><a href="<?php echo site_url('/'); ?>sell/index/0/motor">Sell a Car</a></li>

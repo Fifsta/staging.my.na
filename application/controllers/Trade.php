@@ -1128,8 +1128,10 @@ class Trade extends CI_Controller {
 	//+++++++++++++++++++++++
 	//DELETE PRODUCT AND IMAGES
 	//+++++++++++++++++++++++
-	function delete_product($id)
+	function delete_product()
 	{
+
+		$id = $this->input->post('id', TRUE);
 
 		if($this->session->userdata('id') || $this->session->userdata('admin_id')){
 
