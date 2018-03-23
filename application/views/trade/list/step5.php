@@ -12,7 +12,7 @@
 	} else {
 
 		$str = ' for Private';
-		$link = site_url('/').'members/my_products/'
+		$link = site_url('/').'members/my_products/';
 
 	}
 
