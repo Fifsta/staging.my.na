@@ -1,14 +1,15 @@
 <?php
 class Print_model extends CI_Model{
+
 	public function __construct()
     {
         // Constructor's functionality here, if you have any.
     }
 	
- 	function print_model(){
+ 	/*function print_model(){
   		//parent::CI_model();
 		self::__construct();	
- 	}
+ 	}*/
 
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

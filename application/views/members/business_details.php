@@ -286,7 +286,7 @@ $this->load->view('inc/header', $header);
             <h1 style="font-size:16px; border-bottom:1px solid #999; margin-top:30px; margin-bottom:30px"><strong>MANAGE BUSINESS PRODUCTS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item"><a href="#Latest" data-type="live" data-bus="<?php echo $bus_id; ?>" class="nav-link active pbtn" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-clock-o text-dark">Latest Items</a></li>
-              <li role="presentation" class="nav-item"><a href="#Sold" data-type="bought" data-bus="<?php echo $bus_id; ?>" class="nav-link pbtn" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-exclamation-circle text-dark">Sold Items</a></li>
+              <li role="presentation" class="nav-item"><a href="#Sold" data-type="sold" data-bus="<?php echo $bus_id; ?>" class="nav-link pbtn" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-exclamation-circle text-dark">Sold Items</a></li>
               <li role="presentation" class="nav-item"><a href="#Deals" data-type="deals" data-bus="<?php echo $bus_id; ?>" class="nav-link pbtn" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-tags text-dark">Deals</a></li>
             </ul>
 
@@ -299,7 +299,7 @@ $this->load->view('inc/header', $header);
 
               <section role="tabpanel" class="tab-pane" id="Sold">
                 <h2 class="tab-head">Sold Products</h2>
-                <div id="products-result-bought"></div>
+                <div id="products-result-sold"></div>
               </section>
 
               <section role="tabpanel" class="tab-pane" id="Deals">
@@ -397,19 +397,19 @@ $(document).ready(function(){
 });
 
 
-  $(document).on('click', '.pbtn', function(e) {
+$(document).on('click', '.pbtn', function(e) {
 
-      var section = $(this).attr("data-type");
-      var bus_id = $(this).attr("data-bus");
+    var section = $(this).attr("data-type");
+    var bus_id = $(this).attr("data-bus");
 
-      load_products_do(bus_id, section);
+    load_products_do(bus_id, section);
 
-  });
+});
 
 
 function load_products_do(bus_id, section) {
 
-  $('#products-result-'+section).html("<img src='<?php echo base_url('/').'images/load.gif';?>");
+  $('#products-result-'+section).html("<img src='<?php echo base_url('/').'images/load.gif';?>'>");
 
     $.ajax({
         type: "POST",

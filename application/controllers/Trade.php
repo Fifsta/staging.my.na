@@ -1706,22 +1706,28 @@ class Trade extends CI_Controller {
 	//+++++++++++++++++++++++++++
 	//UPDATE PRODUCT STATUS
 	//++++++++++++++++++++++++++
-	function update_product_status($id, $str){
+	function update_product_status(){
+
+	    $id = $this->input->post('id', TRUE);
+		$type = $this->input->post('type', TRUE);	
 
 		if($this->session->userdata('id') || $this->session->userdata('admin_id')){
 
-			$data['status'] = trim($str);
+			$data['status'] = trim($type);
 			$this->db->where('product_id', $id);
 			$this->db->update('products', $data);
 
 		}
 
-
 	}
+
 	//+++++++++++++++++++++++++++
 	//ACTIVATE PRODUCT STATUS
 	//++++++++++++++++++++++++++
-	function activate_product_status($id, $str){
+	function activate_product_status(){
+
+		$id = $this->input->post('id', TRUE);
+		$str = $this->input->post('str', TRUE);
 
 		if($this->session->userdata('id') || $this->session->userdata('admin_id')){
 
@@ -1732,30 +1738,32 @@ class Trade extends CI_Controller {
 
 		}
 
-
 	}
+
     //+++++++++++++++++++++++++++
     //EXTEND PRODUCT STATUS BY 30 DAYS
     //++++++++++++++++++++++++++
-    function extend_product_status($id, $type){
+    function extend_product_status(){
+
+    	$id = $this->input->post('id', TRUE);
+		$type = $this->input->post('type', TRUE);
 
         if($this->session->userdata('id') || $this->session->userdata('admin_id')){
 
             $data['end_date'] = date('Y-m-d', strtotime("+30 days"));
             if($type == 'A'){
+
                 $data['end_date'] = date('Y-m-d', strtotime("+7 days"));
 
             }
 
-
-            //$data['is_active'] = ucwords(trim($str));
             $this->db->where('product_id', $id);
             $this->db->update('products', $data);
 
         }
 
-
     }
+
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //RATE SELLER BUYER
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++
