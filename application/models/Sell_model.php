@@ -1,14 +1,15 @@
 <?php
 class Sell_model extends CI_Model{
+
 	public function __construct()
     {
         // Constructor's functionality here, if you have any.
     }
 	
- 	function sell_model(){
+ 	/*function sell_model(){
   		//parent::CI_model();
 		self::__construct();	
- 	}
+ 	}*/
 
  	//++++++++++++++++++++++++++++++
     //FIND USER TYPEHEAD
@@ -18,7 +19,9 @@ class Sell_model extends CI_Model{
 		if(strlen($key) < 2){
 			
 			return;
+			
 		}
+
         $key = $this->db->escape_like_str(urldecode($key));
 		
 		$str2 = " (u_client.CLIENT_NAME like '%" . $key . "%' OR u_client.CLIENT_SURNAME like '%" . $key . "%' 
@@ -230,7 +233,7 @@ class Sell_model extends CI_Model{
 			$data['col4H'] = '<th style="width:12%">Agent</th>';
 			$data['bstr'] = 'Business';
 			$query = $this->db->query($pSQL." WHERE products.bus_id = '".$bus_id."' AND products.status = '".$section."' ".$strSQL."
-                                         GROUP BY products.product_id ORDER BY products.product_id DESC" ,FALSE);
+                                      GROUP BY products.product_id ORDER BY products.product_id DESC" ,FALSE);
 		}
 
 		if($query->result()){

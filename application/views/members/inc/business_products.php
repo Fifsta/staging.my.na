@@ -43,7 +43,28 @@
         $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img,$width,$height, $crop = '');
 
       }
-      
+
+      $agent_ref = '';
+
+      //GET AGENT DETAILS
+      if($row->property_agent != 0){
+
+        $this->db->where('ID', $row->property_agent);
+        $agent_q = $this->db->get('u_client');
+
+        if($agent_q->result()){
+
+          $agentR = $agent_q->row();  
+          $agent = $agent_ref.' '.$agentR->CLIENT_NAME. ' ' .$agentR->CLIENT_SURNAME;
+
+        }
+
+      }else{
+
+        $agent = $agent_ref;
+
+      }      
+
 
       //Check Price
       //Fixed price
@@ -66,11 +87,11 @@
 
       echo '
         <tr id="row-'.$row->product_id.'">
-          <td style="width:100px"><img rel="tooltip"src="' . $img_url . '" alt="' . $row->title . '" class="pull-right img-thumbnail" /></td>
+          <td style="width:100px"><img rel="tooltip"src="' . $img_url . '" alt="' . $row->title . '" class="img-thumbnail" /></td>
           <td id="appadd">'.$row->title.'</td>
           <td style="">'.$price.'</td>
           <td style="">'.date('Y-m-d',strtotime($row->end_date)).'</td>
-          <td></td>
+          <td>'.$agent.'</td>
           <td class="text-right">
 
               <div class="btn-group dropleft text-left">
@@ -91,6 +112,7 @@
                     <a href="'.site_url('/').'product/'.$row->product_id.'/" target="_blank" class="dropdown-item"><i class="icon-search"></i> View Item</a>
                   </div>
               </div>
+              
           </td>
         </tr>
       ';

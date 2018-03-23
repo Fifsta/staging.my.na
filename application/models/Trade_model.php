@@ -6066,8 +6066,8 @@ class Trade_model extends CI_Model
 		{
 
 			$row = $query->row_array();
-			$emailTO = 'roland@my.na';
-			$emailTO = array(array('email' => $emailTO), array('email' => 'christian@intouch.com.na'), array('email' => 'info@my.na'));
+			$emailTO = array(array('email' => 'christian@intouch.com.na'));
+			//$emailTO = array(array('email' => $emailTO), array('email' => 'christian@intouch.com.na'), array('email' => 'info@my.na'));
 			$emailFROM = 'trade@my.na';
 			$name = 'My Namibia Trade';
 			$subject = 'New Product Listed - ' . $row['title'];
