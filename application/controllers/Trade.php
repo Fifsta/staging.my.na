@@ -1939,13 +1939,18 @@ class Trade extends CI_Controller {
 
 	}
 
-		//PRINT PRODUCTS
+	//PRINT PRODUCTS
 	function print_pdf($product_id, $style = ''){
+
 		//error_reporting(0);
 		error_reporting(E_ALL);
+
 		ini_set('memory_limit','512M');
+
 		$this->load->model('print_model');
+
 		$data['product_id'] = $product_id;
+		
 		$this->db->select('*');
 		$this->db->where('products.product_id', $product_id);
 		$this->db->join('product_extras','product_extras.product_id = products.product_id');
@@ -1971,8 +1976,8 @@ class Trade extends CI_Controller {
 				$row['sub_sub_sub_cat'] = $this->trade_model->get_category_name($row['sub_sub_sub_cat_id']);
 
 				$html = $this->load->view('trade/print_pdf'.$style, $row, true);// render the view into HTML
-				//$html = '<h1>Hello</h1>';
-				//echo $html;
+
+
 				$this->load->library('pdf');
 				$pdf = $this->pdf->load();
 				$stylecss = file_get_contents( base_url('/').'css/bootstrap.min.css');

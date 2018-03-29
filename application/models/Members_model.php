@@ -326,9 +326,9 @@ class Members_model extends CI_Model
 				{
 
 				}
-				echo '<div class="control-group">
-					  <label class="control-label" for="city">City</label>
-					  <div class="controls">
+				echo '<div class="form-group row">
+					  <label for="city" class="col-sm-1 col-form-label">City</label>
+					  	<div class="col-sm-10">
 							<select onchange="populateSuburb(this.value);" id="city" name="city"  class="form-control">
 							<option value="0">Please Select your City</option>';
 
@@ -386,9 +386,9 @@ class Members_model extends CI_Model
 
 			}
 
-			echo '<div class="control-group">
-                  <label class="control-label" for="suburb">Suburb</label>
-                  <div class="controls">
+			echo '<div class="form-group row">
+					  <label for="city" class="col-sm-1 col-form-label">Suburb</label>
+                  	  <div class="col-sm-10">
               			<select id="suburb" name="suburb" class="form-control">
 						<option value="0">Please Select your Suburb</option>';
 
@@ -422,6 +422,10 @@ class Members_model extends CI_Model
 			return;
 		}
 	}
+
+
+
+	
 	//+++++++++++++++++++++++++++
 	//POPULATE SUBURBS FOR REGIONS
 	//++++++++++++++++++++++++++

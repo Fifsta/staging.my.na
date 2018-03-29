@@ -10,6 +10,15 @@ iframe{border:none;}
 
 
 
+.round_number{
+    border:5px solid #000;   
+    -webkit-border-radius: 500px;
+    -moz-border-radius: 500px;
+    border-radius: 500px;padding:5px 25px; 
+    font-size:50px; font-weight: bolder;
+}
+
+
 .page-item.active .page-link {
     z-index: 2;
     color: #fff;

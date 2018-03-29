@@ -1,423 +1,237 @@
-<?php
-//+++++++++++++++++
-//LOAD HEADER
-//Prepare Variables array to pass into header
-//+++++++++++++++++
-$header['title'] = 'Create an Account - My Namibia &trade;';
-$header['metaD'] = '';
-$this->load->view('inc/header', $header);
+<?php $this->load->view('inc/header'); ?>
 
-//ADDITIONAL RESOURCES
-//add css, IE7 js files here before the head tag
 
-?>
 <link rel="stylesheet" href="<?php echo base_url('/'); ?>css/bootstrap-image-gallery.min.css">
 <link rel="stylesheet" href="<?php echo base_url('/'); ?>css/flags/flags.css">
 <link href="<?php echo base_url('/'); ?>css/datepicker.css" rel="stylesheet" type="text/css"/>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="<?php echo base_url('/'); ?>css/select/select2.css" rel="stylesheet" type="text/css" />
-
 </head>
-<body>
 
-<?php
-//+++++++++++++++++
-//LOAD NAVIGATION
-//+++++++++++++++++
-$nav['section'] = 'account';
-$this->load->view('inc/navigation', $nav);
-?>
+<body id="top">
 
-<!-- END Navigation -->
-<!-- Part 1: Wrap all content here -->
-<div id="wrap">
-    <!-- Begin page content -->
-    <div class="clearfix" style="height:40px;"></div>
-    <div class="container" id="home_container">
-        <div class="row">
-            <div class="span8">
+<?php $this->load->view('inc/top_bar'); ?>
 
-                <h1 class="na_script upper big_icon">Join <span class="na_script yellow big_icon">My</span> <span class="na_script yellow big_icon">Na</span>mibia&trade;</h1>
-
-                   Already registered with your e-mail address? You will not be able to register again.</p>
-
-                <p>All your information is stored securely and confidentially .
-                    By joining My Namibia you will have access your personal  membership console .
-                    Here you will be able to manage your business listing as well as , list anything from products , deals , cars or property to jobs.
-                    You will be kept up to date with the latest news and listings, that fit your profile.</p>
-            </div>
-            <div class="span4">
-                <img src="<?php echo base_url('/');?>img/bground/stick_man_couch_2.png" class="pull-right" alt="Join the biggest Namibian online portal" />
-            </div>
-            <div class="clearfix" style="height:40px"></div>
-
-        </div>
-    </div>
-    <div class="clearfix"><p>&nbsp;</p><p>&nbsp;</p></div>
-    <div class="container-fluid footer">
-
-
-        <div class="row-fluid">
-            <div class="container">
-
-                <div class="row-fluid white">
-                    <div class="span12">
-
-                        <h2>Join the biggest Namibian Online Network for FREE</h2>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-    <div class="clearfix"><p>&nbsp;</p><p>&nbsp;</p></div>
+<nav id="bread">
     <div class="container">
-        <div class="row">
-            <div class="span8">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">My.na</a></li>
+          </ol>
+    </div>
+</nav>
 
-                <div class="clearfix"></div>
+<div class="container">
+    <div class="row">
 
-                <?php if (isset($error)) { ?>
-                    <div class="alert alert-error">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <?php echo $error; ?>
-                    </div>
-                <?php
-                }//end error
-                if (isset($basicmsg)) { ?>
-                    <div class="alert alert-success">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <?php echo $basicmsg; ?>
-                    </div>
-                <?php
-                }
-                ?>
+ 		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-4 order-md-2 order-sm-1 order-lg-2 order-xl-3" id="sidebar">
+			<?php $this->load->view('inc/login'); ?>
+			<?php $this->load->view('inc/weather'); ?>
+			<?php $this->load->view('inc/adverts'); ?>
+		</div>
+		   	
+		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
 
-                <ul id="myTab2" class="nav nav-pills">
-                    <li class="active"><a href="#regtb" data-toggle="tab"><i class="icon-lock"></i> <span
-                                class="hidden-phone">Register with my.na</span></a></li>
-                    <li><a><strong>OR</strong></a></li>
-                    <!--<li><a href="#fbtb" data-toggle="tab"> <i class="fa fa-facebook"></i> <span class="hidden-phone">Login with facebook</span></a></li>-->
-                    <li>
+			<div class="heading">
+				<h2 data-icon="fa-pencil">Join <strong>Ny Namibia</strong></h2>
+				<p>Already registered with your e-mail address? You will not be able to register again.</p>
+				<ul class="options">
 
-                        <div class="fb-login-button" data-max-rows="1" onlogin="checkLoginState()" data-size="large" style="margin-top:5px" data-show-faces="false" data-auto-logout-link="false"></div>
-                    </li>
-                </ul>
+				</ul>
+			</div>
+			<br>
 
-                <div id="myTabContent2" class="tab-content">
-                    <div class="tab-pane fade in active" id="regtb">
-                        <?php
-                        //+++++++++++++++++
-                        //LOAD FORM
-                        //+++++++++++++++++
+            <p>
+	        	All your information is stored securely and confidentially.
+	            By joining My Namibia you will have access your personal  membership console.
+	            Here you will be able to manage your business listing as well as , list anything from products , deals , cars or property to jobs.
+	            You will be kept up to date with the latest news and listings, that fit your profile.
+            </p>
 
-                        if(isset($semi) && $semi){
+            <ul id="myTab2" class="nav nav-pills">
+                <li class="nav-item"><a class="btn btn-dark nav-link" href="#regtb" data-toggle="tab"><i class="icon-lock"></i> <span class="hidden-phone">Register with my.na</span></a></li>
+                <li class="nav-item"><a class="nav-link"><strong>OR</strong></a></li>
+                <li class="nav-item">
+                    <div class="fb-login-button" data-max-rows="1" onlogin="checkLoginState()" data-size="large" style="margin-top:5px" data-show-faces="false" data-auto-logout-link="false"></div>
+                </li>
+            </ul>
 
-                            echo '<div class="alert"><h4>Hi '.$fname.',</h4>We can see you have previously completed the first registration step.
-                                    Please Complete the 2nd step to get you my.na account up and running.
-                                    </div>';
-                        }
-
-                        //+++++++++++++++++
-                        //My.Na Registration Form
-                        //+++++++++++++++++
-                        //Roland Ihms
-                        //Security Questions
-                        $z = rand(1,9);
-                        $y = rand(1,9);
-                        ?>
+            <!-- Start Registration Process -->
+            <div>
 
 
-                        <form id="member-register" name="member-register" method="post" action="<?php echo site_url('/');?>members/register_do" class="form-horizontal">
-                            <fieldset>
-                                <div class="clearfix" style="height:40px;"></div>
+                <div class="spacer"></div>
 
-                                <div id="step1" class="<?php if(isset($semi)){echo 'hide';}?>">
+                <form id="member-register" name="member-register" method="post" action="<?php echo site_url('/');?>members/register_do" class="form-horizontal">
+	                
+	                <!--step 1 -->
+	                <div id="step1" class="<?php if(isset($semi)){echo 'd-none';}?>">
 
-                                    <div class="row-fluid">
-                                        <div class="span2">
-                                            <span class="upper na_script round_number">1</span>
-                                        </div>
-                                        <div class="span10">
-                                            <strong>Step 1</strong>
-                                           <p>Please complete the form below</p>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"><p>&nbsp;</p></div>
+						<div class="heading">
+							<h2 data-icon="fa-pencil">Step <strong>One</strong></h2>
+							<p>Please complete the form below</p>
+							<ul class="options">
+
+							</ul>
+						</div>
+						<br>
+
+						<div class="form-group row">
+						    <label for="fname" class="col-sm-1 col-form-label">Name</label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" id="fname" name="fname" placeholder="First name" value="<?php if(isset($fname)){echo $fname;}?>">
+						    </div>
+						</div>
+
+						<div class="form-group row">
+						    <label for="sname" class="col-sm-1 col-form-label">Surname</label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" id="sname" name="sname" placeholder="Surname" value="<?php if(isset($sname)){echo $sname;}?>">
+						    </div>
+						</div>
+
+						<div class="form-group row">
+						    <label for="email" class="col-sm-1 col-form-label">Email</label>
+						    <div class="col-sm-10">
+						      <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?php if(isset($email)){echo $email;}?>">
+						      <span class="help-block" style="font-size:11px" id="email_help_div">This is your accounts unique identifier, must be unique</span>
+						    </div>
+						</div>
+
+	                </div>
+	                <!-- end step1 -->
 
 
-                                    <?php //$this->load->view('inc/countries_cell');?>
-
-                                    <div class="control-group">
-                                        <label class="control-label" for="fname">Name</label>
-                                        <div class="controls">
-                                            <input type="text" class="span4" id="fname" name="fname" placeholder="First name" value="<?php if(isset($fname)){echo $fname;}?>">
-                                        </div>
-                                    </div>
-
-                                    <div class="control-group">
-                                        <label class="control-label" for="sname">Surname</label>
-                                        <div class="controls">
-                                            <input type="text" class="span4" id="sname" name="sname" placeholder="Surname" value="<?php if(isset($sname)){echo $sname;}?>">
-                                        </div>
-                                    </div>
+	                <!--step 2 -->
+	                <div id="step2" class="<?php if(!isset($semi)){echo 'd-none';} ?>">
 
 
-                                    <div class="control-group">
-                                        <label class="control-label" for="email">Email</label>
-                                        <div class="controls">
-                                            <input type="text" class="span4" id="email" name="email" placeholder="Email" value="<?php if(isset($email)){echo $email;}?>">
-                                            <span class="help-block" style="font-size:11px" id="email_help_div">This is your accounts unique identifier, must be unique</span>
-                                        </div>
+						<div class="heading">
+							<h2 data-icon="fa-pencil">Step <strong>two</strong></h2>
+							<p>Please set your personal and security credentials</p>
+							<ul class="options">
 
-                                    </div>
-                                </div><!-- end step1-->
-                                <div id="step2" class="<?php if(!isset($semi)){echo 'hide';}?>">
+							</ul>
+						</div>
+						<br>
 
-                                    <div class="row-fluid">
-                                        <div class="span2">
-                                            <span class="upper na_script round_number">2</span>
-                                        </div>
-                                        <div class="span10">
-                                            <strong>Step 2</strong>
-                                            <p>Please set your personal and security credentials</p>
-                                        </div>
-                                    </div>
+						<div class="form-group row">
+						    <label for="email" class="col-sm-1 col-form-label">Country</label>
+						    <div class="col-sm-10">
+						      <select onchange="populateRegion(this.value);" id="country" name="country"" class="form-control">
+									<option value="0" selected="selected">Select a Country</option>
+                                        <?php
+                                        if(!$country = $this->session->userdata('country')){
 
-                                    <div class="clearfix"><p>&nbsp;</p></div>
-                                    <div class="control-group">
-                                        <label class="control-label" for="country">Country</label>
-                                        <div class="controls">
+                                            $country = '';
 
-                                            <select onchange="populateRegion(this.value);" id="country" name="country" class="span4">
-                                                <option value="0" selected="selected">Select a Country</option>
-                                                <?php
-                                                if(!$country = $this->session->userdata('country')){
+                                        }
+                                        if(!$city = $this->session->userdata('city')){
 
-                                                    $country = '';
+                                            $city = '';
 
+                                        }
+
+                                        //Get all countries and loop through them
+                                        //for the select box
+                                        $countries = $this->members_model->get_countries();
+                                        if ($countries->num_rows() != 0 ) {
+                                            foreach($countries->result() as $row){
+                                                $country1 = $row->COUNTRY_NAME;
+                                                $code = $row->COUNTRY_CODE;
+                                                $ID = $row->ID;
+                                                //see if country has been selected
+                                                if(isset($country)){
+                                                    if($country1 == $country){ $x = 'selected="selected"';}else{ $x = '';}
+                                                }else{
+                                                    $x ='';
                                                 }
-                                                if(!$city = $this->session->userdata('city')){
+                                                ?>
 
-                                                    $city = '';
+                                                <option <?php echo $x;?> value="<?php echo $ID; ?>"><?php echo $country1; ?></option>
 
-                                                }
-
-                                                //Get all countries and loop through them
-                                                //for the select box
-                                                $countries = $this->members_model->get_countries();
-                                                if ($countries->num_rows() != 0 ) {
-                                                    foreach($countries->result() as $row){
-                                                        $country1 = $row->COUNTRY_NAME;
-                                                        $code = $row->COUNTRY_CODE;
-                                                        $ID = $row->ID;
-                                                        //see if country has been selected
-                                                        if(isset($country)){
-                                                            if($country1 == $country){ $x = 'selected="selected"';}else{ $x = '';}
-                                                        }else{
-                                                            $x ='';
-                                                        }
-                                                        ?>
-
-                                                        <option <?php echo $x;?> value="<?php echo $ID; ?>"><?php echo $country1; ?></option>
-
-                                                    <?php
-                                                    }//end foreach loop
-                                                } //end if rows for countries ?>
-
-                                            </select>
-                                            <span class="help-block" style="font-size:11px">Please select you current country of residence</span>
-                                        </div>
-                                    </div>
-
-                                    <?php //POPULATE REGION PLACEHOLDER ?>
-                                    <div id="region_div"></div>
-
-                                    <?php //POPULATE SUBURB PLACEHOLDER ?>
-                                    <div id="suburb_div"></div>
+                                            <?php
+                                            }//end foreach loop
+                                        } //end if rows for countries ?>
+						      </select>
+						    </div>
+						</div>
 
 
-                                    <div class="control-group">
-                                        <label class="control-label" for="dob">Date of Birth</label>
-                                        <div class="controls">
-                                            <div class="input-append date">
-                                                <input type="text" class="span3" data-date="1985-10-19" data-date-format="yyyy-mm-dd" data-date-viewmode="years" id="dob"  name="dob"  value="<?php if (isset($dob)){echo date('Y-m-d',strtotime($dob));}else{ echo '1985-10-19';}?>" readonly>
-                                                <span class="add-on"><i class="icon-calendar"></i></span>
-                                            </div>
-                                            <span class="help-block" style="font-size:11px">Select your date of birth by clicking on the calendar icon</span>
-                                        </div>
+                        <?php //POPULATE REGION PLACEHOLDER ?>
+                        <div id="region_div"></div>
 
-                                    </div>
+                        <?php //POPULATE SUBURB PLACEHOLDER ?>
+                        <div id="suburb_div"></div>
 
-                                    <div class="control-group">
-                                        <label class="control-label" for="gender">Gender</label>
-                                        <div class="controls">
-                                            <div class="btn-group" data-toggle="buttons-radio">
-                                                <button type="button" id="male_click" onclick="javascript:togglecheck('M');" class="btn btn-inverse active">Male</button>
-                                                <button type="button" id="female_click" onclick="javascript:togglecheck('F');" class="btn btn-inverse">Female</button>
+						<div class="form-group row">
+						    <label for="dob" class="col-sm-1 col-form-label">Date of Birth</label>
+						    <div class="col-sm-3">
+                                <input type="text" class="form-control" data-date="1985-10-19" data-date-format="yyyy-mm-dd" data-date-viewmode="years" id="dob"  name="dob" value="<?php if (isset($dob)){echo date('Y-m-d',strtotime($dob));}else{ echo '1985-10-19';}?>" readonly>
+                                <span class="add-on"><i class="icon-calendar"></i></span>
+						    </div>
+						</div>
 
-                                            </div>
-                                            <input type="hidden" name="gender" id="gender" value="M" />
-                                            <span class="help-block" style="font-size:11px">Are you male or female?</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="control-group">
-                                        <label class="control-label" for="cell">Cellphone</label>
-
-                                        <div class="controls">
-                                            <?php echo $this->my_na_model->get_countries(0,false,false);?>
-                                            <input type="text" id="cell"  name="cell" autocomplete="off" onkeypress="return isNumberKey(event)" class="span3 bfh-countries" placeholder="eg: 0811234567" value="<?php if(isset($cell)){echo $cell;}?>">
-                                            <!--<input type="hidden" id="dial_code"  name="dial_code"  value="264">-->
-                                            <span class="help-block" style="font-size:11px">Please only give us your complete cellular number without<br /> any prefixes or dialling codes.</span>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="control-group">
-                                        <label class="control-label" for="pass1">Password</label>
-                                        <div class="controls">
-                                            <input type="password" class="span4" id="pass1" name="pass1" placeholder="Password">
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label" for="pass2">Confirm</label>
-                                        <div class="controls">
-                                            <input type="password" class="span4" id="pass2" name="pass2" placeholder="Confirm Password">
-                                            <span class="help-block" style="font-size:11px">Confirm your password and choose a safe combination<br /> of letters, symbols and numbers</span>
-                                        </div>
-                                    </div>
-
-                                </div><!-- end step2-->
-
-                                <div class="control-group <?php if(isset($semi)){echo 'hide';}?>" id="Gcaptcha" >
-                                    <label class="control-label"></label>
-                                    <div class="controls">
-                                        <?php if(!isset($semi)){
-                                                $this->my_na_model->build_captcha();
-                                              }
-                                        ?>
-                                    </div>
+						<div class="form-group row">
+						    <label for="gender" class="col-sm-1 col-form-label">Gender</label>
+						    <div class="col-sm-10">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" id="male_click" onclick="javascript:togglecheck('M');" class="btn btn-dark active">Male</button>
+                                    <button type="button" id="female_click" onclick="javascript:togglecheck('F');" class="btn btn-dark">Female</button>
                                 </div>
-                                <input type="hidden" id="x" name="x" value="<?php echo $z;?>"/>
-                                <input type="hidden" id="y" name="y" value="<?php echo $y;?>"/>
-                                <input type="hidden" id="client_id" name="client_id" value="<?php echo $client_id;?>"/>
-                                <input type="hidden" id="email_" name="email_" value="<?php echo $email;?>"/>
-                                <div class="control-group <?php if(isset($semi)){echo 'hide';}?>">
-                                    <label class="control-label" for="i_agree">Accept T&amp;C's</label>
-                                    <div class="controls">
-                                        <input type="checkbox" id="i_agree" name="i_agree">
+                                <input type="hidden" name="gender" id="gender" value="M" />
+                                <span class="help-block" style="font-size:11px">Are you male or female?</span>
+						    </div>
+						</div>		
 
-                                        <span class="help-block" style="font-size:11px">By joining My Namibia&trade; you agree to our Terms and Conditions. All rights reserved</span>
-                                    </div>
+
+						<div class="form-group row">
+						    <label for="cell" class="col-sm-1 col-form-label">Cellphone</label>
+						    <div class="col-sm-10  ">
+                                <div class="btn-group input-group">
+                                    <?php echo $this->my_na_model->get_countries(0,false,false);?>
+                                    <input type="text" id="cell"  name="cell" autocomplete="off" onkeypress="return isNumberKey(event)" class="form-control  input-sm" bfh-countries" placeholder="eg: 0811234567" value="<?php if(isset($cell)){echo $cell;}?>">
+                                    
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label"></label>
-                                    <div class="controls">
-                                        <div id="result_msg"></div>
-                                        <button type="submit" class="btn  btn-inverse" name="submit" id="but<?php if(!isset($semi)){echo '_step1';}?>"><?php if(!isset($semi)){echo 'Go To Next Step';}else{ echo 'Proceed';}?></button>
-                                    </div>
-                                </div>
+                                <span class="help-block" style="font-size:11px">Please only give us your complete cellular number without any prefixes or dialling codes.</span>
+						    </div>
+						</div>
 
 
-                            </fieldset>
-                        </form>
+	                </div>	
+	                <!-- end step2 -->
 
-                    </div>
-                    <!--                      <div class="tab-pane fade" id="fbtb">
-                                               <div class="">
-                                                    <h3>Create a Account using facebook.com</h3>
-                                                    <p>We can quickly register your details using facebook.</p>
-                                                    <div class="fb-login-button pull-right" data-max-rows="1" data-theme="dark" data-size="xlarge" data-show-faces="true" data-auto-logout-link="false"></div>
-                                                    <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"></div>
-                                                </div>
-                                          </div>-->
-                </div>
+                    <input type="hidden" id="client_id" name="client_id" value="<?php echo $client_id;?>"/>
+                    <input type="hidden" id="email_" name="email_" value="<?php echo $email;?>"/>
 
+                    <div class="control-group <?php if(isset($semi)){echo 'hide';}?>">
+                        <label class="control-label" for="i_agree">Accept T&amp;C's</label>
+                        <div class="controls">
+                            <input type="checkbox" id="i_agree" name="i_agree">
+
+                            <span class="help-block" style="font-size:11px">By joining My Namibia&trade; you agree to our Terms and Conditions. All rights reserved</span>
+                        </div>
+                    </div>                    
+
+                     <div class="control-group">
+                        <label class="control-label"></label>
+                        <div class="controls">
+                            <div id="result_msg"></div>
+                            <button type="submit" class="btn  btn-dark" name="submit" id="but<?php if(!isset($semi)){echo '_step1';}?>"><?php if(!isset($semi)){echo 'Go To Next Step';}else{ echo 'Proceed';}?></button>
+                        </div>
+                    </div>                   
+
+            	</form>
             </div>
-
-            <div class="span4">
-                <h3>Business Services</h3>
-
-                <div class="white_box">
-                    <video controls preload="none" poster="<?php echo S3_URL; ?>video/video/business_stick_man.jpg"
-                           style="width:100%" title="business_stick_man">
-                        <source src="<?php echo S3_URL; ?>video/video/business_stick_man.m4v" type="video/mp4"/>
-                        <source src="<?php echo S3_URL; ?>video/video/business_stick_man.webm"
-                                type="video/webm"/>
-                        <source src="<?php echo S3_URL; ?>video/video/business_stick_man.ogv" type="video/ogg"/>
-                        <source src="<?php echo S3_URL; ?>video/video/business_stick_man.mp4"/>
-                        <object type="application/x-shockwave-flash"
-                                data="<?php echo S3_URL; ?>video/video/eh5v.files/html5video/flashfox.swf"
-                                width="1280" height="720" style="position:relative;">
-                            <param name="movie"
-                                   value="<?php echo S3_URL; ?>video/video/eh5v.files/html5video/flashfox.swf"/>
-                            <param name="allowFullScreen" value="true"/>
-                            <param name="flashVars"
-                                   value="autoplay=false&controls=true&fullScreenEnabled=true&posterOnEnd=true&loop=false&poster=<?php echo base_url('/'); ?>video/video/business_stick_man.jpg&src=<?php echo S3_URL; ?>video/video/business_stick_man.m4v"/>
-                            <embed src="eh5v.files/html5video/flashfox.swf" width="1280" height="720"
-                                   style="position:relative;"
-                                   flashVars="autoplay=false&controls=true&fullScreenEnabled=true&posterOnEnd=true&loop=false&poster=<?php echo base_url('/'); ?>video/video/business_stick_man.jpg&src=<?php echo S3_URL; ?>video/video/business_stick_man.m4v"
-                                   allowFullScreen="true" wmode="transparent" type="application/x-shockwave-flash"
-                                   pluginspage="http://www.adobe.com/go/getflashplayer_en"/>
-                            <img alt="business_stick_man"
-                                 src="<?php echo S3_URL; ?>video/video/business_stick_man.jpg"
-                                 style="position:absolute;left:0;" width="100%"
-                                 title="Video playback is not supported by your browser"/>
-                        </object>
-                    </video>
-                </div>
-                <h3>Buy &amp; Sell in Namibia</h3>
-
-                <div class="white_box">
-                    <video controls preload="none" poster="<?php echo S3_URL; ?>video/video/buy_sell_stick_man.jpg"
-                           style="width:100%" title="buy_sell_stick_man">
-                        <source src="<?php echo S3_URL; ?>video/video/buy_sell_stick_man.m4v" type="video/mp4"/>
-                        <source src="<?php echo S3_URL; ?>video/video/buy_sell_stick_man.webm"
-                                type="video/webm"/>
-                        <source src="<?php echo S3_URL; ?>video/video/buy_sell_stick_man.ogv" type="video/ogg"/>
-                        <source src="<?php echo S3_URL; ?>video/video/buy_sell_stick_man.mp4"/>
-                        <object type="application/x-shockwave-flash"
-                                data="<?php echo S3_URL; ?>video/video/eh5v.files/html5video/flashfox.swf"
-                                width="1280" height="720" style="position:relative;">
-                            <param name="movie"
-                                   value="<?php echo S3_URL; ?>video/video/eh5v.files/html5video/flashfox.swf"/>
-                            <param name="allowFullScreen" value="true"/>
-                            <param name="flashVars"
-                                   value="autoplay=false&controls=true&fullScreenEnabled=true&posterOnEnd=true&loop=false&poster=<?php echo S3_URL; ?>video/video/buy_sell_stick_man.jpg&src=<?php echo S3_URL; ?>video/video/buy_sell_stick_man.m4v"/>
-                            <embed src="eh5v.files/html5video/flashfox.swf" width="1280" height="720"
-                                   style="position:relative;"
-                                   flashVars="autoplay=false&controls=true&fullScreenEnabled=true&posterOnEnd=true&loop=false&poster=<?php echo S3_URL; ?>video/video/buy_sell_stick_man.jpg&src=<?php echo S3_URL; ?>video/video/buy_sell_stick_man.m4v"
-                                   allowFullScreen="true" wmode="transparent" type="application/x-shockwave-flash"
-                                   pluginspage="http://www.adobe.com/go/getflashplayer_en"/>
-                            <img alt="buy_sell_stick_man"
-                                 src="<?php echo S3_URL; ?>video/video/buy_sell_stick_man.jpg"
-                                 style="position:absolute;left:0;" width="100%"
-                                 title="Video playback is not supported by your browser"/>
-                        </object>
-                    </video>
-                </div>
-
-            </div>
+            <!-- End Registration Process -->
 
         </div>
-
-    </div>
-    <!-- /container - end content -->
-
-
-    <?php
-    //+++++++++++++++++
-    //LOAD FOOTER
-    //+++++++++++++++++
-    $footer['foo'] = '';
-    $this->load->view('inc/footer', $footer);
-    ?>
+    </div>  
 </div>
-<!-- /wrap  -->
+
+    
+<?php $this->load->view('inc/footer');?>    
+
+<script src='<?php echo base_url('/')?>js/jquery.cycle2.min.js' type="text/javascript" language="javascript"></script>
 
 <!-- JAvascript
 ================================================== -->
@@ -553,29 +367,6 @@ $this->load->view('inc/navigation', $nav);
 
         });
 
-
-
-       /* function formatState (state) {
-            console.log(state.element+'sasas');
-            if (!state.id) { return state.text; }
-            var $state = $(
-                '<span><img src="vendor/images/flags/' + state.element.value.toLowerCase() + '.png" class="img-flag" />'+state.element.text+'</span>'
-            );
-
-            return $state;
-        };
-        function format(state) {
-            if (!state.id) return state.text; // optgroup
-            return "<img class='flag' src='images/flags/" + state.id.toLowerCase() + ".png'/>" + state.text;
-        }
-        $(".country").select2({
-            formatResult: format,
-            formatSelection: format,
-            escapeMarkup: function(m) { return m; }
-        });*/
-
-
-
     });
 
 
@@ -590,10 +381,12 @@ $this->load->view('inc/navigation', $nav);
 
     function togglecheck(val){
 
+    	if(val == 'M') {  $('#male_click').addClass("active"); $('#female_click').removeClass("active"); }
+    	if(val == 'F') {  $('#female_click').addClass("active"); $('#male_click').removeClass("active"); }
+
         var chk = $('#gender');
         chk.val(val);
     }
-
 
 
 
@@ -622,6 +415,7 @@ $this->load->view('inc/navigation', $nav);
         });
 
     }
+
     function submit_form_step1(){
 
         var frm = $('#member-register');
@@ -812,14 +606,13 @@ $this->load->view('inc/navigation', $nav);
     {
 
         if(countryID == 151){
-            $("#region_div").html('<div class="control-group"><div class="span4" style="text-align:center;"><img src="<?php echo base_url('/').'img/load.gif';?>" /> Getting Cities...</div></div>');
+            $("#region_div").html('<div class="control-group"><div style="text-align:center;"><img src="<?php echo base_url('/').'img/load.gif';?>" /> Getting Cities...</div></div>');
             $("#suburb_div").addClass('disabled');
         }
         $.ajax({
             url: "<?php echo site_url('/');?>members/populate_city/"+countryID+"/<?php echo $city_id;?>/",
             success: function(data) {
                 $("#region_div").html(data);
-                $('select').removeClass('span8').addClass('span4');
                 //includeJS('js/microsite.show.js');
             }
         });
@@ -832,7 +625,6 @@ $this->load->view('inc/navigation', $nav);
             url: "<?php echo site_url('/');?>members/populate_suburb/"+cityID+"/0",
             success: function(data) {
                 $("#suburb_div").html(data);
-                $('select').removeClass('span8').addClass('span4');
             }
         });
     }
@@ -845,5 +637,7 @@ $this->load->view('inc/navigation', $nav);
     }
 
     </script>
+
+
 </body>
-</html>
+</html> 
