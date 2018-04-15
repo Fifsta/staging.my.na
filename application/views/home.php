@@ -37,6 +37,8 @@
 					<div class="spacer"></div>
 					<?php $cars['type'] = '348'; $this->load->view('inc/products', $cars);?>
 					<div class="spacer"></div>
+					<?php $this->load->view('inc/auctions');?>					
+					<div class="spacer"></div>
 					<?php $this->load->view('inc/news');?>	
 					<div class="spacer"></div>
 				</div>	
