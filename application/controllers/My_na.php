@@ -392,7 +392,7 @@ class My_na extends CI_Controller {
 
                                         WHERE products.listing_type = 'A' AND products.is_active = 'Y'
                                         GROUP BY products.product_id
-                                        ORDER BY products.listing_date DESC LIMIT 4");
+                                        ORDER BY products.listing_date DESC LIMIT 8");
 		 $o = $this->product_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 3, $offset = 0, $title = '', $amt = 4 , FALSE);
 
 		 $this->output

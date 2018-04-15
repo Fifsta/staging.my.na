@@ -5,7 +5,7 @@
 		<h2 data-icon="fa-briefcase"><strong>Business</strong> Directory</h2>
 		<p></p>
 		<ul class="options">
-			<li><a href="#" data-icon="fa-edit">List my own</a></li>
+			<!--<li><a href="<?php //echo site_url('/').'members/add_business'; ?>" data-icon="fa-edit">List my own</a></li>-->
 		</ul>
 	</div>
 
