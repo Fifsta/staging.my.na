@@ -234,6 +234,7 @@
 <script src='<?php echo base_url('/')?>js/jquery.cycle2.min.js' type="text/javascript" language="javascript"></script>
 
 <!-- JAvascript
+
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 
@@ -243,6 +244,11 @@
 <script src="<?php echo S3_URL;?>video/video/eh5v.files/html5video/html5ext.js" type="text/javascript"></script>
 
 <script type="text/javascript">
+
+
+    
+
+
 
     $(document).ready(function(){
 

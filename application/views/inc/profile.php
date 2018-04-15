@@ -65,6 +65,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 			<div id="MyBusiness" class="panel-collapse collapse <?php echo $my_bus; ?>" role="tabpanel" aria-labelledby="MyBusiness">
 				<div class="panel-body">
 					<ul>
+						<li><a href="<?php echo site_url('/'); ?>members/add_business"><strong>+ Add a Business</strong></a></li>
 						<?php echo $this->my_na_model->get_businesses_nav(); ?>
 					</ul>
 				</div>

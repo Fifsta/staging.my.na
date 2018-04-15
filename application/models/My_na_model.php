@@ -392,7 +392,7 @@ class My_na_model extends CI_Model{
 
             if($tel){
 
-                echo '<select class="'.$class.'" name="'.$id.'"  id="'.$id.'">';
+                echo '<select class="form-control col-md-2" name="'.$id.'" id="'.$id.'">';
                 foreach($q->result() as $row){
 
 
@@ -417,8 +417,6 @@ class My_na_model extends CI_Model{
 
 
             }
-
-
 
 
         }else{
@@ -467,7 +465,7 @@ class My_na_model extends CI_Model{
             }
 
             if(!($found)){
-                echo '<input type="hidden" id="dial_code"  name="dial_code"  value="264">
+                echo '<input type="hidden" id="dial_code" name="dial_code" value="264">
                         <div class="btn-group">
                               <button class="btn" id="fl_select">+264 <img src="'.base_url('/').'images/blank.gif" class="flag flag-na" ></button>
                               <button class="btn dropdown-toggle" data-toggle="dropdown">

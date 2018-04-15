@@ -15,7 +15,7 @@
         <input class="form-control input-sm" name="email" placeholder="Business Email" value="<?php if(isset($BUSINESS_EMAIL)){echo $BUSINESS_EMAIL;}?>">
       </div>
     </div>
-
+ 
     <div class="col-sm-4">
       <div class="form-group">
         <label for="Website">Website</label>
@@ -59,7 +59,6 @@
       <div class="form-group">
         <label for="countries">Country</label>
         <input class="form-control input-sm" name="country" placeholder="Country" value="<?php if(isset($COUNTRY_NAME)){echo $COUNTRY_NAME;}?>">
-
       </div>
     </div> 
 
@@ -67,16 +66,13 @@
       <div class="form-group">
         <label for="countries">City</label>
         <input class="form-control input-sm" name="city" placeholder="City" value="<?php if(isset($COUNTRY_CITY)){echo $COUNTRY_CITY;}?>">
-
       </div>
     </div>   
-
 
     <div class="col-sm-4">
       <div class="form-group">
         <label for="countries">Suburb</label>
         <input class="form-control input-sm" name="suburb" placeholder="Suburb" value="<?php if(isset($COUNTRY_SUBURB)){echo $COUNTRY_SUBURB;}?>">
-
       </div>
     </div>  
 
@@ -84,7 +80,6 @@
       <div class="form-group">
         <label for="countries">PO Box</label>
         <input class="form-control input-sm" name="pobox" placeholder="PO Box" value="<?php if(isset($BUSINESS_POSTAL_BOX)){echo $BUSINESS_POSTAL_BOX;}?>">
-
       </div>
     </div>   
 
@@ -92,7 +87,6 @@
       <div class="form-group">
         <label for="countries">Physical Address</label>
         <input class="form-control input-sm" name="address" placeholder="Address" value="<?php if(isset($BUSINESS_PHYSICAL_ADDRESS)){echo $BUSINESS_PHYSICAL_ADDRESS;}?>">
-
       </div>
     </div>   
 
@@ -100,7 +94,6 @@
       <div class="form-group">
         <label for="countries">Update Details</label>
         <button type="button" class="btn btn-primary btn-lg btn-block details-update" data-icon="fa-envelope-o">Update</button>
-
       </div>
     </div>           
 

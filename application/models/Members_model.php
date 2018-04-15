@@ -1088,6 +1088,8 @@ class Members_model extends CI_Model
 		//$name1 = str_replace('.','_', str_replace('(','-',str_replace(')','-',$name))).'-' . rand(9,99999);
 
 		$name1 = str_replace('--', '-', preg_replace('/[^A-Za-z0-9\-]/', '-', $name)) . rand(9, 99999);
+		
+		$this->load->library('encryption');
 
 		if (isset($_FILES['userfile1']))
 		{
@@ -1195,7 +1197,7 @@ class Members_model extends CI_Model
 			$data['width'] = $this->upload->image_width;
 			$data['height'] = $this->upload->image_height;
 			$image = S3_URL . 'assets/business/photos/' . $file;
-			$btn_path = site_url('/') . 'my_images/edit_image/' . urlencode($this->encrypt->encode('assets/business/photos/' . $file));
+			$btn_path = site_url('/') . 'my_images/edit_image/' . urlencode($this->encryption->encrypt('assets/business/photos/' . $file));
 			//redirect
 			$data['basicmsg'] = '<h4>Do you want to crop the photo?</h4>Your cover photo has been uploaded, do you want to crop your photo to fit the box?
 				 <a href="' . $btn_path . '" class="btn btn-inverse pull-right" rel="tooltip" title="Cover Image 750 pixels x 300 pixels" style="margin:5px"><i class="icon-retweet icon-white"></i> Crop Image Now</a>

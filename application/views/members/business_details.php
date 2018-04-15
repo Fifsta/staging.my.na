@@ -58,8 +58,9 @@ if($img != ''){
   
 }else{
   
-  $img_url =  'assets/business/photos/listing-placeholder.jpg';
-  
+  $img_str =  'assets/business/photos/logo-placeholder.jpg';
+  $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
+
 }
 
 //COVER IMAGE
@@ -150,6 +151,20 @@ $this->load->view('inc/header', $header);
             <div class="list-map">
               <div class="list-map-left" style="background:#ccc; position:relative">
                   <img src="<?php echo $cover_url; ?>" class="img-fluid">
+
+                  <form action="<?php echo site_url('/')?>members/add_cover/<?php echo $bus_id;?>" method="post" accept-charset="utf-8" id="add-cover" name="add-cover" enctype="multipart/form-data"> 
+                    <input type="file" style="width:0px; height:0px;" id="cover_file" name="userfile1">
+                    <input type="hidden" id="cover_msg" name="" value="">
+                    <input type="hidden" id="id1" name="id1" value="<?php echo $this->session->userdata('admin_id');?>">
+                    <input type="hidden" id="bus_id1" name="bus_id1" value="<?php echo $bus_id;?>">
+                    <input type="hidden" id="bus_name1" name="bus_name1" value="<?php echo $name;?>">
+
+                    <button type="submit" style="margin:5px"  class="btn btn-dark pull-right" id="coverbut"><i class="fa fa-picture"></i> <?php if($cover_img != ''){ echo 'Upload New Cover';}else{ echo 'Add Cover';} ?></button>
+                    <a class="btn btn-dark pull-right" rel="tooltip" title="Cover Image 750 pixels x 300 pixels" style="margin:5px" onclick="select_cover()" href="javascript:void(0)"><i class="fa fa-search"></i> Browse Cover</a>
+
+
+                  </form>
+
               </div>
               
               <div class="list-map-right" id="map_container">
@@ -373,6 +388,7 @@ $this->load->view('inc/header', $header);
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js"></script>
 <script src="<?php echo base_url('/');?>js/custom/fb.js"></script>
 <script src="<?php echo base_url('/');?>js/custom/members_home.js"></script>
+ <script src="<?php echo base_url('/');?>js/jquery.form.min.js"></script>
 
 <script data-cfasync="false" type="text/javascript">
 
@@ -390,9 +406,134 @@ $(document).ready(function(){
   });
   $('[rel=tooltip]').tooltip();
 
-  //load_analytics(<?php echo $bus_id;?>, 'MONTH'); 
-
   load_products_do(<?php echo $bus_id; ?>, 'live');
+
+
+  var url = window.URL || window.webkitURL;
+
+  $("#cover_file").change(function(e) {
+
+    var str1 = '' ;  
+
+    if( this.disabled ){
+
+      str1 = 'Your browser does not support File upload.';
+
+    }else{
+
+      var chosen = this.files[0];
+      var image = new Image();
+
+      image.onload = function() {
+
+        var Ow = this.width, Oh = this.height, Filsesize = Math.round(chosen.size/1024);
+        $("#cover_msg").val(validate_image('cover', Ow, Oh, 300, 750, 7000, 7000));
+
+        if(Filsesize > 8000){
+
+          $("#cover_msg").val('Your image size '+Math.round(Filsesize/1024)+ ' MB is too big. Maximum size allowed is 8 Megabytes.');
+
+        }
+
+      };
+
+      image.onerror = function() {
+        str1 = 'PLease choose an image file, not a '+chosen.type+' extension';
+      };
+
+      image.src = url.createObjectURL(chosen);                    
+    }
+
+  });
+
+
+  $("#logo_file").change(function(e) {
+
+    var str1 = '' ; 
+
+    if( this.disabled ){
+
+      str1 = 'Your browser does not support File upload.';
+
+    }else{
+
+      var chosen = this.files[0];
+      var image = new Image();
+
+      image.onload = function() {
+
+        var Ow = this.width, Oh = this.height, Filsesize = Math.round(chosen.size/1024);
+
+        $("#logo_msg").val(validate_image('logo', Ow, Oh, 250, 250, 6000, 6000));
+
+      };
+
+      image.onerror = function() {
+
+        str1 = 'PLease choose an image file, not a '+chosen.type+' extension. Please choose a .jpg, .png or .gif image';
+
+      };
+
+      image.src = url.createObjectURL(chosen); 
+
+    }
+
+  });
+
+
+  $('#coverbut').bind('click', function(e) {
+    
+    //e.preventDefault();
+    var msg = $("#cover_msg").val();
+    
+    console.log(msg);
+    
+    if(msg.length != 0){
+      e.preventDefault();
+      $('#avatar_msg').html("<div class='alert alert-error'>"+msg+"</div>");
+    
+    }else{
+
+
+
+      $('#avatar_msg').html("");
+      
+          var avataroptions = { 
+          target:        '#avatar_msg',
+          url:           '<?php echo site_url('/').'members/add_cover';?>' ,
+          beforeSend:    function() {var percentVal = '0%';probar.width(percentVal)},
+          uploadProgress: function(event, position, total, percentComplete) {
+                    var percentVal = percentComplete + '%';
+                    probar.width(percentVal)
+                    
+                  },
+           complete: function(xhr) {
+                    procover.hide();
+                    probar.width('0%');
+                     $('#avatar_msg').html(xhr.responseText);
+                     //console.log(xhr.responseText);
+                     $('#coverbut').html('<i class="icon-picture icon-white"></i> Update Cover');
+                  }       
+      
+        }; 
+      
+        var frm = $('#add-cover');
+        var probar = $('#procover .bar');
+        var procover = $('#procover');
+      
+        $('#coverbut').html('<img src="<?php echo base_url('/').'images/load.gif';?>" /> Uploading...');
+        procover.show();
+        frm.ajaxForm(avataroptions);    
+      
+      
+    }
+    
+  
+    
+      
+  });
+
+
   
 });
 
@@ -407,18 +548,24 @@ $(document).on('click', '.pbtn', function(e) {
 });
 
 
+
+
+
+
+
+
 function load_products_do(bus_id, section) {
 
-  $('#products-result-'+section).html("<img src='<?php echo base_url('/').'images/load.gif';?>'>");
+    $('#products-result-'+section).html("<img src='<?php echo base_url('/').'images/load.gif';?>'>");
 
     $.ajax({
         type: "POST",
         url: base+'members/load_bus_products/', 
         cache: false,
-      data: { 
+        data: { 
           'bus_id': bus_id,
           'section': section
-      },  
+        },  
         success: function (result) {
 
           $('#products-result-'+section).html(result);
@@ -443,6 +590,7 @@ function load_tab(id, str){
           $.getScript('<?php echo base_url('/');?>js/jquery.knob.js', function(){
               setTimeout(load_review_report(id, str), 300);
           });
+
     }else{
 
         cont.addClass('loading_img');
@@ -474,6 +622,71 @@ function load_tab(id, str){
     }
    
  }
+
+
+function cover_upload_success(url, btn_link){
+  
+  $('#cover_div').css({background: 'url('+url+')'});
+  $('#btn_edit_cover').removeClass('hide').attr("href",btn_link);
+   
+} 
+ 
+function logo_upload_success(url){
+  
+  $('#avatar').attr('src', url); 
+   
+}
+
+function validate_image(type, Ow, Oh,  minH ,minW ,maxH , maxW){
+  
+    var str = '';
+    if(Ow < minW) {
+      
+      str = 'The image width is too small. Minimum width is '+minW+' pixels';
+      
+    }else if(Oh < minH){
+      
+      str = 'The image height is too small .Minimum height is '+minH+' pixels';
+      
+    }
+    
+    if(Ow > maxW) {
+      
+      str = 'The image width is too big. Maximum width is '+ maxW +' pixels';
+      
+    }else if(Oh > maxH){
+      
+      str = 'The image height is too big. Maximum height is '+ maxH +' pixels';
+      
+    }
+      
+    $("#"+type+"_msg").val(str);
+
+   return str;
+
+}
+
+
+function select_logo(){
+  
+  var sel = $('#logo_file');
+  sel.show();
+  sel.focus();
+  sel.click();
+  //sel.hide();
+
+}
+
+function select_cover(){
+  
+  var sel = $('#cover_file');
+  sel.show();
+  sel.focus();
+  sel.click();
+  //sel.hide();
+
+}
+
 
 function load_analytics(id,period){
  
