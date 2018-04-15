@@ -11,6 +11,7 @@ class My_na extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('my_na_model');
+		$this->load->model('product_model');
 	
 	}
 	
@@ -372,7 +373,7 @@ class My_na extends CI_Controller {
 	public function load_auctions_home()
 	{
         
-			$this->load->model('trade_model');
+			$this->load->model('product_model');
 			$query =  $this->db->query("SELECT products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
                                         u_business.IS_ESTATE_AGENT, u_business.BUSINESS_NAME, u_business.BUSINESS_LOGO_IMAGE_NAME,group_concat(product_images.img_file) as images,
                                         MAX(product_auction_bids.amount) as current_bid,
@@ -380,7 +381,7 @@ class My_na extends CI_Controller {
                                         (
                                           SELECT COUNT(u_business_vote.ID) as TOTAL_R FROM u_business_vote WHERE u_business_vote.PRODUCT_ID = products.product_id
                                         ) as TOTAL_REVIEWS
-
+ 
                                         FROM products
                                         JOIN product_extras ON products.product_id = product_extras.product_id
                                         LEFT JOIN u_business ON u_business.ID = products.bus_id
@@ -392,13 +393,15 @@ class My_na extends CI_Controller {
                                         WHERE products.listing_type = 'A' AND products.is_active = 'Y'
                                         GROUP BY products.product_id
                                         ORDER BY products.listing_date DESC LIMIT 4");
-		 $o = $this->trade_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 3, $offset = 0, $title = '', $amt = 4 , FALSE);
+		 $o = $this->product_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 3, $offset = 0, $title = '', $amt = 4 , FALSE);
 
 		 $this->output
 	        ->set_content_type('application/json')
 	        ->set_output(json_encode(array('auctions' => $o)));			
 			
 	}
+
+
 	//LOAD TRADE HOME PAGE
 	public function load_trade_home()
 	{
