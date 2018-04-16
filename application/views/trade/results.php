@@ -61,19 +61,13 @@ $this->load->view('inc/header', $header);
 
         <!--<div class="spacer"></div>-->
 
-        <section id="news">
-
-
-        
-        </section>
-        <br>
         <section id="products">
           
          <div class="col-md-12">
 
             <div id="deal_content">
 
-              
+
 
               <?php 
               /*Search Results

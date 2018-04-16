@@ -1329,13 +1329,14 @@ class Trade_model extends CI_Model
 
 			echo '<div class="row">
 					<div class="col-md-12">
-						<div class="alert">
-						 <h2>No matches found!</h2> We could not find any matching items for the current search criteria.
+						<div class="alert alert-secondary">
+						 <h2><strong>No matches found!</strong></h2> We could not find any matching items for the current search criteria.
 						 <p>Please refine your search by changing the search criteria above.</p>
 						 <h3>but here are some similar items...</h3>
 						</div>
 					</div>
 				 </div>
+				 <br>
 				 ';
 
 			$query = "SELECT * FROM products JOIN product_extras ON products.product_id = product_extras.product_id WHERE main_cat_id = '" . $main_cat_id . "' ORDER BY listing_date DESC LIMIT 9";
@@ -1431,7 +1432,7 @@ class Trade_model extends CI_Model
 
 				if ($row->status == 'sold')
 				{
-					$price['str'] = '<span itemprop="price" class="hide">' . $this->smooth_price($row->sale_price) . '</span> Sold';
+					$price['str'] = '<span itemprop="price" class="d-none">' . $this->smooth_price($row->sale_price) . '</span> Sold';
 				}
 				else
 				{
@@ -1581,7 +1582,7 @@ class Trade_model extends CI_Model
 										  </form>
 										</div>
 
-										<div class="input-append hide" id="auto_bid_box">
+										<div class="input-append d-none" id="auto_bid_box">
 										  <form action="' . site_url('/') . 'trade/place_bid/" id="auction_frm_auto" method="post">
 											  <input class="col-md-3" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold;width:30%" name="bid_amount" value="' . $price['price'] . '">
 											  <input type="hidden" name="product_id" value="' . $product_id . '" />
@@ -1598,7 +1599,7 @@ class Trade_model extends CI_Model
 										<a href="javascript:void(0)" onClick="switch_auto_bid()" class="btn btn-dark pull-right">Auto Bid</a>
 									</div>
 								</div>
-								<div class="alert alert-block clearfix hide" id="auto_help_txt"><strong>Please Note:</strong> Auto bid will automatically place your bid until your auto bid value is met.</div>
+								<div class="alert alert-block clearfix d-none" id="auto_help_txt"><strong>Please Note:</strong> Auto bid will automatically place your bid until your auto bid value is met.</div>
 						   </div>
 							';
 
@@ -1735,7 +1736,7 @@ class Trade_model extends CI_Model
 	            <!--watchlist/print-->
 	            <div class="spacer"></div>
 	            ' . $count . '
-	            <div class="clearfix">' . $btn . '</div>
+	            <div class="clearfix"></div>
 	          </div>
 	        </div>
 			';
@@ -4452,7 +4453,7 @@ class Trade_model extends CI_Model
 			echo '</tbody>
 				</table>
 				<hr />
-				<div id="modal-product-delete" class="modal hide fade">
+				<div id="modal-product-delete" class="modal d-none fade">
 
 					<div class="modal-header">
 					  <a href="#" onclick="' . $exit_str . '" class="close">&times;</a>
@@ -6335,7 +6336,7 @@ class Trade_model extends CI_Model
 			echo '</tbody>
 				</table>
 				<hr />
-				<div id="modal-product-delete" class="modal hide fade">
+				<div id="modal-product-delete" class="modal d-none fade">
 
 					<div class="modal-header">
 					  <a data-dismiss="modal" aria-hidden="true" class="close">&times;</a>
