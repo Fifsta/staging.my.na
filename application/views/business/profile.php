@@ -379,18 +379,7 @@ $this->load->view('inc/header');
 	    	</section>	
 
 
-	      <?php if($query->result()){ ?>
-	       <section style="margin-top: 50px">
-	        <!--tabs-->
-	        <div class="heading">
-	          <h2 data-icon="fa-newspaper-o">Business Product <strong>Listings</strong></h2>
-	        </div>
-	        <div id="products_div">
-	        	<?php echo $this->trade_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 15, $offset = 0, $title = '',$amt = 4, $advert = FALSE); ?>
 
-	        </div>
-	       </section>
-	       <?php } ?>
 
 
 	       <section style="margin-top: 50px">
@@ -423,21 +412,10 @@ $this->load->view('inc/header');
 		$('#b-about img').addClass('img-fluid');
 
 
-		$.ajax({
-            url: '<?php echo site_url('/');?>classifieds/get_latest/',
-            success: function(data) {
-				var pre = $("#classifieds_content");
-                pre.removeClass('loading_img min400');
-                pre.append(data);
-                
-            }
-        });
-
-
 		initialise_owl();
 
 		
-		get_wethear('na','windhoek');
+		/*get_wethear('na','windhoek');
 		//THUMBS
 		$('figure .cycle-slideshow').cycle('pause');
 		$('figure .cycle-slideshow').mouseenter(function() {
@@ -452,7 +430,7 @@ $this->load->view('inc/header');
 			$('.reveal', this).each(function() {
 				$(this).stop().fadeOut(200).attr('src',shown);
 			});
-		});
+		});*/
 		
 	});
 
@@ -473,24 +451,6 @@ $this->load->view('inc/header');
 	}
 	
 	
-	function get_wethear(cunt,city){
-
-		$.getJSON( "<?php echo HUB_URL;?>weather/display_block/"+cunt+"/"+city, function( data ) {
-
-			if(data.success){
-
-				$('#weather_cont').html(data.html);
-				$('.city-weather').unbind('click').bind('click', function(e){
-					var city = $(this).data('location');
-					//console.log(city);
-					get_wethear('na', city);
-				});
-			}
-
-		});
-
-
-	}
 
 $(document).ready(
 function()
@@ -552,7 +512,7 @@ function load_similar(){
 		success: function (data) {
 
 			 $('#similar_div').html(data);
-			 load_deals();
+
 			 initialise_owl();
 
 		}
