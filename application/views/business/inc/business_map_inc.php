@@ -52,7 +52,7 @@ function initialise_map() {
 			mapTypeControl: true,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		  }
-		  var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+		  var map = new google.maps.Map(document.getElementById("map"), myOptions);
 			
 		  var marker = new google.maps.Marker({
 				position: myLatlng,
@@ -65,5 +65,8 @@ function initialise_map() {
 	
 }
 
-	
 </script>
+
+<div style="display:block;position:relative;background:url(<?php echo base_url('/');?>images/load.gif) no-repeat center center;height:350px;width:100%;max-width:none">
+    <div id="map" style="display:block;position:relative;width:100%;height:100%;max-width:none"></div>
+</div>
