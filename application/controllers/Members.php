@@ -1858,22 +1858,24 @@ class Members extends CI_Controller {
 		
 		if($this->session->userdata('id')){
 			 	
-				$msg = $this->un_clean_url($this->uri->segment(4));
-				
-				$data['id'] = $this->session->userdata('id');
-				
-				if($msg != ''){
-					$data['basicmsg'] = $msg;
-				}
-				$this->load->view('members/add_business', $data);	
+			$msg = $this->un_clean_url($this->uri->segment(4));
+			
+			$data['id'] = $this->session->userdata('id');
+			
+			if($msg != ''){
+				$data['basicmsg'] = $msg;
+			}
+
+			$this->load->view('members/add_business', $data);	
 		
 		}else{
 			
-				$this->load->view('login');
+			$this->load->view('login');
 			  
 		 }
 	
 	} 
+	
 	//+++++++++++++++++++++++++++
 	//ADD NEW BUSINESS
 	//++++++++++++++++++++++++++	
