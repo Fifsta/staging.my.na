@@ -425,6 +425,8 @@ $this->load->view('inc/header');
 
 		initialise_owl();
 
+		initialise_map();
+
 		
 		/*get_wethear('na','windhoek');
 		//THUMBS
