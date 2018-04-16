@@ -51,7 +51,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 			<div id="MyAccount" class="panel-collapse collapse <?php echo $my_account; ?>" role="tabpanel" aria-labelledby="MyAccount">
 				<div class="panel-body">
 					<ul>
-						<li><a href="<?php echo site_url('/');?>members/home/">My Dashboard</a> <span>My account overview</span></li>
+						<!--<li><a href="<?php //echo site_url('/');?>members/home/">My Dashboard</a> <span>My account overview</span></li>-->
 						<li><a href="<?php echo site_url('/');?>members/my_profile/">My Profile</a> <span>Change my profile information.</span></li>
 						<li><a href="<?php echo site_url('/');?>members/my_messages/">My Messages</a> <span>All my.na messages</span></li>
 					</ul>
@@ -87,7 +87,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 			</div>
 		</div>	
 
-		<div class="panel panel-default">
+		<!--<div class="panel panel-default">
 			<div class="panel-heading" role="tab">
 				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#NamibiaMap" aria-expanded="false" aria-controls="NamibiaMap" data-icon="fa-map-marker">Namibia Map</a></h3>
 			</div>
@@ -111,7 +111,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 					</ul>
 				</div>
 			</div>
-		</div>
+		</div>-->
 	</div>
 </section>
 <!--profile-->

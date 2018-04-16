@@ -796,7 +796,7 @@ class Product_model extends CI_Model{
 
 			$data['current'] = $bid;
 			$data['price'] = $bid + 5;
-			$data['str'] = '<span style=" font-size:18px">N$</span><span itemprop="price"> ' . $this->smooth_price($bid) . '</span>';
+			$data['str'] = 'N$  ' . $this->smooth_price($bid);
 
 			return $data;
 
