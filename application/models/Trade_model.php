@@ -1010,12 +1010,17 @@ class Trade_model extends CI_Model
 					$priceA = ' active';
 				}
 
-				$sorting = '<div class="row">
-								<div class="col-md-8">
-									<h2 class="upper na_script">' .$title. '</h2>
-								</div>
-								<div class="col-md-4 text-right">
-								 <div class="btn-group text-left">
+
+				$sorting = '<section id="props">
+								<div class="heading">
+							        <h2 data-icon="fa-newspaper-o">' .$title. ' <strong>Listings</strong></h2>
+							        <p>'.$count.'</p>
+							    </div>
+							</section>';
+
+				$sorting.='<section class="text-right" style="padding:5px">
+								
+								 <div class="btn-group">
 									<button class="btn btn-dark"><i class="icon-resize-vertical icon-white"></i> Sort By</button>
 									<button class="btn btn-dark dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
 									<ul class="dropdown-menu pull-right">
@@ -1025,9 +1030,8 @@ class Trade_model extends CI_Model
 									  
 									</ul>
 								  </div>
-								  <p>'.$count.'</p>
-								</div>
-							</div>';
+								  
+							</section>';
 
 			} else {
 

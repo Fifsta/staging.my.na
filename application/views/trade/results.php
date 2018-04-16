@@ -57,25 +57,23 @@ $this->load->view('inc/header', $header);
     <div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
 
         <!--SEARCH/FILTER SECTION -->
-        <?php $this->load->view('trade/inc/filter/filter_'.$group); ?> 
+        <?php // $this->load->view('trade/inc/filter/filter_'.$group); ?> 
 
-        <div class="spacer"></div>
+        <!--<div class="spacer"></div>-->
 
         <section id="news">
 
-        <div class="heading">
-        <h2 data-icon="fa-newspaper-o">Featured <strong>Listings</strong></h2>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 
-        </div>
         
         </section>
-        <hr>
+        <br>
         <section id="products">
           
          <div class="col-md-12">
 
             <div id="deal_content">
+
+              
 
               <?php 
               /*Search Results
