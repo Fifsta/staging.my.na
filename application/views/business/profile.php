@@ -383,11 +383,10 @@ $this->load->view('inc/header');
 	       <section style="margin-top: 50px">
 	        <!--tabs-->
 	        <div class="heading">
-	          <h2 data-icon="fa-newspaper-o">Business Product <strong>Listings</strong></h2>
+	          <h2 data-icon="fa-newspaper-o">Business <strong>Product Listings</strong></h2>
 	        </div>
-	        <br>
 	        <div id="products_div">
-	        	<?php echo $this->trade_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 15, $offset = 0, $title = '',$amt = 4, $advert = FALSE); ?>
+	        	<?php echo $this->product_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 15, $offset = 0, $title = '',$amt = 4, $advert = FALSE); ?>
 
 	        </div>
 	       </section>
@@ -397,7 +396,7 @@ $this->load->view('inc/header');
 	       <section style="margin-top: 50px">
 	        <!--tabs-->
 	        <div class="heading">
-	          <h2 data-icon="fa-newspaper-o">Similar <strong>Listings</strong></h2>
+	          <h2 data-icon="fa-newspaper-o">Similar <strong>Business Listings</strong></h2>
 	        </div>
 	        <div id="similar_div">
 
