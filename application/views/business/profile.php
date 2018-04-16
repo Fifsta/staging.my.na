@@ -378,6 +378,21 @@ $this->load->view('inc/header');
 
 	    	</section>	
 
+
+	      <?php if($query->result()){ ?>
+	       <section style="margin-top: 50px">
+	        <!--tabs-->
+	        <div class="heading">
+	          <h2 data-icon="fa-newspaper-o">Business Product <strong>Listings</strong></h2>
+	        </div>
+	        <div id="products_div">
+	        	<?php echo $this->trade_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 15, $offset = 0, $title = '',$amt = 4, $advert = FALSE); ?>
+
+	        </div>
+	       </section>
+	       <?php } ?>
+
+
 	       <section style="margin-top: 50px">
 	        <!--tabs-->
 	        <div class="heading">
