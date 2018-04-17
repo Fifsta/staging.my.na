@@ -221,32 +221,7 @@ $this->load->view('inc/header');
 
 					</section>
 					<section role="tabpanel" class="tab-pane" id="Enquiry-Form">
-						<h2 class="tab-head">Enquiry Form</h2>
-						<form>
-							<div class="row">
-								<div class="col-sm-4">
-									<div class="form-group">
-										<label for="FullName">Full Name</label>
-										<input id="FullName" class="form-control input-sm" placeholder="Full Name">
-									</div>
-									<div class="form-group">
-										<label for="EmailAddress">Email Address</label>
-										<input id="EmailAddress" class="form-control input-sm" placeholder="Email Address">
-									</div>
-								</div>
-								<div class="col-sm-4">
-									<div class="form-group">
-										<label for="EmailAddress">Message / Enquiry</label>
-										<textarea class="form-control input-sm" rows="5"></textarea>
-									</div>
-								</div>
-								<div class="col-sm-4">
-									<label for="EmailAddress">Security</label>
-									<!--ROBOT CAPTCHA!!!-->
-									<button type="submit" class="btn btn-primary btn-block" data-icon="fa-envelope-o">Send</button>
-								</div>
-							</div>
-						</form>
+						<?php $this->load->view('business/inc/business_contact_inc');?>
 					</section>
 
 						<section role="tabpanel" class="tab-pane" id="Deals">
