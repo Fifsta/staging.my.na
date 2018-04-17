@@ -161,8 +161,7 @@ $this->load->view('inc/header');
 				<div class="details">
 					<div class="details-left">
 						<figure>
-							<a href="#"><img src="<?php echo $img_url; ?>"></a>
-							
+							<img src="<?php echo $img_url; ?>">
 						</figure>
 
 						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>

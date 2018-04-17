@@ -1710,7 +1710,7 @@ class Trade_model extends CI_Model
 	        <div class="details">
 	          <div class="details-left">
 	            <figure>
-	              <a href="#"><img src="'.$img_url.'"></a>
+	              <a href="'.site_url('/').'b/'.$row->bus_id.'/'.$this->clean_url_str($row->BUSINESS_NAME).'"><img src="'.$img_url.'"></a>
 	            </figure>
 	            <div class="rating">
 	              '.$this->get_review_stars_show($rating, $product_id, 0, $total_reviews).'

@@ -69,7 +69,7 @@
     
   }else{
     
-    $img_url = base_url('/').'images/bus_blank.png';  
+    $img_url = S3_URL.'assets/business/photos/images/bus_blank.png';  
     
   }
 
@@ -91,7 +91,7 @@
     
   }else{
     
-    $cover_str = base_url('/').'images/bus_blank.jpg';  
+    $cover_str = S3_URL.'assets/business/photos/bus_blank.jpg';  
     
   }
 
@@ -186,6 +186,8 @@
             <?php $this->trade_model->show_product($product_id,$img_url); ?>
         <!--details-->
 
+        <div class="spacer"></div>
+
         <!--tabs-->
         <ul class="nav nav-tabs" role="tablist">
           <li class="nav-item" role="presentation"><a href="#Contact-Agent" class="nav-link active" aria-controls="Contact-Agent" role="tab" data-toggle="tab" data-icon="fa fa-envelope-o text-dark">Contact Agent</a></li>
@@ -195,35 +197,13 @@
 
             <?php $this->trade_model->show_company($bus_id, $property_agent, $sub_cat_id); ?>
 
-            <h2 class="tab-head">Contact Agent/Seller</h2>
-            <form>
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <label for="FullName">Full Name</label>
-                    <input id="FullName" class="form-control input-sm" placeholder="Full Name">
-                  </div>
-                  <div class="form-group">
-                    <label for="EmailAddress">Email Address</label>
-                    <input id="EmailAddress" class="form-control input-sm" placeholder="Email Address">
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <label for="EmailAddress">Message / Enquiry</label>
-                    <textarea class="form-control" rows="5"></textarea>
-                  </div>
-                </div>
-                <div class="col-sm-4">
-                  <label for="EmailAddress">Security</label>
-                  <!--ROBOT CAPTCHA!!!-->
-                  <button type="submit" class="btn btn-primary btn-block" data-icon="fa-envelope-o">Send</button>
-                </div>
-              </div>
-            </form>
+            <?php $this->load->view('trade/inc/contact_inc'); ?>
+
           </section>
         </div>
         <!--tabs-->   
+
+        <div class="spacer"></div>
 
         <!--tabs-->
         <ul class="nav nav-tabs" role="tablist">
@@ -254,7 +234,9 @@
 
        </section>
 
-       <section style="margin-top: 50px">
+       <div class="spacer"></div>
+
+       <section>
         <!--tabs-->
         <div class="heading">
           <h2 data-icon="fa-newspaper-o">Similar <strong>Listings</strong></h2>
