@@ -548,12 +548,6 @@ $(document).on('click', '.pbtn', function(e) {
 });
 
 
-
-
-
-
-
-
 function load_products_do(bus_id, section) {
 
     $('#products-result-'+section).html("<img src='<?php echo base_url('/').'images/load.gif';?>'>");

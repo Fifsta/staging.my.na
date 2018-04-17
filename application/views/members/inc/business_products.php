@@ -121,7 +121,7 @@
         
         }else{
           
-          $extend = '<<button data-id="'.$row->product_id.'" data-typ="'.$row->listing_type.'" data-bus="'.$row->bus_id.'" data-stat="'.$section.'" id="ext_'.$row->product_id.'" class="btn btn-sm btn-warning extend" title="Item is expired - Click to extend by another 30 days" rel="tooltip"><i class="fa fa-clock-o"></i></button>';
+          $extend = '<button data-id="'.$row->product_id.'" data-typ="'.$row->listing_type.'" data-bus="'.$row->bus_id.'" data-stat="'.$section.'" id="ext_'.$row->product_id.'" class="btn btn-sm btn-warning extend" title="Item is expired - Click to extend by another 30 days" rel="tooltip"><i class="fa fa-clock-o"></i></button>';
         
         }
 

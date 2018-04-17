@@ -702,9 +702,7 @@ class Product_model extends CI_Model{
 									</div>
 
 									<div>
-									
 										<a href="'.site_url('/').'b/'.$row->ID.'/'.$this->clean_url_str($row->BUSINESS_NAME).'">'. $b_logo . '</a>
-
 									</div>
 								</figure>			
 					  		</div>';

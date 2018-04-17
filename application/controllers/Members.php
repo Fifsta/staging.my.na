@@ -11,7 +11,8 @@ class Members extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('members_model');	
-		$this->load->model('business_model');	
+		$this->load->model('business_model');
+		$this->load->model('trade_model');	
 	    $this->section_1 = $this->uri->segment(1);
 	    $this->section_2 = $this->uri->segment(2);				
 	}
@@ -133,6 +134,33 @@ class Members extends CI_Controller {
 	}
 
 
+	//+++++++++++++++++++++++++++
+	//My Products
+	//++++++++++++++++++++++++++
+	public function my_products()
+	{
+		
+		if($this->session->userdata('id')){
+				
+			$redirect = $this->un_clean_url($this->uri->segment(3));
+			
+			if($redirect != ''){
+				$data['redirect'] = $redirect;
+			}
+			
+			$data['id'] = $this->session->userdata('id');
+			$this->load->view('members/my_products', $data);
+				
+		}else{
+			
+			$data['error'] = 'Please login below';
+		    $this->load->view('login', $data);
+			  
+		 }
+			
+	}
+
+
 
 	//+++++++++++++++++++++++++++
 	//MEMBERS MESSAGES
@@ -163,7 +191,12 @@ class Members extends CI_Controller {
 			  
 		 }
 			
-	}	
+	}
+
+
+
+
+
 
 
 	//+++++++++++++++++++++++++++
