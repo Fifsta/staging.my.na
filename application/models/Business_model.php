@@ -2432,7 +2432,7 @@ FUNCTIONS
 		
 				} else {
 				    //save QR file	
-					$this->load->library('Ciqrcode');
+					$this->load->library('ciqrcode');
 					$vcard1 = 'BEGIN:VCARD'."\n";
 					$vcard1 .= 'ORG:' . trim($org) ."\n";
 					$vcard1 .= 'TEL:' . trim($tel) ."\n";
