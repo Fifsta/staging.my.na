@@ -4107,10 +4107,9 @@ class Trade_model extends CI_Model
 		if ($bid)
 		{
 
-
 			$data['current'] = $bid;
 			$data['price'] = $bid + 5;
-			$data['str'] = '<span style=" font-size:18px">N$</span><span itemprop="price"> ' . $this->smooth_price($bid) . '</span>';
+			$data['str'] = $this->smooth_price($bid);
 
 			return $data;
 
@@ -4127,6 +4126,7 @@ class Trade_model extends CI_Model
 		}
 
 	}
+
 
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//+GET BIDDING HISTORY

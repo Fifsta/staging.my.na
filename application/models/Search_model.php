@@ -1250,11 +1250,11 @@ class Search_model extends CI_Model{
 					$des = trim(strip_tags(trim($description)));
 
 					if($row->IS_NTB_MEMBER == 'Y'){ 
-						$ntb = '<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/ntb_sml.png" alt="'.$name.' - NTB Member" style="width:60px"></a>';
+						$ntb = '<a href="#" data-toggle="tooltip" data-placement="top" title="NTB Member"><img src="images/ntb.png" alt="'.$name.' - NTB Member" class="img-thumbnail" style="width:50px; margin:2px;"></a>';
 					} else { $ntb = ''; }
 
 					if($row->IS_HAN_MEMBER == 'Y'){ 
-						$han = '<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/han_sml.png" alt="'.$name.' -  HAN Member" style="width:60px"></a>';
+						$han = '<a href="#" data-toggle="tooltip" data-placement="top" title="HAN Member"><img src="images/han.png" alt="'.$name.' -  HAN Member" class="img-thumbnail" style="width:50px; margin:2px;"></a>';
 					} else { $han = ''; }
 
 					$html = '

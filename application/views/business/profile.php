@@ -196,11 +196,11 @@ $this->load->view('inc/header');
 						</div>
 
 						<?php if($bus_details['IS_NTB_MEMBER'] == 'Y'){ ?>
-						<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/ntb_sml.png" alt="<?php echo $name;?> - NTB Member"></a>
+						<a href="#" data-toggle="tooltip" data-placement="top" title="NTB Member"><img src="images/ntb.png" alt="<?php echo $name;?> - NTB Member" class="img-thumbnail"></a>
 						<?php } ?>
 
 						<?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
-						<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/icons/han_sml.png" alt="<?php echo $name;?> - HAN Member"></a>
+						<a href="#" data-toggle="tooltip" data-placement="top" title="HAN Member"><img src="images/han.png" alt="<?php echo $name;?> - HAN Member" class="img-thumbnail"></a>
 						<?php } ?>
 
 					</div>

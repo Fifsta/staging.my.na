@@ -331,7 +331,7 @@ class A extends CI_Controller {
 		if($category == 'all'){
 			
 			$category = '';
-		
+		 
 		}
 		if($business == 'all'){
 			
