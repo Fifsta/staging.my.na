@@ -26,7 +26,7 @@
 			   </div>
 		   </div>
 
-			<button type="submit" class="btn btn-primary btn-block" data-icon="fa-envelope-o">Send</button>
+			<button type="submit" class="btn btn-primary btn-block" id="contactbut" data-icon="fa-envelope-o">Send</button>
 		</div>
 	</div>
 </form>
