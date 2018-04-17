@@ -51,7 +51,8 @@ if($img != ''){
 	
 }else{
 	
-	$img_url =  'assets/business/photos/listing-placeholder.jpg';
+	$img_str =  'assets/business/photos/logo-placeholder.jpg';
+	$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
 	
 }
 
@@ -212,7 +213,7 @@ $this->load->view('inc/header');
 				<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="nav-item"><a href="#About" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info text-dark">About</a></li>
 					<li role="presentation" class="nav-item"><a href="#Enquiry-Form" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o text-dark">Enquiry Form</a></li>
-					<li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate text-dark">Deals</a></li>
+					<!--<li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate text-dark">Deals</a></li>-->
 					<li role="presentation" class="nav-item"><a href="#Gallery" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o text-dark">Gallery</a></li>
 					<li role="presentation" class="nav-item"><a href="#QR" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-qrcode text-dark">QR Code</a></li>
 				</ul>
