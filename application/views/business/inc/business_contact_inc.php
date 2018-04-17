@@ -28,6 +28,7 @@
 
 			<button type="submit" class="btn btn-primary btn-block" id="contactbut" data-icon="fa-envelope-o">Send</button>
 		</div>
+		<div class="alert alert secondary" id="contact_msg"></div>
 	</div>
 </form>
 
