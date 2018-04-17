@@ -7,6 +7,7 @@ $height = 450;
 
 if(!$bus_details){ show_404(); }
 
+$bus_id =  $bus_details['ID'];
 $name =  $bus_details['BUSINESS_NAME'];
 $email = $bus_details['BUSINESS_EMAIL'];
 $tel = '+'.$bus_details['TEL_DIAL_CODE'].' '.$bus_details['BUSINESS_TELEPHONE'];
@@ -31,7 +32,6 @@ $rand = rand(0,9999);
 //Build image string
 $format = substr($img,(strlen($img) - 4),4);
 $str = substr($img,0,(strlen($img) - 4));
-
 
 
 if($img != ''){
@@ -213,6 +213,7 @@ $this->load->view('inc/header');
 					<li role="presentation" class="nav-item"><a href="#Enquiry-Form" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o text-dark">Enquiry Form</a></li>
 					<li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate text-dark">Deals</a></li>
 					<li role="presentation" class="nav-item"><a href="#Gallery" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o text-dark">Gallery</a></li>
+					<li role="presentation" class="nav-item"><a href="#QR" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-qrcode text-dark">QR Code</a></li>
 				</ul>
 				<div class="tab-content">
 					<section role="tabpanel" class="tab-pane active" id="About">
@@ -264,6 +265,17 @@ $this->load->view('inc/header');
 							<?php $this->business_model->show_gallery($bus_id);?>
 						</div>
 					</section>
+
+					<section role="tabpanel" class="tab-pane" id="QR">
+						<h2 class="tab-head">QR Code</h2>
+						<div class="row">
+							<div class="col-lg-4 col-md-8 col-sm-12 col-xs-12">
+								<?php echo $this->business_model->get_qr_vcard($bus_id,'220','220');?>
+							</div>
+						</div>
+					</section>				
+
+
 				</div>
 
 				<!--tabs-->
