@@ -27,8 +27,10 @@
 		   </div>
 
 			<button type="submit" class="btn btn-primary btn-block" id="contactbut" data-icon="fa-envelope-o">Send</button>
+
+			<div class="row" id="contact_msg"></div>
 		</div>
-		<div class="alert alert secondary" id="contact_msg"></div>
+		
 	</div>
 </form>
 
@@ -39,7 +41,7 @@
 		e.preventDefault();
 		var frm = $('#contact-us');
 		//frm.submit();
-		$('#contactbut').html('<img src="<?php echo base_url('/').'img/load.gif';?>" /> Sending...');
+		$('#contactbut').html('<img src="<?php echo base_url('/').'images/load.gif';?>" /> Sending...');
 		$.ajax({
 			type: 'post',
 			url: '<?php echo site_url('/').'business/contact_ajax/'.$ID.'/';?>' ,
