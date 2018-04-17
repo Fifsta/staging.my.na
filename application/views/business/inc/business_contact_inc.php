@@ -28,7 +28,7 @@
 
 			<button type="submit" class="btn btn-primary btn-block" id="contactbut" data-icon="fa-envelope-o">Send</button>
 
-			<div class="row" id="contact_msg"></div>
+			<div class="row" id="contact_msg" style="margin-top:10px"></div>
 		</div>
 		
 	</div>
