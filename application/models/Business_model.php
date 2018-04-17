@@ -2456,7 +2456,7 @@ FUNCTIONS
 					$out = $this->gcloud_model->upload_gc_bucket($params['savename'] , 'assets/business/qr/');
 					
 					$vcard2 = '<img src="'.S3_URL.'assets/business/qr/'.$row['ID']. $this->clean_url_str($org) .'.jpg" alt=" Vcard for' . $org . ' - My Namibia' . '" 
-					title="Vcard for' . $org . ' - My Namibia' . '" class="img-fluid" />';
+					title="Vcard for' . $org . ' - My Namibia' . '" class="img-fluid" style="width:100%; height:100%;" />';
 
 				}		
 			}

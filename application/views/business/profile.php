@@ -207,6 +207,8 @@ $this->load->view('inc/header');
 				</div>
 				<!--details-->
 
+				<div class="spacer"></div>
+
 				<!--tabs-->
 				<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="nav-item"><a href="#About" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info text-dark">About</a></li>
@@ -277,8 +279,9 @@ $this->load->view('inc/header');
 
 
 				</div>
-
 				<!--tabs-->
+
+				<div class="spacer"></div>
 				
 				<!--tabs-->
 				<ul class="nav nav-tabs" role="tablist">
@@ -362,34 +365,33 @@ $this->load->view('inc/header');
 				</div>
 				<!--tabs-->
 
-
 	    	</section>	
 
+			<?php if($query->result()){ ?>
 
-	      <?php if($query->result()){ ?>
-	       <section style="margin-top: 50px">
-	        <!--tabs-->
-	        <div class="heading">
-	          <h2 data-icon="fa-newspaper-o">Business <strong>Product Listings</strong></h2>
-	        </div>
-	        <div id="products_div">
-	        	<?php echo $this->product_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 15, $offset = 0, $title = '',$amt = 4, $advert = FALSE); ?>
+				<div class="spacer"></div>
 
-	        </div>
-	       </section>
-	       <?php } ?>
+				<section>
+					<div class="heading">
+						<h2 data-icon="fa-newspaper-o">Business <strong>Product Listings</strong></h2>
+					</div>
+					<div id="products_div">
+						<?php echo $this->product_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 15, $offset = 0, $title = '',$amt = 4, $advert = FALSE); ?>
+					</div>
+				</section>
 
+			<?php } ?>
 
-	       <section style="margin-top: 50px">
-	        <!--tabs-->
-	        <div class="heading">
-	          <h2 data-icon="fa-newspaper-o">Similar <strong>Business Listings</strong></h2>
-	        </div>
-	        <div id="similar_div">
+			<div class="spacer"></div>
 
-	        </div>
-	       </section>
+			<section>
+				<div class="heading">
+					<h2 data-icon="fa-newspaper-o">Similar <strong>Business Listings</strong></h2>
+				</div>
+				<div id="similar_div">
 
+				</div>
+			</section>
 
 		</div>
 
