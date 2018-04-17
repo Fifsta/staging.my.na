@@ -1,5 +1,5 @@
 <h2 class="tab-head">Enquiry Form</h2>
-<form>
+<form action="<?php echo site_url('/')?>business/contact/<?php echo $ID;?>" method="post" accept-charset="utf-8" id="contact-us" name="contact-us">
 	<div class="row">
 		<div class="col-sm-4">
 			<div class="form-group">

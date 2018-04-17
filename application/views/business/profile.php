@@ -221,7 +221,7 @@ $this->load->view('inc/header');
 
 					</section>
 					<section role="tabpanel" class="tab-pane" id="Enquiry-Form">
-						<?php $this->load->view('business/inc/business_contact_inc');?>
+						<?php $this->load->view('business/inc/business_contact_inc', $bus_details);?>
 					</section>
 
 						<section role="tabpanel" class="tab-pane" id="Deals">
