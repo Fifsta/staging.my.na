@@ -29,7 +29,6 @@ $this->load->view('inc/header', $header);
   #map-top{
   width:100%;
   min-height:500px;
-  margin-top:60px;
   margin-right:-100px;
   }
 
@@ -207,21 +206,24 @@ var geocoder;
     });
     return json;
   })();
-    var gicons = [];
+
+  var gicons = [];
 
 
     gicons["hover"] = new google.maps.MarkerImage(
-        base_+'img/markers/v1/image.png?v1',
+        base_+'images/markers/v1/image.png?v1',
         new google.maps.Size(40,52),
         new google.maps.Point(0,0),
         new google.maps.Point(20,42)
     );
+
     gicons["dot"] = new google.maps.MarkerImage(
-        base_+'img/markers/v1/dot/image.png?v1',
+        base_+'images/markers/v1/dot/image.png?v1',
         new google.maps.Size(10,10),
         new google.maps.Point(0,0),
         new google.maps.Point(15,10)
     );
+
     var side_bar_html = "";
 
     function initialise_map(id) {
