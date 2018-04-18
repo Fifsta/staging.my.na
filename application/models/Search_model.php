@@ -1129,6 +1129,7 @@ class Search_model extends CI_Model{
 
 			$l_width = 100;
 			$l_height = 100;
+			$this->load->driver('cache');
 
 			if (! $html = $this->cache->get('show_results' . $main_c_id . '_' . $main_category . '_' . $category))
 			{
