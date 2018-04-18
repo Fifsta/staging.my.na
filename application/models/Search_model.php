@@ -1262,7 +1262,7 @@ class Search_model extends CI_Model{
 							$han = '<a href="#" data-toggle="tooltip" data-placement="top" title="HAN Member"><img src="images/han.png" alt="'.$name.' -  HAN Member" class="img-thumbnail" style="width:50px; margin:2px;"></a>';
 						} else { $han = ''; }
 
-						$html. = '
+						$html.= '
 			              <section class="results-item">
 			                <div style="position:relative">
 			                  <figure>
