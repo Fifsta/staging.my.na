@@ -131,11 +131,11 @@ $this->load->view('inc/header', $header);
  <div class="container-fluid fullwidth d-none" id="map_container">
 
      <div class="row">
-         <div class="col-md-4" id="map_results_div">
+         <div class="col-md-4 hidden-sm-down" id="map_results_div">
 
           <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category); ?>
          </div>
-         <div class="col-md-8">
+         <div class="col-md-8 col-sm-12">
              <button id="btn_list_view2" class="btn btn-dark t-list"><i class="fa fa-list"></i> List View</button>
              <div id="map-top"></div>
 
