@@ -20,7 +20,7 @@ if(count($map_details) > 0){
 		$long = $map_details['BUSINESS_MAP_LONGITUDE'];
 		$zoom = $map_details['BUSINESS_MAP_ZOOM_LEVEL'];
 		
-	}
+	} 
 
 	
 }else{
