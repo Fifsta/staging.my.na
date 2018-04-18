@@ -382,7 +382,7 @@ $this->load->view('inc/header', $header);
       </div>
     </div>
   </div>  
-
+</div>
  
 
   
