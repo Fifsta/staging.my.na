@@ -1130,207 +1130,218 @@ class Search_model extends CI_Model{
 			$l_width = 100;
 			$l_height = 100;
 
-			//If has results
-			if($query->num_rows() != 0){
-		
-				$x =0;
-				foreach($query->result() as $row){
+			if(!$query = $this->get_memcache('get_reader_photos'))
+			{
 
-					//$name = filter_var(utf8_decode($row->BUSINESS_NAME), FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
-					$name = $row->BUSINESS_NAME;
-					$img = $row->BUSINESS_LOGO_IMAGE_NAME;
-					$id = $row->ID;
-					$email = $row->BUSINESS_EMAIL;
-					$tel = $row->BUSINESS_TELEPHONE;
-					$description = $row->BUSINESS_DESCRIPTION;
-					$url = $row->BUSINESS_URL;
-					$address = $row->BUSINESS_PHYSICAL_ADDRESS;
-					$advertorial = $row->ADVERTORIAL;
-					
-					//Build image string
-					$format = substr($img,(strlen($img) - 4),4);
-					$str = substr($img,0,(strlen($img) - 4));
-					
-					if($img != ''){
+				//If has results
+				$this->save_memcache('test', $query, 43200);
+
+			} else { 
+
+
+				if($query->num_rows() != 0){
+			
+					$x =0;
+					foreach($query->result() as $row){
+
+						//$name = filter_var(utf8_decode($row->BUSINESS_NAME), FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
+						$name = $row->BUSINESS_NAME;
+						$img = $row->BUSINESS_LOGO_IMAGE_NAME;
+						$id = $row->ID;
+						$email = $row->BUSINESS_EMAIL;
+						$tel = $row->BUSINESS_TELEPHONE;
+						$description = $row->BUSINESS_DESCRIPTION;
+						$url = $row->BUSINESS_URL;
+						$address = $row->BUSINESS_PHYSICAL_ADDRESS;
+						$advertorial = $row->ADVERTORIAL;
 						
-						if(strpos($img,'.') == 0){
+						//Build image string
+						$format = substr($img,(strlen($img) - 4),4);
+						$str = substr($img,0,(strlen($img) - 4));
+						
+						if($img != ''){
+							
+							if(strpos($img,'.') == 0){
 
-							$format = '.jpg';
-							$img_str = 'assets/business/photos/'.$img . $format;
-							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
+								$format = '.jpg';
+								$img_str = 'assets/business/photos/'.$img . $format;
+								$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
+								
+							}else{
+								
+								$img_str = 'assets/business/photos/'.$img;
+								$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
+								
+							}
 							
 						}else{
 							
-							$img_str = 'assets/business/photos/'.$img;
-							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
+							$img_url = base_url('/').'images/bus_blank.jpg';	
 							
 						}
-						
-					}else{
-						
-						$img_url = base_url('/').'images/bus_blank.jpg';	
-						
-					}
 
-					//COVER IMAGE
-					$cover_img = $row->BUSINESS_COVER_PHOTO;
+						//COVER IMAGE
+						$cover_img = $row->BUSINESS_COVER_PHOTO;
 
-					if($cover_img != ''){
+						if($cover_img != ''){
 
-						if(strpos($cover_img,'.') == 0){
+							if(strpos($cover_img,'.') == 0){
 
-							$format2 = '.jpg';
-							$cover_str = S3_URL.'assets/business/photos/'.$cover_img . $format2.'?=';
+								$format2 = '.jpg';
+								$cover_str = S3_URL.'assets/business/photos/'.$cover_img . $format2.'?=';
 
-						}else{
+							}else{
 
-							$cover_str =  S3_URL.'assets/business/photos/'.$cover_img.'?=';
+								$cover_str =  S3_URL.'assets/business/photos/'.$cover_img.'?=';
 
-						}
-
-					}else{
-
-						$cover_str = base_url('/').'images/business_cover_blank.jpg';
-
-					}
-
-					//get Categories
-					//$cats = $row->cats;
-					$catstr = '';
-					$cx = 0;
-					if($row->cats){
-
-                        $catA = explode(',',$row->cats);
-
-                        foreach($catA as $crow){
-
-							if($cx < 6){
-
-								$catstr .= ' <span class="badge badge-secondary text-light">'.$crow.'</span> ';
 							}
 
-							$cx ++;
-                        }
+						}else{
 
-                    }
+							$cover_str = base_url('/').'images/business_cover_blank.jpg';
 
-					//get RATING
-					///$rating = $this->get_rating($id);
-					
-					$ad ='';
-					if($advertorial != '' || $row->PAID_STATUS == '1'){
-						   
-						$ad = '<img src="'.base_url('/').'images/bground/reviewed_2_sml.png" class="pull-right" style="top:-20px; left:-20px; position:absolute" />';
+						}
 
-					}
+						//get Categories
+						//$cats = $row->cats;
+						$catstr = '';
+						$cx = 0;
+						if($row->cats){
 
-					$sponsor ='';
-					if($row->PAID_STATUS == '1'){
+	                        $catA = explode(',',$row->cats);
 
-						$sponsor = '<small class="muted">Sponsored Listing</small>';
-					}
+	                        foreach($catA as $crow){
 
-					//get MAP Coordinates
-					//$cordinates = $this->get_map_coordinates($id);
-					//Build resultset HTML
-					$UA = 'href="javascript:void(0)"';
-					if($this->agent->is_mobile()){
+								if($cx < 6){
+
+									$catstr .= ' <span class="badge badge-secondary text-light">'.$crow.'</span> ';
+								}
+
+								$cx ++;
+	                        }
+
+	                    }
+
+						//get RATING
+						///$rating = $this->get_rating($id);
 						
-						$UA = 'href="tel:'.substr($tel,0,8).substr($tel,8,strlen($tel)).'"';
+						$ad ='';
+						if($advertorial != '' || $row->PAID_STATUS == '1'){
+							   
+							$ad = '<img src="'.base_url('/').'images/bground/reviewed_2_sml.png" class="pull-right" style="top:-20px; left:-20px; position:absolute" />';
+
+						}
+
+						$sponsor ='';
+						if($row->PAID_STATUS == '1'){
+
+							$sponsor = '<small class="muted">Sponsored Listing</small>';
+						}
+
+						//get MAP Coordinates
+						//$cordinates = $this->get_map_coordinates($id);
+						//Build resultset HTML
+						$UA = 'href="javascript:void(0)"';
+						if($this->agent->is_mobile()){
+							
+							$UA = 'href="tel:'.substr($tel,0,8).substr($tel,8,strlen($tel)).'"';
+						}
+						if($tel == ''){
+							$temp = '';
+						}else{
+
+							$java = "phone_click($(this),'".$id."','phone')";
+							$temp = ' <a class="btn btn-secondary" onClick="'.$java.'" rel="tooltip" '. $UA.' title="Click for full contact details" style="margin-bottom:5px"><i class="fa fa-phone text-light"></i> <abbr title="Telephone Number">C:</abbr>'.substr($tel,0,8).'<font style="display:none">'.substr($tel,8,strlen($tel)).'</font></a>';
+						}
+
+
+						$des = trim(strip_tags(trim($description)));
+
+						if($row->IS_NTB_MEMBER == 'Y'){ 
+							$ntb = '<a href="#" data-toggle="tooltip" data-placement="top" title="NTB Member"><img src="images/ntb.png" alt="'.$name.' - NTB Member" class="img-thumbnail" style="width:50px; margin:2px;"></a>';
+						} else { $ntb = ''; }
+
+						if($row->IS_HAN_MEMBER == 'Y'){ 
+							$han = '<a href="#" data-toggle="tooltip" data-placement="top" title="HAN Member"><img src="images/han.png" alt="'.$name.' -  HAN Member" class="img-thumbnail" style="width:50px; margin:2px;"></a>';
+						} else { $han = ''; }
+
+						$html = '
+			              <section class="results-item">
+			                <div style="position:relative">
+			                  <figure>
+			                    <a href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/"><img class="rounded" src="'.$img_url.'" alt="'.$name.'"></a>
+			                    '.$ad.'
+			                  </figure>
+			                  <div class="rating">
+								'.$this->get_review_stars($row->ID, $row->STAR_RATING,$row->NO_OF_REVIEWS).'
+			                  </div>
+			                </div>
+
+			                <div>
+			                  <h2><a href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/">'.$name.'</a></h2>
+			                  '.$sponsor.'
+			                  <p class="addr" data-icon="fa-map-marker text-dark">'. $address .'</p>
+			                  <p class="desc">'.$this->shorten_string($des, 35).'</p>
+								<p>'. $catstr.'</p>
+								<a class="btn btn-dark btn-sm" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View Business Listing</a>
+								<div class="text-right pull-right">'.$ntb.$han.'</div>
+			                </div>
+			              </section>
+						';
+
+						echo $html;
+							 
+						$x ++;
 					}
-					if($tel == ''){
-						$temp = '';
-					}else{
 
-						$java = "phone_click($(this),'".$id."','phone')";
-						$temp = ' <a class="btn btn-secondary" onClick="'.$java.'" rel="tooltip" '. $UA.' title="Click for full contact details" style="margin-bottom:5px"><i class="fa fa-phone text-light"></i> <abbr title="Telephone Number">C:</abbr>'.substr($tel,0,8).'<font style="display:none">'.substr($tel,8,strlen($tel)).'</font></a>';
-					}
-
-
-					$des = trim(strip_tags(trim($description)));
-
-					if($row->IS_NTB_MEMBER == 'Y'){ 
-						$ntb = '<a href="#" data-toggle="tooltip" data-placement="top" title="NTB Member"><img src="images/ntb.png" alt="'.$name.' - NTB Member" class="img-thumbnail" style="width:50px; margin:2px;"></a>';
-					} else { $ntb = ''; }
-
-					if($row->IS_HAN_MEMBER == 'Y'){ 
-						$han = '<a href="#" data-toggle="tooltip" data-placement="top" title="HAN Member"><img src="images/han.png" alt="'.$name.' -  HAN Member" class="img-thumbnail" style="width:50px; margin:2px;"></a>';
-					} else { $han = ''; }
-
-					$html = '
-		              <section class="results-item">
-		                <div style="position:relative">
-		                  <figure>
-		                    <a href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/"><img class="rounded" src="'.$img_url.'" alt="'.$name.'"></a>
-		                    '.$ad.'
-		                  </figure>
-		                  <div class="rating">
-							'.$this->get_review_stars($row->ID, $row->STAR_RATING,$row->NO_OF_REVIEWS).'
-		                  </div>
-		                </div>
-
-		                <div>
-		                  <h2><a href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/">'.$name.'</a></h2>
-		                  '.$sponsor.'
-		                  <p class="addr" data-icon="fa-map-marker text-dark">'. $address .'</p>
-		                  <p class="desc">'.$this->shorten_string($des, 35).'</p>
-							<p>'. $catstr.'</p>
-							<a class="btn btn-dark btn-sm" href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$name.'"><i class="fa fa-info text-light"></i> View Business Listing</a>
-							<div class="text-right pull-right">'.$ntb.$han.'</div>
-		                </div>
-		              </section>
-					';
-
-					echo $html;
-						 
-					$x ++;
-				}
-
-				
-			//No Results	
-			}else{
-				
-				/*echo "<div class='alert text-center'>
-							  <h1>Ooops, no results found for: </h1>
-							  <h3>".$heading."</h3>
-							  <p>We could'nt find any results for the specified criteria. Please try broaden your search results or look under top level categories.</p>
-							  <p></p>
-					  </div>";*/
-
-				if($main_c_id != ''){
-					//echo '<h3 class="upper na_script">But Here are some other great business results in '.$main_category.'</h3>';
-					//SHOW OTHER TOP LEVEL MATCHES
-					$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
-                            group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
-                            FROM u_business
-							LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
-							JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
-							JOIN i_tourism_category as categories ON u_business.ID = categories.BUSINESS_ID
-							JOIN a_tourism_category_sub as cat_names ON cat_names.ID = categories.CATEGORY_ID
-							LEFT JOIN a_map_location ON a_map_location.ID = u_business.BUSINESS_MAP_CITY_ID
-                            WHERE u_business.ISACTIVE = 'Y' AND cat_names.CATEGORY_TYPE_ID = '".$main_c_id."'
-							GROUP BY u_business.ID ORDER BY RAND(), TOTAL DESC LIMIT 10"   ;
+					
+				//No Results	
 				}else{
-					//echo '<h3 class="upper na_script">But Here are some other great business results</h3>';
-					//SHOW RANDOM RESULTS
-					$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
-                            group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
-                            FROM u_business
-							LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
-							JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
-							JOIN i_tourism_category as categories ON u_business.ID = categories.BUSINESS_ID
-							JOIN a_tourism_category_sub as cat_names ON cat_names.ID = categories.CATEGORY_ID
-							LEFT JOIN a_map_location ON a_map_location.ID = u_business.BUSINESS_MAP_CITY_ID
-                            WHERE u_business.ISACTIVE = 'Y'
-							GROUP BY u_business.ID ORDER BY RAND() LIMIT 10"   ;
+					
+					/*echo "<div class='alert text-center'>
+								  <h1>Ooops, no results found for: </h1>
+								  <h3>".$heading."</h3>
+								  <p>We could'nt find any results for the specified criteria. Please try broaden your search results or look under top level categories.</p>
+								  <p></p>
+						  </div>";*/
+
+					if($main_c_id != ''){
+						//echo '<h3 class="upper na_script">But Here are some other great business results in '.$main_category.'</h3>';
+						//SHOW OTHER TOP LEVEL MATCHES
+						$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
+	                            group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
+	                            FROM u_business
+								LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
+								JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
+								JOIN i_tourism_category as categories ON u_business.ID = categories.BUSINESS_ID
+								JOIN a_tourism_category_sub as cat_names ON cat_names.ID = categories.CATEGORY_ID
+								LEFT JOIN a_map_location ON a_map_location.ID = u_business.BUSINESS_MAP_CITY_ID
+	                            WHERE u_business.ISACTIVE = 'Y' AND cat_names.CATEGORY_TYPE_ID = '".$main_c_id."'
+								GROUP BY u_business.ID ORDER BY RAND(), TOTAL DESC LIMIT 10"   ;
+					}else{
+						//echo '<h3 class="upper na_script">But Here are some other great business results</h3>';
+						//SHOW RANDOM RESULTS
+						$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
+	                            group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
+	                            FROM u_business
+								LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
+								JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
+								JOIN i_tourism_category as categories ON u_business.ID = categories.BUSINESS_ID
+								JOIN a_tourism_category_sub as cat_names ON cat_names.ID = categories.CATEGORY_ID
+								LEFT JOIN a_map_location ON a_map_location.ID = u_business.BUSINESS_MAP_CITY_ID
+	                            WHERE u_business.ISACTIVE = 'Y'
+								GROUP BY u_business.ID ORDER BY RAND() LIMIT 10"   ;
+					}
+
+
+					$query = $this->db->query($query);
+	//				/echo $this->my_na_model->show_sdvert();
+
+					$this->show_results($query);
 				}
 
 
-				$query = $this->db->query($query);
-//				/echo $this->my_na_model->show_sdvert();
-
-				$this->show_results($query);
-			}
+			}	
 	
 	}
 
