@@ -168,7 +168,7 @@ $this->load->view('inc/header', $header);
               </div>
               
               <div class="list-map-right" id="map_container">
-                <?php $this->load->view('members/inc/business_map_view_inc', $bus_details);?>
+                <?php //$this->load->view('members/inc/business_map_view_inc', $bus_details);?>
               </div>
             </div>
 
@@ -263,7 +263,7 @@ $this->load->view('inc/header', $header);
               <section role="tabpanel" class="tab-pane" id="Map">
                 <h2 class="tab-head">Business Map</h2>
                 <div class="row" id="map-tab">
-                  <?php //$this->load->view('members/inc/business_map_inc', $bus_details);?>
+                  <?php $this->load->view('members/inc/business_map_inc', $bus_details);?>
                 </div>
               </section>              
 
@@ -420,7 +420,7 @@ $(document).ready(function(){
   $('[rel=tooltip]').tooltip();
 
   load_products_do(<?php echo $bus_id; ?>, 'live');
-  //initialise_map2();
+  initialise_map2();
 
 
   var url = window.URL || window.webkitURL;
