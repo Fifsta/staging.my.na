@@ -27,14 +27,20 @@
                     <input type="hidden" value="<?php if (isset($sub_cat_id)) { echo $sub_cat_id; } else { echo '0'; } ?>" id="sub_cat_id" name="sub_cat_id">
 
 					<div class="near input-group-addon">Near:</div>
-					<input type="text" class="near form-control" id="search-main2" placeholder="Windhoek">
+					<!--<input type="text" class="near form-control" id="search-main2" placeholder="Windhoek">-->
 					<span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search" role="button"></button></span>
     			    
 
                     
                 </form>
 				
-				<div class="history">Search history: <a href="#">pizza</a>, <a href="#">lodge</a>, <a href="#">plumbing</a>, <a href="#">paper towels</a>, <a href="#">shoes</a>,</div>
+				<div class="history">Search history: 
+                    <a href="#">cars</a>, 
+                    <a href="#">properties</a>, 
+                    <a href="#">auctions</a>, 
+                    <a href="#">businesses</a>, 
+                    <a href="#">news</a>
+                </div>
 			</div>
 			<div class="col-sm-2 text-right">
 
