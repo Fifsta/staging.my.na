@@ -26,8 +26,8 @@
                     <input type="hidden" value="<?php if (isset($main_cat_id)) { echo $main_cat_id; } else { echo '0'; } ?>" id="main_cat_id" name="main_cat_id">
                     <input type="hidden" value="<?php if (isset($sub_cat_id)) { echo $sub_cat_id; } else { echo '0'; } ?>" id="sub_cat_id" name="sub_cat_id">
 
-					<div class="near input-group-addon">Near:</div>
-					<!--<input type="text" class="near form-control" id="search-main2" placeholder="Windhoek">-->
+					<!--<div class="near input-group-addon">Near:</div>
+					<input type="text" class="near form-control" id="search-main2" placeholder="Windhoek">-->
 					<span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search" role="button"></button></span>
     			    
 

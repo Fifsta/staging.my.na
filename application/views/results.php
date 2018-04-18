@@ -128,26 +128,26 @@ $this->load->view('inc/header', $header);
   
 </div>
 
- <div class="container-fluid fullwidth" id="map_container" style="display:none ">
+ <div class="container" id="map_container" style="display:none ">
+    <div class="row">
+      <div class="heading">
+        <h2 data-icon="fa-map-marker"> <a href="#">Namibia <strong>Map</strong></a></h2>
+        <p>To benefit from this, make sure that you have location services enabled for this website.</p>
+      </div>
+      <br>
 
-    <div class="heading">
-      <h2 data-icon="fa-map-marker"><i class="fa fa-map-marker"></i> <a href="#">Namibia <strong>Map</strong></a></h2>
-      <p>To benefit from this, make sure that you have location services enabled for this website.</p>
+       <div class="row">
+           <div class="col-md-4 hidden-sm-down" id="map_results_div">
+
+            <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category); ?>
+           </div>
+           <div class="col-md-8 col-sm-12">
+               <button id="btn_list_view2" class="btn btn-dark t-list"><i class="fa fa-list"></i> List View</button>
+               <div id="map-top"></div>
+
+           </div>
+       </div>
     </div>
-    <br>
-
-     <div class="row">
-         <div class="col-md-4 hidden-sm-down" id="map_results_div">
-
-          <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category); ?>
-         </div>
-         <div class="col-md-8 col-sm-12">
-             <button id="btn_list_view2" class="btn btn-dark t-list"><i class="fa fa-list"></i> List View</button>
-             <div id="map-top"></div>
-
-         </div>
-     </div>
-
  </div>
   
 <?php $this->load->view('inc/footer');?>  
