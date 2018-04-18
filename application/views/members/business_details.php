@@ -139,7 +139,7 @@ $this->load->view('inc/header', $header);
             <div class="heading" style="margin-bottom:15px">
               <h2 data-icon="fa-briefcase"><?php echo $name; ?></h2>
               <ul class="options"> 
-                <li><a href="#Contact-Agent" data-icon="fa-envelope text-dark">Details</a></li>
+                <li><a href="#Details" data-icon="fa-envelope text-dark">Details</a></li>
                 <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
                 <li><a href="#Analytics" data-icon="fa-bar-chart text-dark">Analytics</a></li>
                 <li><a href="#Latest" data-icon="fa-briefcase text-dark">Products</a></li>
@@ -231,6 +231,7 @@ $this->load->view('inc/header', $header);
               <li role="presentation" class="nav-item"><a href="#Description" class="nav-link" aria-controls="Description" role="tab" data-toggle="tab" data-icon="fa-file-text-o text-dark">Description</a></li>
               <li role="presentation" class="nav-item"><a href="#Gallery" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o text-dark">Gallery</a></li>
               <li role="presentation" class="nav-item"><a href="#Categories" class="nav-link" aria-controls="Categories" role="tab" data-toggle="tab" data-icon="fa-list text-dark">Categories</a></li>
+              <li role="presentation" class="nav-item"><a href="#Map" onClick="initialise_map()" class="nav-link" aria-controls="Categories" role="tab" data-toggle="tab" data-icon="fa-map-marker text-dark">Map</a></li>
             </ul>
 
             <div class="tab-content">
@@ -252,13 +253,19 @@ $this->load->view('inc/header', $header);
                 </div>
               </section>
 
-
               <section role="tabpanel" class="tab-pane" id="Categories">
                 <h2 class="tab-head">Categories</h2>
                 <div class="row">
                   <?php //$this->load->view('members/inc/business_categories_inc', $bus_details);?>
                 </div>
               </section>
+
+              <section role="tabpanel" class="tab-pane" id="Map">
+                <h2 class="tab-head">Business Map</h2>
+                <div class="row" id="map-tab">
+                  <?php $this->load->view('members/inc/business_map_inc', $bus_details);?>
+                </div>
+              </section>              
 
               <div class="clear:both"> </div>
 
