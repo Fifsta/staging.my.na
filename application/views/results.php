@@ -129,7 +129,7 @@ $this->load->view('inc/header', $header);
 </div>
 
  <div class="container" id="map_container" style="display:none ">
-    <div class="row">
+    
       <div class="heading">
         <h2 data-icon="fa-map-marker"> <a href="#">Namibia <strong>Map</strong></a></h2>
         <p>To benefit from this, make sure that you have location services enabled for this website.</p>
@@ -147,7 +147,7 @@ $this->load->view('inc/header', $header);
 
            </div>
        </div>
-    </div>
+    
  </div>
   
 <?php $this->load->view('inc/footer');?>  
