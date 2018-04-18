@@ -278,7 +278,10 @@ var geocoder;
                maxWidth: 340
            });
 
-      var bounds = new google.maps.LatLngBounds();
+
+           alert(locations);
+
+         var bounds = new google.maps.LatLngBounds();
 
            //LOOP EACH JSON RESULT
       for (var i = 0; i < locations.length; i++) {
