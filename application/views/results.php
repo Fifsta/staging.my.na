@@ -136,7 +136,7 @@ $this->load->view('inc/header', $header);
 
          </div>
          <div class="col-md-8">
-             <button id="btn_list_view2" class="btn btn-dark"><i class="fa-list"></i> List View</button>
+             <button id="btn_list_view2" class="btn btn-dark t-list"><i class="fa fa-list"></i> List View</button>
              <div id="map-top"></div>
 
          </div>
