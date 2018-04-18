@@ -25,6 +25,26 @@ $this->load->view('inc/header', $header);
 <link href="<?php echo base_url('/');?>css/select/select2.css" rel="stylesheet" type="text/css" />
 <link rel="canonical" href="<?php $this->search_model->build_canonical();?>" />
 
+<style type="text/css">
+  #map-top{
+  width:100%;
+  min-height:500px;
+  margin-top:60px;
+  margin-right:-100px;
+  }
+
+  .fullwidth{padding:0; margin:0;max-width:100%;width:100%}
+  .fullwidth .row-fluid{padding:0;margin:0;width:100%}
+  .fullwidth .row-fluid .span8, .fullwidth .row-fluid{padding:0;margin:0;}
+  #map_container .row-fluid{padding:0;margin:0;width:100%}
+  #btn_list_view2{position: absolute; right:10px; top:60px;z-index:999}
+  #map_results_div{padding:100px 20px 20px 20px;overflow-y:scroll}
+  .gm-style-iw {
+  width: 320px;
+  min-height: 150px;
+  }
+</style>
+
 </head>
 <body id="top">
 
@@ -177,7 +197,7 @@ var geocoder;
       'async': false,
       'type': "POST",
        data: { 
-        'cat': <?php echo $d; ?>,
+        'cat': '<?php echo $d; ?>',
        },       
       'url': "<?php echo site_url('/').'map/results/'; ?>",
       'dataType': "json",
