@@ -1291,7 +1291,7 @@ class Search_model extends CI_Model{
 							 
 						$x ++;
 					}
-					echo $html;
+
 					
 				//No Results	
 				}else{
@@ -1342,6 +1342,8 @@ class Search_model extends CI_Model{
 				$this->cache->save('show_results' . $main_c_id . '_' . $main_category . '_' . $category, $html, 3600);
 
 			}
+
+			echo $html;
 	
 	}
 
