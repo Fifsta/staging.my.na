@@ -199,7 +199,7 @@ var geocoder;
        data: { 
         'cat': '<?php echo $d; ?>',
        },       
-      'url': "<?php echo site_url('/').'map/results/'; ?>",
+      'url': "<?php echo site_url('/').'map/results_ajax/'; ?>",
       'dataType': "json",
       'success': function (data) {
         json = data;
