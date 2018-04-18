@@ -9,6 +9,7 @@ $(document).ready(function(){
 	        $('#home_container').slideUp('300');
 	        $('#map_container').fadeIn('400');
 	        $('#map-top').css("height",h+"px");
+	        $('#map_results_div').fadeIn('400');
 	        $('#map_results_div').css("height",h+"px").html($('#normal_results_div').html());
 	        $('#btn_map_view').addClass('disabled');
 	        $('#btn_list_view').removeClass('disabled');
