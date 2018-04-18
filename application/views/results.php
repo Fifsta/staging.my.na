@@ -194,11 +194,8 @@ var geocoder;
       var json = null;
     $.ajax({
       'async': false,
-      'type': "POST",
-       data: { 
-        'cat': '<?php echo $d; ?>',
-       },       
-      'url': "<?php echo site_url('/').'map/results_ajax/'; ?>",
+      'type': "get",
+      'url': "<?php echo site_url('/').'map/results/'.$d;?>",
       'dataType': "json",
       'success': function (data) {
         json = data;
@@ -510,8 +507,12 @@ var geocoder;
 
     $.ajax({
       'async': false,
-      'type': "get",
-      'url': "<?php echo site_url('/').'map/results/';?>"+cat+'/'+type,
+      'type': "POST",
+      'url': "<?php echo site_url('/').'map/result_ajax/';?>",
+      'data': { 
+        'cat': cat,
+        'type': type
+       },        
       'dataType': "json",
       'success': function (data) {
 
@@ -519,6 +520,7 @@ var geocoder;
          deleteMarkers();
          //geolocate(map);
 
+         alert(data);
          setMarkers(map, locations);
 
       }
