@@ -2338,7 +2338,7 @@ class Members extends CI_Controller {
 				$data['basicmsg'] = 'Co-ordinates updated successfully';
 				$data['bus_id'] = $bus_id;
 				$data['id'] = $this->session->userdata('id');
-				redirect('/members/business/'.$bus_id.'/'.$this->clean_url($data['basicmsg']), '301');
+				redirect('/members/business/'.$bus_id.'/'.$this->clean_url($data['basicmsg']).'/#Map', '301');
 		
 		}else{
 				
