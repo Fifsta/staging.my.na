@@ -68,8 +68,9 @@
     }
     
   }else{
-    
-    $img_url = S3_URL.'assets/business/photos/images/bus_blank.png';  
+      
+      $img_str = 'assets/business/photos/images/bus_blank.png';
+      $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'300','300', $crop = '');   
     
   }
 
@@ -275,7 +276,7 @@
      </div>
 
  </div>
-
+<div class="spacer"></div>
 
 <?php $this->load->view('inc/footer');?>  
 <script src="<?php echo base_url('/');?>js/print_page.js"></script>

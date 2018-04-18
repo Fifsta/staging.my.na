@@ -1737,6 +1737,7 @@ class Trade_model extends CI_Model
 	            <div class="spacer"></div>
 	            ' . $count . '
 	            <div class="clearfix"></div>
+	            <div class="clearfix">' . $btn . '</div>
 	          </div>
 	        </div>
 			';
