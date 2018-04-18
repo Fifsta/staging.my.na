@@ -37,7 +37,7 @@ if(count($map_details) > 0){
 var geocoder;
 var map;
 	  
-function initialise_map() {
+function initialise_map2() {
 	
 	setTimeout(function() {
 			

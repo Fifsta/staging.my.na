@@ -420,6 +420,7 @@ $(document).ready(function(){
   $('[rel=tooltip]').tooltip();
 
   load_products_do(<?php echo $bus_id; ?>, 'live');
+  initialise_map2();
 
 
   var url = window.URL || window.webkitURL;
