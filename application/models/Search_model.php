@@ -1291,7 +1291,7 @@ class Search_model extends CI_Model{
 							 
 						$x ++;
 					}
-
+					echo $html;
 					
 				//No Results	
 				}else{

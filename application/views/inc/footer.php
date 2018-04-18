@@ -84,7 +84,7 @@
 
 			if(data.success){
 
-				$('#weather_cont').html(data.html);
+				//$('#weather_cont').html(data.html);
 				$('.city-weather').unbind('click').bind('click', function(e){
 					var city = $(this).data('location');
 
