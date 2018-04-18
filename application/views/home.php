@@ -25,10 +25,10 @@
 		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
 			<div class="row">
 				<div class="col-md-12">
-		 			<?php $this->load->view('inc/featured_business');?>
-					<div class="spacer"></div>
-					<?php $this->load->view('inc/featured_listings');?>
-					<div class="spacer"></div>
+		 			<?php //$this->load->view('inc/featured_business');?>
+					<!--<div class="spacer"></div>-->
+					<?php //$this->load->view('inc/featured_listings');?>
+					<!--<div class="spacer"></div>-->
 					<?php $this->load->view('inc/categories');?>
 					<div class="spacer"></div>
 					<?php $this->load->view('inc/classifieds');?>
