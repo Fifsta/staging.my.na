@@ -4,11 +4,17 @@
 	//+++++++++++++++++++++++++++++++++
 
 	$str = '';
-	if(isset($bus_id) && $bus_id != 0){
-		
-		$str = ' for Business';
-			
-	}
+if (isset($bus_id) && $bus_id != 0) {
+
+    $str = ' for Business';
+
+    $all_link = site_url('/') . 'members/business/' . $bus_id . '/';
+
+} else {
+
+    $all_link = site_url('/') . 'members/my_products/';
+
+}
 
 ?>
 <div id="anchor_me"></div>
@@ -49,7 +55,7 @@
         </div>
         <div>
            <a href="javascript:void(0)" onclick="proceed_to_5()" id="proceed_to_5" class="btn btn-success btn-lg pull-right">Next <i class="fa fa-chevron-right text-light"></i></a>
-           <a href="<?php echo site_url('/').'members/business/'.$bus_id.'/';?>" onclick="back_to_all();" id="back_to_all" class="btn btn-lg btn-dark pull-right" style="margin-right:5px">All Products</a>
+           <a href="<?php echo $all_link; ?>" id="back_to_all" class="btn btn-lg btn-dark pull-right" style="margin-right:5px">All Products</a>
            <a href="javascript:void(0)"onclick="back_to_3()" id="back_to_3" class="btn btn-lg btn-warning pull-right" style="margin-right:5px"><i class="fa fa-chevron-left text-dark"></i> Back</a>
        	   <div class="clearfix">&nbsp;</div>	
         </div>

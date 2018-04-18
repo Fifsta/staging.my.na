@@ -142,7 +142,7 @@ $this->load->view('inc/header', $header);
                 <li><a href="#Contact-Agent" data-icon="fa-envelope text-dark">Details</a></li>
                 <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
                 <li><a href="#Analytics" data-icon="fa-bar-chart text-dark">Analytics</a></li>
-                <li><a href="#Products" data-icon="fa-briefcase text-dark">Products</a></li>
+                <li><a href="#Latest" data-icon="fa-briefcase text-dark">Products</a></li>
                 <li><a href="#Users" data-icon="fa-users text-dark">Users</a></li>
               </ul>
             </div>

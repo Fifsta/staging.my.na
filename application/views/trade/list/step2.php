@@ -8,6 +8,12 @@ if (isset($bus_id) && $bus_id != 0) {
 
     $str = ' for Business';
 
+    $all_link = site_url('/') . 'members/business/' . $bus_id . '/';
+
+} else {
+
+    $all_link = site_url('/') . 'members/my_products/';
+
 }
 
 if (!isset($product_id)) {
@@ -398,7 +404,7 @@ if(!isset($type)){
 
                     ?>
 
-                    <a href="<?php echo site_url('/') . 'members/business/' . $bus_id . '/'; ?>" onclick="back_to_all();" id="back_to_all" class="btn btn-dark btn-lg pull-right" style="margin-right:5px">All Products</a>
+                    <a href="<?php echo $all_link; ?>" id="back_to_all" class="btn btn-dark btn-lg pull-right" style="margin-right:5px">All Products</a>
                     <a href="javascript:void(0)" <?php echo $java; ?> class="btn btn-lg btn-warning pull-right <?php echo $str; ?>" style="margin-right:5px"><i class="fa fa-chevron-left text-dark"></i> Back</a>
 
                 </fieldset>

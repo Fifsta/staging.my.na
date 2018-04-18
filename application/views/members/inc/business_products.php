@@ -190,7 +190,7 @@
                   <div class="dropdown-menu">
                     <a href="'.site_url('/').'sell/update_product/'.$row->product_id.'/" id="upd_'.$row->product_id.'" onclick="update_product('.$row->product_id.');" class="dropdown-item"><i class="icon-pencil"></i> Update Item</a>
                     <a href="javascript:void(0)" data-id="'.$row->product_id.'" class="dropdown-item dbtn"><i class="icon-trash"></i> Remove Item</a>
-                    <a href="'.site_url('/').'product/'.$row->product_id.'/" target="_blank" class="dropdown-item"><i class="icon-search"></i> View Item</a>
+                    <a href="'.site_url('/').'product/'.$row->product_id.'/'.$this->trade_model->clean_url_str($row->title) .'" target="_blank" class="dropdown-item"><i class="icon-search"></i> View Item</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="'.site_url('/').'trade/print_product/'.$row->product_id.'/" data-id="'.$row->product_id.'" class="btnPrint_single"><i class="icon-print"></i> Print Option 1</a>
                     <a class="dropdown-item" href="'.site_url('/').'trade/print_product2/'.$row->product_id.'/" data-id2="'.$row->product_id.'" class="btnPrint_single"><i class="icon-print"></i> Print Option 2</a>

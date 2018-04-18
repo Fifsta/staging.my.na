@@ -19,7 +19,7 @@ class Members extends CI_Controller {
 
 	
 	public function index()
-	{
+	{ 
 		
 		if($id = $this->session->userdata('id')){
 
@@ -1541,8 +1541,16 @@ class Members extends CI_Controller {
 				$data['rating'] = $this->business_model->get_rating($bus_id);
 				//$this->load->view('trade/business_products', $data);
 
-			
-				$this->load->view('members/business_details', $data);	
+				if($bus_id == '0') {
+
+					$this->load->view('members/my_products', $data);
+
+				} else {
+
+					$this->load->view('members/business_details', $data);
+
+				}
+					
 		
 		}else{
 				
