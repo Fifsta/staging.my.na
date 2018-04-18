@@ -136,7 +136,7 @@ $this->load->view('inc/header', $header);
           <section id="listing">
 
 
-            <div class="heading" style="margin-bottom:15px">
+            <div class="heading">
               <h2 data-icon="fa-briefcase"><?php echo $name; ?></h2>
               <ul class="options"> 
                 <li><a href="#Details" data-icon="fa-envelope text-dark">Details</a></li>
@@ -146,7 +146,7 @@ $this->load->view('inc/header', $header);
                 <li><a href="#Users" data-icon="fa-users text-dark">Users</a></li>
               </ul>
             </div>
-
+            <br>
 
             <div class="list-map">
               <div class="list-map-left" style="background:#ccc; position:relative">
@@ -159,8 +159,8 @@ $this->load->view('inc/header', $header);
                     <input type="hidden" id="bus_id1" name="bus_id1" value="<?php echo $bus_id;?>">
                     <input type="hidden" id="bus_name1" name="bus_name1" value="<?php echo $name;?>">
 
-                    <button type="submit" style="margin:5px"  class="btn btn-dark pull-right" id="coverbut"><i class="fa fa-picture"></i> <?php if($cover_img != ''){ echo 'Upload New Cover';}else{ echo 'Add Cover';} ?></button>
-                    <a class="btn btn-dark pull-right" rel="tooltip" title="Cover Image 750 pixels x 300 pixels" style="margin:5px" onclick="select_cover()" href="javascript:void(0)"><i class="fa fa-search"></i> Browse Cover</a>
+                    <!--<button type="submit" style="margin:5px"  class="btn btn-dark pull-right" id="coverbut"><i class="fa fa-picture"></i> <?php //if($cover_img != ''){ echo 'Upload New Cover';}else{ echo 'Add Cover';} ?></button>
+                    <a class="btn btn-dark pull-right" rel="tooltip" title="Cover Image 750 pixels x 300 pixels" style="margin:5px" onclick="select_cover()" href="javascript:void(0)"><i class="fa fa-search"></i> Browse Cover</a>-->
 
 
                   </form>
@@ -222,10 +222,10 @@ $this->load->view('inc/header', $header);
             </div>
             <!--details-->   
 
-
+            <div class="spacer"></div>
             
             <!--tabs business details-->
-            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-top:30px; margin-bottom:30px"><strong>MANAGE DETAILS</strong></h1>
+            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-bottom:30px"><strong>MANAGE DETAILS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item"><a href="#Details" class="nav-link active" aria-controls="Details" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o text-dark">Details</a></li>
               <li role="presentation" class="nav-item"><a href="#Description" class="nav-link" aria-controls="Description" role="tab" data-toggle="tab" data-icon="fa-file-text-o text-dark">Description</a></li>
@@ -272,9 +272,11 @@ $this->load->view('inc/header', $header);
             </div>
             <!--tabs business details-->
 
+            <div class="spacer"></div>
+
 
             <!--tabs review/rating details-->
-            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-top:30px; margin-bottom:30px"><strong>MANAGE RATINGS & REVIEWS</strong></h1>
+            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-bottom:30px"><strong>MANAGE RATINGS & REVIEWS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item"><a href="#Rating" class="nav-link active" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o text-dark">Rating Widget</a></li>
               <li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-file-text-o text-dark">Reviews</a></li>
@@ -303,9 +305,10 @@ $this->load->view('inc/header', $header);
             </div>
             <!--tabs review/rating details-->
 
+            <div class="spacer"></div>
 
             <!--tabs products-->
-            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-top:30px; margin-bottom:30px"><strong>MANAGE BUSINESS PRODUCTS</strong></h1>
+            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-bottom:30px"><strong>MANAGE BUSINESS PRODUCTS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item"><a href="#Latest" data-type="live" data-bus="<?php echo $bus_id; ?>" class="nav-link active pbtn" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-clock-o text-dark">Latest Items</a></li>
               <li role="presentation" class="nav-item"><a href="#Sold" data-type="sold" data-bus="<?php echo $bus_id; ?>" class="nav-link pbtn" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-exclamation-circle text-dark">Sold Items</a></li>
@@ -333,9 +336,10 @@ $this->load->view('inc/header', $header);
             </div>
             <!--products -->
 
+            <div class="spacer"></div>
 
             <!--tabs analytics -->
-            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-top:30px; margin-bottom:30px"><strong>MANAGE ANALYTICS</strong></h1>
+            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-bottom:30px"><strong>MANAGE ANALYTICS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item"><a href="#Analytics" class="nav-link active" aria-controls="Analytics" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o text-dark">Analytics</a></li>
 
@@ -353,9 +357,10 @@ $this->load->view('inc/header', $header);
             </div>
             <!--tabs analytics -->   
 
+            <div class="spacer"></div>
 
             <!--tabs users-->
-            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-top:30px; margin-bottom:30px"><strong>MANAGE BUSINESS USERS</strong></h1>
+            <h1 style="font-size:16px; border-bottom:1px solid #999; margin-bottom:30px"><strong>MANAGE BUSINESS USERS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item"><a href="#Users" class="nav-link active" aria-controls="Users" role="tab" data-toggle="tab" data-icon="fa-users text-dark">Users</a></li>
 
@@ -375,7 +380,8 @@ $this->load->view('inc/header', $header);
             <!--tabs users-->                        
 
             
-          </section>          
+          </section> 
+          <div class="spacer"></div>         
 
         </div> 
 
