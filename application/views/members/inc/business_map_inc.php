@@ -17,7 +17,7 @@ if(count($map_details) > 0){
 		
 		$lat = '-22.583741';
 		
-	}else{
+	}else{ 
 		
 		 $lat = $map_details['BUSINESS_MAP_LATITUDE'];
 	
@@ -126,20 +126,19 @@ function initialise_map() {
 </script>
 
 
-	<div class="row-fluid">
-    <h2>Update your Map</h2>
-
-
-	
-	<p><span class="mark">*</span><strong>How to add your GPS coordinates:</strong></p>
-	<p><strong>STEP1:</strong> Do a quick search for the street you are in or enter your GPS co-ordinates</p>
-	<p><strong>STEP2:</strong> Drag the map or the arrow until you precisely pinpointed your location. <br />
-		You may also switch to satelite view to see the buildings in a street.</p>
-        <div class="input-append">
-          <input style="span12" type="text" id="address_lookup" placeholder="- quick search your street -" value="<?PHP if(isset($BUSINESS_PHYSICAL_ADDRESS)){ echo $BUSINESS_PHYSICAL_ADDRESS;}?>">
-          <input class="btn" type="button" onclick="codeAddress()" value="Search!"/>
-        </div>
-     </div>   
+	<div class="col-md-12">
+    	<h2>Update your Map</h2>
+		<p><span class="mark">*</span><strong>How to add your GPS coordinates:</strong></p>
+		<p><strong>STEP1:</strong> Do a quick search for the street you are in or enter your GPS co-ordinates</p>
+		<p><strong>STEP2:</strong> Drag the map or the arrow until you precisely pinpointed your location. <br />
+			You may also switch to satelite view to see the buildings in a street.</p>
+        <div class="input-group">
+	        <div class="input-group-append">
+	          <input type="text" class="form-control" id="address_lookup" placeholder="- quick search your street -" value="<?PHP if(isset($BUSINESS_PHYSICAL_ADDRESS)){ echo $BUSINESS_PHYSICAL_ADDRESS;}?>">
+	          <input class="btn btn-dark input-group-text" type="button" onclick="codeAddress()" value="Search!"/>
+	        </div>
+    	</div>
+    </div>   
 
 	<p id="helpText" class="help_block">&nbsp;</p>
 
@@ -149,25 +148,25 @@ function initialise_map() {
 
 <form method="post" action="<?php echo site_url('/');?>members/update_map_coordinates/<?php echo $ID;?>/" name="ItineraryCreator" id="form_example" style="margin:0; padding:0" enctype="multipart/form-data">
 	
-		<div style="display:block;position:relative;background:url(<?php echo base_url('/');?>img/load.gif) no-repeat center center;height:350px;width:100%;max-width:none">
-		    <div id="map" style="display:block;position:relative;width:100%;height:100%;max-width:none"></div>
-        </div>
-			<input id="lat" name="lat" type="hidden">			
-			<input id="lng" name="lng" type="hidden">
-            <input id="bus_id" name="bus_id" type="hidden" value="<?php echo $ID;?>">
-            <input id="id" name="id" type="hidden" value="<?php echo $this->session->userdata('id');?>">		
-			<input readonly="readonly" id="zoom" name="zoom" type="hidden">			
-	
-	
-	
+	<div style="display:block;position:relative;background:url(<?php echo base_url('/');?>img/load.gif) no-repeat center center;height:350px;width:100%;max-width:none">
+	    <div id="map" style="display:block;position:relative;width:100%;height:100%;max-width:none"></div>
+    </div>
+
+	<input id="lat" name="lat" type="hidden">			
+	<input id="lng" name="lng" type="hidden">
+    <input id="bus_id" name="bus_id" type="hidden" value="<?php echo $ID;?>">
+    <input id="id" name="id" type="hidden" value="<?php echo $this->session->userdata('id');?>">		
+	<input readonly="readonly" id="zoom" name="zoom" type="hidden">			
+		
 	<div style="clear: both; color:gray; font-size: 10px;">
    	  <strong>Note:</strong> Once you have clicked the save button, please be patient while your files are uploaded to the server.Depending on your connection speed and the size of<br /> 
       the file(s) selected, it could take a couple of mintues.
     </div>
 		
-        <input id="ftoken_id" name="ftoken_id" type="hidden" value="" />
-        <input id="entity_id" name="entity_id" type="hidden" value="" />
-		<button type="submit" class="btn btn-large pull-right" name="submit" id="btn_save"><i class="icon-road"></i> Update Map</button>
+    <input id="ftoken_id" name="ftoken_id" type="hidden" value="" />
+    <input id="entity_id" name="entity_id" type="hidden" value="" />
+	<button type="submit" class="btn btn-dark btn-large" name="submit" id="btn_save"><i class="icon-road"></i> Update Map</button>
 			
 	<div class="clearfix" style="height:80px;"></div>
+
 </form>
