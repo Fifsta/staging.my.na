@@ -128,7 +128,7 @@ $this->load->view('inc/header', $header);
   
 </div>
 
- <div class="container-fluid fullwidth hide" id="map_container">
+ <div class="container-fluid fullwidth d-none" id="map_container">
 
      <div class="row">
          <div class="col-md-4" id="map_results_div">
