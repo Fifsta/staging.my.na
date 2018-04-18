@@ -168,7 +168,7 @@ $this->load->view('inc/header', $header);
               </div>
               
               <div class="list-map-right" id="map_container">
-                <?php $this->load->view('business/inc/business_map_inc', $bus_details);?>
+                <?php $this->load->view('members/inc/business_map_view_inc', $bus_details);?>
               </div>
             </div>
 
