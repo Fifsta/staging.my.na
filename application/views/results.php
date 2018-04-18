@@ -520,7 +520,6 @@ var geocoder;
          deleteMarkers();
          //geolocate(map);
 
-         alert(data);
          setMarkers(map, locations);
 
       }
