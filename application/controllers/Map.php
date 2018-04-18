@@ -172,6 +172,21 @@ class Map extends CI_Controller {
 		echo $this->map_model->get_business_results($cat, $type, $l_id, $loc);
 		
 	}
+
+    public function results_ajax()
+    {
+
+
+        $cat = $this->input->post('cat', true);
+        $type = '';
+        $l_id = 0;
+        $loc = '';
+
+        echo $this->map_model->get_business_results($cat, $type, $l_id, $loc);
+        
+    }
+
+
 	function url_encode($string){
         return urlencode(utf8_encode(  str_replace('(','_', str_replace(')','~',$string))));
     }

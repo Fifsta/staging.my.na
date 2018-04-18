@@ -175,8 +175,11 @@ var geocoder;
       var json = null;
     $.ajax({
       'async': false,
-      'type': "get",
-      'url': "<?php echo site_url('/').'map/results/'.$d;?>",
+      'type': "POST",
+       data: { 
+        'cat': <?php echo $d; ?>,
+       },       
+      'url': "<?php echo site_url('/').'map/results/'; ?>",
       'dataType': "json",
       'success': function (data) {
         json = data;
