@@ -399,6 +399,7 @@ $this->load->view('inc/header');
 	
 </div>
 	
+<div class="spacer"></div>	
 	
 <?php $this->load->view('inc/footer');?>	
 
