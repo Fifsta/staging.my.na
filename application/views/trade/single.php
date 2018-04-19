@@ -428,7 +428,7 @@ function load_reviews(){
 
 }
 
-function load_similar(){
+function load_similar(){ 
     
     var cont = $('#similar_div');
     

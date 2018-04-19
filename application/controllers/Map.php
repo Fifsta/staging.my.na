@@ -178,7 +178,7 @@ class Map extends CI_Controller {
 
 
         $cat = $this->input->post('cat', true);
-        $type = '';
+        $type = $this->input->post('type', true);
         $l_id = 0;
         $loc = '';
 

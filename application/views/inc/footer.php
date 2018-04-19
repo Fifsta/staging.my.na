@@ -97,8 +97,7 @@
 	}
 
 
-	  function initialise_owl() {
-
+	function initialise_owl() {
 
 		// INITIALIZE OWL
 		$('.owl-carousel').owlCarousel({
@@ -133,7 +132,9 @@
 		});
 
 
-  }
+
+  	}
+
 
 	</script>
 

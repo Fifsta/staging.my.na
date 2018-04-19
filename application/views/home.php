@@ -25,6 +25,25 @@
 		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
 			<div class="row">
 				<div class="col-md-12">
+
+					<?php $this->load->view('inc/banners');?>
+
+					  <div class="btn-group" role="group" aria-label="First group">
+					    <button type="button" class="btn btn-dark"><i class="fa fa-briefcase"></i> Business Directory</button>
+					    <button type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Classifieds</button>
+					    <button type="button" class="btn btn-dark"><i class="fa fa-home"></i> Properties</button>
+					    <button type="button" class="btn btn-dark"><i class="fa fa-car"></i> Vehicles</button>
+					    <button type="button" class="btn btn-dark"><i class="fa fa-gavel"></i> Auctions</button>
+					    <button type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Vacancies</button>
+					    <button type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Latest News</button>
+					  </div>
+
+					<div class="spacer"></div>
+
+
+
+
+
 		 			<?php //$this->load->view('inc/featured_business');?>
 					<!--<div class="spacer"></div>-->
 					<?php //$this->load->view('inc/featured_listings');?>
@@ -54,6 +73,41 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){	
+
+		// INITIALIZE OWL
+		$('#owl-banners').owlCarousel({
+		    loop:false,
+		    lazyLoad: true,
+		    navRewind:false,
+		    margin:10,
+		    nav: true,
+		    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
+		    responsiveClass:true,
+		    responsive:{
+		        0:{
+		            items:1,
+		            nav:false,
+		            loop:true
+		        },
+		        600:{
+		            items:1,
+		            nav:false,
+		            loop:true
+		        },
+		        1000:{
+		            items:1,
+		            nav:true,
+		            loop:true
+		        },
+
+		        1600:{
+		            items:1,
+		            nav:true,
+		            loop:true
+		        }		        
+		    }
+		});
+
 
 		slideshow = $( '.feature-cycle-slideshow' ).cycle();
 
