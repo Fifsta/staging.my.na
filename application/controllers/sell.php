@@ -30,7 +30,7 @@ class Sell extends CI_Controller {
 	//+++++++++++++++++++++++++++
 	//SELL/INDEX
 	//++++++++++++++++++++++++++
-	public function index($bus_id = 0)
+	public function index($bus_id = 0, $type = '')
 	{
 		if($this->session->userdata('id'))
 		{
@@ -55,21 +55,26 @@ class Sell extends CI_Controller {
                     $data['logo'] = $row['BUSINESS_LOGO_IMAGE_NAME'];
                     $data['cover'] = $row['BUSINESS_COVER_PHOTO'];
                 }
+
                 $data['private'] = 'no';
                 if($this->input->get('private')){
 
                     $data['private'] = 'yes';
                 }
-                $data['type'] = '';
-                if($this->input->get('type')){
 
-                    $data['type'] = $this->input->get('type');
-                }
+                $data['type'] = $type;
 
-				if(!$data['auction'] = $this->input->get('auction')){
+
+				if($type == 'auction'){
+
+					$data['auction'] = 'true';
+
+				} else {
 
 					$data['auction'] = 'false';
+
 				}
+
                 $this->load->view('trade/list/main', $data);
 
 			}else{
@@ -332,7 +337,7 @@ class Sell extends CI_Controller {
 	//HOME
 	//++++++++++++++++++++++++++++++++++++
 	public function my_trade($bus_id = 0, $section = '')
-	{
+	{ 
 		if($this->session->userdata('id')){
 			$data['business_name'] = '';
 			if($bus_id != 0){
@@ -801,15 +806,16 @@ class Sell extends CI_Controller {
 			  return;	
 		}
 	}
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//PUBLISH DEAL
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
-
 	function publish_item($id, $bus_id){
 		
 		$this->trade_model->publish_item($id, $bus_id);
 		
 	}
+
 	//++++++++++++++++++++++++++++++++++++
 	//STEP 3 Add item details
 	//++++++++++++++++++++++++++++++++++++
@@ -827,25 +833,19 @@ class Sell extends CI_Controller {
 			}else{
 				if($this->input->is_ajax_request()){
 					$this->load->view('trade/list/step2', $data);
-					$str =  '<div class="alert alert-error">'.$data['error'].'</div>';
+					$str =  '<div class="alert alert-danger">'.$data['error'].'</div>';
 					echo "<script type='text/javascript'>
 							$('#msg_step2').html('".$str."');
-								  $('.item_editor').redactor({ 	
-				  
-								  buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 
-								  'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
-								   'alignment', '|', 'horizontalrule']
-							  });
 						  </script>";
 				}else{
-					$data['error'] =  '<div class="alert alert-error">'.$data['error'].'</div>';
+					$data['error'] =  '<div class="alert alert-danger">'.$data['error'].'</div>';
 					$this->load->view('trade/list/main', $data);
 				}
 			}
-
-		}
-			
+		}	
 	}
+
+
 	//++++++++++++++++++++++++++++++++++++
 	//UPDATE Product
 	//++++++++++++++++++++++++++++++++++++
@@ -949,12 +949,13 @@ class Sell extends CI_Controller {
 				$this->load->view('login' , $data);
 			
 		}
-
-			
 	}
+
+
 	function url_encode($string){
         return str_replace('+','-',urlencode(utf8_encode($string)));
     }
+
     
     function url_decode($string){
         return str_replace('-',' ',utf8_decode(urldecode($string)));
