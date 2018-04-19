@@ -29,20 +29,16 @@
 					<?php $this->load->view('inc/banners');?>
 
 					  <div class="btn-group" role="group" aria-label="First group">
-					    <button type="button" class="btn btn-dark"><i class="fa fa-briefcase"></i> Business Directory</button>
-					    <button type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Classifieds</button>
-					    <button type="button" class="btn btn-dark"><i class="fa fa-home"></i> Properties</button>
-					    <button type="button" class="btn btn-dark"><i class="fa fa-car"></i> Vehicles</button>
-					    <button type="button" class="btn btn-dark"><i class="fa fa-gavel"></i> Auctions</button>
-					    <button type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Vacancies</button>
-					    <button type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Latest News</button>
+					    <a href="#categories" type="button" class="btn btn-dark"><i class="fa fa-briefcase"></i> Business Directory</a>
+					    <a href="#classifieds" type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Classifieds</a>
+					    <a href="#properties" type="button" class="btn btn-dark"><i class="fa fa-home"></i> Properties</a>
+					    <a href="#Vehicles" type="button" class="btn btn-dark"><i class="fa fa-car"></i> Vehicles</a>
+					    <a href="#Auctions" type="button" class="btn btn-dark"><i class="fa fa-gavel"></i> Auctions</a>
+					    <a href="#Vacancies" type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Vacancies</a>
+					    <a href="#News" type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Latest News</a>
 					  </div>
 
 					<div class="spacer"></div>
-
-
-
-
 
 		 			<?php //$this->load->view('inc/featured_business');?>
 					<!--<div class="spacer"></div>-->
@@ -68,7 +64,7 @@
 	
 <?php $this->load->view('inc/footer');?>	
 
-<script src='<?php echo base_url('/')?>js/jquery.cycle2.min.js' type="text/javascript" language="javascript"></script>
+<!--<script src='<?php //echo base_url('/')?>js/jquery.cycle2.min.js' type="text/javascript" language="javascript"></script>-->
 
 <script type="text/javascript">
 
