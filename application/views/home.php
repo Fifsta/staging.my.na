@@ -29,7 +29,7 @@
 					<?php $this->load->view('inc/banners');?>
 
 					  <div class="btn-group" role="group" aria-label="First group">
-					    <a href="#categories" type="button" class="btn btn-dark"><i class="fa fa-briefcase"></i> Business Directory</a>
+					    <a href="#categories" type="button" class="btn btn-dark nav-link "><i class="fa fa-briefcase"></i> Business Directory</a>
 					    <a href="#classifieds" type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Classifieds</a>
 					    <a href="#properties" type="button" class="btn btn-dark"><i class="fa fa-home"></i> Properties</a>
 					    <a href="#Vehicles" type="button" class="btn btn-dark"><i class="fa fa-car"></i> Vehicles</a>
@@ -105,7 +105,7 @@
 		});
 
 
-		slideshow = $( '.feature-cycle-slideshow' ).cycle();
+		/*slideshow = $( '.feature-cycle-slideshow' ).cycle();
 
 	    slideshow.on( 'cycle-initialized cycle-before', function( e, opts ) {
 	      progress.stop(true).css( 'width', 0 );
@@ -138,7 +138,7 @@
 			$('.reveal', this).each(function() {
 				$(this).stop().fadeOut(200).attr('src',shown);
 			});
-		});
+		});*/
 
 		initialise_owl();	
 		
