@@ -139,12 +139,61 @@ $this->load->view('inc/header', $header);
        <div class="row">
            <div class="col-md-4 hidden-sm-down" id="map_results_div">
 
-            <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category); ?>
+              <div class="map-left">
+                <div class="form-group">
+                  <select class="selectpicker form-control" multiple data-live-search="true" data-none-selected-text="Filter markers according to ..."><!--data-actions-box="true"-->
+                    <optgroup data-icon="fa-briefcase" label="Business">
+                      <option>Jaccuzzi</option>
+                      <option>Study</option>
+                      <option>Library</option>
+                    </optgroup>
+                    <optgroup data-icon="fa-briefcase" label="Business">
+                      <option>Jaccuzzi</option>
+                      <option>Study</option>
+                      <option>Library</option>
+                    </optgroup>
+                  </select>
+                </div>
+
+                <?php echo $this->search_model->show_sidebar($query); ?>
+
+                <!--<div class="panel-group" id="map-accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+
+
+
+                    <div class="panel-heading" role="tab">
+                      <h3 class="panel-title"><a class="" role="button" data-toggle="collapse" data-parent="#map-accordion" href="#Business" aria-expanded="true" aria-controls="Business">Business</a></h3>
+                    </div>
+
+                    <div id="Business" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="Business">
+                      <div class="panel-body">
+                        <ul>
+                          <li><span>1245</span> <a href="#">All</a></li>
+                          <li><span>1245</span> <a href="#">Lodge</a></li>
+                          <li><span>1245</span> <a href="#">Guest Farm</a></li>
+                          <li><span>1245</span> <a href="#">Guest House</a></li>
+                          <li><span>1245</span> <a href="#">Bed and Breakfast</a></li>
+                          <li><span>1245</span> <a href="#">Campsite Camping and Camping Campsite</a></li>
+                          <li><span>1245</span> <a href="#">Self Catering and Catering Self</a></li>
+                          <li><span>1245</span> <a href="#">Rest Camp</a></li>
+                          <li><span>1245</span> <a href="#">Hotel Resort and Gold Course</a></li>
+                          <li><span>1245</span> <a href="#">Hotel</a></li>
+                          <li><span>1245</span> <a href="#">Tented Camp</a></li>
+                        </ul>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>-->
+
+              </div>
+
            </div>
+
            <div class="col-md-8 col-sm-12">
                <button id="btn_list_view2" class="btn btn-dark t-list"><i class="fa fa-list"></i> List View</button>
                <div id="map-top"></div>
-
            </div>
        </div>
     

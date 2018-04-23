@@ -92,8 +92,8 @@ $this->load->view('inc/header', $header);
 <!-- JAvascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="<?php echo base_url('/');?>js/jquery.inview.js" type="text/javascript"></script>
-<script src="<?php echo base_url('/');?>video/video/eh5v.files/html5video/html5ext.js" type="text/javascript"></script>
+<!--<script src="<?php echo base_url('/');?>js/jquery.inview.js" type="text/javascript"></script>
+<script src="<?php // echo base_url('/');?>video/video/eh5v.files/html5video/html5ext.js" type="text/javascript"></script>-->
 <script src='<?php echo base_url('/') ?>js/jquery.cycle2.min.js' type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url('/');?>js/select2.min.js"></script>
 <script type="text/javascript">
