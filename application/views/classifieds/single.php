@@ -121,10 +121,6 @@ $this->load->view('inc/header', $header);
 					?>
 
 					<div class="spacer"></div>
-					<!--Feature Listings -->
-					<?php $this->load->view('inc/featured_listings');?>		
-
-					<div class="spacer"></div>
 					<?php $this->load->view('inc/classifieds'); ?>	
 					
 				</div>	
