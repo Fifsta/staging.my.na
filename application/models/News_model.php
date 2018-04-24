@@ -42,6 +42,21 @@ class News_model extends CI_Model
                     case 3:
                     $link = 'https://www.az.com.na/nachrichten/'.$row->post_slug;
                     break;
+                    case 5:
+                    $link = 'https://zone.my.na/news/'.$row->post_slug;
+                    break;  
+                    case 6:
+                    $link = 'https://erongo.com.na/news/'.$row->post_slug;
+                    break;
+                    case 7:
+                    $link = 'https://we.com.na/news/'.$row->post_slug;
+                    break;
+                    case 8:
+                    $link = 'https://ewi.com.na/news/'.$row->post_slug;
+                    break;
+                    case 9:
+                    $link = 'https://tourismus.com.na/news/'.$row->post_slug;
+                    break;                                                                                                
                 }
 
                 $img_str = 'assets/images/' . $row->image;
@@ -51,7 +66,7 @@ class News_model extends CI_Model
 
 				$o .= '<figure>
                             <div class="product_ribbon_sml"><small style="color:#ff9900">'.$row->publication.' &nbsp;</small>Listed: '.$this->my_model->time_passed(strtotime($row->datetime)).'<span></span></div>
-							<a href="" class="shown lazyload">
+							<a href="'.$link.'" class="shown lazyload">
 								<img class="owl-lazy" data-src="'.$img_url.'" src="images/16x9.png" />
 							</a>
                             <div>
