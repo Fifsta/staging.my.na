@@ -164,31 +164,27 @@ $this->load->view('inc/header');
 						<figure>
 							<img src="<?php echo $img_url; ?>">
 						</figure>
-
-						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>
-						 
+						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>						 
 					</div>
 					<div class="details-right">
 						<h2><?php echo $address ;?></h2>
 						<div itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
-                             <span itemprop="street-address"><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
-                             <span itemprop="locality"><?php echo $city ;?></span>
-                             <span itemprop="region"><?php echo $region ;?></span>
-                             <span itemprop="country-name">Namibia</span>
-                         </div>
-                         <?php 
-						 echo '<p>'. implode(' ',$cats['links']).'</p>';
-						 ?>
+                            <span itemprop="street-address"><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
+                            <span itemprop="locality"><?php echo $city ;?></span>
+                            <span itemprop="region"><?php echo $region ;?></span>
+                            <span itemprop="country-name">Namibia</span>
+                        </div>
+                        <?php
+							echo '<p>'. implode(' ',$cats['links']).'</p>';
+						?>
 						<div class="row reveal">
 							<div class="col-sm-12 col-md-6 col-lg-4">
 								<p data-icon="fa-phone text-dark"><button class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
-								<p data-icon="fa-fax text-dark"><button class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>
-								
+								<p data-icon="fa-fax text-dark"><button class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>								
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-4">
 								<p data-icon="fa-tablet text-dark"><button class="btn btn-default"><!--C: --><?php echo $cell; ?></button></p>
-								<p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><?php echo $email; ?></button></p>
-								
+								<p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><?php echo $email; ?></button></p>								
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-4">
 								<p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><?php echo $website; ?></button></p>
@@ -196,11 +192,11 @@ $this->load->view('inc/header');
 						</div>
 
 						<?php if($bus_details['IS_NTB_MEMBER'] == 'Y'){ ?>
-						<a href="#" data-toggle="tooltip" data-placement="top" title="NTB Member"><img src="images/ntb.png" alt="<?php echo $name;?> - NTB Member" class="img-thumbnail"></a>
+							<a href="#" data-toggle="tooltip" data-placement="top" title="NTB Member"><img src="images/ntb.png" alt="<?php echo $name;?> - NTB Member" class="img-thumbnail"></a>
 						<?php } ?>
 
 						<?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
-						<a href="#" data-toggle="tooltip" data-placement="top" title="HAN Member"><img src="images/han.png" alt="<?php echo $name;?> - HAN Member" class="img-thumbnail"></a>
+							<a href="#" data-toggle="tooltip" data-placement="top" title="HAN Member"><img src="images/han.png" alt="<?php echo $name;?> - HAN Member" class="img-thumbnail"></a>
 						<?php } ?>
 
 					</div>
@@ -259,7 +255,7 @@ $this->load->view('inc/header');
 								No deals currently listed
 							</div>
 						</section>
-						<div class="clear:both"> </div>
+						<div class="clear:both"></div>
 
 					<section role="tabpanel" class="tab-pane" id="Gallery">
 						<h2 class="tab-head">Gallery</h2>
@@ -272,7 +268,7 @@ $this->load->view('inc/header');
 						<h2 class="tab-head">QR Code</h2>
 						<div class="row">
 							<div class="col-lg-4 col-md-8 col-sm-12 col-xs-12">
-								<?php //echo $this->business_model->get_qr_vcard($bus_id,'220','220');?>
+								<?php echo $this->business_model->get_qr_vcard($bus_id,'220','220');?> 
 							</div>
 						</div>
 					</section>				
@@ -456,45 +452,45 @@ $this->load->view('inc/header');
 	
 
 $(document).ready(
-function()
-{
-	$('.redactor').redactor({ 	
-			
-			buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 
-			'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
-			 'alignment', '|', 'horizontalrule']
+	function()
+	{
+		$('.redactor').redactor({ 	
+				
+				buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 
+				'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
+				 'alignment', '|', 'horizontalrule']
+			});
+		
+		
+		$('[rel=tooltip]').tooltip();
+		$('.carousel').carousel();
+		
+		
+		//$(".my_na").popover({ placement:"left",trigger: "hover", title:"tebhdjsbdjsbd", content:"shnaksbnjkabnsabnsksbnkabns"});  
+		$('.my_na_c').addClass('loading_img');
+
+	    load_similar();
+
+		//my_na(<?php echo $bus_id;?>);
+
+		//load_advert();
+
+		
+		$('.popovers').popover({
+						placement : 'right',
+						html : true,
+						trigger : 'hover', //<--- you need a trigger other than manual
+						delay: { 
+						   show: "500", 
+						   hide: "100"
+						},
+						content: function() {
+						
+							return $(this).find('span.popover-content').html();
+						}
 		});
-	
-	
-	$('[rel=tooltip]').tooltip();
-	$('.carousel').carousel();
-	
-	
-	//$(".my_na").popover({ placement:"left",trigger: "hover", title:"tebhdjsbdjsbd", content:"shnaksbnjkabnsabnsksbnkabns"});  
-	$('.my_na_c').addClass('loading_img');
-
-    load_similar();
-
-	//my_na(<?php echo $bus_id;?>);
-
-	//load_advert();
-
-	
-	$('.popovers').popover({
-					placement : 'right',
-					html : true,
-					trigger : 'hover', //<--- you need a trigger other than manual
-					delay: { 
-					   show: "500", 
-					   hide: "100"
-					},
-					content: function() {
-					
-						return $(this).find('span.popover-content').html();
-					}
-	});
-	
-}
+		
+	}
 );
 
 function load_advert(){
