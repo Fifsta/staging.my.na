@@ -138,11 +138,11 @@ $this->load->view('inc/header');
 		        <div class="heading" style="margin-bottom:15px">
 		          <h2 data-icon="fa-briefcase"><?php echo $name; ?></h2>
 		          <ul class="options">    
-		            <li><a href="#Contact-Agent" data-icon="fa-envelope text-dark">Contact Agency</a></li>
+		            <li><a href="#Enquiry-Form" data-icon="fa-envelope text-dark">Contact Agency</a></li>
 		            <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
-		            <li><a href="#" data-icon="fa-facebook text-dark"></a></li>
+		            <!--<li><a href="#" data-icon="fa-facebook text-dark"></a></li>
 		            <li><a href="#" data-icon="fa-twitter text-dark"></a></li>
-		            <li><a href="#" data-icon="fa-bookmark text-dark"></a></li>
+		            <li><a href="#" data-icon="fa-bookmark text-dark"></a></li>-->
 		          </ul>
 		        </div>
 
@@ -411,7 +411,7 @@ $this->load->view('inc/header');
 
 		initialise_owl();
 
-		initialise_map();
+		
 
 		
 		/*get_wethear('na','windhoek');
