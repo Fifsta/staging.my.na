@@ -2432,7 +2432,7 @@ FUNCTIONS
 		
 				} else {
 				    //save QR file	
-					$this->load->library('ciqrcode');
+					$this->load->library('Ciqrcode');
 					$vcard1 = 'BEGIN:VCARD'."\n";
 					$vcard1 .= 'ORG:' . trim($org) ."\n";
 					$vcard1 .= 'TEL:' . trim($tel) ."\n";
@@ -2449,7 +2449,7 @@ FUNCTIONS
 					$params['data'] = $vcard1;
 					$params['level'] = 'H';
 					$params['size'] = 10;
-					$params['savename'] = BASE_URL .'assets/business/qr/' .$row['ID']. $this->clean_url_str($org) . '.jpg';
+					$params['savename'] = S3_URL .'assets/business/qr/' .$row['ID']. $this->clean_url_str($org) . '.jpg';
 					$this->ciqrcode->generate($params);
 					//SEND TO BUCKET
 					$this->load->model('gcloud_model');
