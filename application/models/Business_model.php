@@ -1445,7 +1445,8 @@ function show_all_gallery_images($bus_id)
 		$test = $this->db->where('BUSINESS_ID', $ID);
 		$test = $this->db->get('u_business_map');
 		return $test->row_array();		  
-    }		 	
+    }
+    		 	
 //UPDATE MAP COORDINATES
 	function update_map_coordinates(){
       	

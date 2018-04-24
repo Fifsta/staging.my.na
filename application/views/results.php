@@ -80,8 +80,8 @@ $this->load->view('inc/header', $header);
                 <a class="btn btn-dark pull-right" style="margin-top:5px; margin-right:5px;" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" rel="tooltip" title="" data-original-title="Show business categories">
                   <i class="fa fa-folder"></i>
                 </a>
-                <button class="btn btn-dark pull-right t-map" id="btn_map_view" style="margin-top:5px; margin-right:5px;" title="Show map listings">
-                  <i class="fa fa-map-marker"></i>
+                <button class="btn btn-dark pull-right t-map" id="btn_map_view" style="margin-top:5px; margin-right:5px;" rel="tooltip" title="" data-original-title="Show Map View">
+                  <i class="fa fa-map-marker"></i> MAP VIEW
                 </button>                
             </div>    
 
