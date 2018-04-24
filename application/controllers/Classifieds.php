@@ -98,8 +98,8 @@ class Classifieds extends CI_Controller {
     //++++++++++++++++++++++++++
 	public function results()
 	{
-		 //if($this->input->get_post('');
 		 
+
 		 $query = $this->classifieds_model->get_classifieds();
 		 $count = 0;
 		 if($query['query']->result()){
@@ -126,7 +126,7 @@ class Classifieds extends CI_Controller {
 		$config['full_tag_open'] = '<nav aria-label="Page navigation example"><ul class="pagination">';
 		$config['full_tag_close'] = '</ul></nav>';
 		$config['first_link'] = false;
-		$config['last_link'] = false;
+		$config['last_link'] = false; 
 		$config['first_tag_open'] = '<li class="page-item">';
 		$config['first_tag_close'] = '</li>';
 		$config['prev_link'] = '<i class="fa fa-chevron-left icon-light"></i>';

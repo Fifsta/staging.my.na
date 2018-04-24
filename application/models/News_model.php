@@ -30,6 +30,20 @@ class News_model extends CI_Model
 						
 			foreach(json_decode($output) as $row){	
 
+
+                //render pub links
+                switch($row->pub_id) {
+                    case 1:
+                    $link = 'https://www.republikein.com.na/nuus/'.$row->post_slug;
+                    break;
+                    case 2:
+                    $link = 'https://www.namibiansun.com/news/'.$row->post_slug;
+                    break;
+                    case 3:
+                    $link = 'https://www.az.com.na/nachrichten/'.$row->post_slug;
+                    break;
+                }
+
                 $img_str = 'assets/images/' . $row->image;
 
                 $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
@@ -41,7 +55,7 @@ class News_model extends CI_Model
 								<img class="owl-lazy" data-src="'.$img_url.'" src="images/16x9.png" />
 							</a>
                             <div>
-                                <h2><a href="#">' . ucwords(strtolower($this->my_model->shorten_string($row->title, 6))) . '</a></h2>
+                                <h2><a href="'.$link.'" target="_blank">' . ucwords(strtolower($this->my_model->shorten_string($row->title, 6))) . '</a></h2>
                                 <div class="details">
                                     <p>'. ucwords(strtolower($this->my_model->shorten_string(strip_tags($row->body), 24))) . '</p>
                                 </div>
@@ -52,7 +66,7 @@ class News_model extends CI_Model
 			$o .= '</div>';
 		}
 		return $o;
-		var_dump(json_decode($output));
+		//print_r(json_decode($output));
 	}
 
 

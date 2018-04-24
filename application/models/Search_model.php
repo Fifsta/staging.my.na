@@ -1387,6 +1387,68 @@ class Search_model extends CI_Model{
 	}
 
 
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	//SHOW SIDEBAR - LOOP THROUGH CATEGORIES
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
+	function show_sidebar($query){
+			
+		//Get Main
+		$main = $this->db->query("SELECT i_tourism_category.CATEGORY_ID, COUNT(i_tourism_category.CATEGORY_ID) as num,
+								a_tourism_category_sub.*,a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME,
+								group_concat(DISTINCT(sub_table.ID),'_-_',sub_table.CATEGORY_NAME) as cats
+								 FROM i_tourism_category 
+								JOIN a_tourism_category_sub ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID 
+								JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
+								LEFT JOIN a_tourism_category_sub as sub_table ON sub_table.CATEGORY_TYPE_ID = a_tourism_category.ID  
+								GROUP BY a_tourism_category_sub.CATEGORY_TYPE_ID ORDER BY num DESC LIMIT 30", FALSE);
+		
+		echo '<div class="panel-group" id="category_acc" role="tablist" aria-multiselectable="true">
+				<div class="panel panel-default">
+			 ';
+			
+		foreach($main->result() as $row){
+		
+			$main_id = $row->CATEGORY_TYPE_ID;
+			$main_name = $row->MAIN_CAT_NAME;
+			
+
+			echo '
+
+                    <div class="panel-heading" role="tab">
+                      <h3 class="panel-title"><a class="" role="button" data-toggle="collapse" data-parent="#map-accordion" href="#cat'.$main_id.'" aria-expanded="true" aria-controls="cat'.$main_id.'">'.$main_name.'</a></h3>
+                    </div>
+
+                    <div id="cat'.$main_id.'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="cat'.$main_id.'">
+                      <div class="panel-body">
+                        <ul>';
+
+						$subA = explode(',',$row->cats);
+						foreach($subA as $sub_row){
+							//echo $sub_row;
+							$id = substr($sub_row, 0, strpos($sub_row,'_-_', 0));
+							$name = substr($sub_row, stripos($sub_row,'_-_') + 3, strlen($sub_row));
+							
+							echo '<li><a href="'.site_url('/').'a/show/'.$main_id.'/'.$this->url_encode($main_name).'/'.$id.'/'.$this->url_encode($name).'/">'.$name.'</a></li>';
+							
+						}
+
+
+            echo '
+                        </ul>
+                      </div>
+                    </div>
+
+
+			';
+
+
+			
+		}
+		echo '</div></div>';
+			
+			
+	}
+
 
     //SHOW SUB CATEGORIES ON HOME PAGE
     function show_sub_cats($id){
