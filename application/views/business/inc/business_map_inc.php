@@ -35,7 +35,7 @@ $(document).ready(function(){
 
 	initialise_map();
 
-}
+});
 
 var geocoder;
 var map;
