@@ -245,7 +245,7 @@ $(function() {
   var geocoder;
   var map;
   var markers = [];
-  var locations = (function () {
+  var locations = (function () { 
 
       var json = null;
       $.ajax({
@@ -259,7 +259,7 @@ $(function() {
       });
 
     return json;
-  });
+  })(); 
 
     var gicons = [];
 
