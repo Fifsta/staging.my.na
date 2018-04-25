@@ -133,6 +133,7 @@ $this->load->view('inc/header', $header);
       <div class="heading">
         <h2 data-icon="fa-map-marker"> <a href="#">Namibia <strong>Map</strong></a></h2>
         <p>To benefit from this, make sure that you have location services enabled for this website.</p>
+        <button id="btn_list_view2" class="btn btn-dark t-list pull-right"><i class="fa fa-list"></i> List View</button>
       </div>
       <br>
 
@@ -192,7 +193,7 @@ $this->load->view('inc/header', $header);
            </div>
 
            <div class="col-md-8 col-sm-12">
-               <button id="btn_list_view2" class="btn btn-dark t-list"><i class="fa fa-list"></i> List View</button>
+               
                <div id="map-top"></div>
            </div>
        </div>
@@ -385,19 +386,19 @@ $(function() {
            var clusterStyles = [
                {
                    textColor: 'white',
-                   url: base_+'img/markers/v1/cluster1.png',
+                   url: base_+'images/markers/v1/cluster1.png',
                    height: 50,
                    width: 50
                },
                {
                    textColor: 'white',
-                   url: base_+'img/markers/v1/cluster2.png',
+                   url: base_+'images/markers/v1/cluster2.png',
                    height: 50,
                    width: 50
                },
                {
                    textColor: 'white',
-                   url: base_+'img/markers/v1/cluster3.png',
+                   url: base_+'images/markers/v1/cluster3.png',
                    height: 60,
                    width: 60
                }
@@ -421,7 +422,7 @@ $(function() {
             data[0] = gicons["dot"];
 
             data[1] = new google.maps.MarkerImage(
-                base_+'img/markers/v1/dot/shadow.png',
+                base_+'images/markers/v1/dot/shadow.png',
                 new google.maps.Size(15,10),
                 new google.maps.Point(0,20),
                 new google.maps.Point(5,0)
@@ -443,7 +444,7 @@ $(function() {
                 new google.maps.Point(20,52)
             );*/
             data[1] = new google.maps.MarkerImage(
-                base_+'img/markers/v1/dot/shadow.png',
+                base_+'images/markers/v1/dot/shadow.png',
                 new google.maps.Size(15,10),
                 new google.maps.Point(0,20),
                 new google.maps.Point(5,0)
