@@ -191,7 +191,7 @@ class Map extends CI_Controller {
         return urlencode(utf8_encode(  str_replace('(','_', str_replace(')','~',$string))));
     }
     
-    function url_decode($string){
+    function url_decode($string){ 
         return utf8_decode(urldecode(str_replace('_','(', str_replace('~',')',$string))));
     }
 

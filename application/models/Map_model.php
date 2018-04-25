@@ -322,12 +322,20 @@ class Map_model extends CI_Model{
         //echo $output;
 
     }
-	
+
 
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//SHOW MAP INFOWINDOIW CONTENT
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function show_map_info($id, $size){
+
+
+        $this->load->model('image_model'); 
+        $this->load->library('thumborp');
+
+        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+        $width = 320;
+        $height = 320;
 			
 			//$query = $this->db->where('ID',$id);
 			$query = $this->db->query("SELECT u_business.*, group_concat(u_gallery_component.GALLERY_PHOTO_NAME) as GALLERY_IMAGES,
@@ -378,7 +386,7 @@ class Map_model extends CI_Model{
                             if($ac >= 2){
 
                             }else{
-                                $cats .= '<span class="badge btn-inverse">'.$catR.'</span> ';
+                                $cats .= '<span class="badge btn-dark">'.$catR.'</span> ';
 
                             }
 
@@ -396,39 +404,48 @@ class Map_model extends CI_Model{
 						
 						if(strpos($img,'.') == 0){
 
-							$format = '.jpg';
-							$img_str = base_url('/').'img/timbthumb.php?w=100&h=100&src='.S3_URL.'assets/business/photos/'.$img . $format;
+                            $format = '.jpg';
+                            $img_str = 'assets/business/photos/' . $img . $format;
+                            $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'100','100', $crop = '');
 							
 						}else{
 							
-							$img_str =  base_url('/').'img/timbthumb.php?w=100&h=100&src='.S3_URL.'assets/business/photos/'.$img;
+                            $img_str = 'assets/business/photos/' . $img;
+                            $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'100','100', $crop = '');
 							
 						}
 						
 					}else{
 						
-						$img_str = base_url('/').'img/timbthumb.php?w=100&h=100&src='.base_url('/').'img/bus_blank.jpg';	
+                        $img_str = 'assets/business/photos/bus_blank.jpg';
+                        $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'100','100', $crop = '');
 						
 					}
 
+
 					if($cover_img != ''){
 						
-							if(strpos($cover_img,'.') == 0){
-					
-								$format2 = '.jpg';
-								$cover_str = S3_URL.'assets/business/photos/'.$cover_img . $format2;
-								
-							}else{
-								
-								$cover_str =  S3_URL.'assets/business/photos/'.$cover_img.'?=';
-								
-							}
+						if(strpos($cover_img,'.') == 0){
+				
+                            $format2 = '.jpg';
+                            $cover_str = 'assets/business/photos/' . $cover_img . $format2;
+                            $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'320','180', $crop = '');
+							
+						}else{
+							
+                            $cover_str = 'assets/business/photos/' . $cover_img;
+                            $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'320','180', $crop = '');
+							
+						}
 						
 					}else{
 						
-						$cover_str = base_url('/').'img/business_cover_blank.jpg';	
+						$cover_str = 'assets/business/photos/business_cover_blank.jpg';	
+                        $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'320','180', $crop = '');
 						
 					}
+
+
 	
 	 				if($tel == ''){
 					   $btn_1 = '<a class="btn btn-mini white_back '.$sizeSTR.'" href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/contact/" rel="tooltip"
@@ -450,20 +467,20 @@ class Map_model extends CI_Model{
                     }
 
 					$html = '<div class="container-fluid" style="max-width:'.$csize.'px;min-width:'.$imgS.'px;margin:0;padding:0;overflow:hidden">
-								<div class="row-fluid" style="background:url('.$cover_str.') no-repeat; background-size:contain;width:320px;min-height:180px;">
-									<div class="span12">
+								<div class="row" style="background:url('.$cover_url.') no-repeat; background-size:contain;width:320px;min-height:180px;">
+									<div class="col-md-12">
 										
 									</div>
 								</div>
-								<div class="row-fluid">
-									<div class="span4" style="margin-top:-80px;">
+								<div class="row">
+									<div class="col-md-4" style="margin-top:-80px;">
 										<a class="" href="#">
-											<img class="img-polaroid" src="'.$img_str.'" alt="'.$name.'" style="width: '.$logo.'px; height:'.$logo.'px;">
+											<img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'" style="width: '.$logo.'px; height:'.$logo.'px;">
 										</a>
 				
 									</div>
 									
-									<div class="span8"  style="margin-top:-80px;">
+									<div class="col-md-8" style="margin-top:-80px;">
 										<h4 class="upper na_script" style="'.$name_offset.' ">'.$name.'</h4>
 										<a class="btn btn-mini white_back" style="'.$name_offset.'" href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/">
 											<i class="icon-info-sign"></i> View
@@ -479,23 +496,23 @@ class Map_model extends CI_Model{
 									</div>
 									
 								</div>
-								<div class="row-fluid clearfix '.$sizeSTR.'">
+								<div class="row clearfix '.$sizeSTR.'">
 
-									<div class="span12">
+									<div class="col-md-12">
 
                                         '.preg_replace( '/\s+/', ' ',strip_tags($this->my_na_model->shorten_string($description, '10'))).'
                                         <div class="clearfix">&nbsp;</div>
-                                        <div class="row-fluid clearfix">
+                                        <div class="row clearfix">
 
-                                            <div class="span8">
+                                            <div class="col-md-8">
 
-                                                    '.
-                                                    $cats.'
+                                                '.$cats.'
 
                                             </div>
-                                             <div class="span4 text-right '.$size.'">
+                                             <div class="col-md-4 text-right '.$size.'">
 
-                                                    '.$star.'
+                                                '.$star.'
+
                                             </div>
 									</div>
 

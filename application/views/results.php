@@ -361,7 +361,7 @@ var geocoder;
 
 
                   google.maps.event.addListener(marker, 'click', function () {
-                        infowindow.setContent('<img src="'+base_+'img/orange_loader.gif"/>');
+                        infowindow.setContent('<img src="'+base_+'images/orange_loader.gif"/>');
                         infowindow.open(map, this);
                         //console.log(this.html);
                             $.ajax({
