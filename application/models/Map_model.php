@@ -447,10 +447,11 @@ class Map_model extends CI_Model{
                         <div class="row">
                             <div class="col-md-4"><img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'"></div>
                             <div class="col-md-8">
-                                <strong>'.$name.'</strong><br><br>
+                                <strong>'.$name.'</strong><br>
                                 <small><i class="fa fa-map-marker text-dark"></i> <em>'. $this->my_na_model->shorten_string($address, 5) .'</em></small>
+                                 <hr>
                                 '.$star.'
-                                <hr>
+                               
                             </div>
                         </div>
                         <br>
