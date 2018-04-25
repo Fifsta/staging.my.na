@@ -348,7 +348,7 @@ class Map_model extends CI_Model{
 										GROUP BY u_business.ID  
 										");
 
-            }
+            
 
 			//If has results
 			if($query->num_rows() != 0){
@@ -382,6 +382,7 @@ class Map_model extends CI_Model{
 						}
 						
 					}
+
 					
 					//Build image string
 					$format = substr($img,(strlen($img) - 4),4);
@@ -431,6 +432,7 @@ class Map_model extends CI_Model{
                         $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'340','180', $crop = '');
 						
 					}
+
 
                     $star = '';
                     if($row->STAR_RATING != null && $row->STAR_RATING != 0){
