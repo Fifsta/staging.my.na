@@ -464,58 +464,6 @@ class Map_model extends CI_Model{
                     </div>
                     ';
 
-
-					/*$html = '<div class="container-fluid" style="max-width:'.$csize.'px;min-width:'.$imgS.'px;margin:0;padding:0;overflow:hidden">
-								<div class="row" style="background:url('.$cover_url.') no-repeat; background-size:contain;width:320px;min-height:180px;">
-								</div>
-								<div class="row">
-
-									<div class="col-md-4" style="margin-top:-80px;">
-										<a class="" href="#">
-											<img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'" style="width: '.$logo.'px; height:'.$logo.'px;">
-										</a>
-									</div>
-									
-									<div class="col-md-8" style="margin-top:-80px;">
-										<h4 class="upper na_script" style="'.$name_offset.' ">'.$name.'</h4>
-										<a class="btn btn-mini white_back" style="'.$name_offset.'" href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/">
-											<i class="icon-info-sign"></i> View
-										</a>
-										
-										'.$btn_1 .'
-										<a class="btn btn-mini white_back '.$sizeSTR.'" href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/reviews/" rel="tooltip"
-											title="View full reviews for '.$name.'">
-											<i class="icon-comment"></i> Reviews
-										</a><br/>
-										<i class="icon-map-marker '.$sizeSTR.'"></i>
-											<small><em>'. $this->my_na_model->shorten_string($address, 5) .'</em></small>
-									</div>
-									
-								</div>
-								<div class="row clearfix '.$sizeSTR.'">
-
-									<div class="col-md-12">
-
-                                        '.preg_replace( '/\s+/', ' ',strip_tags($this->my_na_model->shorten_string($description, '10'))).'
-                                        <div class="clearfix">&nbsp;</div>
-                                        <div class="row clearfix">
-
-                                            <div class="col-md-8">
-
-                                                '.$cats.'
-
-                                            </div>
-                                             <div class="col-md-4 text-right '.$size.'">
-
-                                                '.$star.'
-
-                                            </div>
-									</div>
-
-								</div>	
-							</div>
-						</div>';*/
-
 			
 				//DISPLAY
 				echo $html;

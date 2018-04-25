@@ -36,7 +36,7 @@ $this->load->view('inc/header', $header);
   .fullwidth .row-fluid{padding:0;margin:0;width:100%}
   .fullwidth .row-fluid .span8, .fullwidth .row-fluid{padding:0;margin:0;}
   #map_container .row-fluid{padding:0;margin:0;width:100%}
-  #btn_list_view2{position: absolute; right:10px; top:60px;z-index:999}
+  #btn_list_view2{}
   #map_results_div{padding-left:40px;overflow-y:scroll}
   .gm-style-iw {
   width: 320px;
@@ -133,7 +133,7 @@ $this->load->view('inc/header', $header);
       <div class="heading">
         <h2 data-icon="fa-map-marker"> <a href="#">Namibia <strong>Map</strong></a></h2>
         <p>To benefit from this, make sure that you have location services enabled for this website.</p>
-        <button id="btn_list_view2" class="btn btn-dark t-list pull-right"><i class="fa fa-list"></i> List View</button>
+        <button id="btn_list_view2" style="margin-top:5px; margin-right:5px;" class="btn btn-dark t-list pull-right"><i class="fa fa-list"></i> List View</button>
       </div>
       <br>
 
