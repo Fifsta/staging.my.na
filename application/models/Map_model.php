@@ -453,7 +453,6 @@ class Map_model extends CI_Model{
                                 <hr>
                                 '.$cats.'
                             </div>
-                            
                         </div>
                         <br>
                         <div class="row">

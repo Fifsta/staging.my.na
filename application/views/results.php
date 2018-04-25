@@ -242,24 +242,26 @@ $(function() {
 });
 
 
-var geocoder;
+  var geocoder;
   var map;
   var markers = [];
   var locations = (function () {
-      var json = null;
-    $.ajax({
-      'async': false,
-      'type': "get",
-      'url': "<?php echo site_url('/').'map/results/'.$d;?>",
-      'dataType': "json",
-      'success': function (data) {
-        json = data;
-      }
-    });
-    return json;
-  })();
 
-  var gicons = [];
+      var json = null;
+      $.ajax({
+        'async': false,
+        'type': "get",
+        'url': "<?php echo site_url('/').'map/results/'.$d;?>",
+        'dataType': "json",
+        'success': function (data) {
+          json = data;
+        }
+      });
+
+    return json;
+  });
+
+    var gicons = [];
 
 
     gicons["hover"] = new google.maps.MarkerImage(
@@ -318,7 +320,7 @@ var geocoder;
 
         }*/
        setMarkers(map, locations);
-             //document.getElementById("side_bar").innerHTML = side_bar_html;
+       //document.getElementById("side_bar").innerHTML = side_bar_html;
 
     }
 
@@ -333,65 +335,51 @@ var geocoder;
          var bounds = new google.maps.LatLngBounds();
 
            //LOOP EACH JSON RESULT
-      for (var i = 0; i < locations.length; i++) {
+            for (var i = 0; i < locations.length; i++) {
 
-                 //identify marker
-                  var bus_id = locations[i]['ID'];
-                  var dataM = identify_marker(locations[i]['STAR_RATING']);
-                  var myLatLng = new google.maps.LatLng(locations[i]['LAT'],locations[i]['LON']);
-                  var marker = new google.maps.Marker({
-                      position: myLatLng,
-                      map: map,
-                      html: parseInt(locations[i]['ID']),
-                      clickable:  true,
-                      shadow: dataM[1],
-                      icon: dataM[0],
-                      shape: dataM[2],
-                      title: locations[i]['BUSINESS_NAME'],
-                      zIndex: i,
-                      animation: google.maps.Animation.DROP,
-                      id: parseInt(locations[i]['ID'])
-                  });
-                  //var temp[bus_id] = marker;
-                  markers[bus_id] = marker;
-                  //markers.push(temp);
-                  marker.setMap(map);
+                       //identify marker
+                        var bus_id = locations[i]['ID'];
+                        var dataM = identify_marker(locations[i]['STAR_RATING']);
+                        var myLatLng = new google.maps.LatLng(locations[i]['LAT'],locations[i]['LON']);
+                        var marker = new google.maps.Marker({
+                            position: myLatLng,
+                            map: map,
+                            html: parseInt(locations[i]['ID']),
+                            clickable:  true,
+                            shadow: dataM[1],
+                            icon: dataM[0],
+                            shape: dataM[2],
+                            title: locations[i]['BUSINESS_NAME'],
+                            zIndex: i,
+                            animation: google.maps.Animation.DROP,
+                            id: parseInt(locations[i]['ID'])
+                        });
+                        //var temp[bus_id] = marker;
+                        markers[bus_id] = marker;
+                        //markers.push(temp);
+                        marker.setMap(map);
 
-                  bounds.extend(myLatLng);
-
-
-                  google.maps.event.addListener(marker, 'click', function () {
-                        infowindow.setContent('<img src="'+base_+'images/orange_loader.gif"/>');
-                        infowindow.open(map, this);
-                        //console.log(this.html);
-                            $.ajax({
-                                  url: base+'map/show_map_info/'+ this.html+'/small/',
-                                  cache:false,
-                                  success: function (data) {
-                                      infowindow.setContent(data);
-
-                                  }
-                              });
-                  });
-                $('#business_result_'+marker.id).attr({"onmouseover":"markers["+marker.id+"].setIcon( gicons.hover)","onmouseout":"markers["+marker.id+"].setIcon(gicons.dot)"});
-                //side_bar_html = '<p class="continer-fluid"><a href="javascript:myclick(' + marker.id + ')" onmouseover="markers['+marker.id+'].setIcon(gicons.hover)" onmouseout="markers['+marker.id+'].setIcon(gicons.dot)">' + locations[i]['BUSINESS_NAME'] + '<\/a><\/p>';
+                        bounds.extend(myLatLng);
 
 
-                // Switch icon on marker mouseover and mouseout
-                /*google.maps.event.addListener(marker, "mouseover", function() {
+                        google.maps.event.addListener(marker, 'click', function () {
+                              infowindow.setContent('<img src="'+base_+'images/orange_loader.gif"/>');
+                              infowindow.open(map, this);
+                              //console.log(this.html);
+                                  $.ajax({
+                                        url: base+'map/show_map_info/'+ this.html+'/small/',
+                                        cache:false,
+                                        success: function (data) {
+                                            infowindow.setContent(data);
 
-                    console.log('over'+this.id);
-                    console.log(marker);
+                                        }
+                                    });
+                        });
+                      $('#business_result_'+marker.id).attr({"onmouseover":"markers["+marker.id+"].setIcon( gicons.hover)","onmouseout":"markers["+marker.id+"].setIcon(gicons.dot)"});
 
-                    this.setIcon(gicons["hover"]);
 
-                });
-                google.maps.event.addListener(marker, "mouseout", function() {
-                    console.log('out' + this.id);
-                    this.setIcon(gicons["dot"]);
-                });*/
 
-      }//END loop
+            }//END loop
 
 
           map.fitBounds(bounds);
@@ -526,6 +514,7 @@ var geocoder;
       $("#geo_msg").html(content).fadeIn().delay(5000).fadeOut();
   }
 
+
     //loadresults
     function over_marker(id) {
 
@@ -538,8 +527,8 @@ var geocoder;
             anchor:{"x": 20, "y":42}
         });
 
-
     }
+
     //loadresults
     function out_marker(id) {
 
@@ -554,6 +543,7 @@ var geocoder;
 
 
     }
+
   //loadresults
   function load_results(type,cat) {
 
@@ -576,9 +566,9 @@ var geocoder;
 
       }
     });
-
-
   }
+
+
 
   // Sets the map on all markers in the array.
   function setAllMap(map) {
@@ -586,15 +576,19 @@ var geocoder;
     markers[i].setMap(map);
     }
   }
+
+
   // Removes the markers from the map, but keeps them in the array.
   function clearMarkers() {
     setAllMap(null);
   }
 
+
   // Shows any markers currently in the array.
   function showMarkers() {
     setAllMap(map);
   }
+
 
   // Deletes all markers in the array by removing references to them.
   function deleteMarkers() {
