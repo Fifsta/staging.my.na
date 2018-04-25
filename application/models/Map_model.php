@@ -375,7 +375,7 @@ class Map_model extends CI_Model{
                             if($ac >= 2){
 
                             }else{
-                                $cats .= '<span class="badge btn-dark">'.$catR.'</span> ';
+                                $cats .= '<span class="badge btn-dark" style="padding:1px;">'.$catR.'</span> ';
 
                             }
 
@@ -447,11 +447,10 @@ class Map_model extends CI_Model{
                         <div class="row">
                             <div class="col-md-4"><img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'"></div>
                             <div class="col-md-8">
-                                <strong>'.$name.'</strong><br>
+                                <strong>'.$name.'</strong><br><br>
                                 <small><i class="fa fa-map-marker text-dark"></i> <em>'. $this->my_na_model->shorten_string($address, 5) .'</em></small>
                                 '.$star.'
                                 <hr>
-                                <div class="overflow: -moz-scrollbars-horizontal;">'.$cats.'</div>
                             </div>
                         </div>
                         <br>
