@@ -354,7 +354,7 @@ class Map_model extends CI_Model{
             $name_offset = '';
             if($size == 'small'){
 
-                $sizeSTR = ' hide';
+                $sizeSTR = ' d-none';
                 $imgS = '240';
                 $csize = '240';
                 $logo = '60';
@@ -429,19 +429,19 @@ class Map_model extends CI_Model{
 				
                             $format2 = '.jpg';
                             $cover_str = 'assets/business/photos/' . $cover_img . $format2;
-                            $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'320','180', $crop = '');
+                            $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'340','180', $crop = '');
 							
 						}else{
 							
                             $cover_str = 'assets/business/photos/' . $cover_img;
-                            $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'320','180', $crop = '');
+                            $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'340','180', $crop = '');
 							
 						}
 						
 					}else{
 						
 						$cover_str = 'assets/business/photos/business_cover_blank.jpg';	
-                        $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'320','180', $crop = '');
+                        $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'340','180', $crop = '');
 						
 					}
 
@@ -468,16 +468,13 @@ class Map_model extends CI_Model{
 
 					$html = '<div class="container-fluid" style="max-width:'.$csize.'px;min-width:'.$imgS.'px;margin:0;padding:0;overflow:hidden">
 								<div class="row" style="background:url('.$cover_url.') no-repeat; background-size:contain;width:320px;min-height:180px;">
-									<div class="col-md-12">
-										
-									</div>
 								</div>
 								<div class="row">
+
 									<div class="col-md-4" style="margin-top:-80px;">
 										<a class="" href="#">
 											<img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'" style="width: '.$logo.'px; height:'.$logo.'px;">
 										</a>
-				
 									</div>
 									
 									<div class="col-md-8" style="margin-top:-80px;">
