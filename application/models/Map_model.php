@@ -451,7 +451,7 @@ class Map_model extends CI_Model{
                                 <small><i class="fa fa-map-marker text-dark"></i> <em>'. $this->my_na_model->shorten_string($address, 5) .'</em></small>
                                 '.$star.'
                                 <hr>
-                                '.$cats.'
+                                <div class="overflow: -moz-scrollbars-horizontal;">'.$cats.'</div>
                             </div>
                         </div>
                         <br>
