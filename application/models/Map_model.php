@@ -449,7 +449,7 @@ class Map_model extends CI_Model{
                             <div class="col-md-8">
                                 <strong>'.$name.'</strong><br>
                                 <small><i class="fa fa-map-marker"></i> <em>'. $this->my_na_model->shorten_string($address, 5) .'</em></small>
-                                '.$stars.'
+                                '.$star.'
                                 <hr>
                                 '.$cats.'
                             </div>
