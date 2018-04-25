@@ -474,14 +474,15 @@ class Map_model extends CI_Model{
                             <img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'" style="width: '.$logo.'px; height:'.$logo.'px;">
                         </div>
                         <div class="row text-center">
-                            <h4 class="upper na_script">'.$name.'</h4>
+                            <h4 class="upper">'.$name.'</h4>
                         </div>
                         <div class="row text-center">
-                            <small><em>'. $this->my_na_model->shorten_string($address, 5) .'</em></small>
+                            <small><i class="fa fa-map-marker"></i> <em>'. $this->my_na_model->shorten_string($address, 5) .'</em></small><br>
                         </div>
                         <div class="row text-center">
                             '.$cats.'
                         </div>
+                        <hr>
                         <div class="row text-center">
                             <a class="btn btn-xs btn-dark btn-block" href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/">
                                 <i class="fa fa-info-circle"></i> View
