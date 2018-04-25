@@ -137,9 +137,13 @@ $this->load->view('inc/header', $header);
       </div>
       <br>
 
-       <div class="row">
-           <div class="col-md-4 hidden-sm-down" id="map_results_div">
-
+        <!--Namibia Map-->
+        <section id="namibia-map">
+          
+          
+          <div class="row" style="position:relative">
+            <button id="map-toggle" class="btn btn-primary"><i class="fa fa-angle-double-right"></i></button>
+            <div class="namibia-map">
               <div class="map-left">
                 <div class="form-group">
                   <select class="selectpicker form-control" multiple data-live-search="true" data-none-selected-text="Filter markers according to ..."><!--data-actions-box="true"-->
@@ -158,45 +162,14 @@ $this->load->view('inc/header', $header);
 
                 <?php echo $this->search_model->show_sidebar($query); ?>
 
-                <!--<div class="panel-group" id="map-accordion" role="tablist" aria-multiselectable="true">
-                  <div class="panel panel-default">
-
-
-
-                    <div class="panel-heading" role="tab">
-                      <h3 class="panel-title"><a class="" role="button" data-toggle="collapse" data-parent="#map-accordion" href="#Business" aria-expanded="true" aria-controls="Business">Business</a></h3>
-                    </div>
-
-                    <div id="Business" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="Business">
-                      <div class="panel-body">
-                        <ul>
-                          <li><span>1245</span> <a href="#">All</a></li>
-                          <li><span>1245</span> <a href="#">Lodge</a></li>
-                          <li><span>1245</span> <a href="#">Guest Farm</a></li>
-                          <li><span>1245</span> <a href="#">Guest House</a></li>
-                          <li><span>1245</span> <a href="#">Bed and Breakfast</a></li>
-                          <li><span>1245</span> <a href="#">Campsite Camping and Camping Campsite</a></li>
-                          <li><span>1245</span> <a href="#">Self Catering and Catering Self</a></li>
-                          <li><span>1245</span> <a href="#">Rest Camp</a></li>
-                          <li><span>1245</span> <a href="#">Hotel Resort and Gold Course</a></li>
-                          <li><span>1245</span> <a href="#">Hotel</a></li>
-                          <li><span>1245</span> <a href="#">Tented Camp</a></li>
-                        </ul>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>-->
-
               </div>
-
-           </div>
-
-           <div class="col-md-8 col-sm-12">
-               
-               <div id="map-top"></div>
-           </div>
-       </div>
+              <div class="map-right">
+                <div id="map-top"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!--Namibia Map-->
     
  </div>
   

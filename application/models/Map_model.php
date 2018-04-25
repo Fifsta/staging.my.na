@@ -439,6 +439,10 @@ class Map_model extends CI_Model{
 
                         $star = '<img src="'.base_url('/').'images/icons/star'.round($row->STAR_RATING).'.png" alt="'.round($row->STAR_RATING) .' Stars Rating">';
 
+                    } else {
+
+                        $star = 'No Reviews added';
+
                     }
 
 
