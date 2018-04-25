@@ -1403,7 +1403,7 @@ class Search_model extends CI_Model{
 								GROUP BY a_tourism_category_sub.CATEGORY_TYPE_ID ORDER BY num DESC LIMIT 30", FALSE);
 		
 		echo '<div class="panel-group" id="category_acc" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default">
+				<div class="panel panel-default"> 
 			 ';
 			
 		foreach($main->result() as $row){

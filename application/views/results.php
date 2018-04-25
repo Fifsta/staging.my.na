@@ -138,10 +138,7 @@ $this->load->view('inc/header', $header);
       <br>
 
         <!--Namibia Map-->
-        <section id="namibia-map">
-          
-          
-          <div class="row" style="position:relative">
+        <section id="namibia-map"> 
             <button id="map-toggle" class="btn btn-primary"><i class="fa fa-angle-double-right"></i></button>
             <div class="namibia-map">
               <div class="map-left">
@@ -167,7 +164,6 @@ $this->load->view('inc/header', $header);
                 <div id="map-top"></div>
               </div>
             </div>
-          </div>
         </section>
         <!--Namibia Map-->
     
