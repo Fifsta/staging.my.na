@@ -406,19 +406,19 @@ class Map_model extends CI_Model{
 
                             $format = '.jpg';
                             $img_str = 'assets/business/photos/' . $img . $format;
-                            $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'100','100', $crop = '');
+                            $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'300','300', $crop = '');
 							
 						}else{
 							
                             $img_str = 'assets/business/photos/' . $img;
-                            $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'100','100', $crop = '');
+                            $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'300','300', $crop = '');
 							
 						}
 						
 					}else{
 						
                         $img_str = 'assets/business/photos/bus_blank.jpg';
-                        $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'100','100', $crop = '');
+                        $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'300','300', $crop = '');
 						
 					}
 
@@ -466,7 +466,33 @@ class Map_model extends CI_Model{
                         $star = '<img src="'.base_url('/').'img/icons/star'.round($row->STAR_RATING).'.png" alt="'.round($row->STAR_RATING) .' Stars Rating">';
                     }
 
-					$html = '<div class="container-fluid" style="max-width:'.$csize.'px;min-width:'.$imgS.'px;margin:0;padding:0;overflow:hidden">
+
+
+                    $html = '
+                    <div class="container-fluid">
+                        <div class="row text-center">
+                            <img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'" style="width: '.$logo.'px; height:'.$logo.'px;">
+                        </div>
+                        <div class="row text-center">
+                            <h4 class="upper na_script">'.$name.'</h4>
+                        </div>
+                        <div class="row text-center">
+                            <small><em>'. $this->my_na_model->shorten_string($address, 5) .'</em></small>
+                        </div>
+                        <div class="row text-center">
+                            '.$cats.'
+                        </div>
+                        <div class="row text-center">
+                            <a class="btn btn-xs btn-dark btn-block" href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/">
+                                <i class="fa fa-info-circle"></i> View
+                            </a>
+                        </div>                        
+                    </div>
+                    ';
+
+
+
+					/*$html = '<div class="container-fluid" style="max-width:'.$csize.'px;min-width:'.$imgS.'px;margin:0;padding:0;overflow:hidden">
 								<div class="row" style="background:url('.$cover_url.') no-repeat; background-size:contain;width:320px;min-height:180px;">
 								</div>
 								<div class="row">
@@ -515,7 +541,7 @@ class Map_model extends CI_Model{
 
 								</div>	
 							</div>
-						</div>';
+						</div>';*/
 
 			
 				//DISPLAY
