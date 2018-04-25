@@ -470,11 +470,10 @@ class Map_model extends CI_Model{
 
                     $html = '
                     <div class="container-fluid">
-                        <div class="row text-center">
-                            <img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'" style="width: '.$logo.'px; height:'.$logo.'px;">
-                        </div>
-                        <div class="row text-center">
-                            <h4 class="upper">'.$name.'</h4>
+                        <div class="row">
+                            <div class="col-md-4"><img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'" style="width: '.$logo.'px; height:'.$logo.'px;"></div>
+                            <div class="col-md-8"><h4 class="upper">'.$name.'</h4></div>
+                            
                         </div>
                         <div class="row text-center">
                             <small><i class="fa fa-map-marker"></i> <em>'. $this->my_na_model->shorten_string($address, 5) .'</em></small><br>
@@ -482,7 +481,6 @@ class Map_model extends CI_Model{
                         <div class="row text-center">
                             '.$cats.'
                         </div>
-                        <hr>
                         <div class="row text-center">
                             <a class="btn btn-xs btn-dark btn-block" href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/">
                                 <i class="fa fa-info-circle"></i> View
