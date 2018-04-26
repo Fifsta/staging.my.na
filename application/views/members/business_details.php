@@ -141,7 +141,7 @@ $this->load->view('inc/header', $header);
               <ul class="options"> 
                 <li><a href="#Details" data-icon="fa-envelope text-dark">Details</a></li>
                 <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
-                <li><a href="#Analytics" data-icon="fa-bar-chart text-dark">Analytics</a></li>
+                <li><a href="#Analytics" onClick="load_analytics(<?php echo $bus_id;?>, 'MONTH')" data-icon="fa-bar-chart text-dark">Analytics</a></li>
                 <li><a href="#Latest" data-icon="fa-briefcase text-dark">Products</a></li>
                 <li><a href="#Users" data-icon="fa-users text-dark">Users</a></li>
               </ul>

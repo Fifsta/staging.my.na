@@ -1770,10 +1770,10 @@ function show_all_gallery_images($bus_id)
       	
 		$query = $this->db->query("SELECT RATING FROM u_business_vote WHERE BUSINESS_ID ='".$id."' AND IS_ACTIVE = 'Y' AND TYPE = 'review'");
 			
-			return $query->num_rows();
-		
-				  
+		return $query->num_rows();
+						  
     }
+
     function get_review_stars_show($rating,$id){
 		 
 		$x = 1;
@@ -1792,9 +1792,9 @@ function show_all_gallery_images($bus_id)
 					
 				}
 				
-				$arr[$x] = '<input name="'.$id.'-'.$rating.'" type="radio" value="'.$x.'" class="star" disabled="disabled" '.$str.'/>
-				';	
+				$arr[$x] = '<input name="'.$id.'-'.$rating.'" type="radio" value="'.$x.'" class="star" disabled="disabled" '.$str.'/>';	
 				$x++;
+
 			}
 			
 			$arr = '<div style=";font-size:10px;font-style:italic;text-align:center" class=""><span class="text-center">'. implode($arr).'<br />Based on: <b>'.$this->get_rating_count($id).'</b> reviews</span></div>';
@@ -1821,63 +1821,61 @@ function show_all_gallery_images($bus_id)
 		
 		if($id != '0'){
 			
-				$this->db->from('u_client');
-				$this->db->where('ID', $id);
-				$query = $this->db->get();
-				$row = $query->row_array();
-				
-				if($query->result()){
-				
-					$img = $row['CLIENT_PROFILE_PICTURE_NAME'];
+			$this->db->from('u_client');
+			$this->db->where('ID', $id);
+			$query = $this->db->get();
+			$row = $query->row_array();
+			
+			if($query->result()){
+			
+				$img = $row['CLIENT_PROFILE_PICTURE_NAME'];
 
-					//Build image string
-					$format = substr($img,(strlen($img) - 4),4);
-					$str = substr($img,0,(strlen($img) - 4));
+				//Build image string
+				$format = substr($img,(strlen($img) - 4),4);
+				$str = substr($img,0,(strlen($img) - 4));
 
-					if(strstr($img, "http")){
+				if(strstr($img, "http")){
 
-						$data['image'] = $img.'?width=100&height=100';
+					$data['image'] = $img.'?width=100&height=100';
 
-					}elseif(strstr($img,'.')){
+				}elseif(strstr($img,'.')){
 
-						$data['image']=  S3_URL.'assets/users/photos/'.$img;
-
-
-					}elseif($img == '' || $img == null){
-
-						$data['image'] =  base_url('/').'img/user_blank.jpg';
+					$data['image']=  S3_URL.'assets/users/photos/'.$img;
 
 
-					}else{
+				}elseif($img == '' || $img == null){
 
-						$format = '.jpg';
-						$data['image']=  S3_URL.'assets/users/photos/'.$img . $format;
+					$data['image'] =  base_url('/').'img/user_blank.jpg';
 
-					}
-
-					$data['name'] = $row['CLIENT_NAME'] . ' ' . $row['CLIENT_SURNAME'];
-					return $data;
 
 				}else{
-					
-					$data['image'] =  base_url('/').'img/user_blank.jpg';
-					$data['name'] = 'user';
-					return $data;
-					
+
+					$format = '.jpg';
+					$data['image']=  S3_URL.'assets/users/photos/'.$img . $format;
+
 				}
 
+				$data['name'] = $row['CLIENT_NAME'] . ' ' . $row['CLIENT_SURNAME'];
+				return $data;
 
-
+			}else{
+				
+				$data['image'] =  base_url('/').'img/user_blank.jpg';
+				$data['name'] = 'user';
+				return $data;
+				
+			}
 
 		}
 
     }	
- /**
+
+/**
 ++++++++++++++++++++++++++++++++++++++++++++
 //REVIEWS
 //GET LOGO
 ++++++++++++++++++++++++++++++++++++++++++++	
- */ 	
+**/ 	
 	
 	function get_business_logo($id){
 		 
