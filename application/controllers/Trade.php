@@ -630,7 +630,7 @@ class Trade extends CI_Controller {
 							  $this->load->library('user_agent');
 							  if ($this->agent->is_mobile())
 							  {
-								  $output = $this->load->view('trade/single_mobile', $row, TRUE);
+								  $output = $this->load->view('trade/single', $row, TRUE);
 							  }else{
 
 								  $output = $this->load->view('trade/single', $row, TRUE);
@@ -710,7 +710,7 @@ class Trade extends CI_Controller {
 		  */
 		  $this->load->library('user_agent');
 		  if ($this->agent->is_mobile()) {
-			$images = $this->trade_model->show_images_mobile($product_id, $size = 'big');
+			$images = $this->trade_model->show_images($product_id, $size = 'big');
 		  }else{
 
 			 $images = $this->trade_model->show_images($product_id, $size = 'big');
