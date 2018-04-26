@@ -215,13 +215,15 @@ $(function() {
             new google.maps.Point(15,10)
         );
 
+      var geocoder;
+      var map;
+      var markers = [];      
+
 
 
     function initialise_map(id) {
 
-    var geocoder;
-      var map;
-      var markers = [];
+
       var locations = (function () { 
 
           var json = null;
