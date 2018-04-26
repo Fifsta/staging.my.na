@@ -224,13 +224,13 @@ $(function() {
     function initialise_map(id) {
 
 
-      var locations = (function () { 
+      /*var locations = (function () { 
 
           var json = null;
           $.ajax({
             'async': false,
             'type': "get",
-            'url': "<?php echo site_url('/').'map/results/'.$d;?>",
+            'url': "<?php //echo site_url('/').'map/results/'.$d;?>",
             'dataType': "json",
             'success': function (data) {
               json = data;
@@ -238,7 +238,18 @@ $(function() {
           });
 
         return json;
-      })(); 
+      })(); */
+
+
+          $.ajax({
+            'async': false,
+            'type': "get",
+            'url': "<?php echo site_url('/').'map/results/'.$d;?>",
+            'dataType': "json",
+            'success': function (data) {
+              locations = data;
+            }
+          });
 
 
 
