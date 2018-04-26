@@ -173,9 +173,33 @@ var base_ = '<?php echo base_url('/');?>';
 $(document).ready(function(){
 
 
+$(function() {
+  
+  $('.my_na_c').addClass('loading_img');
+  $('[rel=tooltip]').tooltip();
+  $('.my_na_c').each(function(e){
+    
+    //my_na(this.id);
 
+  });
 
+  //setTimeout(initialise_map("map-side"),2000);
+
+  <?php 
+  if($c_type != 'main'){
+    $d = "".$c_id."/sub/".$l_id;
+    //echo 'load_results("sub","'.$c_id.'")';
+    
+  }else{
+    $d = "".$main_c_id."/main/".$l_id;
+    //echo 'load_results("main","'.$main_c_id.'")';
+    
+  }
+  
+  ?>
+  
 });
+
 
   var geocoder;
   var map;
@@ -216,32 +240,11 @@ $(document).ready(function(){
     var side_bar_html = "";
 
 
-/*$(function() {
-  
-  $('.my_na_c').addClass('loading_img');
-  $('[rel=tooltip]').tooltip();
-  $('.my_na_c').each(function(e){
-    
-    //my_na(this.id);
+});
 
-  });
 
-  //setTimeout(initialise_map("map-side"),2000);
 
-  <?php 
-  if($c_type != 'main'){
-    $d = "".$c_id."/sub/".$l_id;
-    //echo 'load_results("sub","'.$c_id.'")';
-    
-  }else{
-    $d = "".$main_c_id."/main/".$l_id;
-    //echo 'load_results("main","'.$main_c_id.'")';
-    
-  }
-  
-  ?>
-  
-});*/
+
 
 
     function initialise_map(id) {
@@ -508,7 +511,7 @@ $(document).ready(function(){
     }
 
   //loadresults
-  /*function load_results(type,cat) {
+  function load_results(type,cat) {
 
     $.ajax({
       'async': false,
@@ -529,7 +532,7 @@ $(document).ready(function(){
 
       }
     });
-  }*/
+  }
 
 
 
