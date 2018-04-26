@@ -15,8 +15,7 @@ $(document).ready(function(){
 			        'url': base+"map/results_ajax/",
 			        'dataType': "json",
 				      'data': { 
-				        'cat': cat_id,
-				        'type': type
+				        'cat': cat_id
 				       }, 			        
 			        'success': function (data) {
 			          json = data;
