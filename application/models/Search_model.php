@@ -1428,7 +1428,7 @@ class Search_model extends CI_Model{
 							$id = substr($sub_row, 0, strpos($sub_row,'_-_', 0));
 							$name = substr($sub_row, stripos($sub_row,'_-_') + 3, strlen($sub_row));
 							
-							echo '<li><a href="'.site_url('/').'a/show/'.$main_id.'/'.$this->url_encode($main_name).'/'.$id.'/'.$this->url_encode($name).'/">'.$name.'</a></li>';
+							echo '<li><a href="javascript:void(0)" data-id="'.$id.'" class="map-link">'.$name.'</a></li>';
 							
 						}
 

@@ -1,6 +1,32 @@
 $(document).ready(function(){
 
 
+
+	$(document).on('click', '.map-link', function(e) {
+
+			var cat_id = $(this).attr("data-id");
+
+			  var locations = (function () { 
+
+			      var json = null;
+			      $.ajax({
+			        'async': false,
+			        'type': "get",
+			        'url': "<?php echo site_url('/').'map/results/';?>"+cat_id,
+			        'dataType': "json",
+			        'success': function (data) {
+			          json = data;
+			        }
+			      });
+
+			    return json;
+			  })(); 
+
+			 setMarkers('map-top', locations);
+
+	});
+
+
 	$(document).on('click', '.t-map', function(e) {
 
 	        e.preventDefault();
