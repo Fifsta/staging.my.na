@@ -22,7 +22,9 @@ $(document).ready(function(){
 			    return json;
 			  })(); 
 
-			 setMarkers('map-top', locations);
+			  map = new google.maps.Map(document.getElementById(id), myOptions);
+
+			 setMarkers(map, locations);
 
 	});
 
