@@ -240,8 +240,7 @@ $(function() {
         return json;
       })(); */
 
-
-        alert('<?php echo $d; ?>');
+      locations = '';
 
           $.ajax({
             'async': false,
