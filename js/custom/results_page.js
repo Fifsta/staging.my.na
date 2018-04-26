@@ -12,7 +12,7 @@ $(document).ready(function(){
 			      $.ajax({
 			        'async': false,
 			        'type': "get",
-			        'url': "<?php echo site_url('/').'map/results/';?>"+cat_id,
+			        'url': base+"map/results/"+cat_id,
 			        'dataType': "json",
 			        'success': function (data) {
 			          json = data;
