@@ -11,12 +11,9 @@ $(document).ready(function(){
 			      var json = null;
 			      $.ajax({
 			        'async': false,
-			        'type': "post",
-			        'url': base+"map/results_ajax/",
+			        'type': "get",
+			        'url': base+"map/results/"+cat_id,
 			        'dataType': "json",
-				      'data': { 
-				        'cat': cat_id
-				       }, 			        
 			        'success': function (data) {
 			          json = data;
 			        }
