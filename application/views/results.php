@@ -142,20 +142,6 @@ $this->load->view('inc/header', $header);
             <button id="map-toggle" class="btn btn-primary"><i class="fa fa-angle-double-right"></i></button>
             <div class="namibia-map">
               <div class="map-left">
-                <div class="form-group">
-                  <select class="selectpicker form-control" multiple data-live-search="true" data-none-selected-text="Filter markers according to ..."><!--data-actions-box="true"-->
-                    <optgroup data-icon="fa-briefcase" label="Business">
-                      <option>Jaccuzzi</option>
-                      <option>Study</option>
-                      <option>Library</option>
-                    </optgroup>
-                    <optgroup data-icon="fa-briefcase" label="Business">
-                      <option>Jaccuzzi</option>
-                      <option>Study</option>
-                      <option>Library</option>
-                    </optgroup>
-                  </select>
-                </div>
 
                 <?php echo $this->search_model->show_sidebar($query); ?>
 
@@ -184,33 +170,7 @@ $this->load->view('inc/header', $header);
 var base = '<?php echo site_url('/');?>';
 var base_ = '<?php echo base_url('/');?>';
 
-$(function() {
-  
-  $('.my_na_c').addClass('loading_img');
-  $('[rel=tooltip]').tooltip();
-  $('.my_na_c').each(function(e){
-    
-    //my_na(this.id);
-
-  });
-
-  //setTimeout(initialise_map("map-side"),2000);
-
-  <?php 
-  if($c_type != 'main'){
-    $d = "".$c_id."/sub/".$l_id;
-    //echo 'load_results("sub","'.$c_id.'")';
-    
-  }else{
-    $d = "".$main_c_id."/main/".$l_id;
-    //echo 'load_results("main","'.$main_c_id.'")';
-    
-  }
-  
-  ?>
-  
-});
-
+$(document).ready(function(){
 
   var geocoder;
   var map;
@@ -249,6 +209,40 @@ $(function() {
     );
 
     var side_bar_html = "";
+
+
+});
+
+
+
+
+$(function() {
+  
+  $('.my_na_c').addClass('loading_img');
+  $('[rel=tooltip]').tooltip();
+  $('.my_na_c').each(function(e){
+    
+    //my_na(this.id);
+
+  });
+
+  //setTimeout(initialise_map("map-side"),2000);
+
+  <?php 
+  if($c_type != 'main'){
+    $d = "".$c_id."/sub/".$l_id;
+    //echo 'load_results("sub","'.$c_id.'")';
+    
+  }else{
+    $d = "".$main_c_id."/main/".$l_id;
+    //echo 'load_results("main","'.$main_c_id.'")';
+    
+  }
+  
+  ?>
+  
+});
+
 
     function initialise_map(id) {
 
