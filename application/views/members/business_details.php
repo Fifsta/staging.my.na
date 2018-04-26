@@ -349,7 +349,9 @@ $this->load->view('inc/header', $header);
 
               <section role="tabpanel" class="tab-pane active" id="Analytics">
                 <h2 class="tab-head">Analytics</h2>
-                <div id="analytics-div"></div>
+                <div id="analytics-div">
+                  <button class="btn btn-dark" onClick="load_analytics(<?php echo $bus_id;?>, 'MONTH')">Load Business Analytics</button>
+                </div>
               </section>
 
               <div class="clear:both"> </div>
@@ -595,37 +597,37 @@ function load_tab(id, str){
 
     if(str == 'reviews'){
 
-          $.getScript('<?php echo base_url('/');?>js/jquery.knob.js', function(){
-              setTimeout(load_review_report(id, str), 300);
-          });
+        $.getScript('<?php echo base_url('/');?>js/jquery.knob.js', function(){
+            setTimeout(load_review_report(id, str), 300);
+        });
 
     }else{
 
-        cont.addClass('loading_img');
-        cont.empty();
-        $.ajax({
-            type: 'get',
-            cache: false,
-            url: '<?php echo site_url('/').'members/';?>'+str+'/'+id ,
-            success: function (data) {
-                cont.removeClass('loading_img');
-                cont.html(data);
+      cont.addClass('loading_img');
+      cont.empty();
+      $.ajax({
+          type: 'get',
+          cache: false,
+          url: '<?php echo site_url('/').'members/';?>'+str+'/'+id ,
+          success: function (data) {
+              cont.removeClass('loading_img');
+              cont.html(data);
 
-                if(str == 'han_evaluations'){
-                    $('#example').dataTable( {
-                        "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
-                        "sPaginationType": "bootstrap",
-                        "oLanguage": {
-                            "sLengthMenu": "_MENU_"
-                        },
-                        "aaSorting":[],
-                        "bSortClasses": false
+              if(str == 'han_evaluations'){
+                  $('#example').dataTable( {
+                      "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+                      "sPaginationType": "bootstrap",
+                      "oLanguage": {
+                          "sLengthMenu": "_MENU_"
+                      },
+                      "aaSorting":[],
+                      "bSortClasses": false
 
-                    } );
-                }
+                  } );
+              }
 
-            }
-        });
+          }
+      });
 
     }
    
