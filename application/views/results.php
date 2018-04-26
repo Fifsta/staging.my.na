@@ -199,49 +199,48 @@ $(function() {
 });
 
 
-  var geocoder;
-  var map;
-  var markers = [];
-  var locations = (function () { 
-
-      var json = null;
-      $.ajax({
-        'async': false,
-        'type': "get",
-        'url': "<?php echo site_url('/').'map/results/'.$d;?>",
-        'dataType': "json",
-        'success': function (data) {
-          json = data;
-        }
-      });
-
-    return json;
-  })(); 
-
-    var gicons = [];
-
-
-    gicons["hover"] = new google.maps.MarkerImage(
-        base_+'images/markers/v1/image.png?v1',
-        new google.maps.Size(40,52),
-        new google.maps.Point(0,0),
-        new google.maps.Point(20,42)
-    );
-
-    gicons["dot"] = new google.maps.MarkerImage(
-        base_+'images/markers/v1/dot/image.png?v1',
-        new google.maps.Size(10,10),
-        new google.maps.Point(0,0),
-        new google.maps.Point(15,10)
-    );
-
-    var side_bar_html = "";
-
-
-
 
 
     function initialise_map(id) {
+
+    var geocoder;
+      var map;
+      var markers = [];
+      var locations = (function () { 
+
+          var json = null;
+          $.ajax({
+            'async': false,
+            'type': "get",
+            'url': "<?php echo site_url('/').'map/results/'.$d;?>",
+            'dataType': "json",
+            'success': function (data) {
+              json = data;
+            }
+          });
+
+        return json;
+      })(); 
+
+        var gicons = [];
+
+
+        gicons["hover"] = new google.maps.MarkerImage(
+            base_+'images/markers/v1/image.png?v1',
+            new google.maps.Size(40,52),
+            new google.maps.Point(0,0),
+            new google.maps.Point(20,42)
+        );
+
+        gicons["dot"] = new google.maps.MarkerImage(
+            base_+'images/markers/v1/dot/image.png?v1',
+            new google.maps.Size(10,10),
+            new google.maps.Point(0,0),
+            new google.maps.Point(15,10)
+        );
+
+        var side_bar_html = "";
+      
 
         //geocoder = new google.maps.Geocoder();
         var myLatlng = new google.maps.LatLng(-22.583741,17.093782);
