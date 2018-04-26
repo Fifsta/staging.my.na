@@ -1798,14 +1798,15 @@ function show_all_gallery_images($bus_id)
 			}
 			
 			$arr = '<div style=";font-size:10px;font-style:italic;text-align:center" class=""><span class="text-center">'. implode($arr).'<br />Based on: <b>'.$this->get_rating_count($id).'</b> reviews</span></div>';
-			return $arr;
 			
 		}else{
 			
-			$arr = '<a class="clearfix" href="#reviews" data-toggle="tab"><span class="label label-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</span></a><br /><br />';
-			return $arr;
-			
+			//$arr = '<a class="clearfix" href="#reviews" data-toggle="tab"><span class="label label-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</span></a><br /><br />';
+			$arr = '';
+					
 		}
+
+		return $arr;
     }	
 
  /**
