@@ -253,6 +253,12 @@ $(function() {
           });
 
 
+        if(locations == '') {
+
+          initialise_map('map-top');
+
+        }
+
 
         var side_bar_html = "";
 
