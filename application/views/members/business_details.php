@@ -700,6 +700,8 @@ function select_cover(){
 
 function load_analytics(id,period){
  
+$('#analytics-div').html("<img src='<?php echo base_url('/').'images/load.gif';?>'>");
+
 $.ajax({
     type: 'get',
     cache: false,
