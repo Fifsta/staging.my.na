@@ -170,8 +170,6 @@ $this->load->view('inc/header', $header);
 var base = '<?php echo site_url('/');?>';
 var base_ = '<?php echo base_url('/');?>';
 
-$(document).ready(function(){
-
 
 $(function() {
   
@@ -238,10 +236,6 @@ $(function() {
     );
 
     var side_bar_html = "";
-
-
-});
-
 
 
 
