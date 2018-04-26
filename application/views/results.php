@@ -172,6 +172,11 @@ var base_ = '<?php echo base_url('/');?>';
 
 $(document).ready(function(){
 
+
+
+
+});
+
   var geocoder;
   var map;
   var markers = [];
@@ -211,12 +216,7 @@ $(document).ready(function(){
     var side_bar_html = "";
 
 
-});
-
-
-
-
-$(function() {
+/*$(function() {
   
   $('.my_na_c').addClass('loading_img');
   $('[rel=tooltip]').tooltip();
@@ -241,7 +241,7 @@ $(function() {
   
   ?>
   
-});
+});*/
 
 
     function initialise_map(id) {
@@ -508,7 +508,7 @@ $(function() {
     }
 
   //loadresults
-  function load_results(type,cat) {
+  /*function load_results(type,cat) {
 
     $.ajax({
       'async': false,
@@ -529,7 +529,7 @@ $(function() {
 
       }
     });
-  }
+  }*/
 
 
 
