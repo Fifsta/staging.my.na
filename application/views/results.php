@@ -242,7 +242,6 @@ $(function() {
 
 
           $.ajax({
-            'async': false,
             'type': "get",
             'url': "<?php echo site_url('/').'map/results/'.$d;?>",
             'dataType': "json",
