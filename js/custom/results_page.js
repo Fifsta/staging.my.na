@@ -22,7 +22,7 @@ $(document).ready(function(){
 			    return json;
 			  })(); 
 
-			  map = new google.maps.Map(document.getElementById('map-top'), myOptions);
+			  map = new google.maps.Map(document.getElementById('map-top'));
 
 			 setMarkers(map, locations);
 
