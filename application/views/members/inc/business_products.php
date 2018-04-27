@@ -45,6 +45,7 @@
       }
 
       $agent_ref = '';
+      $agent = '';
 
       //GET AGENT DETAILS
       if($row->property_agent != 0){
