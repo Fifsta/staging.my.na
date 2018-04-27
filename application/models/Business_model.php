@@ -7,7 +7,7 @@ class Business_model extends CI_Model{
 	
  	}
 
-
+ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+MEMBER Functions
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -106,7 +106,7 @@ class Business_model extends CI_Model{
 			$this->db->from('i_tourism_category');
 			$this->db->where('CATEGORY_ID',$cat_id);
 			$this->db->where('BUSINESS_ID !=', $bus_id);
-			$this->db->limit($limit);
+			$this->db->limit('8');
 			$result = $this->db->get();
 			$x=0;
 			
