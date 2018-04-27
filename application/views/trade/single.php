@@ -69,7 +69,7 @@
     
   }else{
       
-      $img_str = 'assets/business/photos/images/bus_blank.png';
+      $img_str = 'assets/business/photos/images/logo-placeholder.jpg';
       $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'300','300', $crop = '');   
     
   }
@@ -92,7 +92,7 @@
     
   }else{
     
-    $cover_str = S3_URL.'assets/business/photos/bus_blank.jpg';  
+    $cover_str = S3_URL.'assets/business/photos/listing-placeholder.jpg';  
     
   }
 
