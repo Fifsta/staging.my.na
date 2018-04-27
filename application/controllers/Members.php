@@ -2963,7 +2963,7 @@ class Members extends CI_Controller {
 	function get_business_analytics($bus_id,$period){
 		
 		$data['bus_id'] = $bus_id;
-		$data['period'] = $period;
+		$data['period'] = $period; 
 		$this->load->view('members/inc/business_analytics',$data);
 		
 		
