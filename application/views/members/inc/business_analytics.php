@@ -236,11 +236,6 @@
 	}
 	
 
-
-
-	echo $imp_total.'<br>';
-	echo $click_total;
-
 	?>
 
     <table class="table table-striped">
