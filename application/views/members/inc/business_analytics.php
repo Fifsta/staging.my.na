@@ -224,7 +224,19 @@
 	<?php    
 	$imp_total = $impJAN + $impFEB+ $impMAR + $impAPR + $impMAY + $impJUN + $impJUL + $impAUG + $impSEP + $impOCT + $impNOV + $impDEC;
 	$click_total = $clickJAN + $clickFEB+ $clickMAR + $clickAPR + $clickMAY + $clickJUN + $clickJUL + $clickAUG + $clickSEP + $clickOCT + $clickNOV + $clickDEC;
-	$CTR = ( $click_total / $imp_total) * 100;
+	
+	if($imp_total != 0) {
+
+		$CTR = ( $click_total / $imp_total) * 100;
+
+	} else {
+
+		$CTR = 0;
+
+	}
+	
+
+
 
 	echo $imp_total.'<br>';
 	echo $click_total;
@@ -255,7 +267,7 @@
     <div class="btn-group" data-toggle="buttons-checkbox">
       <button type="button" id="imp_click" onclick="javascript:togglecheck('imp');" class="btn btn-dark">Impressions</button>
       <button type="button" id="click_click" onclick="javascript:togglecheck('click');" class="btn-dark">Clicks</button>
-      <button type="button" id="enq_click" onclick="javascript:togglecheck('enq');" class="btn-dark">Enquiries</button>
+      <button type="button" id="enq_click" onclick="javascript:togglecheck('enq');" class="btn btn-dark">Enquiries</button>
     </div>
     <a class="btn pull-right" onClick="load_analytics_30(<?php echo $bus_id;?>)">Last 15 days</a>
     <p id="choices" style="display:none;float:right; width:135px;"><input type="checkbox" name="imp" checked="checked" id="idimp"><input type="checkbox" name="click" checked="checked" id="idclick"><input type="checkbox" name="enq" checked="checked" id="idenq"></p>
