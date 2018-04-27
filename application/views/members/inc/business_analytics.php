@@ -230,9 +230,13 @@
 	$imp_total = $impJAN + $impFEB+ $impMAR + $impAPR + $impMAY + $impJUN + $impJUL + $impAUG + $impSEP + $impOCT + $impNOV + $impDEC;
 	$click_total = $clickJAN + $clickFEB+ $clickMAR + $clickAPR + $clickMAY + $clickJUN + $clickJUL + $clickAUG + $clickSEP + $clickOCT + $clickNOV + $clickDEC;
 	$CTR = ( $click_total / $imp_total) * 100;
-	
-	
+
+
+	echo $imp_total.'<br>';
+	echo $click_total;
+
 	?>
+
     <table class="table table-striped">
         <thead>
                 <tr>

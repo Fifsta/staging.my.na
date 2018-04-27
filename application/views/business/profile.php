@@ -520,7 +520,7 @@ function load_similar(){
 
 		}
 	});	
-
+ 
 }
 
 function load_deals(){
