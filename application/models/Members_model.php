@@ -2629,8 +2629,8 @@ class Members_model extends CI_Model
 			if (strstr($row['PIC'], "http"))
 			{
 
-				$avatar = $row['PIC'];
-				
+				$avatar_url = $row['PIC'];
+
 
 			}
 			elseif (strpos($row['PIC'], '.') == 0)
