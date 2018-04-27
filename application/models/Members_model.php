@@ -2629,7 +2629,8 @@ class Members_model extends CI_Model
 			if (strstr($row['PIC'], "http"))
 			{
 
-				$avatar = $row['PIC'];
+				$avatar =  'assets/users/photos/' . $row['PIC'];
+				$avatar_url = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar,$width,$height,$crop = '');			
 
 			}
 			elseif (strpos($row['PIC'], '.') == 0)
