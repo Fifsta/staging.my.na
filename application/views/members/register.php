@@ -227,7 +227,7 @@
         </div>
     </div>  
 </div>
-
+<div class="spacer"></div>
     
 <?php $this->load->view('inc/footer');?>    
 
