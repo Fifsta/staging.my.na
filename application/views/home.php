@@ -25,10 +25,9 @@
 		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
 			<div class="row">
 				<div class="col-md-12">
-
 					<?php $this->load->view('inc/banners');?>
 
-					  <div class="btn-group" role="group" aria-label="First group">
+					<div class="btn-group d-none" role="group" aria-label="First group">
 					    <a href="#categories" type="button" class="btn btn-dark nav-link "><i class="fa fa-briefcase"></i> Business Directory</a>
 					    <a href="#classifieds" type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Classifieds</a>
 					    <a href="#properties" type="button" class="btn btn-dark"><i class="fa fa-home"></i> Properties</a>
@@ -36,8 +35,7 @@
 					    <a href="#Auctions" type="button" class="btn btn-dark"><i class="fa fa-gavel"></i> Auctions</a>
 					    <a href="#Vacancies" type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Vacancies</a>
 					    <a href="#News" type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Latest News</a>
-					  </div>
-
+					</div>
 					<div class="spacer"></div>
 
 		 			<?php //$this->load->view('inc/featured_business');?>
