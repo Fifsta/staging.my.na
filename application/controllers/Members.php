@@ -1166,8 +1166,6 @@ class Members extends CI_Controller {
 
 			
 			}else{
-
-				echo 'hi';
 				
 				$this->load->library('user_agent');
 				$agent = $agent = $this->agent->browser().' ver : '.$this->agent->version();
