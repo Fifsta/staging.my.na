@@ -106,6 +106,7 @@ if($verified == 'Y'){
                 </div>
                 <div>
                   <form id="member-register" name="member-register" method="post"  class="form-horizontal">
+                    <input type="hidden" id="id" name="id" value="<?php echo $this->session->userdata('id');?>">
                   <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-4">
                       <div class="form-group">
