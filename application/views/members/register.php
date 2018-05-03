@@ -245,43 +245,41 @@
 
 <script type="text/javascript">
 
-
-    
-
-
-
     $(document).ready(function(){
 
         <?php
-        $city_id = 0;
-        if($country == 'Namibia') {
+            $city_id = 0;
+            if($country == 'Namibia') {
 
-            echo 'populateRegion(151);';
-            if($city == 'Windhoek') {
+                echo 'populateRegion(151);';
+                if($city == 'Windhoek') {
 
-                $city_id = 16;
-                echo 'populateSuburb(16);';
-            }else{
+                    $city_id = 16;
+                    echo 'populateSuburb(16);';
+                }else{
 
-
-
+                }
             }
-        }
 
-		if(isset($semi) && $semi){
-				echo "$('#but').attr('id', 'but_step1');";
-				echo 'next_step();';
-		}
+
+    		if(isset($semi) && $semi){
+    				echo "$('#but').attr('id', 'but_step1');";
+    				echo 'next_step();';
+    		}
         ?>
+
         $('#dob').datepicker();
 
 		$('#fl_select').on('click', function(e){
 			
 			e.preventDefault();
+            
 		});
 		
         $('#but_step1').click(function(e) {
+
             e.preventDefault();
+
             //Validate
             if(($('#fname').val().length == 0) || ($('#sname').val().length == 0)){
 

@@ -105,24 +105,24 @@ if($verified == 'Y'){
                     </div>
                 </div>
                 <div>
-                  <form id="member-register" name="member-register" method="post" action="<?php echo site_url('/');?>members/update_do" class="form-horizontal">
+                  <form id="member-register" name="member-register" method="post"  class="form-horizontal">
                   <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-4">
                       <div class="form-group">
                         <label>First Name</label>
-                        <input type="text" class="form-control input-sm" placeholder="First Name" value="<?php echo $fname; ?>">
+                        <input type="text" class="form-control input-sm" id="fname" name="fname" placeholder="First Name" value="<?php echo $fname; ?>">
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                       <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" class="form-control input-sm" placeholder="Last Name" value="<?php echo $sname; ?>"> 
+                        <input type="text" class="form-control input-sm" id="sname" name="sname" placeholder="Last Name" value="<?php echo $sname; ?>"> 
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                       <div class="form-group">
                         <label>Email</label>
-                        <input type="text" class="form-control input-sm" placeholder="Email" value="<?php echo $email; ?>"> 
+                        <input type="text" class="form-control input-sm" id="email" name="email" placeholder="Email" value="<?php echo $email; ?>"> 
                       </div>
                     </div>        
 
@@ -137,7 +137,7 @@ if($verified == 'Y'){
                     <div class="col-sm-12 col-md-6 col-lg-4">
                       <div class="form-group">
                         <label>Gender</label>
-                        <select class="form-control" name="gender">
+                        <select class="form-control" name="gender" id="gender">
                           <option value="M" <?php if(isset($gender)) { if($gender == 'M') { echo 'selected';} } ?>>Male</option>
                           <option value="M" <?php if(isset($gender)) { if($gender == 'F') { echo 'selected';} } ?>>Female</option> 
                         </select>  
@@ -149,7 +149,7 @@ if($verified == 'Y'){
                       <div class="form-group input-group">
                       
                         <?php echo $this->my_na_model->get_countries($d_code, false, false, $class = '', $id = '');?> 
-                        <input type="text" class="form-control input-sm" placeholder="+264 81 293 4355"  value="<?php if(isset($cell)){echo $cell;}?>" <?php echo $lock;?>> 
+                        <input type="text" class="form-control input-sm" id="cell" name="cell" placeholder="+264 81 293 4355"  value="<?php if(isset($cell)){echo $cell;}?>" <?php echo $lock;?>> 
                         <?php echo $verifiedHTML; ?>
 
                         <input type="hidden" id="cell_verified" name="cell_verified" value="<?php echo $verified;?>">
@@ -235,11 +235,13 @@ if($verified == 'Y'){
 
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <button class="btn btn-primary btn-lg" id="but" data-icon="fa-save">Update profile info</button>
+                        <button class="btn btn-primary btn-lg" id="but">Update Info</button>
                       </div>
                     </div>
 
                   </div>
+
+                  <div id="result_msg"></div>
                 </form>
                 </div>
               </section>
@@ -269,6 +271,7 @@ $(document).ready(function(){
     console.log($(this).next('.dropdown-toggle'));
     $(this).next('.dropdown-toggle').click();
   });
+
 
   $('#but').bind('click', function(e) {
 
@@ -313,7 +316,7 @@ $(document).ready(function(){
       $('#country').popover('show');
       $('#country').focus();
 
-    }else if($('#dobtxt').val().length == 0){
+    }else if($('#dob').val().length == 0){
 
       $('#dob').popover({  delay: { show: 100, hide: 3000 },placement:"top",html: true,trigger: "manual", title:"DOB Required", content:"Please tell us your date of birth so we can categorise your profile and send you special offers in the future"});
       $('#dob').popover('show');
@@ -377,7 +380,7 @@ function submit_form(){
     
     var frm = $('#member-register');
     //frm.submit();
-    $('#but').html('<img src="<?php echo base_url('/').'img/load.gif';?>" /> Working...');
+    $('#but').html('<img src="<?php echo base_url('/').'images/load.gif';?>" /> Working...');
     $.ajax({
       type: 'post',
       data: frm.serialize(),
@@ -385,7 +388,7 @@ function submit_form(){
       success: function (data) {
         
          $('#result_msg').html(data);
-         $('#but').html('<b>Update</b> <img src="<?php echo base_url('/');?>img/icons/my-na-favicon.png" />');
+         $('#but').html('Update Info');
         
       }
     }); 
