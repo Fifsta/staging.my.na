@@ -235,7 +235,7 @@ if($verified == 'Y'){
 
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <button class="btn btn-primary btn-lg" data-icon="fa-save">Update profile info</button>
+                        <button class="btn btn-primary btn-lg" id="but" data-icon="fa-save">Update profile info</button>
                       </div>
                     </div>
 
@@ -261,6 +261,7 @@ if($verified == 'Y'){
 
 $(document).ready(function(){
   
+
   $('#dob').datepicker();
 
   $('#fl_select').on('click', function(e){
@@ -390,6 +391,7 @@ function submit_form(){
     }); 
 
 }
+
 
 function checkCellphoneValidity()
   {
