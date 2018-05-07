@@ -1282,6 +1282,14 @@ class My_na_model extends CI_Model{
 	public function show_advert($query = ''){
 		
 
+        $this->load->model('image_model'); 
+        $this->load->library('thumborp');
+
+        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+        $width = 360;
+        $height = 230;
+
+
 		if($query == '3')
 		{
 			$x = 3;
@@ -1296,7 +1304,7 @@ class My_na_model extends CI_Model{
 
 		}
 
-		if($query->result()){
+		if($query->result()){ 
 			$count = 0;
 			if($x == 3){
 
@@ -1306,11 +1314,13 @@ class My_na_model extends CI_Model{
 				
 				if($row->ADVERTS_IMAGE_NAME == ''){
 					
-					$img = base_url('/').'img/user_blank.jpg';
+					$img_str = 'assets/images/user_blank.jpg';
+                    $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 					
 				}else{
 					
-					$img = base_url('/').'assets/adverts/images/'.$row->ADVERTS_IMAGE_NAME;
+					$img_str= 'assets/adverts/images/'.$row->ADVERTS_IMAGE_NAME;
+                    $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 					
 				}
 				
@@ -1334,7 +1344,7 @@ class My_na_model extends CI_Model{
 
 					echo ' <div class="row-fluid">
 							<div class="span12 white_box">
-								'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img.'" />'.$link2.'
+								'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img_url.'" />'.$link2.'
 							</div>
 
 						</div>
