@@ -187,7 +187,9 @@ $this->load->view('inc/header');
 								<p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><?php echo $email; ?></button></p>								
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-4">
+								<?php if($website) { ?>
 								<p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><?php echo $website; ?></button></p>
+								<?php } ?>
 							</div>							
 						</div>
 
