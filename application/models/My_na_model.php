@@ -1303,17 +1303,10 @@ class My_na_model extends CI_Model{
 			}
 			foreach($query->result() as $row){
 				
-				if($row->ADVERTS_IMAGE_NAME == ''){
 					
-					$img_str = 'assets/images/user_blank.jpg';
-                    $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+				$img_str= 'assets/adverts/images/'.$row->ADVERTS_IMAGE_NAME;
+                $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 					
-				}else{
-					
-					$img_str= 'assets/adverts/images/'.$row->ADVERTS_IMAGE_NAME;
-                    $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
-					
-				}
 				
 				if($row->URL == ''){
 					
@@ -1337,20 +1330,24 @@ class My_na_model extends CI_Model{
 							<div class="col-md-12">
 								'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img_url.'" />'.$link2.'
 							</div>
-
-						</div>
-					  ';
+						   </div>
+					       ';
 
 
 				}
 
 
 				$count ++;
+
 			}
+
+
 			if($x == 3){
 
 				echo '</div>';
 			}
+
+
 			$load_img = "<img src='". base_url('/'). "img/load_white.gif' />";
 
 		 }else{
