@@ -104,7 +104,7 @@ $this->load->view('inc/header');
 
 </head>
 
-<body id="top">
+<body id="top"> 
 
 <?php $this->load->view('inc/top_bar');?>
 
@@ -492,20 +492,6 @@ $(document).ready(
 		
 	}
 );
-
-function load_advert(){
-	
-	$.ajax({
-		type: 'get',
-		url: '<?php echo site_url('/').'my_na/load_advert/';?>' ,
-		success: function (data) {
-			
-			 $('#advert_big').html(data);
-			
-		}
-	});	
-
-}
 
 function load_similar(){
 	
