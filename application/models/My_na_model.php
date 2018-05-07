@@ -1489,56 +1489,7 @@ class My_na_model extends CI_Model{
 			
 		}
 		
-		//MORE THAN 1 WORD
-		if(str_word_count($key) > 1){
-				
-				$keys = str_replace(" ", "+", trim($key));
-				$keyA = explode("+", $keys);
-				$keyF = '';
-				foreach($keyA as $r){
-					if(strlen($r) > 3){
-						$keyF .= ''.$r.' ';
-					}
-				}
-
-                //INSERT TERM FOR CAPTURE
-                if(strlen($key) > 15){
-
-
-                        $idata = array(
-
-                            'client_id' => $this->session->userdata('id'),
-                            'search_term' => $key,
-                            'tokens' => '',
-                            'location' => $this->session->userdata('country')
-
-                        );
-                        $this->db->insert('search_terms', $idata);
-
-                }
-                $tq1 = "SELECT title ,link, type, img_file ,body,
-														MATCH(title, body) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance,
-														MATCH(title) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance2
-														FROM search_index
-                                                        WHERE MATCH(title, body) AGAINST ('".$keyF."' IN BOOLEAN MODE)
-														ORDER BY relevance2 DESC, relevance DESC LIMIT ".$limit;
-                //echo $tq1;
-				$query = $this->db->query($tq1, FALSE);
-				
-		//BIGGER THAN 2 CHARS	
-		}elseif(str_word_count($key) == 1 && strlen($key) > 3)
-        {
-
-            $query = $this->db->query("SELECT title ,link, type, img_file ,body FROM search_index WHERE " . $strSQL . " title LIKE '%" . $key . "%' OR body LIKE '%" . $key . "%' ORDER BY title ASC LIMIT " . $limit . "", false);
-
-        }elseif(strlen($key) > 2){
-
-            $query = $this->db->query("SELECT title ,link, type, img_file ,body FROM search_index WHERE ".$strSQL." title LIKE '%".$key."%' OR body LIKE '%".$key."%' ORDER BY title ASC LIMIT ".$limit. "", FALSE);
-
-        }else{
-            $query = $this->db->query("SELECT title ,link, type, img_file ,body FROM search_index ORDER BY title ASC LIMIT " . $limit . "", false);
-        }
-		// '".$key."'
+		$query = $this->db->query("SELECT title ,link, type, img_file ,body FROM search_index WHERE " . $strSQL . " title LIKE '%" . $key . "%' OR body LIKE '%" . $key . "%' ORDER BY title ASC LIMIT " . $limit . "", false);
 	
 		if($query){ 
 
