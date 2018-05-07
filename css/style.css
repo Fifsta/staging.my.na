@@ -489,7 +489,7 @@ Light Orange ff9900
 	.sidenav .panel-body ul span{padding:0 5px; }
 
 .adverts > div{width:70%; margin:auto; padding:10px}
-	.adverts a{display:block; border:10px solid #ddd}
+	.adverts a{display:block; border:10px solid #fff;l border-radius: 4px;}
 	.adverts a img{width:100%; display:block; margin:auto;}
 
 .content{padding-top:40px; }
