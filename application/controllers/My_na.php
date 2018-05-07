@@ -231,6 +231,19 @@ class My_na extends CI_Controller {
 			echo $this->my_na_model->show_advert($q);
 			
 	}
+
+
+	//LOAD RANDOM ADVERTs
+	public function load_adverts()
+	{
+
+		$cat = $this->input->post('cat', TRUE);
+
+		$o = $this->my_na_model->show_adverts($cat);
+			
+	}
+
+
 	//LOAD RESOURCES WITH AJAX AFTER PAGE LOAD
 	public function load_slide()
 	{

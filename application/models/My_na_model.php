@@ -1279,7 +1279,7 @@ class My_na_model extends CI_Model{
 	//+GET RANDOM ADVERT
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
-	public function show_advert($query = ''){
+	public function show_advert($cats = ''){
 		
 
         $this->load->model('image_model'); 
@@ -1290,19 +1290,10 @@ class My_na_model extends CI_Model{
         $height = 440;
 
 
-		if($query == '3')
-		{
-			$x = 3;
-			$query = $this->db->query("SELECT * FROM adverts WHERE IS_ACTIVE = 'Y' AND TYPE = 'P' AND ADVERTS_EXPIRE_DATE > NOW() ORDER BY RAND() LIMIT 3", false);
 
-		}elseif($query != '' && $query != 3){
+		$query = $this->db->query("SELECT * FROM adverts WHERE IS_ACTIVE = 'Y' AND TYPE = 'P' AND ADVERTS_EXPIRE_DATE > NOW() ORDER BY RAND() LIMIT 3", false);
 
 
-		}else{
-			$x = 1;
-			$query = $this->db->query("SELECT * FROM adverts WHERE IS_ACTIVE = 'Y' AND TYPE = 'P' AND ADVERTS_EXPIRE_DATE > NOW() ORDER BY RAND() LIMIT 1" ,FALSE);
-
-		}
 
 		if($query->result()){ 
 			$count = 0;

@@ -12,7 +12,7 @@ $(document).ready(
 	function()
 	{
 
-		load_advert();
+		load_adverts();
 
 	}
 );		
@@ -20,7 +20,7 @@ $(document).ready(
 function load_advert(){
 		
 		$.ajax({
-			type: 'get',
+			type: 'post',
 			url: '<?php echo site_url('/').'my_na/load_advert/';?>' ,
 			success: function (data) {
 				
