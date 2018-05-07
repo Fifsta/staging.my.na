@@ -1324,10 +1324,11 @@ class My_na_model extends CI_Model{
 
 
 				echo ' <div class="row">
-						<div class="col-md-12">
-							'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img_url.'" />'.$link2.'
-						</div>
+    					   <div class="col-md-12">
+    							'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img_url.'" />'.$link2.'
+    					   </div>
 					   </div>
+                       <div class="spacer"></div>
 				       ';
 
 				$count ++;
