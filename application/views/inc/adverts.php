@@ -12,7 +12,7 @@ $(document).ready(
 	function()
 	{
 
-		load_adverts();
+		load_advert();
 
 	}
 );		
