@@ -1286,8 +1286,8 @@ class My_na_model extends CI_Model{
         $this->load->library('thumborp');
 
         $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-        $width = 360;
-        $height = 230;
+        $width = 307;
+        $height = 440;
 
 
 		if($query == '3')
@@ -1308,7 +1308,7 @@ class My_na_model extends CI_Model{
 			$count = 0;
 			if($x == 3){
 
-				echo ' <div class="row-fluid">';
+				echo ' <div class="row">';
 			}
 			foreach($query->result() as $row){
 				
@@ -1338,12 +1338,12 @@ class My_na_model extends CI_Model{
 
 				if($x == 3){
 
-					echo '<div class="span4 white_box">'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img.'" />'.$link2.'</div>';
+					echo '<div class="col-md-4">'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img.'" />'.$link2.'</div>';
 
 				}else{
 
-					echo ' <div class="row-fluid">
-							<div class="span12 white_box">
+					echo ' <div class="row">
+							<div class="col-md-12">
 								'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img_url.'" />'.$link2.'
 							</div>
 
