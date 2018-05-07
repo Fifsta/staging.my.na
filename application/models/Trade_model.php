@@ -8114,8 +8114,8 @@ class Trade_model extends CI_Model
 	                  </div>
 	                  <div>
 	                    <div class="revi">
-	                      <a href="' . site_url('/') . 'trade/agent/' . $bus_id . '/0/' . $this->encode_url($bus_name) . '/" class="btn btn-default btn-block"><i class="icon-home icon-white"></i> View Agency Products</a>
-	                      <a href="' . site_url('/') . 'trade/agent/' . $bus_id . '/' . $row->ID . '/' . $this->encode_url($bus_name) . '/' . $this->encode_url($row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME) . '/" class="btn btn-default btn-block">View Agent Products</a>
+	                      <a href="' . site_url('/') . 'trade/agent/' . $bus_id . '/0/' . $this->clean_url_str($bus_name) . '/" class="btn btn-default btn-block"><i class="icon-home icon-white"></i> View Agency Products</a>
+	                      <a href="' . site_url('/') . 'trade/agent/' . $bus_id . '/' . $row->ID . '/' . $this->clean_url_str($bus_name) . '/' . $this->clean_url_str($row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME) . '/" class="btn btn-default btn-block">View Agent Products</a>
 	                    </div>
 	                  </div>
 	                 </section>

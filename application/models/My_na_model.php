@@ -1331,7 +1331,6 @@ class My_na_model extends CI_Model{
 
 			}
 
-
 			$load_img = "<img src='". base_url('/'). "img/load_white.gif' />";
 
 		 }else{
