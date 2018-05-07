@@ -1289,16 +1289,12 @@ class My_na_model extends CI_Model{
         $width = 307;
         $height = 440;
 
-
-			$x = 3;
-			$query = $this->db->query("SELECT * FROM adverts WHERE IS_ACTIVE = 'Y' AND TYPE = 'P' AND ADVERTS_EXPIRE_DATE > NOW() ORDER BY RAND() LIMIT 3", false);
-
-
+		$x = 3;
+		$query = $this->db->query("SELECT * FROM adverts WHERE IS_ACTIVE = 'Y' AND TYPE = 'P' AND ADVERTS_EXPIRE_DATE > NOW() ORDER BY RAND() LIMIT 3", false);
 
 		if($query->result()){ 
 
 			$count = 0;
-
 
 			foreach($query->result() as $row){
 				
@@ -1320,12 +1316,12 @@ class My_na_model extends CI_Model{
 				}
 
 
-				echo ' <div class="row" style="margin-bottom:40px">
-    					   <div class="col-md-12">
+				echo    '<div class="row" style="margin-bottom:40px">
+    					    <div class="col-md-12">
     							'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img_url.'" />'.$link2.'
-    					   </div>
-					   </div>
-				       ';
+    					    </div>
+					    </div>
+				        ';
 
 				$count ++;
 
@@ -1414,8 +1410,8 @@ class My_na_model extends CI_Model{
 	//++++++++++++++++++++++++++++++
 	public function load_adverts($row)
 	{
-		$result = '';	
 
+		$result = '';	
 				
         if($row->ADVERTS_IMAGE_NAME == ''){
 
@@ -1438,17 +1434,14 @@ class My_na_model extends CI_Model{
             $link2 = '</a>';
 
         }
-        //IMPRESSION COUNTER
-        //$data['IMPRESSIONS'] = $row->ID + 1;
-        //$this->db->where('ID', $row->ID);
-        //$this->db->update('adverts', $data);
-        $result =  '<div class="white_box">'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img.'" />'.$link2.'</div>';
 
-		
+        $result =  '<div class="white_box">'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img.'" />'.$link2.'</div>';
+	
 		return $result;
 		
 	}
 	
+
 	//++++++++++++++++++++++++++++++
 	//Instant Search 
 	//++++++++++++++++++++++++++++++
@@ -1510,24 +1503,20 @@ class My_na_model extends CI_Model{
                 $img_str = $row->img_file;
                 $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-
                 echo '
-                  <section class="results-item">
+                <section class="results-item">
                     <div>
-                      <figure>
-                        <a href="'.site_url('/').$row->link.'"><img class="rounded" src="'.$img_url.'" alt="'.$row->title.'"></a>
-                      </figure>
+                        <figure>
+                            <a href="'.site_url('/').$row->link.'"><img class="rounded" src="'.$img_url.'" alt="'.$row->title.'"></a>
+                        </figure>
                     </div>
                     <div>
-                      <h2><a href="'.site_url('/').$row->link.'/">'.$row->title.'</a></h2>
-                      <p class="desc">'.$this->shorten_string($text, 40).'</p>
-
+                        <h2><a href="'.site_url('/').$row->link.'/">'.$row->title.'</a></h2>
+                        <p class="desc">'.$this->shorten_string($text, 40).'</p>
                         <p><span class="badge badge-secondary">'.ucwords(str_replace("_"," ",$row->type)).'</span></p>
-
                         <a class="btn btn-dark btn-sm" href="'.site_url('/').$row->link.'/" style="margin-bottom:5px" rel="tooltip" title="View: '.$row->title.'"><i class="fa fa-info text-light"></i>  View '.ucwords(str_replace("_"," ",$row->type)).'</a>
-
                     </div>
-                  </section>
+                </section>
                 ';
 
 			}		
