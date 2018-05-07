@@ -1299,10 +1299,7 @@ class My_na_model extends CI_Model{
 
 			$count = 0;
 
-			if($x == 3){
 
-				echo ' <div class="row">';
-			}
 			foreach($query->result() as $row){
 				
 					
@@ -1323,22 +1320,15 @@ class My_na_model extends CI_Model{
 				}
 
 
-				echo ' <div class="row">
+				echo ' <div class="row" style="margin-bottom:40px">
     					   <div class="col-md-12">
     							'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img_url.'" />'.$link2.'
     					   </div>
 					   </div>
-                       <div class="spacer"></div>
 				       ';
 
 				$count ++;
 
-			}
-
-
-			if($x == 3){
-
-				echo '</div>';
 			}
 
 
