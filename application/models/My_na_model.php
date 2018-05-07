@@ -1296,7 +1296,9 @@ class My_na_model extends CI_Model{
 
 
 		if($query->result()){ 
+
 			$count = 0;
+
 			if($x == 3){
 
 				echo ' <div class="row">';
@@ -1320,22 +1322,13 @@ class My_na_model extends CI_Model{
 
 				}
 
-				if($x == 3){
 
-					echo '<div class="col-md-4">'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img.'" />'.$link2.'</div>';
-
-				}else{
-
-					echo ' <div class="row">
-							<div class="col-md-12">
-								'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img_url.'" />'.$link2.'
-							</div>
-						   </div>
-					       ';
-
-
-				}
-
+				echo ' <div class="row">
+						<div class="col-md-12">
+							'.$link1.'<img class="lazy" style="width:100%" alt="'.strip_tags($row->ADVERTS_HEADER).'" src="'.$img_url.'" />'.$link2.'
+						</div>
+					   </div>
+				       ';
 
 				$count ++;
 
