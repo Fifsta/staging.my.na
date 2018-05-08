@@ -389,8 +389,6 @@ $this->load->view('inc/header');
 		$('#b-about img').addClass('img-fluid');
 		$("a.grouped_elements").fancybox();
 
-		initialise_owl();
-
 		
 		$('.redactor').redactor({ 	
 				
