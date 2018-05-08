@@ -212,6 +212,9 @@ $this->load->view('inc/header');
 					<li role="presentation" class="nav-item"><a href="#Enquiry-Form" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o">Enquiry Form</a></li>
 					<!--<li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate text-dark">Deals</a></li>-->
 					<li role="presentation" class="nav-item"><a href="#Gallery" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o">Gallery</a></li>
+					<?php if($vt != ''){ ?>
+					<li role="presentation" class="nav-item"><a href="#VT" onClick="load_vt();" class="nav-link" aria-controls="VT" role="tab" data-toggle="tab" data-icon="fa-refresh">Virtual Tour</a></li>
+					<?php } ?>
 					<li role="presentation" class="nav-item"><a href="#QR" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-qrcode">QR Code</a></li>
 				</ul>
 				<div class="tab-content">
@@ -224,39 +227,11 @@ $this->load->view('inc/header');
 						<?php $this->load->view('business/inc/business_contact_inc', $bus_details);?>
 					</section>
 
-						<section role="tabpanel" class="tab-pane" id="Deals">
-							<h2 class="tab-head">Deals</h2>
-							<div class="row">
-
-								<!--<div class="col-xs-6 col-sm-3">
-									<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
-									<h3 class="tab-head">Deal title</h3>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-								</div>
-								<div class="col-xs-6 col-sm-3">
-									<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
-									<h3 class="tab-head">Deal title</h3>
-									<p>Book a reservation and get a free car! For free!</p>
-								</div>
-								<div class="col-xs-6 col-sm-3">
-									<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
-									<h3 class="tab-head">Deal title</h3>
-									<p>Book a table with Mathew for free!</p>
-								</div>
-								<div class="col-xs-6 col-sm-3">
-									<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
-									<h3 class="tab-head">Deal title</h3>
-									<p>Just writing stuff in different lengths to see what happens</p>
-								</div>
-								<div class="col-xs-6 col-sm-3">
-									<figure><a href="#" class="fancy-images" rel="deals"><img src="images/sample1.jpg"></a></figure>
-									<h3 class="tab-head">Deal title</h3>
-									<p>Just writing stuff in different lengths to see what happens</p>
-								</div>-->
-								No deals currently listed
-							</div>
-						</section>
-						<div class="clear:both"></div>
+					<section role="tabpanel" class="tab-pane" id="VT">
+						<h2 class="tab-head">Virtual Tour</h2>
+						<div class="row" id="virtual_tour">
+						</div>
+					</section>
 
 					<section role="tabpanel" class="tab-pane" id="Gallery">
 						<h2 class="tab-head">Gallery</h2>
@@ -404,58 +379,16 @@ $this->load->view('inc/header');
 <script src="<?php echo base_url('/');?>js/jquery.rating.pack.js" type="text/javascript"></script> 
 
 <script type="text/javascript">
+
 	$(document).ready(function(){
 
 
 		$('#b-about img').addClass('img-fluid');
-
 		$("a.grouped_elements").fancybox();
 
 		initialise_owl();
 
 		
-
-		
-		/*get_wethear('na','windhoek');
-		//THUMBS
-		$('figure .cycle-slideshow').cycle('pause');
-		$('figure .cycle-slideshow').mouseenter(function() {
-			$(this).cycle('resume').cycle('goto',0);
-			$('.reveal', this).each(function() {
-				var reveal = $(this).attr('data-src');
-				$(this).fadeIn(500).attr('src',reveal);
-			});
-		}).mouseleave(function() {
-			var shown = $('.shown', this).attr('src');
-			$(this).cycle('pause').cycle('goto',0);
-			$('.reveal', this).each(function() {
-				$(this).stop().fadeOut(200).attr('src',shown);
-			});
-		});*/
-		
-	});
-
-	//RESOLUTION
-	function windowResize(){
-		windowWidth = $(window).width();
-		windowHeight = $(window).height();
-		$('#resolution').text(windowWidth+' x '+windowHeight);
-	};
-	$(window).resize(windowResize);
-	
-	//PRELOAD
-	window.onload = showBody;
-	function showBody(){
-		windowResize();
-		swipeHeight();
-		$('#pre_load').fadeOut();
-	}
-	
-	
-
-$(document).ready(
-	function()
-	{
 		$('.redactor').redactor({ 	
 				
 				buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 
@@ -465,7 +398,7 @@ $(document).ready(
 		
 		
 		$('[rel=tooltip]').tooltip();
-		$('.carousel').carousel();
+		//$('.carousel').carousel();
 		
 		
 		//$(".my_na").popover({ placement:"left",trigger: "hover", title:"tebhdjsbdjsbd", content:"shnaksbnjkabnsabnsksbnkabns"});  
@@ -473,161 +406,134 @@ $(document).ready(
 
 	    load_similar();
 
-		//my_na(<?php echo $bus_id;?>);
 
-		//load_advert();
-
-		
 		$('.popovers').popover({
-						placement : 'right',
-						html : true,
-						trigger : 'hover', //<--- you need a trigger other than manual
-						delay: { 
-						   show: "500", 
-						   hide: "100"
-						},
-						content: function() {
-						
-							return $(this).find('span.popover-content').html();
-						}
+			placement : 'right',
+			html : true,
+			trigger : 'hover', //<--- you need a trigger other than manual
+			delay: { 
+			   show: "500", 
+			   hide: "100"
+			},
+			content: function() {
+			
+				return $(this).find('span.popover-content').html();
+			}
 		});
+		
+	});
+
+
+	function load_similar(){
+		
+		$.ajax({
+			type: 'get',
+			url: '<?php echo site_url('/').'business/load_similar/'.$bus_id.'/';?>' ,
+			success: function (data) {
+
+				 $('#similar_div').html(data);
+
+				 initialise_owl();
+
+			}
+		});	
+	 
+	}
+
+
+	/*function load_deals(){
+
+		var x = $('#deals_inc');
+		x.addClass('loading_img');	
+
+		$.ajax({
+			type: 'get',
+			url: '<?php //echo site_url('/').'business/show_business_deal/'.$bus_id.'/';?>' ,
+			success: function (data) {
+				
+				 x.html(data);
+				
+			}
+		});	
+
+	}*/
+
+
+	function load_vt() {
+
+		var x = $('#virtual_tour');
+		x.addClass('loading_img');	
+		$.ajax({
+			type: 'get',
+			url: '<?php //echo site_url('/').'business/load_virtual_tour/'.$bus_id.'/';?>' ,
+			success: function (data) {
+				
+				 x.html(data);
+				
+			}
+		});	
+
+	}
+
+
+	function reload_reviews(){
+		
+		$.ajax({
+			type: 'post',
+			url: '<?php echo site_url('/').'business/reload_reviews/'.$bus_id.'/';?>' ,
+			success: function (data) {
+				
+				 $('#reviews').html(data);
+				 $("input .star").rating();
+			}
+		});
+
+	}
+
+
+
+	function my_na(id){
+		
+		var n = $('#'+id);
+		var place = 'right'; 
+		$.ajax({
+			type: 'get',
+			cache: false,
+			url: '<?php echo site_url('/').'business/my_na/';?>'+id+'/'+place+'/' ,
+			success: function (data) {	
+				
+				n.html(data);
+				$('[rel=tooltip]').tooltip();
+				my_na_effect();
+				n.removeClass('loading_img');
+			}
+		});	
 		
 	}
-);
 
-function load_similar(){
-	
-	$.ajax({
-		type: 'get',
-		url: '<?php echo site_url('/').'business/load_similar/'.$bus_id.'/';?>' ,
-		success: function (data) {
 
-			 $('#similar_div').html(data);
+	function my_na_yes(id){
+		
+		var n = $('#'+id);
+		n.find(".my_na").hide();
+		n.addClass('loading_img');
+		n.popover('destroy');
+		var place = 'right';
+		$.ajax({
+			type: 'get',
+			cache: false,
+			url: '<?php echo site_url('/').'business/my_na_click/';?>'+id+'/'+place+'/',
+			success: function (data) {	
+				
+				n.html(data);
+				$('[rel=tooltip]').tooltip();
+				my_na_effect();
+				n.removeClass('loading_img');
+				n.find(".my_na").show();
+			}
+		});	
 
-			 initialise_owl();
-
-		}
-	});	
- 
-}
-
-function load_deals(){
-var x = $('#deals_inc');
-x.addClass('loading_img');	
-	$.ajax({
-		type: 'get',
-		url: '<?php echo site_url('/').'business/show_business_deal/'.$bus_id.'/';?>' ,
-		success: function (data) {
-			
-			 x.html(data);
-			
-		}
-	});	
-
-}
-
-function load_vt(){
-var x = $('#virtual_tour');
-x.addClass('loading_img');	
-	$.ajax({
-		type: 'get',
-		url: '<?php echo site_url('/').'business/load_virtual_tour/'.$bus_id.'/';?>' ,
-		success: function (data) {
-			
-			 x.html(data);
-			
-		}
-	});	
-
-}
-function reload_reviews(){
-	
-	/*$.ajax({
-		type: 'post',
-		url: '<?php echo site_url('/').'business/reload_reviews/'.$bus_id.'/';?>' ,
-		success: function (data) {
-			
-			 $('#reviews').html(data);
-			 $("input .star").rating();
-		}
-	});*/	
-
-}
-function phone_click(n,type){
-	
-	var num = n.find('font');
-	num.slideDown();
-	 
-	$.ajax({
-		type: 'get',
-		url: '<?php echo site_url('/').'business/add_business_phone_click/'.$bus_id.'/';?>'+type ,
-		success: function (data) {	
-			
-		}
-	});	
-
-}
-
-function my_na(id){
-	
-	var n = $('#'+id);
-	var place = 'right'; 
-	$.ajax({
-		type: 'get',
-		cache: false,
-		url: '<?php echo site_url('/').'business/my_na/';?>'+id+'/'+place+'/' ,
-		success: function (data) {	
-			
-			n.html(data);
-			$('[rel=tooltip]').tooltip();
-			my_na_effect();
-			n.removeClass('loading_img');
-		}
-	});	
-	
-}
-
-function my_na_yes(id){
-	
-	var n = $('#'+id);
-	n.find(".my_na").hide();
-	n.addClass('loading_img');
-	n.popover('destroy');
-	var place = 'right';
-	$.ajax({
-		type: 'get',
-		cache: false,
-		url: '<?php echo site_url('/').'business/my_na_click/';?>'+id+'/'+place+'/',
-		success: function (data) {	
-			
-			n.html(data);
-			$('[rel=tooltip]').tooltip();
-			my_na_effect();
-			n.removeClass('loading_img');
-			n.find(".my_na").show();
-		}
-	});	
-
-}
-
-/*function my_na_effect(){
-
-	//$('.my_na_c').removeClass('loading_img');
-	$(function() {
-		$(".my_na")
-		.find("span")
-		.hide()
-		.end()
-		.hover(function() {
-			$(this).find("span").stop(true, true).fadeIn();
-			
-		}, function(){
-			$(this).find("span").stop(true, true).fadeOut();
-			
-		});
-	});	
-
-}*/
+	}
 
 
 </script>
