@@ -490,6 +490,8 @@ $this->load->view('inc/header');
 			success: function (data) {
 				
 				 x.html(data);
+
+				 initialise_owl();
 				
 			}
 		});	
