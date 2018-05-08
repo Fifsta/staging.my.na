@@ -28,15 +28,11 @@ if(count($map_details) > 0){
 
 
 <!--<script src="http://maps.google.com/maps?file=api&v=2&key=AIzaSyAhEmO7n-f7JDcSWdmRncZ6JfN3z2FHkTQ" type="text/javascript"></script>-->
-<script src="js/jquery-2.1.1.min.js"></script>
+
 <script data-cfasync="false" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script type="text/javascript">
   	  
-$(document).ready(function(){
-
-	initialise_map();
-
-});
+initialise_map();
 
 var geocoder;
 var map;
