@@ -1681,11 +1681,13 @@ function show_all_gallery_images($bus_id)
 							$format = '.jpg';
 							$img_str = 'assets/business/gallery/'.$img_file . $format;
 							$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+							$img_exp =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str, $crop = '');
 							
 						}else{
 							
 							$img_str = 'assets/business/gallery/'.$img_file;
 							$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+							$img_exp =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str, $crop = '');
 							
 						}
 						
@@ -1701,7 +1703,7 @@ function show_all_gallery_images($bus_id)
 //							</li>';
 							
 							//NO TIMBTHUMB
-							echo '<div><a class="grouped_elements" href="'.$img_str.'"><img src="'.$img_url.'" style="width:100%;" class="img-thumbnail" /></a></div>';
+							echo '<div><a class="grouped_elements" href="'.$img_exp.'"><img src="'.$img_url.'" style="width:100%;" class="img-thumbnail" /></a></div>';
 							$x++;
 						
 					 
