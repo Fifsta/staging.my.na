@@ -242,7 +242,7 @@ $this->load->view('inc/header');
 
 					<section role="tabpanel" class="tab-pane" id="QR">
 						<h2 class="tab-head">QR Code</h2>
-						<div class="row">
+						<div class="row"> 
 							<div class="col-lg-4 col-md-8 col-sm-12 col-xs-12">
 								<?php echo $this->business_model->get_qr_vcard($bus_id,'220','220');?> 
 							</div>
@@ -465,7 +465,7 @@ $this->load->view('inc/header');
 		x.addClass('loading_img');	
 		$.ajax({
 			type: 'get',
-			url: '<?php //echo site_url('/').'business/load_virtual_tour/'.$bus_id.'/';?>' ,
+			url: '<?php echo site_url('/').'business/load_virtual_tour/'.$bus_id.'/';?>' ,
 			success: function (data) {
 				
 				 x.html(data);
