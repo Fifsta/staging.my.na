@@ -3541,9 +3541,10 @@ tbody.collapse.show {
 }
 
 .nav-tabs .nav-link {
-  border: 1px solid transparent;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
+  background-color: #000;
+  color: #fff;
 }
 
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
