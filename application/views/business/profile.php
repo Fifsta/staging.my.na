@@ -164,8 +164,7 @@ $this->load->view('inc/header');
 							<img src="<?php echo $img_url; ?>">
 						</figure>
 						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>	
-
-						<?php echo $this->business_model->get_qr_vcard($bus_id,'220','220');?> 					 
+				 
 					</div>
 					<div class="details-right">
 						<h2><?php echo $address ;?></h2>
