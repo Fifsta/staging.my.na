@@ -1697,20 +1697,14 @@ function show_all_gallery_images($bus_id)
 						
 					}
 					
-							//TIMBTHUMB
-							//echo '<li class="thumbnail"><img src="'.base_url('/').'img/timbthumb.php?src='.base_url('/').'assets/business/gallery/'.$img_file.'&q=100&w=180&h=100" />
-//							<a style="float:right;margin:0 3px;" onclick="delete_gallery_img('.$id .');" href="#"><i class="icon-remove"></i></a>
-//							</li>';
-							
-							//NO TIMBTHUMB
-							echo '<div><a class="grouped_elements" href="'.$img_exp.'"><img src="'.$img_url.'" style="width:100%;" class="img-thumbnail" /></a></div>';
-							$x++;
-						
-					 
-					}
+						//NO TIMBTHUMB
+						echo '<div><a class="grouped_elements" href="'.$img_exp.'"><img src="'.$img_url.'" style="width:100%;" class="img-thumbnail" /></a></div>';
+						$x++;
+							 
+				}
 					
 				//show gallery
-				echo '</div>';
+				echo '</div><div class="spacer"></div>';
 				
 			}else{
 			
