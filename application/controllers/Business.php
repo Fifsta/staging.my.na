@@ -141,6 +141,18 @@ class Business extends CI_Controller {
 
 	}
 
+
+	//+++++++++++++++++++++++++++
+	//BUSINESS SHOW GALLERY
+	//++++++++++++++++++++++++++
+	public function load_gallery($bus_id)
+	{
+
+		$this->business_model->show_gallery($bus_id);
+
+	}
+
+
 	//+++++++++++++++++++++++++++
 	//BUSINESS PROFILE PAGE 2
 	//++++++++++++++++++++++++++

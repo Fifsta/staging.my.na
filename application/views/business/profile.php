@@ -160,6 +160,7 @@ $this->load->view('inc/header');
 				<!--details-->
 				<div class="details">
 					<div class="details-left">
+
 						<figure>
 							<img src="<?php echo $img_url; ?>">
 						</figure>
@@ -212,7 +213,7 @@ $this->load->view('inc/header');
 					<li role="presentation" class="nav-item"><a href="#About" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info">About</a></li>
 					<li role="presentation" class="nav-item"><a href="#Enquiry-Form" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o">Enquiry Form</a></li>
 					<!--<li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate text-dark">Deals</a></li>-->
-					<li role="presentation" class="nav-item"><a href="#Gallery" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o">Gallery</a></li>
+					<li role="presentation" class="nav-item"><a href="#Gallery" onClick="load_gallery();" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o">Gallery</a></li>
 					<?php if($vt != ''){ ?>
 					<li role="presentation" class="nav-item"><a href="#VT" onClick="load_vt();" class="nav-link" aria-controls="VT" role="tab" data-toggle="tab" data-icon="fa-refresh">Virtual Tour</a></li>
 					<?php } ?>
@@ -236,8 +237,8 @@ $this->load->view('inc/header');
 
 					<section role="tabpanel" class="tab-pane" id="Gallery">
 						<h2 class="tab-head">Gallery</h2>
-						<div class="row">
-							<?php $this->business_model->show_gallery($bus_id);?>
+						<div class="row" id="bus_gallery">
+							<?php //$this->business_model->show_gallery($bus_id);?>
 						</div>
 					</section>
 
@@ -476,6 +477,24 @@ $this->load->view('inc/header');
 		});	
 
 	}
+
+
+	function load_gallery() {
+
+		var x = $('#bus_gallery');
+		var loader = '<img src="<?php echo base_url('/'); ?>images/load.gif"/>';
+		x.html(loader);
+		$.ajax({
+			type: 'get',
+			url: '<?php echo site_url('/').'business/load_gallery/'.$bus_id.'/';?>' ,
+			success: function (data) {
+				
+				 x.html(data);
+				
+			}
+		});	
+
+	}	
 
 
 	function reload_reviews(){
