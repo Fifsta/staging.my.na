@@ -209,11 +209,11 @@ $this->load->view('inc/header');
 
 				<!--tabs-->
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="nav-item"><a href="#About" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info text-dark">About</a></li>
-					<li role="presentation" class="nav-item"><a href="#Enquiry-Form" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o text-dark">Enquiry Form</a></li>
+					<li role="presentation" class="nav-item"><a href="#About" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info">About</a></li>
+					<li role="presentation" class="nav-item"><a href="#Enquiry-Form" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o">Enquiry Form</a></li>
 					<!--<li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate text-dark">Deals</a></li>-->
-					<li role="presentation" class="nav-item"><a href="#Gallery" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o text-dark">Gallery</a></li>
-					<li role="presentation" class="nav-item"><a href="#QR" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-qrcode text-dark">QR Code</a></li>
+					<li role="presentation" class="nav-item"><a href="#Gallery" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o">Gallery</a></li>
+					<li role="presentation" class="nav-item"><a href="#QR" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-qrcode">QR Code</a></li>
 				</ul>
 				<div class="tab-content">
 					<section role="tabpanel" class="tab-pane active" id="About">
@@ -283,8 +283,8 @@ $this->load->view('inc/header');
 				
 				<!--tabs-->
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-star-o text-dark">Reviews</a></li>
-					<li role="presentation" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa-star text-dark">Submit Review</a></li>
+					<li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-star-o">Reviews</a></li>
+					<li role="presentation" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa-star">Submit Review</a></li>
 				</ul>
 				<div class="tab-content">
 				
