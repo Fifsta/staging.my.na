@@ -139,10 +139,9 @@ $this->load->view('inc/header');
 		          <h2 data-icon="fa-briefcase"><?php echo $name; ?></h2>
 		          <ul class="options">    
 		            <li><a href="#Enquiry-Form" data-icon="fa-envelope text-dark">Contact Agency</a></li>
+		            <li><a href="#Gallery" data-icon="fa-file-image-o text-dark">Gallery</a></li>
 		            <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
-		            <!--<li><a href="#" data-icon="fa-facebook text-dark"></a></li>
-		            <li><a href="#" data-icon="fa-twitter text-dark"></a></li>
-		            <li><a href="#" data-icon="fa-bookmark text-dark"></a></li>-->
+		            <li><a href="#QR" data-icon="fa-qrcode text-dark">QR Code</a></li>
 		          </ul>
 		        </div>
 
