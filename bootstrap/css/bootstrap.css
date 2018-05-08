@@ -3526,6 +3526,7 @@ tbody.collapse.show {
 
 .nav-link:focus, .nav-link:hover {
   text-decoration: none;
+  color:#555;
 }
 
 .nav-link.disabled {
@@ -3534,17 +3535,20 @@ tbody.collapse.show {
 
 .nav-tabs {
   border-bottom: 1px solid #ddd;
+
 }
 
 .nav-tabs .nav-item {
   margin-bottom: -1px;
+  margin-right:1px;
 }
 
 .nav-tabs .nav-link {
+
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
   background-color: #000;
-  color: #fff;
+  color: #fff;  
 }
 
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
@@ -3559,9 +3563,9 @@ tbody.collapse.show {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #495057;
-  background-color: #fff;
-  border-color: #ddd #ddd #fff;
+  color: #fff;
+  background-color: #fc9700;
+
 }
 
 .nav-tabs .dropdown-menu {
