@@ -462,7 +462,8 @@ $this->load->view('inc/header');
 	function load_vt() {
 
 		var x = $('#virtual_tour');
-		x.addClass('loading_img');	
+		var loader = '<img src="<?php echo base_url('/'); ?>images/load.gif"/>';
+		x.html(loader);
 		$.ajax({
 			type: 'get',
 			url: '<?php echo site_url('/').'business/load_virtual_tour/'.$bus_id.'/';?>' ,
