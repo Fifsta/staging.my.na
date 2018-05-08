@@ -1681,13 +1681,13 @@ function show_all_gallery_images($bus_id)
 							$format = '.jpg';
 							$img_str = 'assets/business/gallery/'.$img_file . $format;
 							$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
-							$img_exp =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str, $crop = '');
+							$img_exp =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'auto','auto',$crop = '');
 							
 						}else{
 							
 							$img_str = 'assets/business/gallery/'.$img_file;
 							$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
-							$img_exp =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str, $crop = '');
+							$img_exp =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'auto','auto',$crop = '');
 							
 						}
 						
