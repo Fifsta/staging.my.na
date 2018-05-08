@@ -1701,7 +1701,7 @@ function show_all_gallery_images($bus_id)
 //							</li>';
 							
 							//NO TIMBTHUMB
-							echo '<div><img src="'.$img_url.'" style="width:100%;" class="img-thumbnail" /></div>';
+							echo '<div><a class="grouped_elements" href="'.$img_str.'"><img src="'.$img_url.'" style="width:100%;" class="img-thumbnail" /></a></div>';
 							$x++;
 						
 					 
