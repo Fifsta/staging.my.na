@@ -3,7 +3,7 @@
 //My.Na Business map
 //+++++++++++++++++
 //Roland Ihms
-//Get Map Details
+//Get Map Details 
 
 $map_details = $this->business_model->get_map_details($ID);
 

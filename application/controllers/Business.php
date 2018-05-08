@@ -153,6 +153,16 @@ class Business extends CI_Controller {
 	}
 
 
+	public function load_business_map($bid) {
+
+		$data['ID'] = $bid;
+
+		$this->load->view('business/inc/business_map_inc.php', $data);
+
+	}
+
+
+
 	//+++++++++++++++++++++++++++
 	//BUSINESS PROFILE PAGE 2
 	//++++++++++++++++++++++++++
