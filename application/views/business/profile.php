@@ -387,7 +387,16 @@ $this->load->view('inc/header');
 
 
 		$('#b-about img').addClass('img-fluid');
-		$("a.grouped_elements").fancybox();
+
+		$("a.grouped_elements").fancybox({
+			'transitionIn'	:	'elastic',
+			'transitionOut'	:	'elastic',
+			'speedIn'		:	600, 
+			'speedOut'		:	200, 
+			'overlayShow'	:	false,
+			'cyclic'		:   true
+		});
+
 
 		
 		$('.redactor').redactor({ 	
