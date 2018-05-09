@@ -65,7 +65,7 @@ function initialise_map() {
 
 </script>
 
-<div style="display:block;position:relative;background:url(<?php echo base_url('/');?>images/load.gif) no-repeat center center;height:350px;width:100%;max-width:none">
+<div style="display:block;position:relative;background:url(<?php echo base_url('/');?>images/load.gif) no-repeat center center;height:100%;width:100%;max-width:none">
     <div id="map" style="display:block;position:relative;width:100%;height:100%;max-width:none"></div>
 </div>
 
