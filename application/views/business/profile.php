@@ -211,7 +211,7 @@ $this->load->view('inc/header');
 
 				<!--tabs-->
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="nav-item"><a href="#About" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info">About</a></li>
+					<li role="presentation" class="nav-item"><a href="#About" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info"><span class="hidden-xs-down">About</span></a></li>
 					<li role="presentation" class="nav-item"><a href="#Enquiry-Form" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o">Enquiry Form</a></li>
 					<!--<li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate text-dark">Deals</a></li>-->
 					<li role="presentation" class="nav-item"><a href="#Gallery" onClick="load_gallery();" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o">Gallery</a></li>
