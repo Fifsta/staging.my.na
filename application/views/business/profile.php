@@ -398,14 +398,14 @@ $this->load->view('inc/header');
 			'showNavArrows'	:   true
 		});
 
-
 		
 		$('.redactor').redactor({ 	
 				
-				buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 
-				'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
-				 'alignment', '|', 'horizontalrule']
-			});
+			buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 
+			'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
+			'alignment', '|', 'horizontalrule']
+
+		});
 		
 		
 		$('[rel=tooltip]').tooltip();
@@ -499,7 +499,6 @@ $this->load->view('inc/header');
 			success: function (data) {
 				
 				 x.html(data);
-
 				 initialise_owl();
 				
 			}

@@ -462,7 +462,7 @@ Light Orange ff9900
 	.weather table{margin-top:10px; width:100%; font-size:90%}
 	.weather table .high-low{display:inline-block; text-align:left;}
 
-.sidenav{background:#fff; border-radius:4px; padding:10px; margin-bottom:40px; }
+.sidenav{background:#fff; border-radius:4px; padding:10px; }
 	.profile{overflow:auto}
 	.profile .pic{width:40px; float:left; overflow:hidden; border-radius:4px; margin:5px 0}
 	.profile .name{width:40%; line-height:20px; float:left; padding:10px 5px; font-size:120%; vertical-align:top; margin:5px 0; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
