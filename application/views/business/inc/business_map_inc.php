@@ -52,7 +52,7 @@ function initialise_map() {
 		  }
 		  var map = new google.maps.Map(document.getElementById("map"), myOptions);
 			
-		  var iconBase = '<?php ech base_url('/'); ?>images/';
+		  var iconBase = '<?php echo base_url('/'); ?>images/';
 
 		  var marker = new google.maps.Marker({
 				position: myLatlng,
