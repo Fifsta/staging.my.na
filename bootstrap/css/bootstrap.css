@@ -5888,7 +5888,7 @@ a.bg-dark:focus, a.bg-dark:hover {
   display: inline-flex !important;
 }
 
-@media (min-width: 576px) {
+@media (max-width: 576px) {
   .d-sm-none {
     display: none !important;
   }
