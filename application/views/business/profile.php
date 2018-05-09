@@ -388,7 +388,7 @@ $this->load->view('inc/header');
 
 		$('#b-about img').addClass('img-fluid');
 
-		$("a.grouped_elements").fancybox({
+		$("a.fancy-images").fancybox({
 			'transitionIn'	:	'elastic',
 			'transitionOut'	:	'elastic',
 			'speedIn'		:	600, 
