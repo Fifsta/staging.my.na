@@ -496,7 +496,7 @@ Light Orange ff9900
 .content .left > section{ margin-bottom:30px}
 .content .left > section > .row:nth-child(2){ margin-top:15px;}
 .heading{height:40px; background:#fff; border-radius:0 4px 4px 0; }
-	.heading h2{line-height:20px; padding:10px 20px; margin:-10px 10px 0 0; float:left; background:url(../images/grad-black.jpg) repeat-x transparent; background-size:100% 100%; color:#fff; border-radius:4px 4px 0 0; font-size:140%; box-shadow:0 5px 5px rgba(0,0,0,0.2);  max-width: 50%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+	.heading h2{line-height:20px; padding:10px 20px; margin:-10px 10px 0 0; float:left; background:url(../images/grad-black.jpg) repeat-x transparent; background-size:100% 100%; color:#fff; border-radius:4px 4px 0 0; font-size:140%; box-shadow:0 5px 5px rgba(0,0,0,0.2); text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
 	.heading h2 a{text-decoration:none; color:#fff}
 	.heading h2 a:hover strong{color:#fff}
 	.heading h2 strong{color:#ff9900}
