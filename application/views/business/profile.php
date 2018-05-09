@@ -212,13 +212,13 @@ $this->load->view('inc/header');
 				<!--tabs-->
 				<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="nav-item"><a href="#About" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info"><span class="d-sm-none">About</span></a></li>
-					<li role="presentation" class="nav-item"><a href="#Enquiry-Form" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o">Enquiry Form</a></li>
+					<li role="presentation" class="nav-item"><a href="#Enquiry-Form" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o"><span class="d-sm-none">Enquiry Form</span></a></li>
 					<!--<li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate text-dark">Deals</a></li>-->
-					<li role="presentation" class="nav-item"><a href="#Gallery" onClick="load_gallery();" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o">Gallery</a></li>
+					<li role="presentation" class="nav-item"><a href="#Gallery" onClick="load_gallery();" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o"><span class="d-sm-none">Gallery</span></a></li>
 					<?php if($vt != ''){ ?>
-					<li role="presentation" class="nav-item"><a href="#VT" onClick="load_vt();" class="nav-link" aria-controls="VT" role="tab" data-toggle="tab" data-icon="fa-refresh">Virtual Tour</a></li>
+					<li role="presentation" class="nav-item"><a href="#VT" onClick="load_vt();" class="nav-link" aria-controls="VT" role="tab" data-toggle="tab" data-icon="fa-refresh"><span class="d-sm-none">Virtual Tour</span></a></li>
 					<?php } ?>
-					<li role="presentation" class="nav-item"><a href="#QR" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-qrcode">QR Code</a></li>
+					<li role="presentation" class="nav-item"><a href="#QR" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-qrcode"><span class="d-sm-none">QR Code</span></a></li>
 				</ul>
 				<div class="tab-content">
 					<section role="tabpanel" class="tab-pane active" id="About">
@@ -260,8 +260,8 @@ $this->load->view('inc/header');
 				
 				<!--tabs-->
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-star-o">Reviews</a></li>
-					<li role="presentation" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa-star">Submit Review</a></li>
+					<li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-star-o"><span class="d-sm-none">Reviews</span></a></li>
+					<li role="presentation" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa-star"><span class="d-sm-none">Submit Review</span></a></li>
 				</ul>
 				<div class="tab-content">
 				
