@@ -394,7 +394,8 @@ $this->load->view('inc/header');
 			'speedIn'		:	600, 
 			'speedOut'		:	200, 
 			'overlayShow'	:	false,
-			'cyclic'		:   true
+			'cyclic'		:   true,
+			'showNavArrows'	:   true
 		});
 
 
