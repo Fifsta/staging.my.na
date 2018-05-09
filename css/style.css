@@ -893,7 +893,7 @@ blockquote footer span{font-size:11px; font-weight:normal; color:#999; box-shado
 	.list-map-right{width:0; display:none; overflow:hidden; border:none}
 	.list-map-right.active{width:100%; display:table-cell; }
 	
-	#listing .details .details-left{ padding:0; width:25%}
+	#listing .details .details-left{ padding:0; width:35%}
 	#listing .feat div{ width:100%;}
 	
 	.nav-tabs{ font-size:100%}
