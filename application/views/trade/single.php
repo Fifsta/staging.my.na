@@ -191,7 +191,7 @@
 
         <!--tabs-->
         <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item" role="presentation"><a href="#Contact-Agent" class="nav-link active" aria-controls="Contact-Agent" role="tab" data-toggle="tab" data-icon="fa fa-envelope-o text-dark">Contact Agent</a></li>
+          <li class="nav-item" role="presentation"><a href="#Contact-Agent" class="nav-link active" aria-controls="Contact-Agent" role="tab" data-toggle="tab" data-icon="fa fa-envelope-o">Contact Agent</a></li>
         </ul>
         <div class="tab-content">
           <section role="tabpanel" class="tab-pane active" id="Contact-Agent">
@@ -208,9 +208,9 @@
 
         <!--tabs-->
         <ul class="nav nav-tabs" role="tablist">
-          <li role="reviews" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa fa-star-o text-dark">Reviews</a></li>
-          <li role="submit-review" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa fa-star text-dark">Submit Review</a></li>
-          <li role="question" class="nav-item"><a href="#Questions" class="nav-link" aria-controls="Question" role="tab" data-toggle="tab" data-icon="fa fa-question text-dark">Ask a Question</a></li>
+          <li role="reviews" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa fa-star-o">Reviews</a></li>
+          <li role="submit-review" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa fa-star">Submit Review</a></li>
+          <li role="question" class="nav-item"><a href="#Questions" class="nav-link" aria-controls="Question" role="tab" data-toggle="tab" data-icon="fa fa-question">Ask a Question</a></li>
         </ul>
         <div class="tab-content">
         
