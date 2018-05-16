@@ -7,7 +7,8 @@
     text-overflow: ellipsis; 
 }
 </style>
-      
+  
+<div class="table-responsive">  
 <table id="product_table" class="table datatable table-striped" id="" width="100%" style="table-layout:fixed;">
   <thead>
     <tr style="font-weight:bold">
@@ -209,6 +210,7 @@
   ?> 
   </tbody>
 </table>
+</div>
 
     <!-- Delete Product -->
     <div class="modal fade" id="modal-product-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
