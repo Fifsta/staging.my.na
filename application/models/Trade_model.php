@@ -1525,9 +1525,7 @@ class Trade_model extends CI_Model
 					if ($row->main_cat_id == 3408 || $row->sub_cat_id == 352 || $row->quantity == 0)
 					{
 
-						$btn = '<div class="pull-right" style="margin-top:10px;">
-									  <a href="#Contact-Agent" rel="tooltip" title="Please enquire about the product" class="btn btn-dark btn-lg" >' . $btn_txt . '</a>
-								</div>';
+						$btn = '';
 
 					}
 					else
