@@ -11,7 +11,7 @@
             </div>
 
             <div class="form-group">   
-                 <input type="password block" class="form-control" name="pass" id="pass_lgn" placeholder="Password">
+                 <input type="password" class="form-control" name="pass" id="pass_lgn" placeholder="Password">
             </div>
 
             <label class="checkbox"> <input type="checkbox" value="remember-me"> Remember me </label>
