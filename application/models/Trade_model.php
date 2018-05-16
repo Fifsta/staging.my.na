@@ -59,6 +59,8 @@ class Trade_model extends CI_Model
 		$data['PRODUCT_MAP_LATITUDE'] = $lat;
 		$data['PRODUCT_MAP_LONGITUDE'] = $long;
 
+		return $data;
+
 	}	
 
 
