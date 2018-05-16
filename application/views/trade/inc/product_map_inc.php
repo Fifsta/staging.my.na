@@ -82,5 +82,6 @@ function initialise_map() {
   $zoom = '7';
   echo '<script type="text/javascript">$("#map_info").slideDown();</script>';*/
 }
- ?>
+
+?>
     
