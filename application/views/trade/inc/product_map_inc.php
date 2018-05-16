@@ -11,6 +11,8 @@ $map_details = $this->trade_model->get_map_details($ID);
 if(count($map_details) > 0){
   
 
+    echo $lat.'-'.$long;
+
     
     $lat = $map_details['PRODUCT_MAP_LATITUDE'];
     $long = $map_details['PRODUCT_MAP_LONGITUDE'];
