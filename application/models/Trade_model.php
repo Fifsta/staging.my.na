@@ -18,6 +18,50 @@ class Trade_model extends CI_Model
 	}
 
 
+
+	//Get MAP Details
+	function get_map_details($ID){
+	  	
+		$query = $this->db->where('product_id', $ID);
+		$query = $this->db->get('product_extras');
+
+		$row = $query->row();
+
+		$arr = (array) json_decode($row->extras);
+
+		$lat = '';
+		$long = '';
+
+		if (array_key_exists("toggle_map", $arr))
+		{
+
+			//GET LAT AND LONG
+			foreach ($arr as $key => $value)
+			{
+
+				if ($key == 'prop_lat')
+				{
+
+					$lat = $value;
+
+				}
+				if ($key == 'prop_lon')
+				{
+
+					$long = $value;
+
+				}
+
+			}
+		
+		} 
+
+		$data['PRODUCT_MAP_LATITUDE'] = $lat;
+		$data['PRODUCT_MAP_LONGITUDE'] = $long;
+
+	}	
+
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//+GET PRODUCT RIBBON
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

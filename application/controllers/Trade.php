@@ -17,6 +17,16 @@ class Trade extends CI_Controller {
 		$this->load->model('my_na_model'); 
 
     }
+
+
+	public function load_product_map($pid) {
+
+		$data['ID'] = $pid;
+
+		$this->load->view('trade/inc/product_map_inc.php', $data);
+
+	}
+
 	
 
 	//+++++++++++++++++++++++++++

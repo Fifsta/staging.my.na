@@ -178,11 +178,12 @@
           </div>
           
           <div class="list-map-right" id="map_container">
-            <?php echo $this->trade_model->get_product_map($product_id, $extras); ?>
+            <?php //echo $this->trade_model->get_product_map($product_id, $extras); ?>
+            <iframe src="<?php echo site_url('/'); ?>trade/load_product_map/<?php echo $product_id; ?>" frameborder="0" allowtransparency="true"></iframe>
           </div>
         </div>
         <!--banner-->
-
+ 
         <!--details-->
             <?php $this->trade_model->show_product($product_id,$img_url); ?>
         <!--details-->
