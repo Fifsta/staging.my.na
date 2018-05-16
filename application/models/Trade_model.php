@@ -31,6 +31,7 @@ class Trade_model extends CI_Model
 
 		$lat = '';
 		$long = '';
+		$toggle = 'N';
 
 		if (array_key_exists("toggle_map", $arr))
 		{
