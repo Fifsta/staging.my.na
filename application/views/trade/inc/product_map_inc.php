@@ -7,7 +7,7 @@
 
 $map_details = $this->trade_model->get_map_details($ID);
 
-if($map_details['PRODUCT_MAP_TOGGLE'] == 'N'){
+if($map_details['PRODUCT_MAP_TOGGLE'] == 'Y'){
   
     
     $lat = $map_details['PRODUCT_MAP_LATITUDE'];
