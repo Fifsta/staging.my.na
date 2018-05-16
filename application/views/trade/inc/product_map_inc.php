@@ -7,7 +7,7 @@
 
 $map_details = $this->trade_model->get_map_details($ID);
 
-echo $map_details['PRODUCT_MAP_LATITUDE'];
+//echo $map_details['PRODUCT_MAP_LATITUDE'];
 
 if(count($map_details) > 0){
   
