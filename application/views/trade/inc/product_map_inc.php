@@ -21,7 +21,7 @@ if(count($map_details) > 0){
     
     $lat = $map_details['PRODUCT_MAP_LATITUDE'];
     $long = $map_details['PRODUCT_MAP_LONGITUDE'];
-    $zoom = '4';
+    $zoom = '12';
     
   } 
 
