@@ -1165,7 +1165,7 @@ class Trade_model extends CI_Model
 				$btn_txt = 'Buy Now';
 				if ($row->main_cat_id == 3408)
 				{
-					$btn_txt = 'Enquire Now';
+					$btn_txt = '';
 				}
 
 				//Check Price
@@ -1503,7 +1503,7 @@ class Trade_model extends CI_Model
 				if ($row->main_cat_id == 3408 || $row->sub_cat_id == 352 || $row->quantity == 0)
 				{
 
-					$btn_txt = 'Enquire Now';
+					$btn_txt = '';
 
 				}
 				//SEE IF OWN PRODUCT
@@ -6629,7 +6629,7 @@ class Trade_model extends CI_Model
 				$btn_txt = 'Buy Now';
 				if ($row->main_cat_id == 3408)
 				{
-					$btn_txt = 'Enquire Now';
+					$btn_txt = '';
 				}
 
 				//Check Price
