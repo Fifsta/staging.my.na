@@ -227,11 +227,11 @@ $this->load->view('inc/header', $header);
             <!--tabs business details-->
             <h1 style="font-size:16px; border-bottom:1px solid #999; margin-bottom:30px"><strong>MANAGE DETAILS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="nav-item"><a href="#Details" class="nav-link active" aria-controls="Details" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o text-dark">Details</a></li>
-              <li role="presentation" class="nav-item"><a href="#Description" class="nav-link" aria-controls="Description" role="tab" data-toggle="tab" data-icon="fa-file-text-o text-dark">Description</a></li>
-              <li role="presentation" class="nav-item"><a href="#Gallery" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o text-dark">Gallery</a></li>
-              <li role="presentation" class="nav-item"><a href="#Categories" class="nav-link" aria-controls="Categories" role="tab" data-toggle="tab" data-icon="fa-list text-dark">Categories</a></li>
-              <li role="presentation" class="nav-item"><a href="#Map" onClick="initialise_map()" class="nav-link" aria-controls="Categories" role="tab" data-toggle="tab" data-icon="fa-map-marker text-dark">Map</a></li>
+              <li role="presentation" class="nav-item"><a href="#Details" class="nav-link active" aria-controls="Details" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o"><span class="d-sm-none">Details</span></a></li>
+              <li role="presentation" class="nav-item"><a href="#Description" class="nav-link" aria-controls="Description" role="tab" data-toggle="tab" data-icon="fa-file-text-o"><span class="d-sm-none">Description</span></a></li>
+              <li role="presentation" class="nav-item"><a href="#Gallery" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o"><span class="d-sm-none">Gallery</span></a></li>
+              <li role="presentation" class="nav-item"><a href="#Categories" class="nav-link" aria-controls="Categories" role="tab" data-toggle="tab" data-icon="fa-list"><span class="d-sm-none">Categories</span></a></li>
+              <li role="presentation" class="nav-item"><a href="#Map" onClick="initialise_map()" class="nav-link" aria-controls="Categories" role="tab" data-toggle="tab" data-icon="fa-map-marker"><span class="d-sm-none">Map</span></a></li>
             </ul>
 
             <div class="tab-content">
@@ -278,9 +278,9 @@ $this->load->view('inc/header', $header);
             <!--tabs review/rating details-->
             <h1 style="font-size:16px; border-bottom:1px solid #999; margin-bottom:30px"><strong>MANAGE RATINGS & REVIEWS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="nav-item"><a href="#Rating" class="nav-link active" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o text-dark">Rating Widget</a></li>
-              <li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-file-text-o text-dark">Reviews</a></li>
-              <li role="presentation" class="nav-item"><a href="#QR" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-file-text-o text-dark">QR Code</a></li>
+              <li role="presentation" class="nav-item"><a href="#Rating" class="nav-link active" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o"><span class="d-sm-none">Rating Widget</span></a></li>
+              <li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-file-text-o"><span class="d-sm-none">Reviews</span></a></li>
+              <li role="presentation" class="nav-item"><a href="#QR" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-file-text-o"><span class="d-sm-none">QR Code</span></a></li>
             </ul>
 
             <div class="tab-content">
@@ -310,9 +310,9 @@ $this->load->view('inc/header', $header);
             <!--tabs products-->
             <h1 style="font-size:16px; border-bottom:1px solid #999; margin-bottom:30px"><strong>MANAGE BUSINESS PRODUCTS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="nav-item"><a href="#Latest" data-type="live" data-bus="<?php echo $bus_id; ?>" class="nav-link active pbtn" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-clock-o text-dark">Latest Items</a></li>
-              <li role="presentation" class="nav-item"><a href="#Sold" data-type="sold" data-bus="<?php echo $bus_id; ?>" class="nav-link pbtn" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-exclamation-circle text-dark">Sold Items</a></li>
-              <li role="presentation" class="nav-item"><a href="#Deals" data-type="deals" data-bus="<?php echo $bus_id; ?>" class="nav-link pbtn" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-tags text-dark">Deals</a></li>
+              <li role="presentation" class="nav-item"><a href="#Latest" data-type="live" data-bus="<?php echo $bus_id; ?>" class="nav-link active pbtn" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-clock-o"><span class="d-sm-none">Latest Items</span></a></li>
+              <li role="presentation" class="nav-item"><a href="#Sold" data-type="sold" data-bus="<?php echo $bus_id; ?>" class="nav-link pbtn" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-exclamation-circle"><span class="d-sm-none">Sold Items</span></a></li>
+              <li role="presentation" class="nav-item"><a href="#Deals" data-type="deals" data-bus="<?php echo $bus_id; ?>" class="nav-link pbtn" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-tags"><span class="d-sm-none">Deals</span></a></li>
             </ul>
 
             <div class="tab-content">
@@ -341,7 +341,7 @@ $this->load->view('inc/header', $header);
             <!--tabs analytics -->
             <h1 style="font-size:16px; border-bottom:1px solid #999; margin-bottom:30px"><strong>MANAGE ANALYTICS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="nav-item"><a href="#Analytics" class="nav-link active" aria-controls="Analytics" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o text-dark">Analytics</a></li>
+              <li role="presentation" class="nav-item"><a href="#Analytics" class="nav-link active" aria-controls="Analytics" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o">Analytics</a></li>
 
             </ul>
 
@@ -364,7 +364,7 @@ $this->load->view('inc/header', $header);
             <!--tabs users-->
             <h1 style="font-size:16px; border-bottom:1px solid #999; margin-bottom:30px"><strong>MANAGE BUSINESS USERS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="nav-item"><a href="#Users" class="nav-link active" aria-controls="Users" role="tab" data-toggle="tab" data-icon="fa-users text-dark">Users</a></li>
+              <li role="presentation" class="nav-item"><a href="#Users" class="nav-link active" aria-controls="Users" role="tab" data-toggle="tab" data-icon="fa-users">Users</a></li>
 
             </ul>
 
@@ -379,9 +379,8 @@ $this->load->view('inc/header', $header);
               <div class="clear:both"> </div>
 
             </div>
-            <!--tabs users-->                        
+            <!--tabs users-->
 
-            
           </section> 
           <div class="spacer"></div>         
 
@@ -403,7 +402,7 @@ $this->load->view('inc/header', $header);
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js"></script>
 <script src="<?php echo base_url('/');?>js/custom/fb.js"></script>
 <script src="<?php echo base_url('/');?>js/custom/members_home.js"></script>
- <script src="<?php echo base_url('/');?>js/jquery.form.min.js"></script>
+<script src="<?php echo base_url('/');?>js/jquery.form.min.js"></script>
 
 <script data-cfasync="false" type="text/javascript">
 
