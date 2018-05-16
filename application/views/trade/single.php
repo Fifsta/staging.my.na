@@ -161,9 +161,9 @@
           <ul class="options">    
             <li><a href="#Contact-Agent" data-icon="fa-envelope text-dark">Contact Agent</a></li>
             <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
-            <li><a href="#" data-icon="fa-facebook text-dark"></a></li>
+            <!--<li><a href="#" data-icon="fa-facebook text-dark"></a></li>
             <li><a href="#" data-icon="fa-twitter text-dark"></a></li>
-            <li><a href="#" data-icon="fa-bookmark text-dark"></a></li>
+            <li><a href="#" data-icon="fa-bookmark text-dark"></a></li>-->
           </ul>
         </div>
 
@@ -209,9 +209,9 @@
 
         <!--tabs-->
         <ul class="nav nav-tabs" role="tablist">
-          <li role="reviews" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa fa-star-o">Reviews</a></li>
-          <li role="submit-review" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa fa-star">Submit Review</a></li>
-          <li role="question" class="nav-item"><a href="#Questions" class="nav-link" aria-controls="Question" role="tab" data-toggle="tab" data-icon="fa fa-question">Ask a Question</a></li>
+          <li role="reviews" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa fa-star-o"><span class="d-sm-none">Reviews</span></a></li>
+          <li role="submit-review" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa fa-star"><span class="d-sm-none">Submit Review</span></a></li>
+          <li role="question" class="nav-item"><a href="#Questions" class="nav-link" aria-controls="Question" role="tab" data-toggle="tab" data-icon="fa fa-question"><span class="d-sm-none">Ask a Question</span></a></li>
         </ul>
         <div class="tab-content">
         
