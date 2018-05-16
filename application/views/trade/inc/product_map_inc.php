@@ -7,6 +7,8 @@
 
 $map_details = $this->trade_model->get_map_details($ID);
 
+echo $map_details['PRODUCT_MAP_TOGGLE'];
+
 if($map_details['PRODUCT_MAP_TOGGLE'] == 'Y'){
   
     
