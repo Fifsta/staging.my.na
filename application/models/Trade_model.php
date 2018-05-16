@@ -51,6 +51,13 @@ class Trade_model extends CI_Model
 					$long = $value;
 
 				}
+				if ($key == 'toggle_map')
+				{
+
+					$toggle = $value;
+
+				}
+
 
 			}
 		
@@ -58,6 +65,7 @@ class Trade_model extends CI_Model
 
 		$data['PRODUCT_MAP_LATITUDE'] = $lat;
 		$data['PRODUCT_MAP_LONGITUDE'] = $long;
+		$data['PRODUCT_MAP_TOGGLE'] = $toggle;
 
 		return $data;
 
