@@ -15,7 +15,7 @@ if(count($map_details) > 0){
     
     $lat = '-22.583741';
     $long = '17.093782';
-    $zoom = '7'; 
+    $zoom = '10'; 
     echo '<script type="text/javascript">$("#map_info").slideDown();</script>';
     
   }else{
