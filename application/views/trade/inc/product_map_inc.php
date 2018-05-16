@@ -7,18 +7,24 @@
 
 $map_details = $this->trade_model->get_map_details($ID);
 
+echo $map_details['PRODUCT_MAP_LATITUDE'];
 
 if(count($map_details) > 0){
   
-
-    echo $lat.'-'.$long;
-
+  if($map_details['PRODUCT_MAP_LATITUDE'] == ''){
+    
+    $lat = '-22.583741';
+    $long = '17.093782';
+    $zoom = '7'; 
+    echo '<script type="text/javascript">$("#map_info").slideDown();</script>';
+    
+  }else{
     
     $lat = $map_details['PRODUCT_MAP_LATITUDE'];
     $long = $map_details['PRODUCT_MAP_LONGITUDE'];
-    $zoom = '12';
+    $zoom = '7';
     
-  
+  } 
 
 ?>
 
