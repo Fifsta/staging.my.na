@@ -35,11 +35,9 @@
                 </form>
 				
 				<div class="history">Search history: 
-                    <a href="#">cars</a>, 
-                    <a href="#">properties</a>, 
-                    <a href="#">auctions</a>, 
-                    <a href="#">businesses</a>, 
-                    <a href="#">news</a>
+                    <a href="<?php echo site_url('/'); ?>buy/car-bikes-and-boats">cars</a>, 
+                    <a href="<?php echo site_url('/'); ?>buy/property">properties</a>, 
+                    <a href="<?php echo site_url('/'); ?>a/show/all/all/all/none/">businesses</a>, 
                 </div>
 			</div>
 			<div class="col-sm-2 text-right">
