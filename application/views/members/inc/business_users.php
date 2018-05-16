@@ -1,4 +1,5 @@
-<table cellpadding="0" cellspacing="0" style="font-size:12px" border="0" class="table table-striped" id="user_tbl">
+<div class="table-responsive">
+<table cellpadding="0" cellspacing="0" style="font-size:12px" border="0" class="table table-striped " id="user_tbl">
 	<thead style="border-top:none">
 		<tr style="font-weight:bold;border-top:none">
 			<th></th>
@@ -12,6 +13,7 @@
 		<?php echo $this->members_model->get_business_users($bus_id); ?>
 	</tbody>
 </table>
+</div>
 
 <!-- Delete User -->
 <div class="modal fade" id="modal-user-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
