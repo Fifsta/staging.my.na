@@ -117,7 +117,7 @@
                     '<p class="bold text-center"><i class="icon-search"></i> More Results</p>',
                     '</a>'
                 ].join('\n'),
-                suggestion: Handlebars.compile('<a href="{{link1}}"><p><img class="img-polaroid" src="{{image}}" /><span class="bold">{{value}}</span><span class="muted hidden-phone ">{{body}}</span></p>{{link2}}</a>')
+                suggestion: Handlebars.compile('<a href="{{link1}}"><p><span class="bold">{{value}}</span><span class="muted hidden-phone ">{{body}}</span></p>{{link2}}</a>')
             }
         });
 
