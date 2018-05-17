@@ -1683,6 +1683,15 @@ class My_na_model extends CI_Model{
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 	function load_typehead($type, $cat){
 
+
+        $this->load->model('image_model'); 
+        $this->load->library('thumborp');
+
+        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+        $width = 20;
+        $height = 20;
+
+
         $str = array();
         if($type == 'location'){
 
@@ -1694,13 +1703,17 @@ class My_na_model extends CI_Model{
 
                 foreach($test->result() as $row){
 
+
+                    $img_str = 'assets/images/map_marker.png';
+                    $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
                     $name =  $row->MAP_LOCATION;
                     $array = explode(" ",$name);
                     $temp = implode('","' , $array);
                     $t = array(
 
                         "year" => $x,
-                        "image" => base_url('/').'img/timbthumb.php?src='.base_url('/').'img/markers/map_marker.png&w=20&h=20',
+                        "image" => $img_url,
                         "type" => "City",
                         "body" => $name,
                         "link1" => "javascript:void(0)",
@@ -1737,17 +1750,21 @@ class My_na_model extends CI_Model{
                         if(strpos($img,'.') == 0){
 
                             $format = '.jpg';
-                            $img_str = base_url('/').'img/timbthumb.php?w=20&h=20&src='.base_url('/').'assets/business/photos/'.$img . $format;
+                            $img_str = 'assets/business/photos/'.$img . $format;
+                            $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
 
                         }else{
 
-                            $img_str =  base_url('/').'img/timbthumb.php?w=20&h=20&src='.base_url('/').'assets/business/photos/'.$img;
+                            $img_str = 'assets/business/photos/'.$img;
+                            $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
                         }
 
                     }else{
 
-                        $img_str = base_url('/').'img/timbthumb.php?w=20&h=20&src='.base_url('/').'img/bus_blank.png';
+                        $img_str = 'assets/business/photos/logo-placeholder.jpg';
+                        $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
                     }
 
@@ -1755,7 +1772,7 @@ class My_na_model extends CI_Model{
                     $t = array(
 
                         "year" => $x2,
-                        "image" => $img_str,
+                        "image" => $img_url,
                         "type" => "Business",
                         "body" => $name2,
                         "link1" => "javascript:go_url('".$link."')",
@@ -1780,13 +1797,18 @@ class My_na_model extends CI_Model{
 
                 foreach($test2->result() as $row2){
 
+
+                    $img_str = 'assets/images/map_marker.png';
+                    $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
+
                     $name2 =  trim(preg_replace("/[^a-z0-9.]+/i", " ", $row2->CATEGORY_NAME));
                     $array2 = explode(" ",$name2);
                     $temp2 = implode('","' , $array2);
                     $t = array(
 
                         "year" => $x2,
-                        "image" => base_url('/').'img/timbthumb.php?src='.base_url('/').'img/markers/map_marker.png&w=20&h=20',
+                        "image" => $img_url,
                         "type" => "Category",
                         "body" => $name2,
                         "link1" => "javascript:go_url('".site_url('/').$row2->link."')",
@@ -1811,6 +1833,9 @@ class My_na_model extends CI_Model{
 
                 foreach($test2->result() as $row2){
 
+                    $img_str = 'assets/images/map_marker.png';
+                    $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
                     $name2 =  trim(preg_replace("/[^a-z0-9.]+/i", " ", $row2->title));
                     $array2 = explode(" ",$name2);
                     $temp2 = implode('","' , $array2);
@@ -1818,7 +1843,7 @@ class My_na_model extends CI_Model{
                     $t = array(
 
                         "year" => $x,
-                        "image" => base_url('/').'img/timbthumb.php?src='.base_url('/').'img/markers/map_marker.png&w=20&h=20',
+                        "image" => $img_url,
                         "type" => "Business Location",
                         "body" => $name2,
                         "link1" => "javascript:void(0)",

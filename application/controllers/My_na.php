@@ -573,7 +573,7 @@ class My_na extends CI_Controller {
 	}
 
 	//++++++++++++++++++++++++++++++
-	//Instant Search 
+	//Instant Search  
 	//++++++++++++++++++++++++++++++
 	public function ajax_search_json()
 	{
