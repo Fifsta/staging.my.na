@@ -1529,12 +1529,6 @@ class My_na_model extends CI_Model{
 	//++++++++++++++++++++++++++++++
 	public function instant_search_json()
 	{
-
-
-        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-        $width = 20;
-        $height = 20;
-
 		$out = array();
         if($str = $this->input->get('query')){
 
@@ -1625,10 +1619,6 @@ class My_na_model extends CI_Model{
 
                             foreach ($query->result() as $row) {
 
-                                $img_str = 'assets/business/photos/'.$img . $format;
-                                $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
-
-
                                 $name = $row->title;
                                 $body = $this->shorten_string(strip_tags(str_replace($name, " ", $row->body)), 7);
                                 $array = explode(" ", $name . " " . $body);
@@ -1637,7 +1627,7 @@ class My_na_model extends CI_Model{
                                 $t = array(
 
                                     "year" => $x,
-                                    "image" => '',
+                                    "image" => base_url('/') . 'img/timbthumb.php?src=' . base_url('/') . $row->img_file . '&w=20&h=20',
                                     "type" => "Category",
                                     "body" => $body,
                                     "link1" => "javascript:go_url('" . site_url('/') . $row->link . "')",
@@ -1723,7 +1713,7 @@ class My_na_model extends CI_Model{
                     $t = array(
 
                         "year" => $x,
-                        "image" => $img_url,
+                        "image" => '',
                         "type" => "City",
                         "body" => $name,
                         "link1" => "javascript:void(0)",
@@ -1782,7 +1772,7 @@ class My_na_model extends CI_Model{
                     $t = array(
 
                         "year" => $x2,
-                        "image" => $img_url,
+                        "image" => '',
                         "type" => "Business",
                         "body" => $name2,
                         "link1" => "javascript:go_url('".$link."')",
@@ -1818,7 +1808,7 @@ class My_na_model extends CI_Model{
                     $t = array(
 
                         "year" => $x2,
-                        "image" => $img_url,
+                        "image" => '',
                         "type" => "Category",
                         "body" => $name2,
                         "link1" => "javascript:go_url('".site_url('/').$row2->link."')",
@@ -1853,7 +1843,7 @@ class My_na_model extends CI_Model{
                     $t = array(
 
                         "year" => $x,
-                        "image" => $img_url,
+                        "image" => '',
                         "type" => "Business Location",
                         "body" => $name2,
                         "link1" => "javascript:void(0)",
@@ -1888,7 +1878,6 @@ class My_na_model extends CI_Model{
         $this->load->library('thumborp');
 
 
-
         $test2 = $this->db->where('client_id', $this->session->userdata('id'));
         $test2 = $this->db->distinct();
         $test2 = $this->db->group_by('search_term');
@@ -1908,7 +1897,7 @@ class My_na_model extends CI_Model{
                 $t = array(
 
                     "year" => $x,
-                    "image" => base_url('/').'images/na-icon-sml.png',
+                    "image" => '',
                     "type" => "Business Location",
                     "body" => $name2,
                     "link1" => "javascript:void(0)",
