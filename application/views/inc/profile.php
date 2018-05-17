@@ -40,23 +40,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 			<li><a href="<?php echo site_url('/'); ?>members/my_messages" data-icon="fa fa-envelope text-dark"><i class="fa fa-envelope text-dark"></i></a><span><?php $this->my_na_model->msg_notifications_count(); ?></span></li>
 			<li><a href="<?php echo site_url('/'); ?>members/logout" data-icon="fa fa-cog text-dark"><i class="fa fa-sign-out text-dark"></i></a></li>
 		</ul>
-		<div class="panel-group" id="profile-accordion" role="tablist" aria-multiselectable="true">
-			<div class="panel panel-default">
-				<div class="panel-heading" role="tab">
-					<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#MyAccount" aria-expanded="false" aria-controls="MyAccount" data-icon="fa-list-alt">My Account</a></h3>
-				</div>
-				<div id="MyAccount" class="panel-collapse collapse <?php echo $my_account; ?>" role="tabpanel" aria-labelledby="MyAccount">
-					<div class="panel-body">
-						<ul>
-							<!--<li><a href="<?php //echo site_url('/');?>members/home/">My Dashboard</a> <span>My account overview</span></li>-->
-							<li><a href="<?php echo site_url('/');?>members/my_profile/">My Profile</a> <span>Change my profile information.</span></li>
-							<li><a href="<?php echo site_url('/');?>members/my_messages/">My Messages</a> <span>All my.na messages</span></li>
-							<li><a href="<?php echo site_url('/');?>members/my_products/">My Products</a> <span>All my private products</span></li>
-						</ul>
-					</div>
-				</div>
-			</div> 
-		</div>	
+
 	</nav>
 	
 	<div class="panel-group" id="profile-accordion" role="tablist" aria-multiselectable="true">

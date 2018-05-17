@@ -78,7 +78,7 @@
 
     function go_search(main_cat_id, sub_cat_id) {
 
-        /*var myna = new Bloodhound({
+        var myna = new Bloodhound({
             //datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
             datumTokenizer: function (d) {
                 return d.tokens;
@@ -119,8 +119,8 @@
                 ].join('\n'),
                 suggestion: Handlebars.compile('<a href="{{link1}}"><p><img class="img-polaroid" src="{{image}}" /><span class="bold">{{value}}</span><span class="muted hidden-phone ">{{body}}</span></p>{{link2}}</a>')
             }
-        });*/
-        //$('.tt-hint').addClass('form-control');
+        });
+
     }
 
     function search_more() {
