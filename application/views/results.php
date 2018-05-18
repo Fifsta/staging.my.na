@@ -77,7 +77,7 @@ $this->load->view('inc/header', $header);
             <div class="heading">
               <h2 data-icon="fa-folder-open-o"><?php echo $heading; ?></h2>
               <p>Want to list your business here? <a href="#">Try it out for free!</a></p>
-                <a class="btn btn-dark pull-right cat-slide" style="margin-top:5px; margin-right:5px;" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" rel="tooltip" title="" data-original-title="Show business categories">
+                <a class="btn btn-dark pull-right cat-slide" style="margin-top:5px; margin-right:5px; margin-bottom: 5px;" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" rel="tooltip" title="" data-original-title="Show business categories">
                   <i class="fa fa-folder"></i>
                 </a>
                 <button class="btn btn-dark pull-right t-map" id="btn_map_view" style="margin-top:5px; margin-right:5px;" rel="tooltip" title="" data-original-title="Show Map View">
