@@ -77,7 +77,7 @@ $this->load->view('inc/header', $header);
             <div class="heading">
               <h2 data-icon="fa-folder-open-o"><?php echo $heading; ?></h2>
               <p>Want to list your business here? <a href="#">Try it out for free!</a></p>
-                <a class="btn btn-dark pull-right" style="margin-top:5px; margin-right:5px;" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" rel="tooltip" title="" data-original-title="Show business categories">
+                <a class="btn btn-dark pull-right cat-slide" style="margin-top:5px; margin-right:5px;" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" rel="tooltip" title="" data-original-title="Show business categories">
                   <i class="fa fa-folder"></i>
                 </a>
                 <button class="btn btn-dark pull-right t-map" id="btn_map_view" style="margin-top:5px; margin-right:5px;" rel="tooltip" title="" data-original-title="Show Map View">
@@ -87,8 +87,8 @@ $this->load->view('inc/header', $header);
 
             <div class="collapse" id="collapseExample">
               <div class="sub well card bg-faded" style="background-color:#f5f5f5;">
-                <div class="row" style="padding:10px">
-                  <?php $this->search_model->bus_categories($query); ?>
+                <div class="row" style="padding:10px" id="cat-box">
+    
                 </div>
               </div> 
             </div>          
@@ -170,6 +170,26 @@ $this->load->view('inc/header', $header);
 var base = '<?php echo site_url('/');?>';
 var base_ = '<?php echo base_url('/');?>';
 
+
+  $(document).on('click', '.cat-slide', function(e) {
+
+    $('.cat-slide').html('<img src="<?php echo base_url('/'); ?>images/load.gif"> Loading...</a>');
+
+      $.ajax({
+          'async': false,
+          'type': "get",
+          'url': "<?php echo site_url('/'); ?>my_na/bus_categories/",
+          'dataType': "json",
+          'success': function (data) {
+
+            $('.cat-slide').hide();
+
+            $('#cat-box').html(data.cats);
+
+          }
+      });
+
+  });
 
 $(function() {
   
