@@ -1351,38 +1351,52 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//SHOW SIDEBAR - LOOP THROUGH CATEGORIES
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
-	function bus_categories($query){
+	function bus_categories($query=''){
 			
-        //Get Main
-        $main = $this->db->query("SELECT i_tourism_category.CATEGORY_ID, COUNT(i_tourism_category.CATEGORY_ID) as num,
-                                a_tourism_category_sub.*,a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME,a_tourism_category.CATEGORY_ICON as CAT_ICON,
-                                group_concat(DISTINCT(sub_table.ID),'_-_',sub_table.CATEGORY_NAME) as cats
-                                 FROM i_tourism_category 
-                                JOIN a_tourism_category_sub ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID 
-                                JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
-                                LEFT JOIN a_tourism_category_sub as sub_table ON sub_table.CATEGORY_TYPE_ID = a_tourism_category.ID  
-                                GROUP BY a_tourism_category_sub.CATEGORY_TYPE_ID ORDER BY num DESC", FALSE);
-        
-            
-        foreach($main->result() as $row){
-        
-            $main_id = $row->CATEGORY_TYPE_ID;
-            $main_name = $row->MAIN_CAT_NAME;
-            $icon = $row->CAT_ICON;
+		$o = '';
 
-            $subs = $this->show_sub_cats($main_id);
-            
-            echo '
-            <div class="col-xs-6 col-sm-6 col-md-4 category">
-                <a href="#" data-icon="'.$icon.' text-dark"></a>
-                <h3>'.$row->MAIN_CAT_NAME.'</h3>
-                <p>'.$subs.'</p>
-            </div>
-            ';
-            
-        }
-	
-			
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+
+		if ( ! $o = $this->cache->get('categories'))
+		{
+
+	        //Get Main
+	        $main = $this->db->query("SELECT i_tourism_category.CATEGORY_ID, COUNT(i_tourism_category.CATEGORY_ID) as num,
+	                                  a_tourism_category_sub.*,a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME,a_tourism_category.CATEGORY_ICON as CAT_ICON,
+	                                  group_concat(DISTINCT(sub_table.ID),'_-_',sub_table.CATEGORY_NAME) as cats
+	                                  FROM i_tourism_category 
+	                                  JOIN a_tourism_category_sub ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID 
+	                                  JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
+	                                  LEFT JOIN a_tourism_category_sub as sub_table ON sub_table.CATEGORY_TYPE_ID = a_tourism_category.ID  
+	                                  GROUP BY a_tourism_category_sub.CATEGORY_TYPE_ID ORDER BY num DESC", FALSE);
+	        
+	            
+	        foreach($main->result() as $row){
+	        
+	            $main_id = $row->CATEGORY_TYPE_ID;
+	            $main_name = $row->MAIN_CAT_NAME;
+	            $icon = $row->CAT_ICON;
+
+	            $subs = $this->show_sub_cats($main_id);
+	            
+	            $o.='
+	            <div class="col-xs-6 col-sm-6 col-md-4 category">
+	                <a href="#" data-icon="'.$icon.' text-dark">
+	                <i class="fa '.$icon.' text-dark"></i>
+	                </a>
+	                <h3>'.$row->MAIN_CAT_NAME.'</h3>
+	                <p>'.$subs.'</p>
+	            </div>
+	            ';
+	            
+	        }
+
+
+	        $this->cache->save('categories', $o, 172800);
+
+    	}
+
+        return $o;
 		
 	}
 

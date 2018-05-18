@@ -66,7 +66,29 @@
 
 <script type="text/javascript">
 
-	$(document).ready(function(){	
+
+	$(document).on('click', '.cat-slide', function(e) {
+
+		$('#cat-box').html('Loading...');
+
+	    $.ajax({
+	        'async': false,
+	        'type': "get",
+	        'url': "<?php echo site_url('/'); ?>my_na/bus_categories/",
+	        'dataType': "json",
+	        'success': function (data) {
+
+	        	$('.cat-slide').hide();
+
+	        	$('#cat-box').html(data.cats);
+
+	        }
+	    });
+
+	});
+
+
+	$(document).ready(function(){
 
 		// INITIALIZE OWL
 		$('#owl-banners').owlCarousel({

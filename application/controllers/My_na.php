@@ -33,6 +33,23 @@ class My_na extends CI_Controller {
 	}
 
 
+
+	public function bus_categories() {
+
+
+		$this->load->model('search_model');
+
+		$o = $this->search_model->bus_categories(); 
+
+		$this->output
+		        ->set_content_type('application/json')
+		        ->set_output(json_encode(array('cats' => $o)));		
+
+
+	}
+
+
+
 	public function home2()
 	{
 
