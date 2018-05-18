@@ -1,10 +1,10 @@
-<!--<div id="pre_load">
+<div id="pre_load">
 	<div>
 		<div class="dot"></div>
 		<div class="dot"></div>
 		<div class="dot"></div>
 	</div>
-</div>--> 
+</div> 
 <header id="header" class="grad-orange">
 	<div class="container-fluid">
 		<div class="row">
