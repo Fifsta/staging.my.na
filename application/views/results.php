@@ -133,7 +133,7 @@ $this->load->view('inc/header', $header);
       <div class="heading">
         <h2 data-icon="fa-map-marker"> <a href="#">Namibia <strong>Map</strong></a></h2>
         <p>To benefit from this, make sure that you have location services enabled for this website.</p>
-        <button id="btn_list_view2" style="margin-top:5px; margin-right:5px;" class="btn btn-dark t-list pull-right"><i class="fa fa-list"></i> List View</button>
+        <button id="btn_list_view2" style="margin-top:5px; margin-right:5px; margin-bottom: 5px;" class="btn btn-dark t-list pull-right"><i class="fa fa-list"></i> List View</button>
       </div>
       <br>
 
