@@ -1,3 +1,22 @@
+//RESOLUTION
+function windowResize(){
+	windowWidth = $(window).width();
+	windowHeight = $(window).height();
+	$('#resolution').text(windowWidth+' x '+windowHeight);
+};
+$(window).resize(windowResize);
+
+//PRELOAD
+window.onload = showBody;
+function showBody(){
+	windowResize();
+	swipeHeight();
+	$('#pre_load').fadeOut();
+}
+
+
+
+
 //Tooltip activate
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
