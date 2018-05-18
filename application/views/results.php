@@ -173,7 +173,6 @@ var base_ = '<?php echo base_url('/');?>';
 
   $(document).on('click', '.cat-slide', function(e) {
 
-    $('.cat-slide').html('<img src="<?php echo base_url('/'); ?>images/load.gif"> Loading...</a>');
 
       $.ajax({
           'async': false,
@@ -181,8 +180,6 @@ var base_ = '<?php echo base_url('/');?>';
           'url': "<?php echo site_url('/'); ?>my_na/bus_categories/",
           'dataType': "json",
           'success': function (data) {
-
-            $('.cat-slide').hide();
 
             $('#cat-box').html(data.cats);
 
