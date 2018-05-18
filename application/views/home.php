@@ -69,7 +69,7 @@
 
 	$(document).on('click', '.cat-slide', function(e) {
 
-		$('#cat-box').html('Loading...');
+		$('.cat-slide').html('<img src="<?php echo base_url('/'); ?>images/load.gif"> Loading...</a>');
 
 	    $.ajax({
 	        'async': false,
