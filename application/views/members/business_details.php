@@ -314,6 +314,7 @@ $this->load->view('inc/header', $header);
               <li role="presentation" class="nav-item"><a href="#Latest" data-type="live" data-bus="<?php echo $bus_id; ?>" class="nav-link active pbtn" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-clock-o"><span class="d-sm-none">Latest Items</span></a></li>
               <li role="presentation" class="nav-item"><a href="#Sold" data-type="sold" data-bus="<?php echo $bus_id; ?>" class="nav-link pbtn" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-exclamation-circle"><span class="d-sm-none">Sold Items</span></a></li>
               <li role="presentation" class="nav-item"><a href="#Deals" data-type="deals" data-bus="<?php echo $bus_id; ?>" class="nav-link pbtn" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-tags"><span class="d-sm-none">Deals</span></a></li>
+              <li role="presentation" class="nav-item"><a href="<?php echo site_url('/').'sell/'.$bus_id; ?>" class="nav-link pbtn"  data-icon="fa-add"><span class="d-sm-none">Add</span></a></li>
             </ul>
 
             <div class="tab-content">
