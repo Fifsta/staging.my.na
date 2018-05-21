@@ -361,9 +361,9 @@ $(document).ready(function(){
     var probar = $('#procover .bar');
     var procover = $('#procover');
 
-    $('#imgbut').html('<img src="<?php echo base_url('/').'img/load.gif';?>" /> Uploading...');
+    $('#imgbut').html('<img src="<?php echo base_url('/').'images/load.gif';?>" /> Uploading...');
     procover.show();
-    frm.ajaxForm(avataroptions);
+    $('#add-img').ajaxForm(avataroptions);
   });
 
 });
