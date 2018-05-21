@@ -1026,6 +1026,133 @@ class App_model extends CI_Model{
 
 	}
 
+
+
+	//+++++++++++++++++++++++++++
+	//REGISTER TOURISM  FUNCTIONS
+	//++++++++++++++++++++++++++
+	function register_tourism($email, $fname, $sname, $dial_code,$cell,$pass,$company,$title)
+	{
+
+		$result['msg'] = '';
+		$result['success'] = false;
+
+		$this->load->model('members_model');
+
+		//VALIDATE INPUT
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			$val = FALSE;
+			$error = 'Email address is not valid.';
+		} elseif (($fname == '')) {
+			$val = FALSE;
+			$error = 'Please provide us with your full name.';
+		} else {
+			$val = TRUE;
+		}
+
+
+		if ($val == TRUE) {
+
+			$this->load->library('user_agent');
+
+			$agent = $agent = $this->agent->browser() . ' ver : ' . $this->agent->version();
+
+			$IP = $_SERVER['HTTP_CF_CONNECTING_IP'];
+
+			$insertdata = array(
+				'CLIENT_NAME' => $fname,
+				'CLIENT_SURNAME' => $sname,
+				'CLIENT_EMAIL' => $email,
+				'CLIENT_OCCUPATION' => $title,
+				'CLIENT_PASSWORD'=> $this->members_model->hash_password($email,$pass),
+				'CLIENT_CELLPHONE' => $cell,
+				'DIAL_CODE' => $dial_code,
+				'CLIENT_UA' => $agent,
+				'CLIENT_IP' => $IP,				
+				'IS_ACTIVE' => 'N'
+			);
+
+
+			$this->db->where('CLIENT_EMAIL', $email);
+			$this->db->from('u_client');
+			$query = $this->db->get();
+
+			//IF email already exists
+			if ($query->num_rows() > 0) {
+
+				$row = $query->row();
+
+				$result['msg'] = 'A member with the email address ' . $email . ' already exists!';
+				$result['success'] = false;
+
+
+				//UPDATE CERTAIN FIELDS
+				//1. First update u_client_table
+
+				$updatedata = array(
+					'CLIENT_OCCUPATION' => $title
+				);
+				$this->db->where('ID', $row->ID);
+				$this->db->update('u_client', $updatedata);
+
+				
+				//2. Check if user is listed in the extended table
+				$this->db->where('client_id', $row->ID);
+				$this->db->from('u_client_extend');
+				$query2 = $this->db->get();
+
+
+				//IF entry already exists
+				if ($query2->num_rows() > 0) {
+
+				} else {
+
+					$insertdata2 = array(
+						'client_id' => $row->ID,
+						'company' => $title
+					);
+					$this->db->insert('u_client_extend', $insertdata2);
+
+				}
+
+			} else {
+
+				//Insert into u_client
+				$this->db->insert('u_client', $insertdata);
+				$member_id = $this->db->insert_id();
+
+				//Insert into u_client_extend
+				$insertdata2 = array(
+					'client_id' => $member_id,
+					'company' => $title
+				);
+				$this->db->insert('u_client_extend', $insertdata2);
+
+
+				//success redirect
+				$result['msg'] = 'Thank you ' . $fname . '';
+				$result['success'] = true;
+				$result['client_id'] = $member_id;
+				$result['email'] = $email;
+
+			}
+
+
+		} else {
+
+			$result['msg'] = $error;
+			$result['success'] = false;
+
+		}
+
+		return $result;
+
+	}
+
+
+
+
+
 	//+++++++++++++++++++++++++++
 	//REGISTER FUNCTIONS
 	//++++++++++++++++++++++++++

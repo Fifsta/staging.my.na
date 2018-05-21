@@ -322,12 +322,20 @@ class Map_model extends CI_Model{
         //echo $output;
 
     }
-	
+
 
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//SHOW MAP INFOWINDOIW CONTENT
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function show_map_info($id, $size){
+
+
+        $this->load->model('image_model'); 
+        $this->load->library('thumborp');
+
+        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+        $width = 320;
+        $height = 320;
 			
 			//$query = $this->db->where('ID',$id);
 			$query = $this->db->query("SELECT u_business.*, group_concat(u_gallery_component.GALLERY_PHOTO_NAME) as GALLERY_IMAGES,
@@ -339,19 +347,8 @@ class Map_model extends CI_Model{
 										WHERE u_business.ID = '".$id."'
 										GROUP BY u_business.ID  
 										");
-			$sizeSTR = '';
-            $imgS = '320';
-            $csize = '320';
-            $logo = '80';
-            $name_offset = '';
-            if($size == 'small'){
 
-                $sizeSTR = ' hide';
-                $imgS = '240';
-                $csize = '240';
-                $logo = '60';
-                $name_offset = 'margin-left:75px;width:100%';
-            }
+            
 
 			//If has results
 			if($query->num_rows() != 0){
@@ -378,15 +375,14 @@ class Map_model extends CI_Model{
                             if($ac >= 2){
 
                             }else{
-                                $cats .= '<span class="badge btn-inverse">'.$catR.'</span> ';
+                                $cats .= '<span class="badge btn-dark" style="padding:1px;">'.$catR.'</span> ';
 
                             }
 
-							
 						}
-						//$cats = $catA;
 						
 					}
+
 					
 					//Build image string
 					$format = substr($img,(strlen($img) - 4),4);
@@ -396,112 +392,82 @@ class Map_model extends CI_Model{
 						
 						if(strpos($img,'.') == 0){
 
-							$format = '.jpg';
-							$img_str = base_url('/').'img/timbthumb.php?w=100&h=100&src='.S3_URL.'assets/business/photos/'.$img . $format;
+                            $format = '.jpg';
+                            $img_str = 'assets/business/photos/' . $img . $format;
+                            $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'80','80', $crop = '');
 							
 						}else{
 							
-							$img_str =  base_url('/').'img/timbthumb.php?w=100&h=100&src='.S3_URL.'assets/business/photos/'.$img;
+                            $img_str = 'assets/business/photos/' . $img;
+                            $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'80','80', $crop = '');
 							
 						}
 						
 					}else{
 						
-						$img_str = base_url('/').'img/timbthumb.php?w=100&h=100&src='.base_url('/').'img/bus_blank.jpg';	
+                        $img_str = 'assets/business/photos/bus_blank.jpg';
+                        $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'80','80', $crop = '');
 						
 					}
 
+
 					if($cover_img != ''){
 						
-							if(strpos($cover_img,'.') == 0){
-					
-								$format2 = '.jpg';
-								$cover_str = S3_URL.'assets/business/photos/'.$cover_img . $format2;
-								
-							}else{
-								
-								$cover_str =  S3_URL.'assets/business/photos/'.$cover_img.'?=';
-								
-							}
+						if(strpos($cover_img,'.') == 0){
+				
+                            $format2 = '.jpg';
+                            $cover_str = 'assets/business/photos/' . $cover_img . $format2;
+                            $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'340','180', $crop = '');
+							
+						}else{
+							
+                            $cover_str = 'assets/business/photos/' . $cover_img;
+                            $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'340','180', $crop = '');
+							
+						}
 						
 					}else{
 						
-						$cover_str = base_url('/').'img/business_cover_blank.jpg';	
+						$cover_str = 'assets/business/photos/business_cover_blank.jpg';	
+                        $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'340','180', $crop = '');
 						
 					}
-	
-	 				if($tel == ''){
-					   $btn_1 = '<a class="btn btn-mini white_back '.$sizeSTR.'" href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/contact/" rel="tooltip"
-											title="Contact: '.$name.'">
-											<i class="icon-envelope"></i> 
-											Contact Us
-										</a>';
-					}else{
-						
-					  $btn_1 = '<a class="btn btn-mini white_back '.$sizeSTR.'"
-					  			href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/contact/" 
-								rel="tooltip" title="Click for full contact details"><i class="icon-bullhorn"></i> '.substr($tel, 0,8).'</a>';
-					}
+
 
                     $star = '';
                     if($row->STAR_RATING != null && $row->STAR_RATING != 0){
 
-                        $star = '<img src="'.base_url('/').'img/icons/star'.round($row->STAR_RATING).'.png" alt="'.round($row->STAR_RATING) .' Stars Rating">';
+                        $star = '<img src="'.base_url('/').'images/icons/star'.round($row->STAR_RATING).'.png" alt="'.round($row->STAR_RATING) .' Stars Rating">';
+
+                    } else {
+
+                        $star = 'No Reviews added';
+
                     }
 
-					$html = '<div class="container-fluid" style="max-width:'.$csize.'px;min-width:'.$imgS.'px;margin:0;padding:0;overflow:hidden">
-								<div class="row-fluid" style="background:url('.$cover_str.') no-repeat; background-size:contain;width:320px;min-height:180px;">
-									<div class="span12">
-										
-									</div>
-								</div>
-								<div class="row-fluid">
-									<div class="span4" style="margin-top:-80px;">
-										<a class="" href="#">
-											<img class="img-polaroid" src="'.$img_str.'" alt="'.$name.'" style="width: '.$logo.'px; height:'.$logo.'px;">
-										</a>
-				
-									</div>
-									
-									<div class="span8"  style="margin-top:-80px;">
-										<h4 class="upper na_script" style="'.$name_offset.' ">'.$name.'</h4>
-										<a class="btn btn-mini white_back" style="'.$name_offset.'" href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/">
-											<i class="icon-info-sign"></i> View
-										</a>
-										
-										'.$btn_1 .'
-										<a class="btn btn-mini white_back '.$sizeSTR.'" href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/reviews/" rel="tooltip"
-											title="View full reviews for '.$name.'">
-											<i class="icon-comment"></i> Reviews
-										</a><br/>
-										<i class="icon-map-marker '.$sizeSTR.'"></i>
-											<small><em>'. $this->my_na_model->shorten_string($address, 5) .'</em></small>
-									</div>
-									
-								</div>
-								<div class="row-fluid clearfix '.$sizeSTR.'">
 
-									<div class="span12">
-
-                                        '.preg_replace( '/\s+/', ' ',strip_tags($this->my_na_model->shorten_string($description, '10'))).'
-                                        <div class="clearfix">&nbsp;</div>
-                                        <div class="row-fluid clearfix">
-
-                                            <div class="span8">
-
-                                                    '.
-                                                    $cats.'
-
-                                            </div>
-                                             <div class="span4 text-right '.$size.'">
-
-                                                    '.$star.'
-                                            </div>
-									</div>
-
-								</div>	
-							</div>
-						</div>';
+                    $html = '
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4"><img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'"></div>
+                            <div class="col-md-8">
+                                <strong>'.$name.'</strong><br>
+                                <small><i class="fa fa-map-marker text-dark"></i> <em>'. $this->my_na_model->shorten_string($address, 5) .'</em></small>
+                                 <hr>
+                                '.$star.'
+                               
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a class="btn btn-xs btn-dark btn-block" href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/">
+                                    <i class="fa fa-info-circle"></i> View
+                                </a>
+                            </div>    
+                        </div>                        
+                    </div>
+                    ';
 
 			
 				//DISPLAY

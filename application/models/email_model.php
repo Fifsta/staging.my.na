@@ -899,12 +899,95 @@ class Email_model extends CI_Model{
 		  	  
     }
 	
+
+
+    function get_member_messages($id,$status) {
+
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 25;
+		$height = 25;
+
+    	$res = '';
+
+		if($status == 'all'){
+			$status =  " AND status_client != 'sent' AND status_client != 'trash'";
+		}else{
+			$status =  " AND status_client ='" . $status."'";	
+		}
+
+		$query = $this->db->query("SELECT * FROM u_business_messages WHERE client_id = '".$id."' ".$status ." ORDER BY timestamp DESC" ,FALSE);
+
+		if($query->result()){
+
+			foreach($query->result() as $row){
+
+				//GET BUSINESS LOGO
+				if($row->bus_id_logo != '0'){
+
+					$avatar = $this->get_business_logo($row->bus_id_logo);
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar['image'],$width,$height, $crop = '');
+
+				}elseif($row->client_id != '0'){
+
+					$avatar = $this->get_avatar($row->client_id);
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar['image'],$width,$height, $crop = '');
+
+				}else{
+
+				    $avatar['image'] = 'assets/business/photos/user_blank.jpg';
+					$avatar['name'] = $row->nameFROM;
+
+				}
+
+				$java = $row->msg_id.",".$row->bus_id.",'".$row->status."'";
+				if($row->status_client == 'unread'){
+					$subj = '<a style="text-decoration:none;" onclick="load_msg('.$java.')"><div style="color:#666;cursor:pointer;width:100%;height:100%;font-weight:bold">'.$row->subject.'<br /><font style="font-size:10px">'.$avatar['name'].'</font></div></a>';
+					$body = '<a style="text-decoration:none;" onclick="load_msg('.$java.')"><div style="color:#666;cursor:pointer;width:100%;height:100%;font-weight:bold">'.strip_tags(str_replace('-','',$row->body)).'</div></a>';
+				}else{
+				    $subj = '<a style="text-decoration:none;" onclick="load_msg('.$java.')"><div style="color:#666;cursor:pointer;width:100%;height:100%;">'.$row->subject.'<br /><font style="font-size:10px">'.$avatar['name'].'</font></div></a>';
+					$body = '<a style="text-decoration:none;" onclick="load_msg('.$java.')"><div style="color:#666;cursor:pointer;width:100%;height:100%;">'.strip_tags(str_replace('-','',$row->body)).'</div></a>';
+				}
+
+				$res .= '
+			    <tr>
+			      <td><input type="checkbox" class="caseM" name="messages['.$row->msg_id.']" value="'. $row->msg_id.'"></td>
+			      <td><img src="'.$img_url.'" alt="" class="img-thumbnail"/></td>
+			      <td>'.$subj.'</td>
+			      <td>'.$this->shorten_string($body ,12).'</td>
+			      <td>'.date('Y-m-d',strtotime($row->timestamp)).'</td>
+			    </tr>				
+				';
+
+			}
+
+		} else {
+
+			$res .= '
+			<tr>
+				<td colspan="5">
+					<h3><strong>No mail</strong></h3>
+					There are no messages to display in the current folder.
+				</td>
+			</tr>
+			';
+
+		}
+
+		return $res;
+
+    }
+
+
+
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 	//SHOW !na EMAIL for MEMBERS
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 
 	function get_messages_status($id,$status){
-      	
+      	 
 		if($status == 'all'){
 			
 			$status =  " AND status_client != 'sent' AND status_client != 'trash'";
@@ -913,8 +996,13 @@ class Email_model extends CI_Model{
 			$status =  " AND status_client ='" . $status."'";	
 		}
 		
-		$read = "update_msg('read');";$unread = "update_msg('unread');";$trash = "update_msg('trash');";$refresh = "load_mail('all');";
-		$inbox = "load_mail('all')";$sent = "load_mail('sent')";$trashlink = "load_mail('trash')";
+		$read = "update_msg('read');";
+		$unread = "update_msg('unread');";
+		$trash = "update_msg('trash');";
+		$refresh = "load_mail('all');";
+		$inbox = "load_mail('all')";
+		$sent = "load_mail('sent')";
+		$trashlink = "load_mail('trash')";
 		
 		$query = $this->db->query("SELECT * FROM u_business_messages WHERE client_id = '".$id."' ".$status ." ORDER BY timestamp DESC" ,FALSE);
 		if($query->result()){
@@ -1130,6 +1218,8 @@ class Email_model extends CI_Model{
 		$avatar['name'] = $row['CLIENT_NAME'];
 		return $avatar;
 	}
+
+
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 	//GET USER AVATAR
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1149,22 +1239,24 @@ class Email_model extends CI_Model{
 			if(strpos($row['PIC'],'.') == 0){
 	
 				$format = '.jpg';
-				$avatar['image'] = base_url('/').'img/timbthumb.php?w=100&h=100&src='.S3_URL.'assets/business/photos/'.$row['PIC'] . $format;
+				$avatar['image'] = 'assets/business/photos/'.$row['PIC'] . $format;
 				
 			}else{
 				
-				$avatar['image'] =  base_url('/').'img/timbthumb.php?w=100&h=100&src='.S3_URL.'assets/business/photos/'.$row['PIC'];
+				$avatar['image'] = 'assets/business/photos/'.$row['PIC'];
 				
 			}
 			
 			
 		}else{
 			
-			$avatar['image'] = base_url('/').'img/timbthumb.php?w=100&h=100&src='.base_url('/').'img/bus_blank.jpg';
+			$avatar['image'] = 'assets/business/photos/bus_blank.jpg';
 			
 		}
+
 		$avatar['name'] = $row['BUSINESS_NAME'];
 		return $avatar;
+
 	}
 	
 	

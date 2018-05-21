@@ -13,6 +13,7 @@ class Business extends CI_Controller {
 		parent::__construct();
 		$this->load->model('business_model');
 		$this->load->model('my_na_model');
+		$this->load->model('product_model');
 	}
 	
 	
@@ -55,7 +56,9 @@ class Business extends CI_Controller {
 	//++++++++++++++++++++++++++
 	public function view($bus_id)
 	{
+		$this->load->model('image_model'); 
 
+		$this->load->library('thumborp');
 
 		//Temporary Redirect for Car publication 2017-08-29
 		if($bus_id == 9318){
@@ -137,6 +140,28 @@ class Business extends CI_Controller {
 		}
 
 	}
+
+
+	//+++++++++++++++++++++++++++
+	//BUSINESS SHOW GALLERY
+	//++++++++++++++++++++++++++
+	public function load_gallery($bus_id)
+	{
+
+		$this->business_model->show_gallery($bus_id);
+
+	}
+
+
+	public function load_business_map($bid) {
+
+		$data['ID'] = $bid;
+
+		$this->load->view('business/inc/business_map_inc.php', $data);
+
+	}
+
+
 
 	//+++++++++++++++++++++++++++
 	//BUSINESS PROFILE PAGE 2
@@ -854,7 +879,7 @@ class Business extends CI_Controller {
 	//setlocale(LC_ALL, 'en_US.UTF8');
 	function load_similar($id) {
 		
-		$this->business_model->show_similar($id);
+		$this->business_model->show_similar($id); 
 	}
 
 	

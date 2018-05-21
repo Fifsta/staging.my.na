@@ -1566,7 +1566,6 @@ class Rating_model extends CI_Model{
         $response = array();
         if($query->num_rows() > 0){
 
-			$out .= '<h4>Business Reviews</h4>';
 
             //LOOP RESPONSES FROM SAME DTATA SET
             foreach($query->result() as $subrow) {

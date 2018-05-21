@@ -7,7 +7,7 @@ class Business_model extends CI_Model{
 	
  	}
 
-
+ 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+MEMBER Functions
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -77,6 +77,7 @@ class Business_model extends CI_Model{
       	
 		$test = $this->get_current_cats($bus_id);
 		$count = $test->num_rows();
+
 		if($count > 5){
 			
 			$limit = 1;
@@ -94,6 +95,7 @@ class Business_model extends CI_Model{
 			$limit = 5;
 			
 		}
+		echo '<div class="owl-carousel" id="similar" style="margin-top:20px">';
 		
 		foreach($test->result() as $row){
 			//Get Cat ID
@@ -104,12 +106,11 @@ class Business_model extends CI_Model{
 			$this->db->from('i_tourism_category');
 			$this->db->where('CATEGORY_ID',$cat_id);
 			$this->db->where('BUSINESS_ID !=', $bus_id);
-			$this->db->limit($limit);
+			$this->db->limit('8');
 			$result = $this->db->get();
 			$x=0;
 			
-			echo '<div id="similarCarousel" class="carousel slide vertical">
-					<div class="carousel-inner">';
+			
 			foreach($result->result() as $row2){
 				
 				$business_id = $row2->BUSINESS_ID;
@@ -117,20 +118,30 @@ class Business_model extends CI_Model{
 				$x++;
 			}
 			
-			//return $	
-			echo '</div></div>';
 		}
-		echo "<script data-cfasync='false' type='text/javascript'>$('.carousel').carousel();</script>";
+		echo '</div>';
     }		
 	
 	function show_similar_list($bus_id){
+
+		$this->load->model('image_model'); 
+		$this->load->library('thumborp');
+
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 360;
+		$height = 230;
+
+		$l_width = 60;
+		$l_height = 60;
+
       	
 		$details = $this->get_business_details($bus_id);
 		
 		if($details)
 		{
 			$name = $details['BUSINESS_NAME'];
-			$img = $details['BUSINESS_LOGO_IMAGE_NAME'];
+			$logo = $details['BUSINESS_LOGO_IMAGE_NAME'];
+			$cover = $details['BUSINESS_COVER_PHOTO'];
 			$id = $details['ID'];
 			$email = $details['BUSINESS_EMAIL'];
 			$tel = $details['BUSINESS_TELEPHONE'];
@@ -139,40 +150,92 @@ class Business_model extends CI_Model{
 			$address = $details['BUSINESS_PHYSICAL_ADDRESS'];
 
 			//Build image string
-			$format = substr($img, (strlen($img) - 4), 4);
-			$str = substr($img, 0, (strlen($img) - 4));
+			//$format = substr($img, (strlen($img) - 4), 4);
+			//$str = substr($img, 0, (strlen($img) - 4));
 
-			if ($img != '')
+			if ($logo != '')
 			{
 
-				if (strpos($img, '.') == 0)
+				if (strpos($logo, '.') == 0)
 				{
 
 					$format = '.jpg';
-					$img_str = base_url('/') . 'img/timbthumb.php?w=100&h=100&src=' . S3_URL . 'assets/business/photos/' . $img . $format;
-
+					$logo_str = 'assets/business/photos/' . $logo . $format;
+					$logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+					$b_logo = '<img title="Product is listed by ' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';
 				}
 				else
 				{
 
-					$img_str = base_url('/') . 'img/timbthumb.php?w=100&h=100&src=' . S3_URL . 'assets/business/photos/' . $img;
+					$logo_str = 'assets/business/photos/' . $logo;
+					$logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+					$b_logo = '<img title="Product is listed by ' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';
 
 				}
 
 			}
 			else
 			{
-
-				$img_str = base_url('/') . 'img/timbthumb.php?w=100&h=100&src=' . base_url('/') . 'img/bus_blank.jpg';
+				$logo_url = base_url('/').'images/bus_blank.png';
+				$b_logo = '<img title="' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';
 
 			}
 
-			//get Categories
+
+			if ($cover != '')
+			{
+
+				if (strpos($cover, '.') == 0)
+				{
+
+					$format = '.jpg';
+					$cover_str = 'assets/business/photos/' . $cover . $format;
+					$cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+
+				}
+				else
+				{
+
+					$cover_str = 'assets/business/photos/' . $cover;
+					$cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+
+				}
+
+			}
+			else
+			{
+				$cover_str = 'assets/business/photos/listing-placeholder.jpg';
+				$cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+
+			}
+
+
+
+			//get Categories 
 			$cats = $this->get_current_categories($id);
 
 			//Build resultset HTML
 
-			$html = '<div class="item">
+
+			$html = '<div>
+						<figure class="loader">
+							<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$name.'</small>
+							</div>
+							<div class="slideshow-block">
+								<a href="' . site_url('/') . 'b/' . $id . '/' . $this->clean_url_str($name) . '/"><img class="" src="' . $cover_url . '" alt="' . $name . '"></a>
+							</div>
+
+							<div>
+							
+								'.$b_logo.'	
+
+							</div>
+						</figure>			
+			  		</div>
+					  ';
+
+
+			/*$html = '<div class="item">
 							<div class="" style="height:190px;">
 							   <a class="pull-right" href="#">
 								<img class="img-polaroid" src="' . $img_str . '" alt="' . $name . '" style="width: 100px; height:100px;">
@@ -184,7 +247,7 @@ class Business_model extends CI_Model{
 							      <a class="btn btn-inverse" href="' . site_url('/') . 'b/' . $id . '/' . $this->clean_url_str($name) . '/"><i class="icon-info-sign icon-white"></i> View listing &raquo;</a>
 							  	  
 							</div>
-						</div>';
+						</div>';*/
 
 			echo $html;
 
@@ -1377,12 +1440,13 @@ function show_all_gallery_images($bus_id)
 //GET M<AP
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		 	
 //Get MAP Details
-	function get_map_details($ID){
-      	
-		$test = $this->db->where('BUSINESS_ID', $ID);
-		$test = $this->db->get('u_business_map');
-		return $test->row_array();		  
-    }		 	
+function get_map_details($ID){
+  	
+	$test = $this->db->where('BUSINESS_ID', $ID);
+	$test = $this->db->get('u_business_map');
+	return $test->row_array();		  
+}
+    		 	
 //UPDATE MAP COORDINATES
 	function update_map_coordinates(){
       	
@@ -1455,7 +1519,7 @@ function show_all_gallery_images($bus_id)
 			foreach($test->result() as $row){
 				
 				$cat_id = $row->SUBCAT_ID;
-				$x['links'][$y] = '<a href="'.site_url('/').'a/cat/'.$cat_id.'/'.$this->clean_url_str($row->CATEGORY).'/"><span class="label">'.$row->CATEGORY.'</span></a>';
+				$x['links'][$y] = '<a href="'.site_url('/').'a/cat/'.$cat_id.'/'.$this->clean_url_str($row->CATEGORY).'/"><span class="badge badge-secondary">'.$row->CATEGORY.'</span></a>';
 				
 				if($y == 0){
 					
@@ -1574,6 +1638,15 @@ function show_all_gallery_images($bus_id)
 	
 	//Show Gallery
 	function show_gallery($bus_id){
+
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 800;
+
+		$height = 450;
       	
 		$query = $this->db->where('BUSINESS_ID',$bus_id);
 			$query = $this->db->get('u_gallery_component');
@@ -1606,11 +1679,15 @@ function show_all_gallery_images($bus_id)
 						if(strpos($img_file,'.') == 0){
 				
 							$format = '.jpg';
-							$img_str = S3_URL.'assets/business/gallery/'.$img_file . $format;
+							$img_str = 'assets/business/gallery/'.$img_file . $format;
+							$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+							$img_exp =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 							
 						}else{
 							
-							$img_str =  S3_URL.'assets/business/gallery/'.$img_file;
+							$img_str = 'assets/business/gallery/'.$img_file;
+							$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+							$img_exp =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 							
 						}
 						
@@ -1620,20 +1697,14 @@ function show_all_gallery_images($bus_id)
 						
 					}
 					
-							//TIMBTHUMB
-							//echo '<li class="thumbnail"><img src="'.base_url('/').'img/timbthumb.php?src='.base_url('/').'assets/business/gallery/'.$img_file.'&q=100&w=180&h=100" />
-//							<a style="float:right;margin:0 3px;" onclick="delete_gallery_img('.$id .');" href="#"><i class="icon-remove"></i></a>
-//							</li>';
-							
-							//NO TIMBTHUMB
-							echo '<div><img src="'.$img_str.'" style="width:100%;"/></div>';
-							$x++;
-						
-					 
-					}
+						//NO TIMBTHUMB
+						echo '<div><a class="fancy-images" rel="gallery" href="'.$img_exp.'"><img src="'.$img_url.'" style="width:100%;" class="img-thumbnail" /></a></div>';
+						$x++;
+							 
+				}
 					
 				//show gallery
-				echo '</div>';
+				echo '</div><div class="spacer"></div>';
 				
 			}else{
 			
@@ -1695,10 +1766,10 @@ function show_all_gallery_images($bus_id)
       	
 		$query = $this->db->query("SELECT RATING FROM u_business_vote WHERE BUSINESS_ID ='".$id."' AND IS_ACTIVE = 'Y' AND TYPE = 'review'");
 			
-			return $query->num_rows();
-		
-				  
+		return $query->num_rows();
+						  
     }
+
     function get_review_stars_show($rating,$id){
 		 
 		$x = 1;
@@ -1717,20 +1788,21 @@ function show_all_gallery_images($bus_id)
 					
 				}
 				
-				$arr[$x] = '<input name="'.$id.'-'.$rating.'" type="radio" value="'.$x.'" class="star" disabled="disabled" '.$str.'/>
-				';	
+				$arr[$x] = '<input name="'.$id.'-'.$rating.'" type="radio" value="'.$x.'" class="star" disabled="disabled" '.$str.'/>';	
 				$x++;
+
 			}
 			
-			$arr = '<div style="float:right;font-size:10px;font-style:italic;" class="well well-small"><span class="pull-right">'. implode($arr).'<br />Based on: <b>'.$this->get_rating_count($id).'</b> reviews</span></div>';
-			return $arr;
+			$arr = '<div style=";font-size:10px;font-style:italic;text-align:center" class=""><span class="text-center">'. implode($arr).'<br />Based on: <b>'.$this->get_rating_count($id).'</b> reviews</span></div>';
 			
 		}else{
 			
-			$arr = '<a class="pull-right clearfix" href="#reviews" data-toggle="tab"><span class="label label-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</span></a><br /><br />';
-			return $arr;
-			
+			//$arr = '<a class="clearfix" href="#reviews" data-toggle="tab"><span class="label label-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</span></a><br /><br />';
+			$arr = '';
+					
 		}
+
+		return $arr;
     }	
 
  /**
@@ -1745,63 +1817,61 @@ function show_all_gallery_images($bus_id)
 		
 		if($id != '0'){
 			
-				$this->db->from('u_client');
-				$this->db->where('ID', $id);
-				$query = $this->db->get();
-				$row = $query->row_array();
-				
-				if($query->result()){
-				
-					$img = $row['CLIENT_PROFILE_PICTURE_NAME'];
+			$this->db->from('u_client');
+			$this->db->where('ID', $id);
+			$query = $this->db->get();
+			$row = $query->row_array();
+			
+			if($query->result()){
+			
+				$img = $row['CLIENT_PROFILE_PICTURE_NAME'];
 
-					//Build image string
-					$format = substr($img,(strlen($img) - 4),4);
-					$str = substr($img,0,(strlen($img) - 4));
+				//Build image string
+				$format = substr($img,(strlen($img) - 4),4);
+				$str = substr($img,0,(strlen($img) - 4));
 
-					if(strstr($img, "http")){
+				if(strstr($img, "http")){
 
-						$data['image'] = $img.'?width=100&height=100';
+					$data['image'] = $img.'?width=100&height=100';
 
-					}elseif(strstr($img,'.')){
+				}elseif(strstr($img,'.')){
 
-						$data['image']=  S3_URL.'assets/users/photos/'.$img;
-
-
-					}elseif($img == '' || $img == null){
-
-						$data['image'] =  base_url('/').'img/user_blank.jpg';
+					$data['image']=  S3_URL.'assets/users/photos/'.$img;
 
 
-					}else{
+				}elseif($img == '' || $img == null){
 
-						$format = '.jpg';
-						$data['image']=  S3_URL.'assets/users/photos/'.$img . $format;
+					$data['image'] =  base_url('/').'img/user_blank.jpg';
 
-					}
-
-					$data['name'] = $row['CLIENT_NAME'] . ' ' . $row['CLIENT_SURNAME'];
-					return $data;
 
 				}else{
-					
-					$data['image'] =  base_url('/').'img/user_blank.jpg';
-					$data['name'] = 'user';
-					return $data;
-					
+
+					$format = '.jpg';
+					$data['image']=  S3_URL.'assets/users/photos/'.$img . $format;
+
 				}
 
+				$data['name'] = $row['CLIENT_NAME'] . ' ' . $row['CLIENT_SURNAME'];
+				return $data;
 
-
+			}else{
+				
+				$data['image'] =  base_url('/').'img/user_blank.jpg';
+				$data['name'] = 'user';
+				return $data;
+				
+			}
 
 		}
 
     }	
- /**
+
+/**
 ++++++++++++++++++++++++++++++++++++++++++++
 //REVIEWS
 //GET LOGO
 ++++++++++++++++++++++++++++++++++++++++++++	
- */ 	
+**/ 	
 	
 	function get_business_logo($id){
 		 
@@ -2358,7 +2428,7 @@ FUNCTIONS
 		
 				} else {
 				    //save QR file	
-					$this->load->library('ciqrcode');
+					$this->load->library('Ciqrcode');
 					$vcard1 = 'BEGIN:VCARD'."\n";
 					$vcard1 .= 'ORG:' . trim($org) ."\n";
 					$vcard1 .= 'TEL:' . trim($tel) ."\n";
@@ -2382,7 +2452,7 @@ FUNCTIONS
 					$out = $this->gcloud_model->upload_gc_bucket($params['savename'] , 'assets/business/qr/');
 					
 					$vcard2 = '<img src="'.S3_URL.'assets/business/qr/'.$row['ID']. $this->clean_url_str($org) .'.jpg" alt=" Vcard for' . $org . ' - My Namibia' . '" 
-					title="Vcard for' . $org . ' - My Namibia' . '" class="img-fluid" />';
+					title="Vcard for' . $org . ' - My Namibia' . '" class="img-fluid" style="width:100%; height:100%;" />';
 
 				}		
 			}

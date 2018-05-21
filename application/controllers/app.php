@@ -218,6 +218,71 @@ class App extends REST_Controller{
 		$this->response($o, 200);
 
 	}
+
+
+
+	//+++++++++++++++++++++++++++
+	//REGISTER TOURISM FUNCTIONS
+	//++++++++++++++++++++++++++
+	function register_tourism_post()
+	{
+
+		echo 'hi';
+
+		//VALIDATE INPUT
+		$o['success'] = false;
+		if(!$fname = $this->post('firstname'))
+		{
+			$o['success'] = false;
+			$o['msg'] = 'PLease provide us with your Full Name';
+			$this->response($o, 200);
+		}
+		if(!$sname = $this->post('lastname'))
+		{
+			$sname = '';
+		}
+
+		if(!$pass = $this->post('password'))
+		{
+			$o['msg'] = 'PLease provide us with your secure password';
+			$this->response($o, 200);
+		}
+		if(!$cell = $this->post('cellphone'))
+		{
+			$cell = '';
+
+		}
+		if(!$dial_code = $this->post('dial_code'))
+		{
+			$dial_code = '';
+		}
+		if(!$email = $this->post('email'))
+		{
+			$o['msg'] = 'PLease provide us with your email address';
+			$this->response($o, 200);
+		}
+		if(!$company = $this->post('company'))
+		{
+			$o['msg'] = 'PLease provide us with your company';
+			$this->response($o, 200);
+		}
+		if(!$title = $this->post('title'))
+		{
+			$o['msg'] = 'PLease provide us with your occupation title';
+			$this->response($o, 200);
+		}
+
+
+
+		$this->load->model('app_model');
+		$o = $this->app_model->register_tourism($email, $fname, $sname, $dial_code, $cell, $pass, $company, $title);
+		$this->response($o, 200);
+		
+	}
+
+
+
+
 	//+++++++++++++++++++++++++++
 	//REGISTER FUNCTIONS
 	//++++++++++++++++++++++++++
@@ -260,6 +325,7 @@ class App extends REST_Controller{
 		$this->response($o, 200);
 		
 	}
+
 
 	//+++++++++++++++++++++++++++
 	//REGISTER FUNCTIONS
@@ -608,7 +674,7 @@ class App extends REST_Controller{
 	//CATEGORIES CONTENT POST
 	//++++++++++++++++++++++++++
 	function category_content_post()
-	{
+	{ 
 		//error_reporting(E_ALL);
 		//VALIDATE INPUT
 		if(!$id = $this->post('cat_id'))

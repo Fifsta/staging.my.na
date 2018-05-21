@@ -3,12 +3,12 @@
 class Tna_mail extends CI_Controller {
 
 	/**
-	 * Members Functionality Controller for My.Na
+	 * TNA MAIL Functionality Controller for My.Na
 	 * Roland Ihms
 	 * 
 	 */
 	 
-	function Tna_mail()
+	function __construct()
 	{
 		parent::__construct();
 		$this->load->model('email_model');
@@ -19,11 +19,14 @@ class Tna_mail extends CI_Controller {
 	{
 		echo 'Going nowhere slowly';
 	}
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
 //TNA MAIL
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//+++++++++++++++++++++++++++
 	//INBOX
+
 	//++++++++++++++++++++++++++
 	public function inbox($bus_id)
 	{
@@ -93,25 +96,30 @@ class Tna_mail extends CI_Controller {
 		 }
 	
 	}
+
 	//+++++++++++++++++++++++++++
 	//LOAD MAILBOX TYPE, INBOX,SENT etc for MEMBERS
-	//++++++++++++++++++++++++++
-	public function load_mail_member($status)
+	//+++++++++++++++++++++++++++
+	public function load_mail_member()
 	{
 		
 		if($this->session->userdata('id')){
 			 	
-				$this->load->model('email_model');
-				if($status == ''){
+			$this->load->model('email_model');
+			$id = $this->session->userdata('id');
+			$status = $this->input->post('status', TRUE);
 			
-					$status = 'all';
-				
-				}
-				$this->email_model->get_messages_status($this->session->userdata('id') ,$status);
-		
+			$this->load->model('email_model');	
+
+			$o = $this->email_model->get_member_messages($id,$status);
+
+			$this->output
+		       ->set_content_type('application/json')
+		       ->set_output(json_encode(array('inbox' => $o)));	
+
 		}else{
 			
-				$this->load->view('login');
+			$this->load->view('login');
 			  
 		 }
 	
@@ -310,156 +318,99 @@ class Tna_mail extends CI_Controller {
 		  }
 		 
 	}
+
+
+
+
 	//+++++++++++++++++++++++++++
 	//VIEW MESSAGE MEMBER
 	//++++++++++++++++++++++++++		
-	function view_msg($msg_id, $bus_id, $status)
+	function view_msg()
 	{
          
-		  if($this->session->userdata('id')){
-			  
-					
-				$this->email_model->update_msg_status($msg_id, 'read','Client');
-		
-				 
-				 $data = $this->email_model->get_message($msg_id);
-				 $click = "load_mail('all')";
+		$msg_id = $this->input->post('msg_id',TRUE);
+		$bus_id = $this->input->post('bus_id',TRUE);
+		$status = $this->input->post('status',TRUE);
+
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 100;
+		$height = 100;
+
+		if($this->session->userdata('id')){
+
+			$this->email_model->update_msg_status($msg_id, 'read','Client');
+
+			$data = $this->email_model->get_message($msg_id);
+
+			$click = "load_mail('all')";
+
+			if($data['status'] == 'sent' || $data['status'] == 'replied' ){
+
+				if($data['bus_id'] != 0 && $data['bus_id_logo'] != 0){
+
+					$avatar = $this->get_business_logo($data['bus_id']);
+					$data['img_url'] = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar['image'],$width,$height, $crop = '');
+
+				}else{
+
+					if($data['client_id_logo'] != 0){
+
+						 $avatar = $this->get_user_avatar($data['client_id_logo']);
+						 $data['img_url'] = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar['image'],$width,$height, $crop = '');
+
+					}else{
+
+			 			$avatar = $this->get_user_avatar($data['client_id']);
+			 			$data['img_url'] = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar['image'],$width,$height, $crop = '');
+
+					}
+
+				}
+
+			}elseif($data['status'] == 'unread'){
+
+				if($data['client_id_logo'] != 0){
+
+					$avatar = $this->get_user_avatar($data['client_id_logo']);
+					$data['img_url'] = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar['image'],$width,$height, $crop = '');
+
+				}else{
+
+					$avatar = $this->get_user_avatar($data['client_id']);
+					$data['img_url'] = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar['image'],$width,$height, $crop = '');
+
+				}
+
+			}else{
+
+				$avatar = base_url('/').'img/user_blank.jpg';
+				$data['img_url'] = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar['image'],$width,$height, $crop = '');
+
+			}
+
+
+			$this->load->view('members/inc/message_view_inc', $data);
 			
-		 		 
-				 if($data['status'] == 'sent' || $data['status'] == 'replied' ){
-					 
-					 if($data['bus_id'] != 0 && $data['bus_id_logo'] != 0){
-						 
-					 	$avatar = $this->get_business_logo($data['bus_id']);
-					 }else{
 
-                         if($data['client_id_logo'] != 0){
+		}else{
 
-                             $avatar = $this->get_user_avatar($data['client_id_logo']);
-                         }else{
+			redirect('/members/logout', 'refresh');
 
-                             $avatar = $this->get_user_avatar($data['client_id']);
-                         }
-
-					 }
-				 }elseif($data['status'] == 'unread'){
-                     if($data['client_id_logo'] != 0){
-
-                         $avatar = $this->get_user_avatar($data['client_id_logo']);
-                     }else{
-
-                         $avatar = $this->get_user_avatar($data['client_id']);
-                     }
-				 }else{
-				   $avatar = base_url('/').'img/user_blank.jpg';
-				 }
-				 
-				 echo '<div class="row-fluid">
-							<div class="span8">
-							   <div id="view_msg">
-								   <h3>'.$data['subject'].'</h3>'
-								  .'<p>'.$data['body'].'</p>'
-								  .'<p style="font-size:10px;font-style:italic">'. date('l jS \of F Y h:i:s A', strtotime($data['timestamp'])) .'</p>
-								  <hr />
-								   <a onclick="reply_message()" class="btn"><i class="icon-arrow-left"></i> Reply</a>
-							   	   <a onClick="'.$click.'" class="btn"><i class="icon-envelope"></i> Inbox</a>
-							   </div>
-							   
-							   <div id="reply_msg" style="display:none">
-							   		<h3>'.$data['subject'].'</h3>
-									<form id="replymail" name="replymail" >
-									    <input type="hidden" name="cur_state" id="cur_state" value="'.$data['status'].'">
-										<input type="hidden" name="bus_id_reply" id="bus_id_reply" value="'.$bus_id.'">
-										<input type="hidden" name="msg_id_reply" id="msg_id_reply" value="'.$msg_id.'">
-										<input type="hidden" name="client_id_reply" id="client_id_reply" value="'.$data['client_id'].'">
-										<input type="hidden" name="emailTO" id="emailTO" value="'.$data['email'].'">
-										<input type="hidden" name="emailFROM" id="emailFROM" value="'.$data['emailTO'].'">
-								        <input type="hidden" name="name_from" id="name_from" value="'.$data['nameFROM'].'">
-										<input type="hidden" name="name_to" id="name_to" value="'.$data['nameTO'].'">
-										<textarea id="reply_redactor_content" name="reply_content">
-										<br /><br /><br />
-										-------------------------------------------------------<br /><em>'
-										.date('l jS \of F Y h:i:s A', strtotime($data['timestamp'])).'</em><br />
-										-------------------------------------------------------<br />
-										<p>'.$data['body'].'</p>
-										 </textarea>
-										<br />
-										<div id="reply_msg"></div>
-										<hr />
-										<a id="reply_email_yes" class="btn"><i class="icon-envelope"></i> Reply</a>
-										<a onClick="'.$click.'" class="btn"><i class="icon-envelope"></i> Inbox</a>
-									</form> 
-								</div>	  	
-								
-							</div>
-							<div class="span4">
-								
-									 <div class="popover right" style="display:block;position:relative">
-										<div class="arrow"></div>
-										<h3 class="popover-title">From: </h3>
-										<div class="popover-content">
-										  <img src="'.$avatar['image'] .'" alt="" style="width:40px;height:40px;float:left;margin:0px 5px 5px 0px" class="img-polaroid" />
-										  <p>'.$data['nameFROM'].'</p><small style="color:#CCC">'.date('M d',strtotime($data['timestamp'])).'</small>
-										  <div class="clearfix" style="height:15px;"></div>
-										</div>
-									  
-								</div>
-								  		
-							</div>	
-						</div>
-						<div class="clearfix" style="height:30px;"></div>
-				
-						<script data-cfasync="false" type="text/javascript">
-							function reply_message(){
-							
-								$("#view_msg").hide();
-								$("#reply_msg").fadeIn();
-								$("#reply_redactor_content").prepend();
-								$("#reply_redactor_content").focus();
-							}
-							$("#reply_redactor_content").redactor({ 	
-				
-									buttons: ["html", "|", "formatting", "|", "bold", "italic", "deleted", "|", 
-									"unorderedlist", "orderedlist", "outdent", "indent", "|",
-									"video", "table","|",
-									 "alignment", "|", "horizontalrule"]
-							});
-							$("#reply_email_yes").live("click", function() { 	
-								
-								var frm = $("#replymail");
-								frm.attr("action","'. site_url('/').'tna_mail/reply_email/");
-
-								$("#reply_email_yes").html("Sending...");
-									
-									$.ajax({
-										type: "post",
-										cache: false,
-										data: frm.serialize(),
-										url: "'.site_url('/').'tna_mail/reply_email/" ,
-										success: function (data) {
-											$("#reply_email_yes").html("Sent!");
-											$("#reply_msg").html(data);
-											
-										}
-									});	
-								
-						});		
-						</script>';
-					   	
-				  
-		  }else{
-			
-				redirect('/members/logout', 'refresh');
-			  
-		  }
+		}
 		 
 	}
+
+
 	//++++++++++++++++++++++++++++++++++++++++++++
 	//REPLY EMAIL
 	//++++++++++++++++++++++++++++++++++++++++++++	
 	function reply_email()
 	{
 		 if($this->session->userdata('id')){
+
 			//GET EMAIL FIELDS 	
 			$emailTO = $this->input->post('emailTO',TRUE);
 			$emailFROM = $this->input->post('emailFROM',TRUE);
@@ -471,19 +422,8 @@ class Tna_mail extends CI_Controller {
 			$nameTO = $this->input->post('name_to',TRUE);
 			$nameFROM = $this->input->post('name_from',TRUE);
 			$status = $this->input->post('cur_state',TRUE);
-			//INSERT SENT MESSAGE DATABASE
-			//$data2['bus_id_logo'] = $bus_id;
-//			$data2['bus_id'] = $bus_id;
-//			$data2['client_id'] = $client_id;
-//			$data2['email'] = $emailFROM;
-//			$data2['nameTO'] = $name;
-//			$data2['subject'] = $subject;
-//			$data2['body'] = $body;
-//			$data2['status'] = 'unread';
-//			$data2['status_client'] = 'sent';
-//			$data2['emailTO'] = $emailTO;
-		
-			//$this->db->insert('u_business_messages',$data2);
+
+
 			//BUSINESS SENT TO CLIENT
 			if($status == 'sent'){
 				
@@ -502,6 +442,7 @@ class Tna_mail extends CI_Controller {
 			//BUSINESS REPLIED TO CLIENT	
 			}elseif($status == 'replied'){
 				
+
 				//UPDATE EXISTING MSG IF USER IS REGISTERED	
 				$dataUpdate['status_client'] = 'replied';
 				$dataUpdate['status'] = 'unread';
@@ -532,7 +473,7 @@ class Tna_mail extends CI_Controller {
 			}
 			
 			
-		
+			//$emailTO = 'christian@intouch.com.na';
 			
 			$this->email_model->send_email($emailTO, $emailFROM  , $nameTO , $body , $subject );
 			
@@ -540,21 +481,12 @@ class Tna_mail extends CI_Controller {
 			$str = "<div class='alert alert-success'>
 					<button type='button' class='close' data-dismiss='alert'>×</button>Your reply was sent successfully.</div>";		
 			echo $str;
-			//REDIRECT BUSINESS
-			if($bus_id != '0'){
-				
-				echo '<script data-cfasync="false" type="text/javascript">
-						window.location = "'.site_url('/').$redirect.'";
-						</script>';
-			//REDIRECT MEMBER	
-			}else{
-				
-				echo '<script data-cfasync="false" type="text/javascript">
-						window.location = "'.site_url('/').$redirect.'";
 
-						</script>';
-			}
-			
+			//REDIRECT BUSINESS
+			/*echo '<script data-cfasync="false" type="text/javascript">
+					window.location = "'.site_url('/').$redirect.'";
+				  </script>';*/
+
 		
 		//NOT LOGGED IN
 		}else{
@@ -865,18 +797,18 @@ class Tna_mail extends CI_Controller {
 			}elseif(strpos($row['PIC'],'.') == 0){
 	
 				$format = '.jpg';
-				$avatar = S3_URL.'assets/users/photos/'.$row['PIC'] . $format;
+				$avatar = 'assets/users/photos/'.$row['PIC'] . $format;
 				
 			}else{
 				
-				$avatar =   S3_URL.'assets/users/photos/'.$row['PIC'];
+				$avatar =  'assets/users/photos/'.$row['PIC'];
 				
 			}
 
 			
 		}else{
 			
-			$avatar = base_url('/').'img/user_blank.jpg';
+			$avatar = 'assets/business/photos/user_blank.jpg';
 			
 		}
 		
@@ -901,21 +833,23 @@ class Tna_mail extends CI_Controller {
 			if(strpos($row['PIC'],'.') == 0){
 	
 				$format = '.jpg';
-				$avatar['image'] = base_url('/').'img/timbthumb.php?w=100&h=100&src='.S3_URL.'assets/business/photos/'.$row['PIC'] . $format;
+				$avatar['image'] = 'assets/business/photos/'.$row['PIC'] . $format;
 				
 			}else{
 				
-				$avatar['image'] =  base_url('/').'img/timbthumb.php?w=100&h=100&src='.S3_URL.'assets/business/photos/'.$row['PIC'];
+				$avatar['image'] = 'assets/business/photos/'.$row['PIC'];
 				
 			}
 			
 			
 		}else{
 			
-			$avatar['image'] = base_url('/').'img/timbthumb.php?w=100&h=100&src='.base_url('/').'img/user_blank.jpg';
+			$avatar['image'] = 'assets/business/photos/user_blank.jpg';
 			
 		}
+
 		$avatar['name'] = $row['BUSINESS_NAME'];
+
 		return $avatar;
 	}
 	
@@ -942,18 +876,18 @@ class Tna_mail extends CI_Controller {
 			}elseif(strpos($row['PIC'],'.') == 0){
 	
 				$format = '.jpg';
-				$avatar['image'] = base_url('/').'img/timbthumb.php?w=100&h=100&src='.  S3_URL.'assets/users/photos/'.$row['PIC'] . $format;
+				$avatar['image'] = 'assets/users/photos/'.$row['PIC'] . $format;
 				
 			}else{
 				
-				$avatar['image'] = base_url('/').'img/timbthumb.php?w=100&h=100&src='.  S3_URL.'assets/users/photos/'.$row['PIC'];
+				$avatar['image'] = 'assets/users/photos/'.$row['PIC'];
 				
 			}
 			
 			
 		}else{
 			
-			$avatar['image'] = base_url('/').'img/timbthumb.php?w=100&h=100&src='. base_url('/').'img/user_blank.jpg';
+			$avatar['image'] = 'assets/business/photos/user_blank.jpg';
 			
 		}
 		$avatar['name'] = $row['CLIENT_NAME'].' '.$row['CLIENT_SURNAME'];

@@ -33,7 +33,7 @@ class My_model extends CI_Model{
 				
 				$this->load->model('news_model');
 				
-				$output = $this->news_model->get_nmh_news();
+				$output = $this->news_model->get_nmh_news(); 
 				
 			}
 			

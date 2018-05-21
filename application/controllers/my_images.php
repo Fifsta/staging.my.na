@@ -4,7 +4,7 @@ class My_images extends CI_Controller {
 	/**
 	 OWNERS
 	 */
-	function my_images()
+	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('image_model');
@@ -26,10 +26,9 @@ class My_images extends CI_Controller {
 				
 				echo 'error';
 			}
-			
-			
-			
+				
 		}
+		
 		$param['file'] = $file;
 		if(!$param['width'] = $this->input->get('width', true)){
 			

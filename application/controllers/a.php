@@ -15,6 +15,8 @@ class A extends CI_Controller {
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	public function results($offset = '')
 	{
+
+
 		//Get Input
 		//SORT
 		if (!$this->input->post('sortby')) {
@@ -27,8 +29,12 @@ class A extends CI_Controller {
 			$sort = $this->input->post('sortby', TRUE);
 			$sortURL = $this->input->post('sortby', TRUE); 					
 		}
+
+
+		$scat = $this->input->post('srch_category', TRUE);
+
 		//Category
-		if (!$this->input->post('srch_category')) {
+		if (!$scat || $scat == 'all') {
 				
 			$category = '';
 			$categoryURL = 'all';
@@ -90,20 +96,21 @@ class A extends CI_Controller {
 				$locationURL = $locationURL;
 			}
 			//PAGINATION
+
 			$config['base_url'] = site_url('/'). 'a/d/'.$main_cat_id.'/'.$main_categoryURL.'/'.$l_id.'/'.$locationURL.'/'.$businessURL.'/'.$sortURL.'/';
 		}else{
+
 			//PAGINATION
 			$config['base_url'] = site_url('/'). 'a/show/'.$main_cat_id.'/'.$main_categoryURL.'/'.$c_id.'/'.$categoryURL.'/'.$l_id.'/'.$locationURL.'/'.$businessURL.'/'. $sortURL;
 			
 		}
 		
 		
-        echo $location.' <br />'.$category.'<br />' .$c_type.'- <br />'.$business.' <br />'.$config['base_url'];
+        //echo $location.' <br />'.$category.'<br />' .$c_type.'- <br />'.$business.' <br />'.$config['base_url'];
+
 
 		redirect($config['base_url']);
 
-		
-		
 	}
 
 
@@ -324,7 +331,7 @@ class A extends CI_Controller {
 		if($category == 'all'){
 			
 			$category = '';
-		
+		 
 		}
 		if($business == 'all'){
 			

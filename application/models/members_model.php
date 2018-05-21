@@ -39,25 +39,10 @@ class Members_model extends CI_Model
 	public function get_business_users($bus_id)
 	{
 		$query = $this->db->query("SELECT u_client.*, i_client_business.USER_TYPE, i_client_business.ID as cID
-									FROM u_client JOIN i_client_business ON u_client.ID = i_client_business.CLIENT_ID
-									WHERE  i_client_business.BUSINESS_ID = '" . $bus_id . "'", false);
+								   FROM u_client JOIN i_client_business ON u_client.ID = i_client_business.CLIENT_ID
+								   WHERE  i_client_business.BUSINESS_ID = '" . $bus_id . "'", false);
 
-		echo '
-			<a class="btn pull-right" href="javascript:void(0)" onclick="add_user()"><i class="icon-plus-sign"></i> Add User</a>
-			<h4>Users<small> Your current business  listing users</small></h4>
-			<div class="clearfix" style="height:20px"></div>
-			<table cellpadding="0" cellspacing="0" style="font-size:12px" border="0" class="table table-striped" id="user_tbl" width="100%">
-				<thead>
-					<tr style="font-weight:bold">
-						<th style="width:5%;min-width:40px"></th>
-           				<th style="width:30%">Name</th>
-						<th style="width:10%">User Type</th>
-						<th style="width:25%">Location</th>
-						<th style="width:20%">Date of Birth</th>
-						<th style="width:10%;min-width:100px;text-align:right"></th>
-					</tr>
-				</thead>
-				<tbody>';
+
 		if ($query->num_rows() > 0)
 		{
 			$x = 0;
@@ -73,23 +58,22 @@ class Members_model extends CI_Model
 					$dob = date('Y-m-d', strtotime($row->CLIENT_DATE_OF_BIRTH));
 
 				}
-				$type = '<span class="badge">Employee</span>';
+
+				$type = '<span class="badge badge-secondary">Employee</span>';
 				if ($row->USER_TYPE == 'MANAGER')
 				{
 
-					$type = '<span class="badge badge-important">Manager</span>';
+					$type = '<span class="badge badge-secondary">Manager</span>';
 
 				}
-				$str = 'remove_user(' . $row->cID . ')';
-				echo '<tr>
-						<td style="width:5%;min-width:40px"><img src="' . $this->get_avatar($row->ID) . '" alt="" style="width:25px;height:25px" class="img-polaroid"/> </td>
-						<td style="width:30%">' . $row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME . '</td>
-						<td style="width:10%">' . $type . '</td>
-						<td style="width:25%">' . $location . '</td>
-						<td style="width:20%">' . $dob . '</td>
-					  	<td style="width:10%; text-align:right;min-width:100px;">
-						   <a class="btn btn-mini btn-inverse" onclick="' . $str . '"><i class="icon-remove icon-white"></i></a>
-						   
+
+				echo '<tr id="usr-row-'.$row->cID.'">
+						<td style="width:8%;"><img src="' . $this->get_avatar($row->ID) . '" alt="" class="img-thumbnail"/> </td>
+						<td style="width:32%" valign="middle">' . $row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME . '</td>
+						<td style="width:20%">' . $type . '</td>
+						<td style="width:30%">' . $location . '</td>				  	
+						<td style="width:10%; text-align:right;min-width:100px;">
+						   <a class="btn btn-sm btn-dark usr-remove" data-id="'.$row->cID.'" data-bus="'.$bus_id.'"><i class="fa fa-trash-o"></i></a>
 						</td>
 					  </tr>';
 
@@ -101,144 +85,10 @@ class Members_model extends CI_Model
 		{
 
 			$data = '';
-			//return $data;
-
 
 		}
-		$load_img = "<img src='" . base_url('/') . "img/load.gif' />";
-		$exit_str = "javascript:$('#modal-user-delete').modal('hide')";
-		$exit_str1 = "javascript:$('#modal-user-add').modal('hide')";
-		echo '	</tbody>
-				</table>
-				<hr />
-				<div id="modal-user-add" class="modal hide fade">
-					<div class="modal-header">
-					  <a href="javascript:void(0)" onclick="' . $exit_str1 . '" class="close">&times;</a>
-					  <h3>Add User</h3>
-					</div>
-					 <div class="modal-body">
-					   <p>To add a new user please start typing their name</p>
-					   <input type="text" style="width:95%;" placeholder="start typing name" id="user_name_srch"/>
-					   <div id="add_user_div" style="width:100%;min-height:30px;display:none;" class="loading_img"></div>
-					</div>
-					<div class="modal-footer">
-					  <a href="javascript:void(0)" onclick="' . $exit_str1 . '" class="btn btn-secondary">Cancel</a>
-					</div>
-				</div>
-				
-				<div id="modal-user-delete" class="modal hide fade">
-					<div class="modal-header">
-					  <a href="' . $exit_str . '" onclick="' . $exit_str . '" class="close">&times;</a>
-					  <h3>Remove User</h3>
-					</div>
-					 <div class="modal-body">
-					   <p>Are you sure you want to remove the user from the business?</p>
-					</div>
-					<div class="modal-footer">
-					  <a href="javascript:void(0)"  onclick="' . $exit_str . '" class="btn btn-primary">Remove</a>
-					  <a href="javascript:void(0)" onclick="' . $exit_str . '" class="btn btn-secondary">No</a>
-					</div>
-				</div>
-				
-				<script type="text/javascript">
 
-
-					function add_user(){
-	
-						$("#modal-user-add").appendTo("body").bind("show", function() {
-							var Btn = $(this).find(".btn-primary");
-								
-								Btn.click(function(e) { 
-										
-									$("#modal-user-add").modal("hide");
-												
-								});
-						}).modal({ backdrop: true });
-						
-					}  
-					
-					function add_user_do(id){
-						var btn = $("#add-"+id);
-						btn.html("' . $load_img . '");
-						$.ajax({
-							type: "get",
-							url: "' . site_url('/') . 'members/add_user_business/"+id+"/"+' . $bus_id . ' ,
-							success: function (data) {
-								 btn.html("Add");
-								 $("#modal-user-add").modal("hide");
-								 load_tab(' . $bus_id . ',"users");
-							}
-						});	
-					}  
-					
-					var delay = 1000;
-					var isLoading = false;
-					var isDirty = false;
-					function reloadSearch() {
-					  if(!isLoading){
-						  var q = $("#user_name_srch").val();
-						   if (q.length >= 3) {
-							  isLoading = true;
-							   var div = $("#add_user_div");
-							   div.show();
-							   div.addClass("loading_img");	
-  
-							   $.get("' . site_url('/') . 'members/instant_user/"+encodeURIComponent(q), function(data) {
-								  div.html(data);
-								  div.removeClass("loading_img");
-								});
-							   
-							   // enforce the delay
-							   setTimeout(function(){
-								 isLoading=false;
-								 if(isDirty){
-								   isDirty = false;
-								   reloadSearch();
-								 }
-							   }, delay);
-						   }
-						 }
-					};
-					
-
-					$(document).ready(function() {
-						reloadSearch();
-					  
-						$("#user_name_srch").keyup(function(){
-						  isDirty = true;
-						  reloadSearch();
-					  });
-					  $("[rel=tooltip]").tooltip();
-					});
-					
-
-					function remove_user(id){
-	
-						$("#modal-user-delete").appendTo("body").bind("show", function() {
-							var removeBtn = $(this).find(".btn-primary"),
-								href = removeBtn.attr("href");
-								
-								removeBtn.click(function(e) { 
-										
-									e.preventDefault();
-									removeBtn.html("Removing");
-											$.ajax({
-												type: "get",
-												url: "' . site_url('/') . 'members/delete_user_business/"+id+"/"+' . $bus_id . ' ,
-												success: function (data) {
-													 removeBtn.html("Remove");
-													 $("#modal-user-delete").modal("hide");
-													 $("#deals").html(data);
-													 load_tab(' . $bus_id . ',"users");
-												}
-											});
-								});
-						}).modal({ backdrop: true });
-						
-					}  
-							
-	
-				</script>';
+		
 
 	}
 
@@ -470,18 +320,16 @@ class Members_model extends CI_Model
 				if ($this->agent->referrer() == site_url('/') . 'members/register/' || $this->agent->referrer() == site_url('/') . 'members/register' || $this->agent->referrer() == site_url('/') . 'my_admin/home/')
 				{
 
-					$span = 'span4';
 
 				}
 				else
 				{
 
-					$span = 'span8';
 				}
-				echo '<div class="control-group">
-					  <label class="control-label" for="city">City</label>
-					  <div class="controls">
-							<select onchange="populateSuburb(this.value);" id="city" name="city"  class="' . $span . '">
+				echo '<div class="form-group row">
+					  <label for="city" class="col-sm-1 col-form-label">City</label>
+					  	<div class="col-sm-10">
+							<select onchange="populateSuburb(this.value);" id="city" name="city"  class="form-control">
 							<option value="0">Please Select your City</option>';
 
 				foreach ($query->result() as $row)
@@ -511,7 +359,7 @@ class Members_model extends CI_Model
 			else
 			{
 
-				return;
+
 			}
 		}
 	}
@@ -532,19 +380,16 @@ class Members_model extends CI_Model
 			if ($this->agent->referrer() == site_url('/') . 'members/register/' || $this->agent->referrer() == site_url('/') . 'members/register')
 			{
 
-				$span = 'span4';
-
 			}
 			else
 			{
 
-				$span = 'span8';
 			}
 
-			echo '<div class="control-group">
-                  <label class="control-label" for="suburb">Suburb</label>
-                  <div class="controls">
-              			<select id="suburb" name="suburb" class="' . $span . '">
+			echo '<div class="form-group row">
+					  <label for="city" class="col-sm-1 col-form-label">Suburb</label>
+                  	  <div class="col-sm-10">
+              			<select id="suburb" name="suburb" class="form-control">
 						<option value="0">Please Select your Suburb</option>';
 
 			foreach ($query->result() as $row)
@@ -577,6 +422,10 @@ class Members_model extends CI_Model
 			return;
 		}
 	}
+
+
+
+	
 	//+++++++++++++++++++++++++++
 	//POPULATE SUBURBS FOR REGIONS
 	//++++++++++++++++++++++++++
@@ -745,7 +594,7 @@ class Members_model extends CI_Model
 
 		//upload file
 
-		$config['upload_path'] = BASE_URL . 'assets/users/photos/';
+		$config['upload_path'] = S3_URL . 'assets/users/photos/';
 		$config['allowed_types'] = 'gif|jpg|jpeg|png';
 		$config['max_size'] = '8024';
 		$config['max_width'] = '8324';
@@ -1240,6 +1089,8 @@ class Members_model extends CI_Model
 
 		$name1 = str_replace('--', '-', preg_replace('/[^A-Za-z0-9\-]/', '-', $name)) . rand(9, 99999);
 
+		$this->load->library('encryption');
+
 		if (isset($_FILES['userfile1']))
 		{
 
@@ -1346,7 +1197,8 @@ class Members_model extends CI_Model
 			$data['width'] = $this->upload->image_width;
 			$data['height'] = $this->upload->image_height;
 			$image = S3_URL . 'assets/business/photos/' . $file;
-			$btn_path = site_url('/') . 'my_images/edit_image/' . urlencode($this->encrypt->encode('assets/business/photos/' . $file));
+			$btn_path = site_url('/') . 'my_images/edit_image/' . urlencode($this->encryption->encrypt('assets/business/photos/' . $file));
+			
 			//redirect
 			$data['basicmsg'] = '<h4>Do you want to crop the photo?</h4>Your cover photo has been uploaded, do you want to crop your photo to fit the box?
 				 <a href="' . $btn_path . '" class="btn btn-inverse pull-right" rel="tooltip" title="Cover Image 750 pixels x 300 pixels" style="margin:5px"><i class="icon-retweet icon-white"></i> Crop Image Now</a>
@@ -1376,6 +1228,7 @@ class Members_model extends CI_Model
 						   <script type="text/javascript">cover_upload_success("' . $image . '", "' . $btn_path . '");</script>
 						   ';
 				$this->output->set_header("HTTP/1.0 200 OK");
+				
 			}
 
 		}
@@ -2752,7 +2605,14 @@ class Members_model extends CI_Model
 	//GET USER AVATAR
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public function get_avatar($id)
-	{
+	{ 
+
+		$this->load->model('image_model'); 
+		$this->load->library('thumborp');
+
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 60;
+		$height = 60;
 
 		$this->db->select('ID , CLIENT_PROFILE_PICTURE_NAME as PIC');
 		$this->db->where('ID', $id);
@@ -2769,20 +2629,23 @@ class Members_model extends CI_Model
 			if (strstr($row['PIC'], "http"))
 			{
 
-				$avatar = $row['PIC'];
+				$avatar_url = $row['PIC'];
+
 
 			}
 			elseif (strpos($row['PIC'], '.') == 0)
 			{
 
 				$format = '.jpg';
-				$avatar =  S3_URL . 'assets/users/photos/' . $row['PIC'] . $format;
+				$avatar =  'assets/users/photos/' . $row['PIC'] . $format;
+				$avatar_url = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar,$width,$height,$crop = '');
 
 			}
 			else
 			{
 
-				$avatar =  S3_URL . 'assets/users/photos/' . $row['PIC'];
+				$avatar =  'assets/users/photos/' . $row['PIC'];
+				$avatar_url = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar,$width,$height,$crop = '');
 
 			}
 
@@ -2791,11 +2654,12 @@ class Members_model extends CI_Model
 		else
 		{
 
-			$avatar = base_url('/') . 'img/user_blank.jpg';
+			$avatar = 'assets/users/photos/user_blank.jpg';
+			$avatar_url = $this->image_model->get_image_url_param($thumbnailUrlFactory,$avatar,$width,$height,$crop = '');
 
 		}
 
-		return $avatar;
+		return $avatar_url;
 	}
 
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	

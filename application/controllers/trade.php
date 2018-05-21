@@ -17,9 +17,17 @@ class Trade extends CI_Controller {
 		$this->load->model('my_na_model'); 
 
     }
+
+
+	public function load_product_map($pid) {
+
+		$data['ID'] = $pid;
+
+		$this->load->view('trade/inc/product_map_inc.php', $data);
+
+	}
+
 	
-
-
 
 	//+++++++++++++++++++++++++++
 	//TRADE/INDEX
@@ -125,7 +133,7 @@ class Trade extends CI_Controller {
 	//PST RESULT REDIRECT my.na/buy/
 	//++++++++++++++++++++++++++	
 
-	public function results($main_cat = '', $sub_cat = '', $sub_sub_cat = '' , $sub_sub_sub_cat = '', $location = '', $suburb = '' , $price_from = '', $price_to = '', $main_cat_id = 0,$sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0,$sort = '' ,$key = '' ,  $bus_id = 0 , $limit = 15 ,$offset = 0)
+	public function results($main_cat = '', $sub_cat = '', $sub_sub_cat = '' , $sub_sub_sub_cat = '', $location = '', $suburb = '' , $price_from = '', $price_to = '', $main_cat_id = 0,$sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0,$sort = '' ,$key = '' ,  $bus_id = 0 , $limit = 40 ,$offset = 0)
 	{
         $this->load->model('trade_search_model');
 		//See if top-level category
@@ -224,7 +232,7 @@ class Trade extends CI_Controller {
 		$data['query'] = $q['query'];
 		$data['count'] = $q['count'];
 		$data['offset'] = $offset;
-		$data['limit'] = $limit;
+		$data['limit'] = 50;
 		$data['sort'] = $sort;
 		$data['title'] = $q['title'];
 		$data['heading'] = $q['heading'];
@@ -245,15 +253,13 @@ class Trade extends CI_Controller {
 		$data['price_from'] = $price_from;
 
 		if($this->input->is_ajax_request()){
-
 			$this->trade_model->get_products($data['query'], $data['main_cat_id'], $data['sub_cat_id'], $data['sub_sub_cat_id'], $data['sub_sub_sub_cat_id'], $data['count'], $data['offset'], $data['title'], $amt = '', $advert = TRUE, $data['pages']);
 		}else{
-
 			$this->load->view('trade/results', $data);
 		}
 
 
-	}
+	} 
 
 	public function home()
 	{
@@ -470,8 +476,12 @@ class Trade extends CI_Controller {
 	//++++++++++++++++++++++++++
 	public function agent( $bus_id, $agent_id, $agency, $name = '')
 	{
-		if($agent_id == '0'){
 
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+
+		if($agent_id == '0'){
 
 			$this->load->model('business_model');
 			//Temp redirect for NMH print edition
@@ -565,6 +575,10 @@ class Trade extends CI_Controller {
 	public function product($id)
 	{
 
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+
 		$output = '';
 
 		//redirect SEO friendly url
@@ -626,7 +640,7 @@ class Trade extends CI_Controller {
 							  $this->load->library('user_agent');
 							  if ($this->agent->is_mobile())
 							  {
-								  $output = $this->load->view('trade/single_mobile', $row, TRUE);
+								  $output = $this->load->view('trade/single', $row, TRUE);
 							  }else{
 
 								  $output = $this->load->view('trade/single', $row, TRUE);
@@ -706,7 +720,7 @@ class Trade extends CI_Controller {
 		  */
 		  $this->load->library('user_agent');
 		  if ($this->agent->is_mobile()) {
-			$images = $this->trade_model->show_images_mobile($product_id, $size = 'big');
+			$images = $this->trade_model->show_images($product_id, $size = 'big');
 		  }else{
 
 			 $images = $this->trade_model->show_images($product_id, $size = 'big');
@@ -1061,11 +1075,13 @@ class Trade extends CI_Controller {
 	}
 
 	//DELETE PRODUCT CATEGORIES	
-	function product_img_delete($img_id){
+	function product_img_delete(){
+
+		$img_id = $this->input->post('img_id', TRUE);
 
 		$query = $this->trade_model->product_img_delete($img_id);
 
-
+ 
 	}
 
 	//++++++++++++++++++++++++++++++++++++
@@ -1075,57 +1091,57 @@ class Trade extends CI_Controller {
 	{
 		if($this->session->userdata('id')){
 
-				$this->db->where('product_id', $product_id);
-				$query = $this->db->get('products');
+			$this->db->where('product_id', $product_id);
+			$query = $this->db->get('products');
 
-				if($query->result()){
+			if($query->result()){
 
-					$row = $query->row_array();
+				$row = $query->row_array();
 
-					if($row['bus_id'] != 0){
-						$this->load->model('members_model');
-						if(!$this->members_model->check_business_user($row['bus_id'])){
-							$data['error'] = 'Sorry, please login to continue';
-							$this->load->view('login' , $data);
-							return;
-						}
-
+				if($row['bus_id'] != 0){
+					$this->load->model('members_model');
+					if(!$this->members_model->check_business_user($row['bus_id'])) {
+						$data['error'] = 'Sorry, please login to continue';
+						$this->load->view('login' , $data);
+						return;
 					}
-
-
-					$row['step'] = 2;
-					$row['cat1'] = $row['main_cat_id'];
-					$row['cat1name'] = '';
-					$row['cat2'] = $row['sub_cat_id'];
-					$row['cat2name'] = '';
-					$row['cat3'] = $row['sub_sub_cat_id'];
-					$row['cat3name'] = '';
-					$row['cat4'] = $row['sub_sub_sub_cat_id'];
-					$row['cat4name'] = '';
-
-					$row['catname'] = $this->trade_model->get_cat_names($row);
-
-					$this->load->view('trade/inc/sell_general_item', $row);
-
-				}else{
-
-
-
 				}
+
+
+				$row['step'] = 2;
+				$row['cat1'] = $row['main_cat_id'];
+				$row['cat1name'] = '';
+				$row['cat2'] = $row['sub_cat_id'];
+				$row['cat2name'] = '';
+				$row['cat3'] = $row['sub_sub_cat_id'];
+				$row['cat3name'] = '';
+				$row['cat4'] = $row['sub_sub_sub_cat_id'];
+				$row['cat4name'] = '';
+
+				$row['catname'] = $this->trade_model->get_cat_names($row);
+
+				$this->load->view('trade/inc/sell_general_item', $row);
+
+			}else{
+
+			}
+
 		}else{
-				$data['redirect'] = current_url('/');
-				$data['error'] = 'Sorry, please login to continue';
-				$this->load->view('login' , $data);
+
+			$data['redirect'] = current_url('/');
+			$data['error'] = 'Sorry, please login to continue';
+			$this->load->view('login' , $data);
 
 		}
-
 	}
 
 	//+++++++++++++++++++++++
 	//DELETE PRODUCT AND IMAGES
 	//+++++++++++++++++++++++
-	function delete_product($id)
+	function delete_product()
 	{
+
+		$id = $this->input->post('id', TRUE);
 
 		if($this->session->userdata('id') || $this->session->userdata('admin_id')){
 
@@ -1700,22 +1716,28 @@ class Trade extends CI_Controller {
 	//+++++++++++++++++++++++++++
 	//UPDATE PRODUCT STATUS
 	//++++++++++++++++++++++++++
-	function update_product_status($id, $str){
+	function update_product_status(){
+
+	    $id = $this->input->post('id', TRUE);
+		$type = $this->input->post('type', TRUE);	
 
 		if($this->session->userdata('id') || $this->session->userdata('admin_id')){
 
-			$data['status'] = trim($str);
+			$data['status'] = trim($type);
 			$this->db->where('product_id', $id);
 			$this->db->update('products', $data);
 
 		}
 
-
 	}
+
 	//+++++++++++++++++++++++++++
 	//ACTIVATE PRODUCT STATUS
 	//++++++++++++++++++++++++++
-	function activate_product_status($id, $str){
+	function activate_product_status(){
+
+		$id = $this->input->post('id', TRUE);
+		$str = $this->input->post('str', TRUE);
 
 		if($this->session->userdata('id') || $this->session->userdata('admin_id')){
 
@@ -1726,30 +1748,32 @@ class Trade extends CI_Controller {
 
 		}
 
-
 	}
+
     //+++++++++++++++++++++++++++
     //EXTEND PRODUCT STATUS BY 30 DAYS
     //++++++++++++++++++++++++++
-    function extend_product_status($id, $type){
+    function extend_product_status(){
+
+    	$id = $this->input->post('id', TRUE);
+		$type = $this->input->post('type', TRUE);
 
         if($this->session->userdata('id') || $this->session->userdata('admin_id')){
 
             $data['end_date'] = date('Y-m-d', strtotime("+30 days"));
             if($type == 'A'){
+
                 $data['end_date'] = date('Y-m-d', strtotime("+7 days"));
 
             }
 
-
-            //$data['is_active'] = ucwords(trim($str));
             $this->db->where('product_id', $id);
             $this->db->update('products', $data);
 
         }
 
-
     }
+
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //RATE SELLER BUYER
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1799,62 +1823,10 @@ class Trade extends CI_Controller {
 
 	public function get_product_questions(){
 
-		$product_id = $this->input->post('product_id');
-		$product_title = $this->input->post('product_title');
-
-		$out = '';
-
-		if($this->session->userdata('id')){
-
-			$this->load->view('trade/inc/contact_inc', $get);
-
-		}else{
-
-		    $out.= '<div class="alert">
-				<button type="button" class="close" data-dismiss="alert">×</button>
-				Please login or register to ask the seller a question about '.$product_title.'
-				</div>
-				<div class="container-fluid">
-					<form class="form-signin" action="'. site_url('/').'members/login/" enctype="application/x-www-form-urlencoded">
-						<input type="hidden" class="input" name="redirect" value="'.current_url().'">
-						<div class="row" style="margin-bottom:10px">
-							<div class="col-md-12">
-								<input type="text" class="form-control" name="email" placeholder="Email">
-							</div>
-						</div>	
-						<div class="row" style="margin-bottom:10px">
-							<div class="col-md-12">
-								<input type="password" name="pass" class="form-control" placeholder="Password">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-scope="email" onlogin="checkLoginState()" data-auto-logout-link="false"></div>
-							</div>
-							<div class="col-md-4">	
-								<a class="btn btn-block btn-dark" href="'.site_url('/').'members/register/"><i class="fa fa-star text-light"></i> Join</a>
-							</div>
-							<div class="col-md-4">	
-								<button type="submit" class="btn btn-block btn-dark"><i class="fa fa-lock text-light"></i> Sign in</button>
-							</div>
-						</div>
-						
-					</form>';
-
-					$out.= '<h3 class="na_script">Questions Asked</h3>';
-					
-					$out.= $this->trade_model->get_product_questions($product_id);
-
-			$out.= '</div>';
-
-	  	$this->output
-        ->set_content_type('application/json')
-        ->set_output(json_encode(array('questions' => $out)));		
-
-		}
-
+		$this->load->view('trade/inc/questions');
 
 	}
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//+GET PRODUCT MAP
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1977,13 +1949,18 @@ class Trade extends CI_Controller {
 
 	}
 
-		//PRINT PRODUCTS
+	//PRINT PRODUCTS
 	function print_pdf($product_id, $style = ''){
+
 		//error_reporting(0);
 		error_reporting(E_ALL);
+
 		ini_set('memory_limit','512M');
+
 		$this->load->model('print_model');
+
 		$data['product_id'] = $product_id;
+		
 		$this->db->select('*');
 		$this->db->where('products.product_id', $product_id);
 		$this->db->join('product_extras','product_extras.product_id = products.product_id');
@@ -2009,8 +1986,8 @@ class Trade extends CI_Controller {
 				$row['sub_sub_sub_cat'] = $this->trade_model->get_category_name($row['sub_sub_sub_cat_id']);
 
 				$html = $this->load->view('trade/print_pdf'.$style, $row, true);// render the view into HTML
-				//$html = '<h1>Hello</h1>';
-				//echo $html;
+
+
 				$this->load->library('pdf');
 				$pdf = $this->pdf->load();
 				$stylecss = file_get_contents( base_url('/').'css/bootstrap.min.css');

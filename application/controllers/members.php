@@ -10,46 +10,51 @@ class Members extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('members_model');
-		
+		$this->load->model('members_model');	
+		$this->load->model('business_model');
+		$this->load->model('trade_model');	
+	    $this->section_1 = $this->uri->segment(1);
+	    $this->section_2 = $this->uri->segment(2);				
 	}
 
 	
 	public function index()
-	{
+	{ 
 		
 		if($id = $this->session->userdata('id')){
-			 	//REDIRECT AUTH
-				if($url = $this->input->get('redirect_url')){
 
-					
-					$d['my_na_id'] = $id;
-					$d['u_name'] = $this->session->userdata('u_name');
-					$d['u_email'] = $this->session->userdata('u_email');
-					$d['img_file'] = $this->session->userdata('img_file');
-					$d['city'] = $this->session->userdata('city');
-					$d['country'] = $this->session->userdata('country');
-					$d['points'] = $this->session->userdata('points');
-					$d['register_date'] = $this->session->userdata('register_date');
-					echo "<script>window.location.href = '".$url.'&sess='.$this->encrypt->encode(json_encode($d))."';</script>";
-					
-					//echo $url.'&sess='.$this->encrypt->encode(json_encode($d))."&url=";
-					
-					//var_dump($this->input->get());
-					die();
-				}
+		 	//REDIRECT AUTH
+			if($url = $this->input->get('redirect_url')){
+
+				$d['section_1'] = $this->section_1;
+				$d['section_2'] = $this->section_2;
+				$d['my_na_id'] = $id;
+				$d['u_name'] = $this->session->userdata('u_name');
+				$d['u_email'] = $this->session->userdata('u_email');
+				$d['img_file'] = $this->session->userdata('img_file');
+				$d['city'] = $this->session->userdata('city');
+				$d['country'] = $this->session->userdata('country');
+				$d['points'] = $this->session->userdata('points');
+				$d['register_date'] = $this->session->userdata('register_date');
+				echo "<script>window.location.href = '".$url.'&sess='.$this->encrypt->encode(json_encode($d))."';</script>";
 				
-				$data['id'] = $id;
-				$this->load->view('members/home', $data);	
+				//echo $url.'&sess='.$this->encrypt->encode(json_encode($d))."&url=";
+				
+				//var_dump($this->input->get());
+				die();
+			}
+			
+			$data['id'] = $id;
+			$this->load->view('members/home', $data);	
 		
-		}else{
+		}else{ 
 
-				if($data['redirect'] = $this->input->get('redirect_url')){
-					 
+			if($data['redirect'] = $this->input->get('redirect_url')){
+				 
 
-				}
-				$data['error'] = 'Please login below';
-			    $this->load->view('login', $data);
+			}
+			$data['error'] = 'Please login below';
+		    $this->load->view('login', $data);
 		 }
 	}
 	
@@ -60,7 +65,7 @@ class Members extends CI_Controller {
 	{
 		
 		//var_dump($_SERVER['REQUEST_URI']);
-		echo $_SERVER['REQUEST_URI'];
+		//echo $_SERVER['REQUEST_URI'];
 		//var_dump(uri_string());
 		//echo $this->uri->uri_string();
 		if($this->session->userdata('id')){
@@ -92,10 +97,147 @@ class Members extends CI_Controller {
 				$data['error'] = 'Please login below';
 			    $this->load->view('login', $data);
 			  
-		 }
-		
-		
+		 }	
 	}
+
+
+	//+++++++++++++++++++++++++++
+	//MEMBERS PROFILE
+	//++++++++++++++++++++++++++
+	public function my_profile()
+	{
+		
+		if($this->session->userdata('id')){
+				
+			$redirect = $this->un_clean_url($this->uri->segment(3));
+			
+			if($redirect != ''){
+				$data['redirect'] = $redirect;
+			}
+			
+			if($redirect == 'message'){
+				
+				$data['msg_id'] = $this->uri->segment(4);	
+			}
+
+			
+			$data['id'] = $this->session->userdata('id');
+			$this->load->view('members/my_profile', $data);
+				
+		}else{
+			
+			$data['error'] = 'Please login below';
+		    $this->load->view('login', $data);
+			  
+		 }
+			
+	}
+
+
+	//+++++++++++++++++++++++++++
+	//My Products
+	//++++++++++++++++++++++++++
+	public function my_products()
+	{
+		
+		if($this->session->userdata('id')){
+				
+			$redirect = $this->un_clean_url($this->uri->segment(3));
+			
+			if($redirect != ''){
+				$data['redirect'] = $redirect;
+			}
+			
+			$data['id'] = $this->session->userdata('id');
+			$this->load->view('members/my_products', $data);
+				
+		}else{
+			
+			$data['error'] = 'Please login below';
+		    $this->load->view('login', $data);
+			  
+		 }
+			
+	}
+
+
+
+	//+++++++++++++++++++++++++++
+	//MEMBERS MESSAGES
+	//++++++++++++++++++++++++++
+	public function my_messages()
+	{
+		
+		if($this->session->userdata('id')){
+				
+			$redirect = $this->un_clean_url($this->uri->segment(3));
+			
+			if($redirect != ''){
+				$data['redirect'] = $redirect;
+			}
+			
+			if($redirect == 'message'){
+				
+				$data['msg_id'] = $this->uri->segment(4);	
+			}
+			
+			$data['id'] = $this->session->userdata('id');
+			$this->load->view('members/my_messages', $data);
+				
+		}else{
+			
+			$data['error'] = 'Please login below';
+		    $this->load->view('login', $data);
+			  
+		 }
+			
+	}
+
+
+
+
+
+
+
+	//+++++++++++++++++++++++++++
+	//POPULATE MESSAGES
+	//++++++++++++++++++++++++++
+	public function populate_inbox()
+	{
+		
+		if($this->session->userdata('id')){
+				
+			$redirect = $this->un_clean_url($this->uri->segment(3));
+			
+			if($redirect != ''){
+				$data['redirect'] = $redirect;
+			}
+			
+			if($redirect == 'message'){
+				
+				$data['msg_id'] = $this->uri->segment(4);	
+			}
+			
+			$id = $this->session->userdata('id');
+			$status = $this->input->post('status', TRUE);
+			
+			$this->load->model('email_model');	
+
+			$o = $this->email_model->get_member_messages($id,$status);
+
+			$this->output
+		       ->set_content_type('application/json')
+		       ->set_output(json_encode(array('inbox' => $o)));			
+				
+		} else {
+			
+			$data['error'] = 'Please login below';
+		    $this->load->view('login', $data);
+			  
+		}
+			
+	}	
+
 
 	//+++++++++++++++++++++++++++
 	//LOAD MEMBERS HOME DIREWCTORY SEARCH
@@ -210,6 +352,25 @@ class Members extends CI_Controller {
 		$query = $this->db->query("SELECT * FROM u_special_component WHERE IS_ACTIVE = 'Y' AND SPECIALS_EXPIRE_DATE > NOW() ORDER BY RAND() LIMIT 10" ,FALSE);
 		$this->deal_model->show_deals($query );
 	}
+
+	//+++++++++++++++++++++++++++
+	//LOAD BUSINESS PRODUCTS
+	//++++++++++++++++++++++++++
+	public function load_bus_products()
+	{
+
+		$bus_id = trim($this->input->post('bus_id', TRUE));
+		$section = trim($this->input->post('section', TRUE));
+
+		$this->load->model('sell_model');
+
+		$o = $this->sell_model->get_client_products($bus_id, $section); 
+
+
+	}
+
+
+
 	//+++++++++++++++++++++++++++
 	//SCRATCH & WIN
 	//++++++++++++++++++++++++++
@@ -317,6 +478,8 @@ class Members extends CI_Controller {
 
 	public function register()
 	{
+
+		$this->load->model('my_na_model');
 
         $data = $this->my_na_model->get_ip_location();
 
@@ -1145,7 +1308,7 @@ class Members extends CI_Controller {
 			  
 		 }
 		
-		
+		 
 	}
 	 //+++++++++++++++++++++++++++
 	//UPLOAD AVATAR AJAX
@@ -1186,7 +1349,7 @@ class Members extends CI_Controller {
 	}
 	//+++++++++++++++++++++++++++
 	//POPULATE CITIES FOR COUNTRIES
-	//++++++++++++++++++++++++++
+	//++++++++++++++++++++++++++ 
 	public function populate_city($cunt_id, $city)
 	{
 		$this->members_model->populate_city($cunt_id, $city);
@@ -1305,6 +1468,7 @@ class Members extends CI_Controller {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //TNA MAIL
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
+
 	//+++++++++++++++++++++++++++
 	//BUILD MAIL
 	//++++++++++++++++++++++++++
@@ -1329,6 +1493,7 @@ class Members extends CI_Controller {
 		 }
 	
 	}
+	
 	//+++++++++++++++++++++++++++
 	//PREVIEW MESSAGE
 	//++++++++++++++++++++++++++	
@@ -1345,11 +1510,12 @@ class Members extends CI_Controller {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //BUSINESS 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
-	//+++++++++++++++++++++++++++
+	//+++++++++++++++++++++++++++ 
 	//BUSINESS DETAILS EDIT
 	//++++++++++++++++++++++++++
 	public function business($bus_id, $section = '',$msg_id = '')
 	{
+
 		
 		if($this->members_model->check_business_user($bus_id)){
 				
@@ -1357,8 +1523,34 @@ class Members extends CI_Controller {
 				$data['bus_id'] = $bus_id;
 				$data['msg_id'] = $msg_id;
 				$data['section'] = $section;
-			
-				$this->load->view('members/business_details', $data);	
+
+			$this->load->model('image_model'); 
+
+			$this->load->library('thumborp');
+
+
+				$this->load->model('rating_model');
+				$data['bus_id'] = $bus_id;
+				$this->load->model('trade_model');
+				//ADD a VIEW LISTING COUNTER
+				$this->business_model->add_business_view($bus_id);
+
+				$data['bus_details'] = $this->business_model->get_business_details($bus_id);
+				$data['cats'] = $this->business_model->get_current_categories($bus_id);
+				//get RATING
+				$data['rating'] = $this->business_model->get_rating($bus_id);
+				//$this->load->view('trade/business_products', $data);
+
+				if($bus_id == '0') {
+
+					$this->load->view('members/my_products', $data);
+
+				} else {
+
+					$this->load->view('members/business_details', $data);
+
+				}
+					
 		
 		}else{
 				
@@ -1366,6 +1558,7 @@ class Members extends CI_Controller {
 			  
 		 }
 	
+
 	}
 	
 	
@@ -1375,6 +1568,9 @@ class Members extends CI_Controller {
 	function update_business_do()
 	{
 			
+
+
+
 			$this->output->set_header("Access-Control-Allow-Origin: http://cms.my.na");
 			$email = trim($this->input->post('email', TRUE));
 			$name = $this->input->post('name', TRUE);
@@ -1387,7 +1583,7 @@ class Members extends CI_Controller {
 			$web = prep_url($this->input->post('url', TRUE));
 			$pobox = $this->input->post('pobox', TRUE);
 			$address = $this->input->post('address', TRUE);
-			$description =  html_entity_decode(str_replace('&nbsp;', ' ',$this->input->post('content', TRUE)));
+			//$description =  html_entity_decode(str_replace('&nbsp;', ' ',$this->input->post('content', TRUE)));
 			$bus_id = $this->input->post('bus_id', TRUE);
 			$id = $this->input->post('id', TRUE);
 			$country = $this->input->post('country', TRUE);
@@ -1434,12 +1630,6 @@ class Members extends CI_Controller {
 				   $val = TRUE;	
 				}
 			
-			}elseif(str_word_count($description) < 30){
-				$val = FALSE;
-				$error = 'Please provide a minimum of 30 words for your business description. Currently: '.str_word_count($description).' words.';	
-				
-			}else{
-				$val = TRUE;
 			}
 			
 		
@@ -1457,7 +1647,6 @@ class Members extends CI_Controller {
 								  'BUSINESS_CELLPHONE'=> $cell,
 								  'FAX_DIAL_CODE'=> $faxcode,
 								  'BUSINESS_FAX'=> $fax2,
-								  'BUSINESS_DESCRIPTION'=> $description,
 								  'BUSINESS_POSTAL_BOX'=> $pobox,
 								  'BUSINESS_URL' => $web,
 								  'BUSINESS_COUNTRY_ID' => $country,
@@ -1502,7 +1691,7 @@ class Members extends CI_Controller {
 			$web = prep_url($this->input->post('url', TRUE));
 			$pobox = $this->input->post('pobox', TRUE);
 			$address = $this->input->post('address', TRUE);
-			$description =  html_entity_decode(str_replace('&nbsp;', ' ',$this->input->post('content', FALSE)));
+			//$description =  html_entity_decode(str_replace('&nbsp;', ' ',$this->input->post('content', FALSE)));
 			$bus_id = $this->input->post('bus_id', TRUE);
 			$id = $this->input->post('id', TRUE);
 			$country = $this->input->post('country', TRUE);
@@ -1548,12 +1737,6 @@ class Members extends CI_Controller {
 				   $val = TRUE;	
 				}
 			
-			}elseif(str_word_count($description) < 30){
-				$val = FALSE;
-				$error = 'Please provide a minimum of 30 words for your business description. Currently: '.str_word_count($description).' words.';	
-				
-			}else{
-				$val = TRUE;
 			}
 			
 		
@@ -1571,7 +1754,6 @@ class Members extends CI_Controller {
 								  'BUSINESS_CELLPHONE'=> $cell,
 								  'FAX_DIAL_CODE'=> $faxcode,
 								  'BUSINESS_FAX'=> $fax2,
-								  'BUSINESS_DESCRIPTION'=> $description,
 								  'BUSINESS_POSTAL_BOX'=> $pobox,
 								  'BUSINESS_URL' => $web,
 								  'BUSINESS_PHYSICAL_ADDRESS' => $address,
@@ -1584,29 +1766,89 @@ class Members extends CI_Controller {
 			
 			if($val == TRUE){
 				
-					$this->db->where('ID' , $bus_id);
-					$this->db->update('u_business', $insertdata);
-					
-					//$this->sync_tourism_db($insertdata, $bus_id);
-					//success redirect	
-					$data['bus_id'] = $bus_id;
-					$data['id'] = $this->session->userdata('id');
-					$data['basicmsg'] = $name . ' has been updated successfully';
-					echo '<div class="alert alert-success">
-         			<button type="button" class="close" data-dismiss="alert">×</button>
-            		'.$data['basicmsg'].'</div>';
-					$this->output->set_header("HTTP/1.0 200 OK");
-			}else{
-					$data['id'] = $this->session->userdata('id');
-					$data['bus_id'] = $bus_id;
-					$data['error'] = $error;
-					echo '<div class="alert alert-error">
-         			<button type="button" class="close" data-dismiss="alert">×</button>
-            		'.$data['error'].'</div>';
-					$this->output->set_header("HTTP/1.0 200 OK");
+				$this->db->where('ID' , $bus_id);
+				$this->db->update('u_business', $insertdata);
 				
+				//$this->sync_tourism_db($insertdata, $bus_id);
+				//success redirect	
+				$data['bus_id'] = $bus_id;
+				$data['id'] = $this->session->userdata('id');
+				$data['basicmsg'] = $name . ' has been updated successfully';
+				echo '<div class="alert alert-success">
+     			<button type="button" class="close" data-dismiss="alert">×</button>
+        		'.$data['basicmsg'].'</div>';
+				$this->output->set_header("HTTP/1.0 200 OK");
+
+			}else{
+
+				$data['id'] = $this->session->userdata('id');
+				$data['bus_id'] = $bus_id;
+				$data['error'] = $error;
+				echo '<div class="alert alert-danger">
+     			<button type="button" class="close" data-dismiss="alert">×</button>
+        		'.$data['error'].'</div>';
+				$this->output->set_header("HTTP/1.0 200 OK");
+	
 			}
 	}
+
+
+   //+++++++++++++++++++++++++++
+	//UPDATE BUSINESS DETAILS
+	//++++++++++++++++++++++++++	
+	function business_desc_update_do_ajax()
+	{
+			$name = $this->input->post('name', TRUE);
+			$description =  html_entity_decode(str_replace('&nbsp;', ' ',$this->input->post('content', FALSE)));
+			$bus_id = $this->input->post('bus_id', TRUE);
+			$id = $this->input->post('id', TRUE);
+			
+			//VALIDATE INPUT
+			if($description == ''){
+				$val = FALSE;
+				$error = 'Please provide us with your business description.';	
+
+        	}else{
+        		$val = TRUE;
+        	}
+			
+				
+			$insertdata = array(
+				'BUSINESS_DESCRIPTION'=> $description
+			);
+		
+	
+			
+			if($val == TRUE){
+				
+				$this->db->where('ID' , $bus_id);
+				$this->db->update('u_business', $insertdata);
+				
+				//$this->sync_tourism_db($insertdata, $bus_id);
+				//success redirect	
+				$data['bus_id'] = $bus_id;
+				$data['id'] = $this->session->userdata('id');
+				$data['basicmsg'] = $name . 'description has been updated successfully';
+				echo '<div class="alert alert-success">
+     			<button type="button" class="close" data-dismiss="alert">×</button>
+        		'.$data['basicmsg'].'</div>';
+				$this->output->set_header("HTTP/1.0 200 OK");
+
+			}else{
+
+				$data['id'] = $this->session->userdata('id');
+				$data['bus_id'] = $bus_id;
+				$data['error'] = $error;
+				echo '<div class="alert alert-danger">
+     			<button type="button" class="close" data-dismiss="alert">×</button>
+        		'.$data['error'].'</div>';
+				$this->output->set_header("HTTP/1.0 200 OK");
+	
+			}
+	}
+
+
+
 		
 	//+++++++++++++++++++++++++++
 	//SYNC HAN/TOURISM LISTING
@@ -1657,22 +1899,24 @@ class Members extends CI_Controller {
 		
 		if($this->session->userdata('id')){
 			 	
-				$msg = $this->un_clean_url($this->uri->segment(4));
-				
-				$data['id'] = $this->session->userdata('id');
-				
-				if($msg != ''){
-					$data['basicmsg'] = $msg;
-				}
-				$this->load->view('members/add_business', $data);	
+			$msg = $this->un_clean_url($this->uri->segment(4));
+			
+			$data['id'] = $this->session->userdata('id');
+			
+			if($msg != ''){
+				$data['basicmsg'] = $msg;
+			}
+
+			$this->load->view('members/add_business', $data);	
 		
 		}else{
 			
-				$this->load->view('login');
+			$this->load->view('login');
 			  
 		 }
 	
 	} 
+	
 	//+++++++++++++++++++++++++++
 	//ADD NEW BUSINESS
 	//++++++++++++++++++++++++++	
@@ -2094,7 +2338,7 @@ class Members extends CI_Controller {
 				$data['basicmsg'] = 'Co-ordinates updated successfully';
 				$data['bus_id'] = $bus_id;
 				$data['id'] = $this->session->userdata('id');
-				redirect('/members/business/'.$bus_id.'/'.$this->clean_url($data['basicmsg']), '301');
+				redirect('/members/business/'.$bus_id.'/'.$this->clean_url($data['basicmsg']).'/#Map', '301');
 		
 		}else{
 				
@@ -2174,7 +2418,7 @@ class Members extends CI_Controller {
 				$this->deal_model->get_business_deals($bus_id);
 				$this->load->view('members/inc/deals_inc', $data);	
 		
-		}else{
+		}else{ 
 			
 				$data['error'] = 'Please login below';
 			    $this->load->view('login', $data);
@@ -2207,9 +2451,13 @@ class Members extends CI_Controller {
 	//+++++++++++++++++++++++++++
 	//DEL:ETE USERS FOR THE BUSINESS
 	//++++++++++++++++++++++++++
-	public function delete_user_business($id, $bus_id)
+	public function delete_user_business()
 	{
 		 
+
+		$id = $this->input->post('user_id', TRUE); 
+		$bus_id = $this->input->post('bus_id', TRUE); 
+
 		if($this->members_model->check_business_user($bus_id)){
 			 	
 				$this->db->where('ID', $id);
@@ -2715,7 +2963,7 @@ class Members extends CI_Controller {
 	function get_business_analytics($bus_id,$period){
 		
 		$data['bus_id'] = $bus_id;
-		$data['period'] = $period;
+		$data['period'] = $period; 
 		$this->load->view('members/inc/business_analytics',$data);
 		
 		
@@ -3103,43 +3351,10 @@ function un_clean_url($str)
 	public function load_qr($bus_id)
 	{
 		$this->load->model('business_model');
-		echo '<h3>QR Code <small>Quick Response Code</small></h3>
-				<div class="row-fluid">
-					<div class="span6">
-					 <img src="'.$this->business_model->get_qr_vcard_src($bus_id). '" alt=" Vcard for- My Namibia" 
-						title="Vcard for - My Namibia' . '" style="width:295px;height:295px"/>
-					</div>
-					<div class="span5">
-					<div class="alert alert-block">
-						 <button type="button" class="close" data-dismiss="alert">&times;</button>
-						  <h4>What is a QR code?</h4>
-						  (Quick Response code) A two-dimensional bar code that is widely used to cause a Web page to 
-						  download into the users smartphone when scanned with a mobile tagging app. Smart marketers are using them to promote their services 
-						  products or company. Can be used for people to quickly contact you or view your products.
-					</div>
-						<a href="'.$this->business_model->get_qr_vcard_src($bus_id).'" target="_blank" class="btn"><i class="icon-qrcode"></i> Download QR vCard</a>
-						
-					</div>
-				</div>
-				<div class="row-fluid">
-					<div class="span6">
-					 <img src="'.$this->business_model->get_qr_url_src($bus_id). '" alt=" Vcard for- My Namibia" 
-						title="Vcard for - My Namibia' . '" style="width:295px;height:295px"/>
-					</div>
-					<div class="span5">
-					<div class="alert alert-block">
-						 <button type="button" class="close" data-dismiss="alert">&times;</button>
-						  <h4> QR Codes Are Everywhere</h4>
- 							QR codes are found in newspapers, magazines, on business cards, all types of promotional materials, as well as store shelves. 
-							Some companies create billboard-sized QR codes because the QR app uses the phones camera and can scan the QR matrix at a distance.
-					</div>
-						<a href="'.$this->business_model->get_qr_url_src($bus_id).'" target="_blank" class="btn"><i class="icon-qrcode"></i> Download QR URL</a>
-						
-					</div>
-				</div>
-				
-				'
-				;
+
+
+
+		echo $this->load->view('members/inc/business_qr_code', $bus_id);
 		
 		
 	}
