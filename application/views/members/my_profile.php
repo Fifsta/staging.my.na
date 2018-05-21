@@ -5,7 +5,7 @@
 //+++++++++++++++++
 
 $_uname = '';
-if($this->session->userdata('u_name')){ $_uname = ' - '.ucfirst($this->session->userdata('u_name'));}
+if($this->session->userdata('u_name')){ $_uname = 'My Namibia Profile - '.ucfirst($this->session->userdata('u_name'));}
 $header['title'] = $_uname;
 $header['metaD'] = 'Home feed for '. $_uname;
 $this->load->view('members/inc/header', $header);
@@ -31,7 +31,7 @@ if(strstr($img, "http")){
 }elseif($img != ''){
 
   $fake_file = S3_URL.'assets/users/photos/'.$img; 
-
+ 
 }else{ 
 
   $fake_file =  base_url('/').'images/user_blank.jpg';
@@ -91,6 +91,8 @@ if($verified == 'Y'){
               </div>
             
               <section class="results-item">
+
+                <form action="<?php echo site_url('/')?>members/add_avatar" method="post" accept-charset="utf-8" id="add-img" name="add-img" enctype="multipart/form-data">
                 <div>
 
                   <figure>
@@ -104,6 +106,8 @@ if($verified == 'Y'){
                       </p>
                     </div>
                 </div>
+                </form>
+
                 <div>
                   <form id="member-register" name="member-register" method="post"  class="form-horizontal">
                     <input type="hidden" id="id" name="id" value="<?php echo $this->session->userdata('id');?>">
