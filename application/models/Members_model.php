@@ -478,12 +478,12 @@ class Members_model extends CI_Model
 	 * //Upload AVATAR
 	 * //Functions
 	 * ++++++++++++++++++++++++++++++++++++++++++++
-	 */
+	 */ 
 
 	function add_avatar()
 	{
 		$img = $this->input->post('userfile', true);
-		$user_id = $this->input->post('id', true);
+		$user_id = $this->input->post('user_id', true);
 
 		//upload file
 
@@ -590,11 +590,10 @@ class Members_model extends CI_Model
 	function add_avatar_ajax()
 	{
 		$img = $this->input->post('userfile', true);
-		$user_id = $this->input->post('id', true);
+		$user_id = $this->input->post('user_id', true);
 
 		//upload file
-
-		$config['upload_path'] = S3_URL . 'assets/users/photos/';
+		$config['upload_path'] = BASE_URL . 'assets/users/photos/';
 		$config['allowed_types'] = 'gif|jpg|jpeg|png';
 		$config['max_size'] = '8024';
 		$config['max_width'] = '8324';
@@ -612,16 +611,17 @@ class Members_model extends CI_Model
 			$data['id'] = $user_id;
 			$data['error'] = $this->upload->display_errors();
 			echo
-				'<div class="alert alert-error">
-         			<button type="button" class="close" data-dismiss="alert">×</button>'
-				. $data['error'] . '
-       				 </div>';
+			'<div class="alert alert-error">
+     			<button type="button" class="close" data-dismiss="alert">×</button>' . $data['error'] . '
+   			 </div>';
 
 		}
 		else
 		{
+
 			//LOAD library
 			$this->load->library('image_lib');
+
 			//delete old photo
 			$this->delete_old_avatar($user_id);
 
@@ -630,52 +630,45 @@ class Members_model extends CI_Model
 			$width = $this->upload->image_width;
 			$height = $this->upload->image_height;
 			$file_no_ext = $data['upload_data']['raw_name'];
+
+
 			//CONVERT TO JPEG
 			if (strtolower($this->upload->file_ext) != '.jpg')
 			{
-
-				//$input = $config['upload_path'].$file;
-				//$output = $config['upload_path'].$file_no_ext.'.jpg';
-
 				$input_file = $config['upload_path'] . $file;
 				$output_file = $config['upload_path'] . $file_no_ext . '.jpg';
 				$this->load->model('image_model');
 
 				if ($this->image_model->convert_jpeg($input_file, $output_file))
 				{
-
 					$file = $file_no_ext . '.jpg';
 				}
-
 			}
+
 
 			if (($width > 850) || ($height > 700))
 			{
-
 				$this->downsize_image($file, $user_id);
-
 			}
+
 			//MEMBER LOGGED IN
 			if ($this->session->userdata('id'))
 			{
 				//UDATE SESSION
 				$this->session->set_userdata('img_file', $file);
 			}
+
 			//Watermark image
 			$this->watermark_avatar($file);
 
 			//populate array with values
 			$data = array(
 				'CLIENT_PROFILE_PICTURE_NAME' => $file
-
 			);
+			
 			//insert into database
 			$this->db->where('ID', $user_id);
 			$this->db->update('u_client', $data);
-			//Tourism DB
-			/*$db2 = $this->connect_tourism_db();
-			$db2->where('ID', $user_id);
-			$db2->update('u_client', $data);*/
 
 			//SEND TO BUCKET
 			$this->load->model('gcloud_model');
@@ -689,20 +682,23 @@ class Members_model extends CI_Model
 			$data['width'] = $this->upload->image_width;
 			$data['height'] = $this->upload->image_height;
 			$image = base_url('/') . 'assets/users/photos/' . $file;
+
 			//redirect
 			$data['basicmsg'] = 'Avatar added successfully!';
+
 			echo '<div class="alert alert-success">
          			<button type="button" class="close" data-dismiss="alert">×</button>
             		' . $data['basicmsg'] . '
-       				 </div>
-					 <script type="text/javascript">avatar_upload_success("' . $image . '");</script>
-					 ';
+       			  </div>
+
+				  <script type="text/javascript">avatar_upload_success("' . $image . '");</script>
+				  ';
+
 			$this->output->set_header("HTTP/1.0 200 OK");
 
 		}
-
-
 	}
+
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //DOWNSIZE AVATAR
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	

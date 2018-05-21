@@ -199,16 +199,14 @@ $this->load->view('inc/header', $header);
                   <div class="col-sm-12 col-md-6 col-lg-4">
                     <p data-icon="fa-phone text-dark"><button class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
                     <p data-icon="fa-fax text-dark"><button class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>
-                    
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-4">
                     <p data-icon="fa-tablet text-dark"><button class="btn btn-default"><!--C: --><?php echo $cell; ?></button></p>
                     <p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><?php echo $email; ?></button></p>
-                    
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-4">
                     <p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><?php echo $website; ?></button></p>
-                  </div>              
+                  </div>
                 </div>
 
                 <?php if($bus_details['IS_NTB_MEMBER'] == 'Y'){ ?>
@@ -274,7 +272,6 @@ $this->load->view('inc/header', $header);
             <!--tabs business details-->
 
             <div class="spacer"></div>
-
 
             <!--tabs review/rating details-->
             <h1 style="font-size:16px; border-bottom:1px solid #999; margin-bottom:30px"><strong>MANAGE RATINGS & REVIEWS</strong></h1>
@@ -344,7 +341,6 @@ $this->load->view('inc/header', $header);
             <h1 style="font-size:16px; border-bottom:1px solid #999; margin-bottom:30px"><strong>MANAGE ANALYTICS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item"><a href="#Analytics" class="nav-link active" aria-controls="Analytics" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o">Analytics</a></li>
-
             </ul>
 
             <div class="tab-content">
@@ -356,7 +352,7 @@ $this->load->view('inc/header', $header);
                 </div>
               </section>
 
-              <div class="clear:both"> </div>
+              <div class="clear:both"></div>
 
             </div>
             <!--tabs analytics -->   
@@ -387,7 +383,6 @@ $this->load->view('inc/header', $header);
           <div class="spacer"></div>         
 
         </div> 
-
       </div>
     </div>
   </div>  

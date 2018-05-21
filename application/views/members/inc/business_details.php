@@ -33,7 +33,6 @@
       </div>
     </div>
 
-
     <div class="col-sm-4">
       <div class="form-group">
         <label for="fax">Fax</label>
@@ -53,7 +52,6 @@
         </div>
       </div>
     </div>
-
 
     <div class="col-sm-4">
       <div class="form-group">
