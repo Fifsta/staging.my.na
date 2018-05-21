@@ -365,7 +365,7 @@ $(document).ready(function(){
 
     $('#imgbut').html('<img src="<?php echo base_url('/').'images/load.gif';?>" /> Uploading...');
     procover.show();
-    $('#add-img').ajaxForm(avataroptions);
+    frm.ajaxForm(avataroptions);
   });
 
 });
