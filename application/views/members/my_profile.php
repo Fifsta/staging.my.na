@@ -354,7 +354,7 @@ $(document).ready(function(){
         probar.width('0%');
         $('#avatar_msg').html(xhr.responseText);
         console.log(xhr.responseText);
-        $('#imgbut').html('<i class="icon-user"></i> Update Avatar');
+        $('#imgbut').html('<i class="fa fa-upload text-dark"></i>');
       }
 
     };
@@ -363,7 +363,7 @@ $(document).ready(function(){
     var probar = $('#procover .bar');
     var procover = $('#procover');
 
-    $('#imgbut').html('<img src="<?php echo base_url('/').'images/load.gif';?>" /> Uploading...');
+    $('#imgbut').html('<img src="<?php echo base_url('/').'images/load.gif';?>" />');
     procover.show();
     frm.ajaxForm(avataroptions);
   });
