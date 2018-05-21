@@ -264,6 +264,8 @@ if($verified == 'Y'){
 
 <script data-cfasync="false" type="text/javascript" src="<?php echo base_url('/');?>js/bootstrap-datepicker.js" ></script>
 
+<script data-cfasync="false" type="text/javascript" src="<?php echo base_url('/');?>js/jquery.form.min.js"></script>
+
 <script data-cfasync="false" type="text/javascript">
 
 $(document).ready(function(){
