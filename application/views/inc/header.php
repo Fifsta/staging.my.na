@@ -47,23 +47,20 @@
 	<script src="js/modernizr.js"></script>
 	<![endif]-->
 	
-
 	<!--[if (gte IE 9) | (!IE)]><!-->
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<!--<![endif]-->
-
-	
 	<!-- css -->
 
-	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="bootstrap/css/bootstrap.css?v=2" rel="stylesheet">
+	
 	<link href="css/owl.carousel.min.css" rel="stylesheet" type="text/css">
 	<link href="css/owl.theme.default.min.css" rel="stylesheet" type="text/css">
 	<link href="css/style.combo.css" rel="stylesheet" type="text/css">
 	<link href="css/icons.css" rel="stylesheet" type="text/css">
-	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<link href="<?php echo base_url('/'); ?>css/style.css?v=3" rel="stylesheet" type="text/css">
 
 	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="bootstrap/js/popper.min.js"></script>
 	
-
 	<script src="js/jquery.lazyload.min.js"></script>

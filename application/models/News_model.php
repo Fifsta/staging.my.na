@@ -13,50 +13,78 @@ class News_model extends CI_Model
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     public function get_nmh_news()
-    {
+    { 
+
+        $this->load->model('image_model'); 
+        $this->load->library('thumborp');
+
+        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+        $width = 360;
+        $height = 230;
+
 		$output = file_get_contents(NA_URL.'app/category_content/');
 		
 		if($output){
 			
-			$flikstr = '{ "cellSelector":".swipe-item", "wrapAround": false, "lazyLoad":true, "prevNextButtons":true, "pageDots":false, "cellAlign":"left", "contain":true }';
-			$o = '<div class="row item-list swipe js-flickity" data-flickity-options='."'".$flikstr."'".'>';
-			
-				
-			foreach(json_decode($output) as $row){
-				
-				//$imgA = explode(',', $row->image);
-				//$img = CDN_URL.'assets/images/'.$row->image;	
-				$img = CDN_URL . 'my_images/set/256/144/90/?src=assets/images/' . $row->image;
-				$o .= '<article class="swipe-item col-sm-6 col-md-3">
-							<figure>
-								<p class="list-category"><a href="#">'.$row->publication.'</a></p>
-								<a href="" class="shown lazyload">
-									<img class="shown lazyload" data-src="' . $img . '" src="images/16x9.png" />
-								</a>
-								
-								<div class="more">
-									<p class="social">
-										<a onClick="" data-icon="fa-facebook"></a>
-										<a href="" target="_blank" data-icon="fa-twitter"></a>
-										<a href="#" data-icon="fa-bookmark"></a>
-									</p>
-								</div>
-							</figure>
-							<div>
-								<h2><a href="#">' . ucwords(strtolower($this->my_model->shorten_string($row->title, 6))) . '</a></h2>
-								<p class="date">Listed: '.$this->my_model->time_passed(strtotime($row->datetime)).'</p>
-								<div class="details">
-									<p>'. ucwords(strtolower($this->my_model->shorten_string(strip_tags($row->body), 24))) . '</p>
-								</div>
-							</div>
-						</article>';
+			$o = '<div class="owl-carousel" style="margin-top:20px">';
+						
+			foreach(json_decode($output) as $row){	
+
+
+                //render pub links
+                switch($row->pub_id) {
+                    case 1:
+                    $link = 'https://www.republikein.com.na/nuus/'.$row->post_slug;
+                    break;
+                    case 2:
+                    $link = 'https://www.namibiansun.com/news/'.$row->post_slug;
+                    break;
+                    case 3:
+                    $link = 'https://www.az.com.na/nachrichten/'.$row->post_slug;
+                    break;
+                    case 5:
+                    $link = 'https://zone.my.na/news/'.$row->post_slug;
+                    break;  
+                    case 6:
+                    $link = 'https://erongo.com.na/news/'.$row->post_slug;
+                    break;
+                    case 7:
+                    $link = 'https://we.com.na/news/'.$row->post_slug;
+                    break;
+                    case 8:
+                    $link = 'https://ewi.com.na/news/'.$row->post_slug;
+                    break;
+                    case 9:
+                    $link = 'https://tourismus.com.na/news/'.$row->post_slug;
+                    break;                                                                                                
+                }
+
+                $img_str = 'assets/images/' . $row->image;
+
+                $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
+
+				$o .= '<figure>
+                            <div class="product_ribbon_sml"><small style="color:#ff9900">'.$row->publication.' &nbsp;</small>Listed: '.$this->my_model->time_passed(strtotime($row->datetime)).'<span></span></div>
+							<a href="'.$link.'" class="shown lazyload">
+								<img class="owl-lazy" data-src="'.$img_url.'" src="images/16x9.png" />
+							</a>
+                            <div>
+                                <h2><a href="'.$link.'" target="_blank">' . ucwords(strtolower($this->my_model->shorten_string($row->title, 6))) . '</a></h2>
+                                <div class="details">
+                                    <p>'. ucwords(strtolower($this->my_model->shorten_string(strip_tags($row->body), 24))) . '</p>
+                                </div>
+                            </div>
+						</figure>
+						';
 			}
 			$o .= '</div>';
 		}
 		return $o;
-		var_dump(json_decode($output));
-
+		//print_r(json_decode($output));
 	}
+
+
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //+GET MYNA DB NEWS
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

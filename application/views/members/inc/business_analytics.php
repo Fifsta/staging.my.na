@@ -82,8 +82,6 @@
 <?php if ($this->input->get('embedded')){
 ?>
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="<?php echo base_url('/');?>css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo base_url('/');?>css/skin1-front.css?v5">
 	<script src="<?php echo base_url('/');?>js/bootstrap.min.js?v=1"></script>
 <?php 	
 }
@@ -221,20 +219,25 @@
 			plotAccordingToChoices();
 		}
 		
-
-
-
-
-	
-	
 	</script>
+
 	<?php    
 	$imp_total = $impJAN + $impFEB+ $impMAR + $impAPR + $impMAY + $impJUN + $impJUL + $impAUG + $impSEP + $impOCT + $impNOV + $impDEC;
 	$click_total = $clickJAN + $clickFEB+ $clickMAR + $clickAPR + $clickMAY + $clickJUN + $clickJUL + $clickAUG + $clickSEP + $clickOCT + $clickNOV + $clickDEC;
-	$CTR = ( $click_total / $imp_total) * 100;
 	
+	if($imp_total != 0) {
+
+		$CTR = ( $click_total / $imp_total) * 100;
+
+	} else {
+
+		$CTR = 0;
+
+	}
 	
+
 	?>
+
     <table class="table table-striped">
         <thead>
                 <tr>
@@ -257,9 +260,9 @@
     </table>
     <div class="clearfix" style="height:30px;"></div>
     <div class="btn-group" data-toggle="buttons-checkbox">
-      <button type="button" id="imp_click" onclick="javascript:togglecheck('imp');" class="btn active">Impressions</button>
-      <button type="button" id="click_click" onclick="javascript:togglecheck('click');" class="btn active">Clicks</button>
-      <button type="button" id="enq_click" onclick="javascript:togglecheck('enq');" class="btn active">Enquiries</button>
+      <button type="button" id="imp_click" onclick="javascript:togglecheck('imp');" class="btn btn-dark">Impressions</button>
+      <button type="button" id="click_click" onclick="javascript:togglecheck('click');" class="btn btn-dark">Clicks</button>
+      <button type="button" id="enq_click" onclick="javascript:togglecheck('enq');" class="btn btn-dark">Enquiries</button>
     </div>
     <a class="btn pull-right" onClick="load_analytics_30(<?php echo $bus_id;?>)">Last 15 days</a>
     <p id="choices" style="display:none;float:right; width:135px;"><input type="checkbox" name="imp" checked="checked" id="idimp"><input type="checkbox" name="click" checked="checked" id="idclick"><input type="checkbox" name="enq" checked="checked" id="idenq"></p>
@@ -275,23 +278,23 @@
       <!-- Carousel items -->
       <div class="carousel-inner">
         <div class="active item">
-        	<div class="alert alert-block">
+        	<div class="alert alert-secondary alert-block">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <h4>Impressions?</h4>
+              <strong>Impressions?</strong>
               sometimes called a view or an ad view, is a term that refers to the point in which an ad is viewed once by a visitor, or displayed once on a web page. The number of impressions of a particular advertisement is determined by the number of times the particular page is located and loaded.
             </div>
         </div>
         <div class="item">
-        	<div class="alert alert-block">
+        	<div class="alert alert-secondary alert-block">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <h4>Clicks?</h4>
+              <strong>Clicks?</strong>
               a click is counted when your business listing page is loaded. A click is only incremented when a unique IP loads the page every hour. This gives you a more accurate estimate of how many times your page has been viewed.
             </div>
         </div>
         <div class="item">
-        	<div class="alert alert-block">
+        	<div class="alert alert-secondary alert-block">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <h4>Enquiries?</h4>
+              <strong>Enquiries?</strong>
               an enquiry is counted when you receive an enquiry via the contact form on your profile page.
             </div>
         

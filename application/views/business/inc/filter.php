@@ -13,59 +13,39 @@ if($this->agent->browser() == 'Internet Explorer'){
 }
 
 ?>
-<form id="search-main_b" name="search-main-b" method="post" action="<?php echo site_url('/');?>a/results/" class="form-horizontal">
-    <fieldset>
-        <div class="row">
-            <div class="col-md-4">
-                <input type="hidden" name="sortby" id="sortby" value="<?php if(isset($sortby)){ echo $sortby;}else{ echo '';}?>" />
 
-                <select name="srch_category">
-                    <?php
-					if($c_type == 'main'){  
-						echo $this->search_model->get_categories_select($c_type, 0,$main_c_id);
-					}else{
-						echo $this->search_model->get_categories_select($c_type, 0,$c_id);
-					}
-					?>
-                </select>
-                <span class="help-block" >&nbsp;<i class="icon-question-sign icon-white" rel="tooltip" title="Select What sort of business you are looking for eg: Accommodation, Electrician"></i></span>
-
-            </div>
-            <div class="col-md-4">
-                <div>
-                    <select name="srch_location">
-                        <?php echo  $this->search_model->get_cities_select($l_id);?>
-                    </select>
-                </div>
-
-                <span class="help-block" >&nbsp;<i class="icon-question-sign icon-white" rel="tooltip" title="Select where in Namibia you are looking for eg: Windhoek, Swakopmund"></i></span>
-            </div>
-            <div class="col-md-3">
-
-                <input class="form-control" name="srch_business" id="srch_business" type="text" value="<?php if(isset($busM)){ echo $busM;}else{ echo '';}?>" autocomplete="off" placeholder="Business Name? eg: My Namibia">
-
-                <span class="help-block" >&nbsp;<i class="icon-question-sign icon-white" rel="tooltip" title="If you are looking for a particular business starte typing the name"></i></span>
-
-            </div>
-
-
-            <div class="col-md-1">
-                <button type="submit" id="btn_find_b" class="btn btn-lg btn-dark pull-right" style="margin-top:2px"><i class="icon-search icon-white"></i> Search</button>
-            </div>
+<div id="filter" class="col-sm-12 d-none d-lg-block">
+    <form id="search-main_b" name="search-main-b" method="post" action="<?php echo site_url('/');?>a/results/" class="input-group input-group-lg" style="margin:5px">
+        <div class="btn-group bootstrap-select show-tick input-group-btn form-control"> 
+        <input class="form-control" name="srch_business" id="srch_business" type="text" value="" autocomplete="off" placeholder="Keywords">
         </div>
-    </fieldset>
-</form>
-<div id="typehead_diva"></div>
+        <div class="btn-group bootstrap-select show-tick input-group-btn form-control">                
+            <select name="srch_category" id="srch_category">
+                <option value="all">Any Category</option>
+                    <?php
+                    if($c_type == 'main'){  
+                        echo $this->search_model->get_categories_select($c_type, 0,$main_c_id);
+                    }else{
+                        echo $this->search_model->get_categories_select($c_type, 0,$c_id);
+                    }
+                    ?>
+            </select>
+        </div>
 
+         <div class="btn-group bootstrap-select show-tick input-group-btn form-control">                
+            <select name="srch_location" id="location">
+                <?php echo  $this->search_model->get_cities_select($location_id);?>
+            </select>
+        </div>                               
+        <span class="input-group-btn"><button type="submit" id="btn_find_b" class="btn btn-primary" data-icon="fa-search"> </button></span>
+    </form>
+</div>
+
+<div id="typehead_diva"></div>
+<script type="text/javascript" src="<?php echo base_url('/');?>js/select2.min.js"></script>
 <script type="text/javascript">
 
     $(document).ready(function() {
-
-        $.getScript('<?php echo base_url('/'). 'js/jquery.placeholder.min.js';?>', function(data) {
-            $('input').placeholder();
-
-        });
-
 
         /*var business = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
@@ -103,11 +83,28 @@ if($this->agent->browser() == 'Internet Explorer'){
 
         });*/
 
-        $('select').select2({
+        $('select#srch_category').select2({
             placeholder: "Please Select",
             allowClear: true,
-            width: "95%"
+            width: "100%"
 
+        }).on('change',function(e){
+            
+            var data = $('select#srch_category').select2('data');
+            $('#cat_name').val(data.text);
+            //alert(this);
+        });
+        $('select#location').select2({
+            placeholder: "Please Select",
+            allowClear: true,
+            width: "100%"
+
+        }).on('change',function(e){
+            
+            var data = $('select#location').select2('data');
+            console.log(data.text);
+            $('#location_text').val(data.text);
+            //alert(this);
         });
 
     });

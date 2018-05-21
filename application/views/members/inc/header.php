@@ -1,33 +1,66 @@
- <?php 
- //+++++++++++++++++
- //My.Na Main Header
- //+++++++++++++++++
- //Roland Ihms
- ?>
-<!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!doctype html>
+<html lang="en">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="">
-	<meta name="author" content="">
-	<title>My Namibia &trade; <?php if(isset($title)){ echo $title;}?></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+	<meta name="google-site-verification" content="MMMMMMMMMMMMMMMMMM">
+
+	<meta name="author" content="My Namibia">
+
+	<base href="<?php echo base_url('/');?>" target="_self">
+
+	<!--<meta name="csrf-token" content="{{ csrf_token() }}">-->
+
+	<title><?php if(isset($title)){echo $title;}else{ echo 'My Namibia &trade;';}?></title>
+	<meta name="description" content="<?php if(isset($metaD)){echo $metaD;}else{ echo 'My Namibia - the Free business portal in Namibia';}?>">
+
+	<link rel="shortcut icon" type="image/ico" href="favicon.ico">
+
     <?php if(isset($og)){ echo $og;}?>
-	<link rel="stylesheet" href="<?php echo base_url('/');?>css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo base_url('/');?>css/skin1-front.css">
-	<link rel="shortcut icon" href="<?php echo base_url('/');?>favicon.ico">
+	<link rel="publisher" href="https://plus.google.com/103433975350364100667">
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo base_url('/');?>img/icons/my_na_[144x144].png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo base_url('/');?>img/icons/my_na_[114x114].png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo base_url('/');?>img/icons/my_na_[72x72].png">
     <link rel="apple-touch-icon-precomposed" href="<?php echo base_url('/');?>img/icons/my_na_[57x57].png">
-	<link href='//fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-    <script src="<?php echo base_url('/');?>js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url('/');?>js/jquery.lazyload.min.js"></script>
-	<!--[if gt IE 8]><!-->
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('/');?>css/skin1-ie.css?v2" />
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+
+	<!--<link rel="icon" type="image/gif" href="animated_favicon.gif">-->
+
+	<!--[if lt IE 8]>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<link href="css/ie7.css" rel="stylesheet" type="text/css">
+	<script src="js/ie7.js"></script>
+	<![endif]-->
+	
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+	<!--[if lt IE 10]>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/modernizr.js"></script>
+	<![endif]-->
+	
+	<!--[if (gte IE 9) | (!IE)]><!-->
+	<script src="js/jquery-2.1.1.min.js"></script>
 	<!--<![endif]-->
+	<!-- css -->
+
+	<link href="bootstrap/css/bootstrap.css?v=2" rel="stylesheet">
+	
+	<link href="css/owl.carousel.min.css" rel="stylesheet" type="text/css">
+	<link href="css/owl.theme.default.min.css" rel="stylesheet" type="text/css">
+	<link href="css/style.combo.css" rel="stylesheet" type="text/css">
+	<link href="css/icons.css" rel="stylesheet" type="text/css">
+	<link href="<?php echo base_url('/'); ?>css/style.css?v=3" rel="stylesheet" type="text/css">
+
+	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="bootstrap/js/popper.min.js"></script>
+	
+	<script src="js/jquery.lazyload.min.js"></script>

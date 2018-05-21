@@ -7,10 +7,10 @@
  * 
  * Author   : Andi Irwandi Langgara <irwandi@ourbluecode.com>
  */
-$config['site_key']   = '6LeAtv4SAAAAAM-W_KSKmvJPT_S_3P9TqDFHNRMr';
-$config['secret_key']   = '6LeAtv4SAAAAAB7EsiQG3RY35q-eA_DL4_R5vrqf';
-$config['public_key']   = '6Ld4fusSAAAAACJkP9rYf2GJQltgi-NM3d6IR3le';
-$config['private_key']  = '6Ld4fusSAAAAALzf3k_wLxSNQQ9IoflXS-5xnTMC';
+$config['site_key']   = '6LddsFMUAAAAAD2hMSYkx3zmlDSmSTQHrvIBld3H';
+$config['secret_key']   = '6LddsFMUAAAAADf9jR9aubcAi8xvuJAIJMq0LH9A';
+$config['public_key']   = '6LddsFMUAAAAAD2hMSYkx3zmlDSmSTQHrvIBld3H';
+$config['private_key']  = '6LddsFMUAAAAADf9jR9aubcAi8xvuJAIJMq0LH9A';
 // Set Recaptcha theme, default red (red/white/blackglass/clean)
 $config['recaptcha_theme']  = 'custom';
 

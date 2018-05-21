@@ -3,7 +3,7 @@
  //LOAD HEADER
  //Prepare Variables array to pass into header
  //+++++++++++++++++
- if(isset($heading)){
+ if(isset($heading)){ 
  
 	 $header['title'] = strip_tags($heading) . ' - My Namibia';
 	 $header['metaD'] = strip_tags($heading). '. Find ' . strip_tags($heading) .' online - My Namibia';
@@ -33,45 +33,56 @@
  $advertorial = $bus_details['ADVERTORIAL'];
  $img = $bus_details['BUSINESS_LOGO_IMAGE_NAME'];
  $rand = rand(0,9999); 
+
+$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+$width = 800;
+
+$height = 450;
+
  if($img != ''){
 		
 		if(strpos($img,'.') == 0){
 	
 			$format = '.jpg';
-			$img_str = base_url('/').'img/timbthumb.php?w=200&h=200&src='.S3_URL.'assets/business/photos/'.$img . $format;
+			$img_str = 'assets/business/photos/'.$img . $format;
+			$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'300','300', $crop = '');
 			
 		}else{
 			
-			$img_str =  base_url('/').'img/timbthumb.php?w=200&h=200&src='.S3_URL.'assets/business/photos/'.$img;
+			$img_str = 'assets/business/photos/'.$img;
+			$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'300','300', $crop = '');
 			
 		}
 		
  }else{
 		
-		$img_str = base_url('/').'img/timbthumb.php?w=200&h=200&src='.base_url('/').'img/bus_blank.png';	
+		$img_url = base_url('/').'images/bus_blank.png';	
 		
  }
-  //COVER IMAGE
-  $cover_img = $bus_details['BUSINESS_COVER_PHOTO'];
+
+//COVER IMAGE
+$cover_img = $bus_details['BUSINESS_COVER_PHOTO'];
+
+if($cover_img != ''){
 	
- if(trim($cover_img) != ''){
+	if(strpos($cover_img,'.') == 0){
+
+		$format2 = '.jpg';
+		$cover_str = 'assets/business/photos/'.$cover_img . $format2;
+		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
 		
-			if(strpos($cover_img,'.') == 0){
+	}else{
+		
+		$cover_str =  'assets/business/photos/'.$cover_img;
+		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
+		
+	}
 	
-				$format2 = '.jpg';
-				$cover_str = S3_URL.'assets/business/photos/'.$cover_img . $format2.'?='.$rand;
-				
-			}else{
-				
-				$cover_str =  S3_URL.'assets/business/photos/'.$cover_img.'?='.$rand;
-				
-			}
-		
- }else{
-		
-		$cover_str = base_url('/').'img/business_cover_blank.jpg';	
-		
- }
+}else{
+	
+	$cover_url = base_url('/').'images/business_cover_blank.jpg';	
+	
+}
  	 
  $UAtel = 'href="javascript:void(0)"';
  $UAcell = 'href="javascript:void(0)"';
@@ -111,231 +122,161 @@
  </style>
  <link href='<?php echo base_url('/');?>css/jquery.rating.css' type="text/css" rel="stylesheet"/>
 </head>
-<body>
+<body id="top">
 
- <?php 
- //+++++++++++++++++
- //LOAD NAVIGATION
- //+++++++++++++++++
- $nav['section'] = '';
- $this->load->view('inc/navigation', $nav);
- ?>
-    <!-- END Navigation -->
-   <!-- Part 1: Wrap all content here -->
-    <div id="wrap">  
-    
-      <!-- Begin page content -->
-       <div class="container" id="home_container">
-       	 <div class="clearfix" style="height:20px;"></div>
-		 <div class="row">
-         
-         	
-			  <?php 
-             //+++++++++++++++++
-             //LOAD SEARCH BOX
-             //+++++++++++++++++
-             
-             $this->load->view('inc/home_search');
-			 
-			 //HEading Box
-             ?>
-             
-        </div>
-    	<!-- Listing content 2 column -->
-        <div class="row-fluid">
+<?php $this->load->view('inc/top_bar');?>
 
-            <!-- Left column -->
-            <div class="span8 white_box padding10">
-                 <div class="corner_ribbon" style="position:absolute">
-                	<div id="<?php echo $bus_id;?>" class="my_na_c"></div>
-             	 </div>
-                 <div class="row-fluid vignette" style="min-height:300px;background:url(<?php echo $cover_str;?>) no-repeat;background-size: auto auto;z-index:88; position:relative">
+<nav id="bread">
+	<div class="container">
+		<ol class="breadcrumb">
+		   <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>" itemprop="url"><span itemprop="title">My</span></a></li>
+		   <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>a/show/all/all/all/none/" itemprop="url"><span itemprop="title">Businesses</span></a> </li>
+		   <li class="breadcrumb-item active"><?php echo $name;?></li>
+		</ol>
+	</div>
+</nav>
 
-                       <div class="row-fluid " style="height:250px;">
-                                 		
-                            <div class="span8">
-                            
-                            
-                            </div>
-                            
-                            <div class="span4">
-                            
-                            
-                            </div>
-                       
-                  
-                 	  </div>
-                 </div>
-                 <div class="row-fluid" style="margin-top:-100px;z-index:99; position:relative">
-                                 		
-                            <div class="span1">
-                            
-                            </div>
-                            <div class="span3">
+<div class="container">
 
-                                    <img class="img-polaroid" src="<?php echo $img_str;?>" alt="<?php echo $name;?>" style="width: 150px; height:150px;">
-                     
-                            </div>
-                            
-                            <div class="span8">
-                            
-                            	 <div class="media">
-                                    <div class="row-fluid" style="min-height:80px;">
-                                    
-                                        <div class="span6">
-                                        <?php if(strlen($tel) > 5){ ?>
-                                        <a class="btn btn-inverse" onClick="phone_click($(this),'phone')" <?php echo $UAtel;?> style="margin:5px 0;" rel="tooltip" title="click to view the full telephone number"> <abbr title="Phone">P:</abbr> <span itemprop="tel"><?php echo substr($tel,0,7);?><font style="display:none"><?php echo substr($tel,7,strlen($tel));?></font></span></a><br />
-                                        <?php } ?>
-                                        <?php if(strlen($cell) > 5){ ?>
-                                        <a class="btn btn-inverse " onClick="phone_click($(this),'cell')" <?php echo $UAcell;?> style="margin:5px 0;" rel="tooltip" title="click to view cellular number"><abbr title="Cellular">C:</abbr> <?php echo substr($cell,0,8);?><font style="display:none"><?php echo substr($cell,8,strlen($cell));?></font></a><br />
-                                        <?php } ?>
-                                        </div>
-                                        <div class="span6">
-                                                               
-                                         <?php if(strlen($fax) > 5){ ?>
-                                        <a class="btn btn-inverse" onClick="phone_click($(this),'fax')" style="margin:5px 0;" rel="tooltip" title="click to view fax number"><abbr title="Fax">F:</abbr>  <?php echo substr($fax,0,8);?><font style="display:none"><?php echo substr($fax,8,strlen($fax));?></font></a><br />
-                                        <?php } ?>
-                                        <?php  if(strlen($website) > 5){ ?>
-                                        <a class="btn btn-inverse" href="<?php  echo  prep_url($website);?>" target="_blank" style="margin:5px 0;" rel="nofollow" itemprop="url" title="Visit Website"><i class="icon-globe icon-white"></i> <?php echo substr( prep_url($website),0,20 );?>...</a><br />
-                                        <?php } ?>
-                                        </div>                           
-                                    
-                                    </div>
-                                    <div itemscope style="display:none;padding:0;margin:0" itemtype="http://data-vocabulary.org/Organization"> 
-                                    <span itemprop="name"><?php echo $name;?></span></div>
+	<div class="row">
 
-                                    <h1 style="font-size:150%"><?php echo $name;?></h1>
-                                    <i class="icon-map-marker"></i>
-                                    <span itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address"><?php echo $address ;?></span>   
-                       			 </div>
+	    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-4 order-md-2 order-sm-1 order-lg-2 order-xl-4" id="sidebar">
 
-                            </div>
-  
-                </div><!-- row -->
-				<div class="row-fluid">
-                                 		
-                        <div class="span12">
-                        <div class="clearfix" style="height:20px;"></div>
-                            <ul class="breadcrumb">
-                              <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>"  itemprop="url"><span itemprop="title">My</span></a> <span class="divider">/</span></li>
-                              <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>a/show/all/all/all/none/" itemprop="url"><span itemprop="title">Businesses</span></a> <span class="divider">/</span></li>
-                              <?php echo  implode(' ',$cats['breadcrumb']);?>
-                              <li class="active"><?php echo $name;?></li>
-                            </ul>
-                        </div>
-                       
-                  
-               </div>
-               <div class="row-fluid">
-                                 		
-                        <div class="span6">
+	      <?php $this->load->view('inc/login'); ?>
+	      <?php $this->load->view('inc/weather');?>
+	      <?php $this->load->view('inc/adverts');?>
+
+	    </div>
+
+	    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
+
+	    	<section id="listing">
+
+		        <div class="heading" style="margin-bottom:15px">
+		          <h2 data-icon="fa-briefcase"><?php echo $name; ?></h2>
+		          <ul class="options">    
+		            <li><a href="#" data-icon="fa-facebook text-dark"></a></li>
+		            <li><a href="#" data-icon="fa-twitter text-dark"></a></li>
+		            <li><a href="#" data-icon="fa-bookmark text-dark"></a></li>
+		          </ul>
+		        </div>
+
+				<!--banner-->
+		        <div class="list-map">
+		          <div class="list-map-left" style="background:#ccc; position:relative">
+		              <div class="asso static-banner">
+						<?php if($bus_details['IS_NTB_MEMBER'] == 'Y'){ ?>
+						<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/ntb.png"></a>
+						<?php } ?>
+
+						<?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
+						<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/han.png"></a>
+						<?php } ?>
+		              </div>
+		              <img src="<?php echo $cover_url; ?>" class="img-fluid">
+		          </div>
+		          
+		          <div class="list-map-right" id="map_container">
+		          	<?php //$this->load->view('business/inc/business_map_inc', $bus_details);?>
+		          </div>
+		        </div>
+		        <!--banner-->
+
+				<!--details-->
+				<div class="details">
+					<div class="details-left">
+						<figure>
+							<a href="#"><img src="<?php echo $img_url; ?>"></a>
+							
+						</figure>
+
+						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>
+						 
+					</div>
+					<div class="details-right">
+						<h2><?php echo $address ;?><a href="#" data-toggle="tooltip" title="Find out more about getting featured"><span>Featured</span></a></h2>
+						<div itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+                             <span itemprop="street-address"><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
+                         </div>
                          <?php 
 						 echo '<p>'. implode(' ',$cats['links']).'</p>';
 						 ?>
-                        <div class="clearfix"></div>
-						<?php if($bus_details['IS_NTB_MEMBER'] == 'Y'){ ?>
-                        <img src="<?php echo base_url('/');?>img/icons/ntb_sml.png" alt="<?php echo $name;?> - NTB Member" />
-                        
-                        <?php } ?>
-                        <?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
-                        <img src="<?php echo base_url('/');?>img/icons/han_sml.png" alt="<?php echo $name;?> - HAN Member" />
-                        
-                        <?php } ?>
-                        </div>
-                        
-                        <div class="span6">
-                        
-                        <?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?>
-
-                        </div>
-                       
-                  
-               </div>
-            </div><!-- span 8 -->
-            
-            <div class="span4">
-				<div class="row-fluid">
-                	
-					<?php 
-                    if(!$business){
-                        
-                        echo $this->trade_model->show_estate_agent($agent_id, $bus_id, $name, TRUE);	
-                        
-					}else{
-
-
-                        $advert = $this->my_na_model->show_trade_advert($main_cat_id, $sub_cat_id = 0, $sub_sub_cat_id = 0);
-                        $n = rand(0, ($advert['count'] - 1));
-                        echo '
-								<div class="span9 offset3">'.$advert[0].'</div>
-
-							 ';
-					}
-                    ?>
-                   
+						<div class="row reveal">
+							<div class="col-sm-12 col-md-6">
+								<p data-icon="fa-phone text-dark"><button class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
+								<p data-icon="fa-fax text-dark"><button class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>
+							</div>
+							<div class="col-sm-12 col-md-6">
+								<p data-icon="fa-tablet text-dark"><button class="btn btn-default"><!--C: --><?php echo $cell; ?></button></p>
+								<p data-icon="fa-globe text-dark"><a href="http://www.website.com.na" class="btn btn-default" target="_blank"><!--W: --><?php echo $email; ?></a></p>
+							</div>
+						</div>
+					</div>
 				</div>
-            </div>
-        </div>
+				<!--details-->
 
+	    	</section>	
 
-        <div class="row-fluid">
-                  
-         	 	<?php 
-				/*SIDEBAR
-				span 3 for Sidebar content
-				*/
-				
-				?> 
-				 <div class="span12">
-                     <ul class="breadcrumb" style="background:transparent">
-                        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="badge badge-inverse" href="<?php echo site_url('/');?>" itemprop="url"><span itemprop="title">My</span></span></a><span class="divider">/</span></li>	
-                        <li class="active" style="color:#000"><?php echo $heading;?></li>
-                     </ul>
-                     <h1><?php echo $title;?></h1>
-                 	<div id="deal_content">
-					<?php 
-                        /*Search Results
-                        Loop through the search results in the query array
-                        */	
-                                
-                          $this->trade_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 15, $offset = 0, $title = '',$amt = 4, $advert = FALSE);
+	    	<?php if(!$business){ ?>
+	        <!--tabs-->
+	        <ul class="nav nav-tabs" role="tablist">
+	          <li class="nav-item" role="presentation"><a href="#Contact-Agent" class="nav-link active" aria-controls="Contact-Agent" role="tab" data-toggle="tab" data-icon="fa fa-envelope-o text-dark">Contact Agent</a></li>
+	        </ul>
+	        <div class="tab-content">
+	          <section role="tabpanel" class="tab-pane active" id="Contact-Agent">
+
+	            <?php $this->trade_model->show_company($bus_id, $agent_id, $sub_cat_id = 0); ?>
+
+	          </section>
+	        </div>
+	        <?php } ?>
+	          
+	    	<div class="spacer"></div>
+
+	        <section id="products">
+	          
+	        <div class="heading" style="margin-bottom:15px">
+	          <h2 data-icon="fa-briefcase"><?php echo $title;?></h2>
+	          <ul class="options">    
+	          </ul>
+	        </div>
+
+	         <div class="col-md-12">
+
+	            <div id="deal_content">
+
+	              <?php 
+	              /*Search Results
+	              Loop through the search results in the query array
+	              */  
+	              $this->trade_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 15, $offset = 0, $title = '',$amt = 4, $advert = FALSE);
     
-                        
-                        //LOAD PAGINATION
-                    ?> 
-               		</div>               
+	              ?> 
 
-              		<?php if(isset($pages)){ 
-                            	echo $pages ;} 
-                    ?>  
-              
-         		</div>
-               
-               
-                
-         </div>
+	            </div>   
 
-               	
-	 </div> 
-     <!-- /container - end content --> 
-		<div class="clearfix" style="height:100px;"></div>
+	            <?php 
+	              //LOAD PAGINATION
+	              if(isset($pages)){ echo $pages; } 
+	            ?>    
 
-   
+	            <div class="loading_img hidden" style="width:100%" id="pre_loader"></div>
+	                  
+	         </div>
 
-    <?php 
- //+++++++++++++++++
- //LOAD FOOTER
- //+++++++++++++++++
- $footer['foo'] = '';
- $this->load->view('inc/footer', $footer);
- ?>  
- </div>
-    <!-- JAvascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-<script src='<?php echo base_url('/')?>js/jquery.cycle2.min.js' type="text/javascript" language="javascript"></script>
-<script src='<?php echo base_url('/')?>js/jquery.rating.pack.js' type="text/javascript" language="javascript"></script>
-<script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
+	        </section>
+
+
+		</div>
+	</div>	
+</div>
+<div class="spacer"></div>	
+	
+<?php $this->load->view('inc/footer');?>	
+
+<script src="<?php echo base_url('/')?>redactor/redactor/redactor.min.js?v=1"></script> 
+<script src="<?php echo base_url('/');?>js/jquery.rating.pack.js" type="text/javascript"></script> 
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('[rel=tooltip]').tooltip();
@@ -385,6 +326,7 @@
         window.setTimeout(initiate_rating, 100);
 
     }
+
 	function initiate_rating(){
 		
 		$.getScript("<?php echo base_url('/')?>js/jquery.rating.pack.js", function(){
@@ -392,7 +334,6 @@
 		 	$("input .star").rating();
 		 
 		});
-		
 		
 	}
 
@@ -498,5 +439,6 @@
        
 </script>
 
+	
 </body>
 </html>

@@ -3,11 +3,13 @@
 if($type == '3408') {
 	$title = 'Properties';
 	$section = 'properties';
+	$link = 'buy/property';
 }
 
 if($type == '348') {
 	$title = 'Cars, Bikes & Boats';
 	$section = 'cars';
+	$link = 'buy/car-bikes-and-boats';
 }
 
 ?>
@@ -15,10 +17,10 @@ if($type == '348') {
 	
 	<div class="heading">
 		<h2 data-icon="fa-bed"><a href="#"><strong><?php echo $title; ?></strong></a></h2>
-		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
 		<ul class="options">
-			<li><a href="#" data-icon="fa-edit">List my own</a></li>
-			<li><a href="#" data-icon="fa-bullhorn">Alert me</a></li>
+			<!--<li><a href="#" data-icon="fa fa-edit text-dark">List my own</a></li>
+			<li><a href="#" data-icon="fa fa-bullhorn text-dark">Alert me</a></li>-->
+			<li><a href="<?php echo site_url('/').$link; ?>" data-icon="fa fa-chevron-right text-dark">All <?php echo $section; ?></a></li>
 		</ul>
 	</div>
 	

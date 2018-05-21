@@ -8,14 +8,16 @@ if($sub_cat_id == 0){ $sub_cat_id = 3409; }
 
 ?>
 
-<section id="news">
+
 
   <div class="heading">
     <h2 data-icon="fa-newspaper-o">Filter <strong>Properties</strong></h2>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+    <p>Find the perfect property.</p>
   </div>
-    
-<div class="col-md-12" style="background: #fff">
+
+<section id="filter">    
+
+<div class="col-md-12">
 
 <form name="search" action="<?php echo site_url('/');?>trade/search" method="post" enctype="multipart/form-data"> 
 

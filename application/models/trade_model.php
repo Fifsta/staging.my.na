@@ -1197,7 +1197,7 @@ class Trade_model extends CI_Model
 								' .implode($img). '
 								</div>
 								' .$img_Cycle. '
-							</div>
+							</div> 
 
 							<div class="padding10">
 								
@@ -1564,7 +1564,7 @@ class Trade_model extends CI_Model
 				//SEE IF OWN PRODUCT
 				if ($row->client_id == $this->session->userdata('id'))
 				{
-					$price['str'] = '<span style=" font-size:12px">N$</span><span itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</span>';
+					$price['str'] = '<span itemprop="price">N$' . $this->smooth_price($row->sale_price) . '</span>';
 					$btn_txt = 'Your Own Service';
 				}
 				else
@@ -1572,11 +1572,11 @@ class Trade_model extends CI_Model
 
 					if ($row->sub_cat_id == 3410)
 					{
-						$price['str'] = '<span style=" font-size:12px">N$</span><span itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</span> pm';
+						$price['str'] = '<span itemprop="price">N$ ' . $this->smooth_price($row->sale_price) . '</span> pm';
 					}
 					else
 					{
-						$price['str'] = '<span style=" font-size:12px">N$</span><span itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</span>';
+						$price['str'] = '<span itemprop="price">N$' . $this->smooth_price($row->sale_price) . '</span>';
 					}
 					if ($row->por == 'Y')
 					{
@@ -1654,8 +1654,6 @@ class Trade_model extends CI_Model
 			<div itemscope itemtype="http://schema.org/Product">
 				<div class="pull-right">' . $reserve . '</div>
 				<h2 class="upper na_script" itemprop="name">' . $row->title . '</h2>
-				' . $agent_ref . '
-				' . $location . '
 				<span itemprop="description">
 					<p>' . $row->description . '</p><p>' . $this->show_extras($row->extras) . '</p>
 				</span>	

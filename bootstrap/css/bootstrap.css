@@ -34,7 +34,7 @@
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
-
+ 
 @media print {
   *,
   *::before,
@@ -671,7 +671,7 @@ pre code {
 
 @media (min-width: 1200px) {
   .container {
-    max-width: 1140px;
+    max-width: 1600px;
   }
 }
 
@@ -1579,7 +1579,6 @@ pre code {
 .table td {
   padding: 0.75rem;
   vertical-align: top;
-  border-top: 1px solid #e9ecef;
 }
 
 .table thead th {
@@ -3527,6 +3526,7 @@ tbody.collapse.show {
 
 .nav-link:focus, .nav-link:hover {
   text-decoration: none;
+  color:#555;
 }
 
 .nav-link.disabled {
@@ -3535,16 +3535,20 @@ tbody.collapse.show {
 
 .nav-tabs {
   border-bottom: 1px solid #ddd;
+
 }
 
 .nav-tabs .nav-item {
   margin-bottom: -1px;
+  margin-right:1px;
 }
 
 .nav-tabs .nav-link {
-  border: 1px solid transparent;
+
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
+  background-color: #000;
+  color: #fff;  
 }
 
 .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
@@ -3559,9 +3563,9 @@ tbody.collapse.show {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #495057;
-  background-color: #fff;
-  border-color: #ddd #ddd #fff;
+  color: #fff;
+  background-color: #fc9700;
+
 }
 
 .nav-tabs .dropdown-menu {
@@ -3600,6 +3604,7 @@ tbody.collapse.show {
 
 .tab-content > .active {
   display: block;
+  overflow:hidden;
 }
 
 .navbar {
@@ -5883,7 +5888,7 @@ a.bg-dark:focus, a.bg-dark:hover {
   display: inline-flex !important;
 }
 
-@media (min-width: 576px) {
+@media (max-width: 576px) {
   .d-sm-none {
     display: none !important;
   }

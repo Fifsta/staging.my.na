@@ -1,3 +1,22 @@
+//RESOLUTION
+function windowResize(){
+	windowWidth = $(window).width();
+	windowHeight = $(window).height();
+	$('#resolution').text(windowWidth+' x '+windowHeight);
+};
+$(window).resize(windowResize);
+
+//PRELOAD
+window.onload = showBody;
+function showBody(){
+	windowResize();
+	swipeHeight();
+	$('#pre_load').fadeOut();
+}
+
+
+
+
 //Tooltip activate
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
@@ -37,26 +56,7 @@ function swipeHeight(){
 	});
 }
 
-windowWidth = $(window).width();
-windowHeight = $(window).height();
 
-if (windowWidth < 768) {
-	$(document).ready(function(){
-		//HOME SEARCH OVERLAY
-		$('.expose').on('click', function(e) {
-			e.preventDefault();
-			$('.overlay-search').addClass('exit');
-		});
-		$(window).scroll(function(event) {
-			var scrolledY = $(window).scrollTop();
-			if (scrolledY >= 0) {
-				$('.overlay-search').addClass('exit');
-			}else{
-				//$('.overlay-search').removeClass('exit');
-			}
-		});
-	});
-};
 
 
 $(document).ready(function(){

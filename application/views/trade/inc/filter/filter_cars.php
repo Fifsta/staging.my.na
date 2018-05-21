@@ -4,28 +4,36 @@
  //+++++++++++++++++
  ?>
 
-<form class="form-inline" name="search" action="<?php echo site_url('/');?>trade/search" method="post" enctype="multipart/form-data"> 
+
+
+  <div class="heading">
+    <h2 data-icon="fa-newspaper-o">Filter <strong>Vehicles</strong></h2>
+    <p>Find the perfect Car.</p>
+  </div>
+
+<section id="filter">
+<form class="form-inline" name="search" action="<?php echo site_url('/');?>trade/search" method="post" enctype="multipart/form-data" style="margin:5px;"> 
 <div class="clearfix"><strong>Find the perfect Car</strong></div>
 
-<div class="row-fluid">
-			<div class="span2">
+<div class="row">
+			<div class="col-md-2">
                 <div class="clearfix">&nbsp;</div>
                 <div class="btn-group" data-toggle="buttons-radio">
-                  <button type="button" onclick="javascript:togglecheck('new');" class="btn btn-inverse <?php if($this->trade_model->test_extras($extras,'owners',  'active', 'New')== 'active'){ echo 'active';}?>"><i class="icon-tag icon-white"></i> New</button>
-                  <button type="button" onclick="javascript:togglecheck('used');" class="btn btn-inverse <?php if($this->trade_model->test_extras($extras,'owners',  'active', 'New') != 'active'){ echo 'active';}?>"><i class="icon-tags icon-white"></i> Used</button>
+                  <button type="button" onclick="javascript:togglecheck('new');" class="btn btn-dark btn-lg <?php if($this->trade_model->test_extras($extras,'owners',  'active', 'New')== 'active'){ echo 'active';}?>"><i class="icon-tag icon-white"></i> New</button>
+                  <button type="button" onclick="javascript:togglecheck('used');" class="btn btn-dark btn-lg <?php if($this->trade_model->test_extras($extras,'owners',  'active', 'New') != 'active'){ echo 'active';}?>"><i class="icon-tags icon-white"></i> Used</button>
                   
                 </div>
 				<input type="hidden" id="owners" name="owners" value="" >
                 <input type="hidden" name="main_cat_id" value="348" >   
 			</div>	
-			<div class="span2">
+			<div class="col-md-2">
             	<small>&nbsp;Vehicle Type<i class="icon-question-sign pull-right" rel="tooltip" title="The type of vehicle"></i></small>
                 <select name="sub_cat_id" id="sel_sub_cat_id" class="span12">
 					<?php $this->trade_model->get_categories_select('main_cat_id', 348, $sub_cat_id);?>
                 </select>	
 			</div>
 
-			<div class="span2">
+			<div class="col-md-2">
             	<small>&nbsp;Manufacturer<i class="icon-question-sign pull-right" rel="tooltip" title="What car manufacturer"></i></small>
                 <select name="sub_sub_cat_id" id="sel_sub_sub_cat_id" class="span12" <?php if(!isset($sub_cat_id) || $sub_cat_id == 0){ echo 'disabled="disabled"';}?>>
                 	<?php 
@@ -39,7 +47,7 @@
 					?>
                 </select>
 			</div>
-            <div class="span2">
+            <div class="col-md-2">
             	<small>&nbsp;Model<i class="icon-question-sign pull-right" rel="tooltip" title="The specific model"></i></small>
 				<select name="sub_sub_sub_cat_id" id="sel_sub_sub_sub_cat_id" class="span12" <?php if(!isset($sub_sub_cat_id) || $sub_sub_cat_id == 0){ echo 'disabled="disabled"';}?>>
                 	<?php 
@@ -53,7 +61,7 @@
 					?>
                 </select>
 			</div>
-            <div class="span2">
+            <div class="col-md-2">
             	<small>&nbsp;Body Style<i class="icon-question-sign pull-right" rel="tooltip" title="The body style of the car or vehicle"></i></small>
                 <select name="body_style" class="span12 used_div" data-placeholder="Body Style">
                     <option value="" <?php $this->trade_model->test_extras($extras,'body_style',  'selected', 'Dont know');?>>Any Body Style</option>
@@ -69,7 +77,7 @@
                 </select>
 			</div>
             
-            <div class="span1">
+            <div class="col-md-1">
             	<small>&nbsp;Year<i class="icon-question-sign pull-right" rel="tooltip" title="Oldest Year model"></i></small>
                 <select name="year_from" class="span12  used_div">
                     <option value="0">Year</option>
@@ -97,7 +105,7 @@
                     <option value="1900">1900</option>
                 </select>
             </div>    
-            <div class="span1">
+            <div class="col-md-1">
             	<small>&nbsp;Year<i class="icon-question-sign pull-right" rel="tooltip" title="Newest year model"></i></small>    
                 <select name="year_to" class="span12  used_div">
                     <option value="0">Year</option>
@@ -128,10 +136,10 @@
   
 </div>
  
-    <div class="row-fluid  <?php if($extras == '?'){ echo 'hide';}elseif(is_array($extras)){ if(!array_key_exists('features', $extras)){ echo 'hide';}}?>" id="extra_div_toggle">	
-			<div class="span12">
+    <div class="row  <?php if($extras == '?'){ echo 'hide';}elseif(is_array($extras)){ if(!array_key_exists('features', $extras)){ echo 'hide';}}?>" id="extra_div_toggle">	
+			<div class="col-md-12">
             	  <div class="clearfix">&nbsp;</div>
-                    <select name="features[]" data-placeholder="Type Extras Features" class="extra_slect span12" multiple="" size="6">
+                    <select name="features[]" data-placeholder="Type Extras Features" class="extra_slect form-control" multiple="" size="6">
                         
                         <option value="ABS brakes" <?php $this->trade_model->test_extras($extras ,'ABS brakes',   'selected','ABS brakes');?>>ABS brakes</option>
                         <option value="Air conditioning" <?php $this->trade_model->test_extras($extras,'Air conditioning',   'selected','Air conditioning');?>>Air conditioning</option>
@@ -197,18 +205,18 @@
     
 
 <div class="clearfix">&nbsp;</div>
-<div class="row-fluid">	
+<div class="row">	
 
-			<div class="span3">
+			<div class="col-md-3">
 				<div class="row-fluid">
-                	<div class="span6">
+                	<div class="col-md-6">
                         <div class="input-prepend input-append">
                           <span class="add-on btn-inverse"><i class="icon-minus icon-white"></i></span>
                           <input name="price_from" type="text"  placeholder="N$"  rel="tooltip" title="The minimum amount in N$" class="span9" value="<?php if($price_from != 'n' && is_numeric($price_from)){ echo number_format($price_from);}?>">
                         </div>
                         		 	
 					</div>
-                    <div class="span6">
+                    <div class="col-md-6">
                         <div class="input-append input-prepend">
                           <input name="price_to" type="text" placeholder="N$"   rel="tooltip" title="The maximum amount to search for" class="span9" value="<?php if($price_to != 'n' && is_numeric($price_to)){ echo number_format($price_to);}?>">
                           <span class="add-on btn-inverse"><i class="icon-plus icon-white"></i></span>
@@ -217,11 +225,11 @@
                 </div>        		 	
 			</div>
 						
-			<div class="span3">
+			<div class="col-md-3">
             <small class="hidden-desktop hidden-tablet">&nbsp;Location <i class="icon-question-sign pull-right" rel="tooltip" title="Where do you want to find the item? Select a city"></i></small>
 				<?php $this->trade_model->populate_city($location);?>	
 			</div>
-			<div class="span3">
+			<div class="col-md-3">
 				<small class="hidden-desktop hidden-tablet">&nbsp;Suburb <i class="icon-question-sign pull-right" rel="tooltip" title="Where do you want to find the item? Select a city"></i></small>
 				<div id="suburb_div">
 				<?php 	if($suburb != 'all'){
@@ -234,7 +242,7 @@
                 ?>
                 </div>
 			</div>
-			<div class="span3 text-right">
+			<div class="col-md-3 text-right">
                  <input type="hidden" name="sort" value="">
                  <input type="hidden" name="offset" value="0">
                  <input type="hidden" name="limit" value="15">
@@ -250,6 +258,7 @@
 
 </form>
 
+</section>
 
 <script type="text/javascript">
 

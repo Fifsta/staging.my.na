@@ -1,4 +1,4 @@
- <?php 
+<?php 
  //+++++++++++++++++
  //LOAD HEADER
  //Prepare Variables array to pass into header
@@ -22,8 +22,74 @@
   $product['bus_id'] = $bus_id;
   $product['client_id'] = $client_id;
   $product['product_title'] = $title;
+
+
+  $name =  $BUSINESS_NAME;
+  $email = $BUSINESS_EMAIL;
+  $tel = '+'.$TEL_DIAL_CODE.' '.$BUSINESS_TELEPHONE;
+  $fax = '+'.$FAX_DIAL_CODE.' '.$BUSINESS_FAX;
+  $cell = '+'.$CEL_DIAL_CODE.' '.$BUSINESS_CELLPHONE;
+  $description = $BUSINESS_DESCRIPTION;
+  $pobox = $BUSINESS_POSTAL_BOX;
+  $website = $BUSINESS_URL; 
+  $address = $BUSINESS_PHYSICAL_ADDRESS;
+  $city = $city;
+  $region = $region;
+  $startdate = $BUSINESS_DATE_CREATED;
+  //$city = $bus_details['CLIENT_CITY'];
+  $img = $BUSINESS_LOGO_IMAGE_NAME;
+  $vt = $BUSINESS_VIRTUAL_TOUR_NAME;
+  $advertorial = $ADVERTORIAL;
+  //Get categories
+
+  $rand = rand(0,9999);
+  //Build image string
+  $format = substr($img,(strlen($img) - 4),4);
+  $str = substr($img,0,(strlen($img) - 4));
   
-  $img_str = base_url('/').'assets/products/images/'.$image;
+  $img_str = S3_URL.'assets/products/images/'.$image;
+
+  if($img != ''){
+    
+    if(strpos($img,'.') == 0){
+
+      $format = '.jpg';
+      $img_str = S3_URL.'assets/business/photos/'.$img . $format;
+      
+    }else{
+      
+      $img_str = S3_URL.'assets/business/photos/'.$img;
+      
+    }
+    
+  }else{
+    
+    $img_str = base_url('/').'images/bus_blank.png';  
+    
+  }
+
+  //COVER IMAGE
+  $cover_img = $BUSINESS_COVER_PHOTO;
+
+  if($cover_img != ''){
+    
+    if(strpos($cover_img,'.') == 0){
+
+      $format2 = '.jpg';
+      $cover_str = S3_URL.'assets/business/photos/'.$cover_img . $format2.'?='.$rand;
+      
+    }else{
+      
+      $cover_str =  S3_URL.'assets/business/photos/'.$cover_img.'?='.$rand;
+      
+    }
+    
+  }else{
+    
+    $cover_str = base_url('/').'images/bus_blank.jpg';  
+    
+  }
+
  
   //BUILD OPEN GRAPH <meta property="og:image:secure_url" content="'.$img_str.'" />
   $header['og'] ='
@@ -35,652 +101,235 @@
   <meta property="og:description" content="'.$header['metaD'].'"> 
   <meta property="og:image"       content="'.str_replace('https://','http://',$img_str).'">';
 
- $this->load->view('inc/header', $header);
- 
- //ADDITIONAL RESOURCES
- //add css, IE7 js files here before the head tag
+  $this->load->view('inc/header', $header);
+   
+  //ADDITIONAL RESOURCES
+  //add css, IE7 js files here before the head tag
 
-//EXTRA REFERENCE
-$property_ref = '';
-if(is_array(json_encode($extras)) && array_key_exists('agency', json_decode($extras))){
-   $artemp = (array)json_decode($extras);
-   if($artemp['agency'] != ''){
-	  $property_ref = 'Ref: '.$artemp['agency']; 
-   }  
-}
+  //EXTRA REFERENCE
+  $property_ref = '';
+  if(is_array(json_encode($extras)) && array_key_exists('agency', json_decode($extras))){
+     $artemp = (array)json_decode($extras);
+     if($artemp['agency'] != ''){
+  	  $property_ref = 'Ref: '.$artemp['agency']; 
+     }  
+  }
 
- ?>
- 
- <link rel="stylesheet" type="text/css" href="<?php echo base_url('/');?>css/jquery.countdown.css" >
-<!-- <link rel="stylesheet" href="<?php echo base_url('/');?>redactor/redactor/redactor.css" />-->
- <link href='<?php echo base_url('/');?>css/jquery.rating.css' type="text/css" rel="stylesheet"/>
- <link rel="stylesheet" href="<?php echo base_url('/');?>js/prettyPhoto_3.1.5/prettyPhoto.css" type="text/css" media="screen">
+?>
 
-<style type="text/css">
-	#product_images{min-height:auto !important;}
-
-</style>
-
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('/');?>css/jquery.countdown.css" />
+<link href='<?php echo base_url('/');?>css/jquery.rating.css' type="text/css" rel="stylesheet" />
 </head>
 
-<body>
+<body id="top">
 
- <?php 
- //+++++++++++++++++
- //LOAD NAVIGATION
- //+++++++++++++++++
- $nav['section'] = '';
- $this->load->view('inc/navigation', $nav);
- ?>
-    <!-- END Navigation -->
-   <!-- Part 1: Wrap all content here -->
-    <div id="wrap">
-     <!-- Begin page content -->
-       <div class="container" id="home_container">
-       	 <div class="clearfix"></div>
-		 <div class="row">
-			   <?php 
-               //+++++++++++++++++
-               //LOAD DEAL SEARCH BOX
-               //+++++++++++++++++
-               
-               $this->load->view('inc/home_search');
-               
-               //HEading Box
-               ?>
-         </div>
-        <div class="row-fluid">
-             <div class="span12">
-               <h1 class="upper na_script"><?php echo $title;?><span class="pull-right"><?php echo $property_ref;?></span></h1>
-             </div>
+<?php $this->load->view('inc/top_bar'); ?>
+
+<nav id="bread">
+  <div class="container">
+  </div>
+</nav>
+
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
+      
+      <?php $this->load->view('inc/weather'); ?>
+      
+      <?php $this->load->view('inc/adverts'); ?>
+
+    </div>
+
+    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 order-md-1 order-sm-2">
+
+      <section id="listing">
+
+        <div class="heading">
+          <h2 data-icon="fa-briefcase"><?php echo $title; ?></h2>
+          <ul class="options">    
+            <li><a href="#Contact-Agent" data-icon="fa-envelope text-dark">Contact Agency</a></li>
+            <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
+            <li><a href="#Agency-Products" data-icon="fa-shopping-basket text-dark">Agency Products</a></li>
+            <li><a href="#" data-icon="fa-facebook text-dark"></a></li>
+            <li><a href="#" data-icon="fa-twitter text-dark"></a></li>
+            <li><a href="#" data-icon="fa-bookmark text-dark"></a></li>
+          </ul>
         </div>
-        <div class="row-fluid hide">
-             <div class="span12">
-                 <ul class="breadcrumb btn-inverse">
-                    <?php $this->trade_model->show_categories_breadcrumb($main_cat_id, $sub_cat_id, $sub_sub_cat_id, $sub_sub_sub_cat_id, $location, $suburb);
-                        
-                    ?>
-                    <li class="active current"><?php echo $title;?></li>
-                    <li class="hidden-phone pull-right"><span class="label label-warning"><?php echo $property_ref;?></span></li>
-                 </ul>
+
+        <!--banner-->
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-7 col-xl-6">
+               <?php echo $this->trade_model->show_images($product_id); ?>
             </div>
-        </div> 
+            
+            <div class="col-sm-12 col-md-12 col-lg-5 col-xl-6" style="padding:20px">
+            
+            </div>
+          </div>
+        </div>
+        <!--banner-->
 
-        <div class="row-fluid">
+        <!--details-->
+        <div class="details">
+          <div class="details-left">
 
+            <figure>
+              <a href="#"><img src="<?php echo $img_str; ?>"></a>
+            </figure>
 
-		        <div class="span7">
+            <div class="rating">
+              <span></span><span></span><span class="active"></span><span></span><span></span>
+              <a class="#">8 Reviews</a>
+            </div>
+          </div>
+          <div class="details-right" style="background: #fff">
 
-			        <?php
-			        /*
-					GET RIBBON
-					*/
-			        echo $this->trade_model->get_product_ribbon($product_id, $extras, $featured, $listing_type, $start_price, $sale_price, $start_date, $end_date, $listing_date, $status);
-
-			        ?>
-			        <div id="product_images" class="loading_img" style="width:100%">
-				        <?php
-				        /*
-						SHOW single product Images
-						*/
-				        //echo $images['images'];
-
-				        ?>
-			        </div>
-
-		        </div>
-               <div class="span5">
-
-	               <div class="white_box padding10" style="min-height:32px;">
-		               &nbsp;
-		               <?php
-		               //Sharing buttons
-		               $fb2 = "window.open('https://www.facebook.com/sharer/sharer.php?app_id=287335411399195&u=<?php echo rawurlencode(str_replace('NEW/', '',current_url('/'))) ;?>', '_blank', 'width=800,height=600,scrollbars=yes,status=yes,resizable=yes,screenx=20%,screeny=20%');";
-		               $fb = "postToFeed(".$product_id.", '". trim($this->trade_model->clean_url_str($title)) ."','".trim($img_str)."', '".trim($this->trade_model->clean_url_str($title)) ." - My Namibia','".preg_replace("/[^0-9a-zA-Z -]/", "", trim($this->trade_model->shorten_string(strip_tags($description), 50)))."', '".site_url('/').'product/'.$product_id.'/'.trim($this->trade_model->clean_url_str($title))."')";
-
-		               $tweet_url = trim($this->trade_model->clean_url_str($title)).'&text='.trim(substr(strip_tags($title . ' ' . $title) ,0, 60)).' ' .site_url('/').'product/'.$product_id.'&via=MyNamibia';
-
-		               ?>
-		               <a href="javascript:void(0);"
-		                  onclick="window.open('https://twitter.com/share?url=<?php echo $tweet_url;?>&amp;via=MyNamibia', '_blank', 'width=800,height=600,scrollbars=yes,status=yes,resizable=yes,screenx=20%,screeny=20%');" class="twitter"></a>
-		               <a onclick="<?php echo $fb;?>"
-		                  class="facebook" href="javascript:void(0);" style="margin-left:5px"></a>
-		               <div class="pull-right">
-			               <a href="javascript:void(0);" title="Print this Page" rel="tooltip" class="btn btn-inverse btnPrint"><i class="icon-print icon-white"></i></a>
-			               <?php $this->trade_model->watch_list_test($product_id);?>
-
-		               </div>
-	               </div>
-	               <div class="white_box  padding10">
-		               <div id="product_details">
-
-			               <?php
-			               /*
-							 SHOW single product details
-							 */
-			               $this->trade_model->show_product($product_id);
-
-			               ?>
-		               </div>
-	               </div>
+            <div class="spacer"></div>
+               <div class="pull-right">
+                <a href="javascript:void(0);" title="Print this Page" rel="tooltip" class="btn btn-dark btnPrint"><i class="fa fa-print text-light"></i></a>
+               <?php $this->trade_model->watch_list_test($product_id);?>
+               </div>                             
+             <?php $this->trade_model->show_product($product_id); ?>
+             <div class="spacer"></div>
+          </div>
+        </div>
+        <!--details-->
 
 
-                    <div id="map_container">
-  					 <?php 
-                        /*
-                        SHOW MAP
-                        */	        
-                        echo $this->trade_model->get_product_map($product_id, $extras);
+      </section>  
 
-                    ?>
-                	</div>
+      <div class="row">
+        <div class="col-xl-6">
 
-                    <div class="results_div" id="contact_anchor">     
-                            <div class="clearfix">&nbsp;</div>
-                        
-                            <h3 class="na_script">Ask Seller a Question</h3>
-                           
-                           
-                               <div class="loading_img span11" id="question_div">
-                               <?php 
-                               //+++++++++++++++++
-                               //GET QUESTIONS
-                               //+++++++++++++++++
-                               
-                               //$this->trade_model->get_product_questions($product_id);
+          <!--Review Include-->
+          <div class="tab-content loading_img col-md-11" id="reviews_div">
+            
+          </div> 
+
+        </div>  
+
+        <div class="col-xl-6">
           
-                               ?> 
-                               </div>
-                           <div class="clearfix">&nbsp;</div>     
-   					 </div>
+          <!--Question Include-->
+          <div class="tab-content loading_img col-md-11" id="question_div">
+             
+          </div> 
 
-	               <div class="results_div">
-		               <h3 class="na_script">Review the Product</h3>
+        </div>  
+      </div>
+    </div>
+  </div>  
+</div>
 
-		               <div class="loading_img span11" id="review_div">
-			               <?php
-			               //+++++++++++++++++
-			               //LOAD REVIEW INC
-			               //+++++++++++++++++
-
-			               //$this->trade_model->rate_product($product_id);
-
-			               ?>
-		               </div>
-		               <div class="loading_img span11" id="reviews_div">
-
-			               <?php
-			               //+++++++++++++++++
-			               //SHOW REVIEWS
-			               //+++++++++++++++++
-
-			               //$this->trade_model->show_reviews($product_id);
-			               ?>
-		               </div>
-		               <div class="clearfix">&nbsp;</div>
-	               </div>
-               </div>
-    
-
-         	
-               
-                
-         </div> 
-       
-        <div class="row-fluid">
-
-	        <?php
-	        /*
-            SHOW ADVERTS
-            */
-	        if($main_cat_id == '3408') {
-
-		        $advert = $this->my_na_model->show_trade_advert($main_cat_id , $sub_cat_id, $sub_sub_cat_id , 0, 1);
-		        $n = rand(0, ($advert['count'] - 1));
-		        echo '
-					<div class="span5 ">'.$advert[0].'</div>
-					<div class="span5 offset2 hidden-phone">
-					    <div class="white_box">
-					        <a href="https://www.my.na/adverts/track/57/54922948/" target="_blank">
-					            <img class="lazy" alt="List your Properties for FREE" src="'.S3_URL.'assets/adverts/images/0f6a8b13fecffa4a5cae5d891b33abbf.jpg">
-					        </a>
-					     </div>
-                    </div>
-				 ';
-
-	        }elseif($main_cat_id == '348'){
-
-		        $advert = $this->my_na_model->show_trade_advert($main_cat_id , $sub_cat_id, 0 , 0, 2);
-		        $n = rand(0, ($advert['count'] - 1));
-		        echo '
-					<div class="span5 ">'.$advert[0].'</div>
-					<div class="span5 offset2 hidden-phone">
-					  '.$advert[$n].'
-                    </div>
-				 ';
-
-	        }else{
-
-		        $advert = $this->my_na_model->show_trade_advert($main_cat_id , $sub_cat_id, 0 , 0, 2);
-		        $n = rand(0, ($advert['count'] - 1));
-		        echo '
-					<div class="span5 ">'.$advert[0].'</div>
-					<div class="span5 offset2 hidden-phone">
-					  '.$advert[$n].'
-                    </div>
-				 ';
-
-	        }
-
-
-
-	        ?>
-
-        </div>
-
-        <div>
-	        <?php
-	        /*
-			SHOW Company Info
-			*/
-	        $this->trade_model->show_company($bus_id, $property_agent, $sub_cat_id);
-
-	        ?>
-        </div>
-
-       <div class="row-fluid">
-                  
-         	 	<?php 
-				/*SIDEBAR
-				span 3 for Sidebar content
-				*/
-				
-				?> 
-				 <div class="span12 loading_img" id="similar_div">
-                     
-					 <?php 
-                        /*
-                        get similar products
-                        */
-						//$cat2 = $sub_cat_id;
-						//$cat1 = $main_cat_id;
-								        
-                        //$this->trade_model->get_similar_products($cat1, $cat2, $product_id);
-                        
-                    ?>
-
-         		</div>
-
-         </div> 
-       	
-	 </div> 
-     <!-- /container - end content --> 
-		<div class="clearfix" style="height:100px;"></div>
-     	
-      	
-
-   
-  <div class="msg_div" id="msg"></div>
-    <?php 
- //+++++++++++++++++
- //LOAD FOOTER
- //+++++++++++++++++
- $footer['foo'] = '';
- $this->load->view('inc/footer', $footer);
-  //$this->output->enable_profiler(TRUE);
- 
- ?>  
- </div><!-- /wrap  -->
- 
- <div class="modal hide fade in" id="img_modal_div" style="width:auto">
- 	<img style="display*: inline;display:inline-block" src="<?php echo base_url('/');?>img/deal_place_load.gif" id="img_modal" />
- </div>
-
- <div class="modal hide fade" id="notification_modal">
-
-     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin:5px 10px 0 0">&times;</button>
-     <div class="modal-body" id="notification_modal_body">
-
-            <img src="<?php echo base_url('/');?>img/bground/stick_man.png" class="pull-right" alt="List and buy anything namibian" />
-            <h2>New Bid</h2>
-            <p>A new bid has just been placed. Act quick to avoid disappointment</p>
-            <div class="container-fluid">
-                <div class="row-fluid">
-                    <div class="span10">
-                        <div class="CT-tmer"></div>
-                        <p>Current Bid is: </p>
-                        <div id="current_bid_div"><h1 class="yellow big_icon"><small class="yellow">N$ </small></h1></div>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-     </div>
-
- </div>
-    
-    <!-- JAvascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-
-<script src='<?php echo base_url('/')?>js/jquery.cycle2.min.js' type="text/javascript" language="javascript"></script>
-<!--<script src="<?php /*echo base_url('/');*/?>js/jquery.rating.pack.js" type="text/javascript"></script>-->
-<!--<script src="<?php echo base_url('/')?>redactor/redactor/redactor.min.js?v=1"></script>-->
+<?php $this->load->view('inc/footer');?>  
 <script src="<?php echo base_url('/');?>js/print_page.js"></script>
 <script src="<?php echo base_url('/');?>js/custom/fb.js?v=2"></script>
-<script src="<?php echo base_url('/');?>js/prettyPhoto_3.1.5/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+
+
 <script type="text/javascript">
 $(document).ready(function(){
 
-
-	/*$.getScript("<?php echo base_url('/');?>js/jquery.rating.pack.js", function(){
-
-		$("input .star").rating();
-
-	});*/
-	//
-	$('[rel=tooltip]').tooltip();
-    /*	$('.redactor').redactor({
-				
-				buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 
-				'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
-				 'alignment', '|', 'horizontalrule']
-	});*/
-	$('#watch_btn').bind('click', function(e){
-			e.preventDefault();
-			save_watchlist();
-			
-	});
-
-	<!-- Print Page -->
-	$(".btnPrint").printPage({
-	  url: "<?php echo site_url('/');?>trade/print_product/"+<?php print $product_id; ?>,
-	  attr: "href",
-	  message:"Your document is being created"
-	});
-
-	window.setTimeout(load_similar, 4000);
-	window.setTimeout(load_review, 3000);
-	window.setTimeout(load_reviews, 2000);
-	window.setTimeout(load_questions, 1000);
-	window.setTimeout(load_product_images, 100);
+    //PRINT PAGE//
+    $(".btnPrint").printPage({
+      url: "<?php echo site_url('/');?>trade/print_product/"+<?php print $product_id; ?>,
+      attr: "href",
+      message:"Your document is being created"
+    });
 
 
-    $(".carousel-inner").cycle({
-        fx:     "scrollHorz",
-        timeout: 3000,
-        speed: 300
-        // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+    window.setTimeout(load_review, 3000);
+    window.setTimeout(load_reviews, 2000);
+    window.setTimeout(load_questions, 1000);
+
+
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        nav: true,
+        navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:1,
+                nav:true
+            },
+            600:{
+                items:1,
+                nav:true
+            },
+            1000:{
+                items:1,
+                nav:true,
+                loop:false
+            }
+        }
     });
 
 });
 
 
-function img_show(str){
-		
-		var cont = $('#img_modal');
-		$('#img_modal_div').bind('show', function() {
-			//var id = $(this).data('id'),
-			cont.attr('src','<?php echo base_url('/');?>assets/products/images/'+str); 	
-				
-				
-		}).modal({ backdrop: true });
-
-}
-function load_similar(){
-		
-		var cont = $('#similar_div');
-		
-		$.ajax({
-			type: 'get',
-			cache: false,
-			url: '<?php echo site_url('/').'trade/get_similar_products/'.$main_cat_id.'/'.$sub_cat_id.'/' .$product_id;?>' ,
-			success: function (data) {	
-				
-				cont.html(data);
-				cont.removeClass('loading_img');
-				$("img.lazy").lazyload();
-			}
-		});	
-
-}
-
 function load_review(){
-		
-		var cont = $('#review_div');
-		
-		$.ajax({
-			type: 'get',
-			cache: false,
-			url: '<?php echo site_url('/').'trade/rate_product/' .$product_id;?>' ,
-			success: function (data) {	
-				$.getScript( "<?php echo base_url('/');?>js/jquery.rating.pack.js" )
-				  .done(function( script, textStatus ) {
-					
-				  });
-				cont.html(data);
-				cont.removeClass('loading_img');
-			}
-		});	
+    
+    var cont = $('#review_div');
+    
+    $.ajax({
+      type: 'get',
+      cache: false,
+      url: '<?php echo site_url('/').'trade/rate_product/'.$product_id; ?>' ,
+      success: function (data) {  
+        $.getScript( "<?php echo base_url('/');?>js/jquery.rating.pack.js" )
+          .done(function( script, textStatus ) {
+          
+          });
+        cont.html(data);
+        cont.removeClass('loading_img');
+      }
+    }); 
 
 }
 
 function load_reviews(){
-		
-		var cont = $('#reviews_div');
-		
-		$.ajax({
-			type: 'get',
-			cache: false,
-			url: '<?php echo site_url('/').'trade/show_reviews/' .$product_id;?>' ,
-			success: function (data) {	
-				
-				cont.html(data);
-				cont.removeClass('loading_img');
-				$.getScript( "<?php echo base_url('/');?>js/jquery.rating.pack.js" )
-				  .done(function( script, textStatus ) {
-					
-				  });
-			}
-		});	
+    
+    var cont = $('#reviews_div');
+    
+    $.ajax({
+      type: 'get',
+      cache: false,
+      url: '<?php echo site_url('/').'trade/show_reviews/'.$product_id; ?>' ,
+      success: function (data) {  
+        
+        cont.html(data);
+        cont.removeClass('loading_img');
+        $.getScript( "<?php echo base_url('/'); ?>js/jquery.rating.pack.js" )
+          .done(function( script, textStatus ) {
+          
+          });
+      }
+    }); 
 
 }
 
 
 function load_questions(){
-		
-		var cont = $('#question_div');
-		
-		$.ajax({
-			type: 'get',
-			cache: false,
-			url: '<?php echo site_url('/').'trade/get_product_questions/' .$product_id.'/?'.http_build_query($product);?>',
-			success: function (data) {	
-				
-				cont.html(data);
-				cont.removeClass('loading_img');
-			}
-		});	
+    
+    var cont = $('#question_div');
+    
+    $.ajax({
+      type: 'POST',
+      dataType: 'json',
+      data: {product_id: <?php echo $product_id; ?>, product_title: '<?php echo $title; ?>'},
+      url: '<?php echo site_url('/'); ?>trade/get_product_questions/',
+      success: function (data) {  
+        
+        cont.html(data.questions);
+        cont.removeClass('loading_img');
+      }
+    }); 
 
 }
-
-function load_product_images()
-{
-
-	var images = $('#product_images');
-
-	$.ajax({
-		type: 'get',
-		cache: false,
-		url: '<?php echo site_url('/').'trade/show_images/' .$product_id;?>' ,
-		success: function (data) {
-			images.html(data);
-			images.removeClass('loading_img');
-			$("a[rel^='prettyPhoto']").prettyPhoto(
-
-				{social_tools: false}
-			);
-
-			$("img.lazy").lazyload();
-			$('#prod_carousel').carousel();
-			$('#prod_carousel').on("slid", function(e) {
-				//CURRENT ITEM
-				var currItem = $('.active.item', this);
-				//Get image selector
-				currImage = currItem.find('img');
-				//Remove class to not load again - probably unnecessary
-				if(currImage.hasClass('lazy')){
-					currImage.removeClass('lazy');
-					currImage.attr('src', currImage.attr('data-original'));
-				}
-				//SCROLLING LEFT
-				var prevItem = $('.active.item', this).prev('.item');
-				//Account for looping to LAST image
-				if(!prevItem.length){
-					prevItem = $('.active.item', this).siblings(":last");
-				}
-				//Get image selector
-				prevImage = prevItem.find('img');
-				//Remove class to not load again - probably unnecessary
-				if(prevImage.hasClass('lazy')){
-					prevImage.removeClass('lazy');
-					prevImage.attr('src', prevImage.attr('data-original'));
-				}
-
-				//SCROLLING RIGHT
-				var nextItem = $('.active.item', this).next('.item');
-
-				//Account for looping to FIRST image
-				if(!nextItem.length){
-					nextItem = $('.active.item', this).siblings(":first");
-				}
-
-				//Get image selector
-				nextImage = nextItem.find('img');
-
-				//Remove class to not load again - probably unnecessary
-				if(nextImage.hasClass('lazy')){
-					nextImage.removeClass('lazy');
-					nextImage.attr('src', nextImage.attr('data-original'));
-				}
-
-			});
-
-		}
-	});
-
-
-}
-
-
-	function load_product_details(){
-		
-		var cont = $('#product_details');
-		
-		$.ajax({
-			type: 'get',
-			cache: false,
-			url: '<?php echo site_url('/').'trade/show_product/' .$product_id;?>' ,
-			success: function (data) {	
-				
-				cont.html(data);
-				cont.removeClass('loading_img');
-			}
-		});	
-		
-
-	}
-
-
-
-
-function isNumberKey(evt){
-    var charCode = (evt.which) ? evt.which : event.keyCode
-    if (charCode > 31 && (charCode < 48 || charCode > 57))
-        return false;
-    return true;
-}
-
-function save_watchlist(){
-	
-		var btn = $('#watch_btn');
-		btn.html('Saving...');
-		$.ajax({
-			type: 'get',
-			cache: false,
-			url: '<?php echo site_url('/').'trade/add_watchlist/' .$product_id;?>' ,
-			success: function (data) {	
-				btn.html('<i class="icon-remove-circle icon-white"></i> Watching');
-				
-			}
-		});	
-	
-}
-
-function switch_auto_bid(){
-
-	$("#bid_box").toggle();
-	$("#auto_bid_box").delay(100).toggle();
-	$("#auto_help_txt").fadeToggle();
-}
-
-
-
-var current_bid = <?php if($current_bid != ''){echo $current_bid;}else{echo '0';}?>;
-var bid_id = <?php if($bid_id != ''){echo $bid_id;}else{echo '0';}?>;
-//SERVER EVENTS TO CHANGE CONTENT
-if(typeof(EventSource) !== "undefined") {
-
-    var source = new EventSource("<?php echo site_url('/');?>sse/product/<?php echo $product_id;?>/"+bid_id);
-
-    // NEW BID PLACED
-    source.addEventListener('new_bid', function(e)
-    {
-        var data = JSON.parse(e.data);
-        //console.log(e.data);
-        //console.log(current_bid+' Wohooooo '+data.max_bid);
-        if(data){
-            //NEW BID
-            if(data.max_bid > current_bid){
-
-
-                $('#current_bid_div').html('<h1 class="yellow big_icon"><small class="yellow">N$ </small> '+data.amount+'</h1>');
-                $('#notification_modal').modal('show');
-                load_product_details();
-            }
-            current_bid = data.max_bid;
-        }
-
-
-    }, false);
-
-    <?php //IF EXPIRED
-     $now = date('Y-m-d H:i:s');
-     $end = date('Y-m-d H:i:s', strtotime($end_date));
-     if($end > $now){ ?>
-
-        // ENDING SOON
-        source.addEventListener('ending_soon', function(e)
-        {
-            var data = JSON.parse(e.data);
-            console.log('ended');
-
-            if(data){
-                window.location.reload();
-            }
-
-
-        }, false);
-    <?php } ?>
-   
-
-    } else {
-        // Sorry! No server-sent events support..
-    }
-
-
 
 
 </script>

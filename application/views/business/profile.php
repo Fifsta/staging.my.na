@@ -1,9 +1,13 @@
 <?php 
 
+$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+$width = 800;
 
+$height = 450;
 
 if(!$bus_details){ show_404(); }
 
+$bus_id =  $bus_details['ID'];
 $name =  $bus_details['BUSINESS_NAME'];
 $email = $bus_details['BUSINESS_EMAIL'];
 $tel = '+'.$bus_details['TEL_DIAL_CODE'].' '.$bus_details['BUSINESS_TELEPHONE'];
@@ -13,7 +17,7 @@ $description = $bus_details['BUSINESS_DESCRIPTION'];
 $pobox = $bus_details['BUSINESS_POSTAL_BOX'];
 $website = $bus_details['BUSINESS_URL']; 
 $address = $bus_details['BUSINESS_PHYSICAL_ADDRESS'];
-$city = $bus_details['city'];
+$city = $bus_details['city']; 
 $region = $bus_details['region'];
 $latitude = $bus_details['latitude'];
 $longitude = $bus_details['longitude'];
@@ -30,23 +34,25 @@ $format = substr($img,(strlen($img) - 4),4);
 $str = substr($img,0,(strlen($img) - 4));
 
 
-
 if($img != ''){
 	
 	if(strpos($img,'.') == 0){
 
 		$format = '.jpg';
-		$img_str = S3_URL.'assets/business/photos/'.$img . $format;
+		$img_str = 'assets/business/photos/'.$img . $format;
+		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
 		
 	}else{
 		
-		$img_str = S3_URL.'assets/business/photos/'.$img;
+		$img_str = 'assets/business/photos/'.$img;
+		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
 		
 	}
 	
 }else{
 	
-	$img_str = base_url('/').'img/timbthumb.php?w=200&h=200&src='.base_url('/').'img/bus_blank.png';	
+	$img_str =  'assets/business/photos/logo-placeholder.jpg';
+	$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
 	
 }
 
@@ -58,19 +64,23 @@ if($cover_img != ''){
 	if(strpos($cover_img,'.') == 0){
 
 		$format2 = '.jpg';
-		$cover_str = S3_URL.'assets/business/photos/'.$cover_img . $format2.'?='.$rand;
+		$cover_str = 'assets/business/photos/'.$cover_img . $format2;
+		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
 		
 	}else{
 		
-		$cover_str =  S3_URL.'assets/business/photos/'.$cover_img.'?='.$rand;
+		$cover_str =  'assets/business/photos/'.$cover_img;
+		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
 		
 	}
 	
 }else{
 	
-	$cover_str = base_url('/').'img/business_cover_blank.jpg';	
+	$cover_str =  'assets/business/photos/listing-placeholder.jpg';
+	$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
 	
 }
+
 
 $header['title'] = $name. ' - My Namibia';
 $header['metaD'] =  strip_tags(implode(' ',$cats['links'])) . ' - ' .$name. ' - a business listed on My Namibia';
@@ -83,7 +93,7 @@ $header['og'] ='
 <meta property="og:url"         content="'.site_url('/').'b/'.$bus_id.'/'.$this->uri->segment(3).'/"> 
 <meta property="og:title"       content="'.$header['title'].'"> 
 <meta property="og:description" content="'.$header['metaD'].'"> 
-<meta property="og:image"       content="'.$img_str.'">'; 
+<meta property="og:image"       content="'.$img_url.'">'; 
 
 $this->load->view('inc/header');
 
@@ -94,7 +104,7 @@ $this->load->view('inc/header');
 
 </head>
 
-<body id="top">
+<body id="top"> 
 
 <?php $this->load->view('inc/top_bar');?>
 
@@ -103,128 +113,260 @@ $this->load->view('inc/header');
 		<ol class="breadcrumb">
 		   <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>"  itemprop="url"><span itemprop="title">My</span></a></li>
 		   <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>a/show/all/all/all/none/" itemprop="url"><span itemprop="title">Businesses</span></a> </li>
-		   <?php echo implode(' ',$cats['breadcrumb']); ?>
+		   
 		   <li class="breadcrumb-item active"><?php echo $name;?></li>
 		</ol>
 	</div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
 
 	<div class="row">
 
-		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 order-md-2 order-sm-1 order-lg-2" id="sidebar">
-			
-			<?php $this->load->view('inc/weather'); ?>
-			
-			<?php $this->load->view('inc/adverts'); ?>
+	    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-4 order-md-2 order-sm-1 order-lg-2 order-xl-4" id="sidebar">
 
-		</div>
+	      <?php $this->load->view('inc/login'); ?>
+	      <?php $this->load->view('inc/weather');?>
+	      <?php $this->load->view('inc/adverts');?>
 
-		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 order-md-1 order-sm-2">
+	    </div>
 
-			<section id="listing">
-				
-				<div class="heading">
-					<h2 data-icon="fa-briefcase"><?php echo $name; ?></h2>
-					<ul class="options">		
-						<li><a href="#Contact-Agent" data-icon="fa-envelope text-dark">Contact Agency</a></li>
-						<li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
-						<li><a href="#Agency-Products" data-icon="fa-shopping-basket text-dark">Agency Products</a></li>
-						<li><a href="#" data-icon="fa-facebook text-dark"></a></li>
-						<li><a href="#" data-icon="fa-twitter text-dark"></a></li>
-						<li><a href="#" data-icon="fa-bookmark text-dark"></a></li>
-					</ul>
-				</div>
-			
-			
-				<button id="list-map-toggle" class="btn btn-primary" data-icon="fa-map-o"></button>
+	    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
+
+	    	<section id="listing">
+
+		        <div class="heading" style="margin-bottom:15px">
+		          <h2 data-icon="fa-briefcase"><?php echo $name; ?></h2>
+		          <ul class="options">    
+		            <li><a href="#Enquiry-Form" data-icon="fa-envelope text-dark">Contact Agency</a></li>
+		            <li><a href="#Gallery" data-icon="fa-file-image-o text-dark" onClick="load_gallery();">Gallery</a></li>
+		            <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
+		            <li><a href="#QR" data-icon="fa-qrcode text-dark">QR Code</a></li>
+		          </ul>
+		        </div>
 
 				<!--banner-->
-				<div class="list-map">
-					<div class="list-map-left">
-						<div class="asso static-banner">
+		        <div class="list-map">
+		          <div class="list-map-left" style="background:#ccc; position:relative">
+		              <img src="<?php echo $cover_url; ?>" class="img-fluid">
+		          </div>
+		          
+		          <div class="list-map-right" id="map_container">
+		          	<?php //$this->load->view('business/inc/business_map_inc', $bus_details);?>
+		          	<iframe src="<?php echo site_url('/'); ?>business/load_business_map/<?php echo $bus_id; ?>" frameborder="0" allowtransparency="true"></iframe>
+		          </div>
+		        </div>
+		        <!--banner-->
 
-						<?php if($bus_details['IS_NTB_MEMBER'] == 'Y'){ ?>
-						<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/ntb.png"></a>
-						<?php } ?>
-
-						<?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
-						<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/han.png"></a>
-						<?php } ?>
-
-						</div>
-						<img src="<?php echo $cover_str; ?>" class="img-fluid">
-					</div>
-					
-					<div class="list-map-right">
-						<?php $this->load->view('business/inc/business_map_inc', $bus_details);?>
-					</div>
-				</div>
-				<!--banner-->
-				
 				<!--details-->
 				<div class="details">
 					<div class="details-left">
+
 						<figure>
-							<a href="#"><img src="<?php echo $img_str; ?>"></a>
+							<img src="<?php echo $img_url; ?>">
 						</figure>
-
-						<div class="rating">
-							<span></span><span></span><span class="active"></span><span></span><span></span>
-							<a class="#">8 Reviews</a>
-						</div>
+						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>	
+				 
 					</div>
-					<div class="details-right" style="background: #fff">
+					<div class="details-right">
+						<h2><?php echo $address ;?></h2>
+						<div itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
+                            <span itemprop="street-address"><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
+                            <span itemprop="locality"><?php echo $city ;?></span>
+                            <span itemprop="region"><?php echo $region ;?></span>
+                            <span itemprop="country-name">Namibia</span>
+                        </div>
+                        <?php
+							echo '<p>'. implode(' ',$cats['links']).'</p>';
+						?>
+						<div class="row reveal">
+							<div class="col-sm-12 col-md-6 col-lg-4">
+								<p data-icon="fa-phone text-dark"><button class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
+								<p data-icon="fa-fax text-dark"><button class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>								
+							</div>
+							<div class="col-sm-12 col-md-6 col-lg-4">
+								<p data-icon="fa-tablet text-dark"><button class="btn btn-default"><!--C: --><?php echo $cell; ?></button></p>
+								<p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><?php echo $email; ?></button></p>								
+							</div>
+							<div class="col-sm-12 col-md-6 col-lg-4">
+								<?php if($website) { ?>
+								<p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><?php echo $website; ?></button></p>
+								<?php } ?>
+							</div>							
+						</div>
 
-						<div class="spacer"></div>
-							
-								
-							<button class="btn btn-dark block"><i data-icon="fa-phone"></i> <?php echo $tel; ?></button>
-						
-							<button class="btn btn-dark block"><i data-icon="fa-fax"></i> <?php echo $fax; ?></button>
-						
-							<button class="btn btn-dark block"><i data-icon="fa-tablet"></i> <?php echo $cell; ?></button>
+						<?php if($bus_details['IS_NTB_MEMBER'] == 'Y'){ ?>
+							<a href="#" data-toggle="tooltip" data-placement="top" title="NTB Member"><img src="images/ntb.png" alt="<?php echo $name;?> - NTB Member" class="img-thumbnail"></a>
+						<?php } ?>
 
-							<button class="btn btn-dark block"><i data-icon="fa-envelope"></i> <?php echo $email; ?></button>
-								
-							<hr>
+						<?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
+							<a href="#" data-toggle="tooltip" data-placement="top" title="HAN Member"><img src="images/han.png" alt="<?php echo $name;?> - HAN Member" class="img-thumbnail"></a>
+						<?php } ?>
 
-						 <div itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
-                             <span itemprop="street-address"><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
-                             <span itemprop="locality"><?php echo $city ;?></span>
-                             <span itemprop="region"><?php echo $region ;?></span>
-                             <span itemprop="country-name">Namibia</span>
-                         </div>
-                         <hr>
-						<p><?php echo $description; ?></p>
-						<?php $this->business_model->show_gallery($bus_id);?>
-						<div class="spacer"></div>
 					</div>
 				</div>
 				<!--details-->
-					
-			</section>
 
-			<div class="row">
-				<div class="col-xl-6">
-				<!--Contact Include-->
-					<div class="tab-content">
-						
-						<?php $this->load->view('business/inc/business_reviews_inc', $bus_details);?>
-						
-					</div>	
-				</div>	
+				<div class="spacer"></div>
 
-				<div class="col-xl-6">
-				<!--Contact Include-->
-					<div class="tab-content">
-						
+				<!--tabs-->
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="nav-item"><a href="#About" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info"><span class="d-sm-none">About</span></a></li>
+					<li role="presentation" class="nav-item"><a href="#Enquiry-Form" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o"><span class="d-sm-none">Enquiry Form</span></a></li>
+					<!--<li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate text-dark">Deals</a></li>-->
+					<li role="presentation" class="nav-item"><a href="#Gallery" onClick="load_gallery();" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o"><span class="d-sm-none">Gallery</span></a></li>
+					<?php if($vt != ''){ ?>
+					<li role="presentation" class="nav-item"><a href="#VT" onClick="load_vt();" class="nav-link" aria-controls="VT" role="tab" data-toggle="tab" data-icon="fa-refresh"><span class="d-sm-none">Virtual Tour</span></a></li>
+					<?php } ?>
+					<li role="presentation" class="nav-item"><a href="#QR" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-qrcode"><span class="d-sm-none">QR Code</span></a></li>
+				</ul>
+				<div class="tab-content">
+					<section role="tabpanel" class="tab-pane active" id="About">
+						<h2 class="tab-head">About</h2>
+						<p id="b-about"><?php echo $description; ?></p>
+
+					</section>
+					<section role="tabpanel" class="tab-pane" id="Enquiry-Form">
 						<?php $this->load->view('business/inc/business_contact_inc', $bus_details);?>
+					</section>
+
+					<section role="tabpanel" class="tab-pane" id="VT">
+						<h2 class="tab-head">Virtual Tour</h2>
+						<div class="row" id="virtual_tour">
+						</div>
+					</section>
+
+					<section role="tabpanel" class="tab-pane" id="Gallery">
+						<h2 class="tab-head">Gallery</h2>
+						<div class="row" id="bus_gallery">
+							<?php //$this->business_model->show_gallery($bus_id);?>
+						</div>
+					</section>
+
+					<section role="tabpanel" class="tab-pane" id="QR">
+						<h2 class="tab-head">QR Code</h2>
+						<div class="row"> 
+							<div class="col-lg-4 col-md-8 col-sm-12 col-xs-12">
+								<?php echo $this->business_model->get_qr_vcard($bus_id,'220','220');?> 
+							</div>
+						</div>
+					</section>				
+
+
+				</div>
+				<!--tabs-->
+
+				<div class="spacer"></div>
+				
+				<!--tabs-->
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-star-o"><span class="d-sm-none">Reviews</span></a></li>
+					<li role="presentation" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa-star"><span class="d-sm-none">Submit Review</span></a></li>
+				</ul>
+				<div class="tab-content">
+				
+					<section role="tabpanel" class="tab-pane active" id="Reviews">
+						<!--<h2 class="tab-head">Awards</h2>
+						<div class="row">
+							<div class="alert alert-warning">
+								<h4><strong>No Reviews Added</strong></h4>
+								No Reviews have been added for the current product.
+							  </div>
+						</div>-->
 						
-					</div>	
-				</div>	
-			</div>
+						<h2 class="tab-head">Reviews</h2>
+						<?php //echo $this->rating_model->show_reviews($bus_id);?>
+							  <div class="alert alert-warning">
+								<h4><strong>No Reviews Added</strong></h4>
+								No Reviews have been added for the current product.
+							  </div>
+					</section>
+					
+					<section role="tabpanel" class="tab-pane" id="Submit-Review">
+						<h2 class="tab-head">Submit Review</h2>
+						<!--<p><strong data-icon="fa-info-circle">Leaving a Review:</strong> Please note that you will only receive your <strong>3x MyNa points</strong> once this your has been authorised! Reviews are authorised according a real experience only! We reserve the rights to block your profile once we find that you are misusing / exploiting this process!</p>-->
+						<!--<p><strong data-icon="fa-info-circle">Example Review:</strong> <em>"My family and I stayed at the guesthouse in July for 3 days and the service we received was fantastic. The guest house facilities where cleaned daily and the food served was great aswell. Will be back."</em></p>-->
+						<div class="row">
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Service <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Value for money	<div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Sleep Quality <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Cleanliness <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Location <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Rooms <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Food &amp; Beverage <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+							<div class="col-xs-6 col-sm-4 col-md-3">
+								Facilities <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
+							</div>
+						</div>
+						<form>
+							<div class="row">
+								<div class="col-sm-12 col-md-6">
+									<label>Share your experience in a couple of words</label>
+									<textarea class="form-control" rows="5"></textarea>
+									<label for="EmailAddress">Security</label>
+									<!--ROBOT CAPTCHA!!!-->
+									<button type="submit" class="btn btn-primary btn-block" data-icon="fa-envelope-o">Send</button>
+								</div>
+								<div class="col-sm-12 col-md-6">
+									<label data-icon="fa-exclamation-triangle">Make sure your review will be approved</label>
+									<div class="well well-sm">
+										<ul>
+											<li>be clear & concise</li>
+											<li>if you had a bad experience, try to offer constructive suggestions – remember everyone has a bad day</li>
+											<li>refrain from using peoples names</li>
+											<li>refrain from swearing</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</form>
+					
+					</section>
+					
+				</div>
+				<!--tabs-->
+
+	    	</section>	
+
+			<?php if($query->result()){ ?>
+
+				<div class="spacer"></div>
+
+				<section>
+					<div class="heading">
+						<h2 data-icon="fa-newspaper-o">Business <strong>Product Listings</strong></h2>
+					</div>
+					<div id="products_div">
+						<?php echo $this->product_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 15, $offset = 0, $title = '',$amt = 4, $advert = FALSE); ?>
+					</div>
+				</section>
+
+			<?php } ?>
+
+			<div class="spacer"></div>
+
+			<section>
+				<div class="heading">
+					<h2 data-icon="fa-newspaper-o">Similar <strong>Business Listings</strong></h2>
+				</div>
+				<div id="similar_div">
+
+				</div>
+			</section>
 
 		</div>
 
@@ -232,6 +374,7 @@ $this->load->view('inc/header');
 	
 </div>
 	
+<div class="spacer"></div>	
 	
 <?php $this->load->view('inc/footer');?>	
 
@@ -239,281 +382,189 @@ $this->load->view('inc/header');
 <script src="<?php echo base_url('/');?>js/jquery.rating.pack.js" type="text/javascript"></script> 
 
 <script type="text/javascript">
+
 	$(document).ready(function(){
 
-		$.ajax({
-            url: '<?php echo site_url('/');?>classifieds/get_latest/',
-            success: function(data) {
-				var pre = $("#classifieds_content");
-                pre.removeClass('loading_img min400');
-                pre.append(data);
-                
-            }
-        });
 
+		$('#b-about img').addClass('img-fluid');
 
-		$('.owl-carousel').owlCarousel({
-		    loop:true,
-		    margin:10,
-		    nav: true,
-		    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
-		    responsiveClass:true,
-		    responsive:{
-		        0:{
-		            items:1,
-		            nav:true
-		        },
-		        600:{
-		            items:3,
-		            nav:true
-		        },
-		        1000:{
-		            items:4,
-		            nav:true,
-		            loop:false
-		        }
-		    }
+		$("a.fancy-images").fancybox({
+			'transitionIn'	:	'elastic',
+			'transitionOut'	:	'elastic',
+			'speedIn'		:	600, 
+			'speedOut'		:	200, 
+			'overlayShow'	:	false,
+			'cyclic'		:   true,
+			'showNavArrows'	:   true
 		});
 
 		
-		get_wethear('na','windhoek');
-		//THUMBS
-		$('figure .cycle-slideshow').cycle('pause');
-		$('figure .cycle-slideshow').mouseenter(function() {
-			$(this).cycle('resume').cycle('goto',0);
-			$('.reveal', this).each(function() {
-				var reveal = $(this).attr('data-src');
-				$(this).fadeIn(500).attr('src',reveal);
-			});
-		}).mouseleave(function() {
-			var shown = $('.shown', this).attr('src');
-			$(this).cycle('pause').cycle('goto',0);
-			$('.reveal', this).each(function() {
-				$(this).stop().fadeOut(200).attr('src',shown);
-			});
-		});
-		
-	});
-
-	//RESOLUTION
-	function windowResize(){
-		windowWidth = $(window).width();
-		windowHeight = $(window).height();
-		$('#resolution').text(windowWidth+' x '+windowHeight);
-	};
-	$(window).resize(windowResize);
-	
-	//PRELOAD
-	window.onload = showBody;
-	function showBody(){
-		windowResize();
-		swipeHeight();
-		$('#pre_load').fadeOut();
-	}
-	
-	
-	function get_wethear(cunt,city){
-
-		$.getJSON( "<?php echo HUB_URL;?>weather/display_block/"+cunt+"/"+city, function( data ) {
-
-			if(data.success){
-
-				$('#weather_cont').html(data.html);
-				$('.city-weather').unbind('click').bind('click', function(e){
-					var city = $(this).data('location');
-					//console.log(city);
-					get_wethear('na', city);
-				});
-			}
-
-		});
-
-
-	}
-
-$(document).ready(
-function()
-{
-	$('.redactor').redactor({ 	
-			
+		$('.redactor').redactor({ 	
+				
 			buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 
 			'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
-			 'alignment', '|', 'horizontalrule']
+			'alignment', '|', 'horizontalrule']
+
 		});
-	
-	
-	$('[rel=tooltip]').tooltip();
-	$('.carousel').carousel();
-	
-	
-	//$(".my_na").popover({ placement:"left",trigger: "hover", title:"tebhdjsbdjsbd", content:"shnaksbnjkabnsabnsksbnkabns"});  
-	$('.my_na_c').addClass('loading_img');
-    load_similar();
-	my_na(<?php echo $bus_id;?>);
-	load_advert();
-	
-	$('.popovers').popover({
-					placement : 'right',
-					html : true,
-					trigger : 'hover', //<--- you need a trigger other than manual
-					delay: { 
-					   show: "500", 
-					   hide: "100"
-					},
-					content: function() {
-					
-						return $(this).find('span.popover-content').html();
-					}
+		
+		
+		$('[rel=tooltip]').tooltip();
+		//$('.carousel').carousel();
+		
+		
+		//$(".my_na").popover({ placement:"left",trigger: "hover", title:"tebhdjsbdjsbd", content:"shnaksbnjkabnsabnsksbnkabns"});  
+		$('.my_na_c').addClass('loading_img');
+
+	    load_similar();
+
+
+		$('.popovers').popover({
+			placement : 'right',
+			html : true,
+			trigger : 'hover', //<--- you need a trigger other than manual
+			delay: { 
+			   show: "500", 
+			   hide: "100"
+			},
+			content: function() {
+			
+				return $(this).find('span.popover-content').html();
+			}
+		});
+		
 	});
-	
-}
-);
 
-function load_advert(){
-	
-	$.ajax({
-		type: 'get',
-		url: '<?php echo site_url('/').'my_na/load_advert/';?>' ,
-		success: function (data) {
-			
-			 $('#advert_big').html(data);
-			
-		}
-	});	
 
-}
+	function load_similar(){
+		
+		$.ajax({
+			type: 'get',
+			url: '<?php echo site_url('/').'business/load_similar/'.$bus_id.'/';?>' ,
+			success: function (data) {
 
-function load_similar(){
-	
-	$.ajax({
-		type: 'get',
-		url: '<?php echo site_url('/').'business/load_similar/'.$bus_id.'/';?>' ,
-		success: function (data) {
-			
-			 $('#similar_div').html(data);
-			 load_deals();
-		}
-	});	
+				 $('#similar_div').html(data);
 
-}
+				 initialise_owl();
 
-function load_deals(){
-var x = $('#deals_inc');
-x.addClass('loading_img');	
-	$.ajax({
-		type: 'get',
-		url: '<?php echo site_url('/').'business/show_business_deal/'.$bus_id.'/';?>' ,
-		success: function (data) {
-			
-			 x.html(data);
-			
-		}
-	});	
-
-}
-
-function load_vt(){
-var x = $('#virtual_tour');
-x.addClass('loading_img');	
-	$.ajax({
-		type: 'get',
-		url: '<?php echo site_url('/').'business/load_virtual_tour/'.$bus_id.'/';?>' ,
-		success: function (data) {
-			
-			 x.html(data);
-			
-		}
-	});	
-
-}
-function reload_reviews(){
-	
-	/*$.ajax({
-		type: 'post',
-		url: '<?php echo site_url('/').'business/reload_reviews/'.$bus_id.'/';?>' ,
-		success: function (data) {
-			
-			 $('#reviews').html(data);
-			 $("input .star").rating();
-		}
-	});*/	
-
-}
-function phone_click(n,type){
-	
-	var num = n.find('font');
-	num.slideDown();
+			}
+		});	
 	 
-	$.ajax({
-		type: 'get',
-		url: '<?php echo site_url('/').'business/add_business_phone_click/'.$bus_id.'/';?>'+type ,
-		success: function (data) {	
-			
-		}
-	});	
+	}
 
-}
 
-function my_na(id){
-	
-	var n = $('#'+id);
-	var place = 'right'; 
-	$.ajax({
-		type: 'get',
-		cache: false,
-		url: '<?php echo site_url('/').'business/my_na/';?>'+id+'/'+place+'/' ,
-		success: function (data) {	
-			
-			n.html(data);
-			$('[rel=tooltip]').tooltip();
-			my_na_effect();
-			n.removeClass('loading_img');
-		}
-	});	
-	
-}
+	/*function load_deals(){
 
-function my_na_yes(id){
-	
-	var n = $('#'+id);
-	n.find(".my_na").hide();
-	n.addClass('loading_img');
-	n.popover('destroy');
-	var place = 'right';
-	$.ajax({
-		type: 'get',
-		cache: false,
-		url: '<?php echo site_url('/').'business/my_na_click/';?>'+id+'/'+place+'/',
-		success: function (data) {	
-			
-			n.html(data);
-			$('[rel=tooltip]').tooltip();
-			my_na_effect();
-			n.removeClass('loading_img');
-			n.find(".my_na").show();
-		}
-	});	
+		var x = $('#deals_inc');
+		x.addClass('loading_img');	
 
-}
+		$.ajax({
+			type: 'get',
+			url: '<?php //echo site_url('/').'business/show_business_deal/'.$bus_id.'/';?>' ,
+			success: function (data) {
+				
+				 x.html(data);
+				
+			}
+		});	
 
-function my_na_effect(){
+	}*/
 
-	//$('.my_na_c').removeClass('loading_img');
-	$(function() {
-		$(".my_na")
-		.find("span")
-		.hide()
-		.end()
-		.hover(function() {
-			$(this).find("span").stop(true, true).fadeIn();
-			
-		}, function(){
-			$(this).find("span").stop(true, true).fadeOut();
-			
+
+	function load_vt() {
+
+		var x = $('#virtual_tour');
+		var loader = '<img src="<?php echo base_url('/'); ?>images/load.gif"/>';
+		x.html(loader);
+		$.ajax({
+			type: 'get',
+			url: '<?php echo site_url('/').'business/load_virtual_tour/'.$bus_id.'/';?>' ,
+			success: function (data) {
+				
+				 x.html(data);
+				
+			}
+		});	
+
+	}
+
+
+	function load_gallery() {
+
+		var x = $('#bus_gallery');
+		var loader = '<img src="<?php echo base_url('/'); ?>images/load.gif"/>';
+		x.html(loader);
+		$.ajax({
+			type: 'get',
+			url: '<?php echo site_url('/').'business/load_gallery/'.$bus_id.'/';?>' ,
+			success: function (data) {
+				
+				 x.html(data);
+				 initialise_owl();
+				
+			}
+		});	
+
+	}	
+
+
+	function reload_reviews(){
+		
+		$.ajax({
+			type: 'post',
+			url: '<?php echo site_url('/').'business/reload_reviews/'.$bus_id.'/';?>' ,
+			success: function (data) {
+				
+				 $('#reviews').html(data);
+				 $("input .star").rating();
+			}
 		});
-	});	
 
-}
+	}
+
+
+
+	function my_na(id){
+		
+		var n = $('#'+id);
+		var place = 'right'; 
+		$.ajax({
+			type: 'get',
+			cache: false,
+			url: '<?php echo site_url('/').'business/my_na/';?>'+id+'/'+place+'/' ,
+			success: function (data) {	
+				
+				n.html(data);
+				$('[rel=tooltip]').tooltip();
+				my_na_effect();
+				n.removeClass('loading_img');
+			}
+		});	
+		
+	}
+
+
+	function my_na_yes(id){
+		
+		var n = $('#'+id);
+		n.find(".my_na").hide();
+		n.addClass('loading_img');
+		n.popover('destroy');
+		var place = 'right';
+		$.ajax({
+			type: 'get',
+			cache: false,
+			url: '<?php echo site_url('/').'business/my_na_click/';?>'+id+'/'+place+'/',
+			success: function (data) {	
+				
+				n.html(data);
+				$('[rel=tooltip]').tooltip();
+				my_na_effect();
+				n.removeClass('loading_img');
+				n.find(".my_na").show();
+			}
+		});	
+
+	}
 
 
 </script>

@@ -4,7 +4,7 @@
  //+++++++++++++++++
  //Roland Ihms
  //Get Account Details
- $acc_details = $this->members_model->get_my_account($id);
+$acc_details = $this->members_model->get_my_account($id);
 $fname = $acc_details['CLIENT_NAME'];
 $sname = $acc_details['CLIENT_SURNAME'];
 $email = $acc_details['CLIENT_EMAIL'];
@@ -180,7 +180,6 @@ if($verified == 'Y'){
               <div id="region_div">
               <?php //POPULATE REGION PLACEHOLDER 
 			  if(isset($city)){
-				
 				if($country == '151'){
 				}
 				    $this->members_model->populate_city($country, $city);

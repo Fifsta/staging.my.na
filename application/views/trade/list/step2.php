@@ -8,6 +8,12 @@ if (isset($bus_id) && $bus_id != 0) {
 
     $str = ' for Business';
 
+    $all_link = site_url('/') . 'members/business/' . $bus_id . '/';
+
+} else {
+
+    $all_link = site_url('/') . 'members/my_products/';
+
 }
 
 if (!isset($product_id)) {
@@ -15,7 +21,6 @@ if (!isset($product_id)) {
     $step4 = '';
     $step5 = '';
 } else {
-
     $step3 = site_url('/') . 'sell/step3/' . $product_id . '/' . $bus_id . '/';
     $step4 = site_url('/') . 'sell/step4/' . $product_id . '/' . $bus_id . '/';
     $step5 = site_url('/') . 'sell/step5/' . $product_id . '/' . $bus_id . '/';
@@ -27,35 +32,33 @@ if(!isset($type)){
 }
 
 ?>
+ 
 <div id="anchor_me"></div>
-<div class=" text-center">
 
-    <a href="#" class="btn btn-warning disabled  step1" style="margin:5px"> 1 Select Category <i
-            class="icon-ok icon-white"></i></a>
-    <a href="" class="btn btn-success btn-large step2" style="margin:5px"> 2 Details <i
-            class="icon-chevron-right icon-white"></i></a>
-    <a href="<?php echo $step3; ?>" class="btn btn-inverse disabled step3" style="margin:5px"> 3 Attach Photos <i
-            class="icon-chevron-right icon-white"></i></a>
-    <a href="<?php echo $step4; ?>" class="btn btn-inverse disabled step4" style="margin:5px"> 4 Extras <i
-            class="icon-chevron-right icon-white"></i></a>
-    <a href="<?php echo $step5; ?>" class="btn btn-inverse disabled step5" style="margin:5px"> 5 Confirm and Publish <i
-            class="icon-chevron-right icon-white"></i></a>
+<div class="spacer"></div>
 
-</div>
+    <div class="heading">
+        <h2 data-icon="fa-list"><?php echo strtoupper($type);?> <strong>Details</strong></h2>
+        <ul class="options">
 
+        </ul>
+    </div>
+    <br>
 
-<div id="item_details">
-    <div class="clearfix">&nbsp;</div>
-    <div class="row-fluid  white_box">
-        <div class="clearfix">&nbsp;</div>
-        <div class="product_ribbon">
-            <small class="clearfix">Product Descriptions</small>
-            <?php echo strtoupper($type);?> DETAILS<span></span></div>
-        <div class="clearfix" style="height:100px">&nbsp;</div>
-        <div class="span11">
-            <form id="item-add" name="item-add" method="post" action="<?php echo site_url('/'); ?>sell/add_general_item"
-                  class="form-horizontal">
+    <div class="card">
+        <div class="card-body">
+
+            <a href="#" class="btn btn-warning disabled step1" style="margin:5px"> 1 Select Category <i class="fa fa-check text-dark"></i></a>
+            <a href="" class="btn btn-success btn-large step2" style="margin:5px"> 2 Details <i class="fa fa-chevron-right text-light"></i></a>
+            <a href="<?php echo $step3; ?>" class="btn btn-dark disabled step3" style="margin:5px"> 3 Attach Photos <i class="fa fa-chevron-right text-light"></i></a>
+            <a href="<?php echo $step4; ?>" class="btn btn-dark disabled step4" style="margin:5px"> 4 Extras <i class="fa fa-chevron-right text-light"></i></a>
+            <a href="<?php echo $step5; ?>" class="btn btn-dark disabled step5" style="margin:5px"> 5 Confirm and Publish <i class="fa fa-chevron-right text-light"></i></a>
+            <hr>
+
+            <form id="item-add" name="item-add" method="post" action="<?php echo site_url('/'); ?>sell/add_general_item">
+
                 <fieldset>
+
                     <input type="hidden" name="cat1" id="cat1" value="<?php echo $cat1; ?>"/>
                     <input type="hidden" name="cat1name" id="cat1name" value="<?php echo $cat1name; ?>"/>
                     <input type="hidden" name="cat2" id="cat2" value="<?php echo $cat2; ?>"/>
@@ -64,60 +67,44 @@ if(!isset($type)){
                     <input type="hidden" name="cat3name" id="cat3name" value="<?php echo $cat3name; ?>"/>
                     <input type="hidden" name="cat4" id="cat4" value="<?php echo $cat4; ?>"/>
                     <input type="hidden" name="cat4name" id="cat4name" value="<?php echo $cat4name; ?>"/>
-                    <input type="hidden" name="bus_id" id="bus_id" value="<?php if (isset($bus_id)) {
-                        echo $bus_id;
-                    } else {
-                        echo '0';
-                    } ?>"/>
-                    <input type="hidden" name="product_id" id="product_id" value="<?php if (isset($product_id)) {
-                        echo $product_id;
-                    } else {
-                        echo '0';
-                    } ?>"/>
+                    <input type="hidden" name="bus_id" id="bus_id" value="<?php if (isset($bus_id)) { echo $bus_id; } else {  echo '0'; } ?>"/>
+                    <input type="hidden" name="product_id" id="product_id" value="<?php if (isset($product_id)) { echo $product_id; } else { echo '0'; } ?>"/>
 
                     <div class="control-group">
-                        <label class="control-label" for="category">Category</label>
+                        <label class="control-label" for="category"><strong>Category</strong></label>
 
                         <div class="controls">
-                            <input type="text" class="span12" value="<?php echo $catname; ?>" disabled>
+                            <input type="text" class="form-control" value="<?php echo $catname; ?>" disabled>
                             <span class="help-block" style="font-size:11px">Listed in which category.</span>
                         </div>
                     </div>
+                    <br>
 
                     <div class="control-group">
-                        <label class="control-label" for="title">Item</label>
+                        <label class="control-label" for="title"><strong>Item</strong></label>
 
                         <div class="controls">
-                            <input type="text" class="span12  keyboard-normal" id="item_title" name="item_title" placeholder="Item title"
-                                   value="<?php if (isset($title)) {
-                                       echo $title;
-                                   } ?>">
+                            <input type="text" class="form-control keyboard-normal" id="item_title" name="item_title" placeholder="Item title" value="<?php if (isset($title)) { echo $title; } ?>">
                             <span class="help-block" style="font-size:11px">The product title. Be specific, if it is a BMW a good title will be BMW 3 Series 320i</span>
                         </div>
                     </div>
+                    <br>
 
                     <div class="control-group">
-                        <label class="control-label" for="item_content">Item Description:</label>
-
+                        <label class="control-label" for="item_content"><strong>Item Description:</strong></label>
                         <div class="controls">
-
-                            <textarea id="item_content" class="item_editor span12 keyboard-normal" name="item_content"
-                                      style="display:block"><?php if (isset($description)) {
-                                    echo $description;
-                                } ?></textarea>
-                                                <span class="help-block" style="font-size:11px">
-                                                Please describe the item or product. Please provide specific detail here. Condition and relevant specifications</span>
+                            <textarea id="item_content" class="item_editor form-control keyboard-normal" name="item_content" style="display:block"><?php if (isset($description)) { echo $description; } ?></textarea>
+                            <span class="help-block" style="font-size:11px">Please describe the item or product. Please provide specific detail here. Condition and relevant specifications</span>
                         </div>
                     </div>
-
+                    <br>
 
                     <div class="control-group">
-                        <label class="control-label" for="item_loc">Location</label>
+                        <label class="control-label" for="item_loc"><strong>Location</strong></label>
 
                         <div class="controls">
 
-                            <select onchange="populateSuburb(this.value);" class="span12" id="item_loc" name="item_loc"
-                                    placeholder="Location">
+                            <select onchange="populateSuburb(this.value);" class="form-control" id="item_loc" name="item_loc" placeholder="Location">
                                 <option value="National">National</option>
                                 <?php $cities = $this->trade_model->get_cities();
                                 foreach ($cities->result() as $row2) {
@@ -136,14 +123,13 @@ if(!isset($type)){
 
                                 ?>
                             </select>
-
                             <span class="help-block" style="font-size:11px">Please select a location for the item</span>
 
                         </div>
                     </div>
-
+                    <br>
                     <div class="control-group">
-                        <label class="control-label" for="item_suburb">Suburb</label>
+                        <label class="control-label" for="item_suburb"><strong>Suburb</strong></label>
 
                         <div class="controls">
 
@@ -156,7 +142,6 @@ if(!isset($type)){
 
                                     echo $this->trade_model->populate_suburb_name($location = '', $suburb = '');
 
-
                                 }
                                 ?>
                             </div>
@@ -165,91 +150,98 @@ if(!isset($type)){
 
                         </div>
                     </div>
-
+                    <br>
 
                     <?php
 
                     //IF SERVICE DO NOT SHOW AUCTION OR SALE TYPE
-                    if ($type != 'service') {
-                        ?>
+                    if ($type != 'service') { ?>
+
                         <div class="control-group" id="listing_sel_type">
-                            <label class="control-label" for="gender">Listing Type</label>
+                            <label class="control-label" for="gender"><strong>Listing Type</strong></label>
 
                             <div class="controls">
                                 <div class="btn-group" data-toggle="buttons-radio">
-                                    <button type="button" id="sale_click" onclick="javascript:togglecheck('S');" class="btn
-												  <?php if (isset($listing_type) && ($listing_type == 'S')) {
-                                        echo 'btn-success active';
-                                    } elseif (!isset($listing_type)) {
-                                        echo 'btn-success active';
-                                    }; ?>">Fixed Price
-                                    </button>
-                                    <button type="button" id="auction_click" onclick="javascript:togglecheck('A');"
-                                            class="btn
-                                                  <?php if (isset($listing_type) && ($listing_type == 'A')) {
-                                                echo 'btn-success active';
-                                            } ?>">Auction
-                                    </button>
+
+                                    <button type="button" id="sale_click" onclick="javascript:togglecheck('S');" class="btn <?php if (isset($listing_type) && ($listing_type == 'S')) { echo 'btn-success active'; } elseif (!isset($listing_type)) { echo 'btn-success active'; }; ?>">Fixed Price</button>
+                                    <button type="button" id="auction_click"onclick="javascript:togglecheck('A');"  class="btn <?php if (isset($listing_type) && ($listing_type == 'A')) {  echo 'btn-success active'; } ?>">Auction</button>
 
                                 </div>
-                                <input type="hidden" name="listing_type" id="listing_type"
-                                       value="<?php if (isset($listing_type)) {
-                                           echo $listing_type;
-                                       } else {
-                                           echo 'S';
-                                       } ?>"/>
+
+                                <input type="hidden" name="listing_type" id="listing_type" value="<?php if (isset($listing_type)) { echo $listing_type; } else { echo 'S'; } ?>" />
                                 <span class="help-block" style="font-size:11px">Do you want to have a fixed price for the item or put it on auction.</span>
+
                             </div>
                         </div>
+                        <hr>
 
                     <?php }else{
-                        //ADD A HIDDEN TYPE OF C for SERVICE
-                        ?>
 
-                        <input type="hidden" name="listing_type" id="listing_type" value="C">
+                        //ADD A HIDDEN TYPE OF C for SERVICE
+                    ?>
+
+                    <input type="hidden" name="listing_type" id="listing_type" value="C">
                     <?php } ?>
 
-                    <!-- Fixed Pricing -->
-                    <?php //
-                    if (!isset($sale_price)) {
+                        <!-- Fixed Pricing -->
+                        <?php //
+                        if (!isset($sale_price)) {
 
-                        $sale_price = 0;
-                    }
-                    if (strpos($sale_price, '.')) {
+                            $sale_price = 0;
 
-                        $cents = substr($sale_price, strpos($sale_price, '.') + 1, strlen($sale_price));
-                        $dolla = substr($sale_price, 0, strpos($sale_price, '.'));
-                    } else {
+                        }
 
-                        $cents = '00';
-                        $dolla = $sale_price;
+                        if (strpos($sale_price, '.')) {
 
-                    }
+                            $cents = substr($sale_price, strpos($sale_price, '.') + 1, strlen($sale_price));
+                            $dolla = substr($sale_price, 0, strpos($sale_price, '.'));
+
+                        } else {
+
+                            $cents = '00';
+                            $dolla = $sale_price;
+
+                        }
+
                     ?>
-                    <div id="fixed_pricing" <?php if (isset($listing_type) && ($listing_type == 'A')) {
-                        echo 'class="hide"';
-                    } ?>>
+                    <div id="fixed_pricing" <?php if (isset($listing_type) && ($listing_type == 'S')) { echo 'class="d-none"'; } ?>>
 
                         <div class="control-group">
-                            <label class="control-label" for="price_u">Price N$</label>
+                            <label class="control-label" for="price_u"><strong>Price N$</strong></label>
 
                             <div class="controls">
-                                <div class="span6">
+                                <div class="col-md-12 form-row">
 
-                                    <input type="text" class="span8 keyboard-numbers" id="price" name="price"
+                                    <input type="text" class="form-control col-md-4 keyboard-numbers" id="price" name="price"
                                            onkeypress="return isNumberKey(event)" placeholder="Fixed Price"
                                            value="<?php if (isset($dolla)) {
                                                echo $dolla;
                                            } ?>">
-                                    <input type="number" class="span4 keyboard-numbers" max="99" id="price_c" name="price_c"
+                                    <input type="number" class="form-control col-md-4 keyboard-numbers" max="99" id="price_c" name="price_c"
                                            onkeypress="return isNumberKey(event)" placeholder="Fixed Price"
                                            value="<?php if (isset($cents)) {
                                                echo $cents;
                                            } ?>">
-                                    <span class="help-block" style="font-size:11px">What is the fixed price of the item/product in N$ - Second box is for the cent value of the price if required</span>
-                                </div>
 
-                                <div class="span2">
+                                    <div class="col">
+
+                                        <h1 id="money-preview" style="margin-top:0"
+                                            class="yellow upper na_script"><?php if (isset($dolla)) {
+                                                echo ' N$ ' . $dolla;
+                                            } ?><?php if (isset($cents)) {
+                                                echo '.' . $cents;
+                                            } else {
+                                                echo '.00';
+                                            } ?></h1>
+
+                                    </div>
+  
+                                    <span class="help-block" style="font-size:11px">What is the fixed price of the item/product in N$ - Second box is for the cent value of the price if required</span>
+
+                                </div>
+                                <br>
+                                <div class="col">
+
                                     <?php if ($bus_id != 0) { ?>
                                         <input type="checkbox" name="por"
                                                value="POR" <?php if (isset($por) && $por == 'Y') {
@@ -260,85 +252,68 @@ if(!isset($type)){
                                     <?php } ?>
 
                                 </div>
-                                <div class="span4">
-
-                                    <h1 id="money-preview" style="margin-top:0"
-                                        class="yellow upper na_script"><?php if (isset($dolla)) {
-                                            echo ' N$ ' . $dolla;
-                                        } ?><?php if (isset($cents)) {
-                                            echo '.' . $cents;
-                                        } else {
-                                            echo '.00';
-                                        } ?></h1>
-
-                                </div>
+                                <br>
 
                             </div>
                         </div>
-
                     </div>
-
                     <!--  End Fixed Pricing -->
 
 
                     <!-- Auction Pricing -->
-                    <div id="auction_pricing" <?php if (isset($listing_type) && ($listing_type == 'A')) {
-                        echo '';
-                    } else {
-                        echo 'class="hide"';
-                    } ?> >
+                    <div id="auction_pricing" <?php if (isset($listing_type) && ($listing_type == 'A')) {  echo ''; } else { echo 'class="d-none"'; } ?>>
 
                         <div class="control-group">
-                            <label class="control-label" for="start_price">Start Price</label>
+                            <label class="control-label" for="start_price"><strong>Start Price</strong></label>
 
                             <div class="controls">
-                                <div class="span6">
-
-                                    <input type="text" class="span12 keyboard-numbers" id="start_price" name="start_price"
-                                           onkeypress="return isNumberKey(event)" placeholder="Start Price"
-                                           value="<?php if (isset($start_price)) {
-                                               echo $start_price;
-                                           } ?>">
-                                    <span class="help-block" style="font-size:11px">What is the normal value of the item/promotion in N$</span>
-                                </div>
-
-                                <div class="span6">
-                                    <input type="text" class="span12 keyboard-numbers" id="reserve" name="reserve"
-                                           onkeypress="return isNumberKey(event)" placeholder="Reserve"
-                                           value="<?php if (isset($reserve)) {
-                                               echo $reserve;
-                                           } ?>">
-                                    <span class="help-block" style="font-size:11px">What is the reserve value? If the reserve bid hasnt been matched at the end of the auction the item is not sold.</span>
+                                <div class="col-md-12 form-row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control keyboard-numbers" id="start_price" name="start_price"
+                                               onkeypress="return isNumberKey(event)" placeholder="Start Price"
+                                               value="<?php if (isset($start_price)) {
+                                                   echo $start_price;
+                                               } ?>">
+                                        <span class="help-block" style="font-size:11px">What is the normal value of the item/promotion in N$</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control keyboard-numbers" id="reserve" name="reserve"
+                                               onkeypress="return isNumberKey(event)" placeholder="Reserve"
+                                               value="<?php if (isset($reserve)) {
+                                                   echo $reserve;
+                                               } ?>">
+                                        <span class="help-block" style="font-size:11px">What is the reserve value? If the reserve bid hasnt been matched at the end of the auction the item is not sold.</span>
+                                    </div>    
                                 </div>
 
                             </div>
                         </div>
 
                         <div class="control-group">
-                            <label class="control-label" for="slug">Duration</label>
+                            <label class="control-label" for="slug"><strong>Duration</strong></label>
 
                             <div class="controls">
-                                <div class="input-append date span6" id="dpstart" data-date="102/2012"
-                                     data-date-format="yyyy-mm-dd" data-date-minviewmode="months">
-                                    <input class="span9" size="16" type="text" name="dpstart"
-                                           value="<?php if (isset($start_date)) {
-                                               echo date('Y-m-d', strtotime($start_date));
-                                           } else {
-                                               echo date('Y-m-d');
-                                           } ?>" readonly>
-                                    <span class="add-on"><i class="icon-calendar"></i></span>
+                                <div class="col-md-12 form-row">
+
+                                    <div class="col-md-6">
+                                        <input class="form-control" size="16" type="text" name="dpstart"
+                                               value="<?php if (isset($start_date)) {
+                                                   echo date('Y-m-d', strtotime($start_date));
+                                               } else {
+                                                   echo date('Y-m-d');
+                                               } ?>" readonly>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="form-control" size="16" type="text" name="dpend"
+                                               value="<?php if (isset($end_date)) {
+                                                   echo date('Y-m-d', strtotime($end_date));
+                                               } else {
+                                                   echo date('Y-m-d', strtotime("+7 days"));
+                                               } ?>" readonly>
+
+                                    </div>
                                 </div>
-                                <div class="input-append date span6" id="dpend" data-date="102/2012"
-                                     data-date-format="yyyy-mm-dd" data-date-minviewmode="months">
-                                    <input class="span9" size="16" type="text" name="dpend"
-                                           value="<?php if (isset($end_date)) {
-                                               echo date('Y-m-d', strtotime($end_date));
-                                           } else {
-                                               echo date('Y-m-d', strtotime("+7 days"));
-                                           } ?>" readonly>
-                                    <span class="add-on"><i class="icon-calendar"></i></span>
-                                </div>
-                                <p>&nbsp;</p>
 
                                 <div class="alert">Your auction will start when it is approved and will run for a
                                     duration of <strong>7 Days</strong> by default. Ends on
@@ -347,23 +322,22 @@ if(!isset($type)){
                                         } else {
                                             echo date('g:ia \o\n l jS', strtotime("+7 days"));
                                         } ?></strong></div>
-                                <!--<span class="help-block" style="font-size:11px">From when to when is the listing available. </span>-->
+
                             </div>
                         </div>
-
 
                     </div>
                     <!--  End Auction Pricing -->
                     <?php
 
                     //IF SERVICE DO NOT SHOW QUANTITY
-                    if ($type != 'service') {
-                        ?>
+                    if ($type != 'service') {  ?>
+
                         <div class="control-group" id="quantity_group">
-                            <label class="control-label" for="quantity">Quantity</label>
+                            <label class="control-label" for="quantity"><strong>Quantity</strong></label>
 
                             <div class="controls">
-                                <input type="number" class="span1 keyboard-numbers" id="quantity" name="quantity" placeholder="1"
+                                <input type="number" class="form-control col-md-1 keyboard-numbers" id="quantity" name="quantity" placeholder="1"
                                        value="<?php if (isset($quantity)) {
                                            echo $quantity;
                                        } else {
@@ -374,103 +348,123 @@ if(!isset($type)){
                             </div>
                         </div>
 
-                    <?php }else{
-                        //IF SERVICE SHOW QUANTITY 0
-                        ?>
-                        <input type="hidden" name="quantity" id="quantity" value="0">
+                    <?php 
 
+                        }else{
+                        //IF SERVICE SHOW QUANTITY 0
+
+                    ?>
+                    <input type="hidden" name="quantity" id="quantity" value="0">
 
                     <?php } ?>
+
+                    <br>
                     <div class="control-group">
-                        <label class="control-label" for="item_email">Payment Instructions:</label>
-
+                        <label class="control-label" for="item_email"><strong>Payment Instructions:</strong></label>
                         <div class="controls">
-
-                            <textarea id="item_email" class="item_editor span12  keyboard-normal" name="item_email"
-                                      style="display:block"><?php if (isset($email_instructions)) {
-                                    echo $email_instructions;
-                                } ?></textarea>
-                                                <span class="help-block" style="font-size:11px">
-                                                Please provide us with special instructions on how to claim the item. This will be sent in the email which the item recipient receives.</span>
+                            <textarea id="item_email" class="item_editor form-control keyboard-normal" name="item_email" style="display:block"><?php if (isset($email_instructions)) { echo $email_instructions; } ?></textarea>
+                            <span class="help-block" style="font-size:11px"> Please provide us with special instructions on how to claim the item. This will be sent in the email which the item recipient receives.</span>
                         </div>
                     </div>
+                    <br>
 
                     <div id="item_msg"></div>
+
                     <?php
-                    if (isset($product_id) && $is_active == 'N') {
 
+                        if (isset($product_id) && $is_active == 'N') {
 
-                        //echo '<a onclick="submit_item('.$product_id.')" class="btn btn-inverse pull-right" style="margin-left:10px;display:block" id="btn_submit_item">
-                        //<i class="icon-play icon-white"></i> Publish Item</a>';
+                            //echo '<a onclick="submit_item('.$product_id.')" class="btn btn-inverse pull-right" style="margin-left:10px;display:block" id="btn_submit_item">
+                            //<i class="icon-play icon-white"></i> Publish Item</a>';
 
+                        } else {
 
-                    } else {
+                            // echo '<a class="btn btn-inverse pull-right" style="margin-left:10px;display:none" id="btn_submit_item">
+                            //  <i class="icon-play icon-white"></i> Publish Item</a>';
 
-                        // echo '<a class="btn btn-inverse pull-right" style="margin-left:10px;display:none" id="btn_submit_item">
-                        //  <i class="icon-play icon-white"></i> Publish Item</a>';
+                        }
 
-                    }
                     ?>
-
 
                     <div id="msg_step2"></div>
-                    <button type="submit" class="btn btn-success pull-right"
-                            id="add_item_btn"><?php if (isset($product_id)) {
-                            echo 'Update Item';
+                    <button type="submit" class="btn btn-lg btn-success pull-right" id="add_item_btn"><?php if (isset($product_id)) { echo 'Update Item'; } else { echo 'Add Item'; } ?> <i class="fa fa-chevron-right text-light"></i></button>
+                    <?php 
+
+                        if (isset($product_id)) {
+
+                            $str = 'disabled';
+                            $java = '';
+
                         } else {
-                            echo 'Add Item';
-                        } ?> <i class="icon-chevron-right icon-white"></i></button>
-                    <?php if (isset($product_id)) {
 
-                        $str = 'disabled';
-                        $java = '';
+                            $str = '';
+                            $java = 'onclick="back_to_1()"';
 
-                    } else {
+                        }
 
-                        $str = '';
-                        $java = 'onclick="back_to_1()"';
-                    }
                     ?>
-                    <a href="<?php echo site_url('/') . 'sell/my_trade/' . $bus_id . '/'; ?>" onclick="back_to_all();"
-                       id="back_to_all" class="btn btn-inverse pull-right" style="margin-right:5px"><i
-                            class="icon-list icon-white"></i> All Products</a>
-                    <a href="javascript:void(0)" <?php echo $java; ?>
-                       class="btn btn-warning pull-right <?php echo $str; ?>" style="margin-right:5px"><i
-                            class="icon-chevron-left icon-white"></i> Back</a>
+
+                    <a href="<?php echo $all_link; ?>" id="back_to_all" class="btn btn-dark btn-lg pull-right" style="margin-right:5px">All Products</a>
+                    <a href="javascript:void(0)" <?php echo $java; ?> class="btn btn-lg btn-warning pull-right <?php echo $str; ?>" style="margin-right:5px"><i class="fa fa-chevron-left text-dark"></i> Back</a>
+
                 </fieldset>
             </form>
-
         </div>
     </div>
-</div>
+
+
 <script data-cfasync="false" type="text/javascript">
 
+    //$('#dpstart').datepicker();
+    //$('#dpend').datepicker();
+
     $(document).ready(function () {
+
         console.log('type '+type+ 'auction: '+auction);
-        //show price
-        //money-preview
+
 		init_keyboard();
+
         var money_pre = $('#money-preview');
+
         $('#price').on('input', function () {
 
             var temp = parseFloat($(this).val() + '.' + $('#price_c').val());
             money_pre.html('N$ ' + temp.formatMoney(2, '.', ','));
 
         });
+
         $('#price_c').on('input', function () {
 
             var temp = parseFloat($('#price').val() + '.' + $(this).val());
             money_pre.html('N$ ' + temp.formatMoney(2, '.', ','));
 
         });
-        if (auction) {
+
+        $('#sale_click').bind('click', function () {
+
+            $('#auction_pricing').addClass('d-none');
+            $('#fixed_pricing').removeClass('d-none');
+
+        });
+
+        $('#auction_click').bind('click', function () {
+
+            $('#fixed_pricing').addClass('d-none');
+            $('#auction_pricing').removeClass('d-none');
+
+        });
+
+
+        if (auction == 'true') {
 
             $('#listing_sel_type').fadeOut();
             $('#quantity_group').fadeOut();
-            $('#auction_pricing').fadeIn();
+            $('#auction_pricing').removeClass('d-none').fadeIn();
             $('#fixed_pricing').fadeOut();
             $('#listing_type').val('A');
+
         }
+
         $('.item_editor').redactor({
 			destroy: function()
 			{
@@ -482,33 +476,26 @@ if(!isset($type)){
                 'alignment', '|', 'horizontalrule'],
             cleanOnPaste: true
         });
-        //$('#dpstart').datepicker()
 
-        //$('#dpend').datepicker()
-        <?php
-         /**
-        * ++++++++++++++++++++++++++++++++++++++++++++
-        * //SUBMIT STEP 3
-        * ++++++++++++++++++++++++++++++++++++++++++++
-         */
-         ?>
+
         $('#add_item_btn').bind('click', function (e) {
 
             e.preventDefault();
             var cont = $('#admin_content').addClass('slideLeft'), frm = $('#item-add'), btn = $(this);
             btn.html('Working...');
+
             //cont.addClass('loading_img');
+
             $.ajax({
                 type: 'post',
                 cache: false,
                 data: frm.serialize(),
                 url: '<?php echo site_url('/').'sell/add_general_item';?>',
                 success: function (data) {
-                    btn.html('<i class="icon-chevron-right icon-white"></i> Update Item');
+                    btn.html('<i class="fa fa-chevron-right text-light"></i> Next');
                     cont.empty().removeClass('slideLeft');
                     cont.html(data);
                     window.scrollTo(0, 0);
-
                 }
             });
         });
@@ -525,4 +512,5 @@ if(!isset($type)){
             j = (j = i.length) > 3 ? j % 3 : 0;
         return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
     };
+
 </script>    

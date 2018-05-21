@@ -66,9 +66,9 @@ class Classifieds extends CI_Controller {
 	}
 	
 	
-    //++++++++++++++++++++++++++++++
-    //CAREERS LANDING ? RESULTS PAGE
-    //++++++++++++++++++++++++++++++
+    //+++++++++++++++++++++++++++++++++
+    //CLASSIFIED LANDING ? RESULTS PAGE
+    //+++++++++++++++++++++++++++++++++
 
 	public function get_latest()
 	{
@@ -84,12 +84,12 @@ class Classifieds extends CI_Controller {
 			 
 		 }
 
-		 $o = $this->classifieds_model->render_classifieds($query['query']);
+		 $o = $this->classifieds_model->render_latest_classifieds($query['query']);
 		
 		 $this->output
 	        ->set_content_type('application/json')
 	        ->set_output(json_encode(array('classifieds' => $o)));
-		 
+	
 	}
 
 	
@@ -98,8 +98,8 @@ class Classifieds extends CI_Controller {
     //++++++++++++++++++++++++++
 	public function results()
 	{
-		 //if($this->input->get_post('');
 		 
+
 		 $query = $this->classifieds_model->get_classifieds();
 		 $count = 0;
 		 if($query['query']->result()){
@@ -122,11 +122,11 @@ class Classifieds extends CI_Controller {
 		$config['num_links'] = 2; 
 		$config['page_query_string'] = true;
 		$config['query_string_segment'] = 'offset';
-		//Styling
+		//Styling 
 		$config['full_tag_open'] = '<nav aria-label="Page navigation example"><ul class="pagination">';
 		$config['full_tag_close'] = '</ul></nav>';
 		$config['first_link'] = false;
-		$config['last_link'] = false;
+		$config['last_link'] = false; 
 		$config['first_tag_open'] = '<li class="page-item">';
 		$config['first_tag_close'] = '</li>';
 		$config['prev_link'] = '<i class="fa fa-chevron-left icon-light"></i>';

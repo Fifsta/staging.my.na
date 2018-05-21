@@ -11,6 +11,7 @@ class My_na extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('my_na_model');
+		$this->load->model('product_model');
 	
 	}
 	
@@ -30,6 +31,23 @@ class My_na extends CI_Controller {
 		echo $output;
 
 	}
+
+
+
+	public function bus_categories() {
+
+
+		$this->load->model('search_model');
+
+		$o = $this->search_model->bus_categories(); 
+
+		$this->output
+		        ->set_content_type('application/json')
+		        ->set_output(json_encode(array('cats' => $o)));		
+
+
+	}
+
 
 
 	public function home2()
@@ -56,11 +74,14 @@ class My_na extends CI_Controller {
 			echo 'FALSE';
 			
 		}else{
-			$data['url'] = $this->input->get('url');
+			$data['url'] = $type = $this->input->post('url', TRUE);;
+
 			if($str = $this->input->get('srch_bar')){
 
 				$data['str'] = urldecode($str);
 			}
+
+
 			$this->load->view('inc/profile', $data);
 				
 		}
@@ -227,6 +248,19 @@ class My_na extends CI_Controller {
 			echo $this->my_na_model->show_advert($q);
 			
 	}
+
+
+	//LOAD RANDOM ADVERTs
+	public function load_adverts()
+	{
+
+		$cat = $this->input->post('cat', TRUE);
+
+		$o = $this->my_na_model->show_adverts($cat);
+			
+	}
+
+
 	//LOAD RESOURCES WITH AJAX AFTER PAGE LOAD
 	public function load_slide()
 	{
@@ -368,17 +402,8 @@ class My_na extends CI_Controller {
 	//LOAD LATEST AUCTIONS
 	public function load_auctions_home()
 	{
-             echo '<div class="row-fluid">
-                    <div class="span6">
-                        <h3 class="na_script upper">Current Hot Auctions</h3>
-
-                    </div>
-                    <div class="span6 text-right">
-                        <a href="'.site_url('/').'trade/auctions/" class="btn btn-inverse" title="More Properties" rel="tooltip"  style="margin-top:15px;"><i class="icon icon-plus icon-white"></i> More Auctions</a>
-
-                    </div>
-                  </div>';
-			$this->load->model('trade_model');
+        
+			$this->load->model('product_model');
 			$query =  $this->db->query("SELECT products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
                                         u_business.IS_ESTATE_AGENT, u_business.BUSINESS_NAME, u_business.BUSINESS_LOGO_IMAGE_NAME,group_concat(product_images.img_file) as images,
                                         MAX(product_auction_bids.amount) as current_bid,
@@ -386,7 +411,7 @@ class My_na extends CI_Controller {
                                         (
                                           SELECT COUNT(u_business_vote.ID) as TOTAL_R FROM u_business_vote WHERE u_business_vote.PRODUCT_ID = products.product_id
                                         ) as TOTAL_REVIEWS
-
+ 
                                         FROM products
                                         JOIN product_extras ON products.product_id = product_extras.product_id
                                         LEFT JOIN u_business ON u_business.ID = products.bus_id
@@ -397,11 +422,16 @@ class My_na extends CI_Controller {
 
                                         WHERE products.listing_type = 'A' AND products.is_active = 'Y'
                                         GROUP BY products.product_id
-                                        ORDER BY products.listing_date DESC LIMIT 4");
-			$this->trade_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 3, $offset = 0, $title = '', $amt = 4 , FALSE);
+                                        ORDER BY products.listing_date DESC LIMIT 8");
+		 $o = $this->product_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 3, $offset = 0, $title = '', $amt = 4 , FALSE);
 
+		 $this->output
+	        ->set_content_type('application/json')
+	        ->set_output(json_encode(array('auctions' => $o)));			
 			
 	}
+
+
 	//LOAD TRADE HOME PAGE
 	public function load_trade_home()
 	{
@@ -429,6 +459,7 @@ class My_na extends CI_Controller {
 			$this->trade_model->get_products($query, 4);
 			
 	}
+
 	//LOAD TRADE HOME PAGE
 	public function load_auction_home()
 	{
@@ -453,9 +484,11 @@ class My_na extends CI_Controller {
                                         WHERE products.is_active = 'Y' AND products.listing_type = 'A'
                                         GROUP BY products.product_id
                                         ORDER BY products.end_date DESC LIMIT 4";
+                                        
 			$this->trade_model->get_products($query, 4);
 			
 	}
+
 	//LOAD PROPERTIES HOME PAGE
 	public function load_properties_new_home()
 	{
@@ -557,7 +590,7 @@ class My_na extends CI_Controller {
 	}
 
 	//++++++++++++++++++++++++++++++
-	//Instant Search 
+	//Instant Search  
 	//++++++++++++++++++++++++++++++
 	public function ajax_search_json()
 	{
@@ -602,22 +635,31 @@ class My_na extends CI_Controller {
 	//++++++++++++++++++++++++++++++
 	public function search()
 	{
-		/*$type = $this->input->post('type', TRUE);
+		$type = $this->input->post('type', TRUE);
 		$location = $this->input->post('location', TRUE);
 		$main_cat_id = $this->input->post('main_cat_id', TRUE);
 		$sub_cat_id = $this->input->post('sub_cat_id', TRUE);
 		$sub_sub_cat_id = $this->input->post('sub_sub_cat_id', TRUE);
 		$sub_sub_sub_cat_id = $this->input->post('sub_sub_sub_cat_id', TRUE);
-		$key = $this->input->post('srch_bar', TRUE);
-		$key = $this->db->escape_like_str($key);*/
-		redirect(site_url('/').'my_na/results/?'.http_build_query($this->input->post()), 301);
+
+ 		$q = $this->input->post('srch_bar',TRUE);
+
+		$data['title'] = rawurldecode($q);
+		$data['key'] = $data['title'];
+		$data['str'] = $q;
+		$this->load->view('results_index', $data);
+
 	}
 	//++++++++++++++++++++++++++++++
 	//GLOBAL RESULTS
 	//++++++++++++++++++++++++++++++
 	public function results()
 	{
+
+
+
  		$q = $this->input->get('srch_bar',TRUE);
+
 		$data['title'] = rawurldecode($q);
 		$data['key'] = $data['title'];
 		$data['str'] = $q;

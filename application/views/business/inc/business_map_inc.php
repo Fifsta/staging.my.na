@@ -1,10 +1,12 @@
- <?php 
- //+++++++++++++++++
- //My.Na Business map
- //+++++++++++++++++
- //Roland Ihms
- //Get Map Details
+<?php 
+//+++++++++++++++++
+//My.Na Business map
+//+++++++++++++++++
+//Roland Ihms
+//Get Map Details 
+
 $map_details = $this->business_model->get_map_details($ID);
+
 if(count($map_details) > 0){
 	
 	if($map_details['BUSINESS_MAP_LATITUDE'] == ''){
@@ -20,22 +22,18 @@ if(count($map_details) > 0){
 		$long = $map_details['BUSINESS_MAP_LONGITUDE'];
 		$zoom = $map_details['BUSINESS_MAP_ZOOM_LEVEL'];
 		
-	}
+	} 
 
-	
-}else{
-	
-	$lat = '-22.583741';
-	$long = '17.093782';
-	$zoom = '7';
-	echo '<script type="text/javascript">$("#map_info").slideDown();</script>';
-}
- ?>
-    
+?>
+
+
 <!--<script src="http://maps.google.com/maps?file=api&v=2&key=AIzaSyAhEmO7n-f7JDcSWdmRncZ6JfN3z2FHkTQ" type="text/javascript"></script>-->
+
 <script data-cfasync="false" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script type="text/javascript">
   	  
+initialise_map();
+
 var geocoder;
 var map;
 	  
@@ -54,9 +52,12 @@ function initialise_map() {
 		  }
 		  var map = new google.maps.Map(document.getElementById("map"), myOptions);
 			
+		  var iconBase = '<?php echo base_url('/'); ?>images/';
+
 		  var marker = new google.maps.Marker({
 				position: myLatlng,
 				map: map,
+				icon: iconBase + 'map_marker.png',
 				animation: google.maps.Animation.DROP
 			
 		  });
@@ -65,14 +66,22 @@ function initialise_map() {
 	
 }
 
-	
 </script>
 
-<h4>Where to find us</h4>
+<div style="display:block;position:relative;background:url(<?php echo base_url('/');?>images/load.gif) no-repeat center center;height:100%;width:100%;max-width:none">
+    <div id="map" style="display:block;position:relative;width:100%;height:100%;max-width:none"></div>
+</div>
+
+
+<?php
+	
+}else{
 
 	
-		<div style="display:block;position:relative;background:url(<?php echo base_url('/');?>img/load.gif) no-repeat center center;height:100%;width:100%;max-width:none">
-		    <div id="map" style="display:block;position:relative;width:100%;height:100%;max-width:none"></div>
-        </div>
-        <br />
-		<a class="btn pull-right" href="#contact" data-toggle="tab" rel="tooltip" title="Contact Us"><i class="icon-envelope"></i> Contact Us</a>	
+	/*$lat = '-22.583741';
+	$long = '17.093782';
+	$zoom = '7';
+	echo '<script type="text/javascript">$("#map_info").slideDown();</script>';*/
+}
+ ?>
+    

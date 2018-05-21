@@ -1,6 +1,33 @@
-			<div class="adverts">
-				<div><a href="#"><img src="images/advert-sample.png" class="img-fluid"></a></div>
-				<div><a href="#"><img src="images/advert-sample.png"></a></div>
-				<div><a href="#"><img src="images/advert-sample.png"></a></div>
-				<div><a href="#"><img src="images/advert-sample.png"></a></div>
-			</div>
+<div class="adverts hidden-sm-down" id="advert-box">
+	
+
+</div>
+
+<div class="spacer"></div>
+
+<script>
+
+$(document).ready(
+	function()
+	{
+
+		load_advert();
+
+	}
+);
+
+function load_advert(){
+		
+	$.ajax({
+		type: 'post',
+		url: '<?php echo site_url('/').'my_na/load_advert/'; ?>' ,
+		success: function (data) {
+			
+			 $('#advert-box').html(data);
+			
+		}
+	});	
+
+}
+
+</script>

@@ -4,10 +4,11 @@ $(document).ready(function(){
 	
 	
 	
-	$('#pop_cats_bt').bind('click', function(){
+	/*$('#pop_cats_bt').bind('click', function(){
 		
 		$('#pop_cats').slideToggle();
 	});
+
 	setTimeout(weather_report,500);
     setTimeout(load_deals,500);
 	$('#reload_main').live('click',function(){
@@ -44,7 +45,7 @@ $(document).ready(function(){
         } else {
             // element has gone out of viewport
         }
-    });
+    });*/
 
 
 });
@@ -62,6 +63,7 @@ function load_advert(){
 		});	
 
 }
+
 function load_properties(){
 		
 	load_ajax_home('properties');
@@ -73,16 +75,19 @@ function load_auction(){
 	load_ajax_home('auctions');
 
 }
+
 function load_deals(){
 		
 	load_ajax_home('deals');
 
 }
+
 function load_news(){
 
 	load_ajax_home('news');
 
 }
+
 function load_slide(){
 		
 	$.ajax({
@@ -140,7 +145,6 @@ function locate_me(){
     });
 }
 
-
 function load_ajax_home(str){
 
 	$.ajax({
@@ -150,26 +154,8 @@ function load_ajax_home(str){
 				
 				 $('#'+str+'_slide').html(data).removeClass('loading_img');
 				 if(str == 'auctions' || str == 'properties'){
-						// Cycle plugin
-						$('.slides').cycle({
-							fx:     'fade',
-							speed:   400,
-							timeout: 200
-						}).cycle("pause"); 
-						// Pause & play on hover
-						$('.slideshow-block').hover(function(){
-				
-							$(this).find('.slides').addClass('active').cycle('resume');
-							$(this).find('.slides li img').each(function (e) {
-								$(this).attr('src', $(this).attr('data-original'));
-							});
-				
-						}, function(){
-							$(this).find('.slides').removeClass('active').cycle('pause');
-						});
-						$("input.star").rating();
+				 	alert('auction');
 				 }
-				 $("img.lazy").lazyload();
 				
 			}
 		});	
@@ -191,28 +177,4 @@ function load_sub_cats(id){
 			}
 		});	
 	
-}
-
-function initiate_pagination(){
-
-    //PAGINATION
-    $('div.pagination ul li a').bind('click', function(e){
-
-        e.preventDefault();
-        var pre = $('#pre_loader');
-        pre.removeClass('hidden');
-        $('div.pagination ul').find('li.active').removeClass('active');
-        $(this).closest( "li" ).addClass('active');
-        $.ajax({
-            url: $(this).attr('href'),
-            success: function(data) {
-                pre.addClass('hidden');
-                $("#deal_content").append(data);
-                initiate_slides();
-            }
-        });
-
-
-    });
-
 }

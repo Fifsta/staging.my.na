@@ -1,30 +1,63 @@
 $(document).ready(function(){
 
-   /* $('#btn_list_view2').live('click', function(e){
 
-        e.preventDefault();
-        $('#btn_map_view').removeClass('disabled');
-        $('#btn_list_view').addClass('disabled');
-        $('#home_container').slideDown('600');
-        $('#map_container').slideUp('300');
-		$(this).hide();
-    });
 
-    $('#btn_map_view').live('click', function(e){
+	$(document).on('click', '.map-link', function(e) {
 
-        e.preventDefault();
-        var h = $(window).height();
-        console.log("height:"+h);
-        $('#home_container').slideUp('300');
-        $('#map_container').fadeIn('400');
-        $('#map-top').css("height",h+"px");
-        $('#map_results_div').css("height",h+"px").html($('#normal_results_div').html());
-        $('#btn_map_view').addClass('disabled');
-        $('#btn_list_view').removeClass('disabled');
-		$('#btn_list_view2').fadeIn();
-        initialise_map("map-top");
+			var cat_id = $(this).attr("data-id");
 
-    });*/
+			  var locations = (function () { 
+
+			      var json = null;
+			      $.ajax({
+			        'async': false,
+			        'type': "get",
+			        'url': base+"map/results/"+cat_id+"/sub",
+			        'dataType': "json",
+			        'success': function (data) {
+			          json = data;
+			        }
+			      });
+
+			    return json;
+			  })(); 
+
+			  map = new google.maps.Map(document.getElementById('map-top'));
+
+			 setMarkers(map, locations);
+
+	});
+
+
+	$(document).on('click', '.t-map', function(e) {
+
+	        e.preventDefault();
+	        var h = $(window).height();
+	        console.log("height:"+h);
+	        $('#home_container').slideUp('300');
+	        $('#map_container').fadeIn('400');
+	        $('#map-top').css("height",h+"px");
+	        $('#map_results_div').fadeIn('400');
+	        $('#map_results_div').css("height",h+"px").html($('#normal_results_div').html());
+	        $('#btn_map_view').addClass('disabled');
+	        $('#btn_list_view').removeClass('disabled');
+			$('#btn_list_view2').fadeIn();
+	        initialise_map("map-top");
+
+	});
+
+	$(document).on('click', '.t-list', function(e) {
+
+	        e.preventDefault();
+	        $('#btn_map_view').removeClass('disabled');
+	        $('#btn_list_view').addClass('disabled');
+	        $('#home_container').slideDown('600');
+	        $('#map_container').slideUp('300');
+			$(this).hide();
+
+	});
+
+
 
     $('#sort_asc').on('click', function(e){
 

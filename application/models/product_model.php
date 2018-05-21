@@ -408,8 +408,8 @@ class Product_model extends CI_Model{
 		$width = 360;
 		$height = 230;
 
-		$l_width = 60;
-		$l_height = 60;
+		$l_width = 200;
+		$l_height = 200;
 
 
 		if ($query == '')
@@ -509,16 +509,13 @@ class Product_model extends CI_Model{
 
 							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-							$img[$xx] = '<img class="' . $lazy . ' vignette" src="' . base_url('/') . 'images/deal_place_load.gif" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/>';
+							$img[$xx] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="owl-lazy" data-src="'.$img_url.'" style="width:100%"/></a>';
 						}
 						else
 						{
-
 							$at = '<img class="vignette" alt="' . strip_tags($row->title) . '" src="'.$img_url.'"/>';
 							array_push($imgAa, $at);
-
 						}
-
 
 						$xx++;
 					}
@@ -536,22 +533,17 @@ class Product_model extends CI_Model{
 				$b_logo = '';
 				if ($row->IS_ESTATE_AGENT == 'Y')
 				{
-
-
 					if (trim($row->BUSINESS_LOGO_IMAGE_NAME) != '')
 					{
-
 						$img_str = 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME;
 						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
 
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px;z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
 					}
 					else
 					{
-
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px;z-index:1;position:relative;width:60px" src="' . S3_URL . 'images/bus_blank.jpg" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
+						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px;z-index:1;position:relative;width:80px" src="' . S3_URL . 'images/bus_blank.jpg" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
 					}
-
 				}
 
 				$btn_txt = 'Buy Now';
@@ -571,16 +563,16 @@ class Product_model extends CI_Model{
 
 					if ($row->sub_cat_id == 3410)
 					{
-						$price = '<span style=" font-size:18px">N$</span> ' . $this->smooth_price($row->sale_price) . ' pm';
+						$price = 'N$ ' . $this->smooth_price($row->sale_price) . ' pm';
 					}
 					else
 					{
-						$price = '<span style=" font-size:18px">N$</span> ' . $this->smooth_price($row->sale_price);
+						$price = 'N$ ' . $this->smooth_price($row->sale_price);
 					}
 					if ($row->por == 'Y')
 					{
 
-						$price = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
+						$price = 'POR:Price On Request';
 
 					}
 					//Auction	
@@ -593,7 +585,7 @@ class Product_model extends CI_Model{
 
 					if ($price['str'] != 'No Bids')
 					{
-						$price = '<span style=" font-size:10px">BID</span> ' . $price['str'];
+						$price = 'BID: ' . $price['str'];
 
 					}
 					else
@@ -617,11 +609,11 @@ class Product_model extends CI_Model{
 
 					if ($row->sub_cat_id == 3410)
 					{
-						$price = '<span style=" font-size:12px">N$</span><span itemprop="price"> ' . $this->my_model->smooth_price($row->sale_price) . '</span> pm';
+						$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div> pm';
 					}
 					else
 					{
-						$price = '<span style=" font-size:12px">N$</span><span itemprop="price"> ' . $this->my_model->smooth_price($row->sale_price) . '</span>';
+						$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div>';
 					}
 					if ($row->por == 'Y')
 					{
@@ -657,14 +649,15 @@ class Product_model extends CI_Model{
 				if ($row->location != '')
 				{
 
-					$location = '<span  itemprop="address">' . $row->location . '</span>';
+					$location = '<div itemprop="address">' . $row->location . '</div>';
 
 					if ($row->suburb != 0 && $row->suburb != '')
 					{
-						$location = '<span  itemprop="address" >' . $row->location . ' / ' . $row->suburb . '</span>';
+						$location = '<div itemprop="address" >' . $row->location . ' / ' . $row->suburb . '</div>';
 					}
 
 				}
+				
 				//get REVIEWS
 				$rating = 0;
 				$total_reviews = 0;
@@ -691,37 +684,24 @@ class Product_model extends CI_Model{
 
 				$this->load->model('trade_model');
 
-				$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
+				//$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
 				
 				$output .= '<div>
 								<figure>
-								' .$ribbon. '
-								<div class="slideshow-block">
-									<a href="#" class="link"></a>
-									<div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides="> li">
-									' .implode($img). '
+									<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
+									<div class="slideshow-block">
+										<a href="#" class="link"></a>
+										<div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides>
+										' .implode($img). '
+										</div>
+										' .$img_Cycle. '
 									</div>
-									' .$img_Cycle. '
-								</div>
 
-								<div class="padding10">
+									<div>
 									
-									<div class="price_label">' . $price . '</div>
-									<span class="pull-right" style="margin-top:-55px">
-										<a onClick="' . $fb . '" class="facebook"></a>
-										' . anchor_popup('https://twitter.com/share?url=' . trim($tweet_url), ' ', $tweet) . '
-									</span>
-									<br>
-									<h5 style="font-size:12px" class="upper na_script">' . ucwords(strtolower($this->trade_model->shorten_string($row->title, 6))) . '</h5>
-									' . $location . '
-									
-									' . $this->trade_model->get_review_stars_show($rating, $row->product_id, 0, $total_reviews) .'<br>' . $b_logo . '
-									<hr>
-									<div class="clearfix"></div>
-									<p>' . $type_btn . '</p>
-									<div class="clearfix"></div>
-								</div>
-								' . $private . '
+										'. $b_logo . '
+
+									</div>
 								</figure>			
 					  		</div>';
 				$x2++;
