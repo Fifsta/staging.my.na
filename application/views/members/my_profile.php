@@ -93,18 +93,26 @@ if($verified == 'Y'){
               <section class="results-item">
 
                 <form action="<?php echo site_url('/')?>members/add_avatar" method="post" accept-charset="utf-8" id="add-img" name="add-img" enctype="multipart/form-data">
+                  <input type="hidden" id="user_id" name="user_id" value="<?php echo $this->session->userdata('id');?>">
                 <div>
 
                   <figure>
                     <a href="#"><img src="<?php echo $fake_file; ?>" class="img-responsive"></a>
 
                   </figure>
-                    <div class="more">
-                      <p>
-                        <input type="file" id="userfile" name="userfile" style="" >
-                        <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
-                      </p>
-                    </div>
+                  
+                  <div class="more">
+                    <p>
+                      <input type="file" id="userfile" name="userfile" style="" >
+                      <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
+                    </p>
+                  </div>
+
+                  <div id="avatar_msg"></div>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 100%" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                     
                 </div>
                 </form>
 
@@ -336,17 +344,17 @@ $(document).ready(function(){
   });
 
 
-
-
   $('#imgbut').bind('click', function() {
+
+    //$('#imgbut').html('<img src="<?php //echo base_url('/').'images/load.gif';?>" />');
 
     var avataroptions = {
       target:        '#avatar_msg',
       url:           '<?php echo site_url('/').'members/add_avatar_ajax';?>' ,
       beforeSend:    function() {var percentVal = '0%';probar.width(percentVal)},
       uploadProgress: function(event, position, total, percentComplete) {
-        var percentVal = percentComplete + '%';
-        probar.width(percentVal)
+      var percentVal = percentComplete + '%';
+      probar.width(percentVal)
 
       },
       complete: function(xhr) {
@@ -363,22 +371,29 @@ $(document).ready(function(){
     var probar = $('#procover .bar');
     var procover = $('#procover');
 
-    $('#imgbut').html('<img src="<?php echo base_url('/').'images/load.gif';?>" />');
     procover.show();
-    frm.ajaxForm(avataroptions);
+
+    $('#add-img').ajaxForm(avataroptions);
+    
   });
 
 });
+
+
 
 function togglecheck(val){
       
   var chk = $('#gender');
   chk.val(val);
+
 }
+
+
 function toggle_note_check(val){
       
   var chk = $('#daily_mail');
   chk.val(val);
+
 }
 
 
