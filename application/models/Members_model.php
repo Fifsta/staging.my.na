@@ -594,7 +594,7 @@ class Members_model extends CI_Model
 
 		//upload file
 
-		$config['upload_path'] = BASE_URL . 'assets/users/photos/';
+		$config['upload_path'] = S3_URL . 'assets/users/photos/';
 		$config['allowed_types'] = 'gif|jpg|jpeg|png';
 		$config['max_size'] = '8024';
 		$config['max_width'] = '8324';

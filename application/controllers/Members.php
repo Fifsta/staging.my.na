@@ -1308,7 +1308,7 @@ class Members extends CI_Controller {
 			  
 		 }
 		
-		
+		 
 	}
 	 //+++++++++++++++++++++++++++
 	//UPLOAD AVATAR AJAX
