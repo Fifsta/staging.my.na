@@ -38,8 +38,6 @@ if(strstr($img, "http")){
 
 }
 
-echo BASE_URL;
-
 $verified = $acc_details['VERIFIED'];
 
 if($verified == 'Y'){
@@ -96,26 +94,18 @@ if($verified == 'Y'){
 
                 <form action="<?php echo site_url('/')?>members/add_avatar" method="post" accept-charset="utf-8" id="add-img" name="add-img" enctype="multipart/form-data">
                   <input type="hidden" id="user_id" name="user_id" value="<?php echo $this->session->userdata('id');?>">
-                <div>
+                    <div>
+                      <figure>
+                        <a href="#"><img src="<?php echo $fake_file; ?>" class="img-responsive"></a>
+                      </figure>
 
-                  <figure>
-                    <a href="#"><img src="<?php echo $fake_file; ?>" class="img-responsive"></a>
-
-                  </figure>
-                  
-                  <div class="more">
-                    <p>
-                      <input type="file" id="userfile" name="userfile" style="" >
-                      <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
-                    </p>
-                  </div>
-
-                  <div id="avatar_msg"></div>
-                  <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 100%" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                     
-                </div>
+                      <div class="more">
+                        <p>
+                          <input type="file" id="userfile" name="userfile" style="" >
+                          <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
+                        </p>
+                      </div>
+                    </div>
                 </form>
 
                 <div>
@@ -353,25 +343,18 @@ $(document).ready(function(){
     var avataroptions = {
       target:        '#avatar_msg',
       url:           '<?php echo site_url('/').'members/add_avatar_ajax';?>' ,
-      beforeSend:    function() {var percentVal = '0%';probar.width(percentVal)},
-      uploadProgress: function(event, position, total, percentComplete) {
-      var percentVal = percentComplete + '%';
-      probar.width(percentVal)
-
-      },
+      beforeSend:    function() {},
+      uploadProgress: function() {},
       complete: function(xhr) {
-        procover.hide();
-        probar.width('0%');
-        $('#avatar_msg').html(xhr.responseText);
-        console.log(xhr.responseText);
+        location.reload();
         $('#imgbut').html('<i class="fa fa-upload text-dark"></i>');
       }
 
     };
 
     var frm = $('#add-img');
-    var probar = $('#procover .bar');
-    var procover = $('#procover');
+    var probar = $('#progress');
+    var procover = $('#progress');
 
     procover.show();
 
