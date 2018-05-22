@@ -403,7 +403,7 @@ if(!isset($type)){
 
                     ?>
 
-                    <a href="<?php echo $all_link; ?>/#Latest" id="back_to_all" class="btn btn-dark btn-lg pull-right" style="margin-right:5px">All Products</a>
+                    <a href="<?php echo $all_link; ?>#Latest" id="back_to_all" class="btn btn-dark btn-lg pull-right" style="margin-right:5px">All Products</a>
                     <a href="javascript:void(0)" <?php echo $java; ?> class="btn btn-lg btn-warning pull-right <?php echo $str; ?>" style="margin-right:5px"><i class="fa fa-chevron-left text-dark"></i> Back</a>
 
                 </fieldset>
