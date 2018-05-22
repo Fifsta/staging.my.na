@@ -277,6 +277,9 @@ class Clients extends CI_Controller {
 
 	public function verify_mobile()
 	{
+
+		echo $this->session->userdata('id');
+
 		if($this->session->userdata('id')){
 
 			$data['client_id'] = $this->session->userdata('id');
@@ -289,9 +292,9 @@ class Clients extends CI_Controller {
 
 			//TEST NUMBER EXISTS
 			$a = $this->db->query("SELECT * FROM u_client
-									WHERE (CLIENT_CELLPHONE = '".ltrim($number, '0')."' OR CLIENT_CELLPHONE = '".$number."')
-									AND VERIFIED = 'Y' AND ID != ".$data['client_id']."
-									", true);
+								   WHERE (CLIENT_CELLPHONE = '".ltrim($number, '0')."' OR CLIENT_CELLPHONE = '".$number."')
+								   AND VERIFIED = 'Y' AND ID != ".$data['client_id']."
+								   ", true);
 			//NUMBER EXISTS
 			if($a->result()){
 
