@@ -38,6 +38,8 @@ if(strstr($img, "http")){
 
 }
 
+echo BASE_URL;
+
 $verified = $acc_details['VERIFIED'];
 
 if($verified == 'Y'){
