@@ -246,12 +246,12 @@ if ($agents != FALSE || $bus_id == 2706 || $bus_id == 2709 || $bus_id == 2666 ||
         <div class="controls">
             <div class="btn-group" data-toggle="buttons-radio">
                 <button type="button" onclick="javascript:toggleextra('Y', 'featured');"
-                        class="btn btn-inverse <?php if ($existing['featured'] == 'Y') {
+                        class="btn btn-dark <?php if ($existing['featured'] == 'Y') {
                             echo 'active';
                         }?>">Yes
                 </button>
                 <button type="button" onclick="javascript:toggleextra('N', 'featured');"
-                        class="btn btn-inverse <?php if ($existing['featured'] == 'N') {
+                        class="btn btn-dark <?php if ($existing['featured'] == 'N') {
                             echo 'active';
                         }?>">No
                 </button>
@@ -385,12 +385,12 @@ if ($bus_id == 2706 || $bus_id == 2709 || $bus_id == 2666 || $bus_id == 5959 || 
         <div class="controls">
             <div class="btn-group" data-toggle="buttons-radio">
                 <button type="button" onclick="javascript:toggleextra('Y', 'featured');"
-                        class="btn btn-inverse <?php /*if ($existing['featured'] == 'Y') {
+                        class="btn btn-dark <?php /*if ($existing['featured'] == 'Y') {
                             echo 'active';
                         }*/?>">Yes
                 </button>
                 <button type="button" onclick="javascript:toggleextra('N', 'featured');"
-                        class="btn btn-inverse <?php /*if ($existing['featured'] == 'N') {
+                        class="btn btn-dark <?php /*if ($existing['featured'] == 'N') {
                             echo 'active';
                         }*/?>">No
                 </button>

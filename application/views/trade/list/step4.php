@@ -31,7 +31,7 @@ if (isset($bus_id) && $bus_id != 0) {
 
 <div class="card">
     <div class="card-body">
-        <a href="#" class="btn btn-warning disabled  step1" style="margin:5px"> 1 Select Category <i class="fa fa-check text-dark"></i></a> 
+        <a href="#" class="btn btn-warning disabled step1" style="margin:5px"> 1 Select Category <i class="fa fa-check text-dark"></i></a> 
         <a href="<?php echo site_url('/').'sell/update_product/'.$product_id.'/';?>" class="btn btn-warning disabled  step2" style="margin:5px"> 2 Details <i class="fa fa-check text-dark"></i></a>
         <a href="<?php echo site_url('/').'sell/step3/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-warning disabled step3" style="margin:5px"> 3 Attach Photos <i class="fa fa-check text-dark"></i></a>
         <a href="<?php echo site_url('/').'sell/step4/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-success btn-large step4" style="margin:5px"> 4 Extras <i class="fa fa-chevron-right text-light"></i></a>

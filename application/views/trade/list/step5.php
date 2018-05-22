@@ -83,20 +83,17 @@
 
 	function publish(){
 
-			var cont = $('#admin_content');
-			  $.get('<?php echo site_url('/'). 'trade/publish_item/'.$product_id.'/'.$bus_id;?>', function(data) {
-					cont.removeClass('slideLeft').html(data);
-
-			  });
+		var cont = $('#admin_content');
+		$.get('<?php echo site_url('/'). 'trade/publish_item/'.$product_id.'/'.$bus_id;?>', function(data) {
+			cont.removeClass('slideLeft').html(data);
+		});
 
 	}
 
 
 	function publish_facebook_page(){
 
-
-		//frm.submit();
-		$('#pub_fb_btn').html('<img src="<?php echo base_url('/').'img/load.gif';?>" /> Working...');
+		$('#pub_fb_btn').html('<img src="<?php echo base_url('/').'images/load.gif';?>" /> Working...');
 		$.ajax({
 			type: 'post',
 			url: '<?php echo site_url('/').'fb/post_product_to_my_page/'.$product_id.'/';?>',
@@ -110,24 +107,19 @@
 
 	}
 
-<?php
-   /**
-  ++++++++++++++++++++++++++++++++++++++++++++
-  //BACK
-  ++++++++++++++++++++++++++++++++++++++++++++	
-   */
-   ?> 
   
-  function back_to_4(){
-	  
-		  var cont = $('#admin_content').addClass('slideLeft'), btn = $('#back_to_4');
-		  btn.html('Working...');
-		  $.get('<?php echo site_url('/'). 'sell/step4/'.$product_id.'/'.$bus_id;?>', function(data) {
-				cont.removeClass('slideLeft').html(data);
-				btn.html('<i class="icon-chevron-left icon-white"></i> Back');
-		  });
-	  
-  }
+	function back_to_4(){
+
+		var cont = $('#admin_content').addClass('slideLeft'), btn = $('#back_to_4');
+		btn.html('Working...');
+		$.get('<?php echo site_url('/'). 'sell/step4/'.$product_id.'/'.$bus_id;?>', function(data) {
+			cont.removeClass('slideLeft').html(data);
+			btn.html('<i class="icon-chevron-left icon-white"></i> Back');
+		});
+
+	}
+
 </script>
+
 <script src="<?php echo base_url('/');?>js/custom/fb.js"></script>
 
