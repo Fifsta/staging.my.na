@@ -1,10 +1,18 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 header("Access-Control-Allow-Origin: https://nmh.my.na");
+
 class Clients extends CI_Controller {
 
 	/**
 	 * Verify Clients Controller
 	 */
+
+	function __construct()
+	{
+	}
+
+
 	public function index()
 	{
 		$this->load->view('login');

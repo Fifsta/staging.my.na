@@ -135,7 +135,6 @@
 	<div id="home-bak" style="padding-top:0;width:100%;height:100%;bottom:0;">
 		<div class="container" style="position:relative;z-index:999;">
 
-			<div class="hidden-phone" style="height:180px;">&nbsp;</div>
 			<div class="hidden-desktop" style="height:40px;">&nbsp;</div>
 
 			<?php echo form_open(site_url('/') . 'clients/verify_mobile/', array('class' => 'form-signin white_box', 'id' => 'form-verify')); ?>
