@@ -338,12 +338,14 @@ $(document).ready(function(){
 
   $('#imgbut').bind('click', function() {
 
-    //$('#imgbut').html('<img src="<?php //echo base_url('/').'images/load.gif';?>" />');
 
     var avataroptions = {
       target:        '#avatar_msg',
       url:           '<?php echo site_url('/').'members/add_avatar_ajax';?>' ,
-      beforeSend:    function() {},
+      beforeSend:    function() {
+
+         $('#imgbut').html('<img src="<?php echo base_url('/').'images/load.gif';?>" />');
+      },
       uploadProgress: function() {},
       complete: function(xhr) {
         location.reload();
