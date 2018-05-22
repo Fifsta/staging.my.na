@@ -113,6 +113,21 @@
 
 </style>
 
+	<?php
+	if ($VERIFIED == 'Y')
+	{
+
+		$verifiedHTML = '<button id="verify_btn" class="btn btn-success pull-right"><i class="icon-ok icon-white"></i> Verified</button>';
+
+	}
+	else
+	{
+
+		$verifiedHTML = '<buttons id="verify_btn" onclick="do_verify()" class="btn btn-danger  pull-right"><i class="icon-refresh icon-white"></i> Send Code</button>';
+
+	}
+	?>
+
 </head>
 <body>
 
