@@ -347,7 +347,6 @@ $(document).ready(function(){
       uploadProgress: function() {},
       complete: function(xhr) {
         location.reload();
-        $('#imgbut').html('<i class="fa fa-upload text-dark"></i>');
       }
     };
 
