@@ -42,7 +42,8 @@ if (isset($bus_id) && $bus_id != 0) {
 	    //IF EXTRAS 
 	    if($has_extras){
 	    	
-	        $this->load->view($group); 
+	    	$data['all_link'] = $all_link;
+	        $this->load->view($group, $data); 
 	 
 	    //NO EXTRAS
 	    }else{
