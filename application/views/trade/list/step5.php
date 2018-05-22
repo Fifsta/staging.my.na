@@ -46,27 +46,24 @@
 	        <a href="<?php echo site_url('/').'sell/step5/'.$product_id.'/'.$bus_id.'/';?>" class="btn btn-success btn-large step5" style="margin:5px"> 5 Confirm and Publish <i class="fa fa-chevron-right text-light"></i></a>
 	        <hr>
 
-		<?php if($is_active != 'Y'){ ?>
-            <div class="alert alert-secondary">
-                <h2>Publish your item</h2>
-                Please publish your item so we can approve it and make it live.</div>
-            <div>
-           <a href="javascript:void(0)" onclick="publish()" class="btn btn-lg btn-success pull-right">Publish <i class="fa fa-chevron-right text-light"></i></a>
-        <?php }else{ ?>
-	        <!--<iframe class="loading_img" style="width:100%; min-height:400px" id="advert_content"></iframe>-->
-            <div class="alert alert-secondary">
+			<?php if($is_active != 'Y'){ ?>
+	            <div class="alert alert-secondary">
+	                <h2>Publish your item</h2>
+	                Please publish your item so we can approve it and make it live.</div>
+	            <div>
+	           <a href="javascript:void(0)" onclick="publish()" class="btn btn-lg btn-success pull-right">Publish <i class="fa fa-chevron-right text-light"></i></a>
+	        <?php }else{ ?>
+		        <!--<iframe class="loading_img" style="width:100%; min-height:400px" id="advert_content"></iframe>-->
+	            <div class="alert alert-secondary">
 
-	            <h2 style="font-size:18px">Item is Live</h2>
-                <p>The product is live and showing on the website. You can automatically publish the item to the My Namibia facebook page to get that extra exposure.</p>
-	            <div class="clearfix">&nbsp;</div>
-	            <?php echo $fb_btn;?>
-	            <div class="btn btn-warning fb-share-button" data-href="<?php echo site_url('/').'product/'.$product_id; ?>/" data-layout="button_count"></div>
-	            <a href="<?php echo site_url('/').'product/'.$product_id;?>/" class="btn btn-dark clearfix"  target="_blank">Preview <?php echo $title;?></a>
-
-            </div>
-
-           <div>
-       <?php }?>
+		            <h2 style="font-size:18px">Item is Live</h2>
+	                <p>The product is live and showing on the website. You can automatically publish the item to the My Namibia facebook page to get that extra exposure.</p>
+		            <div class="clearfix">&nbsp;</div>
+		            <?php echo $fb_btn;?>
+		            <div class="btn btn-warning fb-share-button" data-href="<?php echo site_url('/').'product/'.$product_id; ?>/" data-layout="button_count"></div>
+		            <a href="<?php echo site_url('/').'product/'.$product_id;?>/" class="btn btn-dark clearfix"  target="_blank">Preview <?php echo $title;?></a>
+	            </div>
+	       <?php }?>
 
 	       <a href="<?php echo $link; ?>/#Latest" id="back_to_all" class="btn btn-lg btn-dark pull-right" style="margin-right:5px">All Products</a>
 
