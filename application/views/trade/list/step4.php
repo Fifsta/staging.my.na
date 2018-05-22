@@ -64,6 +64,7 @@ if (isset($bus_id) && $bus_id != 0) {
 
     </div>
 </div>
+<div class="spacer"></div>
 
 
 
