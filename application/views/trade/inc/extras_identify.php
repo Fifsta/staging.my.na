@@ -56,7 +56,7 @@
               </div>
               <div class="row-fluid">
             		<div class="span12">
-                      <button type="submit" class="btn btn-success pull-right" id="add_extras_btn"><?php if (isset($product_id)){echo 'Update Item';}else{ echo 'Add Item';}?> <i class="icon-chevron-right icon-white"></i></button>
+                      <button type="submit" class="btn btn-lg btn-success pull-right" id="add_extras_btn"><?php if (isset($product_id)){echo 'Update Item';}else{ echo 'Add Item';}?> <i class="icon-chevron-right icon-white"></i></button>
                       <?php   if(isset($product_id)){ 
 					  			
 								    $str = '';
@@ -69,7 +69,7 @@
 							  }
 					  ?>
                       <a href="<?php echo $all_link; ?>#Latest" id="back_to_all" class="btn btn-lg btn-dark pull-right" style="margin-right:5px">All Products</a>
-                      <a href="javascript:void(0)" <?php echo $java;?> class="btn btn-warning pull-right <?php echo $str;?>" style="margin-right:5px"><i class="icon-chevron-left icon-white"></i> Back</a>  
+                      <a href="javascript:void(0)" <?php echo $java;?> class="btn btn-lg btn-warning pull-right <?php echo $str;?>" style="margin-right:5px"><i class="icon-chevron-left icon-white"></i> Back</a>  
            			</div>
            </div>
            </fieldset> 
