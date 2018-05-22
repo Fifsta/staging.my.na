@@ -68,7 +68,7 @@
 									$java = 'onclick="back_to_3()"';   
 							  }
 					  ?>
-                      <a href="<?php echo site_url('/').'sell/my_trade/'.$bus_id.'/';?>" onclick="back_to_all();" class="btn btn-dark pull-right" style="margin-right:5px"><i class="icon-list icon-white"></i> All Products</a> 
+                      <a href="<?php echo site_url('/').'sell/my_trade/'.$bus_id.'/#Latest';?>" onclick="back_to_all();" class="btn btn-dark pull-right" style="margin-right:5px"><i class="icon-list icon-white"></i> All Products</a> 
                       <a href="javascript:void(0)" <?php echo $java;?> class="btn btn-warning pull-right <?php echo $str;?>" style="margin-right:5px"><i class="icon-chevron-left icon-white"></i> Back</a>  
            			</div>
            </div>
