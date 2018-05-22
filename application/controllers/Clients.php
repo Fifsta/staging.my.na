@@ -279,8 +279,6 @@ class Clients extends CI_Controller {
 	public function verify_mobile()
 	{
 
-		echo $this->session->userdata('id');
-
 		if($this->session->userdata('id')){
 
 			$data['client_id'] = $this->session->userdata('id');
@@ -360,11 +358,9 @@ class Clients extends CI_Controller {
 
 				}
 
-
 				echo json_encode($o);
 
 			}
-
 
 
 		}else{
