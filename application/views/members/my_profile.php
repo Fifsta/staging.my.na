@@ -338,12 +338,10 @@ $(document).ready(function(){
 
   $('#imgbut').bind('click', function() {
 
-
     var avataroptions = {
       target:        '#avatar_msg',
       url:           '<?php echo site_url('/').'members/add_avatar_ajax';?>' ,
       beforeSend:    function() {
-
          $('#imgbut').html('<img src="<?php echo base_url('/').'images/load.gif';?>" />');
       },
       uploadProgress: function() {},
@@ -351,14 +349,7 @@ $(document).ready(function(){
         location.reload();
         $('#imgbut').html('<i class="fa fa-upload text-dark"></i>');
       }
-
     };
-
-    var frm = $('#add-img');
-    var probar = $('#progress');
-    var procover = $('#progress');
-
-    procover.show();
 
     $('#add-img').ajaxForm(avataroptions);
     
