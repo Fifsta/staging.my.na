@@ -68,7 +68,7 @@
            <div>
        <?php }?>
 
-	       <a href="<?php echo $link; ?>" id="back_to_all" class="btn btn-lg btn-dark pull-right" style="margin-right:5px">All Products</a>
+	       <a href="<?php echo $link; ?>/#Latest" id="back_to_all" class="btn btn-lg btn-dark pull-right" style="margin-right:5px">All Products</a>
 
            <a href="javascript:void(0)" onclick="back_to_4()" id="back_to_4" class="btn btn-lg btn-warning pull-right" style="margin-right:5px"><i class="fa fa-chevron-left text-dark"></i> Back</a>
 
