@@ -1528,30 +1528,30 @@ class My_na_model extends CI_Model{
 	//++++++++++++++++++++++++++++++
 	//Instant Search 
 	//++++++++++++++++++++++++++++++
-	public function instant_search_json()
-	{
-		$out = array();
+    public function instant_search_json()
+    {
+        $out = array();
         if($str = $this->input->get('query')){
 
-					if($this->input->get('location') != 'national'){
-						$locationSQL = " AND location = '".$this->input->get('location')."' ";	
-					}
-					$strSQL = '';
-					if($this->input->get('sub_cat_id') != 0){
-						$strSQL = " sub_cat_id = '".$this->input->get('sub_cat_id')."' ";	
-					}
-					
-					if($this->input->get('main_cat_id') != 0){
-						if($strSQL == ''){
-							
-							$strSQL = " main_cat_id = '".$this->input->get('main_cat_id')."' AND ";	
-						}else{
-							$strSQL = $strSQL. " AND main_cat_id = '".$this->input->get('main_cat_id')."' AND ";		
-						}
-						
-					}
+                    if($this->input->get('location') != 'national'){
+                        $locationSQL = " AND location = '".$this->input->get('location')."' ";  
+                    }
+                    $strSQL = '';
+                    if($this->input->get('sub_cat_id') != 0){
+                        $strSQL = " sub_cat_id = '".$this->input->get('sub_cat_id')."' ";   
+                    }
+                    
+                    if($this->input->get('main_cat_id') != 0){
+                        if($strSQL == ''){
+                            
+                            $strSQL = " main_cat_id = '".$this->input->get('main_cat_id')."' AND "; 
+                        }else{
+                            $strSQL = $strSQL. " AND main_cat_id = '".$this->input->get('main_cat_id')."' AND ";        
+                        }
+                        
+                    }
 
-					$key = $this->db->escape_like_str(urldecode($str));
+                    $key = $this->db->escape_like_str(urldecode($str));
 
                     //INSERT TERM FOR CAPTURE
                     if(strlen($key) > 15){
@@ -1582,11 +1582,11 @@ class My_na_model extends CI_Model{
                         }
 
                         $tq1 = "SELECT title ,link, type, img_file ,body,
-														MATCH(title, body) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance,
-														MATCH(title) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance2
-														FROM search_index
+                                                        MATCH(title, body) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance,
+                                                        MATCH(title) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance2
+                                                        FROM search_index
                                                         WHERE MATCH(title, body) AGAINST ('".$keyF."' IN BOOLEAN MODE)
-														ORDER BY relevance2 DESC, relevance DESC LIMIT 8";
+                                                        ORDER BY relevance2 DESC, relevance DESC LIMIT 8";
                         //echo $tq1;
                         $query = $this->db->query($tq1, FALSE);
                         $go = true;
@@ -1610,11 +1610,11 @@ class My_na_model extends CI_Model{
                         $query = false;
                         $go = false;
                     }
-									   
+                                       
 
 
 
-					$x = 1;
+                    $x = 1;
                     if($go) {
                         if ($query->result()) {
 
@@ -1628,7 +1628,7 @@ class My_na_model extends CI_Model{
                                 $t = array(
 
                                     "year" => $x,
-                                    "image" => base_url('/') . 'img/timbthumb.php?src=' . base_url('/') . $row->img_file . '&w=20&h=20',
+                                    "image" => base_url('/') . 'img/timbthumb.php?src=' . S3_URL . $row->img_file . '&w=20&h=20',
                                     "type" => "Category",
                                     "body" => $body,
                                     "link1" => "javascript:go_url('" . site_url('/') . $row->link . "')",
@@ -1644,18 +1644,18 @@ class My_na_model extends CI_Model{
                         }
                     }
 
-		
-			if($query){
-				//var_dump($arr);
-				//echo json_encode($arr);
-				//echo json_encode($out);
-			}
+        
+            if($query){
+                //var_dump($arr);
+                //echo json_encode($arr);
+                //echo json_encode($out);
+            }
 
             echo json_encode($out);
-			
-			$this->output->set_content_type('application/json');
-		}
-	}
+            
+            $this->output->set_content_type('application/json');
+        }
+    }
 		
 
 	//+++++++++++++++++++++++++++
