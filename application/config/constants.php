@@ -64,7 +64,7 @@ if($_SERVER['HTTP_HOST'] == 'localhost'){
 	define('CMS_URL',  'http://cms.my.na/');
 	define('CDN_URL',  'https://cdn.my.na/');
 	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
-	define('NA_URL',  'https://www.my.na/');
+	define('NA_URL',  'https://beta.my.na/');
 	define('HUB_URL',  'https://nmh.my.na/');
 	
 }else{
@@ -73,7 +73,7 @@ if($_SERVER['HTTP_HOST'] == 'localhost'){
 	define('CMS_URL',  'https://cms.my.na/');
 	define('CDN_URL',  'https://cdn.my.na/');
 	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
-	define('NA_URL',  'https://www.my.na/');
+	define('NA_URL',  'https://beta.my.na/');
 	define('HUB_URL',  'https://nmh.my.na/');
 }
 
