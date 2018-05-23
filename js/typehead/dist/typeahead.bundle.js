@@ -1124,12 +1124,18 @@
                     left: "0",
                     borderColor: "transparent",
                     boxShadow: "none",
-                    opacity: "1"
+                    opacity: "1",
+                    width: "100%",
+                    height: "100%",
+                    padding: "0 10px 0 15px"
                 },
                 input: {
                     position: "relative",
                     verticalAlign: "top",
-                    backgroundColor: "transparent"
+                    backgroundColor: "transparent",
+                    width: "100%",
+                    height: "100%",
+                    padding: "0 10px 0 15px"
                 },
                 inputWithNoHint: {
                     position: "relative",
@@ -1159,6 +1165,7 @@
             return css;
         }
     }();
+
     var EventBus = function() {
         "use strict";
         var namespace, deprecationMap;

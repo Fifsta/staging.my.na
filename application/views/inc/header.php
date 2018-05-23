@@ -20,7 +20,8 @@
 
 	<link rel="shortcut icon" type="image/ico" href="favicon.ico">
 
-    <?php if(isset($og)){ echo $og;}?>
+    <?php if(isset($og)){ echo $og; } ?>
+    
 	<link rel="publisher" href="https://plus.google.com/103433975350364100667">
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo base_url('/');?>img/icons/my_na_[144x144].png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo base_url('/');?>img/icons/my_na_[114x114].png">
@@ -64,3 +65,5 @@
 	<script src="bootstrap/js/popper.min.js"></script>
 	
 	<script src="js/jquery.lazyload.min.js"></script>
+
+	<link href="<?php echo base_url('/'); ?>css/typeahead.css" rel="stylesheet" type="text/css">

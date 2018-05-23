@@ -18,7 +18,6 @@
 			
                 <form class="input-group input-group-lg" id="search-main" name="search-main" method="post" action="<?php echo site_url('/'); ?>my_na/search">
 
-                    <div class="find input-group-addon">Find:</div>
                     <input type="text" class="form-control typeahead" name="srch_bar" type="text" value="<?php if (isset($str)) { echo htmlspecialchars($str); } else { echo ''; } ?>" autocomplete="off" placeholder="Search Anything Namibian">
 
                     <input type="hidden" value="<?php if (isset($type)) { echo $type; echo 'none'; } ?>" name="type">
@@ -47,7 +46,7 @@
 	</div>
 </header>
 
-<script src="<?php echo base_url('/'); ?>js/typehead/dist/typeahead.bundle.min.js"></script>
+<script src="<?php echo base_url('/'); ?>js/typehead/dist/typeahead.bundle.js"></script>
 <script src="<?php echo base_url('/'); ?>js/handlebars-1.0.rc.1.min.js"></script>
 <script src="<?php echo base_url('/'); ?>js/custom/fb.js?v=2"></script>
 
@@ -71,7 +70,7 @@
 
         });
 
-        //go_search(<?php if(isset($main_cat_id) && $main_cat_id != 0){ echo $main_cat_id; }else{ echo '0';}?>, <?php if(isset($sub_cat_id) && $sub_cat_id != 0){ echo $sub_cat_id;}else{ echo '0';}?>);
+        go_search(<?php if(isset($main_cat_id) && $main_cat_id != 0){ echo $main_cat_id; }else{ echo '0';}?>, <?php if(isset($sub_cat_id) && $sub_cat_id != 0){ echo $sub_cat_id;}else{ echo '0';}?>);
 
     });
     
