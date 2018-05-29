@@ -31,31 +31,33 @@ class News_model extends CI_Model
 			foreach(json_decode($output) as $row){	
 
 
+                if(isset($row->post_slug)) { $slug = $row->post_slug; } else { $slug = ''; }
+
                 //render pub links
                 switch($row->pub_id) {
                     case 1:
-                    $link = 'https://www.republikein.com.na/nuus/'.$row->post_slug;
+                    $link = 'https://www.republikein.com.na/nuus/'.$slug;
                     break;
                     case 2:
-                    $link = 'https://www.namibiansun.com/news/'.$row->post_slug;
+                    $link = 'https://www.namibiansun.com/news/'.$slug;
                     break;
                     case 3:
-                    $link = 'https://www.az.com.na/nachrichten/'.$row->post_slug;
+                    $link = 'https://www.az.com.na/nachrichten/'.$slug;
                     break;
                     case 5:
-                    $link = 'https://zone.my.na/news/'.$row->post_slug;
+                    $link = 'https://zone.my.na/news/'.$slug;
                     break;  
                     case 6:
-                    $link = 'https://erongo.com.na/news/'.$row->post_slug;
+                    $link = 'https://erongo.com.na/news/'.$slug;
                     break;
                     case 7:
-                    $link = 'https://we.com.na/news/'.$row->post_slug;
+                    $link = 'https://we.com.na/news/'.$slug;
                     break;
                     case 8:
-                    $link = 'https://ewi.com.na/news/'.$row->post_slug;
+                    $link = 'https://ewi.com.na/news/'.$slug;
                     break;
                     case 9:
-                    $link = 'https://tourismus.com.na/news/'.$row->post_slug;
+                    $link = 'https://tourismus.com.na/news/'.$slug;
                     break;                                                                                                
                 }
 
