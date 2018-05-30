@@ -79,7 +79,9 @@
 	        'type': "get",
 	        'url':  "<?php echo site_url('/'); ?>my_na/gdpr_accept/",
 	        'success': function (data) {
-	          $('.footer-modal').addClass('animated slideInDown');
+
+	          $('.footer-modal').addClass('animated slideOutDown');
+
 	        }
 	      });
 
