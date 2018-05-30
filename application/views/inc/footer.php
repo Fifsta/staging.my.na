@@ -54,14 +54,10 @@
 
 <div class="row-fluid footer-modal animate bounce">
     <div class="container">
-        <div class="row-fluid">
-            <div class="span4" class="position:relative">
-                <a href="https://beta.my.na/" target="_blank"><img src="<?php echo base_url('/'); ?>img/betamyna.jpg" class="betamyna"></a>
-            </div>
-            <div class="span8 text-center" style="color:#fff;">
-                <h1 style="padding-top:10px"><span style="color:#FF9F01">my.na</span> is getting a whole new Look and user experience</h1>
-                We invite you to help us shape the best online portal in Namibia! <a href="https://beta.my.na/" target="_blank" style="color:#FF9F01">Visit now and give us your feedback!</a>
-            </div>
+        <div class="row text center text-light">
+        	<strong>Notice</strong>
+			This website or its third-party tools use cookies, which are necessary to its functioning and required to achieve the purposes illustrated in the cookie policy. If you want to know more or withdraw your consent to all or some of the cookies, please refer to the cookie policy.
+			By closing this banner, scrolling this page, clicking a link or continuing to browse otherwise, you agree to the use of cookies.
         </div>    
     </div>
 </div> 
