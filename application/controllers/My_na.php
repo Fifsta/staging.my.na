@@ -16,7 +16,24 @@ class My_na extends CI_Controller {
 	}
 	
 
-	
+	public function gdpr_accpet() {
+
+		$this->load->helper('cookie');
+
+       $cookie= array(
+
+           'name'   => 'gdpr_accept',
+           'value'  => 'true',                            
+           'expire' => '300',                                                                                   
+           'secure' => TRUE
+
+       );		
+
+       $this->input->set_cookie($cookie)
+
+	}
+
+
 	public function index()
 	{
 	
