@@ -76,13 +76,13 @@
 
 	$(document).on('click', '#gdpr_accept', function(e) {
 
-			      $.ajax({
-			        'type': "get",
-			        'url':  "<?php echo site_url('/'); ?>my_na/gdpr_accept/",
-			        'success': function (data) {
-			          alert('done');
-			        }
-			      });
+	      $.ajax({
+	        'type': "get",
+	        'url':  "<?php echo site_url('/'); ?>my_na/gdpr_accept/",
+	        'success': function (data) {
+	          $('.footer-modal').addClass('animated slideInDown');
+	        }
+	      });
 
 	});
 
@@ -90,8 +90,9 @@
 
 $(document).ready( function(){
 
-	$('.footer-modal').show();
-    $('.footer-modal').addClass('animated slideInUp');
+
+	check_gdpr();
+
 	
 	// Call weather function
 	get_weather('na','windhoek');
@@ -120,8 +121,29 @@ $(document).ready( function(){
 
 	});
 
-
 });
+
+
+function check_gdpr() {
+
+      $.ajax({
+        'type': "get",
+        'url':  "<?php echo site_url('/'); ?>my_na/gdpr_check/",
+        'success': function (data) {
+
+        	if(data == 'false') {
+
+    			$('.footer-modal').show();
+				$('.footer-modal').addClass('animated slideInUp');
+
+        	}
+
+        }
+      });	
+
+}
+
+
 
 //Call weather from NMH HUB
 function get_weather(cont,city){
