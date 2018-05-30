@@ -45,7 +45,6 @@
 	</div>
 </footer>
 
-<?php if(!$this->input->cookie('gdpr_accept',true)) { ?>
 
 <div class="row footer-modal animate bounce">
     <div class="container" style="position: relative">
@@ -57,7 +56,7 @@
         </div>    
     </div>
 </div> 
-<?php } ?>
+
 
 
 <?php //$this->output->enable_profiler(true); ?>
