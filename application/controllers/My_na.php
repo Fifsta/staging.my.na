@@ -18,7 +18,7 @@ class My_na extends CI_Controller {
 
 	public function gdpr_accpet() {
 
-		$this->load->helper('cookie');
+	  $this->load->helper('cookie');
 
        $cookie= array(
 
@@ -29,7 +29,7 @@ class My_na extends CI_Controller {
 
        );		
 
-       $this->input->set_cookie($cookie)
+       $this->input->set_cookie($cookie);
 
 	}
 
