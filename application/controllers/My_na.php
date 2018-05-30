@@ -31,7 +31,7 @@ class My_na extends CI_Controller {
 
 		if($this->session->userdata('gdpr_accept') === 'true'){
 
-			return = "true";
+			return "true";
 
 		}
 
