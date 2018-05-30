@@ -57,10 +57,10 @@
 <div class="row footer-modal animate bounce">
     <div class="container">
     	<button type="button" class="close pull-right text-light" data-dismiss="" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
-        <div class="row text center text-light" style="padding:20px;">
+        <div class="row text-light" style="padding:20px;">
         	<strong>Notice</strong>
 			This website or its third-party tools use cookies, which are necessary to its functioning and required to achieve the purposes illustrated in the cookie policy. If you want to know more or withdraw your consent to all or some of the cookies, please refer to the <a href="https://www.my.na/page/privacy-policy-2018/" target="_blank" style="color:#ff9900">cookie policy</a>.
-			By closing this banner, accepting, clicking a link or continuing to browse otherwise, you agree to the use of cookies. <a href="javascript:void(0)"" id="gdpr_accept" style="color:#ff9900">Accept</a> | <a href="javascript:void(0)" style="color:#ff9900">Do not Accept</a>
+			By closing this banner, accepting, clicking a link or continuing to browse otherwise, you agree to the use of cookies. <a href="javascript:void(0)" id="gdpr_accept" style="color:#ff9900">Accept</a> | <a href="javascript:void(0)" style="color:#ff9900">Do not Accept</a>
         </div>    
     </div>
 </div> 
