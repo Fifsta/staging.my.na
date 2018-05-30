@@ -1,197 +1,235 @@
-	<footer id="footer">
-		<div class="container-fluid">
-			<a href="#" class="logo-footer"><img src="images/logo-footer.png"></a>
-			<div class="row">
-				<aside class="col-sm-3 col-md-3 col-lg-4">
-					<h2>About My Namibia</h2>
-					<p>My Namibia also known as MY.NA is an online business and product networking platform for Namibians . Buy and Sell anything Namibian on this site , from , cars and property to any second hand product or service you can think off . List your product , business , service or Job here for FREE today and get maximum exposure online in Namibia . Namibian business's can feature in our state of the art business directory, giving your business the best exposure and visibility online. From Namibia for Namibia.</p>
-				</aside>
-				
-				<aside class="col-sm-9 col-md-9 col-lg-8">
-					<h2>Let us help you find</h2>
+<link rel="stylesheet" href="<?php echo base_url('/');?>css/animate.css">
+<style>
 
-					
-					<div class="row">
-						<?php $this->my_na_model->home_categories('light'); ?>
-					</div>
-				</aside>
-			</div>
+    .footer-modal{
+        width:100%;
+        background-color: #000;
+        opacity:1;
+        height:100px;
+        z-index: 9999;
+        bottom:0;
+        position: fixed;
+        display:none;
+    }
+
+    .betamyna{
+        position:absolute;
+        bottom:0;
+        display:none;
+        width:250px;
+        box-shadow: 5px 10px #888888;
+    }
+
+</style>
+
+<footer id="footer">
+	<div class="container-fluid">
+		<a href="#" class="logo-footer"><img src="images/logo-footer.png"></a>
+		<div class="row">
+			<aside class="col-sm-3 col-md-3 col-lg-4">
+				<h2>About My Namibia</h2>
+				<p>My Namibia also known as MY.NA is an online business and product networking platform for Namibians . Buy and Sell anything Namibian on this site , from , cars and property to any second hand product or service you can think off . List your product , business , service or Job here for FREE today and get maximum exposure online in Namibia . Namibian business's can feature in our state of the art business directory, giving your business the best exposure and visibility online. From Namibia for Namibia.</p>
+			</aside>
+			
+			<aside class="col-sm-9 col-md-9 col-lg-8">
+				<h2>Let us help you find</h2>		
+				<div class="row">
+					<?php $this->my_na_model->home_categories('light'); ?>
+				</div>
+			</aside>
 		</div>
-		<div class="footer-end">
-			<div class="container">
-				<a href="#" class="logo-bookmark"><img src="images/footer-end.png"></a>
-				<ul>
-					<li><a href="#" data-icon="fa-facebook text-dark"></a></li>
-					<li><a href="#" data-icon="fa-twitter text-dark"></a></li>
-					<li><li><a href="#" data-icon="fa-youtube text-dark"></a></li>
-				</ul>
-				<small><a href="#">Terms & Conditions</a> | <a href="#">Contact Us</a> | <a href="#">Privacy policy</a> | <?php echo date('Y'); ?> © My Namibia ™</small>
-			</div>
+	</div>
+	<div class="footer-end">
+		<div class="container">
+			<a href="#" class="logo-bookmark"><img src="images/footer-end.png"></a>
+			<ul>
+				<li><a href="#" data-icon="fa-facebook text-dark"></a></li>
+				<li><a href="#" data-icon="fa-twitter text-dark"></a></li>
+				<li><li><a href="#" data-icon="fa-youtube text-dark"></a></li>
+			</ul>
+			<small><a href="#">Terms & Conditions</a> | <a href="#">Contact Us</a> | <a href="#">Privacy policy</a> | <?php echo date('Y'); ?> © My Namibia ™</small>
 		</div>
-	</footer>
+	</div>
+</footer>
+
+<div class="row-fluid footer-modal animate bounce">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span4" class="position:relative">
+                <a href="https://beta.my.na/" target="_blank"><img src="<?php echo base_url('/'); ?>img/betamyna.jpg" class="betamyna"></a>
+            </div>
+            <div class="span8 text-center" style="color:#fff;">
+                <h1 style="padding-top:10px"><span style="color:#FF9F01">my.na</span> is getting a whole new Look and user experience</h1>
+                We invite you to help us shape the best online portal in Namibia! <a href="https://beta.my.na/" target="_blank" style="color:#FF9F01">Visit now and give us your feedback!</a>
+            </div>
+        </div>    
+    </div>
+</div> 
 
 
-	<?php //$this->output->enable_profiler(true); ?>
+<?php //$this->output->enable_profiler(true); ?>
 
-	<style type="text/css"> #iubenda-cs-banner { bottom: 0px !important; left: 0px !important; position: fixed !important; width: 100% !important; z-index: 99999998 !important; background-color: black; } .iubenda-cs-content { display: block; margin: 0 auto; padding: 20px; width: auto; font-family: Helvetica,Arial,FreeSans,sans-serif; font-size: 14px; background: #000; color: #fff;} .iubenda-cs-rationale { max-width: 900px; position: relative; margin: 0 auto; } .iubenda-banner-content > p { font-family: Helvetica,Arial,FreeSans,sans-serif; line-height: 1.5; } .iubenda-cs-close-btn { margin:0; color: #fff; text-decoration: none; font-size: 14px; position: absolute; top: 0; right: 0; border: none; } .iubenda-cs-cookie-policy-lnk { text-decoration: underline; color: #fff; font-size: 14px; font-weight: 900; } </style> <script type="text/javascript"> var _iub = _iub || []; _iub.csConfiguration = {"banner":{"slideDown":false,"applyStyles":false,"textColor":"white","backgroundColor":"black"},"lang":"en","siteId":1239277,"cookiePolicyUrl":"https://www.my.na/page/privacy-policy-2018","consentOnScroll":false,"cookiePolicyId":43729094}; </script><script type="text/javascript" src="//cdn.iubenda.com/cookie_solution/safemode/iubenda_cs.js" charset="UTF-8" async></script>
+
+<script  type="text/javascript">
+
+<?php 
 	
-	<script  type="text/javascript">
-
-    <?php 
-    	
-	    $qstr = '';
-	    if($qstr = $this->input->get()){
-	        $qstr = http_build_query($qstr);
-	    }
-	    
-    ?>
+    $qstr = '';
+    if($qstr = $this->input->get()){
+        $qstr = http_build_query($qstr);
+    }
+    
+?>
 
 
-	$(document).ready( function(){
-		
-		// Call weather function
-		get_weather('na','windhoek');
+$(document).ready( function(){
 
-		// Prepend user profile after login
-		/*$.get( "<?php echo site_url();?>my_na/nav/?url=<?php echo $_SERVER['REQUEST_URI']; ?>", function( data ) {
-		  
-		  	if(data == 'FALSE'){
+	$('.footer-modal').show();
+    $('.footer-modal').addClass('animated slideInUp');
+	
+	// Call weather function
+	get_weather('na','windhoek');
 
-			}else{
+	// Prepend user profile after login
+	/*$.get( "<?php echo site_url();?>my_na/nav/?url=<?php echo $_SERVER['REQUEST_URI']; ?>", function( data ) {
+	  
+	  	if(data == 'FALSE'){
 
-				$('#sidebar').prepend( data );
-			}
+		}else{
 
-		});*/
+			$('#sidebar').prepend( data );
+		}
 
-		$.post('<?php echo site_url();?>my_na/nav/', { url: "<?php echo $_SERVER['REQUEST_URI']; ?>"}, function(data){
+	});*/
+
+	$.post('<?php echo site_url();?>my_na/nav/', { url: "<?php echo $_SERVER['REQUEST_URI']; ?>"}, function(data){
 
 
-		  	if(data == 'FALSE'){
+	  	if(data == 'FALSE'){
 
-			}else{
+		}else{
 
-				$('#sidebar').prepend( data );
-			}
-
-		});
-
+			$('#sidebar').prepend( data );
+		}
 
 	});
 
-	//Call weather from NMH HUB
-	function get_weather(cont,city){
 
-		$.getJSON( "<?php echo HUB_URL;?>weather/display_block/"+cont+"/"+city, function( data ) {
+});
 
-			if(data.success){
+//Call weather from NMH HUB
+function get_weather(cont,city){
 
-				//$('#weather_cont').html(data.html);
-				$('.city-weather').unbind('click').bind('click', function(e){
-					var city = $(this).data('location');
+	$.getJSON( "<?php echo HUB_URL;?>weather/display_block/"+cont+"/"+city, function( data ) {
 
-					get_weather('na', city);
-				});
-			}
+		if(data.success){
 
-		});
+			//$('#weather_cont').html(data.html);
+			$('.city-weather').unbind('click').bind('click', function(e){
+				var city = $(this).data('location');
+
+				get_weather('na', city);
+			});
+		}
+
+	});
+
+}
+
+
+function initialise_owl() {
+
+	// INITIALIZE OWL
+	$('.owl-carousel').owlCarousel({
+	    loop:false,
+	    lazyLoad: true,
+	    navRewind:false,
+	    margin:10,
+	    nav: true,
+	    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
+	    responsiveClass:true,
+	    responsive:{
+	        0:{
+	            items:1,
+	            nav:true
+	        },
+	        600:{
+	            items:1,
+	            nav:true
+	        },
+	        1000:{
+	            items:3,
+	            nav:true,
+	            loop:false
+	        },
+
+	        1600:{
+	            items:4,
+	            nav:true,
+	            loop:false
+	        }		        
+	    }
+	});
+
+
 
 	}
 
 
-	function initialise_owl() {
+</script>
 
-		// INITIALIZE OWL
-		$('.owl-carousel').owlCarousel({
-		    loop:false,
-		    lazyLoad: true,
-		    navRewind:false,
-		    margin:10,
-		    nav: true,
-		    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
-		    responsiveClass:true,
-		    responsive:{
-		        0:{
-		            items:1,
-		            nav:true
-		        },
-		        600:{
-		            items:1,
-		            nav:true
-		        },
-		        1000:{
-		            items:3,
-		            nav:true,
-		            loop:false
-		        },
+ <?php
 
-		        1600:{
-		            items:4,
-		            nav:true,
-		            loop:false
-		        }		        
-		    }
-		});
+	if($this->session->flashdata('login')){
 
+		echo "<script data-cfasync='false'  type='text/javascript'>
 
-
-  	}
-
-
-	</script>
-
-	 <?php
-
-		if($this->session->flashdata('login')){
-
-			echo "<script data-cfasync='false'  type='text/javascript'>
-
-			 		$(document).ready(function(){
-						
-						$.getScript('".base_url('/')."js/jquery.knob.js', function(){setTimeout(do_load, 300);});
-						var cont = $('.na_points');
-						//LOAD POINTS
-						cont.addClass('loading');
-						
-						cont.removeClass('loading');
-			       });
+		 		$(document).ready(function(){
+					
+					$.getScript('".base_url('/')."js/jquery.knob.js', function(){setTimeout(do_load, 300);});
+					var cont = $('.na_points');
+					//LOAD POINTS
+					cont.addClass('loading');
+					
+					cont.removeClass('loading');
+		       });
+			   
+			    function do_load(){
 				   
-				    function do_load(){
-					   
-						$.ajax({
-							type:'get',
-							cache: false,
-							url: '".site_url('/')."win/get_points/".$this->session->userdata('id')."',
-							success: function(data) {
-								$('.na_points').html(data);
-							}
-						});  
-				  	}
-				 </script>
+					$.ajax({
+						type:'get',
+						cache: false,
+						url: '".site_url('/')."win/get_points/".$this->session->userdata('id')."',
+						success: function(data) {
+							$('.na_points').html(data);
+						}
+					});  
+			  	}
+			 </script>
 
-			<div class='na_points' id='na_points_msg'></div>
-			";
-	 	}
-	 ?> 
+		<div class='na_points' id='na_points_msg'></div>
+		";
+ 	}
+ ?> 
 
 
-	<!-- Bootstrap -->
-	<link href="https://s3.amazonaws.com/mynamibia/packages/css/weather-icons.min.css" rel="stylesheet" type="text/css">
+<!-- Bootstrap -->
+<link href="https://s3.amazonaws.com/mynamibia/packages/css/weather-icons.min.css" rel="stylesheet" type="text/css">
 
-	<!-- Calatz -->
-	<!-- The "browse to" file input fields -->
-	
-	<script src="js/jquery.fileInput.js"></script>
-	<script src="js/owl.carousel.js"></script>
-	
-	<script src="js/jquery.lazysizes.min.js"></script>
-	<script src="js/jquery.fancybox.min.js"></script>
-	<script src="js/bootstrap-select.min.js"></script>
+<!-- Calatz -->
+<!-- The "browse to" file input fields -->
+
+<script src="js/jquery.fileInput.js"></script>
+<script src="js/owl.carousel.js"></script>
+
+<script src="js/jquery.lazysizes.min.js"></script>
+<script src="js/jquery.fancybox.min.js"></script>
+<script src="js/bootstrap-select.min.js"></script>
 
 
-	<!-- Datepicker -->
-	<script src="js/moment.min.js"></script>
-	<script src="js/bootstrap-datetimepicker.min.js"></script>
-	
-	<!-- Custom Js -->
-	<script src="js/jquery.custom.js"></script>
+<!-- Datepicker -->
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- Custom Js -->
+<script src="js/jquery.custom.js"></script>
