@@ -53,10 +53,12 @@
 </footer>
 
 <?php if(!$this->input->cookie('gdpr_accept',true)) { ?>
-<div class="row-fluid footer-modal animate bounce">
+
+<div class="row footer-modal animate bounce">
     <div class="container">
+    	<button type="button" class="close pull-right text-light" data-dismiss="" aria-label="Close">
         <div class="row text center text-light" style="padding:20px;">
-          <button type="button" class="close pull-right text-light" data-dismiss="" aria-label="Close">
+          
           <span aria-hidden="true">&times;</span>
         </button>      	
         	<strong>Notice</strong>
@@ -84,7 +86,13 @@
 
 	$(document).on('click', '#gdpr_accept', function(e) {
 
-		alert('yay');
+			      $.ajax({
+			        'type': "get",
+			        'url':  "<?php echo site_url('/'); ?>my_na/gdpr_accept/",
+			        'success': function (data) {
+			          alert('done');
+			        }
+			      });
 
 	});
 

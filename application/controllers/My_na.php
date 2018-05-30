@@ -16,7 +16,7 @@ class My_na extends CI_Controller {
 	}
 	
 
-	public function gdpr_accpet() {
+	public function gdpr_accept() {
 
 	  $this->load->helper('cookie');
 
