@@ -48,8 +48,8 @@
 <?php if(!$this->input->cookie('gdpr_accept',true)) { ?>
 
 <div class="row footer-modal animate bounce">
-    <div class="container">
-    	<button type="button" class="close pull-right text-light" data-dismiss="" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+    <div class="container" style="position: relative">
+    	<button type="button" class="close pull-right text-light" style="margin-top:20px" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
         <div class="text-light" style="padding:25px;">
         	<strong>Notice</strong><br>
 			This website or its third-party tools use cookies, which are necessary to its functioning and required to achieve the purposes illustrated in the cookie policy. If you want to know more or withdraw your consent to all or some of the cookies, please refer to the&nbsp;<a href="https://www.my.na/page/privacy-policy-2018/" target="_blank" style="color:#ff9900">cookie policy</a>.
