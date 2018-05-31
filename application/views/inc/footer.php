@@ -46,13 +46,13 @@
 </footer>
 
 
-<div class="row footer-modal animate bounce">
+<div class="footer-modal" id="gdpr-modal">
     <div class="container" style="position: relative">
-    	<button type="button" class="close pull-right gdpr_accept text-light" style="margin-top:20px" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
-        <div class="text-light" style="padding:25px;">
-        	<strong>Notice</strong><br>
-			This website or its third-party tools use cookies, which are necessary to its functioning and required to achieve the purposes illustrated in the cookie policy. If you want to know more or withdraw your consent to all or some of the cookies, please refer to the&nbsp;<a href="https://www.my.na/page/privacy-policy-2018/" target="_blank" style="color:#ff9900">cookie policy</a>.
-			By closing this banner, accepting, clicking a link or continuing to browse otherwise, you agree to the use of cookies.&nbsp;<a href="javascript:void(0)" id="gdpr_accept" class="gdpr_accept" style="color:#ff9900">Accept</a>&nbsp;|&nbsp;<a href="javascript:void(0)" class="gdpr_decline" style="color:#ff9900">Do not Accept</a>
+        <button type="button" class="close pull-right gdpr_accept" style="margin-top:20px; color:#fff; opacity:1" aria-hidden="true">&times;</button>
+        <div class="text-light" style="padding:25px; color:#fff">
+            <strong>Notice</strong><br>
+            This website or its third-party tools use cookies, which are necessary to its functioning and required to achieve the purposes illustrated in the cookie policy. If you want to know more or withdraw your consent to all or some of the cookies, please refer to the&nbsp;<a href="https://www.my.na/page/privacy-policy-2018/" target="_blank" style="color:#ff9900">cookie policy</a>.
+            By closing this banner, accepting, clicking a link or continuing to browse otherwise, you agree to the use of cookies.&nbsp;<a href="javascript:void(0)" class="gdpr_accept" id="gdpr_accept" style="color:#ff9900">Accept</a>&nbsp;|&nbsp;<a href="javascript:void(0)" id="gdrp_decline" class="gdpr_decline" style="color:#ff9900">Do not Accept</a>
         </div>    
     </div>
 </div> 
