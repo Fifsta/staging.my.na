@@ -5,7 +5,7 @@
         width:100%;
         background-color: #000;
         opacity:1;
-        height:150px;
+        height:auto;
         z-index: 9999;
         bottom:0;
         position: fixed;
@@ -48,11 +48,11 @@
 
 <div class="row footer-modal animate bounce">
     <div class="container" style="position: relative">
-    	<button type="button" class="close pull-right text-light" style="margin-top:20px" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+    	<button type="button" class="close pull-right gdpr_accept text-light" style="margin-top:20px" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
         <div class="text-light" style="padding:25px;">
         	<strong>Notice</strong><br>
 			This website or its third-party tools use cookies, which are necessary to its functioning and required to achieve the purposes illustrated in the cookie policy. If you want to know more or withdraw your consent to all or some of the cookies, please refer to the&nbsp;<a href="https://www.my.na/page/privacy-policy-2018/" target="_blank" style="color:#ff9900">cookie policy</a>.
-			By closing this banner, accepting, clicking a link or continuing to browse otherwise, you agree to the use of cookies.&nbsp;<a href="javascript:void(0)" id="gdpr_accept" style="color:#ff9900">Accept</a>&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#ff9900">Do not Accept</a>
+			By closing this banner, accepting, clicking a link or continuing to browse otherwise, you agree to the use of cookies.&nbsp;<a href="javascript:void(0)" id="gdpr_accept" class="gdpr_accept" style="color:#ff9900">Accept</a>&nbsp;|&nbsp;<a href="javascript:void(0)" class="gdpr_decline" style="color:#ff9900">Do not Accept</a>
         </div>    
     </div>
 </div> 
@@ -73,20 +73,46 @@
     
 ?>
 
-	$(document).on('click', '#gdpr_accept', function(e) {
+    $(document).on('click', '.gdpr_decline', function(e) {
 
-	      $.ajax({
-	        'type': "get",
-	        'url':  "<?php echo site_url('/'); ?>my_na/gdpr_accept/",
-	        'success': function (data) {
+        window.history.back();
 
-	          $('.footer-modal').addClass('animated slideOutDown');
+    });    
 
-	        }
-	      });
 
-	});
+    $(document).on('click', '.gdpr_accept', function(e) {
 
+          $.ajax({
+            'type': "get",
+            'url':  "<?php echo site_url('/'); ?>my_na/gdpr_accept/",
+            'success': function (data) {
+
+              $('.footer-modal').addClass('animated slideOutDown');
+
+            }
+          });
+
+    });    
+
+
+    function check_gdpr() {
+
+          $.ajax({
+            'type': "get",
+            'url':  "<?php echo site_url('/'); ?>my_na/gdpr_check/",
+            'success': function (data) {
+
+                if(data == 'false') {
+
+                    $('.footer-modal').show();
+                    $('.footer-modal').addClass('animated slideInUp');
+
+                }
+
+            }
+          });   
+
+    }
 
 
 $(document).ready( function(){
@@ -123,28 +149,6 @@ $(document).ready( function(){
 	});
 
 });
-
-
-function check_gdpr() {
-
-      $.ajax({
-        'type': "get",
-        'url':  "<?php echo site_url('/'); ?>my_na/gdpr_check/",
-        'success': function (data) {
-
-        	if(data == 'false') {
-
-    			$('.footer-modal').show();
-				$('.footer-modal').addClass('animated slideInUp');
-
-        	}
-
-        }
-      });	
-
-}
-
-
 
 //Call weather from NMH HUB
 function get_weather(cont,city){
