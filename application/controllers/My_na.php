@@ -24,6 +24,19 @@ class My_na extends CI_Controller {
 
 		$this->session->set_userdata($data);
 
+		if($this->session->userdata('id')){
+
+			$id = $this->session->userdata('id');
+
+			$udata = array(
+			   'GDPR_ACCEPT'  => 'Y'
+			);
+
+	        $this->db->where('ID', $id);
+	        $this->db->update('u_client', $udata);			
+
+		}
+
 	}
 
 
