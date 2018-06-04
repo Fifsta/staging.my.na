@@ -42,17 +42,52 @@ class My_na extends CI_Controller {
 
 	public function gdpr_check() {
 
-		if($this->session->userdata('gdpr_accept') === 'true'){
+		if($this->session->userdata('id')){
 
-			echo "true";
+			$id = $this->session->userdata('id');
+
+			if($this->session->userdata('gdpr_accept') === 'true'){
+
+				echo "true";
+
+			} else {
+
+		        $query = $this->db->query("SELECT GDPR_ACCEPT FROM u_client WHERE ID = '".$id."' ");
+
+		        if($query->result()){
+
+		        	$row = $query->row();
+
+		        	if($row->GDPR_ACCEPT == 'Y') {
+
+		        		echo "true";
+
+		        	} else {
+
+		        		echo "false";
+
+		        	}
+
+		        }
+
+			}			
+
 
 		} else {
 
-			echo "false";
+			if($this->session->userdata('gdpr_accept') === 'true'){
+
+				echo "true";
+
+			} else {
+
+				echo "false";
+
+			}
 
 		}
 
-	}	
+	}
 
 
 	public function index()
