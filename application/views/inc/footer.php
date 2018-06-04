@@ -82,15 +82,15 @@
 
     $(document).on('click', '.gdpr_accept', function(e) {
 
-          $.ajax({
+        $.ajax({
             'type': "get",
             'url':  "<?php echo site_url('/'); ?>my_na/gdpr_accept/",
             'success': function (data) {
 
-              $('.footer-modal').addClass('animated slideOutDown');
+            	$('.footer-modal').addClass('animated slideOutDown');
 
             }
-          });
+        });
 
     });    
 
