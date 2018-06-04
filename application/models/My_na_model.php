@@ -1555,8 +1555,6 @@ class My_na_model extends CI_Model{
 
                     $key = $this->db->escape_like_str(urldecode($str));
 
-                    echo $key;
-
                     //INSERT TERM FOR CAPTURE
                     if(strlen($key) > 15){
 
