@@ -62,6 +62,7 @@ class App_model extends CI_Model{
 			}
 			
 		}
+
 		$q = $this->db->query("SELECT a.ID as my_id, CONCAT(a.DIAL_CODE,a.CLIENT_CELLPHONE) as mobile,a.VERIFIED as mobile_verified, a.CLIENT_EMAIL as email, 
 							a.CLIENT_GENDER as gender,a.CLIENT_DATE_OF_BIRTH as dob, a.CLIENT_PROFILE_PICTURE_NAME as pic, 
 							a.CLIENT_NAME as name,a.CLIENT_SURNAME as lastname, a.CLIENT_OCCUPATION as profession,
@@ -71,6 +72,7 @@ class App_model extends CI_Model{
 							LEFT JOIN a_map_location ON a_map_location.ID = a.CLIENT_CITY
 							LEFT JOIN a_map_suburb ON a_map_suburb.ID = a.CLIENT_SUBURB
 							WHERE ".$sql."", true);
+		
 		//echo $this->db->last_query();
 		//TEST MULTIPLE VALIDATED RESULTS
 		$o['data'] = array();
