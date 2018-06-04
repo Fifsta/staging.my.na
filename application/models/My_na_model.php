@@ -1528,30 +1528,34 @@ class My_na_model extends CI_Model{
 	//++++++++++++++++++++++++++++++
 	//Instant Search 
 	//++++++++++++++++++++++++++++++
-    public function instant_search_json()
+    public function instant_search_json($mid,$sid,$query)
     {
-        $out = array();
-        if($str = $this->input->get('query')){
 
-                    if($this->input->get('location') != 'national'){
+        $out = array();
+        
+        if($str = $query){
+
+                    /*if($this->input->get('location') != 'national'){
                         $locationSQL = " AND location = '".$this->input->get('location')."' ";  
-                    }
+                    }*/
                     $strSQL = '';
-                    if($this->input->get('sub_cat_id') != 0){
-                        $strSQL = " sub_cat_id = '".$this->input->get('sub_cat_id')."' ";   
+                    if($sid != 0){
+                        $strSQL = " sub_cat_id = '".$sid."' ";   
                     }
                     
-                    if($this->input->get('main_cat_id') != 0){
+                    if($sid != 0){
                         if($strSQL == ''){
                             
-                            $strSQL = " main_cat_id = '".$this->input->get('main_cat_id')."' AND "; 
+                            $strSQL = " main_cat_id = '".$mid."' AND "; 
                         }else{
-                            $strSQL = $strSQL. " AND main_cat_id = '".$this->input->get('main_cat_id')."' AND ";        
+                            $strSQL = $strSQL. " AND main_cat_id = '".$mid."' AND ";        
                         }
                         
                     }
 
                     $key = $this->db->escape_like_str(urldecode($str));
+
+                    echo $key;
 
                     //INSERT TERM FOR CAPTURE
                     if(strlen($key) > 15){
