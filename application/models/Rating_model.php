@@ -303,13 +303,13 @@ class Rating_model extends CI_Model{
 
 			$first = $query->row();
 			$name = $first->BUSINESS_NAME;
+
 			if($external == 'external'){
-				$out .=  '<h4>'.$name.' Reviews <img src="'.base_url('/').'img/icons/fnb_irate.png" style="width:80px" class="pull-right"/></h4>';
+				$out .=  '<h4>'.$name.' Reviews <img src="'.base_url('/').'images/icons/fnb_irate.png" style="width:80px" class="pull-right"/></h4>';
 			}else{
-
 				$out .=  '<h4>'.$name.' Reviews</h4>';
-
 			}
+			
 			$out .= $summary;
 
             //LOOP RESPONSES FROM SAME DTATA SET
@@ -363,33 +363,31 @@ class Rating_model extends CI_Model{
                         $r = $this->get_review_stars_img($rating);
                     }
 
-                    $out .= '<div class="row-fluid">
-							<div class="span12">
-								<div class="media">
+                    $out .= '<div class="row">
+								<div class="col-md-12">
+									<div class="media">
+										  <div itemscope itemtype="http://data-vocabulary.org/Review">
+											  <span itemprop="itemreviewed" style="display:none">'.$row->BUSINESS_NAME.'</span>
+											  <a class="popovers pull-left" href="#" title="Reviewed on '.date('F j, Y',strtotime($review_date)).'">
+												<span class="popover-content d-none">'.$r.'</span>
+												<img class="media-object img-thumbnail" style="width:60px; margin-right:10px; height:60px" alt="'.$row->CLIENT_NAME.' '.$row->CLIENT_SURNAME.'" src="'.$user.'">
+											  </a>
+											  <span itemprop="summary" style="display:none;height:0px">'.strip_tags($this->shorten_string($review,4)).'</span>
+											  <div class="media-body">
+											  '.$this->get_review_stars($rating,$client_id).'
+											   <br/>
 
-									  <div itemscope itemtype="http://data-vocabulary.org/Review">
-										  <span itemprop="itemreviewed" style="display:none">'.$row->BUSINESS_NAME.'</span>
-										  <a class="popovers pull-left" href="#" title="Reviewed on '.date('F j, Y',strtotime($review_date)).'">
-											<span class="popover-content hide">'.$r.'</span>
-											<img class="media-object img-polaroid img-circle" style="width:60px; margin-right:10px; height:60px" alt="'.$row->CLIENT_NAME.' '.$row->CLIENT_SURNAME.'" src="'.$user.'">
-										  </a>
-										  <span itemprop="summary" style="display:none;height:0px">'.strip_tags($this->shorten_string($review,4)).'</span>
-										  <div class="media-body">
-										  '.$this->get_review_stars($rating,$client_id).'
-										   <br/>
-
-										  <span itemprop="description" class="clearfix" style="line-height:15px;">'.$review .'</span>
-										  <small class="muted" style="font-size:10px;"> ' .$this->time_passed(strtotime($review_date)).'</small>
-										   <div style="font-size:10px;"><span itemprop="reviewer">'.$row->CLIENT_NAME.' '.$row->CLIENT_SURNAME.'</span></div>
-											'.$reply.'
-										  <time itemprop="dtreviewed" style="display:none;font-size:10px;font-style:italic" datetime="'.date('m-d-Y',strtotime($review_date)).'">'
-                        .date('F j, Y',strtotime($review_date)).'</time>
-										  <span itemprop="rating" style="visibility:hidden">'.(round($rating)).'</span>
+											  <span itemprop="description" class="clearfix" style="line-height:15px;">'.$review .'</span>
+											  <small class="muted" style="font-size:10px;"> ' .$this->time_passed(strtotime($review_date)).'</small>
+											   <div style="font-size:10px;"><span itemprop="reviewer">'.$row->CLIENT_NAME.' '.$row->CLIENT_SURNAME.'</span></div>
+												'.$reply.'
+											  <time itemprop="dtreviewed" style="display:none;font-size:10px;font-style:italic" datetime="'.date('m-d-Y',strtotime($review_date)).'">'.date('F j, Y',strtotime($review_date)).'</time>
+											  <span itemprop="rating" style="visibility:hidden">'.(round($rating)).'</span>
+											  </div>
 										  </div>
-									  </div>
+									</div>
 								</div>
-							</div>
-					 </div>
+						 </div>
 
 					 ';
 
@@ -464,7 +462,7 @@ class Rating_model extends CI_Model{
 			$first = $query->row();
 			$name = $first->BUSINESS_NAME;
 			if($external == 'external'){
-				$out .=  '<h4>'.$name.' Reviews <img src="'.base_url('/').'img/icons/fnb_irate.png" style="width:80px" class="pull-right"/></h4>';
+				$out .=  '<h4>'.$name.' Reviews <img src="'.base_url('/').'images/icons/fnb_irate.png" style="width:80px" class="pull-right"/></h4>';
 			}else{
 
 				$out .=  '<h4>'.$name.' Reviews</h4>';
@@ -594,8 +592,6 @@ class Rating_model extends CI_Model{
 			}
 
 
-
-
 		}else{
 
 			echo '<p>Only My.na users can review businesses. Please register or log in to review the business.<br />
@@ -619,10 +615,12 @@ class Rating_model extends CI_Model{
 
 	public function submit_review($bus_id)
 	{
+
+
 		$rating = $this->input->post('star1', TRUE);
 		$review = strip_tags($this->input->post('reviewtxt', TRUE));
 		$IP = $this->input->ip_address();
-		$IP = $_SERVER['HTTP_CF_CONNECTING_IP'];
+		//$IP = $_SERVER['HTTP_CF_CONNECTING_IP'];
 		$client_id = $this->input->post('client_id', TRUE);
 
 		//NEW USER REVIEW -- NOT LOGGED IN
@@ -702,17 +700,16 @@ class Rating_model extends CI_Model{
 			$this->load->view('business/profile', $data);
 
 		}
-
-
 	}
+
 
 	public function submit_review_ajax($bus_id)
 	{
 		$type = $this->input->post('type', TRUE);
 		$rating = $this->input->post('star1', TRUE);
 		$review = strip_tags($this->input->post('reviewtxt', TRUE));
-		//$IP = $this->input->ip_address();
-		$IP = $_SERVER['HTTP_CF_CONNECTING_IP'];
+		$IP = $this->input->ip_address();
+		//$IP = $_SERVER['HTTP_CF_CONNECTING_IP'];
 		$client_id = $this->input->post('client_id', TRUE);
 
 		//NEW USER REVIEW -- NOT LOGGED IN
@@ -1590,11 +1587,7 @@ class Rating_model extends CI_Model{
                 //IF RESPONSE
                 if($row->TYPE == 'response'){
 
-
-
                 }else{
-
-
 
                     $id = $row->ID;
                     $client_id = $row->CLIENT_ID;
@@ -1617,6 +1610,7 @@ class Rating_model extends CI_Model{
 
 
                     $r = $this->get_review_detail($row);
+
                     if(strlen($r) == 0){
 
                         $r = $this->get_review_stars_img($rating);
@@ -1631,7 +1625,7 @@ class Rating_model extends CI_Model{
 									  <div itemscope itemtype="http://data-vocabulary.org/Review">
 										  <span itemprop="itemreviewed" style="display:none">'.$row->BUSINESS_NAME.'</span>
 										  <a class="popovers pull-left" href="#" title="Reviewed on '.date('F j, Y',strtotime($review_date)).'">
-											<span class="popover-content hide">'.$r.'</span>
+											<span class="popover-content d-none">'.$r.'</span>
 											<img class="media-object img-polaroid img-circle" style="width:60px; margin-right:10px; height:60px" alt="'.$row->CLIENT_NAME.' '.$row->CLIENT_SURNAME.'" src="'.$user.'">
 										  </a>
 										  <span itemprop="summary" style="display:none;height:0px">'.strip_tags($this->shorten_string($review,4)).'</span>
@@ -1729,11 +1723,12 @@ class Rating_model extends CI_Model{
 			$rating = 1;
 
 		}
-		$str = '<img class="mobile_small" src="'.base_url('/').'img/icons/star_badge'.$rating.'.png?v3" alt="'.$rating.' Star Rating - '.$name.'" title="'.$rating.' Star Rating - '.$name.'">
+		$str = '<img class="mobile_small" src="'.base_url('/').'images/icons/star_badge'.$rating.'.png?v3" alt="'.$rating.' Star Rating - '.$name.'" title="'.$rating.' Star Rating - '.$name.'">
 				<h4><small>Rated:</small> '.$rating.' Stars</h4>';
 
 		return $str;
 	}
+
     function get_review_stars_img($rating){
 
 		$x = 1;
@@ -1744,10 +1739,11 @@ class Rating_model extends CI_Model{
 			$rating = 1;
 			
 		}
-		$str = '<img src="'.base_url('/').'img/icons/star'.$rating.'.png">';
+		$str = '<img src="'.base_url('/').'images/icons/star'.$rating.'.png">';
 
 		return $str;
 	}
+
     function get_review_stars($rating,$id){
 
 		$x = 1;
@@ -1761,7 +1757,7 @@ class Rating_model extends CI_Model{
 				$rating = 1;
 
 			}
-			$str = '<img src="'.base_url('/').'img/icons/star'.$rating.'.png" rel="tooltip" title="Rated '.$rating .' Stars" alt="Rated '.$rating .' Stars">';
+			$str = '<img src="'.base_url('/').'images/icons/star'.$rating.'.png" rel="tooltip" title="Rated '.$rating .' Stars" alt="Rated '.$rating .' Stars">';
 			return $str;
 		}
 //		/return $arr;
@@ -2003,7 +1999,7 @@ class Rating_model extends CI_Model{
 					$title = ucwords(str_replace('_',' ', strtolower($srow)));
 					$out .= '<tr>';
 					$out .= '<td style="width:50%; border:none;text-align:right">'.$title . '</td>
-							 <td class="text-right"  style="border:none;width:50%">
+							 <td class="text-left"  style="border:none;width:50%">
 							 '.$this->get_review_stars_img($avg[$srow]).' 
 							 <span class="badge hidden-phone" title="Total Average for '.$title.'" rel="tooltip">' .round($avg[$srow], 1).'</span></td>';
 					$out .= '</tr>';
@@ -2015,7 +2011,7 @@ class Rating_model extends CI_Model{
 					$title = 'Overall';
 					$out .= '<tr>';
 					$out .= '<td style="width:50%; border:none;text-align:right;font-weight:bold">'.$title . '</td>
-							 <td class="text-right"  style="border:none;width:50%">
+							 <td class="text-left"  style="border:none;width:50%">
 							 '.$this->get_review_stars_img($mainrow->AVG_TOTAL).' 
 							 <span class="badge  hidden-phone" title="Total Average for '.$title.'" rel="tooltip">' .round($mainrow->AVG_TOTAL, 1).'</span></td>';
 					$out .= '</tr>';
@@ -2055,29 +2051,29 @@ class Rating_model extends CI_Model{
 			$str = '';
 			if($avg >= 4.5){
 				//GOLD
-				$str .='<img src="'.base_url('/').'img/icons/han_award5.png?5" title="Gold Excellence HAN Award" alt="Gold Excellence HAN Award" class="" >
+				$str .='<img src="'.base_url('/').'images/icons/han_award5.png?5" title="Gold Excellence HAN Award" alt="Gold Excellence HAN Award" class="" >
 							<h4><small>Rated:</small> Gold</h4>';
 
 			}elseif($avg >= 4.0 & $avg <= 4.4){
 				//SILVERR
-				$str .='<img src="'.base_url('/').'img/icons/han_award4.png?5" title="Silver Excellence HAN Award" alt="Silver Excellence HAN Award" class="">
+				$str .='<img src="'.base_url('/').'images/icons/han_award4.png?5" title="Silver Excellence HAN Award" alt="Silver Excellence HAN Award" class="">
 						<h4><small>Rated:</small> Silver</h4>';
 
 			}elseif($avg >= 3.5 & $avg <= 4.0){
 
 				//BRONZE
-				$str .='<img src="'.base_url('/').'img/icons/han_award3.png?5" title="Bronze Excellence HAN Award" alt="Bronze Excellence HAN Award" class="">
+				$str .='<img src="'.base_url('/').'images/icons/han_award3.png?5" title="Bronze Excellence HAN Award" alt="Bronze Excellence HAN Award" class="">
 						<h4><small>Rated:</small> Bronze</h4>';
 
 			}elseif($avg >= 3.0 & $avg <= 3.4){
 
 				//MERIT
-				$str .='<img src="'.base_url('/').'img/icons/han_award2.png?5" title="Merit Excellence HAN Award" alt="Merit Excellence HAN Award" class="">
+				$str .='<img src="'.base_url('/').'images/icons/han_award2.png?5" title="Merit Excellence HAN Award" alt="Merit Excellence HAN Award" class="">
 						<h4><small>Rated:</small> Merit</h4>';
 
 			}else{
 
-				$str .='<img src="'.base_url('/').'img/icons/han_award2.png?5" title="Merit Excellence HAN Award" alt="Merit Excellence HAN Award" class="">
+				$str .='<img src="'.base_url('/').'images/icons/han_award2.png?5" title="Merit Excellence HAN Award" alt="Merit Excellence HAN Award" class="">
 						<h4><small>Rated:</small> Merit</h4>';
 
 			}

@@ -1,110 +1,64 @@
-<div class="container-fluid">
-	<?php if(isset($reviews) && $reviews != ''){?>
+<h2 class="tab-head">Submit Review</h2>
+<!--<p><strong data-icon="fa-info-circle">Leaving a Review:</strong> Please note that you will only receive your <strong>3x MyNa points</strong> once this your has been authorised! Reviews are authorised according a real experience only! We reserve the rights to block your profile once we find that you are misusing / exploiting this process!</p>-->
+<!--<p><strong data-icon="fa-info-circle">Example Review:</strong> <em>"My family and I stayed at the guesthouse in July for 3 days and the service we received was fantastic. The guest house facilities where cleaned daily and the food served was great aswell. Will be back."</em></p>-->
 
-		<div class="row-fluid">
+<form id="reviewfrm" name="reviewfrm" method="post" action="<?php echo site_url('/');?>rate/submit_review/<?php echo $bus_id;?>">
 
-			<div class="span12">
-
-				<?php echo $reviews;?>
-			</div>
-		</div>
-
-	<?php }
-	$h2 = '';
-	if(!$logged_in){
-
-		$h2 = '<span class="yellow">Step 2:</span> ';
-	}
-	?>
+	<input type="hidden" value="<?php echo $client_id;?>" name="client_id" />
+	<input type="hidden" value="<?php echo $type;?>" name="type" />
 
 	<div class="row">
+		<div class="col-xs-6 col-sm-4 col-md-3">
+			<h4>Service</h4>
+			<input name="SERVICE" type="radio" value="1" class="star hide"/>
+			<input name="SERVICE" type="radio" value="2" class="star hide"/>
+			<input name="SERVICE" type="radio" value="3" class="star hide"/>
+			<input name="SERVICE" type="radio" value="4" class="star hide"/>
+			<input name="SERVICE" type="radio" value="5" class="star hide"/>
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-3">
+			<h4>Value for money</h4>
+			<input name="VALUE_FOR_MONEY" type="radio" value="1" class="star hide"/>
+			<input name="VALUE_FOR_MONEY" type="radio" value="2" class="star hide"/>
+			<input name="VALUE_FOR_MONEY" type="radio" value="3" class="star hide"/>
+			<input name="VALUE_FOR_MONEY" type="radio" value="4" class="star hide"/>
+			<input name="VALUE_FOR_MONEY" type="radio" value="5" class="star hide"/>
 
-		<div class="col-lg-12">
-			<h4><?php echo $h2;?> Your Rating</h4>
-			<form id="reviewfrm" name="reviewfrm" method="post" action="<?php echo site_url('/');?>rate/submit_review/<?php echo $bus_id;?>">
-				<input type="hidden" value="<?php echo $client_id;?>" name="client_id" />
-				<input type="hidden" value="<?php echo $type;?>" name="type" />
-			<div class="row">
-				<div class="col-lg-5 text-right">
-
-					Service
-
-				</div>
-				<div class="col-lg-7">
-
-					<input name="SERVICE" type="radio" value="1" class="star hide"/>
-					<input name="SERVICE" type="radio" value="2" class="star hide"/>
-					<input name="SERVICE" type="radio" value="3" class="star hide"/>
-					<input name="SERVICE" type="radio" value="4" class="star hide"/>
-					<input name="SERVICE" type="radio" value="5" class="star hide"/>
-
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-5 text-right">
-
-					Value For Money
-
-				</div>
-				<div class="col-lg-7">
-
-					<input name="VALUE_FOR_MONEY" type="radio" value="1" class="star hide"/>
-					<input name="VALUE_FOR_MONEY" type="radio" value="2" class="star hide"/>
-					<input name="VALUE_FOR_MONEY" type="radio" value="3" class="star hide"/>
-					<input name="VALUE_FOR_MONEY" type="radio" value="4" class="star hide"/>
-					<input name="VALUE_FOR_MONEY" type="radio" value="5" class="star hide"/>
-
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-5 text-right">
-
-					Product
-
-				</div>
-				<div class="col-lg-7">
-
-					<input name="PRODUCT_RATING" type="radio" value="1" class="star hide"/>
-					<input name="PRODUCT_RATING" type="radio" value="2" class="star hide"/>
-					<input name="PRODUCT_RATING" type="radio" value="3" class="star hide"/>
-					<input name="PRODUCT_RATING" type="radio" value="4" class="star hide"/>
-					<input name="PRODUCT_RATING" type="radio" value="5" class="star hide"/>
-
-				</div>
-			</div>
-
-			<p class="muted"><small>Share your experience in a couple of words</small></p>
-			<form id="reviewfrm" name="reviewfrm" method="post" action="<?php echo site_url('/');?>rate/submit_review/<?php echo $bus_id;?>">
-				<!--<input name="star1" type="radio" value="1" class="star hide"/>
-				<input name="star1" type="radio" value="2" class="star hide"/>
-				<input name="star1" type="radio" value="3" class="star hide"/>
-				<input name="star1" type="radio" value="4" class="star hide"/>
-				<input name="star1" type="radio" value="5" class="star hide"/>-->
-
-
-
-				<textarea rows="3"  class="redactor" id="reviewtxt" name="reviewtxt"></textarea>
-				<div id="review_msg"></div>
-				<div class="row">
-					<div class="col-lg-5 text-right">
-
-						<img src="<?php echo base_url('/');?>img/icons/affiliation.png" title="Proudly Partnered With" rel="tooltip"/>
-
-
-					</div>
-					<div class="col-lg-7">
-
-						<a href="javascript:void(0)" id="reviewbut" onclick="submit_review()" class="btn pull-right"><i class="icon-comment"></i> Submit Review</a>
-
-					</div>
-				</div>
-
-			</form>
-			<div class="clearfix" style="height:5px;"></div>
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-3">
+			<h4>Product</h4>
+			<input name="PRODUCT_RATING" type="radio" value="1" class="star hide"/>
+			<input name="PRODUCT_RATING" type="radio" value="2" class="star hide"/>
+			<input name="PRODUCT_RATING" type="radio" value="3" class="star hide"/>
+			<input name="PRODUCT_RATING" type="radio" value="4" class="star hide"/>
+			<input name="PRODUCT_RATING" type="radio" value="5" class="star hide"/>
 		</div>
 	</div>
-</div>
+	<hr>
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<strong>Share your experience in a couple of words</strong>
+			<textarea class="form-control" id="reviewtxt" name="reviewtxt" rows="5"></textarea>
+			<button type="button" class="btn btn-primary btn-block" id="reviewbut" onclick="submit_review()" data-icon="fa-comment-o">Submit Review</button>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<strong>Make sure your review will be approved</strong>
+			<div class="well well-sm">
+				<ul>
+					<li>be clear & concise</li>
+					<li>if you had a bad experience, try to offer constructive suggestions – remember everyone has a bad day</li>
+					<li>refrain from using peoples names</li>
+					<li>refrain from swearing</li>
+				</ul>
+			</div>
+			<img src="<?php echo base_url('/');?>images/icons/affiliation.png" title="Proudly Partnered With" rel="tooltip"/>
+		</div>
+		
+		<div id="review_msg"></div>
+	</div>
+
+</form>
+
 <script type="text/javascript">
 
 	window.setTimeout(function(){

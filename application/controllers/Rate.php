@@ -2,8 +2,10 @@
 
 class Rate extends CI_Controller {
 
-	function rate()
-	{
+ 
+
+    function __construct()
+    {
 		parent::__construct();
 		$this->load->model('rating_model');
 

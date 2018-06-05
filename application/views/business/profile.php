@@ -275,65 +275,12 @@ $this->load->view('inc/header');
 						</div>-->
 						
 						<h2 class="tab-head">Reviews</h2>
-						<?php //echo $this->rating_model->show_reviews($bus_id);?>
-							  <div class="alert alert-warning">
-								<h4><strong>No Reviews Added</strong></h4>
-								No Reviews have been added for the current product.
-							  </div>
+						<?php echo $this->rating_model->show_reviews($bus_id);?>
+
 					</section>
 					
 					<section role="tabpanel" class="tab-pane" id="Submit-Review">
-						<h2 class="tab-head">Submit Review</h2>
-						<!--<p><strong data-icon="fa-info-circle">Leaving a Review:</strong> Please note that you will only receive your <strong>3x MyNa points</strong> once this your has been authorised! Reviews are authorised according a real experience only! We reserve the rights to block your profile once we find that you are misusing / exploiting this process!</p>-->
-						<!--<p><strong data-icon="fa-info-circle">Example Review:</strong> <em>"My family and I stayed at the guesthouse in July for 3 days and the service we received was fantastic. The guest house facilities where cleaned daily and the food served was great aswell. Will be back."</em></p>-->
-						<div class="row">
-							<div class="col-xs-6 col-sm-4 col-md-3">
-								Service <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
-							</div>
-							<div class="col-xs-6 col-sm-4 col-md-3">
-								Value for money	<div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
-							</div>
-							<div class="col-xs-6 col-sm-4 col-md-3">
-								Sleep Quality <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
-							</div>
-							<div class="col-xs-6 col-sm-4 col-md-3">
-								Cleanliness <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
-							</div>
-							<div class="col-xs-6 col-sm-4 col-md-3">
-								Location <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
-							</div>
-							<div class="col-xs-6 col-sm-4 col-md-3">
-								Rooms <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
-							</div>
-							<div class="col-xs-6 col-sm-4 col-md-3">
-								Food &amp; Beverage <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
-							</div>
-							<div class="col-xs-6 col-sm-4 col-md-3">
-								Facilities <div class="rating"><span></span><span></span><span></span><span></span><span></span></div>
-							</div>
-						</div>
-						<form>
-							<div class="row">
-								<div class="col-sm-12 col-md-6">
-									<label>Share your experience in a couple of words</label>
-									<textarea class="form-control" rows="5"></textarea>
-									<label for="EmailAddress">Security</label>
-									<!--ROBOT CAPTCHA!!!-->
-									<button type="submit" class="btn btn-primary btn-block" data-icon="fa-envelope-o">Send</button>
-								</div>
-								<div class="col-sm-12 col-md-6">
-									<label data-icon="fa-exclamation-triangle">Make sure your review will be approved</label>
-									<div class="well well-sm">
-										<ul>
-											<li>be clear & concise</li>
-											<li>if you had a bad experience, try to offer constructive suggestions – remember everyone has a bad day</li>
-											<li>refrain from using peoples names</li>
-											<li>refrain from swearing</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</form>
+						<?php $this->rating_model->rate_business($bus_id);?>
 					
 					</section>
 					

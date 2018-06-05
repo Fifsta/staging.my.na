@@ -586,6 +586,14 @@ class My_na_model extends CI_Model{
 	public function get_user_avatar_id($id ,$w, $h, $img = ''){
 
 
+            $this->load->model('image_model'); 
+
+            $this->load->library('thumborp');
+            $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+            $width = $w;
+            $height = $h;
+
+
 			if($img == ''){
 
 
@@ -596,7 +604,6 @@ class My_na_model extends CI_Model{
 
 				if($query->result())
 				{
-
 					$img_file = $row['CLIENT_PROFILE_PICTURE_NAME'];
 				}else{
 
@@ -605,25 +612,28 @@ class My_na_model extends CI_Model{
 
 			}else{
 				$img_file = $img;
-
 			}
 
 			if(strstr($img_file, "http")){
 
-				$img = $img_file.'?width='.$w.'&height='.$h;
+                $img_str = $img_file;
+                $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
 
 			}elseif($img_file != ''){
 
-				$img = base_url('/').'assets/users/photos/'.$img_file;
+				$img_str = 'assets/users/photos/'.$img_file;
+                $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');              
 
 			}else{
 
-				$img = base_url('/').'img/user_blank.jpg';
+                $img_str = 'assets/users/photos/user_blank.jpg';
+                $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');                   
 
 			}
 
 			//$avatar = base_url('/').'img/timbthumb.php?src='.base_url('/').$img.'&q=100&w='.$w.'&h='.$h;
-			$avatar = $img;
+			$avatar = $img_url;
 			return $avatar;
 
 
