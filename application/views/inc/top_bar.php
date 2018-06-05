@@ -102,7 +102,7 @@
             displayKey: 'value',
             source: myna.ttAdapter(),
             highlight: true,
-            limit: 0,
+            limit: 20,
             templates: {
                 empty: [
                     '<div class="alert">',
