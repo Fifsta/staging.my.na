@@ -73,7 +73,7 @@
         go_search(<?php if(isset($main_cat_id) && $main_cat_id != 0){ echo $main_cat_id; }else{ echo '0';}?>, <?php if(isset($sub_cat_id) && $sub_cat_id != 0){ echo $sub_cat_id;}else{ echo '0';}?>);
 
     });
-    
+     
 
     function go_search(main_cat_id, sub_cat_id) {
 
@@ -83,20 +83,18 @@
                 return d.tokens;
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            //prefetch: '<?php echo base_url('/');?>cache/typehead.json?v=6',
             prefetch: '<?php echo site_url('/');?>my_na/typehead/location/',
-            //remote: '<?php echo site_url('/');?>my_na/ajax_search_json/<?php if(isset($main_cat_id) && $main_cat_id != 0){ echo '?main_cat_id='.$main_cat_id.'&';}else{ echo '?';}if(isset($sub_cat_id) && $sub_cat_id != 0){ echo 'sub_cat_id='.$sub_cat_id.'&';} ?>query=%QUERY'
             remote: {
                 url: '<?php echo site_url('/');?>my_na/ajax_search_json/' + main_cat_id + '/' + sub_cat_id + '/%QUERY',
                 wildcard: '%QUERY'
             },
-            limit: 10
+            limit: 0
 
         });
 
         myna.initialize();
 
-        $('#search-main input.typeahead').typeahead({
+        $('input.typeahead').typeahead({
             minLength: 1,
             highlight: true
         }, {
@@ -104,7 +102,7 @@
             displayKey: 'value',
             source: myna.ttAdapter(),
             highlight: true,
-            limit: 10,
+            limit: 0,
             templates: {
                 empty: [
                     '<div class="alert">',
@@ -116,7 +114,7 @@
                     '<p class="bold text-center"><i class="icon-search"></i> More Results</p>',
                     '</a>'
                 ].join('\n'),
-                suggestion: Handlebars.compile('<a href="{{link1}}"><p><span class="bold">{{value}}</span></p>{{link2}}</a>')
+                suggestion: Handlebars.compile('<a href="{{link1}}"><p>{{image}}<span class="bold">{{value}}</span></p>{{link2}}</a>')
             }
         });
 

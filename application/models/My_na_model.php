@@ -85,7 +85,7 @@ class My_na_model extends CI_Model{
         return $test;
                   
     }    
-
+ 
 
 
 	 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -164,7 +164,7 @@ class My_na_model extends CI_Model{
 				return $data;
 				
 			}
-
+ 
 		
 	}
 
@@ -1531,6 +1531,14 @@ class My_na_model extends CI_Model{
     public function instant_search_json($mid,$sid,$query)
     {
 
+
+        $this->load->model('image_model'); 
+
+        $this->load->library('thumborp');
+        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+        $width = 20;
+        $height = 20;
+
         $out = array();
         
         if($str = $query){
@@ -1584,11 +1592,11 @@ class My_na_model extends CI_Model{
                         }
 
                         $tq1 = "SELECT title ,link, type, img_file ,body,
-                                                        MATCH(title, body) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance,
-                                                        MATCH(title) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance2
-                                                        FROM search_index
-                                                        WHERE MATCH(title, body) AGAINST ('".$keyF."' IN BOOLEAN MODE)
-                                                        ORDER BY relevance2 DESC, relevance DESC LIMIT 8";
+                                MATCH(title, body) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance,
+                                MATCH(title) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance2
+                                FROM search_index
+                                WHERE MATCH(title, body) AGAINST ('".$keyF."' IN BOOLEAN MODE)
+                                ORDER BY relevance2 DESC, relevance DESC LIMIT 8";
                         //echo $tq1;
                         $query = $this->db->query($tq1, FALSE);
                         $go = true;
@@ -1622,6 +1630,11 @@ class My_na_model extends CI_Model{
 
                             foreach ($query->result() as $row) {
 
+                            $img_str = 'assets/products/images/' . $row->img_file;
+
+                            $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
+
                                 $name = $row->title;
                                 $body = $this->shorten_string(strip_tags(str_replace($name, " ", $row->body)), 7);
                                 $array = explode(" ", $name . " " . $body);
@@ -1630,7 +1643,6 @@ class My_na_model extends CI_Model{
                                 $t = array(
 
                                     "year" => $x,
-                                    "image" => base_url('/') . 'img/timbthumb.php?src=' . S3_URL . $row->img_file . '&w=20&h=20',
                                     "type" => "Category",
                                     "body" => $body,
                                     "link1" => "javascript:go_url('" . site_url('/') . $row->link . "')",
