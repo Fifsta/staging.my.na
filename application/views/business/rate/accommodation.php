@@ -1,197 +1,107 @@
-<div class="container-fluid">
+<h2 class="tab-head">Submit Review</h2>
 
-	<?php if(isset($reviews) && $reviews != ''){?>
+<form id="reviewfrm" name="reviewfrm" method="post" action="<?php echo site_url('/');?>rate/submit_review/<?php echo $bus_id;?>">
 
-		<div class="row-fluid">
+	<input type="hidden" value="<?php echo $client_id;?>" name="client_id" />
+	<input type="hidden" value="<?php echo $type;?>" name="type" />
 
-			<div class="span12">
-
-				<?php echo $reviews;?>
-			</div>
+	<div class="row">
+		<div class="col-xs-6 col-sm-4 col-md-3">
+			<h4>Service</h4>
+			<input name="SERVICE" type="radio" value="1" class="star hide"/>
+			<input name="SERVICE" type="radio" value="2" class="star hide"/>
+			<input name="SERVICE" type="radio" value="3" class="star hide"/>
+			<input name="SERVICE" type="radio" value="4" class="star hide"/>
+			<input name="SERVICE" type="radio" value="5" class="star hide"/>
 		</div>
-
-	<?php }
-	$h2 = '';
-	if(!$logged_in){
-
-		$h2 = '<span class="yellow">Step 2:</span> ';
-	}
-	?>
-
-	<div class="row-fluid">
-
-		<div class="span12">
-			<h4><?php echo $h2;?> Your Rating</h4>
-			<form id="reviewfrm" name="reviewfrm" method="post" action="<?php echo site_url('/');?>rate/submit_review/<?php echo $bus_id;?>">
-				<div class="row-fluid">
-					<div class="span5 text-right">
-
-						Service
-
-					</div>
-					<div class="span7">
-
-						<input name="SERVICE" type="radio" value="1" class="star hide"/>
-						<input name="SERVICE" type="radio" value="2" class="star hide"/>
-						<input name="SERVICE" type="radio" value="3" class="star hide"/>
-						<input name="SERVICE" type="radio" value="4" class="star hide"/>
-						<input name="SERVICE" type="radio" value="5" class="star hide"/>
-
-					</div>
-				</div>
-
-				<div class="row-fluid">
-					<div class="span5 text-right">
-
-						Value for money
-
-					</div>
-					<div class="span7">
-
-						<input name="VALUE_FOR_MONEY" type="radio" value="1" class="star hide"/>
-						<input name="VALUE_FOR_MONEY" type="radio" value="2" class="star hide"/>
-						<input name="VALUE_FOR_MONEY" type="radio" value="3" class="star hide"/>
-						<input name="VALUE_FOR_MONEY" type="radio" value="4" class="star hide"/>
-						<input name="VALUE_FOR_MONEY" type="radio" value="5" class="star hide"/>
-
-					</div>
-				</div>
-				<div class="row-fluid">
-					<div class="span5 text-right">
-
-						Sleep Quality
-
-					</div>
-					<div class="span7">
-
-						<input name="SLEEP_QUALITY" type="radio" value="1" class="star hide"/>
-						<input name="SLEEP_QUALITY" type="radio" value="2" class="star hide"/>
-						<input name="SLEEP_QUALITY" type="radio" value="3" class="star hide"/>
-						<input name="SLEEP_QUALITY" type="radio" value="4" class="star hide"/>
-						<input name="SLEEP_QUALITY" type="radio" value="5" class="star hide"/>
-
-					</div>
-				</div>
-
-				<div class="row-fluid">
-					<div class="span5 text-right">
-
-						Cleanliness
-
-					</div>
-					<div class="span7">
-
-						<input name="CLEANLINESS" type="radio" value="1" class="star hide"/>
-						<input name="CLEANLINESS" type="radio" value="2" class="star hide"/>
-						<input name="CLEANLINESS" type="radio" value="3" class="star hide"/>
-						<input name="CLEANLINESS" type="radio" value="4" class="star hide"/>
-						<input name="CLEANLINESS" type="radio" value="5" class="star hide"/>
-
-					</div>
-				</div>
-				<div class="row-fluid">
-					<div class="span5 text-right">
-
-						Location
-
-					</div>
-					<div class="span7">
-
-						<input name="LOCATION" type="radio" value="1" class="star hide"/>
-						<input name="LOCATION" type="radio" value="2" class="star hide"/>
-						<input name="LOCATION" type="radio" value="3" class="star hide"/>
-						<input name="LOCATION" type="radio" value="4" class="star hide"/>
-						<input name="LOCATION" type="radio" value="5" class="star hide"/>
-
-					</div>
-				</div>
-				<div class="row-fluid">
-					<div class="span5 text-right">
-
-						Rooms
-
-					</div>
-					<div class="span7">
-
-						<input name="ROOMS" type="radio" value="1" class="star hide"/>
-						<input name="ROOMS" type="radio" value="2" class="star hide"/>
-						<input name="ROOMS" type="radio" value="3" class="star hide"/>
-						<input name="ROOMS" type="radio" value="4" class="star hide"/>
-						<input name="ROOMS" type="radio" value="5" class="star hide"/>
-
-					</div>
-				</div>
-				<div class="row-fluid">
-					<div class="span5 text-right">
-
-						Food &amp; Beverage
-
-					</div>
-					<div class="span7">
-
-						<input name="FOOD_N_BEVERAGES" type="radio" value="1" class="star hide"/>
-						<input name="FOOD_N_BEVERAGES" type="radio" value="2" class="star hide"/>
-						<input name="FOOD_N_BEVERAGES" type="radio" value="3" class="star hide"/>
-						<input name="FOOD_N_BEVERAGES" type="radio" value="4" class="star hide"/>
-						<input name="FOOD_N_BEVERAGES" type="radio" value="5" class="star hide"/>
-
-					</div>
-				</div>
-				<div class="row-fluid">
-					<div class="span5 text-right">
-
-						Facilities
-
-					</div>
-					<div class="span7">
-
-						<input name="FACILITIES" type="radio" value="1" class="star hide"/>
-						<input name="FACILITIES" type="radio" value="2" class="star hide"/>
-						<input name="FACILITIES" type="radio" value="3" class="star hide"/>
-						<input name="FACILITIES" type="radio" value="4" class="star hide"/>
-						<input name="FACILITIES" type="radio" value="5" class="star hide"/>
-
-					</div>
-				</div>
-
-				<p class="muted"><small>Share your experience in a couple of words</small></p>
-				<input type="hidden" value="<?php echo $client_id;?>" name="client_id" />
-				<input type="hidden" value="<?php echo $type;?>" name="type" />
-				<textarea rows="3"  class="redactor" id="reviewtxt" name="reviewtxt"></textarea>
-				<br />
-				<div id="review_msg"></div>
-				<div class="row-fluid">
-					<div class="span5 text-right">
-
-						<img src="<?php echo base_url('/');?>img/icons/affiliation.png" title="Proudly Partnered With" rel="tooltip"/>
-
-
-					</div>
-					<div class="span7">
-
-						<a href="javascript:void(0)" id="reviewbut" onclick="submit_review()" class="btn pull-right"><i class="icon-comment"></i> Submit Review</a>
-
-					</div>
-				</div>
-
-			</form>
-			<div class="clearfix" style="height:5px;"></div>
-
+		<div class="col-xs-6 col-sm-4 col-md-3">
+			<h4>Value For Money</h4>
+			<input name="VALUE_FOR_MONEY" type="radio" value="1" class="star hide"/>
+			<input name="VALUE_FOR_MONEY" type="radio" value="2" class="star hide"/>
+			<input name="VALUE_FOR_MONEY" type="radio" value="3" class="star hide"/>
+			<input name="VALUE_FOR_MONEY" type="radio" value="4" class="star hide"/>
+			<input name="VALUE_FOR_MONEY" type="radio" value="5" class="star hide"/>
+		</div>	
+		<div class="col-xs-6 col-sm-4 col-md-3">
+			<h4>Sleep Quality</h4>
+			<input name="SLEEP_QUALITY" type="radio" value="1" class="star hide"/>
+			<input name="SLEEP_QUALITY" type="radio" value="2" class="star hide"/>
+			<input name="SLEEP_QUALITY" type="radio" value="3" class="star hide"/>
+			<input name="SLEEP_QUALITY" type="radio" value="4" class="star hide"/>
+			<input name="SLEEP_QUALITY" type="radio" value="5" class="star hide"/>
 		</div>
+		<div class="col-xs-6 col-sm-4 col-md-3">
+			<h4>Cleanliness</h4>
+			<input name="CLEANLINESS" type="radio" value="1" class="star hide"/>
+			<input name="CLEANLINESS" type="radio" value="2" class="star hide"/>
+			<input name="CLEANLINESS" type="radio" value="3" class="star hide"/>
+			<input name="CLEANLINESS" type="radio" value="4" class="star hide"/>
+			<input name="CLEANLINESS" type="radio" value="5" class="star hide"/>
+		</div>	
+		<div class="col-xs-6 col-sm-4 col-md-3">
+			<h4>Location</h4>
+			<input name="LOCATION" type="radio" value="1" class="star hide"/>
+			<input name="LOCATION" type="radio" value="2" class="star hide"/>
+			<input name="LOCATION" type="radio" value="3" class="star hide"/>
+			<input name="LOCATION" type="radio" value="4" class="star hide"/>
+			<input name="LOCATION" type="radio" value="5" class="star hide"/>
+		</div>	
+		<div class="col-xs-6 col-sm-4 col-md-3">
+			<h4>Rooms</h4>
+			<input name="ROOMS" type="radio" value="1" class="star hide"/>
+			<input name="ROOMS" type="radio" value="2" class="star hide"/>
+			<input name="ROOMS" type="radio" value="3" class="star hide"/>
+			<input name="ROOMS" type="radio" value="4" class="star hide"/>
+			<input name="ROOMS" type="radio" value="5" class="star hide"/>
+		</div>	
+		<div class="col-xs-6 col-sm-4 col-md-3">
+			<h4>Food &amp; Beverage</h4>
+			<input name="FOOD_N_BEVERAGES" type="radio" value="1" class="star hide"/>
+			<input name="FOOD_N_BEVERAGES" type="radio" value="2" class="star hide"/>
+			<input name="FOOD_N_BEVERAGES" type="radio" value="3" class="star hide"/>
+			<input name="FOOD_N_BEVERAGES" type="radio" value="4" class="star hide"/>
+			<input name="FOOD_N_BEVERAGES" type="radio" value="5" class="star hide"/>
+		</div>
+		<div class="col-xs-6 col-sm-4 col-md-3">
+			<h4>Facilities</h4>
+			<input name="FACILITIES" type="radio" value="1" class="star hide"/>
+			<input name="FACILITIES" type="radio" value="2" class="star hide"/>
+			<input name="FACILITIES" type="radio" value="3" class="star hide"/>
+			<input name="FACILITIES" type="radio" value="4" class="star hide"/>
+			<input name="FACILITIES" type="radio" value="5" class="star hide"/>
+		</div>												
 	</div>
-</div>
-<script type="text/javascript">
+	<hr> 
+	<div class="row">
+		<div class="col-sm-12 col-md-6">
+			<strong>Share your experience in a couple of words</strong>
+			<textarea class="form-control" id="reviewtxt" name="reviewtxt" rows="5"></textarea>
+			<button type="button" class="btn btn-primary btn-block" id="reviewbut" onclick="submit_review()" data-icon="fa-comment-o">Submit Review</button>
+		</div>
+		<div class="col-sm-12 col-md-6">
+			<strong>Make sure your review will be approved</strong>
+			<div class="well well-sm">
+				<ul>
+					<li>be clear & concise</li>
+					<li>if you had a bad experience, try to offer constructive suggestions – remember everyone has a bad day</li>
+					<li>refrain from using peoples names</li>
+					<li>refrain from swearing</li>
+				</ul>
+			</div>
+			<img src="<?php echo base_url('/');?>images/icons/affiliation.png" title="Proudly Partnered With" rel="tooltip"/>
+		</div>
+		
+		<div id="review_msg"></div>
+	</div>
 
-	
+</form>
+
+<script type="text/javascript">
 
 	window.setTimeout(function(){
 		btn_action();
 	},1000);
-
-	
 	function btn_action(){
-
-
 
 		$("#btn_submit").click(function(e) {
 			e.preventDefault();
@@ -212,7 +122,7 @@
 	}
 
     function submit_review(){
-		console.log('w - accc');
+
 		var  c_id = $('#client_id_s');
 
 		if(c_id.val() == 0){
@@ -256,10 +166,11 @@
 					}, 300);
 					
 				}else{
-					  var frm = $("#reviewfrm, #new_user_cred");
-					  $('#email_').val(email);
-					  $("#reviewbut").html("Processing...");
-					  $.ajax({
+
+				  	var frm = $("#reviewfrm, #new_user_cred");
+				 	$('#email_').val(email);
+					$("#reviewbut").html("Processing...");
+				  	$.ajax({
 						  type: "post",
 						  url: "<?php echo site_url('/');?>rate/submit_review_ajax/<?php echo $bus_id;?>/" ,
 						  data: frm.serialize(),
@@ -268,11 +179,9 @@
 							  $("#reviewbut").html('<i class="icon-comment"></i> Submit Review');
 							  $("input .star").rating().fadeIn();
 						  }
-					  });
-					
+				  	});
 					
 				}
-				
 			}
 			
 			
@@ -291,20 +200,20 @@
 			  });
 			
 		}
-
-
     }
+
 
 	function pass_update(){
 
 		$('#pass_update').slideToggle();
 		window.setTimeout(scroller(), 1000)
 
-
 	}
+
 	function scroller(){
 
 		window.scrollTo(0,$('#anchor').offset().top);
+
 	}
 
 </script>
