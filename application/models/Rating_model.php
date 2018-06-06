@@ -363,35 +363,27 @@ class Rating_model extends CI_Model{
                         $r = $this->get_review_stars_img($rating);
                     }
 
-                    $out .= '<div class="row">
-								<div class="col-md-12">
-									<div class="media">
-										  <div itemscope itemtype="http://data-vocabulary.org/Review">
-											  <span itemprop="itemreviewed" style="display:none">'.$row->BUSINESS_NAME.'</span>
-											  <a class="popovers pull-left" href="#" title="Reviewed on '.date('F j, Y',strtotime($review_date)).'">
-												<span class="popover-content d-none">'.$r.'</span>
-												<img class="media-object img-thumbnail" style="width:60px; margin-right:10px; height:60px" alt="'.$row->CLIENT_NAME.' '.$row->CLIENT_SURNAME.'" src="'.$user.'">
-											  </a>
-											  <span itemprop="summary" style="display:none;height:0px">'.strip_tags($this->shorten_string($review,4)).'</span>
-											  <div class="media-body">
-											  '.$this->get_review_stars($rating,$client_id).'
-											   <br/>
 
-											  <span itemprop="description" class="clearfix" style="line-height:15px;">'.$review .'</span>
-											  <small class="muted" style="font-size:10px;"> ' .$this->time_passed(strtotime($review_date)).'</small>
-											   <div style="font-size:10px;"><span itemprop="reviewer">'.$row->CLIENT_NAME.' '.$row->CLIENT_SURNAME.'</span></div>
-												'.$reply.'
-											  <time itemprop="dtreviewed" style="display:none;font-size:10px;font-style:italic" datetime="'.date('m-d-Y',strtotime($review_date)).'">'.date('F j, Y',strtotime($review_date)).'</time>
-											  <span itemprop="rating" style="visibility:hidden">'.(round($rating)).'</span>
-											  </div>
-										  </div>
-									</div>
-								</div>
-						 </div>
+                    $out .= '
+						<div class="row review-item">
+							<div class="col-xs-3 col-sm-2 col-md-1">
+								<figure><a href="#"><img  alt="'.$row->CLIENT_NAME.' '.$row->CLIENT_SURNAME.'" src="'.$user.'"></a></figure>
+							</div>
+							<div class="col-sm-10 col-md-5">
+								<blockquote>
+									<div class="rating">'.$this->get_review_stars($rating,$client_id).'</div>
+									<p>'.$review.'</p>
+									<footer>'.$row->CLIENT_NAME.' '.$row->CLIENT_SURNAME.'<span>' .$this->time_passed(strtotime($review_date)).'</span></footer>
+								</blockquote>
 
-					 ';
-
+								'.$reply.'
+							</div>
+							 <time itemprop="dtreviewed" style="display:none;font-size:10px;font-style:italic" datetime="'.date('m-d-Y',strtotime($review_date)).'">'.date('F j, Y',strtotime($review_date)).'</time>
+							 <span itemprop="rating" style="visibility:hidden">'.(round($rating)).'</span>
+						</div>
+                    ';
                 }
+
 			}//end for each
 			$out .= '';
 
@@ -405,7 +397,7 @@ class Rating_model extends CI_Model{
 		}
 
 		return $out;
-	}
+	} 
 
 	function get_review_response($id, $pic, $name, $row ){
 
@@ -417,15 +409,21 @@ class Rating_model extends CI_Model{
             $business_img = $this->my_na_model->get_business_logo($bus_id1, 100, 100, $pic);
 
 
-            return '<div class="media">
-							  <a class="pull-left" href="#">
-								<img class="media-object img-polaroid" style="width:60px; margin-right:10px; height:60px" src="'.$business_img.'" alt="'.$name.'">
-							  </a>
-							  <div class="media-body">
-								'.$row['REVIEW'].'<br/>
-								<span style="font-size:10px;">'.$name.' ' .date('Y-m-d H:i', strtotime($row['TIME_VOTED'])).'</span>
-							  </div>
-					</div>';
+            return '<hr>
+						<div class="row">
+							<div class="col-sm-2 col-md-2">
+								<figure><a href="#"><img  alt="'.$name.'" src="'.$business_img.'"></a></figure>
+							</div>
+							<div class="col-sm-10 col-md-10">
+								<blockquote>
+									<p>'.$row['REVIEW'].'</p>
+									<footer>'.$name.'<span>' .date('Y-m-d H:i', strtotime($row['TIME_VOTED'])).'</span></footer>
+								</blockquote>
+							</div>
+						</div>
+
+            ';
+
 
         }
 	}

@@ -1,6 +1,4 @@
 <h2 class="tab-head">Submit Review</h2>
-<!--<p><strong data-icon="fa-info-circle">Leaving a Review:</strong> Please note that you will only receive your <strong>3x MyNa points</strong> once this your has been authorised! Reviews are authorised according a real experience only! We reserve the rights to block your profile once we find that you are misusing / exploiting this process!</p>-->
-<!--<p><strong data-icon="fa-info-circle">Example Review:</strong> <em>"My family and I stayed at the guesthouse in July for 3 days and the service we received was fantastic. The guest house facilities where cleaned daily and the food served was great aswell. Will be back."</em></p>-->
 
 <form id="reviewfrm" name="reviewfrm" method="post" action="<?php echo site_url('/');?>rate/submit_review/<?php echo $bus_id;?>">
 
@@ -34,7 +32,7 @@
 			<input name="PRODUCT_RATING" type="radio" value="5" class="star hide"/>
 		</div>
 	</div>
-	<hr>
+	<hr> 
 	<div class="row">
 		<div class="col-sm-12 col-md-6">
 			<strong>Share your experience in a couple of words</strong>
@@ -129,10 +127,11 @@
 					}, 300);
 					
 				}else{
-					  var frm = $("#reviewfrm, #new_user_cred");
-					  $('#email_').val(email);
-					  $("#reviewbut").html("Processing...");
-					  $.ajax({
+
+				  	var frm = $("#reviewfrm, #new_user_cred");
+				 	$('#email_').val(email);
+					$("#reviewbut").html("Processing...");
+				  	$.ajax({
 						  type: "post",
 						  url: "<?php echo site_url('/');?>rate/submit_review_ajax/<?php echo $bus_id;?>/" ,
 						  data: frm.serialize(),
@@ -141,11 +140,9 @@
 							  $("#reviewbut").html('<i class="icon-comment"></i> Submit Review');
 							  $("input .star").rating().fadeIn();
 						  }
-					  });
-					
+				  	});
 					
 				}
-				
 			}
 			
 			
@@ -164,20 +161,20 @@
 			  });
 			
 		}
-
-
     }
+
 
 	function pass_update(){
 
 		$('#pass_update').slideToggle();
 		window.setTimeout(scroller(), 1000)
 
-
 	}
+
 	function scroller(){
 
 		window.scrollTo(0,$('#anchor').offset().top);
+
 	}
 
 </script>
