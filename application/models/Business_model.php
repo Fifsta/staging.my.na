@@ -1696,9 +1696,9 @@ function get_map_details($ID){
 						$img_str = base_url('/').'img/bus_blank.jpg';	
 						
 					}
-					
+					 
 						//NO TIMBTHUMB
-						echo '<div><a class="fancy-images" rel="gallery" href="'.$img_exp.'"><img src="'.$img_url.'" style="width:100%;" class="img-thumbnail" /></a></div>';
+						echo '<figure class="loader"><div><a class="fancy-images" rel="gallery" href="'.$img_exp.'"><img src="'.$img_url.'" style="width:100%;" class="img-thumbnail" /></a></div></figure>';
 						$x++;
 							 
 				}

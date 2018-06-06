@@ -612,7 +612,6 @@ class Rating_model extends CI_Model{
 	public function submit_review($bus_id)
 	{
 
-
 		$rating = $this->input->post('star1', TRUE);
 		$review = strip_tags($this->input->post('reviewtxt', TRUE));
 		$IP = $this->input->ip_address();
