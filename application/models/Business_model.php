@@ -1424,8 +1424,7 @@ function show_all_gallery_images($bus_id)
 				
 			}else{
 			
-				echo '<div class="alert alert-block">
-					<button type="button" class="close" data-dismiss="alert">×</button>
+				echo '<div class="alert alert-secondary">
 					<h4>No Gallery Images Added</h4>
 					Please add some gallery images to enhance your business listing by clicking on the select images button below
 				</div>';
@@ -1708,8 +1707,7 @@ function get_map_details($ID){
 				
 			}else{
 			
-				echo '<div class="alert alert-block">
-						<button type="button" class="close" data-dismiss="alert">×</button>
+				echo '<div class="alert alert-secondary">
 						<h4>No Gallery Images Added</h4>
 						Please add some gallery images to enhance your business listing by clicking on the select images button below
 					  </div>';
