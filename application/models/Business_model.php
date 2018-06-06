@@ -1644,9 +1644,9 @@ function get_map_details($ID){
 		$this->load->library('thumborp');
 
 		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-		$width = 800;
+		$width = 720;
 
-		$height = 450;
+		$height = 460;
       	
 		$query = $this->db->where('BUSINESS_ID',$bus_id);
 			$query = $this->db->get('u_gallery_component');
@@ -1698,7 +1698,7 @@ function get_map_details($ID){
 					}
 					 
 						//NO TIMBTHUMB
-						echo '<figure class="loader"><div><a class="fancy-images" rel="gallery" href="'.$img_exp.'"><img src="'.$img_url.'" style="width:100%;" class="img-thumbnail" /></a></div></figure>';
+						echo '<figure class="loader"><div><a class="fancy-images" rel="gallery" href="'.$img_exp.'"><img src="'.$img_url.'" style="width:100%;" /></a></div></figure>';
 						$x++;
 							 
 				}
