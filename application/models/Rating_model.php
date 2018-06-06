@@ -389,8 +389,7 @@ class Rating_model extends CI_Model{
 
 		}else{
 
-			$out .= '<div class="alert alert-block">
-						<button type="button" class="close" data-dismiss="alert">×</button>
+			$out .= '<div class="alert alert-secondary">
 						<h4>No Reviews Added</h4>
 						No Reviews have been added for the current business.
 					  </div>';
@@ -545,8 +544,7 @@ class Rating_model extends CI_Model{
 
 		}else{
 
-			$out .= '<div class="alert alert-block">
-						<button type="button" class="close" data-dismiss="alert">×</button>
+			$out .= '<div class="alert alert-secondary">
 						<h4>No Reviews Added</h4>
 						No Reviews have been added for the current business.
 					  </div>';
@@ -1702,8 +1700,7 @@ class Rating_model extends CI_Model{
 
         }else{
 
-            $out .= '<div class="alert alert-block">
-						<button type="button" class="close" data-dismiss="alert">×</button>
+            $out .= '<div class="alert alert-secondary">
 						<h4>No Reviews Added</h4>
 						No Reviews have been added for the current business.
 					  </div>';
