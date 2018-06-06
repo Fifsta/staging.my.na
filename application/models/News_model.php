@@ -28,8 +28,13 @@ class News_model extends CI_Model
 			
 			$o = '<div class="owl-carousel" style="margin-top:20px">';
 						
-			foreach(json_decode($output) as $row){	
+            if(is_array($output)){
+                $output = new Object();
+            }else{
+                $output = json_decode($output);
+            }   
 
+            foreach($output as $row){
 
                 $slug = $row->post_slug; 
 
