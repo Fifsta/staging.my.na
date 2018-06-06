@@ -616,8 +616,8 @@ class My_na_model extends CI_Model{
 
 			if(strstr($img_file, "http")){
 
-                $img_str = $img_file;
-                $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+                $img_url = $img_file;
+                //$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
 
 			}elseif($img_file != ''){
