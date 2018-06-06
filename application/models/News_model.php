@@ -72,7 +72,7 @@ class News_model extends CI_Model
 								<img class="owl-lazy" data-src="'.$img_url.'" src="images/16x9.png" />
 							</a>
                             <div>
-                                <h2><a href="'.$link.'" target="_blank">' . ucwords(strtolower($this->my_model->shorten_string($row->title, 6))) . '</a></h2>
+                                <h2><strong><a href="'.$link.'" target="_blank">' . ucwords(strtolower($this->my_model->shorten_string($row->title, 6))) . '</a></strong></h2>
                                 <div class="details">
                                     <p>'. ucwords(strtolower($this->my_model->shorten_string(strip_tags($row->body), 24))) . '</p>
                                 </div>

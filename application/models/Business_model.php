@@ -1370,67 +1370,63 @@ class Business_model extends CI_Model{
 		 }
 		 
 	
-//SHOW ALL IMAGES IMAGE MANAGER		
-function show_all_gallery_images($bus_id)
+	//SHOW ALL IMAGES IMAGE MANAGER		
+	function show_all_gallery_images($bus_id)
 	{
 			
-			$query = $this->db->where('BUSINESS_ID',$bus_id);
-			$query = $this->db->get('u_gallery_component');
-			//IF have children
-			if($query->num_rows() > 0){
-				echo '<h4>All Gallery Images</h4>';
-				echo '<ul class="thumbnails">';
-				$x =0;
-				foreach($query->result() as $row){
-					$id = $row->ID;
-					$img_file = $row->GALLERY_PHOTO_NAME;
-					//$title = $row->CLIENT_PHOTO_TITLE;
-						
-					if($img_file != ''){
-						
-						if(strpos($img_file,'.') == 0){
-				
-							$format = '.jpg';
-							$img_str = S3_URL.'assets/business/gallery/'.$img_file . $format;
-							
-						}else{
-							
-							$img_str =  S3_URL.'assets/business/gallery/'.$img_file;
-							
-						}
+		$query = $this->db->where('BUSINESS_ID',$bus_id);
+		$query = $this->db->get('u_gallery_component');
+
+		//IF have children
+		if($query->num_rows() > 0){
+
+			echo '<h4>All Gallery Images</h4>';
+			echo '<ul class="thumbnails">';
+			$x =0;
+
+			foreach($query->result() as $row){
+				$id = $row->ID;
+				$img_file = $row->GALLERY_PHOTO_NAME;
+					
+				if($img_file != ''){
+					
+					if(strpos($img_file,'.') == 0){
+			
+						$format = '.jpg';
+						$img_str = S3_URL.'assets/business/gallery/'.$img_file . $format;
 						
 					}else{
 						
-						$img_str = base_url('/').'img/bus_blank.jpg';	
+						$img_str =  S3_URL.'assets/business/gallery/'.$img_file;
 						
-					}
-							
-							//TIMBTHUMB
-							//echo '<li class="thumbnail"><img src="'.base_url('/').'img/timbthumb.php?src='.base_url('/').'assets/business/gallery/'.$img_file.'&q=100&w=180&h=100" />
-//							<a style="float:right;margin:0 3px;" onclick="delete_gallery_img('.$id .');" href="#"><i class="icon-remove"></i></a>
-//							</li>';
-							
-							//NO TIMBTHUMB
-							echo '<li class="thumbnail"><img src="'.$img_str.'" style="width:180px;"/>
-							<a style="float:left;margin:0 5px;" onclick="delete_gallery_img('.$id .');" href="#"><i class="icon-remove"></i></a>
-						   </li>';
-							$x++;
-						
-					 
 					}
 					
-				//show gallery
-				echo '</ul>';
+				}else{
+					
+					$img_str = base_url('/').'img/bus_blank.jpg';	
+					
+				}
+						
+					
+				//NO TIMBTHUMB
+				echo '<li class="thumbnail"><img src="'.$img_str.'" style="width:180px;"/>
+				<a style="float:left;margin:0 5px;" onclick="delete_gallery_img('.$id .');" href="#"><i class="icon-remove"></i></a>
+			    </li>';
+				$x++;
+					
+			}
 				
-			}else{
+			//show gallery
+			echo '</ul>';
 			
-				echo '<div class="alert alert-secondary">
+		}else{
+		
+			echo '<div class="alert alert-secondary">
 					<h4>No Gallery Images Added</h4>
 					Please add some gallery images to enhance your business listing by clicking on the select images button below
-				</div>';
-			}			
-			
-		
+				  </div>';
+
+		}			
 	}
 		 
 			 
@@ -1721,15 +1717,14 @@ function get_map_details($ID){
 
 	function add_business_member($bus_id ,$id){
 
-		
 		$data = array( 
 			      'BUSINESS_ID'=> $bus_id,
 				  'CLIENT_ID'=> $id
         		);
+
 		//insert into database
 		$this->db->insert('i_client_business',$data);
-		
-		
+			
     }
 	
 	
@@ -1739,11 +1734,11 @@ function get_map_details($ID){
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 //GET BUSINESS RATING STARS
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
    //GET BUSINESS RATING
 	public function get_rating($id){
       	
 		$query = $this->db->query("SELECT AVG(RATING)as TOTAL FROM u_business_vote WHERE BUSINESS_ID ='".$id."' AND IS_ACTIVE = 'Y' AND TYPE = 'review' ORDER BY TOTAL");
-			
 		
 		if($query->result()){
 			
@@ -1755,10 +1750,10 @@ function get_map_details($ID){
 			return 0;
 			
 		}
-		
-		
-				  
+			  
     }
+
+
 	//GET BUSINESS RATING COUNT
 	public function get_rating_count($id){
       	
