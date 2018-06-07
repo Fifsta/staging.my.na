@@ -38,7 +38,7 @@ class News_model extends CI_Model
 
             foreach($output as $row){
 
-                $slug = $row->new_slug; 
+                if(isset($row->post_slug)) {$slug = $row->post_slug; } else {$slug = '';}
 
                 //render pub links
                 switch($row->pub_id) {
