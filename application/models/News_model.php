@@ -34,6 +34,8 @@ class News_model extends CI_Model
                 $output = json_decode($output);
             }   
 
+            print_r($output);
+
             foreach($output as $row){
 
                 $slug = $row->post_slug; 
