@@ -61,7 +61,7 @@ class Sell_model extends CI_Model{
 		if ($test->result())
 		{
 			$a = array();
-			$this->load->library('encrypt');
+			$this->load->library('encryption');
 			$o['success'] = true;
 			foreach($test->result() as $row){
 				
