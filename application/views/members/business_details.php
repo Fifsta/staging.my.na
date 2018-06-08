@@ -363,7 +363,7 @@ $this->load->view('inc/header', $header);
             <h1 style="font-size:16px; border-bottom:1px solid #999; margin-bottom:30px"><strong>MANAGE BUSINESS USERS</strong></h1>
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item"><a href="#Users" class="nav-link active" aria-controls="Users" role="tab" data-toggle="tab" data-icon="fa-users">Users</a></li>
-              <li role="presentation" class="nav-item"><a href="#Add_Users" class="nav-link" aria-controls="Add_Users" role="tab" data-toggle="tab" data-icon="fa-plus">Users</a></li>
+              <li role="presentation" class="nav-item"><a href="#Add_Users" class="nav-link" aria-controls="Add_Users" role="tab" data-toggle="tab" data-icon="fa-plus">Add</a></li>
             </ul>
 
             <div class="tab-content">
@@ -374,14 +374,14 @@ $this->load->view('inc/header', $header);
                 <div id='usr-result'></div>
               </section>
 
-               <section role="tabpanel" class="tab-pane active" id="Add_Users">
+               <section role="tabpanel" class="tab-pane" id="Add_Users">
                 <h2 class="tab-head">ADD A USER</h2>
                 <form id="client_add" name="client_add" method="post" action="" class="form">
                     <fieldset>            
                         <div class="input-group" style="padding:15px">
                             <input type="text" class="form-control client_name" id="my_na_client" name="client_name" value="">
                              <span class="input-group-btn">
-                                 <button id="my_na_user_btn" class="btn btn-default" type="button" ><i class="glyphicon glyphicon-search glyphicon glyphicon-white"></i> Find</button>
+                                 <button id="my_na_user_btn" class="btn btn-dark" type="button" ><i class="fa fa-search"></i> Find</button>
                               </span>
                         </div>
                         <!-- /input-group -->
