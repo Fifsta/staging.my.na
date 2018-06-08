@@ -634,6 +634,14 @@ function reloadSearch() {
      }
 };
 
+function render_member(obj) {
+    
+
+    var res = '<tr id="usr_'+obj.ID+'"><td>'+obj.FNAME+' '+obj.SNAME+'</td><td>'+obj.EMAIL+'</td><td class="text-right"> <a href="javascript:add_user('+obj.ID+');" class="btn btn-primary btn-xs">Add</a></td></tr>';
+
+    return res;
+
+}
 
 function load_products_do(bus_id, section) {
 
