@@ -431,6 +431,9 @@ $this->load->view('inc/header', $header);
 
 <script data-cfasync="false" type="text/javascript">
 
+        var delay = 100;
+        var isLoading = false;
+
 $(document).ready(function(){
  
   $('#redactor_content').redactor({   
@@ -448,9 +451,7 @@ $(document).ready(function(){
   load_products_do(<?php echo $bus_id; ?>, 'live');
   //initialise_map2();
 
-
   var url = window.URL || window.webkitURL;
-
 
   $("#my_na_user_btn").on('click',function(e){
       e.preventDefault();
@@ -595,6 +596,7 @@ $(document).on('click', '.pbtn', function(e) {
 
 
 function reloadSearch() {
+  if(!isLoading){
       var q = $("#my_na_client").val();
        if (q.length >= 3) {
           isLoading = true;
@@ -630,7 +632,7 @@ function reloadSearch() {
              }
            }, delay);
        }
-     
+     }
 };
 
 function render_member(obj) {
