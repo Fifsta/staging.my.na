@@ -385,7 +385,7 @@ $this->load->view('inc/header', $header);
                               </span>
                         </div>
                         <!-- /input-group -->
-                           <table class="table table-striped table-responsive" style="display:none">
+                           <table class="table table-striped" style="display:none; width:100%">
                                 <thead>
                                     <tr>
                                         <th style="width:30%">Name</th>
