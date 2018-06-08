@@ -65,7 +65,7 @@ class Sell_model extends CI_Model{
 			$o['success'] = true;
 			foreach($test->result() as $row){
 				
-				$row->ACC_link = $this->encrypt->encode(json_encode($row));
+				$row->ACC_link = $this->encryption->encrypt(json_encode($row));
 				array_push($a, $row);
 				
 			}

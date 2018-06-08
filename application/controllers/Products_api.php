@@ -31,7 +31,8 @@ class Products_api extends REST_Controller{
 	
 	
 	public function towns_get() {
-
+		
+		
 		$country_id = $this->get('country_id');
 		
 		$this->load->model('trade_search_model');
@@ -597,12 +598,26 @@ class Products_api extends REST_Controller{
 
 		$product_id = $this->get('product_id');
 
+		$bus_id = $this->get('bus_id');
+
+		if(isset($bus_id)) {
+
+			$bus_id = $this->get('bus_id');
+
+		} else {
+
+			$bus_id = 'null';
+
+		}
+
 		$this->load->model('trade_search_model');
-		$o = $this->trade_search_model->get_api_product($product_id);
+		$o = $this->trade_search_model->get_api_product($product_id, $bus_id);
 
 		$this->response($o, 200);
 
 	}
+
+
 
 	function business_get() {
 
