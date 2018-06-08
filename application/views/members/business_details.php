@@ -451,6 +451,14 @@ $(document).ready(function(){
 
   var url = window.URL || window.webkitURL;
 
+
+  $("#my_na_user_btn").on('click',function(e){
+      e.preventDefault();
+      isDirty = true;
+      reloadSearch();
+  });
+
+
   $("#cover_file").change(function(e) {
 
     var str1 = '' ;  
@@ -573,8 +581,6 @@ $(document).ready(function(){
       
   });
 
-
-  
 });
 
 
@@ -586,6 +592,47 @@ $(document).on('click', '.pbtn', function(e) {
     load_products_do(bus_id, section);
 
 });
+
+
+function reloadSearch() {
+  if(!isLoading){
+      var q = $("#my_na_client").val();
+       if (q.length >= 3) {
+          isLoading = true;
+           var div = $("#add_user_div");
+           div.parent('table').fadeOut();
+           div.html('');
+
+           $.getJSON("<?php echo  NA_URL . 'products_api/find_client/';?>?q="+encodeURIComponent(q), function(data) {
+
+               console.log(data);
+              if(data.success){
+                    var obj = data.result;
+                    obj.forEach(function(item, index){
+                            
+                            var row = render_member(item);
+                            div.append(row);
+                            //console.log(item.FNAME+' ' +index);
+                        
+                    }); 
+                    //isLoading=false; 
+              }
+              //div.html(data);
+              div.parent('table').fadeIn();
+              //div.removeClass("hide");
+            });
+           
+           // enforce the delay
+           setTimeout(function(){
+             isLoading=false;
+             if(isDirty){
+               isDirty = false;
+               
+             }
+           }, delay);
+       }
+     }
+};
 
 
 function load_products_do(bus_id, section) {
