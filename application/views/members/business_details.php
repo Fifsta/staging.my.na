@@ -595,7 +595,6 @@ $(document).on('click', '.pbtn', function(e) {
 
 
 function reloadSearch() {
-  if(!isLoading){
       var q = $("#my_na_client").val();
        if (q.length >= 3) {
           isLoading = true;
@@ -631,7 +630,7 @@ function reloadSearch() {
              }
            }, delay);
        }
-     }
+     
 };
 
 function render_member(obj) {
