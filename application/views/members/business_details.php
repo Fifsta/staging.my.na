@@ -679,7 +679,7 @@ function reload_users() {
         url: '<?php echo site_url('/').'members/users/'.$bus_id.'/'; ?>',
         success: function (dataresult) {
 
-          $('user-table').html(dataresult);
+          $('#user-table').html(dataresult);
 
         }
     });
