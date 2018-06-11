@@ -378,9 +378,6 @@ $this->load->view('inc/header', $header);
                 <h2 class="tab-head">Add a user</h2>
                 <small>Please insert name or email address in search field below and click on find. Notice only my.na users will be filtered.</small>
 
-                <div style="display:none" id="user_upload_msg" class="alert alert-warning">
-                  
-                </div>
 
                 <form id="client_add" name="client_add" method="post" action="" class="form">
                     <fieldset>            
@@ -391,6 +388,8 @@ $this->load->view('inc/header', $header);
                                  <button id="my_na_user_btn" class="btn btn-dark" type="button" ><i class="fa fa-search"></i> Find</button>
                               </span>
                         </div>
+                        <div style="display:none" id="user_upload_msg" class="alert alert-success"></div>
+
                         <div id="load_users" style="text-align:center"></div>
                         <!-- /input-group -->
                            <table class="table table-striped" style="display:none; width:100%">
