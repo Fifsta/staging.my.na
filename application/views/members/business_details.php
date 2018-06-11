@@ -385,6 +385,7 @@ $this->load->view('inc/header', $header);
                                  <button id="my_na_user_btn" class="btn btn-dark" type="button" ><i class="fa fa-search"></i> Find</button>
                               </span>
                         </div>
+                        <div id="load_users"></div>
                         <!-- /input-group -->
                            <table class="table table-striped" style="display:none; width:100%">
                                 <thead>
@@ -458,7 +459,7 @@ $(document).ready(function(){
       e.preventDefault();
       isDirty = true;
 
-      $('#add_user_div').html("<img src='<?php echo base_url('/').'images/load.gif';?>'>");
+      $('#load_users').html("<img src='<?php echo base_url('/').'images/load.gif';?>'>");
 
       reloadSearch();
   });
