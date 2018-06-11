@@ -295,7 +295,9 @@ $this->load->view('inc/header', $header);
 
               <section role="tabpanel" class="tab-pane" id="QR">
                 <h2 class="tab-head">QR Code</h2>
-                <div id="load_qr"></div>
+                <div id="load_qr">
+                  <?php echo $this->business_model->get_qr_vcard($bus_id,'220','220');?> 
+                </div>
               </section>
 
               <div class="clear:both"> </div>
@@ -655,7 +657,6 @@ function render_member(obj) {
 
 
 function add_user(id) {
-
 
     $.ajax({
         type: 'get',
