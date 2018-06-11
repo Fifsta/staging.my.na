@@ -3195,6 +3195,7 @@ function un_clean_url($str)
 								}elseif($row['VERIFIED'] == 'N'){
 		
 									redirect('/clients/verify/');
+									
 								}else{
 		
 									redirect('/members/home/');

@@ -543,8 +543,6 @@ $(document).ready(function(){
     
     }else{
 
-
-
       $('#avatar_msg').html("");
       
           var avataroptions = { 
@@ -575,10 +573,7 @@ $(document).ready(function(){
         frm.ajaxForm(avataroptions);    
       
       
-    }
-    
-  
-    
+    }   
       
   });
 
@@ -643,6 +638,25 @@ function render_member(obj) {
     return res;
 
 }
+
+
+
+function add_user(id) {
+
+    $.ajax({
+        type: 'get',
+        url: '<?php echo site_url('/').'MEMBERS/add_user_business/'.$bus_id.'/'; ?>'+id ,
+        success: function (dataresult) {
+
+            //reload_users();
+            alert('hooray');
+
+        }
+    });
+
+}
+
+
 
 function load_products_do(bus_id, section) {
 
