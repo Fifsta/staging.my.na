@@ -645,7 +645,7 @@ function add_user(id) {
 
     $.ajax({
         type: 'get',
-        url: '<?php echo site_url('/').'MEMBERS/add_user_business/'.$bus_id.'/'; ?>'+id ,
+        url: '<?php echo site_url('/').'members/add_user_business/'.$bus_id.'/'; ?>'+id ,
         success: function (dataresult) {
 
             //reload_users();
