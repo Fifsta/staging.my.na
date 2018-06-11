@@ -379,8 +379,9 @@ $this->load->view('inc/header', $header);
                 <form id="client_add" name="client_add" method="post" action="" class="form">
                     <fieldset>            
                         <div class="input-group" style="padding:15px">
+                            
                             <input type="text" class="form-control client_name" id="my_na_client" name="client_name" value="">
-                             <span class="input-group-btn">
+                             <span class="input-group-prepend">
                                  <button id="my_na_user_btn" class="btn btn-dark" type="button" ><i class="fa fa-search"></i> Find</button>
                               </span>
                         </div>
