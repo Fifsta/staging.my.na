@@ -9,7 +9,7 @@
 			<th style="min-width:100px;text-align:right"></th>
 		</tr>
 	</thead>
-	<tbody>
+	<tbody id="user-table">
 		<?php echo $this->members_model->get_business_users($bus_id); ?>
 	</tbody>
 </table>

@@ -388,6 +388,7 @@ $this->load->view('inc/header', $header);
                                  <button id="my_na_user_btn" class="btn btn-dark" type="button" ><i class="fa fa-search"></i> Find</button>
                               </span>
                         </div>
+
                         <div style="display:none; font-weight: bold" id="user_upload_msg" class=""></div>
 
                         <div id="load_users" style="text-align:center"></div>
@@ -663,6 +664,22 @@ function add_user(id) {
 
           $('#user_upload_msg').show();
           $('#user_upload_msg').html(dataresult);
+          reload_users();
+
+        }
+    });
+
+}
+
+
+function reload_users() {
+
+    $.ajax({
+        type: 'get',
+        url: '<?php echo site_url('/').'members/users/'.$bus_id.'/'; ?>',
+        success: function (dataresult) {
+
+          $('user-table').html(dataresult);
 
         }
     });
