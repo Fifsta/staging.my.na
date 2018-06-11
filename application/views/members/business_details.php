@@ -379,7 +379,7 @@ $this->load->view('inc/header', $header);
                 <form id="client_add" name="client_add" method="post" action="" class="form">
                     <fieldset>            
                         <div class="input-group" style="padding:15px">
-                            
+
                             <input type="text" class="form-control client_name" id="my_na_client" name="client_name" value="">
                              <span class="input-group-prepend">
                                  <button id="my_na_user_btn" class="btn btn-dark" type="button" ><i class="fa fa-search"></i> Find</button>
@@ -457,6 +457,9 @@ $(document).ready(function(){
   $("#my_na_user_btn").on('click',function(e){
       e.preventDefault();
       isDirty = true;
+
+      $('#add_user_div').html("<img src='<?php echo base_url('/').'images/load.gif';?>'>");
+
       reloadSearch();
   });
 
@@ -644,13 +647,13 @@ function render_member(obj) {
 
 function add_user(id) {
 
+
     $.ajax({
         type: 'get',
         url: '<?php echo site_url('/').'members/add_user_business/'.$bus_id.'/'; ?>'+id ,
         success: function (dataresult) {
 
-            //reload_users();
-            alert('hooray');
+          $('user_upload_msg').html(dataresult);
 
         }
     });

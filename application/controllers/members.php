@@ -2478,7 +2478,7 @@ class Members extends CI_Controller {
 	//+++++++++++++++++++++++++++
 	//ADD USERS FOR THE BUSINESS
 	//++++++++++++++++++++++++++
-	public function add_user_business($id, $bus_id)
+	public function add_user_business($bus_id,$id)
 	{
 		 
 		if($this->members_model->check_business_user($bus_id)){
