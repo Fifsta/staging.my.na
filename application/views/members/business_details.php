@@ -375,7 +375,13 @@ $this->load->view('inc/header', $header);
               </section>
 
                <section role="tabpanel" class="tab-pane" id="Add_Users">
-                <h2 class="tab-head">ADD A USER</h2>
+                <h2 class="tab-head">Add a user</h2>
+                <small>Please insert name or email address in search field below and click on find. Notice only my.na users will be filtered.</small>
+
+                <div style="display:none" id="user_upload_msg" class="alert alert-warning">
+                  
+                </div>
+
                 <form id="client_add" name="client_add" method="post" action="" class="form">
                     <fieldset>            
                         <div class="input-group" style="padding:15px">
