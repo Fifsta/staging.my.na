@@ -2488,7 +2488,7 @@ class Members extends CI_Controller {
 				$query = $this->db->get('i_client_business');
 				if($query->result()){
 					
-					echo '<div class="alert">User already added</div>';
+					echo '<div class="alert alert-success">User already added</div>';
 					
 				}else{
 					
@@ -2538,7 +2538,7 @@ class Members extends CI_Controller {
 					$this->load->model('email_model');	
 					$this->email_model->send_mail($body_final, $subject, $emailTO, $fromEMAIL, $fromNAME, $TAG);	
 
-					echo 'User Added';
+					echo '<div class="alert alert-success">User added</div>';
 
 				}
 				
