@@ -2537,6 +2537,9 @@ class Members extends CI_Controller {
 					//SEND EMAIL LINK 
 					$this->load->model('email_model');	
 					$this->email_model->send_mail($body_final, $subject, $emailTO, $fromEMAIL, $fromNAME, $TAG);	
+
+					echo 'User Added';
+
 				}
 				
 				
