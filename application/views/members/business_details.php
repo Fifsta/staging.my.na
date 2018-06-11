@@ -662,6 +662,7 @@ function add_user(id) {
         url: '<?php echo site_url('/').'members/add_user_business/'.$bus_id.'/'; ?>'+id ,
         success: function (dataresult) {
 
+          $('#user_upload_msg').show();
           $('#user_upload_msg').html(dataresult);
 
         }
