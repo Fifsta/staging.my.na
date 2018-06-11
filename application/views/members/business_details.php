@@ -385,7 +385,7 @@ $this->load->view('inc/header', $header);
                                  <button id="my_na_user_btn" class="btn btn-dark" type="button" ><i class="fa fa-search"></i> Find</button>
                               </span>
                         </div>
-                        <div id="load_users"></div>
+                        <div id="load_users" style="text-align:center"></div>
                         <!-- /input-group -->
                            <table class="table table-striped" style="display:none; width:100%">
                                 <thead>
@@ -611,6 +611,8 @@ function reloadSearch() {
                     var obj = data.result;
                     obj.forEach(function(item, index){
                             
+
+                            $('#load_users').hide();
                             var row = render_member(item);
                             div.append(row);
                             //console.log(item.FNAME+' ' +index);
