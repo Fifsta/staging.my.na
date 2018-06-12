@@ -1507,13 +1507,21 @@ class Members_model extends CI_Model
 	function show_all_gallery_images($bus_id)
 	{
 
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 360;
+		$height = 230;
+
+
 		$query = $this->db->where('BUSINESS_ID', $bus_id);
 		$query = $this->db->get('u_gallery_component');
 		//IF have children
 		if ($query->num_rows() > 0)
 		{
-			echo '<h4>All Gallery Images</h4>';
-			echo '<ul class="thumbnails">';
+
+
 			$x = 0;
 			foreach ($query->result() as $row)
 			{
@@ -1528,13 +1536,15 @@ class Members_model extends CI_Model
 					{
 
 						$format = '.jpg';
-						$img_str = S3_URL . 'assets/business/gallery/' . $img_file . $format;
+						$img_str = 'assets/business/gallery/' . $img_file . $format;
+						$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
 					}
 					else
 					{
 
-						$img_str = S3_URL . 'assets/business/gallery/' . $img_file;
+						$img_str = 'assets/business/gallery/' . $img_file;
+						$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
 					}
 
@@ -1542,25 +1552,22 @@ class Members_model extends CI_Model
 				else
 				{
 
-					$img_str = base_url('/') . 'img/bus_blank.jpg';
+					$img_str = 'assets/business/gallery/bus_blank.jpg';
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
 				}
-				//TIMBTHUMB
-				//echo '<li class="thumbnail"><img src="'.base_url('/').'img/timbthumb.php?src='.base_url('/').'assets/business/gallery/'.$img_file.'&q=100&w=180&h=100" />
-//							<a style="float:right;margin:0 3px;" onclick="delete_gallery_img('.$id .');" href="#"><i class="icon-remove"></i></a>
-//							</li>';
+
 
 				//NO TIMBTHUMB
-				echo '<li class="thumbnail"><img src="' . $img_str . '" style="width:180px;"/>
-							<a style="float:left;margin:0 5px;" onclick="delete_gallery_img(' . $id . ');" href="#"><i class="icon-remove"></i></a>
-						   </li>';
+				echo '<div class="col-md-2" style="position:relative">
+							<img src="' . $img_url . '" />
+							<button style="position:absolute; margin:-35px 5px;" class="btn btn-dark" onclick="delete_gallery_img(' . $id . ');"><i class="fa fa-trash"></i></button>
+					  </div>';
 				$x++;
 
 
 			}
 
-			//show gallery
-			echo '</ul>';
 
 		}
 		else
