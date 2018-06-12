@@ -248,7 +248,8 @@ $this->load->view('inc/header', $header);
               <section role="tabpanel" class="tab-pane" id="Gallery">
                 <h2 class="tab-head">Gallery</h2>
                 <div class="row">
-                  <?php $this->business_model->show_gallery($bus_id);?>
+                  <?php //$this->business_model->show_gallery($bus_id);?>
+                  <?php $this->load->view('members/inc/business_gallery', $bus_details);?>
                 </div>
               </section>
 
