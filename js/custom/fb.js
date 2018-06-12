@@ -111,7 +111,7 @@
 					type: 'POST',
 					data: myKeyVals,
 					cache: false,
-					url: 'https://www.my.na/fb/login/',
+					url: 'https://www.my.na/fb/login/?redirect='+document.URL,
 					success: function (data) {
 	
 						if(data === 'TRUE'){
