@@ -67,8 +67,7 @@ class Fb extends CI_Controller {
 	function login($status = '')
 	{
 		//error_reporting(E_ALL);
-		
-		echo 'hi';
+	
 		 
 		$redirect = trim($this->input->post('redirect', TRUE)); 
 		$id = trim($this->input->post('id', TRUE));
