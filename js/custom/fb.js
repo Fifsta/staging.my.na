@@ -104,12 +104,14 @@
 
 	  function gologin(response){
 		
+		var myKeyVals = { redirect : document.URL}
+
 		FB.api('/me', function(response) {
 				$.ajax({
 					type: 'POST',
-					data: response,
+					data: myKeyVals,
 					cache: false,
-					url: 'https://www.my.na/fb/login/?redirect='+document.URL,
+					url: 'https://www.my.na/fb/login/',
 					success: function (data) {
 	
 						if(data === 'TRUE'){
