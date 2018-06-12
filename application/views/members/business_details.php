@@ -249,7 +249,7 @@ $this->load->view('inc/header', $header);
                 <h2 class="tab-head">Gallery</h2>
                 <div class="row">
                   <?php //$this->business_model->show_gallery($bus_id);?>
-                  <?php $this->load->view('members/inc/business_gallery2', $bus_details);?>
+                  <?php $this->load->view('members/inc/business_gallery', $bus_details);?>
                 </div>
               </section>
 

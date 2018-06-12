@@ -12,76 +12,48 @@
 $gal_details = $this->members_model->get_gallery($ID);
 
  ?>
-            <form id="fileupload" action="<?php echo site_url('/') ?>trade/add_product_images/" method="POST" enctype="multipart/form-data">
+<form action="<?php echo site_url('/')?>members/add_gallery_images/" method="post" accept-charset="utf-8" id="add-gal" name="add-gal" enctype="multipart/form-data">  
+ <fieldset>
+ <legend>Add gallery images</legend>
+      <div class="control-group">
+      <div class="controls">
+         <?php if(strpos($BUSINESS_LOGO_IMAGE_NAME,'.') == 0 && strlen($BUSINESS_LOGO_IMAGE_NAME) > 4){
+					
+					$format = '.jpg';
+					$fake_file = base_url('/').'img/timbthumb.php?w=200&h=200&src='.S3_URL.'assets/business/photos/'.$BUSINESS_LOGO_IMAGE_NAME . $format;
+				
+			   }elseif($BUSINESS_LOGO_IMAGE_NAME != ''){
+				
+					$fake_file =  base_url('/').'img/timbthumb.php?w=200&h=200&src='.S3_URL.'assets/business/photos/'.$BUSINESS_LOGO_IMAGE_NAME;
+				
+			   }else{ 
+					$fake_file =  base_url('/').'img/bus_blank.jpg';
+		
+			   } ?>
+ 
+           <input type="hidden" id="user_id" name="user_id" value="<?php echo $this->session->userdata('id');?>">
+           <input type="hidden" id="bus_id_gal" name="bus_id_gal" value="<?php echo $ID;?>">
+            <input type="hidden" id="bus_name_gal" name="bus_name_gal" value="<?php echo $BUSINESS_NAME;?>">
 
-                <div class="alert alert-secondary"><i class="fa fa-question-circle-o pull-right text-dark"></i><strong>Why Photos?</strong> Items
-                    with a proper description and detailed photos sell far quicker than ones without because the buyer can see
-                    what the product looks like
-                </div>
-
-                <!-- Redirect browsers with JavaScript disabled to the origin page -->
-                <noscript><input type="hidden" name="redirect" value=""></noscript>
-
-                <input type="hidden" name="bus_id" value="<?php if (isset($bus_id)) { echo $bus_id; } else { echo '0'; } ?>">
-
-                <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-
-                <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-                <div class="row fileupload-buttonbar">
-                    <div class="col-md-7">
-                        <!-- The fileinput-button span is used to style the file input field as button -->
-
-                        <span class="btn btn-dark fileinput-button">
-                            <i class="fa fa-plus text-light"></i>
-                            <span>Add files...</span>
-                            <input type="file" name="files[]" multiple>
-                        </span>
-
-                        <button type="submit" class="btn btn-success start" id="start_up">
-                            <i class="icon-upload icon-white"></i>
-                            <span>Start upload</span>
-                        </button>
-
-                        <button type="reset" class="btn btn-danger cancel">
-                            <i class="icon-ban-circle icon-white"></i>
-                            <span>Cancel upload</span>
-                        </button>
-
-                        <!-- The global file processing state -->
-                        <span class="fileupload-process"></span>
-                    </div>
-                    <hr>
-                    <!-- The global progress state -->
-                    <div class="col-md-5 fileupload-progress fade">
-
-                        <!-- The global progress bar -->
-                        <!--<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                            <div class="bar bar-warning" style="width:0%;"></div>
-                        </div>-->
-
-                        <div class="progress">
-                          <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-
-                        <!-- The extended global progress state -->
-                        <div class="progress-extended">&nbsp;</div>
-                    </div>
-                </div>
-
-                <!-- The table listing the files available for upload/download -->
-                <table role="presentation" class="table table-responsive">
-                    <tbody class="files"></tbody>
-                </table>
-
-
-                <h4 style="font-size:18px"><strong>Existing Photos</strong></h4>
-                <div id="product_gallery_msg"></div>
-                <div class="col-md-12"><div id="item_photos"><?php //$this->trade_model->show_all_product_images($product_id); ?></div></div>
-                <div class="clearfix">&nbsp;</div>
-                <div class="alert alert-secondary"><i class="fa fa-question-circle-o pull-right text-dark"></i> <strong>Featured Image?</strong> 
-                    To set the primary image for the product please click on the image itself and see the green check icon appear.
-                </div>
-            </form>
+           
+           <div class="row-fluid">
+               <div style="height:100px;" class="span2">
+                  <span class="avatar-overlay100"></span>
+                   <img id="avatar" src="<?php echo $fake_file;?>" style="float:left;position:absolute;border:1px solid #333333;width:100px; height:100px" />
+               	   <input type="file" class="btn btn-link" id="gal_file_btn" style="display:none" name="files[]" multiple >
+                   
+               </div>
+               <div class="span10"> 
+               		<a class="btn btn-large" onclick="$('#gal_file_btn').click();">Browse</a>
+               </div>
+            </div>
+            
+        </div>
+        <button type="submit"  class="btn btn pull-right" id="galbut"><i class="icon-tags"></i> Add Images</button>
+        
+      </div>
+      </fieldset>
+</form>
            <div id="gallery_msg"></div>
              <div class="progress progress-striped active" id="galcover" style="display:none">
                   <div class="bar bar-warning" style="width: 0%;"></div>
