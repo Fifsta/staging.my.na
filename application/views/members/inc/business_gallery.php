@@ -36,14 +36,14 @@ $gal_details = $this->members_model->get_gallery($ID);
             <input type="hidden" id="bus_name_gal" name="bus_name_gal" value="<?php echo $BUSINESS_NAME;?>">
 
            
-           <div class="row-fluid">
-               <div style="height:100px;" class="span2">
+           <div class="row">
+               <div style="height:100px;" class="col-md-2">
                   <span class="avatar-overlay100"></span>
                    <img id="avatar" src="<?php echo $fake_file;?>" style="float:left;position:absolute;border:1px solid #333333;width:100px; height:100px" />
                	   <input type="file" class="btn btn-link" id="gal_file_btn" style="display:none" name="files[]" multiple >
                    
                </div>
-               <div class="span10"> 
+               <div class="col-md-10"> 
                		<a class="btn btn-large" onclick="$('#gal_file_btn').click();">Browse</a>
                </div>
             </div>
