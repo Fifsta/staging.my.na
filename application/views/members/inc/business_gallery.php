@@ -95,6 +95,8 @@ $(document).on('click', '.gal-link', function(e) {
 
 $(document).on('click', '.img-del', function(e) {
 
+	removeBtn.html('<img src="<?php echo base_url('/').'images/load.gif';?>" /> Deleting...');	
+
 	var id = $(this).attr("data-id");
 
 	$.post('<?php echo site_url('/')?>members/gallery_img_delete/'+id , { cache: false } ,  function(data) {
@@ -141,7 +143,7 @@ $('#galbut').click(function() {
 	frm.ajaxForm(avataroptions);
 });
  
- 
+
 //Show gallery after upload success
 function show_gallery(){
 
