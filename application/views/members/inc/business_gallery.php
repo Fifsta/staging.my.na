@@ -39,23 +39,7 @@ $gal_details = $this->members_model->get_gallery($ID);
 <div class="col-md-12">
 <div class="row gallery">
 
-	<?php
-	//Get GALLERY
-	if($gal_details->result()){
 
-		$this->members_model->show_all_gallery_images($bus_id);
-		
-	}else{
-		
-		echo '<div class="alert alert-block">
-	         	<button type="button" class="close" data-dismiss="alert">×</button>
-	            <h4>No Gallery Images Added</h4>
-				Please add some gallery images to enhance your business listing by clicking on the select images button below
-			  </div>';
-	}
-		
-
-	?>
 
 </div>
 </div>
@@ -95,13 +79,15 @@ $(document).on('click', '.gal-link', function(e) {
 
 $(document).on('click', '.img-del', function(e) {
 
+	var removeBtn = $('#delete_img_confirm');
+
 	removeBtn.html('<img src="<?php echo base_url('/').'images/load.gif';?>" /> Deleting...');	
 
 	var id = $(this).attr("data-id");
 
 	$.post('<?php echo site_url('/')?>members/gallery_img_delete/'+id , { cache: false } ,  function(data) {
 
-			var removeBtn = $('#delete_img_confirm');
+
 
 			removeBtn.html('Remove');	
 
