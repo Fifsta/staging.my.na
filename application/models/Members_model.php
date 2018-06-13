@@ -1561,7 +1561,7 @@ class Members_model extends CI_Model
 				//NO TIMBTHUMB
 				echo '<div class="col-md-2" style="position:relative">
 							<img src="' . $img_url . '" />
-							<button style="position:absolute; margin:-35px 5px;" class="btn btn-dark" onclick="delete_gallery_img(' . $id . ');"><i class="fa fa-trash"></i></button>
+							<button style="position:absolute; margin:-35px 5px;" class="btn btn-dark gal-link" data-id="' . $id . '" data-toggle="modal" data-target="#modal-img-delete"><i class="fa fa-trash"></i></button>
 					  </div>';
 				$x++;
 
@@ -1577,7 +1577,7 @@ class Members_model extends CI_Model
 					<button type="button" class="close" data-dismiss="alert">×</button>
 					<h4>No Gallery Images Added</h4>
 					Please add some gallery images to enhance your business listing by clicking on the select images button below
-				</div>';
+				  </div>';
 		}
 
 

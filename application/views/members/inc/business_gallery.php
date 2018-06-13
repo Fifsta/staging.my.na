@@ -25,7 +25,7 @@ $gal_details = $this->members_model->get_gallery($ID);
 
 		</div>
 		<div class="col-md-10">
-			<button type="submit" class="btn btn-dark pull-right" id="galbut"><i class="icon-tags"></i> Add Images</button>
+			<button type="submit" class="btn btn-dark" id="galbut"><i class="icon-tags"></i> Add Images</button>
 		</div>	
 	</div>
 	
@@ -75,7 +75,7 @@ $gal_details = $this->members_model->get_gallery($ID);
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="delete_img_confirm">Remove</button>
+        <a href="#" type="button" class="btn btn-dark" id="delete_img_confirm">Remove</a>
       </div>
     </div>
   </div>
@@ -83,19 +83,34 @@ $gal_details = $this->members_model->get_gallery($ID);
 
  <script type="text/javascript">
 
-function delete_gallery_img(id){
-	
+/*function delete_gallery_img(id){
+
 	$('#modal-img-delete').appendTo("body").unbind('show').bind('show', function() {
-		    var removeBtn = $('#delete_img_confirm'),
-			href = removeBtn.attr('href');
-			removeBtn.attr('href','javascript:delete_gallery_img_do('+id+')');		
+
+			console.log('hi');
+
+		    var removeBtn = $('#delete_img_confirm');
+
+			removeBtn.attr('data-id', id);
+
 			removeBtn.click(function(e) { 
 				
-				removeBtn.html('Removing');
+			removeBtn.html('Removing');
+
 				
 			});
 	}).modal({ backdrop: true });
-}
+}*/
+
+
+
+$(document).on('click', '.gal-link', function(e) {
+
+		var id = $(this).attr("data-id");
+
+});
+
+
 
 function delete_gallery_img_do(id){	 
 	 //gallery images

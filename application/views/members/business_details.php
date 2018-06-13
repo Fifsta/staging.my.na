@@ -6,7 +6,7 @@
 
 //+++++++++++++++++
 //My.Na Business Detailsb
-//+++++++++++++++++
+//+++++++++++++++++ 
 //Roland Ihms
 //Get Business Details
 
@@ -247,6 +247,7 @@ $this->load->view('inc/header', $header);
 
               <section role="tabpanel" class="tab-pane" id="Gallery">
                 <h2 class="tab-head">Gallery</h2>
+                <p class="muted">Browse one or more images by clicking on the "Browse" button, then upload these images by clicking on the "Add Images" button</p>
                 <div class="row">
                   <?php //$this->business_model->show_gallery($bus_id);?>
                   <?php $this->load->view('members/inc/business_gallery', $bus_details);?>
