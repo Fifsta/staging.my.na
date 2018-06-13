@@ -30,15 +30,13 @@ $gal_details = $this->members_model->get_gallery($ID);
 	</div>
 	
 </form>
+<div id="gallery_msg"></div>
 </div> 
 
-<div class="clearfix"></div>
 
-<div id="gallery_msg"></div>
-<div class="progress progress-striped active" id="galcover" style="display:none">
-  <div class="bar bar-warning" style="width: 0%;"></div>
-</div>
 
+
+<div class="col-md-12">
 <div class="row gallery">
 
 	<?php
@@ -53,15 +51,16 @@ $gal_details = $this->members_model->get_gallery($ID);
 	         	<button type="button" class="close" data-dismiss="alert">×</button>
 	            <h4>No Gallery Images Added</h4>
 				Please add some gallery images to enhance your business listing by clicking on the select images button below
-			</div>';
+			  </div>';
 	}
 		
 
 	?>
 
 </div>
+</div>
  
-<div class="modal" tabindex="-1" role="dialog" id="modal-img-delete">
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-img-delete" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -75,52 +74,41 @@ $gal_details = $this->members_model->get_gallery($ID);
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="#" type="button" class="btn btn-dark" id="delete_img_confirm">Remove</a>
+        <button type="button" class="btn btn-dark img-del" id="delete_img_confirm">Remove</button>
       </div>
     </div>
   </div>
 </div>
 
- <script type="text/javascript">
-
-/*function delete_gallery_img(id){
-
-	$('#modal-img-delete').appendTo("body").unbind('show').bind('show', function() {
-
-			console.log('hi');
-
-		    var removeBtn = $('#delete_img_confirm');
-
-			removeBtn.attr('data-id', id);
-
-			removeBtn.click(function(e) { 
-				
-			removeBtn.html('Removing');
-
-				
-			});
-	}).modal({ backdrop: true });
-}*/
+<script type="text/javascript">
 
 
 
 $(document).on('click', '.gal-link', function(e) {
 
-		var id = $(this).attr("data-id");
+	var id = $(this).attr("data-id");
+
+	$('#delete_img_confirm').attr('data-id', id);
 
 });
 
 
+$(document).on('click', '.img-del', function(e) {
 
-function delete_gallery_img_do(id){	 
-	 //gallery images
-	  $.post('<?php echo site_url('/')?>members/gallery_img_delete/'+id , { cache: false } ,  function(data) {
+	var id = $(this).attr("data-id");
+
+	$.post('<?php echo site_url('/')?>members/gallery_img_delete/'+id , { cache: false } ,  function(data) {
+
 			var removeBtn = $('#delete_img_confirm');
-			removeBtn.html('Remove');	 
+
+			removeBtn.html('Remove');	
+
 			$('#gallery_msg').html(data);
+
 			$('#modal-img-delete').modal('hide');		 
-		});
-}
+	});
+
+});
  
 
 $('#galbut').click(function() {
@@ -153,21 +141,22 @@ $('#galbut').click(function() {
 	frm.ajaxForm(avataroptions);
 });
  
+ 
 //Show gallery after upload success
 function show_gallery(){
 
-		$.ajax({
-			type: 'get',
-			cache:false,
-			url: '<?php echo site_url('/')?>members/show_all_gallery_images/<?php echo $ID;?>' ,
+	$.ajax({
+		type: 'get',
+		cache:false,
+		url: '<?php echo site_url('/')?>members/show_all_gallery_images/<?php echo $ID;?>' ,
+		
+		success: function (data) {
 			
-			success: function (data) {
-				
-				 $('.gallery').html(data);
-				
-				
-			}
-		});	
+			 $('.gallery').html(data);
+			
+			
+		}
+	});	
 		
 }
 
