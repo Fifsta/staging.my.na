@@ -228,7 +228,7 @@ $this->load->view('inc/header', $header);
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="nav-item"><a href="#Details" class="nav-link active" aria-controls="Details" role="tab" data-toggle="tab" data-icon="fa-pencil-square-o"><span class="d-sm-none">Details</span></a></li>
               <li role="presentation" class="nav-item"><a href="#Description" class="nav-link" aria-controls="Description" role="tab" data-toggle="tab" data-icon="fa-file-text-o"><span class="d-sm-none">Description</span></a></li>
-              <li role="presentation" class="nav-item"><a href="#Gallery" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o"><span class="d-sm-none">Gallery</span></a></li>
+              <li role="presentation" class="nav-item"><a href="#Gallery" onClick="show_gallery()" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o"><span class="d-sm-none">Gallery</span></a></li>
               <li role="presentation" class="nav-item"><a href="#Categories" class="nav-link" aria-controls="Categories" role="tab" data-toggle="tab" data-icon="fa-list"><span class="d-sm-none">Categories</span></a></li>
               <li role="presentation" class="nav-item"><a href="#Map" onClick="initialise_map()" class="nav-link" aria-controls="Categories" role="tab" data-toggle="tab" data-icon="fa-map-marker"><span class="d-sm-none">Map</span></a></li>
             </ul>
