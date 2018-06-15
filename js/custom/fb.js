@@ -109,7 +109,7 @@
 					type: 'POST',
 					data: response,
 					cache: false,
-					url: 'https://www.my.na/fb/login/?redirect='+document.URL,
+					url: 'https://beta.my.na/fb/login/',
 					success: function (data) {
 	
 						if(data === 'TRUE'){
