@@ -27,7 +27,7 @@ class Trade extends CI_Controller {
 
 	}
 
-	
+
 
 	//+++++++++++++++++++++++++++
 	//TRADE/INDEX

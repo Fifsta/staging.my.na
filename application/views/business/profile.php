@@ -152,7 +152,6 @@ $this->load->view('inc/header');
 		          </div>
 		          
 		          <div class="list-map-right" id="map_container">
-		          	<?php //$this->load->view('business/inc/business_map_inc', $bus_details);?>
 		          	<iframe src="<?php echo site_url('/'); ?>business/load_business_map/<?php echo $bus_id; ?>" frameborder="0" allowtransparency="true"></iframe>
 		          </div>
 		        </div>

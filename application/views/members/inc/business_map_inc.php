@@ -29,8 +29,8 @@ if(count($map_details) > 0){
 		
 	}else{
 		
-		 $long = $map_details['BUSINESS_MAP_LONGITUDE'];
-	
+		$long = $map_details['BUSINESS_MAP_LONGITUDE'];
+
 	}	
 	
 }else{
@@ -40,7 +40,8 @@ if(count($map_details) > 0){
 	$zoom = '7';
 	echo '<script type="text/javascript">$("#map_info").slideDown();</script>';
 }
- ?>
+
+?>
     
 <!--<script src="http://maps.google.com/maps?file=api&v=2&key=AIzaSyAhEmO7n-f7JDcSWdmRncZ6JfN3z2FHkTQ" type="text/javascript"></script>-->
 <script data-cfasync="false" src="//maps.googleapis.com/maps/api/js?v=3&sensor=false&libraries=places"></script>

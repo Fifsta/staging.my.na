@@ -3827,8 +3827,8 @@ class Trade_model extends CI_Model
 				$format = substr($row->img_file,(strlen($row->img_file) - 4),4);
 				$str = substr($row->img_file,0,(strlen($row->img_file) - 4));
 				
-				$width = 800;
-				$height = 450;
+				$width = 1000;
+				$height = 500;
 
 
 				if($row->img_file != ''){
@@ -3862,7 +3862,107 @@ class Trade_model extends CI_Model
 		}
 
 
-	} 	
+	} 
+
+
+	function toggle_map($id) {
+
+		$query = $this->db->where('product_id', $id);
+		$query = $this->db->get('product_extras');
+		$row = $query->row();
+		
+		$mydata = json_decode($row->extras);
+
+		$string = 'N';
+		//var_dump($mydata);
+		
+		//If has items
+		if(count($mydata) > 0){
+			
+			
+				foreach($mydata as $key => $val){ 
+
+				
+					if($key == 'toggle_map') { $string = $val; }
+
+				
+				}
+	
+
+		}
+		
+		return $string;		
+		
+	}
+
+
+
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	//GET IMAGES
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	function show_images_mason($product_id)
+	{
+
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+
+		//get images
+		$this->db->order_by('sequence', 'ASC');
+		$this->db->where('product_id', $product_id);
+		$images = $this->db->get('product_images');
+
+		$data = '';
+		//GET MAIN IMAGE				
+		if ($images->result())
+		{
+
+			echo '<div class="grid row">';
+
+			foreach ($images->result() as $row)
+			{
+
+				//Build image string
+				$format = substr($row->img_file,(strlen($row->img_file) - 4),4);
+				$str = substr($row->img_file,0,(strlen($row->img_file) - 4));
+				
+				$width = 800;
+				$height = 0;
+
+
+				if($row->img_file != ''){
+					
+					if(strpos($row->img_file,'.') == 0){
+			
+						$format = '.jpg';
+						$img_str = 'assets/products/images/' . $row->img_file . '?' . $format;
+						
+					}else{
+						
+						$img_str = 'assets/products/images/' . $row->img_file;
+						
+					}
+					
+				}else{
+					
+					$img_str = base_url('/').'img/bus_blank.jpg';	
+					
+				}
+
+				$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
+				echo '<div class="grid-item"><img src="'.$img_url.'"></div>';
+
+
+			}
+
+			echo '</div>';
+
+		}
+
+
+	} 		
 
 
 

@@ -162,7 +162,7 @@ class Business extends CI_Controller {
 	}
 
 
-
+ 
 	//+++++++++++++++++++++++++++
 	//BUSINESS PROFILE PAGE 2
 	//++++++++++++++++++++++++++
