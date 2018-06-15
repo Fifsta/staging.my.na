@@ -560,11 +560,11 @@ Light Orange ff9900
 #listing .heading{margin-bottom:0}
 	/*#listing .heading h2{font-size:160%;}*/
 	#list-map-toggle{display:none}
-	.list-map{width:100%; height:100%; display:table; table-layout: fixed; border:5px solid #fff; border-top:none; position:relative; z-index:1}
+	.list-map{width:100%; height:300px; display:table; table-layout: fixed; border:5px solid #fff; border-top:none; position:relative; z-index:1}
 	.list-map figure{box-shadow:none; border:none;}
 	.list-map > div{height:100%; display:table-cell; vertical-align:top; }
 		.list-map-left{width:70%; background:#fff; padding-right:5px; border-radius:4px}
-		.list-map-right{width:30%; padding:0; border:1px solid #ddd; border-radius:4px}
+		.list-map-right{width:30%; padding:0; border:1px solid #ddd; border-radius:4px; overflow: hidden; height:300px;}
 	#listing .swipe-item{width:100%; height:auto; margin:0;}
 	#listing .swipe-item a{display:block;}
 	#listing .swipe-item img{width:100%; display:block;}

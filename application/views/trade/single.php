@@ -23,6 +23,8 @@
   $product['client_id'] = $client_id;
   $product['product_title'] = $title;
 
+  $toggle_map = $this->trade_model->toggle_map($product_id);
+
   $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
 
   $name =  $BUSINESS_NAME;
@@ -125,6 +127,17 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('/');?>css/jquery.countdown.css" />
 <link href='<?php echo base_url('/');?>css/jquery.rating.css' type="text/css" rel="stylesheet" />
+<link href='<?php echo base_url('/');?>isotope-docs/css/isotope-docs.css' type="text/css" rel="stylesheet" />
+
+<style>
+  .grid .picture{ background:#000; margin:15px 0}
+  .grid .details{width:100%; height:100%; text-decoration:none; position:absolute; bottom:-20px; left:0; background:rgba(28,83,122,0.0); box-shadow:  inset 0 0 100px 20px #1c537a; text-align:center; opacity:0; z-index:1}
+  .grid .details:hover{opacity:1; bottom:0px;}
+  .grid .details i{display:inline-block; margin:auto; font-size:20px; color:#fff; margin-bottom:5px;}
+  .grid h3{font-size:100%; color:#fff; text-align:center; padding:0}
+
+</style>
+
 </head>
 
 <body id="top">
@@ -177,10 +190,19 @@
               <?php echo $this->trade_model->show_images($product_id);?>
           </div>
           
+          <?php if($toggle_map == 'Y') { ?>
           <div class="list-map-right" id="map_container">
+            <iframe src="<?php echo site_url('/'); ?>trade/load_product_map/<?php echo $product_id; ?>" frameborder="0" allowtransparency="true"></iframe>
             <?php //echo $this->trade_model->get_product_map($product_id, $extras); ?>
-            <iframe src="<?php echo site_url('/').'trade/load_product_map/'.$product_id; ?>" frameborder="0" allowtransparency="true"></iframe>
+            <div> 
+
+            <?php //echo $this->trade_model->show_images_mason($product_id); ?>  
+
+            </div>
+            <div style="display:none"><iframe src="<?php echo site_url('/').'trade/load_product_map/'.$product_id; ?>" frameborder="0" allowtransparency="true"></iframe></div>
           </div>
+          <?php } ?>
+
         </div>
         <!--banner-->
  
@@ -282,17 +304,35 @@
 <?php $this->load->view('inc/footer');?>  
 <script src="<?php echo base_url('/');?>js/print_page.js"></script>
 <script src="<?php echo base_url('/');?>js/custom/fb.js?v=2"></script>
-
+<script src="<?php echo base_url('/');?>js/jquery.isotope.min.js"></script>
+<script src="<?php echo base_url('/');?>js/jquery.imagesloaded.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function(){
 
 
+    jQuery(document).ready(function($){
+      
+      //ISOTOPE
+      var $grid = $('.grid').isotope({
+        itemSelector: ".grid-item", 
+      });
+      $grid.imagesLoaded().progress( function() {
+        $grid.isotope('layout');
+      });
+      /*$('.filter-button-group').on( 'click', 'button', function() {
+        var filterValue = $(this).attr('data-filter');
+        $grid.isotope({ filter: filterValue });
+      });*/
+      
+    });
+
+
     $('#watch_btn').bind('click', function(e){
         e.preventDefault();
-        save_watchlist();
-        
+        save_watchlist();     
     });
+
 
     //PRINT PAGE//
     $(".btnPrint").printPage({

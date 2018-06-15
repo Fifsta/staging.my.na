@@ -4,18 +4,28 @@
 //+++++++++++++++++
 //Roland Ihms
 //Get Map Details 
-
+ 
 $map_details = $this->trade_model->get_map_details($ID);
 
-if($map_details['PRODUCT_MAP_TOGGLE'] == 'Y'){
+if(count($map_details) > 0){
   
+  if($map_details['PRODUCT_MAP_TOGGLE'] == 'N'){
     
-    $lat = $map_details['PRODUCT_MAP_LATITUDE'];
-    $long = $map_details['PRODUCT_MAP_LONGITUDE'];
-    $zoom = '10';
+    $lat = '-22.583741';
+    $long = '17.093782';
+    $zoom = '7';
+    echo '<script type="text/javascript">$("#map_info").slideDown();</script>';
     
+  }else{
+    
+    $lat = $map_details['BUSINESS_MAP_LATITUDE'];
+    $long = $map_details['BUSINESS_MAP_LONGITUDE'];
+    $zoom = $map_details['BUSINESS_MAP_ZOOM_LEVEL'];
+    
+  } 
 
 ?>
+
 
 <!--<script src="http://maps.google.com/maps?file=api&v=2&key=AIzaSyAhEmO7n-f7JDcSWdmRncZ6JfN3z2FHkTQ" type="text/javascript"></script>-->
 
@@ -73,6 +83,5 @@ function initialise_map() {
   $zoom = '7';
   echo '<script type="text/javascript">$("#map_info").slideDown();</script>';*/
 }
-
-?>
+ ?>
     
