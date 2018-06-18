@@ -83,8 +83,9 @@ class Fb extends CI_Controller {
 		
 		//KILL IF EMAIL EMPTY
 		if($email == ''){
-			die();
 			echo 'FALSE';	
+			die();
+			
 		}
 		
 		if($gender == 'male'){
@@ -150,8 +151,10 @@ class Fb extends CI_Controller {
 
                         'id' => $this->session->userdata('id'),
                         'u_name' => $fname. ' ' .$sname ,
+                        'u_email' => $email ,
                         'img_file' => $pic,
                         'fb_id' => $id,
+                        'subscriptions' => array(),							
                         'points' => $this->my_na_model->count_points($this->session->userdata('id')),
 
 
@@ -160,8 +163,9 @@ class Fb extends CI_Controller {
                 $this->session->set_flashdata('login', 'yes');
 				//UPDATE MY>NA WITH NEW CREDENTIALS
 				//$this->fb_model->update_existing($this->session->userdata('id'));
+				//echo 'TRUE';
 			}
-			echo 'FALSE';
+			
 		}
 	  
 
