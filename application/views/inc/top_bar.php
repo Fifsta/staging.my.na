@@ -48,7 +48,7 @@
 
 <script src="<?php echo base_url('/'); ?>js/typehead/dist/typeahead.bundle.js"></script>
 <script src="<?php echo base_url('/'); ?>js/handlebars-1.0.rc.1.min.js"></script>
-<script src="<?php echo base_url('/'); ?>js/custom/fb.js?v=2"></script>
+
 
 <script type="text/javascript">
 

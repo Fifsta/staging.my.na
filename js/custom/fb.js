@@ -5,6 +5,8 @@
 		// app know the current login status of the person.
 		// Full docs on the response object can be found in the documentation
 		// for FB.getLoginStatus().
+		console.log('statusChangeCallback');
+		console.log(response);
 		if (response.status === 'connected') {
 		  // Logged into your app and Facebook.
 		  
@@ -40,7 +42,7 @@
 			  xfbml      : true,
 			  cookie     : true,
 			  status     : true,  
-			  version    : 'v2.1'
+			  version    : 'v2.11'
 			});
 	
 			// ADD ADDITIONAL FACEBOOK CODE HERE
@@ -65,28 +67,33 @@
 //				}, {scope: 'user_friends, email,user_birthday'});
 			  }
 			});
-
+			FB.AppEvents.logPageView(); 
    	  };
 	
-	 (function(d, s, id){
+	/* (function(d, s, id){
 		 var js, fjs = d.getElementsByTagName(s)[0];
 		 if (d.getElementById(id)) {return;}
 		 js = d.createElement(s); js.id = id;
 		 js.src = "//connect.facebook.net/en_US/sdk.js";
 		 fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));*/
+
+	(function(d, s, id){
+	     var js, fjs = d.getElementsByTagName(s)[0];
+	     if (d.getElementById(id)) {return;}
+	     js = d.createElement(s); js.id = id;
+	     js.src = "https://connect.facebook.net/en_US/sdk.js";
+	     fjs.parentNode.insertBefore(js, fjs);
 	   }(document, 'script', 'facebook-jssdk'));
-
-	
   
-	  
-	  function goregister(response){
-
-		FB.api('/me', function(response) {
+    function goregister(response){
+	  	
+		FB.api('/me?fields=id,first_name,last_name,picture,email', function(response) {
 				$.ajax({
 					type: 'POST',
 					data: response,
 					cache: false,
-					url: 'https://beta.my.na/fb/login/register/',
+					url: 'https://www.my.na/fb/login/register/?redirect='+document.URL,
 					success: function (data) {
 
 						if(data === 'TRUE'){
@@ -102,16 +109,16 @@
 	  }
 
 
-	  function gologin(response){
-		
-		FB.api('/me', function(response) {
+	function gologin(response){
+		console.log('FB GoLogin 2');
+		FB.api('/me?fields=id,first_name,last_name,picture,email', function(response) {
 				$.ajax({
 					type: 'POST',
 					data: response,
 					cache: false,
-					url: 'https://beta.my.na/fb/login/',
+					url: 'https://www.my.na/fb/login/?redirect='+document.URL,
 					success: function (data) {
-	
+						console.log('FB Gologin response '+data);
 						if(data === 'TRUE'){
 							
 							window.location.reload();
@@ -121,7 +128,7 @@
 				});
 		});
 		  
-	  }
+	}
 
 	function postToFeed(id, name, pic, caption, body, linkt) {
 
