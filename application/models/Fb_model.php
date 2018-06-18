@@ -3,191 +3,190 @@ class Fb_model extends CI_Model{
 			
 	public function __construct()
     {
-        // Constructor's functionality here, if you have any.
+        $this->load->database();    
     }
 	
- 	function Fb_model(){
-  		//parent::CI_model();
-		self::__construct();
-		//LOAD library
-		//$this->load->library('image_lib');	
- 	}
+	 
 	
-	
-	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	//REGISTER FACEBOOK
-	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
-	function register_fb(){
-		
-			
-			$id = trim($this->input->post('id', TRUE));
-			$email = trim($this->input->post('email', TRUE));
-			$fname = $this->input->post('first_name', TRUE);
-			$sname = $this->input->post('last_name', TRUE);
-			$gender = $this->input->post('gender', TRUE);
-			$country = 151;
-			$city = $this->input->post('location[name]', TRUE);
-			$suburb = $this->input->post('suburb', TRUE);
-			$dob = $this->input->post('birthday', TRUE);
-			$pic = 'https://graph.facebook.com/'.$id.'/picture/';
-			//$dob = strtotime($new_date_format); 
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //REGISTER FACEBOOK
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+    function register_fb(){
+        
+            
+            $id = trim($this->input->post('id', TRUE));
+            $email = trim($this->input->post('email', TRUE));
+            $fname = $this->input->post('first_name', TRUE);
+            $sname = $this->input->post('last_name', TRUE);
+            $gender = $this->input->post('gender', TRUE);
+            $country = 151;
+            $city = $this->input->post('location[name]', TRUE);
+            $suburb = $this->input->post('suburb', TRUE);
+            $dob = $this->input->post('birthday', TRUE);
+            $pic = 'https://graph.facebook.com/'.$id.'/picture/';
+            //$dob = strtotime($new_date_format); 
 
-			$this->load->library('user_agent');
-			$agent = $this->agent->browser().' ver : '.$this->agent->version();
-			$IP = $this->input->ip_address();
-			if($gender == 'male'){
-				$gender = 'M';	
-			}else{
-				
-				$gender = 'F';	
-			}
-			$insertdata = array(
-						  'CLIENT_NAME'=> $fname ,
-						  'FB_ID'=> $id,
-						  'CLIENT_SURNAME'=> $sname ,
-						   'CLIENT_EMAIL'=> $email,
-						  'CLIENT_GENDER'=> $gender,
-						  'CLIENT_PROFILE_PICTURE_NAME'=> $pic,
-						  'CLIENT_DATE_OF_BIRTH'=> $dob,
-						  'CLIENT_UA' => $agent,
-						  'CLIENT_IP' => $IP,
-						  'IS_ACTIVE' => 'Y',
-						  'FB_LOGOUT' => 'N'
-			);
+            $this->load->library('user_agent');
+            $agent = $this->agent->browser().' ver : '.$this->agent->version();
+            $IP = $this->input->ip_address();
+            if($gender == 'male'){
+                $gender = 'M';  
+            }else{
+                
+                $gender = 'F';  
+            }
+            $insertdata = array(
+                          'CLIENT_NAME'=> $fname ,
+                          'FB_ID'=> $id,
+                          'CLIENT_SURNAME'=> $sname ,
+                           'CLIENT_EMAIL'=> $email,
+                          'CLIENT_GENDER'=> $gender,
+                          'CLIENT_PROFILE_PICTURE_NAME'=> $pic,
+                          'CLIENT_DATE_OF_BIRTH'=> $dob,
+                          'CLIENT_UA' => $agent,
+                          'CLIENT_IP' => $IP,
+                          'IS_ACTIVE' => 'Y',
+                          'FB_LOGOUT' => 'N'
+            );
 
-			$this->db->insert('u_client', $insertdata);
-			//get ID
-			$this->db->where('CLIENT_EMAIL' , $email);
-			$this->db->from('u_client');
-			$query = $this->db->get();
-			$row = $query->row_array();
-			$member_id = $row['ID'];	
-			
-			//BUILD ARRAY 4 email		
-			$data['fname'] = $fname;
-			$data['img'] = '0';
-			$data['member_id'] = $member_id;
-			$data['email'] = $email;
-			$data['sname'] = $sname;
-			$data['dob'] = $dob;
-			$data['base'] = base_url('/');
-			$data['confirm_link'] = site_url('/') . 'members/activate/'.$member_id;
-			//SEND EMAIL LINK
-			$this->load->model('email_model');	
-			$this->email_model->send_register_link($data);
-			
-			
-			//SET SESSION
-			/*$this->session->set_userdata('id', $row['ID']);
-			$this->session->set_userdata('u_name', $row['CLIENT_NAME']. ' ' .$row['CLIENT_SURNAME'] );
-			$this->session->set_userdata('fb_id', $row['FB_ID']);
-			$this->session->set_userdata('img_file', $row['CLIENT_PROFILE_PICTURE_NAME']);
-			$this->session->set_userdata('points', $this->my_na_model->count_points($row['ID']));
-			$this->session->set_flashdata('login', 'yes');*/
+            $this->db->insert('u_client', $insertdata);
+            //get ID
+            $this->db->where('CLIENT_EMAIL' , $email);
+            $this->db->from('u_client');
+            $query = $this->db->get();
+            $row = $query->row_array();
+            $member_id = $row['ID'];    
+            
+            //BUILD ARRAY 4 email       
+            $data['fname'] = $fname;
+            $data['img'] = '0';
+            $data['member_id'] = $member_id;
+            $data['email'] = $email;
+            $data['sname'] = $sname;
+            $data['dob'] = $dob;
+            $data['base'] = base_url('/');
+            $data['confirm_link'] = site_url('/') . 'members/activate/'.$member_id;
+            //SEND EMAIL LINK
+            $this->load->model('email_model');  
+            $this->email_model->send_register_link($data);
+            
+            
+            //SET SESSION
+            /*$this->session->set_userdata('id', $row['ID']);
+            $this->session->set_userdata('u_name', $row['CLIENT_NAME']. ' ' .$row['CLIENT_SURNAME'] );
+            $this->session->set_userdata('fb_id', $row['FB_ID']);
+            $this->session->set_userdata('img_file', $row['CLIENT_PROFILE_PICTURE_NAME']);
+            $this->session->set_userdata('points', $this->my_na_model->count_points($row['ID']));
+            $this->session->set_flashdata('login', 'yes');*/
 
             $dataS = array(
 
                 'id'        => $row['ID'],
                 'u_name'    => $row['CLIENT_NAME']. ' ' .$row['CLIENT_SURNAME'],
+                'u_email'   => $row['CLIENT_EMAIL'],
                 'img_file'  => $row['CLIENT_PROFILE_PICTURE_NAME'],
                 'fb_id'     => $row['FB_ID'],
                 'points'    => $this->my_na_model->count_points($row['ID']),
+                'register_date' => $row['REGISTER_DATE'],
+                'subscriptions' => array()
 
 
             );
             $this->session->set_userdata($dataS);
             $this->session->set_flashdata('login', 'yes');
-			//success redirect		
-			$data['basicmsg'] = 'Thank you, ' . $fname .' you have successfully registered.';
-			
-			$redirect = $this->input->get('redirect');
-			//redirect($redirect, 301);
+            //success redirect      
+            $data['basicmsg'] = 'Thank you, ' . $fname .' you have successfully registered.';
+            
+            $redirect = $this->input->get('redirect');
+            //redirect($redirect, 301);
 
-			
-		
-	}
-	
-	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	//UPDATE MY.NA ROW WITH FACEBOOK CREDENTIALS
-	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
-	function update_existing($client_id){
-		
-			$id = trim($this->input->post('id', TRUE));
-			$email = trim($this->input->post('email', TRUE));
-			$fname = $this->input->post('first_name', TRUE);
-			$sname = $this->input->post('last_name', TRUE);
-			$gender = $this->input->post('gender', TRUE);
-			$country = 151;
-			$city = $this->input->post('location[name]', TRUE);
-			$suburb = $this->input->post('suburb', TRUE);
-			$dob = $this->input->post('birthday', TRUE);
-			$pic = 'https://graph.facebook.com/'.$id.'/picture/';
+            
+        
+    }
+    
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //UPDATE MY.NA ROW WITH FACEBOOK CREDENTIALS
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+    function update_existing($client_id){
+        
+            $id = trim($this->input->post('id', TRUE));
+            $email = trim($this->input->post('email', TRUE));
+            $fname = $this->input->post('first_name', TRUE);
+            $sname = $this->input->post('last_name', TRUE);
+            $gender = $this->input->post('gender', TRUE);
+            $country = 151;
+            $city = $this->input->post('location[name]', TRUE);
+            $suburb = $this->input->post('suburb', TRUE);
+            $dob = $this->input->post('birthday', TRUE);
+            $pic = 'https://graph.facebook.com/'.$id.'/picture/';
 
-			$this->load->library('user_agent');
-			$agent = $this->agent->browser().' ver : '.$this->agent->version();
-			$IP = $this->input->ip_address();
+            $this->load->library('user_agent');
+            $agent = $this->agent->browser().' ver : '.$this->agent->version();
+            $IP = $this->input->ip_address();
 
-			if($gender == 'male'){
-				$gender = 'M';	
-			}else{
-				
-				$gender = 'F';	
-			}
+            if($gender == 'male'){
+                $gender = 'M';  
+            }else{
+                
+                $gender = 'F';  
+            }
 
-			$insertdata = array(
-						  'CLIENT_NAME'=> $fname ,
-						  'CLIENT_SURNAME'=> $sname ,
-						  'CLIENT_EMAIL'=> $email,
-						  'LAST_LOGIN' => date("Y-m-d H:i:s"),
-						  'CLIENT_GENDER'=> $gender,
-						  'CLIENT_PROFILE_PICTURE_NAME'=> $pic,
-						  'CLIENT_DATE_OF_BIRTH'=> $dob,
-						  'CLIENT_UA' => $agent,
-						  'CLIENT_IP' => $IP,
-						  'IS_ACTIVE' => 'Y',
-						  'FB_LOGOUT' => 'N',
-						  'FB_ID'=> $id
-			);
-			
-			$this->db->where('ID', $client_id);
-			$this->db->update('u_client', $insertdata);
+            $insertdata = array(
+                          'CLIENT_NAME'=> $fname ,
+                          'CLIENT_SURNAME'=> $sname ,
+                          'CLIENT_EMAIL'=> $email,
+                          'LAST_LOGIN' => date("Y-m-d H:i:s"),
+                          'CLIENT_GENDER'=> $gender,
+                          'CLIENT_PROFILE_PICTURE_NAME'=> $pic,
+                          'CLIENT_DATE_OF_BIRTH'=> $dob,
+                          'CLIENT_UA' => $agent,
+                          'CLIENT_IP' => $IP,
+                          'IS_ACTIVE' => 'Y',
+                          'FB_LOGOUT' => 'N',
+                          'FB_ID'=> $id
+            );
+            
+            $this->db->where('ID', $client_id);
+            $this->db->update('u_client', $insertdata);
 
 
-			//SET SESSION
-			/*$this->session->set_userdata('id', $client_id);
-			$this->session->set_userdata('u_name', $fname. ' ' .$sname );
-			$this->session->set_userdata('img_file', $pic);
-			$this->session->set_userdata('fb_id', $id);
-			$this->session->set_userdata('points', $this->my_na_model->count_points($client_id));*/
+            //SET SESSION
+            /*$this->session->set_userdata('id', $client_id);
+            $this->session->set_userdata('u_name', $fname. ' ' .$sname );
+            $this->session->set_userdata('img_file', $pic);
+            $this->session->set_userdata('fb_id', $id);
+            $this->session->set_userdata('points', $this->my_na_model->count_points($client_id));*/
 
             $dataS = array(
 
                 'id'        => $client_id,
                 'u_name'    => $fname. ' ' .$sname,
+                'u_email'   =>  $email,
                 'img_file'  => $pic,
                 'fb_id'     => $id,
                 'points'    => $this->my_na_model->count_points($client_id),
-
+                'register_date' => date('Y-m-d'),
+                'subscriptions' => array()
 
             );
             $this->session->set_userdata($dataS);
             $this->session->set_flashdata('login', 'yes');
-			$redirect = $this->input->get('redirect');
-			//redirect($redirect, 301);
-			
-			//echo $client_id. ' ' .$id;
-		
-		
-	}
+            $redirect = $this->input->get('redirect');
+            //redirect($redirect, 301);
+            
+            //echo $client_id. ' ' .$id;
+        
+        
+    }
 
-	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	//TEST IF SESSION SET OTHERWISE ROLL FACEBOOK
-	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
-	function load_fb(){
-		
-		
-		
-	}
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //TEST IF SESSION SET OTHERWISE ROLL FACEBOOK
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+    function load_fb(){
+        
+        
+        
+    }
 
 
 
@@ -418,7 +417,7 @@ class Fb_model extends CI_Model{
 
         return $page_post;
     }
-	
-	
+    
+    
 }
 ?>
