@@ -36,6 +36,7 @@
 					    <a href="#Vacancies" type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Vacancies</a>
 					    <a href="#News" type="button" class="btn btn-dark"><i class="fa fa-newspaper-o"></i> Latest News</a>
 					</div>
+
 					<div class="spacer"></div>
 
 		 			<?php //$this->load->view('inc/featured_business');?>
@@ -53,7 +54,8 @@
 					<?php $this->load->view('inc/auctions');?>					
 					<div class="spacer"></div>
 					<?php $this->load->view('inc/news');?>	
-					<div class="spacer"></div> 
+					<div class="spacer"></div>
+
 				</div>	
 			</div>
 		</div>
@@ -79,7 +81,6 @@
 	        'success': function (data) {
 
 	        	$('.cat-slide').hide();
-
 	        	$('#cat-box').html(data.cats);
 
 	        }

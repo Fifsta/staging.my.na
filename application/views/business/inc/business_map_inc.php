@@ -5,8 +5,6 @@
 //Roland Ihms
 //Get Map Details 
 
-echo $ID;
-
 $map_details = $this->business_model->get_map_details($ID);
 
 if(count($map_details) > 0){

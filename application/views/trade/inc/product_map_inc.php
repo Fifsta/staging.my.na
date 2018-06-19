@@ -18,9 +18,9 @@ if(count($map_details) > 0){
     
   }else{
     
-    $lat = $map_details['BUSINESS_MAP_LATITUDE'];
-    $long = $map_details['BUSINESS_MAP_LONGITUDE'];
-    $zoom = $map_details['BUSINESS_MAP_ZOOM_LEVEL'];
+    $lat = $map_details['PRODUCT_MAP_LATITUDE'];
+    $long = $map_details['PRODUCT_MAP_LONGITUDE'];
+    $zoom = $map_details['PRODUCT_MAP_ZOOM_LEVEL'];
     
   } 
 

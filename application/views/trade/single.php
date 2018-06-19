@@ -135,7 +135,7 @@
   .grid .details:hover{opacity:1; bottom:0px;}
   .grid .details i{display:inline-block; margin:auto; font-size:20px; color:#fff; margin-bottom:5px;}
   .grid h3{font-size:100%; color:#fff; text-align:center; padding:0}
-
+ 
 </style>
 
 </head>

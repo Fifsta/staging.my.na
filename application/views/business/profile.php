@@ -156,7 +156,7 @@ $this->load->view('inc/header');
 		          </div>
 		        </div>
 		        <!--banner-->
-
+ 
 				<!--details-->
 				<div class="details">
 					<div class="details-left">
