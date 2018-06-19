@@ -93,7 +93,7 @@
 					type: 'POST',
 					data: response,
 					cache: false,
-					url: 'https://beta.my.na/fb/login/register/?redirect='+document.URL,
+					url: 'https://beta.my.na/fb/login/register/',
 					success: function (data) {
 
 						if(data === 'TRUE'){
@@ -116,7 +116,7 @@
 					type: 'POST',
 					data: response,
 					cache: false,
-					url: 'https://beta.my.na/fb/login/?redirect='+document.URL,
+					url: 'https://beta.my.na/fb/login/',
 					success: function (data) {
 						console.log('FB Gologin response '+data);
 						if(data === 'TRUE'){
