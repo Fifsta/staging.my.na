@@ -64,6 +64,8 @@
 	
 <?php $this->load->view('inc/footer');?>	
 
+<script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
+
 <!--<script src='<?php //echo base_url('/')?>js/jquery.cycle2.min.js' type="text/javascript" language="javascript"></script>-->
 
 <script type="text/javascript">
