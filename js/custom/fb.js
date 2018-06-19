@@ -93,7 +93,7 @@
 					type: 'POST',
 					data: response,
 					cache: false,
-					url: 'https://www.my.na/fb/login/register/?redirect='+document.URL,
+					url: 'https://beta.my.na/fb/login/register/?redirect='+document.URL,
 					success: function (data) {
 
 						if(data === 'TRUE'){
@@ -116,7 +116,7 @@
 					type: 'POST',
 					data: response,
 					cache: false,
-					url: 'https://www.my.na/fb/login/?redirect='+document.URL,
+					url: 'https://beta.my.na/fb/login/?redirect='+document.URL,
 					success: function (data) {
 						console.log('FB Gologin response '+data);
 						if(data === 'TRUE'){
@@ -161,7 +161,7 @@
 		$.ajax({
 			type: 'post',
 			data: response,
-			url: 'https://www.my.na/fb/fb_share_callback/',
+			url: 'https://beta.my.na/fb/fb_share_callback/',
 			success: function(data) {
 
 				console.log(data);
