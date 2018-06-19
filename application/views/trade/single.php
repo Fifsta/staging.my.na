@@ -304,28 +304,11 @@
 <?php $this->load->view('inc/footer');?>  
 <script src="<?php echo base_url('/');?>js/print_page.js"></script>
 <script src="<?php echo base_url('/');?>js/custom/fb.js?v=2"></script>
-<script src="<?php echo base_url('/');?>js/jquery.isotope.min.js"></script>
-<script src="<?php echo base_url('/');?>js/jquery.imagesloaded.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function(){
 
 
-    jQuery(document).ready(function($){
-      
-      //ISOTOPE
-      var $grid = $('.grid').isotope({
-        itemSelector: ".grid-item", 
-      });
-      $grid.imagesLoaded().progress( function() {
-        $grid.isotope('layout');
-      });
-      /*$('.filter-button-group').on( 'click', 'button', function() {
-        var filterValue = $(this).attr('data-filter');
-        $grid.isotope({ filter: filterValue });
-      });*/
-      
-    });
 
 
     $('#watch_btn').bind('click', function(e){

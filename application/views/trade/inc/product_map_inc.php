@@ -9,20 +9,11 @@ $map_details = $this->trade_model->get_map_details($ID);
 
 if(count($map_details) > 0){
   
-  if($map_details['PRODUCT_MAP_TOGGLE'] == 'N'){
-    
-    $lat = '-22.583741';
-    $long = '17.093782';
-    $zoom = '7';
-    echo '<script type="text/javascript">$("#map_info").slideDown();</script>';
-    
-  }else{
-    
+
     $lat = $map_details['PRODUCT_MAP_LATITUDE'];
     $long = $map_details['PRODUCT_MAP_LONGITUDE'];
     $zoom = $map_details['PRODUCT_MAP_ZOOM_LEVEL'];
     
-  } 
 
 ?>
 
