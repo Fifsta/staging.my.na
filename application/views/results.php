@@ -154,13 +154,13 @@ $this->load->view('inc/header', $header);
         <!--Namibia Map-->
     
  </div>
-  
+   
 <?php $this->load->view('inc/footer');?>  
 
 <script src='<?php echo base_url('/')?>js/jquery.rating.pack.js' type="text/javascript" language="javascript"></script>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 <script src="<?php echo base_url('/');?>js/geolocationmarker-compiled.js"></script>
-<script type="text/javascript" src="<?php echo base_url('/');?>js/custom/results_page.js?v2"></script>
+
 
 
 <script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>

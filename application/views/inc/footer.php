@@ -61,7 +61,7 @@
 
 <?php //$this->output->enable_profiler(true); ?>
 
-
+<script type="text/javascript" src="<?php echo base_url('/');?>js/custom/results_page.js?v2"></script>
 <script  type="text/javascript">
 
 <?php 
