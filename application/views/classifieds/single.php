@@ -134,6 +134,7 @@ $this->load->view('inc/header', $header);
 </div>
 	
 <?php $this->load->view('inc/footer');?>	
+<script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
 
 </body>
 </html>
