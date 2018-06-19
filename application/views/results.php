@@ -211,200 +211,165 @@ $(function() {
   
 });
 
-        var gicons = [];
+var gicons = [];
 
 
-        gicons["hover"] = new google.maps.MarkerImage(
-            base_+'images/markers/v1/image.png?v1',
-            new google.maps.Size(40,52),
-            new google.maps.Point(0,0),
-            new google.maps.Point(20,42)
-        );
+gicons["hover"] = new google.maps.MarkerImage(
+    base_+'images/markers/v1/image.png?v1',
+    new google.maps.Size(40,52),
+    new google.maps.Point(0,0),
+    new google.maps.Point(20,42)
+);
 
-        gicons["dot"] = new google.maps.MarkerImage(
-            base_+'images/markers/v1/dot/image.png?v1',
-            new google.maps.Size(10,10),
-            new google.maps.Point(0,0),
-            new google.maps.Point(15,10)
-        );
+gicons["dot"] = new google.maps.MarkerImage(
+    base_+'images/markers/v1/dot/image.png?v1',
+    new google.maps.Size(10,10),
+    new google.maps.Point(0,0),
+    new google.maps.Point(15,10)
+);
 
-      var geocoder;
-      var map;
-      var markers = [];      
-
-
-
-    function initialise_map(id) {
+var geocoder;
+var map;
+var markers = [];      
 
 
-      /*var locations = (function () { 
 
-          var json = null;
-          $.ajax({
-            'async': false,
-            'type': "get",
-            'url': "<?php //echo site_url('/').'map/results/'.$d;?>",
-            'dataType': "json",
-            'success': function (data) {
-              json = data;
-            }
-          });
+function initialise_map(id) {
 
-        return json;
-      })(); */
+  locations = '';
 
-      locations = '';
-
-          $.ajax({
-            'async': false,
-            'type': "get",
-            'url': "<?php echo site_url('/').'map/results/'.$d;?>",
-            'dataType': "json",
-            'success': function (data) {
-              locations = data;
-            }
-          });
-
-
-        if(locations == '') {
-
-          initialise_map('map-top');
-
+      $.ajax({
+        'async': false,
+        'type': "get",
+        'url': "<?php echo site_url('/').'map/results/'.$d;?>",
+        'dataType': "json",
+        'success': function (data) {
+          locations = data;
         }
+      });
 
 
-        var side_bar_html = "";
+    if(locations == '') {
 
-
-        //geocoder = new google.maps.Geocoder();
-        var myLatlng = new google.maps.LatLng(-22.583741,17.093782);
-
-        var myOptions = {
-        zoom:12,
-        center: myLatlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        scrollwheel: false,
-        zoomControl: true,
-        zoomControlOptions: {
-          style: google.maps.ZoomControlStyle.LARGE,
-          position: google.maps.ControlPosition.LEFT_CENTER
-        },
-        streetViewControl:true,
-        scaleControl:false,
-        zoom: 14,
-                //styles: styles
-        }
-       map = new google.maps.Map(document.getElementById(id), myOptions);
-
-       geolocate(map);
-             // Try HTML5 geolocation
-      /* if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var pos = new google.maps.LatLng(position.coords.latitude,
-                           position.coords.longitude);
-
-          //Get location name
-          codeLatLng(position.coords.latitude,position.coords.longitude);
-
-        }, function() {
-          handleNoGeolocation(true);
-        });
-        } else {
-        // Browser doesn't support Geolocation
-
-        }*/
-       setMarkers(map, locations);
-       //document.getElementById("side_bar").innerHTML = side_bar_html;
+      initialise_map('map-top');
 
     }
 
 
-     function setMarkers(map, locations) {
+    var side_bar_html = "";
 
-          var infowindow = new google.maps.InfoWindow({
-               maxWidth: 340
-          });
+    var myLatlng = new google.maps.LatLng(-22.583741,17.093782);
 
-         var bounds = new google.maps.LatLngBounds();
+    var myOptions = {
+    zoom:12,
+    center: myLatlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    scrollwheel: false,
+    zoomControl: true,
+    zoomControlOptions: {
+      style: google.maps.ZoomControlStyle.LARGE,
+      position: google.maps.ControlPosition.LEFT_CENTER
+    },
+    streetViewControl:true,
+    scaleControl:false,
+    zoom: 14,
+            //styles: styles
+    }
+   map = new google.maps.Map(document.getElementById(id), myOptions);
 
-         //LOOP EACH JSON RESULT
-        for (var i = 0; i < locations.length; i++) {
+   geolocate(map);
 
-                   //identify marker
-                    var bus_id = locations[i]['ID'];
-                    var dataM = identify_marker(locations[i]['STAR_RATING']);
-                    var myLatLng = new google.maps.LatLng(locations[i]['LAT'],locations[i]['LON']);
-                    var marker = new google.maps.Marker({
-                        position: myLatLng,
-                        map: map,
-                        html: parseInt(locations[i]['ID']),
-                        clickable:  true,
-                        shadow: dataM[1],
-                        icon: dataM[0],
-                        shape: dataM[2],
-                        title: locations[i]['BUSINESS_NAME'],
-                        zIndex: i,
-                        animation: google.maps.Animation.DROP,
-                        id: parseInt(locations[i]['ID'])
-                    });
-                    //var temp[bus_id] = marker;
-                    markers[bus_id] = marker;
-                    //markers.push(temp);
-                    marker.setMap(map);
+   setMarkers(map, locations);
 
-                    bounds.extend(myLatLng);
+}
 
 
-                    google.maps.event.addListener(marker, 'click', function () {
-                          infowindow.setContent('<img src="'+base_+'images/load.gif"/>');
-                          infowindow.open(map, this);
-                          //console.log(this.html);
-                              $.ajax({
-                                    url: base+'map/show_map_info/'+ this.html+'/small/',
-                                    cache:false,
-                                    success: function (data) {
-                                        infowindow.setContent(data);
+   function setMarkers(map, locations) {
 
-                                    }
-                                });
-                    });
+        var infowindow = new google.maps.InfoWindow({
+             maxWidth: 340
+        });
 
-                  $('#business_result_'+marker.id).attr({"onmouseover":"markers["+marker.id+"].setIcon( gicons.hover)","onmouseout":"markers["+marker.id+"].setIcon(gicons.dot)"});
+       var bounds = new google.maps.LatLngBounds();
+
+       //LOOP EACH JSON RESULT
+      for (var i = 0; i < locations.length; i++) {
+
+                 //identify marker
+                  var bus_id = locations[i]['ID'];
+                  var dataM = identify_marker(locations[i]['STAR_RATING']);
+                  var myLatLng = new google.maps.LatLng(locations[i]['LAT'],locations[i]['LON']);
+                  var marker = new google.maps.Marker({
+                      position: myLatLng,
+                      map: map,
+                      html: parseInt(locations[i]['ID']),
+                      clickable:  true,
+                      shadow: dataM[1],
+                      icon: dataM[0],
+                      shape: dataM[2],
+                      title: locations[i]['BUSINESS_NAME'],
+                      zIndex: i,
+                      animation: google.maps.Animation.DROP,
+                      id: parseInt(locations[i]['ID'])
+                  });
+                  //var temp[bus_id] = marker;
+                  markers[bus_id] = marker;
+                  //markers.push(temp);
+                  marker.setMap(map);
+
+                  bounds.extend(myLatLng);
 
 
-          }//END loop
+                  google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.setContent('<img src="'+base_+'images/load.gif"/>');
+                        infowindow.open(map, this);
+                        //console.log(this.html);
+                            $.ajax({
+                                  url: base+'map/show_map_info/'+ this.html+'/small/',
+                                  cache:false,
+                                  success: function (data) {
+                                      infowindow.setContent(data);
+
+                                  }
+                              });
+                  });
+
+                $('#business_result_'+marker.id).attr({"onmouseover":"markers["+marker.id+"].setIcon( gicons.hover)","onmouseout":"markers["+marker.id+"].setIcon(gicons.dot)"});
 
 
-          map.fitBounds(bounds);
-           var clusterStyles = [
-               {
-                   textColor: 'white',
-                   url: base_+'images/markers/v1/cluster1.png',
-                   height: 50,
-                   width: 50
-               },
-               {
-                   textColor: 'white',
-                   url: base_+'images/markers/v1/cluster2.png',
-                   height: 50,
-                   width: 50
-               },
-               {
-                   textColor: 'white',
-                   url: base_+'images/markers/v1/cluster3.png',
-                   height: 60,
-                   width: 60
-               }
-           ];
+        }//END loop
 
-           var mcOptions = {
-               gridSize: 80,
-               styles: clusterStyles,
-               maxZoom: 15
-           };
-           //mc = new MarkerClusterer(map, markers, mcOptions);
-          // mc = new MarkerClusterer(map);
-  }
+
+        map.fitBounds(bounds);
+         var clusterStyles = [
+             {
+                 textColor: 'white',
+                 url: base_+'images/markers/v1/cluster1.png',
+                 height: 50,
+                 width: 50
+             },
+             {
+                 textColor: 'white',
+                 url: base_+'images/markers/v1/cluster2.png',
+                 height: 50,
+                 width: 50
+             },
+             {
+                 textColor: 'white',
+                 url: base_+'images/markers/v1/cluster3.png',
+                 height: 60,
+                 width: 60
+             }
+         ];
+
+         var mcOptions = {
+             gridSize: 80,
+             styles: clusterStyles,
+             maxZoom: 15
+         };
+         //mc = new MarkerClusterer(map, markers, mcOptions);
+        // mc = new MarkerClusterer(map);
+}
 
 
     function identify_marker(str){
