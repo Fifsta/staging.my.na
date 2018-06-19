@@ -162,9 +162,6 @@ $this->load->view('inc/header', $header);
 <script src="<?php echo base_url('/');?>js/geolocationmarker-compiled.js"></script>
 
 
-
-<script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
-
 <script type="text/javascript">
 
 var base = '<?php echo site_url('/');?>';
@@ -172,7 +169,6 @@ var base_ = '<?php echo base_url('/');?>';
 
 
   $(document).on('click', '.cat-slide', function(e) {
-
 
       $.ajax({
           'async': false,
