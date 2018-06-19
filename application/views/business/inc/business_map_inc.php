@@ -5,6 +5,8 @@
 //Roland Ihms
 //Get Map Details 
 
+echo $ID;
+
 $map_details = $this->business_model->get_map_details($ID);
 
 if(count($map_details) > 0){
@@ -12,7 +14,7 @@ if(count($map_details) > 0){
 	if($map_details['BUSINESS_MAP_LATITUDE'] == ''){
 		
 		$lat = '-22.583741';
-		$long = '17.093782';
+		$long = '17.093782'; 
 		$zoom = '7';
 		echo '<script type="text/javascript">$("#map_info").slideDown();</script>';
 		
