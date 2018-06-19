@@ -98,7 +98,7 @@
 
 						if(data === 'TRUE'){
 							
-							window.location.reload();
+							//window.location.reload();
 							
 						}   	
 					}
