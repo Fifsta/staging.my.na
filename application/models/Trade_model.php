@@ -67,7 +67,7 @@ class Trade_model extends CI_Model
 		$data['PRODUCT_MAP_LATITUDE'] = $lat;
 		$data['PRODUCT_MAP_LONGITUDE'] = $long;
 		$data['PRODUCT_MAP_TOGGLE'] = $toggle;
-		$data['PRODUCT_MAP_ZOOM_LEVEL'] = $toggle;
+		$data['PRODUCT_MAP_ZOOM_LEVEL'] = 13;
 
 		return $data;
 
