@@ -160,7 +160,7 @@ $this->load->view('inc/header', $header);
 <script src='<?php echo base_url('/')?>js/jquery.rating.pack.js' type="text/javascript" language="javascript"></script>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 <script src="<?php echo base_url('/');?>js/geolocationmarker-compiled.js"></script>
-<script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
+
 
 <script type="text/javascript">
 
@@ -372,51 +372,51 @@ function initialise_map(id) {
 }
 
 
-    function identify_marker(str){
+function identify_marker(str){
 
-        var data = new Array( );
-        if(str == null){
+    var data = new Array( );
+    if(str == null){
 
-            data[0] = gicons["dot"];
+        data[0] = gicons["dot"];
 
-            data[1] = new google.maps.MarkerImage(
-                base_+'images/markers/v1/dot/shadow.png',
-                new google.maps.Size(15,10),
-                new google.maps.Point(0,20),
-                new google.maps.Point(5,0)
-            );
-            data[2] = {
-                coord: [7,0,8,1,9,2,9,3,9,4,9,5,9,6,9,7,8,8,7,9,2,9,1,8,0,7,0,6,0,5,0,4,0,3,0,2,1,1,2,0],
-                type: 'poly'
-            };
+        data[1] = new google.maps.MarkerImage(
+            base_+'images/markers/v1/dot/shadow.png',
+            new google.maps.Size(15,10),
+            new google.maps.Point(0,20),
+            new google.maps.Point(5,0)
+        );
+        data[2] = {
+            coord: [7,0,8,1,9,2,9,3,9,4,9,5,9,6,9,7,8,8,7,9,2,9,1,8,0,7,0,6,0,5,0,4,0,3,0,2,1,1,2,0],
+            type: 'poly'
+        };
 
 
-        }else{
+    }else{
 
-            data[0] = gicons["dot"];
+        data[0] = gicons["dot"];
 
 /*            data[1] = new google.maps.MarkerImage(
-                base_+'img/markers/v1/shadow.png',
-                new google.maps.Size(66,52),
-                new google.maps.Point(0,20),
-                new google.maps.Point(20,52)
-            );*/
-            data[1] = new google.maps.MarkerImage(
-                base_+'images/markers/v1/dot/shadow.png',
-                new google.maps.Size(15,10),
-                new google.maps.Point(0,20),
-                new google.maps.Point(5,0)
-            );
-            data[2] = {
-                coord: [17,0,19,1,20,2,21,3,22,4,23,5,24,6,24,7,25,8,25,9,25,10,25,11,25,12,25,13,25,14,25,15,24,16,24,17,23,18,23,19,22,20,22,21,21,22,21,23,20,24,19,25,19,26,18,27,18,28,17,29,17,30,16,31,15,32,15,33,14,34,14,35,11,35,11,34,10,33,10,32,9,31,8,30,8,29,7,28,7,27,6,26,6,25,5,24,4,23,4,22,3,21,3,20,2,19,2,18,1,17,1,16,0,15,0,14,0,13,0,12,0,11,0,10,0,9,0,8,1,7,2,6,2,5,3,4,4,3,5,2,6,1,8,0],
-                type: 'poly'
-            };
+            base_+'img/markers/v1/shadow.png',
+            new google.maps.Size(66,52),
+            new google.maps.Point(0,20),
+            new google.maps.Point(20,52)
+        );*/
+        data[1] = new google.maps.MarkerImage(
+            base_+'images/markers/v1/dot/shadow.png',
+            new google.maps.Size(15,10),
+            new google.maps.Point(0,20),
+            new google.maps.Point(5,0)
+        );
+        data[2] = {
+            coord: [17,0,19,1,20,2,21,3,22,4,23,5,24,6,24,7,25,8,25,9,25,10,25,11,25,12,25,13,25,14,25,15,24,16,24,17,23,18,23,19,22,20,22,21,21,22,21,23,20,24,19,25,19,26,18,27,18,28,17,29,17,30,16,31,15,32,15,33,14,34,14,35,11,35,11,34,10,33,10,32,9,31,8,30,8,29,7,28,7,27,6,26,6,25,5,24,4,23,4,22,3,21,3,20,2,19,2,18,1,17,1,16,0,15,0,14,0,13,0,12,0,11,0,10,0,9,0,8,1,7,2,6,2,5,3,4,4,3,5,2,6,1,8,0],
+            type: 'poly'
+        };
 
-
-        }
-        return data;
 
     }
+    return data;
+
+}
 
 
   //REVERSE GEOCODE
@@ -440,26 +440,27 @@ function initialise_map(id) {
       }
       });
   }
+
+
   // Try HTML5 geolocation
   function geolocate(map){
 
-    GeoMarker = new GeolocationMarker();
-        GeoMarker.setCircleOptions({fillColor: '#808080'});
+      GeoMarker = new GeolocationMarker();
+      GeoMarker.setCircleOptions({fillColor: '#808080'});
 
-        google.maps.event.addListenerOnce(GeoMarker, 'position_changed', function() {
-          map.setCenter(this.getPosition());
-      //console.log(this.getPosition()+'ddd')
-          //map.fitBounds(this.getBounds());
-        });
+      google.maps.event.addListenerOnce(GeoMarker, 'position_changed', function() {
+        map.setCenter(this.getPosition());
+      });
 
-        google.maps.event.addListener(GeoMarker, 'geolocation_error', function(e) {
+      google.maps.event.addListener(GeoMarker, 'geolocation_error', function(e) {
 
-      $("#geo_msg").html('There was an error obtaining your position. Message: ' + e.message).fadeIn().delay(5000).fadeOut();
-        });
+        $("#geo_msg").html('There was an error obtaining your position. Message: ' + e.message).fadeIn().delay(5000).fadeOut(); 
 
-        GeoMarker.setMap(map);
+      });
 
+      GeoMarker.setMap(map);
   }
+
 
   //Handle geolocate
   function handleNoGeolocation(errorFlag) {
@@ -473,34 +474,34 @@ function initialise_map(id) {
   }
 
 
-    //loadresults
-    function over_marker(id) {
+  //loadresults
+  function over_marker(id) {
 
-        markers[id].setIcon({
-            url: base_+'img/markers/v1/image.png',
-            point: 0,
-            coord: [17,0,19,1,20,2,21,3,22,4,23,5,24,6,24,7,25,8,25,9,25,10,25,11,25,12,25,13,25,14,25,15,24,16,24,17,23,18,23,19,22,20,22,21,21,22,21,23,20,24,19,25,19,26,18,27,18,28,17,29,17,30,16,31,15,32,15,33,14,34,14,35,11,35,11,34,10,33,10,32,9,31,8,30,8,29,7,28,7,27,6,26,6,25,5,24,4,23,4,22,3,21,3,20,2,19,2,18,1,17,1,16,0,15,0,14,0,13,0,12,0,11,0,10,0,9,0,8,1,7,2,6,2,5,3,4,4,3,5,2,6,1,8,0],
-            type: 'poly',
-            size: {"width": 40, "height":52},
-            anchor:{"x": 20, "y":42}
-        });
+      markers[id].setIcon({
+          url: base_+'img/markers/v1/image.png',
+          point: 0,
+          coord: [17,0,19,1,20,2,21,3,22,4,23,5,24,6,24,7,25,8,25,9,25,10,25,11,25,12,25,13,25,14,25,15,24,16,24,17,23,18,23,19,22,20,22,21,21,22,21,23,20,24,19,25,19,26,18,27,18,28,17,29,17,30,16,31,15,32,15,33,14,34,14,35,11,35,11,34,10,33,10,32,9,31,8,30,8,29,7,28,7,27,6,26,6,25,5,24,4,23,4,22,3,21,3,20,2,19,2,18,1,17,1,16,0,15,0,14,0,13,0,12,0,11,0,10,0,9,0,8,1,7,2,6,2,5,3,4,4,3,5,2,6,1,8,0],
+          type: 'poly',
+          size: {"width": 40, "height":52},
+          anchor:{"x": 20, "y":42}
+      });
 
-    }
+  }
 
-    //loadresults
-    function out_marker(id) {
+  //loadresults
+  function out_marker(id) {
 
-        markers[id].setIcon({
-            url: base_+'img/markers/v1/dot/image.png',
-            point: 0,
-            coord: [7,0,8,1,9,2,9,3,9,4,9,5,9,6,9,7,8,8,7,9,2,9,1,8,0,7,0,6,0,5,0,4,0,3,0,2,1,1,2,0],
-            type: 'poly',
-            size: {"width": 10, "height":10},
-            anchor:{"x": 15, "y":10}
-        });
+      markers[id].setIcon({
+          url: base_+'img/markers/v1/dot/image.png',
+          point: 0,
+          coord: [7,0,8,1,9,2,9,3,9,4,9,5,9,6,9,7,8,8,7,9,2,9,1,8,0,7,0,6,0,5,0,4,0,3,0,2,1,1,2,0],
+          type: 'poly',
+          size: {"width": 10, "height":10},
+          anchor:{"x": 15, "y":10}
+      });
 
 
-    }
+  }
 
   //loadresults
   function load_results(type,cat) {
@@ -555,7 +556,7 @@ function initialise_map(id) {
   }
 
 
-    var styles = [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#fcfcfc"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#fcfcfc"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#dddddd"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#dddddd"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#eeeeee"}]},{"featureType":"water","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#dddddd"}]}];
+  var styles = [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#fcfcfc"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#fcfcfc"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#dddddd"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#dddddd"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#eeeeee"}]},{"featureType":"water","elementType":"geometry","stylers":[{"visibility":"simplified"},{"color":"#dddddd"}]}];
 
 </script>
 
