@@ -18,6 +18,27 @@
 			
                 <form class="input-group input-group-lg" id="search-main" name="search-main" method="post" action="<?php echo site_url('/'); ?>my_na/search">
 
+                  <!--<div class="input-group-prepend">
+                    <button class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All</button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">All</a>
+                      <a class="dropdown-item" href="#">Cars, Bikes & Boats</a>
+                      <a class="dropdown-item" href="#">Properties</a>
+                      <a class="dropdown-item" href="#">Auctions</a>
+                      <a class="dropdown-item" href="#">Classifieds</a>
+                    </div>
+                  </div>-->
+
+                  <div class="input-group-prepend">
+                    <select class="form-control" id="search_type" style="border-radius: 4px 0px 0px 4px; height:100%; background: #efefef; width:50px">
+                        <option>All</option>
+                        <option>Cars, Bikes & Boats</option>
+                    </select>
+                    <select class="form-control" id="select_tmp" style="border-radius: 4px 0px 0px 4px; height:100%; background: #efefef; width:auto; display:none">
+                        <option id="select_tmp_option"></option>
+                    </select>                    
+                  </div>                                  
+
                     <input type="text" class="form-control typeahead" name="srch_bar" type="text" value="<?php if (isset($str)) { echo htmlspecialchars($str); } else { echo ''; } ?>" autocomplete="off" placeholder="Search Anything Namibian">
 
                     <input type="hidden" value="<?php if (isset($type)) { echo $type; echo 'none'; } ?>" name="type">
@@ -28,8 +49,6 @@
 					<!--<div class="near input-group-addon">Near:</div>
 					<input type="text" class="near form-control" id="search-main2" placeholder="Windhoek">-->
 					<span class="input-group-btn"><button type="submit" class="btn btn-primary" data-icon="fa-search" role="button"></button></span>
-    			    
-
                     
                 </form>
 				
@@ -53,6 +72,13 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
+
+
+         $('#search_type').change(function(){
+            $("#select_tmp").html($('#search_type option:selected').text());
+            $(this).width($("#select_tmp_option").width());  
+         });
+
         var wait = 0;
         /*$.getScript('
         <?php echo base_url('/'). 'js/jquery.placeholder.min.js'; ?>', function(data) {
