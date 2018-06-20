@@ -22,6 +22,8 @@ class News_model extends CI_Model
         $width = 360;
         $height = 230;
 
+        $link = '';
+
 		$output = file_get_contents(NA_URL.'app/category_content/');
 		
 		if($output){
@@ -70,6 +72,7 @@ class News_model extends CI_Model
 
                 $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
+                $o .= $row->pub_id;
 
 				$o .= '<figure>
                             <div class="product_ribbon_sml"><small style="color:#ff9900">'.$row->publication.' &nbsp;</small>Listed: '.$this->my_model->time_passed(strtotime($row->datetime)).'<span></span></div>
