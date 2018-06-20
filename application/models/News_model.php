@@ -51,6 +51,9 @@ class News_model extends CI_Model
                     case 3:
                     $link = 'https://www.az.com.na/nachrichten/'.$slug;
                     break;
+                    case 4:
+                    $link = 'https://www.republikein.com.na/inserts/edition/88/';
+                    break;                    
                     case 5:
                     $link = 'https://zone.my.na/news/'.$slug;
                     break;  
@@ -72,7 +75,7 @@ class News_model extends CI_Model
 
                 $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-                $o .= $row->pub_id;
+                $o .= $row->post_slug;
 
 				$o .= '<figure>
                             <div class="product_ribbon_sml"><small style="color:#ff9900">'.$row->publication.' &nbsp;</small>Listed: '.$this->my_model->time_passed(strtotime($row->datetime)).'<span></span></div>
