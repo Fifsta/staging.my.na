@@ -8,6 +8,7 @@
 <header id="header" class="grad-orange">
 	<div class="container-fluid">
 		<div class="row">
+            <div style="width:auto;display:none" id="tstbox"></div>
 			<div class="col-sm-2">
 				<div class="slogo">
 					<a href="#"><img src="images/logo-main.png"></a>
@@ -28,15 +29,15 @@
                       <a class="dropdown-item" href="#">Classifieds</a>
                     </div>
                   </div>-->
-
+                  
                   <div class="input-group-prepend">
-                    <select class="form-control" id="search_type" style="border-radius: 4px 0px 0px 4px; height:100%; background: #efefef; width:50px">
+                    <select class="form-control" id="search_type" style="border-radius: 4px 0px 0px 4px; height:100%; background: #efefef; width:60px; font-size:12px">
                         <option>All</option>
                         <option>Cars, Bikes & Boats</option>
-                    </select>
-                    <select class="form-control" id="select_tmp" style="border-radius: 4px 0px 0px 4px; height:100%; background: #efefef; width:auto; display:none">
-                        <option id="select_tmp_option"></option>
-                    </select>                    
+                        <option>Properties</option>
+                        <option>Auctions</option>
+                        <option>Classifieds</option>                        
+                    </select>  
                   </div>                                  
 
                     <input type="text" class="form-control typeahead" name="srch_bar" type="text" value="<?php if (isset($str)) { echo htmlspecialchars($str); } else { echo ''; } ?>" autocomplete="off" placeholder="Search Anything Namibian">
@@ -75,9 +76,32 @@
 
 
          $('#search_type').change(function(){
-            $("#select_tmp").html($('#search_type option:selected').text());
-            $(this).width($("#select_tmp_option").width());  
+
+
+            var ft = $("#search_type option:selected").text();
+
+            $('#tstbox').html(ft);
+
+            var lg = $('#tstbox').width();
+
+            //alert(lg);
+
+            //var lg = $("#search_type option:selected").text().length;
+
+
+           //var lg = lg*10;
+
+          //if(lg <= 30) { lg = 60; }
+
+            $('#search_type').css({'width': lg+40});
+            //$('#search_type').width(lg);
          });
+
+         $.fn.textWidth = function(text, font) {
+            if (!$.fn.textWidth.fakeEl) $.fn.textWidth.fakeEl = $('<span>').hide().appendTo(document.body);
+            $.fn.textWidth.fakeEl.text(text || this.val() || this.text()).css('font', font || this.css('font'));
+            return $.fn.textWidth.fakeEl.width();
+        };        
 
         var wait = 0;
         /*$.getScript('
