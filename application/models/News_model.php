@@ -75,7 +75,7 @@ class News_model extends CI_Model
 
                 $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-                $o .= $row->post_slug;
+                //$o .= $row->post_slug;
 
 				$o .= '<figure>
                             <div class="product_ribbon_sml"><small style="color:#ff9900">'.$row->publication.' &nbsp;</small>Listed: '.$this->my_model->time_passed(strtotime($row->datetime)).'<span></span></div>
