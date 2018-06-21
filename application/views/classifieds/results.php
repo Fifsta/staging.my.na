@@ -49,20 +49,21 @@ $this->load->view('inc/header', $header);
 
         <section id="classifieds">
 
-        <div class="heading">
-        <h2 data-icon="fa-newspaper-o">Find Classified <strong>in Namibia</strong></h2>
-        <p>Browse all classified listings here</p>
+	        <div class="heading">
+	        <h2 data-icon="fa-newspaper-o">Find Classified <strong>in Namibia</strong></h2>
+	        <p>Browse all classified listings here</p>
 
-        </div>
+	        </div>
 
-         <?php
-	        //++++++++++++++++++++++
-	        //LOAD CAREER SEARCH BOX
-	        //++++++++++++++++++++++
-	        $this->load->view('classifieds/inc/filter');
-         ?>
+	         <?php
+		        //++++++++++++++++++++++
+		        //LOAD CAREER SEARCH BOX
+		        //++++++++++++++++++++++
+		        $this->load->view('classifieds/inc/filter');
+	         ?>
                      
         </section>
+        
         <section id="products" style="margin-top:10px">
           
          <div class="col-md-12">

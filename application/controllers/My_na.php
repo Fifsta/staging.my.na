@@ -16,6 +16,50 @@ class My_na extends CI_Controller {
 	}
 	
 
+	//+++++++++++++++++++++++++++
+	//GET FEATURED BUSINESS JSON
+	//++++++++++++++++++++++++++
+	public function get_feature_business($featured = 'N',$cat1 = false,$cat2 = false, $limit = 10, $offset = 0) {
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('my_na_business_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit))
+		{
+
+			$output = $this->my_na_model->get_feature_businesses($featured,$cat1,$cat2, $limit, $offset);
+
+			$this->cache->save('my_na_business_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit, $output, 600);
+		}
+
+		echo json_encode($output);
+
+	}
+
+
+	//+++++++++++++++++++++++++++
+	//GET FEATURED PRODUCTS JSON
+	//++++++++++++++++++++++++++
+	public function get_feature_products($featured = 'Y',$cat1 = false,$cat2 = false, $limit = 10, $offset = 0)
+	{
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('my_na_products_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit))
+		{
+
+			$output = $this->my_na_model->get_feature_products($featured,$cat1,$cat2, $limit, $offset);
+
+			$this->cache->save('my_na_products_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit, $output, 600);
+		}
+
+		echo json_encode($output);
+
+
+	}
+
+
+
+
 	public function gdpr_accept() {
 
 		$data = array(
@@ -652,7 +696,7 @@ class My_na extends CI_Controller {
 			$this->my_na_model->show_na_count();
 			
 			
-	}
+	} 
 	//++++++++++++++++++++++++++++++
 	//Instant Search 
 	//++++++++++++++++++++++++++++++
@@ -718,7 +762,7 @@ class My_na extends CI_Controller {
  		$q = $this->input->post('srch_bar',TRUE);
 
 		$data['title'] = rawurldecode($q);
-		$data['key'] = $data['title'];
+		$data['key'] = $data['title']; 
 		$data['str'] = $q;
 		$this->load->view('results_index', $data);
 

@@ -7,7 +7,33 @@
 			<li><a href="#" data-icon="fa-edit">Feature my Business</a></li>
 		</ul>
 	</div>
+
+    <div id="owl-bus">
+
     
-	<iframe src="<?php echo HUB_URL;?>main/business/" allowtransparency="1" forder="0" style="width:100%; min-height: 260px; overlow:hidden"></iframe>
+    </div>
                      
 </section>
+
+<script>
+
+	$('document').ready(function(){
+
+		load_my_na_business();
+
+	});
+
+
+	function load_my_na_business(){
+
+		var link = '<?php echo site_url('/');?>my_na/get_feature_business/Y/false/false/20/0/';
+		$.getJSON( link, function( data ) {
+
+			$('#owl-bus').html(data);
+			initialise_owl();
+
+		});
+
+	}
+
+</script>

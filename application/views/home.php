@@ -39,21 +39,21 @@
 
 					<div class="spacer"></div>
 
-		 			<?php //$this->load->view('inc/featured_business');?>
-					<!--<div class="spacer"></div>-->
-					<?php //$this->load->view('inc/featured_listings');?>
-					<!--<div class="spacer"></div>-->
-					<?php $this->load->view('inc/categories');?>
+		 			<?php $this->load->view('inc/featured_business'); ?>
 					<div class="spacer"></div>
-					<?php $this->load->view('inc/classifieds');?>
+					<?php $this->load->view('inc/featured_listings'); ?>
 					<div class="spacer"></div>
-					<?php $prop['type'] = '3408'; $this->load->view('inc/products', $prop);?>
+					<?php $this->load->view('inc/categories'); ?>
 					<div class="spacer"></div>
-					<?php $cars['type'] = '348'; $this->load->view('inc/products', $cars);?>
+					<?php $this->load->view('inc/classifieds'); ?>
 					<div class="spacer"></div>
-					<?php $this->load->view('inc/auctions');?>					
+					<?php $prop['type'] = '3408'; $this->load->view('inc/products', $prop); ?>
 					<div class="spacer"></div>
-					<?php $this->load->view('inc/news');?>	
+					<?php $cars['type'] = '348'; $this->load->view('inc/products', $cars); ?>
+					<div class="spacer"></div>
+					<?php $this->load->view('inc/auctions'); ?>					
+					<div class="spacer"></div>
+					<?php $this->load->view('inc/news'); ?>	
 					<div class="spacer"></div>
 
 				</div>	

@@ -389,7 +389,7 @@ $this->load->view('inc/header');
 			success: function (data) {
 
 				 $('#similar_div').html(data);
-
+ 
 				 initialise_owl();
 
 			}

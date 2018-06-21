@@ -30,7 +30,8 @@ class Business extends CI_Controller {
 			  
 		 }
 	}
-	
+
+
 	//+++++++++++++++++++++++++++
 	//BUSINESS DETAILS EDIT
 	//++++++++++++++++++++++++++

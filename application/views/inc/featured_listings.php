@@ -6,6 +6,33 @@
 
 	</div>
 
-	<iframe src="<?php echo HUB_URL;?>main/products/" allowtransparency="1" frameborder="0" style="width:100%; min-height: 290px; overlow:hidden"></iframe>
+    <div id="owl-prod">
+
+    
+    </div>
                      
 </section>
+
+<script>
+
+
+	$('document').ready(function(){
+
+		load_my_na_products();
+
+	});
+
+
+	function load_my_na_products(){
+
+		var link = '<?php echo site_url('/');?>my_na/get_feature_products/Y/false/false/20/0/';
+		$.getJSON( link, function( data ) {
+
+			$('#owl-prod').html(data);
+			initialise_owl();
+
+		});
+
+	}
+
+</script>

@@ -19,30 +19,19 @@
 			
                 <form class="input-group input-group-lg" id="search-main" name="search-main" method="post" action="<?php echo site_url('/'); ?>my_na/search">
 
-                  <!--<div class="input-group-prepend">
-                    <button class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All</button>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#">All</a>
-                      <a class="dropdown-item" href="#">Cars, Bikes & Boats</a>
-                      <a class="dropdown-item" href="#">Properties</a>
-                      <a class="dropdown-item" href="#">Auctions</a>
-                      <a class="dropdown-item" href="#">Classifieds</a>
-                    </div>
-                  </div>-->
-                  
                   <div class="input-group-prepend">
                     <select class="form-control" id="search_type" style="border-radius: 4px 0px 0px 4px; height:100%; background: #efefef; width:60px; font-size:12px">
-                        <option>All</option>
-                        <option>Cars, Bikes & Boats</option>
-                        <option>Properties</option>
-                        <option>Auctions</option>
-                        <option>Classifieds</option>                        
+                        <option value="all">All</option>
+                        <option value="product_v">Cars, Bikes & Boats</option>
+                        <option value="product_p">Properties</option>
+                        <option value="product_a">Auctions</option>
+                        <option value="classified">Classifieds</option>                        
                     </select>  
                   </div>                                  
 
                     <input type="text" class="form-control typeahead" name="srch_bar" type="text" value="<?php if (isset($str)) { echo htmlspecialchars($str); } else { echo ''; } ?>" autocomplete="off" placeholder="Search Anything Namibian">
 
-                    <input type="hidden" value="<?php if (isset($type)) { echo $type; echo 'none'; } ?>" name="type">
+                    <input type="hidden" id="search_type_val" value="<?php if (isset($type)) { echo $type; echo 'none'; } ?>" name="type">
                     <input type="hidden" value="<?php if (isset($location)) { echo $location; } else { echo 'national'; } ?>" name="location">
                     <input type="hidden" value="<?php if (isset($main_cat_id)) { echo $main_cat_id; } else { echo '0'; } ?>" id="main_cat_id" name="main_cat_id">
                     <input type="hidden" value="<?php if (isset($sub_cat_id)) { echo $sub_cat_id; } else { echo '0'; } ?>" id="sub_cat_id" name="sub_cat_id">
@@ -77,38 +66,21 @@
 
          $('#search_type').change(function(){
 
+            var val = $("#search_type option:selected").val();
+
+            $('#search_type_val').val(val);
 
             var ft = $("#search_type option:selected").text();
-
             $('#tstbox').html(ft);
-
             var lg = $('#tstbox').width();
+            $('#search_type').css({'width': lg+40});       
 
-            //alert(lg);
+            myna.clear();
 
-            //var lg = $("#search_type option:selected").text().length;
-
-
-           //var lg = lg*10;
-
-          //if(lg <= 30) { lg = 60; }
-
-            $('#search_type').css({'width': lg+40});
-            //$('#search_type').width(lg);
          });
-
-         $.fn.textWidth = function(text, font) {
-            if (!$.fn.textWidth.fakeEl) $.fn.textWidth.fakeEl = $('<span>').hide().appendTo(document.body);
-            $.fn.textWidth.fakeEl.text(text || this.val() || this.text()).css('font', font || this.css('font'));
-            return $.fn.textWidth.fakeEl.width();
-        };        
+    
 
         var wait = 0;
-        /*$.getScript('
-        <?php echo base_url('/'). 'js/jquery.placeholder.min.js'; ?>', function(data) {
-         $('input').placeholder();
-
-         });*/
 
         $('#btn_find').bind('click', function (e) {
             e.preventDefault();
@@ -127,6 +99,7 @@
 
     function go_search(main_cat_id, sub_cat_id) {
 
+
         var myna = new Bloodhound({
             //datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
             datumTokenizer: function (d) {
@@ -135,7 +108,7 @@
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             prefetch: '<?php echo site_url('/');?>my_na/typehead/location/',
             remote: {
-                url: '<?php echo site_url('/');?>my_na/ajax_search_json/' + main_cat_id + '/' + sub_cat_id + '/%QUERY',
+                url: '<?php echo site_url('/');?>my_na/ajax_search_json/' + $("#search_type_val").val() + '/' + main_cat_id + '/' + sub_cat_id + '/%QUERY',
                 wildcard: '%QUERY'
             },
             limit: 0
