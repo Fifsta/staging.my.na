@@ -127,7 +127,6 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('/');?>css/jquery.countdown.css" />
 <link href='<?php echo base_url('/');?>css/jquery.rating.css' type="text/css" rel="stylesheet" />
-<link href='<?php echo base_url('/');?>isotope-docs/css/isotope-docs.css' type="text/css" rel="stylesheet" />
 
 <style>
   .grid .picture{ background:#000; margin:15px 0}

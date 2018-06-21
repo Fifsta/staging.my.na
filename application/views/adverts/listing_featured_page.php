@@ -67,7 +67,7 @@ $this->load->view('inc/header', $header);
           <div class="heading" style="margin-bottom:15px">
             <h2 data-icon="fa-briefcase"><?php echo $title; ?></h2>
             <ul class="options">    
-              <li><a href="#list-form" data-icon="fa-edit text-dark">Feature listing now</a></li>
+              <li><a href="#Form" data-icon="fa-edit text-dark">Feature listing now</a></li>
             </ul>
           </div>
 
@@ -79,6 +79,7 @@ $this->load->view('inc/header', $header);
               </div>
               <div class="col-md-3">
                 <div class="card">
+                  <img class="card-img-top" src="<?php echo base_url('/');?>images/adverts/ad1/2.png" alt="Card image cap" style="padding:10px">
                   <div class="card-body">
                     <p><strong>Reach More Than 1 Million Unique Visitors</strong> on all our platforms. Your product gets the normal classifieds exposure in our national publications and newspapers.</p>
                     <p>Manage your product listing online, view stats on views enquiries and hits. Fast and effective email and SMS alerts are included at no extra cost.</p>
@@ -97,7 +98,7 @@ $this->load->view('inc/header', $header);
 
         <div class="spacer"></div>
 
-        <section id="list-form">
+        <section id="Form">
 
           <div class="heading" style="margin-bottom:15px">
             <h2 data-icon="fa-briefcase">Feature Your Product Online</h2>
@@ -119,6 +120,7 @@ $this->load->view('inc/header', $header);
               <div class="col-md-3">
 
                 <div class="card">
+                  <img class="card-img-top" src="<?php echo base_url('/');?>images/adverts/ad1/3.png" alt="Card image cap" style="padding:10px">
                   <div class="card-body">
                     <h5 class="card-title"><strong>How it Works...</strong></h3>
                       
@@ -129,7 +131,7 @@ $this->load->view('inc/header', $header);
                         </p>
     
                         <p>  
-                        4. Upload the item details and photos<br>
+                        4. Upload the item details<br>
                         5. Submit a Feature Request below<br>
                         6. Wait for buyers to contact you!<br>
                         </p>
