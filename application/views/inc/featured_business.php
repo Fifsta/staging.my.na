@@ -4,7 +4,7 @@
 		<h2 data-icon="fa-newspaper-o">Featured <strong>Businesses</strong></h2>
 		<p>Browse all listed featured business entries here.</p>
 		<ul class="options">
-			<li><a href="#" data-icon="fa-edit">Feature my Business</a></li>
+			<li><a href="https://nmh.my.na/main/subscribe/?type=featured_business" target="_blank" data-icon="fa-edit">Feature my Business</a></li>
 		</ul>
 	</div>
 
