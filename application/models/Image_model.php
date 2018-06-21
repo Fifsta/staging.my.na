@@ -61,11 +61,11 @@ class Image_model extends CI_Model{
 		$param['file'] = $file;
 		if(!$param['width'] = $width){
 			
-			$param['width'] = 'auto';
+			$param['width'] = '0';
 		}
 		if(!$param['height'] = $height){
 			
-			$param['height'] = 'auto';
+			$param['height'] = '0';
 		}
 		
 		if(!$param['crop'] = $crop){

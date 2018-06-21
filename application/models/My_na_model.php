@@ -2380,6 +2380,57 @@ class My_na_model extends CI_Model{
 
     }
 
+//Shorten Price
+    function smooth_price($price)
+    {
+
+        if (strpos($price, '.00'))
+        {
+
+            $price = str_replace('.00', '', $price);
+        }
+
+        if (strlen(trim($price)) > 8)
+        {
+
+            //$price = number_format($price, 2, ',', ' ');
+            $price1 = number_format($price, 2);
+
+        }
+        elseif (strlen($price) > 7)
+        {
+
+            $price1 = number_format($price, 2);
+
+        }
+        elseif (strlen($price) > 6)
+        {
+
+            $price1 = number_format($price, 2);
+
+        }
+        elseif (strlen($price) > 5)
+        {
+
+            $price1 = number_format($price, 2);
+
+        }
+        elseif (strlen($price) > 3)
+        {
+
+            $price1 = number_format($price, 2);
+
+        }
+        else
+        {
+
+            $price1 = number_format($price, 2);
+        }
+
+        return $price1;
+    }
+    
+
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 	//CACHE FEED FILE
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
