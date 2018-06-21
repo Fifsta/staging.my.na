@@ -11,7 +11,7 @@
             <div style="width:auto;display:none" id="tstbox"></div>
 			<div class="col-sm-2">
 				<div class="slogo">
-					<a href="#"><img src="images/logo-main.png"></a>
+					<a href="<?php echo site_url('/'); ?>"><img src="images/logo-main.png"></a>
 					<div>find • list • buy • sell</div>
 				</div>
 			</div>
