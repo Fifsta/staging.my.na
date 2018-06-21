@@ -27,6 +27,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 ?>
 
 <section class="sidenav" id="my_profile">
+			
 	<nav class="profile">
 		<a href="#" class="pic"><?php echo $this->my_na_model->get_user_avatar('25', '25'); ?></a>
 		<a href="#" class="name"><?php echo $this->session->userdata('u_name'); ?></a>
@@ -44,6 +45,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 	</nav>
 	
 	<div class="panel-group" id="profile-accordion" role="tablist" aria-multiselectable="true">
+
 		<div class="panel panel-default">
 			<div class="panel-heading" role="tab">
 				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#MyAccount" aria-expanded="false" aria-controls="MyAccount" data-icon="fa-list-alt">My Account</a></h3>

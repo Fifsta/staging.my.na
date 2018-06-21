@@ -1,13 +1,29 @@
-<?php
+<?php 
 
-$data['section'] = '';
-$data['heading'] = $heading;
-$data['title'] = $title;
-$data['metaD'] = $metaD;
-$this->load->view('inc/header', $data);
-$this->load->view('inc/navigation', $data);
+//+++++++++++++++++
+//LOAD HEADER
+//Prepare Variables array to pass into header
+//+++++++++++++++++
+if(isset($title)){
+
+   $header['metaD'] = $heading. '. Find ' . $heading .' online - My Namibia';
+   $header['section'] = '';
+ 
+}else{
+
+   $header['metaD'] = '';
+   $header['section'] = '';
+ 
+}
+
+$this->load->view('inc/header', $header);
 
 ?>
+
+<link href="<?php echo base_url('/');?>css/select/select2.css" rel="stylesheet" type="text/css" />
+<link href='<?php echo base_url('/');?>css/jquery.rating.css' type="text/css" rel="stylesheet"/>
+<link rel="canonical" href="<?php $this->trade_model->build_canonical();?>" />
+
 <style type="text/css">
     #form_frame{height:770px;}
 
@@ -16,138 +32,136 @@ $this->load->view('inc/navigation', $data);
         #form_frame{height:1100px;}
     }
 </style>
-<div id="wrap">
-    <div class="container" id="home_container">
-            <div class="clearfix"><p>&nbsp;</p><p>&nbsp;</p></div>
 
-            <div class="row-fluid">
-                <div class="span1 text-right">
+</head>
 
-                   
-                </div>
-                <div class="span10">
+<body id="top">
 
-                    <h1 class=" text-center"> <span class="na_script big_icon yellow">FEATURE Your</span> Listing for that <span class="na_script yellow big_icon">Extra Exposure</span></h1>
-                    <div class="clearfix"><p>&nbsp;</p><p>&nbsp;</p></div>
-                    <img src="<?php echo base_url('/');?>img/adverts/feature_your_products.png" />
-                    <div class="row-fluid">
-                        <div class="span8">
-                            <p>Reach More Than 1 Million Unique Visitors on all our platforms. Your product gets the normal classifieds exposure in our national publications and newspapers.</p>
-                            <p>Manage your product listing online, view stats on views enquiries and hits. Fast and effective email and SMS alerts are included at no extra cost.</p>
+<?php $this->load->view('inc/top_bar');?>
 
-                        </div>
-                        <div class="span4 text-right">
-                            <p class="muted">All For only</p>
-                            <h1 class="na_script big_icon yellow"><small class="yellow">N$</small> 99 </h1>
-                            <p class="muted"><small>once off for 30 days</small></p>
-                            <p><strong>Offer only valid until </strong> <?php echo date('F jS, Y', strtotime("+2 days"));?></p>
-                        </div>
-                    </div>
-                   
+<nav id="bread">
+  <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?php echo site_url('/'); ?>">Home</a></li>
+        <li class="breadcrumb-item">Feature your listing</li>
+      </ol>
+  </div>
+</nav>
 
-                </div>
-                <div class="span1">
+<div class="container">
 
-                   
-                </div>
-            </div>
+  <div class="row">
 
+    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-4 order-md-2 order-sm-1 order-lg-2 order-xl-4" id="sidebar">
+
+      <?php $this->load->view('inc/login'); ?>
+      <?php $this->load->view('inc/weather');?>
+      <?php $this->load->view('inc/adverts');?>
 
     </div>
 
-    <div class="clearfix"><p>&nbsp;</p><p>&nbsp;</p></div>
+    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
 
-    <div class="container-fluid footer">
+        <section id="list">
+
+          <div class="heading" style="margin-bottom:15px">
+            <h2 data-icon="fa-briefcase"><?php echo $title; ?></h2>
+            <ul class="options">    
+              <li><a href="#list-form" data-icon="fa-edit text-dark">Feature listing now</a></li>
+            </ul>
+          </div>
+
+          <div class="row">
+
+              <div class="col-md-9">
+                  <img src="<?php echo base_url('/');?>images/adverts/feature_your_products.png" />
+
+              </div>
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-body">
+                    <p><strong>Reach More Than 1 Million Unique Visitors</strong> on all our platforms. Your product gets the normal classifieds exposure in our national publications and newspapers.</p>
+                    <p>Manage your product listing online, view stats on views enquiries and hits. Fast and effective email and SMS alerts are included at no extra cost.</p>
+                    <p class="muted">All For only</p>
+                    <h1 class="na_script big_icon yellow"><small class="yellow">N$</small> 99 </h1>
+                    <p class="muted"><small>once off for 30 days</small></p>
+                    <p><strong>Offer only valid until<br></strong> <?php echo date('F jS, Y', strtotime("+2 days"));?></p>
+                </div>
+                </div>  
+              </div>
+              
+          </div>
 
 
-        <div class="row-fluid">
-            <div class="container">
+        </section>
 
-                <div class="row-fluid white">
-                    <div class="span2 text-right">
+        <div class="spacer"></div>
+
+        <section id="list-form">
+
+          <div class="heading" style="margin-bottom:15px">
+            <h2 data-icon="fa-briefcase">Feature Your Product Online</h2>
+            <ul class="options">    
+              
+            </ul>
+          </div>
+
+          <div class="row">
+
+              <div class="col-md-9">
 
 
-                    </div>
-                    <div class="span7">
+                 <iframe id="form_frame" style="width:100%;overflow: hidden" src="<?php echo HUB_URL;?>main/subscribe/?type=featured_product" allowtransparency="true" frameborder="0"></iframe>                
 
-                        <h1 class=""><span class="na_script big_icon yellow">How</span> do I <span class="na_script big_icon yellow">Feature</span> my <span class="na_script big_icon yellow">Listing?</span></h1>
-                        <div class="row-fluid">
 
-                            <div class="span6">
-                                <h3 class="upper">How it Works...</h3>
-                                <ul>
-                                    <li>1. Find an Item to sell.</li>
-                                    <li>2. Take some pictures</li>
-                                    <li>3. Upload it yourself or Send it to us</li>
-                                </ul>
+              </div>
 
-                            </div>
-                            <div class="span6">
-                                <h3 class="upper">&nbsp;</h3>
+              <div class="col-md-3">
 
-                                <ul>
-                                    <li>4. Upload the item details and photos</li>
-                                    <li>5. Submit a Feature Request below</li>
-                                    <li>6. Wait for buyers to contact you!</li>
-                                </ul>
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title"><strong>How it Works...</strong></h3>
+                      
+                        <p>
+                        1. Find an Item to sell.<br>
+                        2. Take some pictures<br>
+                        3. Upload it yourself or Send it to us
+                        </p>
+    
+                        <p>  
+                        4. Upload the item details and photos<br>
+                        5. Submit a Feature Request below<br>
+                        6. Wait for buyers to contact you!<br>
+                        </p>
+                      
 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="span3">
-                        <img src="<?php echo base_url('/');?>img/icons/stick_man_moola.png" alt="List and buy anything namibian" />
-
-                    </div>
+                  </div>
                 </div>
 
-            </div>
-        </div>
+              </div>
+              
+          </div>
+
+
+        </section>
+
+        <div class="spacer"></div>
 
     </div>
 
-    <div class="clearfix"><p>&nbsp;</p><p>&nbsp;</p></div>
-
-    <div class="container">
-
-        <div class="row-fluid ">
-            <div class="span12">
-                <iframe id="form_frame" style="width:100%;overflow: hidden" src="<?php echo HUB_URL;?>main/subscribe/?type=featured_product" allowtransparency="true" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-
-       <!--  <div class="row-fluid text-center">
-            <div class="span9">
-                <h1 class=""><span class="na_script yellow">JOIN</span> today and enjoy <span class="na_script yellow">trading in namibia</span> for FREE Today!</h1>
-
-            </div>
-            <div class="span3 text-left">
-
-                <a class="btn btn-large btn-inverse pull-right" href="<?php echo site_url('/');?>members/register/">Join <img src="<?php echo base_url('/');?>img/icons/my-na-favicon.png" > Today</a>
-            </div>
-        </div> -->
-    </div>
-    <div class="clearfix"><p>&nbsp;</p><p>&nbsp;</p></div>
-
-    <?php
-    //+++++++++++++++++
-    //LOAD FOOTER
-    //+++++++++++++++++
-    $footer['foo'] = '';
-    $this->load->view('inc/footer', $footer);
-
-
-    ?>
-
+  </div>  
+  
 </div>
-<!-- JAvascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
 
-<script src="<?php echo S3_URL;?>video/video/eh5v.files/html5video/html5ext.js" type="text/javascript"></script>
-<script src="<?php echo base_url('/'); ?>js/custom/fb.js?v=2"></script>
+<?php $this->load->view('inc/footer'); ?>  
+
+<script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
+
+<script type="text/javascript">
+
+
+
+</script>
+
 </body>
 </html>
-

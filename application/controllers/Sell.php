@@ -20,7 +20,7 @@ class Sell extends CI_Controller {
 	public function Sell()
 	{
 		//
-		//self::__construct();
+		//self::__construct(); 
 		//parent::__construct();
 		$this->CI_Controller();
 
