@@ -42,7 +42,7 @@ $this->load->view('inc/header', $header);
 		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
 
 		<div class="card text-center">
-			<a href="https://www.my.na/sell/featured?type=featured_product"><img alt="Feature Your Listing Online" src="https://www.my.na/img/adverts/featured_listing_banner.png" class="img-fluid"></a>	
+			<a href="http://localhost/beta.my.na/sell/featured"><img alt="Feature Your Listing Online" src="https://www.my.na/img/adverts/featured_listing_banner.png" class="img-fluid"></a>	
 		</div>
 
         <div class="spacer"></div>
