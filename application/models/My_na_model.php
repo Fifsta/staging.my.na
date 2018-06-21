@@ -301,8 +301,6 @@ class My_na_model extends CI_Model{
                       </div>
                       ';
 
-                $x2++;
-
             }
 
             $res .= '</div>';
