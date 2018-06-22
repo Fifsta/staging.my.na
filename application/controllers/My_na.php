@@ -709,9 +709,9 @@ class My_na extends CI_Controller {
 	//++++++++++++++++++++++++++++++
 	//Instant Search  
 	//++++++++++++++++++++++++++++++
-	public function ajax_search_json($mid,$sid,$query)
+	public function ajax_search_json($type,$mid,$sid,$query)
 	{ 
-			$this->my_na_model->instant_search_json($mid,$sid,$query);
+			$this->my_na_model->instant_search_json($type,$mid,$sid,$query);
 			
 	}
 	//++++++++++++++++++++++++++++++

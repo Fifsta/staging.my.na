@@ -29,7 +29,7 @@
                     </select>  
                   </div>                                  
 
-                    <input type="text" class="form-control typeahead" name="srch_bar" type="text" value="<?php if (isset($str)) { echo htmlspecialchars($str); } else { echo ''; } ?>" autocomplete="off" placeholder="Search Anything Namibian">
+                    <input type="text" class="form-control typeahead" id="search-bar" name="srch_bar" type="text" value="<?php if (isset($str)) { echo htmlspecialchars($str); } else { echo ''; } ?>" autocomplete="off" placeholder="Search Anything Namibian">
 
                     <input type="hidden" id="search_type_val" value="<?php if (isset($type)) { echo $type; echo 'none'; } ?>" name="type">
                     <input type="hidden" value="<?php if (isset($location)) { echo $location; } else { echo 'national'; } ?>" name="location">
@@ -64,6 +64,11 @@
     $(document).ready(function () {
 
 
+        $( "#search-bar" ).keypress(function() {
+
+        });
+
+
          $('#search_type').change(function(){
 
             var val = $("#search_type option:selected").val();
@@ -75,7 +80,9 @@
             var lg = $('#tstbox').width();
             $('#search_type').css({'width': lg+40});       
 
-            myna.clear();
+           $("input.typeahead").typeahead("destroy");
+
+           go_search(<?php if(isset($main_cat_id) && $main_cat_id != 0){ echo $main_cat_id; }else{ echo '0';}?>, <?php if(isset($sub_cat_id) && $sub_cat_id != 0){ echo $sub_cat_id;}else{ echo '0';}?>,val);
 
          });
     
@@ -92,12 +99,12 @@
 
         });
 
-        go_search(<?php if(isset($main_cat_id) && $main_cat_id != 0){ echo $main_cat_id; }else{ echo '0';}?>, <?php if(isset($sub_cat_id) && $sub_cat_id != 0){ echo $sub_cat_id;}else{ echo '0';}?>);
+        go_search(<?php if(isset($main_cat_id) && $main_cat_id != 0){ echo $main_cat_id; }else{ echo '0';}?>, <?php if(isset($sub_cat_id) && $sub_cat_id != 0){ echo $sub_cat_id;}else{ echo '0';}?>,'all');
 
     });
      
 
-    function go_search(main_cat_id, sub_cat_id) {
+    function go_search(main_cat_id, sub_cat_id, type) {
 
 
         var myna = new Bloodhound({
@@ -108,7 +115,7 @@
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             prefetch: '<?php echo site_url('/');?>my_na/typehead/location/',
             remote: {
-                url: '<?php echo site_url('/');?>my_na/ajax_search_json/' + $("#search_type_val").val() + '/' + main_cat_id + '/' + sub_cat_id + '/%QUERY',
+                url: '<?php echo site_url('/');?>my_na/ajax_search_json/' + type + '/' + main_cat_id + '/' + sub_cat_id + '/%QUERY',
                 wildcard: '%QUERY'
             },
             limit: 0
