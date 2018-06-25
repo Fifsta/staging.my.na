@@ -23,7 +23,9 @@
                     <select class="form-control" id="search_type" style="border-radius: 4px 0px 0px 4px; height:100%; background: #efefef; width:60px; font-size:12px">
                         <option value="all">All</option>
                         <option value="product_v">Cars, Bikes & Boats</option>
-                        <option value="product_p">Properties</option>
+                        <option value="product_p" style="font-weight: bold">Properties</option>
+                        <option value="product_a">&nbsp;&nbsp;&nbsp;Properties for Sale</option>
+                        <option value="product_a">&nbsp;&nbsp;&nbsp;Properties for Rent</option>
                         <option value="product_a">Auctions</option>
                         <option value="classified">Classifieds</option>                        
                     </select>  
@@ -113,7 +115,7 @@
                 return d.tokens;
             },
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            prefetch: '<?php echo site_url('/');?>my_na/typehead/location/',
+
             remote: {
                 url: '<?php echo site_url('/');?>my_na/ajax_search_json/' + type + '/' + main_cat_id + '/' + sub_cat_id + '/%QUERY',
                 wildcard: '%QUERY'

@@ -1986,6 +1986,16 @@ class My_na_model extends CI_Model{
         $width = 20;
         $height = 20;
 
+        if($type != 'all') {
+
+            $strType = " type = '".$type."' AND ";
+
+        } else {
+
+            $strType = "";
+
+        }
+
         $out = array();
         
         if($str = $query){
@@ -2025,7 +2035,7 @@ class My_na_model extends CI_Model{
                             $this->db->insert('search_terms', $idata);
                         }
                     }
-
+ 
                     //MORE THAN 1 WORD
                     if(str_word_count($key) > 1){
 
@@ -2042,21 +2052,21 @@ class My_na_model extends CI_Model{
                                 MATCH(title, body) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance,
                                 MATCH(title) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance2
                                 FROM search_index
-                                WHERE MATCH(title, body) AGAINST ('".$keyF."' IN BOOLEAN MODE) AND type = '".$type."'
+                                WHERE ".$strType." MATCH(title, body) AGAINST ('".$keyF."' IN BOOLEAN MODE) 
                                 ORDER BY relevance2 DESC, relevance DESC LIMIT 8";
                         //echo $tq1;
                         $query = $this->db->query($tq1, FALSE);
                         $go = true;
 
 
-                        //BIGGER THAN 2 CHARS
+                        //BIGGER THAN 3 CHARS
                     }elseif(str_word_count($key) == 1 && strlen($key) > 3){
-                        $tq1 = "SELECT title ,link, type, img_file ,body FROM search_index WHERE ".$strSQL." body LIKE '%".$key."%' OR title LIKE '%".$key."%' AND type = '".$type."' ORDER BY title ASC LIMIT 8";
+                        $tq1 = "SELECT title ,link, type, img_file ,body FROM search_index WHERE ".$strType." ".$strSQL." body LIKE '%".$key."%' OR title LIKE '%".$key."%' ORDER BY title ASC LIMIT 8";
                         $query = $this->db->query($tq1, FALSE);
                         $go = true;
                         //BIGGER THAN 2 CHARS
                     }elseif(strlen($key) > 2){
-                        $tq1 = "SELECT title ,link, type, img_file ,body FROM search_index WHERE ".$strSQL." body LIKE '%".$key."%' OR title LIKE '%".$key."%' AND type = '".$type."' ORDER BY title ASC LIMIT 8";
+                        $tq1 = "SELECT title ,link, type, img_file ,body FROM search_index WHERE ".$strType." ".$strSQL." body LIKE '%".$key."%' OR title LIKE '%".$key."%' ORDER BY title ASC LIMIT 8";
                         $query = $this->db->query($tq1, FALSE);
                         $go = true;
                     }else{
