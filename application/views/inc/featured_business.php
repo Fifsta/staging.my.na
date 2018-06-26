@@ -6,7 +6,7 @@
 		<ul class="options">
 			<li><a href="https://nmh.my.na/main/subscribe/?type=featured_business" target="_blank"><i class="fa fa-edit text-dark"></i> Feature my Business</a></li>
 		</ul>
-	</div>
+	</div> 
 
     <div id="owl-bus">
 
@@ -30,7 +30,7 @@
 		$.getJSON( link, function( data ) {
 
 			$('#owl-bus').html(data);
-			initialise_owl();
+			initialise_bus_owl();
 
 		});
 
