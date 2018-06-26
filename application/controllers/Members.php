@@ -3258,7 +3258,7 @@ function un_clean_url($str)
 		//$this->session->sess_destroy();  
 		//redirect(site_url('/'),'refresh');
 		//if user clicks logout
-		if($this->input->get('redirect')){
+		if($this->input->post('redirect')){
 			
 			$log['FB_LOGOUT'] = 'Y';
 			$this->db->where('ID', $this->session->userdata('id'));
@@ -3268,10 +3268,8 @@ function un_clean_url($str)
 			
 			$data['redirect'] = $this->input->get('redirect');
 			if($data['redirect'] == ''){
-				
 				redirect(site_url('/'), 301);
 			}else{
-				
 				redirect($data['redirect'], 301);
 			}
 			
@@ -3302,7 +3300,6 @@ function un_clean_url($str)
 
 	function forgot_password(){
 
-		
 		$this->load->view('login' , $data);
 	}
 	
@@ -3356,11 +3353,8 @@ function un_clean_url($str)
 	{
 		$this->load->model('business_model');
 
-
-
 		echo $this->load->view('members/inc/business_qr_code', $bus_id);
-		
-		
+			
 	}
 	
 	public function download_load_qr($bus_id)
