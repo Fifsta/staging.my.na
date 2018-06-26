@@ -11,7 +11,7 @@ class Fb extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('fb_model');
-	
+	 
 	}
 	
 	public function index()

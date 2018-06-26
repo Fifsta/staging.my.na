@@ -12,7 +12,6 @@ class My_na extends CI_Controller {
 		parent::__construct();
 		$this->load->model('my_na_model');
 		$this->load->model('product_model');
-	
 	}
 	
 
