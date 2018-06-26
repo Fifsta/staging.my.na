@@ -23,7 +23,7 @@
 		
 		}
 	  }
-	
+	 
 	  // This function is called when someone finishes with the Login
 	  // Button.  See the onlogin handler attached to it in the sample
 	  // code below.
@@ -42,7 +42,7 @@
 			  xfbml      : true,
 			  cookie     : true,
 			  status     : true,  
-			  version    : 'v2.11'
+			  version    : 'v2.11' 
 			});
 	
 			// ADD ADDITIONAL FACEBOOK CODE HERE

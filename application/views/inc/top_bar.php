@@ -22,6 +22,7 @@
                   <div class="input-group-prepend">
                     <select class="form-control" id="search_type" style="border-radius: 4px 0px 0px 4px; height:100%; background: #efefef; width:60px; font-size:12px">
                         <option value="all">All</option>
+                        <option value="business" style="font-weight: bold">Businesses</option>
                         <option value="product_v">Cars, Bikes & Boats</option>
                         <option value="product_p" style="font-weight: bold">Properties</option>
                         <option value="product_a">&nbsp;&nbsp;&nbsp;Properties for Sale</option>

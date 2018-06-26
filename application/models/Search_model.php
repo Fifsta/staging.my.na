@@ -1218,7 +1218,7 @@ class Search_model extends CI_Model{
 								$cx ++;
 	                        }
 
-	                    }
+	                    } 
 
 						//get RATING
 						///$rating = $this->get_rating($id);
