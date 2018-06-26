@@ -118,4 +118,3 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 	</div>
 </section>
 <!--profile-->
-<div class="spacer"></div>
