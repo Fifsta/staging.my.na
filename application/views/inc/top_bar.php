@@ -24,10 +24,13 @@
                         <option value="all">All</option>
                         <option value="business" style="font-weight: bold">Businesses</option>
                         <option value="vehicle" style="font-weight: bold">Cars, Bikes & Boats</option>
+                        <option value="car">&nbsp;&nbsp;&nbsp;Cars</option>
+                        <option value="boat">&nbsp;&nbsp;&nbsp;Boats</option>
+                        <option value="bike">&nbsp;&nbsp;&nbsp;Bikes</option>
                         <option value="property" style="font-weight: bold">Properties</option>
                         <option value="for-sale">&nbsp;&nbsp;&nbsp;Properties for Sale</option>
                         <option value="to-rent">&nbsp;&nbsp;&nbsp;Properties for Rent</option>
-                        <option value="classified">Classifieds</option>                        
+                        <option value="classified" style="font-weight: bold">Classifieds</option>                        
                     </select>  
                   </div>                                  
 

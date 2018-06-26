@@ -1998,6 +1998,12 @@ class My_na_model extends CI_Model{
 
             if($type == 'to-rent') { $s_type = 'product'; $mid = '3410'; }
 
+            if($type == 'car') { $s_type = 'product'; $mid = '3410'; }
+
+            if($type == 'boat') { $s_type = 'product'; $mid = '3410'; }
+
+            if($type == 'bike') { $s_type = 'product'; $mid = '3410'; }
+
             //if($type == 'auction') { $s_type = 'product'; }
 
             if($type == 'classified') { $s_type = 'classified'; }
