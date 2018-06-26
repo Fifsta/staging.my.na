@@ -23,7 +23,7 @@
                 <label class="checkbox"> <input type="checkbox" value="remember-me"> Remember me </label>
     			
     			<div class="form-group" style="position:relative"> 
-                    <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-scope="email"  data-auto-logout-link="false"></div>
+                    <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-scope="email" onlogin="checkLoginState()"  data-auto-logout-link="false"></div>
                     <button class="btn btn-dark pull-right" type="submit"><i class="fa fa-lock text-white"></i> <b>Sign in</b></button>
     			</div>
 
