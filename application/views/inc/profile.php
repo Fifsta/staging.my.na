@@ -129,6 +129,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 	    $.ajax({
 	        'type': "post",
 	        'url': "<?php echo site_url('/'); ?>members/logout",
+	        'data': myKeyVals,
 	        'success': function (data) {
 
 
