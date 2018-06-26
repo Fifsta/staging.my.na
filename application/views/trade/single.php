@@ -181,11 +181,7 @@
 
         <!--banner-->
         <div class="list-map">
-          <div class="list-map-left" style="background:#ccc; position:relative">
-              <div class="asso static-banner">
-                <!--<a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/han.png"></a>
-                <a href="#" data-toggle="tooltip" data-placement="top" title="Message"><img src="images/ntb.png"></a>-->
-              </div>
+          <div class="list-map-left" style="background:#ccc; position:relative; padding-right:0px">
               <?php echo $this->trade_model->show_images($product_id);?>
           </div>
           
