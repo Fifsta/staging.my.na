@@ -124,7 +124,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 
 	$(document).on('click', '.logout-btn', function(e) {
 
-		var myKeyVals = { referer : '<?php echo $url; ?>' }
+		var myKeyVals = { referer : '<?php echo current_url(); ?>' }
 
 	    $.ajax({
 	        'type': "post",
