@@ -12,7 +12,7 @@
 			<div class="col-sm-2">
 				<div class="slogo">
 					<a href="<?php echo site_url('/'); ?>"><img src="images/logo-main.png"></a>
-					<div>find • list • buy • sell</div>
+					<div>find • list • buy • sell</div> 
 				</div>
 			</div>
 			<div class="col-sm-8">
@@ -23,11 +23,10 @@
                     <select class="form-control" id="search_type" style="border-radius: 4px 0px 0px 4px; height:100%; background: #efefef; width:60px; font-size:12px">
                         <option value="all">All</option>
                         <option value="business" style="font-weight: bold">Businesses</option>
-                        <option value="product_v">Cars, Bikes & Boats</option>
-                        <option value="product_p" style="font-weight: bold">Properties</option>
-                        <option value="product_a">&nbsp;&nbsp;&nbsp;Properties for Sale</option>
-                        <option value="product_a">&nbsp;&nbsp;&nbsp;Properties for Rent</option>
-                        <option value="product_a">Auctions</option>
+                        <option value="vehicle" style="font-weight: bold">Cars, Bikes & Boats</option>
+                        <option value="property" style="font-weight: bold">Properties</option>
+                        <option value="for-sale">&nbsp;&nbsp;&nbsp;Properties for Sale</option>
+                        <option value="to-rent">&nbsp;&nbsp;&nbsp;Properties for Rent</option>
                         <option value="classified">Classifieds</option>                        
                     </select>  
                   </div>                                  

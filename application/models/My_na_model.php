@@ -1977,7 +1977,7 @@ class My_na_model extends CI_Model{
 	//Instant Search 
 	//++++++++++++++++++++++++++++++
     public function instant_search_json($type,$mid,$sid,$query)
-    {
+    { 
 
         $this->load->model('image_model'); 
 
@@ -1988,7 +1988,23 @@ class My_na_model extends CI_Model{
 
         if($type != 'all') {
 
-            $strType = " type = '".$type."' AND ";
+            if($type == 'business') { $s_type = 'business'; }
+
+            if($type == 'vehicle') { $s_type = 'product'; $mid = '348'; }
+
+            if($type == 'property') { $s_type = 'product'; $mid = '3408'; }
+
+            if($type == 'for-sale') { $s_type = 'product'; $mid = '3409'; }
+
+            if($type == 'to-rent') { $s_type = 'product'; $mid = '3410'; }
+
+            //if($type == 'auction') { $s_type = 'product'; }
+
+            if($type == 'classified') { $s_type = 'classified'; }
+
+
+
+            $strType = " type = '".$s_type."' AND ";
 
         } else {
 
