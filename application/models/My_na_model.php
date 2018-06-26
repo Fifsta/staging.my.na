@@ -329,8 +329,8 @@ class My_na_model extends CI_Model{
         $width = 360;
         $height = 230;
 
-        $l_width = 60;
-        $l_height = 60;
+        $l_width = 100;
+        $l_height = 100;
         
         $likeSQL = '';
         $sql = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,

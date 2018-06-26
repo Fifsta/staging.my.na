@@ -233,7 +233,7 @@ function initialise_bus_owl() {
 	        },
 
 	        1600:{
-	            items:2,
+	            items:3,
 	            nav:true,
 	            loop:false
 	        }		        
