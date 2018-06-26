@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 //GOOGLE ANALYTICS
 $UA =  "var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-4464808-23']);
+  _gaq.push(['_setAccount', 'UA-121400346-1']);
   _gaq.push(['_trackPageview']);
 
   (function() {
