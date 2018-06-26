@@ -3255,6 +3255,21 @@ function un_clean_url($str)
 
 	function logout($referer = ''){
 
+			
+			$log['FB_LOGOUT'] = 'Y';
+			$this->db->where('ID', $this->session->userdata('id'));
+			$this->db->update('u_client', $log);
+			
+			$this->session->sess_destroy();
+			
+			redirect(site_url('/'), 301);
+		
+	}
+
+	
+
+	function logout2($referer = ''){
+
 		//$this->session->sess_destroy();  
 		//redirect(site_url('/'),'refresh');
 		//if user clicks logout
@@ -3266,7 +3281,7 @@ function un_clean_url($str)
 			
 			$this->session->sess_destroy();
 			
-			$data['redirect'] = $this->input->get('redirect');
+			$data['redirect'] = $this->input->post('redirect');
 			if($data['redirect'] == ''){
 				redirect(site_url('/'), 301);
 			}else{
@@ -3278,11 +3293,6 @@ function un_clean_url($str)
 		}elseif($referer != ''){
 			
 			$data['redirect'] =  $referer;
-			/*$this->session->unset_userdata('id');
-			$this->session->unset_userdata('u_name');
-			$this->session->unset_userdata('last_login');
-			$this->session->unset_userdata('img_file');
-			$this->session->unset_userdata('points');*/
 			$this->session->sess_destroy();
 			$data['basicmsg'] = 'Please log in below!';
 			$this->load->view('login' , $data);
@@ -3293,10 +3303,8 @@ function un_clean_url($str)
 			redirect(site_url('/'), 301);
 			
 		}
-		
-
-		
 	}
+
 
 	function forgot_password(){
 

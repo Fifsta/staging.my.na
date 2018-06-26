@@ -39,7 +39,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 			</li>
 
 			<li><a href="<?php echo site_url('/'); ?>members/my_messages" data-icon="fa fa-envelope text-dark"><i class="fa fa-envelope text-dark"></i></a><span><?php $this->my_na_model->msg_notifications_count(); ?></span></li>
-			<li><a href="javascript:void(0)" class="logout-btn" data-icon="fa fa-cog text-dark"><i class="fa fa-sign-out text-dark"></i></a></li>
+			<li><a href="<?php echo site_url('/'); ?>members/logout" data-icon="fa fa-cog text-dark"><i class="fa fa-sign-out text-dark"></i></a></li>
 		</ul>
 
 	</nav>
@@ -119,23 +119,3 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 </section>
 <!--profile-->
 <div class="spacer"></div>
-
-<script type="text/javascript">
-
-	$(document).on('click', '.logout-btn', function(e) {
-
-		var myKeyVals = { referer : '<?php echo current_url(); ?>' }
-
-	    $.ajax({
-	        'type': "post",
-	        'url': "<?php echo site_url('/'); ?>members/logout",
-	        'data': myKeyVals,
-	        'success': function (data) {
-
-
-	        }
-	    });
-
-	});
-
-</script>
