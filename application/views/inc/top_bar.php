@@ -48,14 +48,14 @@
                 </form>
 				
 
-				<div class="history" id="listing"><strong>Jump to:</strong> 
+				<!--<div class="history" id="listing"><strong>Jump to:</strong> 
                     <a href="#categories" class="jumper">business categories</a>, 
                     <a href="#classifieds" class="jumper">classifieds</a>, 
                     <a href="#properties" class="jumper">properties</a>, 
                     <a href="#vehicles" class="jumper">vehicles</a>, 
                     <a href="#auctions" class="jumper">auctions</a>, 
                     <a href="#news" class="jumper">news</a>, 
-                </div>
+                </div>-->
 			</div>
 			<div class="col-sm-2 text-right">
 
