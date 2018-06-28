@@ -1,7 +1,7 @@
 <section id="bus_list">
 
 	<div class="heading">
-		<h2 data-icon="fa-newspaper-o">Featured <strong>Businesses</strong></h2>
+		<h2 data-icon="fa-newspaper-o" itemprop="description">Featured <strong>Businesses</strong></h2>
 		<p>Browse all listed featured business entries here.</p>
 		<ul class="options">
 			<li><a href="https://nmh.my.na/main/subscribe/?type=featured_business" target="_blank"><i class="fa fa-edit text-dark"></i> Feature my Business</a></li>
