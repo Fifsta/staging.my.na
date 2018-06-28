@@ -429,7 +429,7 @@ Light Orange ff9900
 #header{width:100%; position:relative; padding:10px 0; position:fixed; z-index:900}
 	#header .slogo{display:inline-block;}
 	#header .slogo a{display:block; margin-bottom:5px}
-	#header .slogo img{height:50px; width:auto; display:block}
+	#header .slogo img{ width:auto; display:block}
 	#header .slogo div{color:#fff; display:block; text-align:center; font-size:120%; white-space:nowrap}
 	
 	#header .input-group{width:70%; box-shadow:0 5px 5px rgba(0,0,0,0.2); margin:auto;}
