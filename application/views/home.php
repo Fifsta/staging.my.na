@@ -4,8 +4,6 @@
 
 <body id="top">
 
-<span itemprop="description" style="display:none">Great microwave for the price. It is small and fits in my apartment.</span>
-
 <?php $this->load->view('inc/top_bar'); ?>
 
 <nav id="bread">
