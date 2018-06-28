@@ -47,10 +47,14 @@
                     
                 </form>
 				
-				<div class="history">Search history: 
-                    <a href="<?php echo site_url('/'); ?>buy/car-bikes-and-boats">cars</a>, 
-                    <a href="<?php echo site_url('/'); ?>buy/property">properties</a>, 
-                    <a href="<?php echo site_url('/'); ?>a/show/all/all/all/none/">businesses</a>, 
+
+				<div class="history" id="listing"><strong>Jump to:</strong> 
+                    <a href="#categories" class="jumper">business categories</a>, 
+                    <a href="#classifieds" class="jumper">classifieds</a>, 
+                    <a href="#properties" class="jumper">properties</a>, 
+                    <a href="#vehicles" class="jumper">vehicles</a>, 
+                    <a href="#auctions" class="jumper">auctions</a>, 
+                    <a href="#news" class="jumper">news</a>, 
                 </div>
 			</div>
 			<div class="col-sm-2 text-right">

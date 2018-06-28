@@ -66,6 +66,7 @@ $(document).ready(function(){
 		var thisIcon = $(this).attr('data-icon');
 		$(this).prepend('<i class="fa '+thisIcon+'"></i> ');
 	});
+
 	
 	//OPTIONS to TABS JUMP IN LISTINGS
 	$("#listing .options a[href*=#]").click(function(event){
@@ -83,9 +84,10 @@ $(document).ready(function(){
 		var target_top = target_offset.top-header_height-70;
 		$('html, body').animate({scrollTop:target_top}, 500);
 	});
-
+ 
 	// BACK TO TOP
 	$("a.jumper[href*=#]").click(function(event){
+
 		var link = $(this).attr('href');
 		setTimeout(function() {
 			$(link).trigger('click');
@@ -96,8 +98,9 @@ $(document).ready(function(){
 		var trgt = parts[1];
 		console.log(trgt);
 		var target_offset = $("#"+trgt).offset();
-		var target_top = target_offset.top;
-		$('html, body').animate({scrollTop:target_top}, 500);
+		var header_height = $('#heading').height();
+		var target_top = target_offset.top-header_height-110;
+		$('html, body').animate({scrollTop:target_top}, 800);
 	});
 	
 	//DROP

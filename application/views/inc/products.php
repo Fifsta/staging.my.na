@@ -8,7 +8,7 @@ if($type == '3408') {
 
 if($type == '348') {
 	$title = 'Cars, Bikes & Boats';
-	$section = 'cars';
+	$section = 'vehicles';
 	$link = 'buy/car-bikes-and-boats';
 }
 
