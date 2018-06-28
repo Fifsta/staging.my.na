@@ -247,40 +247,6 @@ function initialise_bus_owl() {
 
 </script>
 
- <?php
-
-	if($this->session->flashdata('login')){
-
-		echo "<script data-cfasync='false'  type='text/javascript'>
-
-		 		$(document).ready(function(){
-					
-					$.getScript('".base_url('/')."js/jquery.knob.js', function(){setTimeout(do_load, 300);});
-					var cont = $('.na_points');
-					//LOAD POINTS
-					cont.addClass('loading');
-					
-					cont.removeClass('loading');
-		       });
-			   
-			    function do_load(){
-				   
-					$.ajax({
-						type:'get',
-						cache: false,
-						url: '".site_url('/')."win/get_points/".$this->session->userdata('id')."',
-						success: function(data) {
-							$('.na_points').html(data);
-						}
-					});  
-			  	}
-			 </script>
-
-		<div class='na_points' id='na_points_msg'></div>
-		";
- 	}
- ?> 
-
 
 <!-- Bootstrap -->
 <link href="https://s3.amazonaws.com/mynamibia/packages/css/weather-icons.min.css" rel="stylesheet" type="text/css">
