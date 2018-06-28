@@ -6,7 +6,7 @@
 	</div>
 </div>--> 
 <header id="header" class="grad-orange">
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row">
             <div style="width:auto;display:none" id="tstbox"></div>
 			<div class="col-sm-2">
@@ -48,17 +48,20 @@
                 </form>
 				
 
-				<!--<div class="history" id="listing"><strong>Jump to:</strong> 
-                    <a href="#categories" class="jumper">business categories</a>, 
-                    <a href="#classifieds" class="jumper">classifieds</a>, 
-                    <a href="#properties" class="jumper">properties</a>, 
-                    <a href="#vehicles" class="jumper">vehicles</a>, 
-                    <a href="#auctions" class="jumper">auctions</a>, 
-                    <a href="#news" class="jumper">news</a>, 
-                </div>-->
 			</div>
 			<div class="col-sm-2 text-right">
+                <nav id="menu" class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-icon="fa-bars"></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="dropdown-header">My Namibia Menu</li>
+                            <li><a href="#">Business</a>
+                                <ul>
+                                    <?php $this->my_na_model->show_popular_cats($t = true); ?>
+                                </ul>    
+                            </li>
 
+                        </ul>                  
+                </nav>
 			</div>
 		</div>
 	</div>

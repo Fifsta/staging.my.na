@@ -26,8 +26,8 @@
 			<div class="row">
 				<div class="col-md-12">
 					<?php $this->load->view('inc/banners');?>
-					
-					<div class="btn-group" role="group" aria-label="First group">
+
+					<div class="btn-group d-sm-none" role="group" aria-label="First group">
 					    <a href="#categories" type="button" class="btn btn-dark nav-link jumper"><i class="fa fa-briefcase"></i> Business Directory</a>
 					    <a href="#classifieds" type="button" class="btn btn-dark jumper"><i class="fa fa-newspaper-o"></i> Classifieds</a>
 					    <a href="#properties" type="button" class="btn btn-dark jumper"><i class="fa fa-home"></i> Properties</a>
