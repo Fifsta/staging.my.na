@@ -63,8 +63,12 @@
                             <li><a href="<?php echo site_url('/'); ?>buy/property">Properties</a></li>
                             <li><a href="<?php echo site_url('/'); ?>buy/car-bikes-and-boats">Vehicles</a></li>
                             <li><a href="<?php echo site_url('/'); ?>trade/auctions/">Auctions</a></li>
-                            <li><a href="<?php echo site_url('/'); ?>members/add_business">>Add Business</a></li>
-
+                            <div class="dropdown-divider"></div>
+                            <li><a href="<?php echo site_url('/'); ?>members/add_business">List a Business</a></li>
+                            <li><a href="<?php echo site_url('/'); ?>sell/index/0/motor">Sell a Car</a></li>
+                            <li><a href="<?php echo site_url('/'); ?>sell/index/0/property">Sell a Property</a></li>
+                            <li><a href="<?php echo site_url('/'); ?>sell/index/0/general">Sell Anything</a></li>
+                            <li><a href="<?php echo site_url('/'); ?>sell/index/0/auction">Create an Auction</a></li>
                         </ul>                  
                 </nav>
 			</div>
