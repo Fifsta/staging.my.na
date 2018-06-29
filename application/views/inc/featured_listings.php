@@ -28,7 +28,7 @@
 		var link = '<?php echo site_url('/');?>my_na/get_feature_products/Y/false/false/20/0/';
 		$.getJSON( link, function( data ) {
 
-			$('#owl-bus').html(data);
+			$('#owl-prod').html(data);
 			initialise_bus_owl();
 
 		});
