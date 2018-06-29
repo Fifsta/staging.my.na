@@ -4,9 +4,8 @@
 		<h2 data-icon="fa-gavel"><a href="#"><strong>Auctions</strong></a></h2>
 		<p></p>
 		<ul class="options">
-			<!--<li><a href="#" data-icon="fa-edit">List my own</a></li>
-			<li><a href="#" data-icon="fa-bullhorn">Alert me</a></li>-->
-		</ul>
+			<li><a href="<?php echo site_url('/'); ?>trade/auctions/" data-icon="fa fa-chevron-right text-dark">All auctions</a></li>
+		</ul> 
 	</div>
 
 	<div id="auctions_slide">

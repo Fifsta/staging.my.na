@@ -3526,7 +3526,7 @@ tbody.collapse.show {
 
 .nav-link:focus, .nav-link:hover {
   text-decoration: none;
-  color:#555;
+  color:#fc9700;
 }
 
 .nav-link.disabled {
