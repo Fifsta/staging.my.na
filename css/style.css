@@ -305,7 +305,7 @@ img.lazy {
     font-weight: normal;
     line-height: 20px;
     width: auto;
-    max-width: 100%;
+    max-width: 70%;
     display: inline;
     border-radius: 0 4px 4px 0;
 }

@@ -416,15 +416,13 @@ class My_na_model extends CI_Model{
                 {
                     $cover_str = 'assets/business/photos/listing-placeholder.jpg';
                     $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
-
                 }
 
                 $res .= '
-                
                 <div>
                     <figure class="loader">
                         <div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$name.'</small></div>
-                        <div class="product_ribbon_sml_orng">'.$cats.'</div>
+                        <div class="product_ribbon_sml_orng"><small>'.$row->cats.'</small></div>
                         <div class="slideshow-block">
                             <a href="' . site_url('/') . 'b/' . $id . '/' . $this->clean_url_str($name) . '/"><img class="" src="' . $cover_url . '" alt="' . $name . '"></a>
                         </div>
