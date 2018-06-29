@@ -441,8 +441,8 @@ Light Orange ff9900
 
 #menu{display:inline-block}
 
-#bread{background:#fff; box-shadow:10px 0 20px rgba(0,0,0,0.2); padding-top:95px; margin-bottom:50px;}
-	.breadcrumb{margin-bottom:0; background:none; border-radius:0; font-size:11px;}
+#bread{background:#fff; box-shadow:10px 0 20px rgba(0,0,0,0.2); padding-top:70px; margin-bottom:50px;}
+	.breadcrumb{margin-bottom:0; margin-top: 10px; background:none; border-radius:0; font-size:11px;}
 #weather_cont .weather-circle{color:#ff9900;}
 #weather_cont .weather-color{color:#ff9900;}
 .weather{text-align:center; margin:20px 5%}

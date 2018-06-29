@@ -9,13 +9,13 @@
 	<div class="container">
 		<div class="row">
             <div style="width:auto;display:none" id="tstbox"></div>
-			<div class="col-sm-2">
+			<div class="col-sm-1">
 				<div class="slogo">
 					<a href="<?php echo site_url('/'); ?>"><img src="images/logo-main.png"></a>
 					<div>find • list • buy • sell</div> 
 				</div>
 			</div>
-			<div class="col-sm-8">
+			<div class="col-sm-10">
 			
                 <form class="input-group input-group-lg" id="search-main" name="search-main" method="post" action="<?php echo site_url('/'); ?>my_na/search">
 
@@ -49,7 +49,7 @@
 				
 
 			</div>
-			<div class="col-sm-2 text-right">
+			<div class="col-sm-1 text-right">
                 <nav id="menu" class="btn-group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-icon="fa-bars"></button>
                         <ul class="dropdown-menu dropdown-menu-right">
