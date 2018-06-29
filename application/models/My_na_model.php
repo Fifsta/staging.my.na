@@ -283,7 +283,11 @@ class My_na_model extends CI_Model{
                 //$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
                 $res .= ' <div>
                             <figure class="loader">
-                                <div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
+
+                                <div class="ribbon-wrapper">
+                                    <div class="product_ribbon_ft"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
+                                    <div class="product_ribbon_ft_orng"><small>'.$title.'</small></div>
+                                </div>                        
                                 <div class="slideshow-block">
                                     <a href="#" class="link"></a>
                                     <div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides="> li">
