@@ -63,7 +63,7 @@
                             <li><a href="<?php echo site_url('/'); ?>buy/property">Properties</a></li>
                             <li><a href="<?php echo site_url('/'); ?>buy/car-bikes-and-boats">Vehicles</a></li>
                             <li><a href="<?php echo site_url('/'); ?>trade/auctions/">Auctions</a></li>
-                            <li><a href="<?php echo site_url('/'); ?>members/add_business">Auctions">Add Business</a></li>
+                            <li><a href="<?php echo site_url('/'); ?>members/add_business">>Add Business</a></li>
 
                         </ul>                  
                 </nav>
