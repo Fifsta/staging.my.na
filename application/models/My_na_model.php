@@ -286,7 +286,7 @@ class My_na_model extends CI_Model{
 
                                 <div class="ribbon-wrapper">
                                     <div class="product_ribbon_ft"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
-                                    <div class="product_ribbon_ft_orng"><small>'.$row->maincat.'</small></div>
+                                    <div class="product_ribbon_ft_orng"><small>'.$row->subcat.'</small></div>
                                 </div>                        
                                 <div class="slideshow-block">
                                     <a href="#" class="link"></a>
