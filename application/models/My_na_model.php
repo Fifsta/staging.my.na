@@ -424,13 +424,14 @@ class My_na_model extends CI_Model{
                 <div>
                     <figure class="loader">
                         <div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$name.'</small></div>
+                        <div class="product_ribbon_sml_orng">'.$cats.'</div>
                         <div class="slideshow-block">
                             <a href="' . site_url('/') . 'b/' . $id . '/' . $this->clean_url_str($name) . '/"><img class="" src="' . $cover_url . '" alt="' . $name . '"></a>
                         </div>
 
                         <div>
                         
-                            '.$b_logo.' 
+                            '.$b_logo.'  
 
                         </div>
                     </figure>           
