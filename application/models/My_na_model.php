@@ -74,7 +74,7 @@ class My_na_model extends CI_Model{
 
         if($my->result()){
             
-            $res .= '<div class="owl-carousel" id="bus-carousel" style="margin-top:20px">';
+            $res .= '<div class="owl-carousel bus-carousel" id="bus-carousel" style="margin-top:20px">';
 
             foreach ($my->result() as $row)
             {
@@ -349,7 +349,7 @@ class My_na_model extends CI_Model{
         
         if($my->result()){
        
-            $res = '<div class="owl-carousel" id="bus-carousel" style="margin-top:20px">';
+            $res = '<div class="owl-carousel bus-carousel" id="bus-carousel" style="margin-top:20px">';
 
             foreach($my->result() as $row){
 
