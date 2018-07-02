@@ -147,7 +147,7 @@ $this->load->view('inc/header');
 
 				<!--banner-->
 		        <div class="list-map">
-		          <div class="list-map-left" style="background:#ccc; position:relative">
+		          <div class="list-map-left">
 		              <img src="<?php echo $cover_url; ?>" class="img-fluid">
 		          </div>
 		          
