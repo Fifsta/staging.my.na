@@ -211,7 +211,7 @@ function initialise_owl() {
 function initialise_bus_owl() {
 
 	// INITIALIZE OWL
-	$('.bus-carousel').owlCarousel({
+	$('#bus-carousel').owlCarousel({
 	    loop:false,
 	    lazyLoad: true,
 	    navRewind:false,
@@ -247,7 +247,7 @@ function initialise_bus_owl() {
 function initialise_prod_owl() {
 
 	// INITIALIZE OWL
-	$('.prod-carousel').owlCarousel({
+	$('#prod-carousel').owlCarousel({
 	    loop:false,
 	    lazyLoad: true,
 	    navRewind:false,
