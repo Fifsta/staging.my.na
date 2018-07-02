@@ -18,6 +18,7 @@ if($this->agent->browser() == 'Internet Explorer'){
     <form id="search-main_b" name="search-main-b" method="post" action="<?php echo site_url('/');?>a/results/" class="input-group input-group-lg" style="margin:5px">
         <div class="btn-group bootstrap-select show-tick input-group-btn form-control"> 
         <input class="form-control" name="srch_business" id="srch_business" type="text" value="" autocomplete="off" placeholder="Keywords">
+        <input type="hidden" name="sortby" id="sortby" value="<?php if(isset($sortby)){ echo $sortby;}else{ echo '';}?>" />
         </div>
         <div class="btn-group bootstrap-select show-tick input-group-btn form-control">                
             <select name="srch_category" id="srch_category">
@@ -46,42 +47,6 @@ if($this->agent->browser() == 'Internet Explorer'){
 <script type="text/javascript">
 
     $(document).ready(function() {
-
-        /*var business = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            //prefetch: '<?php echo base_url('/');?>cache/typehead.json?v=6',
-            //local:statess,
-            //remote: '<?php echo site_url('/');?>my_na/build_typehead/business/?query=%QUERY',
-            prefetch :  '<?php echo site_url('/');?>my_na/build_typehead/business/'
-        });
-        business.initialize();
-        $('#srch_business').typeahead({
-                minLength: 0,
-                highlight: true
-            }, {
-                name: 'business',
-                displayKey: 'value',
-                source: business.ttAdapter(),
-                highlight: true,
-                templates: {
-                    empty: [
-                        '<div class="alert">',
-                        'unable to find any businesses',
-                        '</div>'
-                    ].join('\n'),
-                    suggestion: Handlebars.compile('<a href="{{link1}}"><p><img class="img-polaroid" src="{{image}}" /><span class="bold">{{value}}</span><span class="muted hidden-phone ">{{body}}</span></p>{{link2}}</a>')
-             }
-        });
-
-        $('#search-main_b .twitter-typeahead').css("width", "100%");
-        $('#btn_find_b').live('click', function(){
-
-            $('#btn_find_b').html('<img src="<?php echo base_url('/'). 'img/load.gif';?>"/> Finding...');
-            $('#search-main_b').delay(200).submit();
-
-
-        });*/
 
         $('select#srch_category').select2({
             placeholder: "Please Select",
