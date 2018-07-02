@@ -244,6 +244,42 @@ function initialise_bus_owl() {
 
 }
 
+function initialise_prod_owl() {
+
+	// INITIALIZE OWL
+	$('.prod-carousel').owlCarousel({
+	    loop:false,
+	    lazyLoad: true,
+	    navRewind:false,
+	    margin:10,
+	    nav: true,
+	    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
+	    responsiveClass:true,
+	    responsive:{
+	        0:{
+	            items:1,
+	            nav:true
+	        },
+	        600:{
+	            items:1,
+	            nav:true
+	        },
+	        1000:{
+	            items:2,
+	            nav:true,
+	            loop:false
+	        },
+
+	        1600:{
+	            items:3,
+	            nav:true,
+	            loop:false
+	        }		        
+	    }
+	});
+
+}
+
 
 </script>
 
