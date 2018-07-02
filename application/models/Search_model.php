@@ -1117,7 +1117,7 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//SHOW RESULTS - LOOP THROUGH EACH RESULT IN QUERY ARRAY
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
-	function show_results($query, $main_c_id = '', $main_category = '', $category = '', $heading = '', $sortby = ''){
+	function show_results($query, $main_c_id = '', $main_category = '', $category = '', $sortby){
 			
 
 			$this->load->model('image_model'); 
