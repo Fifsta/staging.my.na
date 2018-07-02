@@ -35,9 +35,9 @@
 
             <!--tabs products-->
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="nav-item"><a href="#Latest" data-type="live" data-bus="0" class="nav-link active pbtn" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-clock-o text-dark">Latest Items</a></li>
-              <li role="presentation" class="nav-item"><a href="#Sold" data-type="sold" data-bus="0" class="nav-link pbtn" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-exclamation-circle text-dark">Sold Items</a></li>
-              <li role="presentation" class="nav-item"><a href="#Deals" data-type="deals" data-bus="0" class="nav-link pbtn" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-tags text-dark">Deals</a></li>
+              <li role="presentation" class="nav-item"><a href="#Latest" data-type="live" data-bus="0" class="nav-link active pbtn" aria-controls="Rating" role="tab" data-toggle="tab" data-icon="fa-clock-o text-light">Latest Items</a></li>
+              <li role="presentation" class="nav-item"><a href="#Sold" data-type="sold" data-bus="0" class="nav-link pbtn" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa-exclamation-circle text-light">Sold Items</a></li>
+              <li role="presentation" class="nav-item"><a href="#Deals" data-type="deals" data-bus="0" class="nav-link pbtn" aria-controls="QR" role="tab" data-toggle="tab" data-icon="fa-tags text-light">Deals</a></li>
             </ul>
 
             <div class="tab-content">
