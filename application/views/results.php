@@ -110,7 +110,7 @@ $this->load->view('inc/header', $header);
 
             <div class="results-list">
             
-              <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category, $sortby); ?>
+              <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category, rand()); ?>
               
             </div>
 
