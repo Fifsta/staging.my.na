@@ -162,6 +162,7 @@ $this->load->view('inc/header', $header);
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 <script src="<?php echo base_url('/');?>js/geolocationmarker-compiled.js"></script>
 <script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
+<!--<script type="text/javascript" src="<?php echo base_url('/');?>js/custom/results_page.js?v2"></script>-->
 
 <script type="text/javascript">
 
@@ -527,6 +528,37 @@ function identify_marker(str){
       }
     });
   }
+
+   $('#sort_asc').on('click', function(e){
+
+        $('#sortby').val('ASC');
+        var frm = $('#search-main_b');
+
+        frm.serialize();
+        frm.submit();
+
+
+    });
+    $('#sort_desc').on('click', function(e){
+
+        $('#sortby').val('DESC');
+        var frm = $('#search-main_b');
+
+        frm.serialize();
+        frm.submit();
+
+
+    });
+    $('#sort_rate').on('click', function(e){
+
+        $('#sortby').val('');
+        var frm = $('#search-main_b');
+
+        frm.serialize();
+        frm.submit();
+
+
+    });
 
 
 
