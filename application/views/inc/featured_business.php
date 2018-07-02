@@ -30,7 +30,7 @@
 		$.getJSON( link, function( data ) {
 
 			$('#owl-bus').html(data);
-			initialise_bus_owl();
+
 
 		});
 
