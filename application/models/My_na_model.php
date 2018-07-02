@@ -1740,7 +1740,7 @@ class My_na_model extends CI_Model{
 	
 	public function show_advert($query = ''){
 		
-
+ 
         $this->load->model('image_model'); 
         $this->load->library('thumborp');
 
@@ -1749,7 +1749,7 @@ class My_na_model extends CI_Model{
         $height = 440;
 
 		$x = 3;
-		$query = $this->db->query("SELECT * FROM adverts WHERE IS_ACTIVE = 'Y' AND TYPE = 'P' AND ADVERTS_EXPIRE_DATE > NOW() ORDER BY RAND() LIMIT 3", false);
+		$query = $this->db->query("SELECT * FROM adverts WHERE IS_ACTIVE = 'Y' AND TYPE = 'P' AND ADVERTS_EXPIRE_DATE > NOW() ORDER BY RAND() LIMIT 6", false);
 
 		if($query->result()){ 
 
