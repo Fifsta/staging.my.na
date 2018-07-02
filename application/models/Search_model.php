@@ -1131,7 +1131,7 @@ class Search_model extends CI_Model{
 			$l_height = 100;
 			$this->load->driver('cache');
 
-			if (! $html = $this->cache->get_memcache('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $sortby))
+			if (! $html = $this->cache->get('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $sortby))
 			{
 
 				//If has results
@@ -1339,7 +1339,7 @@ class Search_model extends CI_Model{
 
 				}
 
-				$this->cache->save_memcache('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $sortby, $html, 3600);
+				$this->cache->save('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $sortby, $html, 3600);
 
 			}
 
