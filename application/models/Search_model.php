@@ -1117,7 +1117,7 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//SHOW RESULTS - LOOP THROUGH EACH RESULT IN QUERY ARRAY
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
-	function show_results($query, $main_c_id = '', $main_category = '', $category = '', $heading = ''){
+	function show_results($query, $main_c_id = '', $main_category = '', $category = '', $heading = '', $sortby = ''){
 			
 
 			$this->load->model('image_model'); 
@@ -1131,7 +1131,7 @@ class Search_model extends CI_Model{
 			$l_height = 100;
 			$this->load->driver('cache');
 
-			if (! $html = $this->cache->get('show_results' . $main_c_id . '_' . $main_category . '_' . $category))
+			if (! $html = $this->cache->get('show_results' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $sortby))
 			{
 
 				//If has results
@@ -1339,7 +1339,7 @@ class Search_model extends CI_Model{
 
 				}
 
-				$this->cache->save('show_results' . $main_c_id . '_' . $main_category . '_' . $category, $html, 3600);
+				$this->cache->save('show_results' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $sortby, $html, 3600);
 
 			}
 
