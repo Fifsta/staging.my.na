@@ -162,7 +162,6 @@ $this->load->view('inc/header', $header);
 <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 <script src="<?php echo base_url('/');?>js/geolocationmarker-compiled.js"></script>
 <script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
-<!--<script type="text/javascript" src="<?php echo base_url('/');?>js/custom/results_page.js?v2"></script>-->
 
 <script type="text/javascript">
 
