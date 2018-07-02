@@ -24,7 +24,7 @@ class Sell extends CI_Controller {
 		//parent::__construct();
 		$this->CI_Controller();
 
-	}
+	} 
 	
 	
 	//+++++++++++++++++++++++++++

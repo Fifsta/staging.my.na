@@ -1,5 +1,5 @@
 <?php $this->load->view('inc/header'); ?>
-
+ 
 </head>
 
 <body id="top">

@@ -1274,7 +1274,7 @@ class Search_model extends CI_Model{
 								'.$this->get_review_stars($row->ID, $row->STAR_RATING,$row->NO_OF_REVIEWS).'
 			                  </div>
 			                </div>
-
+ 
 			                <div>
 			                  <h2><a href="'.site_url('/') . 'b/'. $id .'/'.$this->clean_url_str($name).'/">'.$name.'</a></h2>
 			                  '.$sponsor.'
