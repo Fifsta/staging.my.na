@@ -1067,7 +1067,7 @@ class Trade_model extends CI_Model
 				}
 
 
-				$sorting = '<section id="props">
+				$sorting = '<section id="props" style="margin-bottom:25px">
 								<div class="heading">
 							        <h2 data-icon="fa-newspaper-o">' .$title. ' <strong>Listings</strong></h2>
 							        <p>'.$count.'</p>
