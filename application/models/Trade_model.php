@@ -1074,7 +1074,7 @@ class Trade_model extends CI_Model
 							    </div>
 							</section>';
 
-				$sorting.='<section class="text-right" style="padding:5px">
+				/*$sorting.='<section class="text-right" style="padding:5px">
 								
 								 <div class="btn-group">
 									<button class="btn btn-dark"><i class="icon-resize-vertical icon-white"></i> Sort By</button>
@@ -1087,7 +1087,7 @@ class Trade_model extends CI_Model
 									</ul>
 								  </div>
 								  
-							</section>';
+							</section>';*/
 
 			} else {
 
