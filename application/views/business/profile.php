@@ -233,7 +233,7 @@ $this->load->view('inc/header');
 						<h2 class="tab-head">Virtual Tour</h2>
 						<div class="row" id="virtual_tour">
 						</div>
-					</section>
+					</section> 
 
 					<section role="tabpanel" class="tab-pane" id="Gallery">
 						<h2 class="tab-head">Gallery</h2>

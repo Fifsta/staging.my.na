@@ -3832,6 +3832,10 @@ class Trade_model extends CI_Model
 				$height = 500;
 
 
+				$n_width = 800;
+				$n_height = 0;
+
+
 				if($row->img_file != ''){
 					
 					if(strpos($row->img_file,'.') == 0){
@@ -3852,8 +3856,9 @@ class Trade_model extends CI_Model
 				}
 
 				$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+				$img_url_o =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$n_width,$n_height, $crop = '');
 
-				echo '<div class="loader"><img class="owl-lazy" data-src="'.$img_url.'" style="width:100%;"/></div>';
+				echo '<div class="loader"><a class="fancy-images" rel="gallery" href="'.$img_url_o.'"><img class="owl-lazy" data-src="'.$img_url.'" style="width:100%;"/></a></div>';
 
 
 			}
