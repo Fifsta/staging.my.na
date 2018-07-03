@@ -21,7 +21,7 @@
 		<div class="row">
 			<aside class="col-sm-3 col-md-3 col-lg-4">
 				<h2>About My Namibia</h2>
-				<p>My Namibia also known as MY.NA is an online business and product networking platform for Namibians . Buy and Sell anything Namibian on this site , from , cars and property to any second hand product or service you can think off . List your product , business , service or Job here for FREE today and get maximum exposure online in Namibia . Namibian business's can feature in our state of the art business directory, giving your business the best exposure and visibility online. From Namibia for Namibia.</p>
+				<p itemscope="about" itemtype="http://data-vocabulary.org/About">My Namibia also known as MY.NA is an online business and product networking platform for Namibians . Buy and Sell anything Namibian on this site , from , cars and property to any second hand product or service you can think off . List your product , business , service or Job here for FREE today and get maximum exposure online in Namibia . Namibian business's can feature in our state of the art business directory, giving your business the best exposure and visibility online. From Namibia for Namibia.</p>
 			</aside>
 			
 			<aside class="col-sm-9 col-md-9 col-lg-8">
