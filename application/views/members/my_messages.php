@@ -6,7 +6,7 @@
 
 $header['title'] = '';
 $header['metaD'] = '';
-$this->load->view('members/inc/header', $header);
+$this->load->view('inc/header', $header);
 
 $bus_details = $this->members_model->get_business_details($id);
 $name = filter_var(utf8_decode($bus_details['BUSINESS_NAME']), FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);
