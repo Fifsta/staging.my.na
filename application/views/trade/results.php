@@ -95,7 +95,9 @@ $this->load->view('inc/header', $header);
   </div>  
   
 </div>
-  
+ 
+<div class="spacer"></div>  
+
 <?php $this->load->view('inc/footer');?>  
 
 <script type="text/javascript" src="<?php echo base_url('/');?>js/select2.min.js"></script>    
