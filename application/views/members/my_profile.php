@@ -8,7 +8,7 @@ $_uname = '';
 if($this->session->userdata('u_name')){ $_uname = 'My Namibia Profile - '.ucfirst($this->session->userdata('u_name'));}
 $header['title'] = $_uname;
 $header['metaD'] = 'Home feed for '. $_uname;
-$this->load->view('members/inc/header', $header);
+$this->load->view('inc/header', $header);
 
 $acc_details = $this->members_model->get_my_account($id);
 $fname = $acc_details['CLIENT_NAME'];
@@ -74,13 +74,13 @@ if($verified == 'Y'){
 <div class="container">
   <div class="row">
 
-    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-4 order-md-2 order-sm-1 order-lg-2 order-xl-3" id="sidebar">
+    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-3 order-xl-3" id="sidebar">
       <?php $this->load->view('inc/login'); ?>
       <?php $this->load->view('inc/weather'); ?>
       <?php $this->load->view('inc/adverts'); ?>
     </div>
 
-    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
+    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
       <div class="row">
         <div class="col-md-12">
 
@@ -263,8 +263,8 @@ if($verified == 'Y'){
 <?php $this->load->view('inc/footer');?>  
 
 <script data-cfasync="false" type="text/javascript" src="<?php echo base_url('/');?>js/bootstrap-datepicker.js" ></script>
-
 <script data-cfasync="false" type="text/javascript" src="<?php echo base_url('/');?>js/jquery.form.min.js"></script>
+<script src="<?php echo base_url('/');?>js/custom/fb.js?v=2"></script>
 
 <script data-cfasync="false" type="text/javascript">
 

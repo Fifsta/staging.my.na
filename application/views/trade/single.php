@@ -304,8 +304,6 @@
 $(document).ready(function(){
 
 
-
-
     $('#watch_btn').bind('click', function(e){
         e.preventDefault();
         save_watchlist();     
