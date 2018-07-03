@@ -47,7 +47,7 @@ $this->load->view('inc/header', $header);
 
         <div class="spacer"></div>
 
-        <section id="classifieds">
+        <section id="classifieds" style="margin-bottom:25px">
 
 	        <div class="heading">
 	        <h2 data-icon="fa-newspaper-o">Find Classified <strong>in Namibia</strong></h2>

@@ -97,7 +97,7 @@ class Classifieds extends CI_Controller {
     //CAREERS LANDING ? RESULTS PAGE
     //++++++++++++++++++++++++++
 	public function results()
-	{
+	{ 
 		 
 
 		 $query = $this->classifieds_model->get_classifieds();

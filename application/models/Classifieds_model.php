@@ -50,7 +50,7 @@ class Classifieds_model extends CI_Model{
 			 }
 			 $query['cl_cat_id'] = $cl_cat_id;
 			 $query['cat_name'] = $this->input->get_post('cat_name', true);
-			 
+			  
 		 }
 
 		$query['location'] = 'Namibia';
