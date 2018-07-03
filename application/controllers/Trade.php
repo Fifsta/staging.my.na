@@ -15,7 +15,7 @@ class Trade extends CI_Controller {
 		$this->load->model('trade_model'); 
 		$this->load->model('business_model'); 
 		$this->load->model('my_na_model');  
-
+		$this->load->model('search_model');  
     }
 
 

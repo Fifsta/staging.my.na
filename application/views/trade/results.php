@@ -35,9 +35,8 @@ $this->load->view('inc/header', $header);
 <nav id="bread">
   <div class="container">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Library</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Data</li>
+           <?php $this->trade_model->show_categories_breadcrumb($main_cat_id, $sub_cat_id, $sub_sub_cat_id, $sub_sub_sub_cat_id, $location, $suburb); ?>
+           <li class="active current"><?php echo $heading;?></li>
       </ol>
   </div>
 </nav>

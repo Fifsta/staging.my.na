@@ -2056,7 +2056,7 @@ class Search_model extends CI_Model{
 	
 							//$output .= '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="'.site_url('/').'a/show/'.$c_id.'/"  itemprop="url"><span itemprop="title"></span></a><span class="divider">/</span></li>';
 	
-							if($location != '' && $location != 'all' && $location != 'national'){
+						 	if($location != '' && $location != 'all' && $location != 'national'){
 	
 								$output .= '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" 
 											href="'.site_url('/').'a/show/'.$main_c_id.'/'.$this->url_encode($main_category).'/'.$c_id.'/'.$this->url_encode($category).'/'.$l_id.'/'.$this->clean_url_str($location).'"  
