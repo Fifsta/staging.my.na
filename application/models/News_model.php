@@ -29,7 +29,9 @@ class News_model extends CI_Model
 		if($output){
 			
 			$o = '<div class="owl-carousel" style="margin-top:20px">';
-						
+				
+            print_r($output);
+                		
             if(is_array($output)){
                 $output = new Object();
             }else{
@@ -37,7 +39,7 @@ class News_model extends CI_Model
             }   
 
 
-            print_r($output);
+
 
             foreach($output as $row){
 
