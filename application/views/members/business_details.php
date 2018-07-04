@@ -16,7 +16,7 @@ $email = $bus_details['BUSINESS_EMAIL'];
 $tel = '+'.$bus_details['TEL_DIAL_CODE'].' '.$bus_details['BUSINESS_TELEPHONE'];
 $fax = '+'.$bus_details['FAX_DIAL_CODE'].' '.$bus_details['BUSINESS_FAX'];
 $cell = '+'.$bus_details['CEL_DIAL_CODE'].' '.$bus_details['BUSINESS_CELLPHONE'];
-$description = $bus_details['BUSINESS_DESCRIPTION'];
+$description = $bus_details['BUSINESS_DESCRIPTION']; 
 $pobox = $bus_details['BUSINESS_POSTAL_BOX'];
 $website = $bus_details['BUSINESS_URL']; 
 $address = $bus_details['BUSINESS_PHYSICAL_ADDRESS'];
@@ -122,13 +122,13 @@ $this->load->view('inc/header', $header);
 
   <div class="row">
 
-    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-4 order-md-2 order-sm-1 order-lg-2 order-xl-3" id="sidebar">
+    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-3 order-xl-3" id="sidebar">
       <?php $this->load->view('inc/login'); ?>
       <?php $this->load->view('inc/weather'); ?>
       <?php $this->load->view('inc/adverts'); ?>
     </div>
 
-    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
+    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
 
       <div class="row">
         <div class="col-md-12">
