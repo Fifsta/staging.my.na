@@ -24,14 +24,14 @@ class News_model extends CI_Model
 
         $link = '';
 
-		$output = file_get_contents(NA_URL.'app/category_content/');
+		$output = file_get_contents(NA_URL.'app/my_na_category_content/');
 		
 		if($output){
 			
 			$o = '<div class="owl-carousel" style="margin-top:20px">';
 				
             print_r($output);
-                		
+
             if(is_array($output)){
                 $output = new Object();
             }else{
