@@ -731,12 +731,6 @@ class Deal_model extends CI_Model{
 								<div class="slideshow-block">
 									<img alt="'.strip_tags($row->SPECIALS_HEADER).'" src="'.$img_url.'"/>
 								</div> 
-
-								<div>
-								
-									<a href="'.site_url('/').'b/'.$row->ID.'/'.$this->clean_url_str($row->BUSINESS_NAME).'">'. $b_logo . '</a>
-
-								</div>
 							</figure>			
 					  </div>
 					  ';				
