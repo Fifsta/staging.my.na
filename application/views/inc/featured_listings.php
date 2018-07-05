@@ -12,3 +12,27 @@
     </div>
                      
 </section>
+
+<script>
+
+
+	$('document').ready(function(){
+
+		load_my_na_products();
+
+	});
+
+
+	function load_my_na_products(){
+
+		var link = '<?php echo site_url('/');?>my_na/get_feature_products/Y/false/false/20/0/';
+		$.getJSON( link, function( data ) {
+
+			$('#owl-prod').html(data);
+			initialise_feat_owl();
+
+		});
+
+	}
+
+</script>

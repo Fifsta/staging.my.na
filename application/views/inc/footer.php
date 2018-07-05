@@ -75,7 +75,6 @@
     
 ?>
 
-
     $(document).on('click', '.gdpr_decline', function(e) {
 
         window.history.back();
@@ -120,6 +119,7 @@
 
 $(document).ready( function(){
 
+
 	check_gdpr();
 
 	
@@ -151,34 +151,6 @@ $(document).ready( function(){
 	});
 
 });
-
-
-function load_my_na_business(){
-
-	var link = '<?php echo site_url('/');?>my_na/get_feature_business/Y/false/false/20/0/';
-	$.getJSON( link, function( data ) {
-
-		$('#owl-bus').html(data);
-		initialise_bus_owl();
-
-	});
-
-}
-
-function load_my_na_products(){
-
-	var link = '<?php echo site_url('/');?>my_na/get_feature_products/Y/false/false/20/0/';
-	$.getJSON( link, function( data ) {
-
-		$('#owl-prod').html(data);
-		initialise_prod_owl();
-		
-	});
-
-	
-
-}
-
 
 //Call weather from NMH HUB
 function get_weather(cont,city){
@@ -236,10 +208,10 @@ function initialise_owl() {
 
 }
 
-function initialise_bus_owl() {
+function initialise_feat_owl() {
 
 	// INITIALIZE OWL
-	$('#bus-carousel').owlCarousel({
+	$('#feat-carousel').owlCarousel({
 	    loop:false,
 	    lazyLoad: true,
 	    navRewind:false,
@@ -270,48 +242,7 @@ function initialise_bus_owl() {
 	    }
 	});
 
-	initialise_bus_owl();
-
 }
-
-function initialise_prod_owl() {
-
-	// INITIALIZE OWL
-	$('#prod-carousel').owlCarousel({
-	    loop:false,
-	    lazyLoad: true,
-	    navRewind:false,
-	    margin:10,
-	    nav: true,
-	    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
-	    responsiveClass:true,
-	    responsive:{
-	        0:{
-	            items:1,
-	            nav:true
-	        },
-	        600:{
-	            items:1,
-	            nav:true
-	        },
-	        1000:{
-	            items:2,
-	            nav:true,
-	            loop:false
-	        },
-
-	        1600:{
-	            items:3,
-	            nav:true,
-	            loop:false
-	        }		        
-	    }
-	});
-
-	initialise_prod_owl();
-
-}
-
 
 </script>
 

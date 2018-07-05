@@ -92,9 +92,6 @@
 
 	$(document).ready(function(){
 
-		load_my_na_products();
-		load_my_na_business();		
-
 		// INITIALIZE OWL
 		$('#owl-banners').owlCarousel({
 		    loop:false,
