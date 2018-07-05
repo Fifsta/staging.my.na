@@ -704,7 +704,7 @@ class Deal_model extends CI_Model{
 				if($row->QUANTITY != 0){
 					$c = ($this->count_claims($row->ID) / $row->QUANTITY) * 100;
 				}
-				$fb = "postToFeed(".$row->ID.", '". ucwords(trim($this->clean_url_str($row->SPECIALS_HEADER, " ", " "))) ."','".trim($img)."', '".ucwords(trim($this->clean_url_str($row->SPECIALS_HEADER, " ", " "))) ." - My Namibia','".preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->shorten_string(strip_tags($this->clean_url_str($row->SPECIALS_CONTENT," "," ")), 50))))."', '".site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER))."')";
+				$fb = "postToFeed(".$row->ID.", '". ucwords(trim($this->clean_url_str($row->SPECIALS_HEADER, " ", " "))) ."','".trim($img_url)."', '".ucwords(trim($this->clean_url_str($row->SPECIALS_HEADER, " ", " "))) ." - My Namibia','".preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->shorten_string(strip_tags($this->clean_url_str($row->SPECIALS_CONTENT," "," ")), 50))))."', '".site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER))."')";
 				$tweet = array('scrollbars' => 'yes','status'     => 'yes','resizable'  => 'yes','screenx'    => '20%','screeny'    => '20%','class'      => 'twitter');
 				$tweet_url = 'https://twitter.com/share?url='.site_url('/').$this->clean_url_str($row->SPECIALS_HEADER).'&text='.trim(str_replace("'"," ",substr(strip_tags($row->SPECIALS_HEADER ) ,0, 100))).'&via=MyNamibia';
 
@@ -727,7 +727,7 @@ class Deal_model extends CI_Model{
 
 				echo ' <div class="col-sm-12 col-md-6 col-lg-4  col-xg-3">
 							<figure class="loader">
-								<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$ribbon.'</small>'.$proce.'</div>
+								<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$ribbon.'</small>'.$price.'</div>
 								<div class="slideshow-block">
 									<img alt="'.strip_tags($row->SPECIALS_HEADER).'" src="'.$img_url.'"/>
 								</div> 
