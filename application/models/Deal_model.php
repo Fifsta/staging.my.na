@@ -654,14 +654,14 @@ class Deal_model extends CI_Model{
 							$btn = '
 									<a id="claim_btn'.$row->ID.'"  class="btn pull-right btn-warning">
 									<i class="icon-star-empty icon-white"></i> Deal Claimed
-									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-inverse pull-right" style="margin-right:5px">
+									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-dark pull-right" style="margin-right:5px">
 									View</a>';
 
 						}else{
 							$btn = '
-									<a onclick="claim_deal_1('.$row->ID.');" href="javascript:void(0)" id="claim_btn_1'.$row->ID.'"  class="btn pull-right btn-inverse">
+									<a onclick="claim_deal_1('.$row->ID.');" href="javascript:void(0)" id="claim_btn_1'.$row->ID.'"  class="btn pull-right btn-dark">
 									<i class="icon-star-empty icon-white"></i> Grab Deal
-									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-inverse pull-right" style="margin-right:5px"">
+									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-dark pull-right" style="margin-right:5px"">
 									View</a>';
 
 						}
@@ -669,8 +669,8 @@ class Deal_model extends CI_Model{
 						//NO DEAL
 					}else{
 
-						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-inverse">
-									<i class="icon-star-empty icon-white"></i> View Special </a>';
+						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn btn-dark pull-right btn-inverse">
+									<i class="fa fa-star-o text-light"></i> View Special </a>';
 
 
 						$ribbon = '<small>Save Huge</small> ON THIS SPECIAL<span></span>';
@@ -684,14 +684,14 @@ class Deal_model extends CI_Model{
 					if($row->SPECIAL_TYPE == 'deal')
 					{
 						$ribbon = '<small>Hurry up</small> SAVE N$ '.number_format($row->NORMAL_PRICE - $row->SPECIALS_PRICE).' TODAY<span></span>';
-						$btn = '<a onclick="claim_deal_un(' . $row->ID . ');" href="javascript:void(0)" id="claim_btn' . $row->ID . '"  class="btn pull-right btn-inverse">
-										<i class="icon-star-empty icon-white"></i> Grab Deal
+						$btn = '<a onclick="claim_deal_un(' . $row->ID . ');" href="javascript:void(0)" id="claim_btn' . $row->ID . '"  class="btn btn-xs pull-right btn-dark">
+										<i class="fa fa-star-o text-light"></i> Grab Deal
 										</a>';
 
 					}else{
 						$ribbon = '<div class="product_ribbon_sml"><small>Save Huge</small> ON THIS SPECIAL<span></span></div>';
 						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-inverse">
-									<i class="icon-star-empty icon-white"></i> View Special</a>';
+									<i class="fa fa-star-o text-light"></i> View Special</a>';
 
 					}
 				}
@@ -710,7 +710,7 @@ class Deal_model extends CI_Model{
 
 				$load_img = "<img src='". base_url('/'). "img/load_white.gif' />";
 				$register_btn = "<a href='".site_url('/')."members/register/' class='btn btn-inverse btn-block'> Join My Na</a>";
-				$claim_btn = "<a href='javascript:void(0)' id='claim_btn_do'  class='btn btn-block btn-inverse'><i class='icon-star-empty icon-white'></i> Grab Deal</a>";
+				$claim_btn = "<a href='javascript:void(0)' id='claim_btn_do'  class='btn btn-block btn-inverse'><i class='fa fa-star-o text-light'></i> Grab Deal</a>";
 
 				if ($x % 4 == 0) {
 					$ad = '';
@@ -728,9 +728,9 @@ class Deal_model extends CI_Model{
 				echo ' <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
 							<figure class="loader">
 								<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$ribbon.'</small>'.$price.'</div>
-								<div class="slideshow-block">
+								<div style="position:relative">
 									<img alt="'.strip_tags($row->SPECIALS_HEADER).'" src="'.$img_url.'"/>
-									'.$btn.'
+									<div style="position:absolute; bottom:10px; right:10px">'.$btn.'</div>
 								</div> 
 							</figure>			
 					  </div>

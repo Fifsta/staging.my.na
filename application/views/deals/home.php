@@ -58,6 +58,16 @@ $this->load->view('inc/header', $header);
 
         <!--<div class="spacer"></div>-->
 
+        <section style="margin-bottom:20px">
+			<div class="heading">
+				<h2 data-icon="fa-star-o" itemprop="description">Current <strong>Deals</strong></h2>
+				<p></p>
+				<ul class="options">
+					<!--<li><a href="https://nmh.my.na/main/subscribe/?type=featured_business" target="_blank"><i class="fa fa-edit text-dark"></i> Feature my Business</a></li>-->
+				</ul>
+			</div> 
+        </section>	
+
         <section id="products">
           
          <div class="col-md-12">
