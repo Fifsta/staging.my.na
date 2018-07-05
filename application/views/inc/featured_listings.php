@@ -29,6 +29,7 @@ function load_my_na_products(){
 	$.getJSON( link, function( data ) {
 
 		$('#owl-prod').html(data);
+		initialise_prod_owl();
 
 	});
 
