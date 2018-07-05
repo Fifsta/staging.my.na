@@ -3,7 +3,7 @@ AddDefaultCharset utf-8
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
-    RewriteCond %{HTTP_HOST} ^my.na$ [NC]
+    RewriteCond %{HTTP_HOST} ^beta.my.na$ [NC]
     RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
 
     RewriteRule ^assets/(.*)$ https://d3rp5jatom3eyn.cloudfront.net/assets/$1 [R=301,NC,L]
