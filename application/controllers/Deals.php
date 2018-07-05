@@ -8,13 +8,13 @@ class Deals extends CI_Controller {
 	 * 
 	 */
 	 
-	function Deals()
-	{
-		parent::__construct();
-		$this->load->model('deal_model');
-	}
 	
-	
+    public function __construct()
+    {
+  		parent::__construct();
+  		$this->load->model('deal_model');
+			
+ 	}	
 	
 	public function index()
 	{

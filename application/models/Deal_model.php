@@ -9,7 +9,7 @@ class Deal_model extends CI_Model{
  	function deal_model(){
   		//parent::CI_model();
 		self::__construct();	
- 	}
+ 	} 
 
 
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2385,19 +2385,19 @@ class Deal_model extends CI_Model{
 
 	public function show_deals_breadcrumb($cat = '', $loc = '', $key = ''){
 		
-		echo '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="'.site_url('/').'" itemprop="url"><span itemprop="title">My Namibia</span></a><span class="divider">/</span></li>';
+		echo '<li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="'.site_url('/').'" itemprop="url"><span itemprop="title">My Namibia</span></a><span class="divider"></span></li>';
 
 		if($cat == '' && $loc == '' && $key == ''){
 
-			echo '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="'.site_url('/').'deals/" itemprop="url"><span itemprop="title">Deals</span></a></li>';
+			echo '<li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="'.site_url('/').'deals/" itemprop="url"><span itemprop="title">Deals</span></a></li>';
 		}else{
 
 			if($loc == ''){
 
-				echo '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="'.site_url('/').'deals/" itemprop="url"><span itemprop="title">Deals</span></a><span class="divider">/</span></li>';
+				echo '<li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="'.site_url('/').'deals/" itemprop="url"><span itemprop="title">Deals</span></a><span class="divider"></span></li>';
 			}else{
 
-				echo '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="'.site_url('/').'deals/" itemprop="url"><span itemprop="title">Deals</span></a><span class="divider">/</span></li>
+				echo '<li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="'.site_url('/').'deals/" itemprop="url"><span itemprop="title">Deals</span></a><span class="divider"></span></li>
 				<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a class="label label-warning" href="'.site_url('/').'deals/" itemprop="url"><span itemprop="title">'.ucwords($loc).'</span></a></li>';
 			}
 
