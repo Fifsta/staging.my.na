@@ -665,7 +665,7 @@ class Deal_model extends CI_Model{
 									View</a>';
 
 						}
-						$ribbon = '<div class="product_ribbon_sml"><small>Hurry up</small> SAVE N$ '.number_format($row->NORMAL_PRICE - $row->SPECIALS_PRICE).' TODAY<span></span></div>';
+						$ribbon = '<small>Hurry up</small> SAVE N$ '.number_format($row->NORMAL_PRICE - $row->SPECIALS_PRICE).' TODAY<span></span>';
 						//NO DEAL
 					}else{
 
@@ -689,7 +689,7 @@ class Deal_model extends CI_Model{
 										</a>';
 
 					}else{
-						$ribbon = '<div class="product_ribbon_sml"><small>Save Huge</small> ON THIS SPECIAL<span></span></div>';
+						$ribbon = '<small>Save Huge</small> ON THIS SPECIAL<span></span>';
 						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-inverse">
 									<i class="fa fa-star-o text-light"></i> View Special</a>';
 
