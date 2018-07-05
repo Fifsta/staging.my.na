@@ -150,8 +150,6 @@ $(document).ready( function(){
 
 	});
 
-	initialise_bus_owl();
-
 });
 
 //Call weather from NMH HUB
