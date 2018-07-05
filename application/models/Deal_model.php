@@ -620,11 +620,14 @@ class Deal_model extends CI_Model{
 
 				if($row->SPECIALS_IMAGE_NAME == ''){
 
+
 					$img = base_url('/').'img/user_blank.jpg';
 
 				}else{
 
-					$img = base_url('/').'img/timbthumb.php?w=300&h=200&src='.CDN_URL.'assets/deals/images/'.$row->SPECIALS_IMAGE_NAME;
+					$img_str = 'assets/deals/images/' . $row->SPECIALS_IMAGE_NAME;
+
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
 				}
 
@@ -726,11 +729,7 @@ class Deal_model extends CI_Model{
 							<figure class="loader">
 								<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
 								<div class="slideshow-block">
-									<a href="#" class="link"></a>
-									<div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides="> li">
-									' .implode($img). '
-									</div>
-									' .$img_Cycle. '
+									<img alt="'.strip_tags($row->SPECIALS_HEADER).'" src="'.$img_url.'"/>
 								</div> 
 
 								<div>
