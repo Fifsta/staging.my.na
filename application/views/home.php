@@ -38,7 +38,6 @@
 					</div>
 
 					<div class="spacer"></div>
-
 		 			<?php $this->load->view('inc/featured_business'); ?>
 					<div class="spacer"></div>
 					<?php $this->load->view('inc/featured_listings'); ?>
@@ -53,7 +52,7 @@
 					<div class="spacer"></div>
 					<?php $this->load->view('inc/auctions'); ?>					
 					<div class="spacer"></div>
-					<?php $this->load->view('inc/news'); ?>	
+					<?php $this->load->view('inc/news'); ?>
 					<div class="spacer"></div>
 
 				</div>
@@ -92,6 +91,9 @@
 
 
 	$(document).ready(function(){
+
+		load_my_na_products();
+		load_my_na_business();		
 
 		// INITIALIZE OWL
 		$('#owl-banners').owlCarousel({
@@ -151,9 +153,6 @@
     //$("input .star").rating();          
 
   }	
-
-
-	
 
 </script>
 

@@ -75,6 +75,7 @@
     
 ?>
 
+
     $(document).on('click', '.gdpr_decline', function(e) {
 
         window.history.back();
@@ -119,10 +120,6 @@
 
 $(document).ready( function(){
 
-
-	initialise_prod_owl();
-	initialise_bus_owl();
-
 	check_gdpr();
 
 	
@@ -154,6 +151,34 @@ $(document).ready( function(){
 	});
 
 });
+
+
+function load_my_na_business(){
+
+	var link = '<?php echo site_url('/');?>my_na/get_feature_business/Y/false/false/20/0/';
+	$.getJSON( link, function( data ) {
+
+		$('#owl-bus').html(data);
+		initialise_bus_owl();
+
+	});
+
+}
+
+function load_my_na_products(){
+
+	var link = '<?php echo site_url('/');?>my_na/get_feature_products/Y/false/false/20/0/';
+	$.getJSON( link, function( data ) {
+
+		$('#owl-prod').html(data);
+		initialise_prod_owl();
+		
+	});
+
+	
+
+}
+
 
 //Call weather from NMH HUB
 function get_weather(cont,city){
