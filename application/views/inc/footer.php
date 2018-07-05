@@ -120,6 +120,9 @@
 $(document).ready( function(){
 
 
+	initialise_prod_owl();
+	initialise_bus_owl();
+
 	check_gdpr();
 
 	
