@@ -242,8 +242,6 @@ function initialise_bus_owl() {
 	    }
 	});
 
-	initialise_bus_owl();
-
 }
 
 function initialise_prod_owl() {
@@ -279,8 +277,6 @@ function initialise_prod_owl() {
 	        }		        
 	    }
 	});
-
-	initialise_prod_owl();
 
 }
 
