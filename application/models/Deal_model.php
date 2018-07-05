@@ -729,7 +729,7 @@ class Deal_model extends CI_Model{
 							<figure class="loader">
 								<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$ribbon.'</small>'.$price.'</div>
 								<div class="slideshow-block">
-									<a href=""><img alt="'.strip_tags($row->SPECIALS_HEADER).'" src="'.$img_url.'"/>
+									<img alt="'.strip_tags($row->SPECIALS_HEADER).'" src="'.$img_url.'"/>
 									'.$btn.'
 								</div> 
 							</figure>			
