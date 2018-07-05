@@ -8,6 +8,9 @@ AddDefaultCharset utf-8
 
 	#RewriteRule ^assets/(.*)$ https://d3rp5jatom3eyn.cloudfront.net/assets/$1 [R=301,NC,L]
 
+    RewriteCond %{SERVER_PORT} 80 
+    RewriteRule ^(.*)$ https://beta.my.na/$1 [R,L]    
+
     RewriteCond %{REQUEST_URI} ^system.*
     RewriteRule ^(.*)$ /index.php?/$1 [L]
 
