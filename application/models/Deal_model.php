@@ -727,7 +727,7 @@ class Deal_model extends CI_Model{
 
 				echo ' <div class="col-sm-12 col-md-6 col-lg-4  col-xg-3">
 							<figure class="loader">
-								<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
+								<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$ribbon.'</small>'.$proce.'</div>
 								<div class="slideshow-block">
 									<img alt="'.strip_tags($row->SPECIALS_HEADER).'" src="'.$img_url.'"/>
 								</div> 
