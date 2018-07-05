@@ -13,26 +13,63 @@
                      
 </section>
 
-<script>
+<script type="text/javascript">
 
 
-	$('document').ready(function(){
+$('document').ready(function(){
 
-		load_my_na_products();
+	load_my_na_products();
+
+});
+
+
+function load_my_na_products(){
+
+	var link = '<?php echo site_url('/');?>my_na/get_feature_products/Y/false/false/20/0/';
+	$.getJSON( link, function( data ) {
+
+		$('#owl-prod').html(data);
+		initialise_prod_owl();
 
 	});
 
+}
 
-	function load_my_na_products(){
 
-		var link = '<?php echo site_url('/');?>my_na/get_feature_products/Y/false/false/20/0/';
-		$.getJSON( link, function( data ) {
+function initialise_prod_owl() {
 
-			$('#owl-prod').html(data);
-			initialise_prod_owl();
+	// INITIALIZE OWL
+	$('#prod-carousel').owlCarousel({
+	    loop:false,
+	    lazyLoad: true,
+	    navRewind:false,
+	    margin:10,
+	    nav: true,
+	    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
+	    responsiveClass:true,
+	    responsive:{
+	        0:{
+	            items:1,
+	            nav:true
+	        },
+	        600:{
+	            items:1,
+	            nav:true
+	        },
+	        1000:{
+	            items:2,
+	            nav:true,
+	            loop:false
+	        },
 
-		});
+	        1600:{
+	            items:3,
+	            nav:true,
+	            loop:false
+	        }		        
+	    }
+	});
 
-	}
+}	
 
 </script>
