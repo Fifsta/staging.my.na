@@ -589,6 +589,18 @@ class Deal_model extends CI_Model{
 	
 	public function show_deals($query, $advert = FALSE){
 		
+
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 360;
+		$height = 230;
+
+		$l_width = 60;
+		$l_height = 60;
+
+
 		if($query == ''){
 
 			$query = $this->db->query("SELECT * FROM u_special_component WHERE IS_ACTIVE = 'Y' AND SPECIALS_EXPIRE_DATE > NOW() ORDER BY RAND() LIMIT 24" ,FALSE);
@@ -710,7 +722,27 @@ class Deal_model extends CI_Model{
 				   ';
 				}
 
-				echo ' <div class="span3 white_box">
+				echo ' <div class="col-sm-12 col-md-6 col-lg-4  col-xg-3">
+							<figure class="loader">
+								<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
+								<div class="slideshow-block">
+									<a href="#" class="link"></a>
+									<div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides="> li">
+									' .implode($img). '
+									</div>
+									' .$img_Cycle. '
+								</div> 
+
+								<div>
+								
+									<a href="'.site_url('/').'b/'.$row->ID.'/'.$this->clean_url_str($row->BUSINESS_NAME).'">'. $b_logo . '</a>
+
+								</div>
+							</figure>			
+					  </div>
+					  ';				
+
+				/*echo ' <div class="span3 white_box">
 							'.$ribbon.'
 							<div class="slideshow-block">
 								<a href="#" class="link"></a>
@@ -738,7 +770,7 @@ class Deal_model extends CI_Model{
 								<div class="clearfix"></div>
 							</div>
 					  </div>
-					  ';
+					  ';*/
 
 				$x ++;
 
