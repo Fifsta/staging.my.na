@@ -721,11 +721,11 @@ class Deal_model extends CI_Model{
 					}
 					echo $ad.'
 				   </div>
-				   <div class="row-fluid">
+				   <div class="row">
 				   ';
 				}
 
-				echo ' <div class="col-sm-12 col-md-6 col-lg-4  col-xg-3">
+				echo ' <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
 							<figure class="loader">
 								<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$ribbon.'</small>'.$price.'</div>
 								<div class="slideshow-block">
