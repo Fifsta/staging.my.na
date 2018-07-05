@@ -636,10 +636,10 @@ class Deal_model extends CI_Model{
 				);
 
 				//PRICE
-				$price = '<span style=" font-size:12px">N$</span> '.$row->SPECIALS_PRICE.'';
+				$price = 'N$ '.$row->SPECIALS_PRICE.'';
 				if($row->NORMAL_PRICE > 0){
 
-					$price = '<span style=" font-size:12px">N$</span> '.$row->SPECIALS_PRICE.' <span style=" font-size:12px">N$</span> <span style="text-decoration: line-through;font-size:15px">'.$row->NORMAL_PRICE.'</span>';
+					$price = 'N$ '.$row->SPECIALS_PRICE.' / was N$'.$row->NORMAL_PRICE;
 				}
 
 				$price_l = '<div class="price_label">'.$price.'</div>';
