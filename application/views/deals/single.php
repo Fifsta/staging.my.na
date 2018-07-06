@@ -1,24 +1,34 @@
-<?php 
-
-//+++++++++++++++++
-//LOAD HEADER
-//Prepare Variables array to pass into header
-//+++++++++++++++++
-if(isset($title)){
-
- $header['title'] = $title . ' - My Namibia';
- $header['metaD'] = 'Buy or Sell '.$title. '. Find ' . $title .' online - My Namibia';
- $header['section'] = '';
+ <?php 
+ //+++++++++++++++++
+ //LOAD HEADER
+ //Prepare Variables array to pass into header
+ //+++++++++++++++++
+ if(isset($heading)){
  
-}else{
-
- $header['title'] = '';
- $header['metaD'] = '';
- $header['section'] = ''; 
+	 $header['title'] = $SPECIALS_HEADER . ' - My Namibia';
+	 $header['metaD'] = substr(strip_tags($SPECIALS_CONTENT),0, 180). '. - My Namibia Deals';
+	 $header['section'] = '';
+	 
+ }else{
+	
+	 $header['title'] = $SPECIALS_HEADER . ' - My Namibia';
+	 $header['metaD'] = substr(strip_tags($SPECIALS_CONTENT),0, 180). '. - My Namibia Deals';
+	 $header['section'] = '';
+	 
+ }
  
-}
+ $img_str = base_url('/').'assets/deals/images/'.$SPECIALS_IMAGE_NAME;
  
-$this->load->view('inc/header', $header);
+  //BUILD OPEN GRAPH
+  $header['og'] ='
+  <meta property="fb:app_id" content="287335411399195"> 
+  <meta property="og:type"        content="MyNamibia:Deals"> 
+  <meta property="og:url"         content="'.site_url('/').'deal/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/"> 
+  <meta property="og:title"       content="'.$header['title'].'"> 
+  <meta property="og:description" content="'.$header['metaD'].'"> 
+  <meta property="og:image"       content="'.$img_str.'">
+  '; 
+ $this->load->view('inc/header', $header);
 
 ?>
 
