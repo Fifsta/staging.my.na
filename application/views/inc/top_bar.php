@@ -52,10 +52,10 @@
 			<div class="col-sm-1 text-right">
                 <nav id="menu" class="btn-group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-icon="fa-bars"></button>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li class="dropdown-header dropdown-menu-right">My Namibia Menu</li>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">My Namibia Menu</li>
                             <li><a href="#">Business</a>
-                                <ul class="dropdown-menu">
+                                <ul>
                                     <?php $this->my_na_model->show_popular_cats($t = true); ?>
                                 </ul>    
                             </li>
