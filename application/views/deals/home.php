@@ -15,7 +15,7 @@ if(isset($title)){
  $header['title'] = '';
  $header['metaD'] = '';
  $header['section'] = '';
- 
+  
 }
  
 $this->load->view('inc/header', $header);
@@ -107,8 +107,138 @@ $this->load->view('inc/header', $header);
 
 <script src="<?php echo base_url('/');?>js/custom/fb.js?v=2"></script>
 
+<script src="<?php echo base_url('/');?>js/custom/fb.js?v=2"></script>
 <script type="text/javascript">
- 
+  $(document).ready(function(){
+    $('[rel=tooltip]').tooltip();
+
+  });
+
+
+  function initiate_slides(){
+    // Cycle plugin
+    $('.slides').cycle({
+      fx:     'fade',
+      speed:   400,
+      timeout: 200,
+    }).cycle("pause");
+
+    // Pause & play on hover
+    $('.slideshow-block').hover(function(){
+
+      $(this).find('.slides').addClass('active').cycle('resume');
+      $(this).find('.slides li img').each(function (e) {
+        $(this).attr('src', $(this).attr('data-original'));
+      });
+
+    }, function(){
+      $(this).find('.slides').removeClass('active').cycle('pause');
+    });
+
+    //$("input .star").rating();          
+    $("[rel=tooltip]").tooltip();
+    window.setTimeout(initiate_rating, 100);
+
+  }
+
+  function initiate_rating(){
+
+    $.getScript("<?php echo base_url('/')?>js/jquery.rating.pack.js", function(){
+
+      $("input .star").rating();
+
+    });
+
+
+  }
+
+  function initiate_pagination(){
+
+    //PAGINATION
+    $('div.pagination ul li a').bind('click', function(e){
+
+      e.preventDefault();
+      var pre = $('#pre_loader');
+      pre.removeClass('hidden');
+      $('div.pagination ul').find('li.active').removeClass('active');
+      $(this).closest( "li" ).addClass('active');
+      $.ajax({
+        url: $(this).attr('href'),
+        success: function(data) {
+          pre.addClass('hidden');
+          $("#deal_content").append(data);
+          //initiate_slides();
+        }
+      });
+
+
+    });
+
+  }
+
+
+
+  function my_na(id){
+
+    var n = $('#'+id);
+    var place = 'left';
+    $.ajax({
+      type: 'get',
+      cache: false,
+      url: '<?php echo site_url('/').'business/my_na/';?>'+id+'/'+place+'/' ,
+      success: function (data) {
+
+        n.html(data);
+        $('[rel=tooltip]').tooltip();
+        my_na_effect(id);
+        n.removeClass('loading_img');
+      }
+    });
+
+  }
+
+  function my_na_yes(id){
+
+    var n = $('#'+id);
+    n.find(".my_na").hide();
+    n.addClass('loading_img');
+    n.popover('destroy');
+
+    var place = 'left';
+    $.ajax({
+      type: 'get',
+      cache: false,
+      url: '<?php echo site_url('/').'business/my_na_click/';?>'+id+'/'+place+'/' ,
+      success: function (data) {
+
+        n.html(data);
+        $('[rel=tooltip]').tooltip();
+        my_na_effect(id);
+        n.removeClass('loading_img');
+        n.find(".my_na").show();
+      }
+    });
+
+  }
+
+  function my_na_effect(id){
+
+    $(function() {
+      $("#"+id)
+        .find("span")
+        .hide()
+        .end()
+        .hover(function() {
+          $(this).find("span").stop(true, true).fadeIn();
+
+        }, function(){
+          $(this).find("span").stop(true, true).fadeOut();
+
+        });
+    });
+
+  }
+
 
 </script>
 
