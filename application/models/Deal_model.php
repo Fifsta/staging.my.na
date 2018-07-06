@@ -92,9 +92,9 @@ class Deal_model extends CI_Model{
 						<td style="width:5%"><span class="badge">'.$this->count_claims($row->ID).'</span></td>
 					  	<td style="width:20%;min-width:100px;text-align:right">  
 							'.$active.'
-							<a onclick="deal_stats('.$row->ID.');" class="btn btn-mini btn-inverse"><i class="icon-cog icon-white"></i></a>
-							<a onclick="update_deal('.$row->ID.');" class="btn btn-mini btn-inverse"><i class="icon-pencil icon-white"></i></a> 
-							<a onclick="delete_deal('.$row->ID.');" class="btn btn-mini btn-inverse"><i class="icon-trash icon-white"></i></a></td>
+							<a onclick="deal_stats('.$row->ID.');" class="btn btn-mini btn-dark"><i class="icon-cog icon-white"></i></a>
+							<a onclick="update_deal('.$row->ID.');" class="btn btn-mini btn-dark"><i class="icon-pencil icon-white"></i></a> 
+							<a onclick="delete_deal('.$row->ID.');" class="btn btn-mini btn-dark"><i class="icon-trash icon-white"></i></a></td>
 					  </tr>';
 			}
 			
@@ -173,14 +173,14 @@ class Deal_model extends CI_Model{
 							$btn = '
 									<a id="claim_btn'.$row->ID.'"  class="btn pull-right btn-warning">
 									<i class="icon-star-empty icon-white"></i> Deal Claimed
-									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-inverse pull-right" style="margin-right:5px">
+									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-dark pull-right" style="margin-right:5px">
 									View</a>';
 
 						}else{
 							$btn = '
-									<a onclick="claim_deal_1('.$row->ID.');" href="javascript:void(0)" id="claim_btn_1'.$row->ID.'"  class="btn pull-right btn-inverse">
+									<a onclick="claim_deal_1('.$row->ID.');" href="javascript:void(0)" id="claim_btn_1'.$row->ID.'"  class="btn pull-right btn-dark">
 									<i class="icon-star-empty icon-white"></i> Grab Deal
-									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-inverse pull-right" style="margin-right:5px"">
+									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-dark pull-right" style="margin-right:5px"">
 									View</a>';
 
 						}
@@ -188,7 +188,7 @@ class Deal_model extends CI_Model{
 						//NO DEAL
 					}else{
 
-						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-inverse">
+						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-dark">
 									<i class="icon-star-empty icon-white"></i> View Special</a>';
 
 
@@ -203,13 +203,13 @@ class Deal_model extends CI_Model{
 					if($row->SPECIAL_TYPE == 'deal')
 					{
 						$ribbon = '<div class="product_ribbon_sml"><small>Hurry up</small> SAVE N$ '.number_format($row->NORMAL_PRICE - $row->SPECIALS_PRICE).' TODAY<span></span></div>';
-						$btn = '<a onclick="claim_deal_un(' . $row->ID . ');" href="javascript:void(0)" id="claim_btn' . $row->ID . '"  class="btn pull-right btn-inverse">
+						$btn = '<a onclick="claim_deal_un(' . $row->ID . ');" href="javascript:void(0)" id="claim_btn' . $row->ID . '"  class="btn pull-right btn-dark">
 										<i class="icon-star-empty icon-white"></i> Grab Deal
 										</a>';
 
 					}else{
 						$ribbon = '<div class="product_ribbon_sml"><small>Save Huge</small> ON THIS SPECIAL<span></span></div>';
-						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-inverse">
+						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-dark">
 									<i class="icon-star-empty icon-white"></i> View Special</a>';
 
 					}
@@ -266,8 +266,8 @@ class Deal_model extends CI_Model{
 			if($x == 0){
 				$fb_share_key = '';//$this->encrypt('fb_share');
 				$load_img = "<img src='". base_url('/'). "img/load_white.gif' />";
-				$register_btn = "<a href='".site_url('/')."members/register/' class='btn btn-inverse btn-block'> Join My Na</a>";
-				$claim_btn = "<a href='javascript:void(0)' id='claim_btn_do'  class='btn btn-block btn-inverse'><i class='icon-star-empty icon-white'></i> Grab Deal</a>";
+				$register_btn = "<a href='".site_url('/')."members/register/' class='btn btn-dark btn-block'> Join My Na</a>";
+				$claim_btn = "<a href='javascript:void(0)' id='claim_btn_do'  class='btn btn-block btn-dark'><i class='icon-star-empty icon-white'></i> Grab Deal</a>";
 				echo ' <script data-cfasync="false" type="text/javascript">
 	  						
 							 $(function () {
@@ -436,14 +436,14 @@ class Deal_model extends CI_Model{
 							$btn = '
 									<a id="claim_btn'.$row->ID.'"  class="btn pull-right btn-warning">
 									<i class="icon-star-empty icon-white"></i> Deal Claimed
-									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-inverse pull-right" style="margin-right:5px">
+									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-dark pull-right" style="margin-right:5px">
 									View</a>';
 
 						}else{
 							$btn = '
-									<a onclick="claim_deal_1('.$row->ID.');" href="javascript:void(0)" id="claim_btn_1'.$row->ID.'"  class="btn pull-right btn-inverse">
+									<a onclick="claim_deal_1('.$row->ID.');" href="javascript:void(0)" id="claim_btn_1'.$row->ID.'"  class="btn pull-right btn-dark">
 									<i class="icon-star-empty icon-white"></i> Grab Deal
-									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-inverse pull-right" style="margin-right:5px"">
+									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-dark pull-right" style="margin-right:5px"">
 									View</a>';
 
 						}
@@ -451,7 +451,7 @@ class Deal_model extends CI_Model{
 						//NO DEAL
 					}else{
 
-						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-inverse">
+						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-dark">
 									<i class="icon-star-empty icon-white"></i> View Special</a>';
 
 
@@ -466,13 +466,13 @@ class Deal_model extends CI_Model{
 					if($row->SPECIAL_TYPE == 'deal')
 					{
 						$ribbon = '<div class="product_ribbon_sml"><small>Hurry up</small> SAVE N$ '.number_format($row->NORMAL_PRICE - $row->SPECIALS_PRICE).' TODAY<span></span></div>';
-						$btn = '<a onclick="claim_deal_un(' . $row->ID . ');" href="javascript:void(0)" id="claim_btn' . $row->ID . '"  class="btn pull-right btn-inverse">
+						$btn = '<a onclick="claim_deal_un(' . $row->ID . ');" href="javascript:void(0)" id="claim_btn' . $row->ID . '"  class="btn pull-right btn-dark">
 										<i class="icon-star-empty icon-white"></i> Grab Deal
 										</a>';
 
 					}else{
 						$ribbon = '<div class="product_ribbon_sml"><small>Save Huge</small> ON THIS SPECIAL<span></span></div>';
-						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-inverse">
+						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-dark">
 									<i class="icon-star-empty icon-white"></i> View Special</a>';
 
 					}
@@ -491,8 +491,8 @@ class Deal_model extends CI_Model{
 				$tweet_url = 'https://twitter.com/share?url='.site_url('/').$this->clean_url_str($row->SPECIALS_HEADER).'&text='.trim(str_replace("'"," ",substr(strip_tags($row->SPECIALS_HEADER ) ,0, 100))).'&via=MyNamibia';
 
 				$load_img = "<img src='". base_url('/'). "img/load_white.gif' />";
-				$register_btn = "<a href='".site_url('/')."members/register/' class='btn btn-inverse btn-block'> Join My Na</a>";
-				$claim_btn = "<a href='javascript:void(0)' id='claim_btn_do'  class='btn btn-block btn-inverse'><i class='icon-star-empty icon-white'></i> Grab Deal</a>";
+				$register_btn = "<a href='".site_url('/')."members/register/' class='btn btn-dark btn-block'> Join My Na</a>";
+				$claim_btn = "<a href='javascript:void(0)' id='claim_btn_do'  class='btn btn-block btn-dark'><i class='icon-star-empty icon-white'></i> Grab Deal</a>";
 				echo ' <div class="span3 white_box">
 							'.$ribbon.'
 							<div class="slideshow-block">
@@ -669,7 +669,7 @@ class Deal_model extends CI_Model{
 						//NO DEAL
 					}else{
 
-						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn btn-dark pull-right btn-inverse">
+						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn btn-dark pull-right btn-dark">
 									<i class="fa fa-star-o text-light"></i> View Special </a>';
 
 
@@ -690,7 +690,7 @@ class Deal_model extends CI_Model{
 
 					}else{
 						$ribbon = '<small>Save Huge</small> ON THIS SPECIAL<span></span>';
-						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-inverse">
+						$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-dark">
 									<i class="fa fa-star-o text-light"></i> View Special</a>';
 
 					}
@@ -709,8 +709,8 @@ class Deal_model extends CI_Model{
 				$tweet_url = 'https://twitter.com/share?url='.site_url('/').$this->clean_url_str($row->SPECIALS_HEADER).'&text='.trim(str_replace("'"," ",substr(strip_tags($row->SPECIALS_HEADER ) ,0, 100))).'&via=MyNamibia';
 
 				$load_img = "<img src='". base_url('/'). "img/load_white.gif' />";
-				$register_btn = "<a href='".site_url('/')."members/register/' class='btn btn-inverse btn-block'> Join My Na</a>";
-				$claim_btn = "<a href='javascript:void(0)' id='claim_btn_do'  class='btn btn-block btn-inverse'><i class='fa fa-star-o text-light'></i> Grab Deal</a>";
+				$register_btn = "<a href='".site_url('/')."members/register/' class='btn btn-dark btn-block'> Join My Na</a>";
+				$claim_btn = "<a href='javascript:void(0)' id='claim_btn_do'  class='btn btn-block btn-dark'><i class='fa fa-star-o text-light'></i> Grab Deal</a>";
 
 				if ($x % 4 == 0) {
 					$ad = '';
@@ -782,8 +782,8 @@ class Deal_model extends CI_Model{
 			echo '</div>';
 			$fb_share_key = '';//$this->encrypt('fb_share');
 			$load_img = "<img src='". base_url('/'). "img/load_white.gif' />";
-			$register_btn = "<a href='".site_url('/')."members/register/' class='btn btn-inverse btn-block'> Join My Na</a>";
-			$claim_btn = "<a onclick='' href='javascript:void(0)' id='claim_btn_do' class='btn btn-block btn-inverse'><i class='icon-star-empty icon-white'></i> Grab Deal</a>";
+			$register_btn = "<a href='".site_url('/')."members/register/' class='btn btn-dark btn-block'> Join My Na</a>";
+			$claim_btn = "<a onclick='' href='javascript:void(0)' id='claim_btn_do' class='btn btn-block btn-dark'><i class='icon-star-empty icon-white'></i> Grab Deal</a>";
 			echo ' <script data-cfasync="false" type="text/javascript">
   
 
@@ -926,14 +926,14 @@ class Deal_model extends CI_Model{
 						$btn = '
 									<a id="claim_btn'.$row->ID.'"  class="btn pull-right btn-warning">
 									<i class="icon-star-empty icon-white"></i> Deal Claimed
-									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-inverse pull-right" style="margin-right:5px">
+									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-dark pull-right" style="margin-right:5px">
 									View</a>';
 
 					}else{
 						$btn = '
-									<a onclick="claim_deal_1('.$row->ID.');" href="javascript:void(0)" id="claim_btn_1'.$row->ID.'"  class="btn pull-right btn-inverse">
+									<a onclick="claim_deal_1('.$row->ID.');" href="javascript:void(0)" id="claim_btn_1'.$row->ID.'"  class="btn pull-right btn-dark">
 									<i class="icon-star-empty icon-white"></i> Grab Deal
-									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-inverse pull-right" style="margin-right:5px"">
+									</a><a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'"  class="btn btn-dark pull-right" style="margin-right:5px"">
 									View</a>';
 
 					}
@@ -941,7 +941,7 @@ class Deal_model extends CI_Model{
 					//NO DEAL
 				}else{
 
-					$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-inverse">
+					$btn = '<a href="'.site_url('/').'deal/'.$row->ID.'/'.trim($this->clean_url_str($row->SPECIALS_HEADER)).'" id="claim_btn'.$row->ID.'"  class="btn pull-right btn-d">
 									<i class="icon-star-empty icon-white"></i> View Special</a>';
 
 
@@ -997,8 +997,8 @@ class Deal_model extends CI_Model{
 			}
 			$fb_share_key = '';//$this->encrypt('fb_share');
 			$load_img = "<img src='". base_url('/'). "img/load_white.gif' />";
-			$register_btn = "<a href='".site_url('/')."members/register/' class='btn btn-inverse btn-block'> Join My Na</a>";
-			$claim_btn = "<a onclick='' href='javascript:void(0)' id='claim_btn_do' class='btn btn-block btn-inverse'><i class='icon-star-empty icon-white'></i> Grab Deal</a>";
+			$register_btn = "<a href='".site_url('/')."members/register/' class='btn btn-dark btn-block'> Join My Na</a>";
+			$claim_btn = "<a onclick='' href='javascript:void(0)' id='claim_btn_do' class='btn btn-block btn-dark'><i class='icon-star-empty icon-white'></i> Grab Deal</a>";
 			echo ' <script data-cfasync="false" type="text/javascript">
 
 						 $(document).ready(function(){
@@ -1338,7 +1338,7 @@ class Deal_model extends CI_Model{
 						}
 						else
 						{
-							$btn = '<a onclick="claim_deal_1(' . $row->ID . ');" href="javascript:void(0)" id="claim_btn_1' . $row->ID . '"  class="btn btn-large pull-right btn-inverse">
+							$btn = '<a onclick="claim_deal_1(' . $row->ID . ');" href="javascript:void(0)" id="claim_btn_1' . $row->ID . '"  class="btn btn-large pull-right btn-dark">
 										<i class="icon-star-empty icon-white"></i> Grab Deal
 										</a>';
 
@@ -1353,7 +1353,7 @@ class Deal_model extends CI_Model{
 					//IF DEAL
 					if($row->SPECIAL_TYPE == 'deal')
 					{
-						$btn = '<a onclick="claim_deal_un(' . $row->ID . ');" href="javascript:void(0)" id="claim_btn' . $row->ID . '"  class="btn btn-large pull-right btn-inverse">
+						$btn = '<a onclick="claim_deal_un(' . $row->ID . ');" href="javascript:void(0)" id="claim_btn' . $row->ID . '"  class="btn btn-large pull-right btn-dark">
 									<i class="icon-star-empty icon-white"></i> Grab Deal
 									</a>';
 					}else{
@@ -1432,8 +1432,8 @@ class Deal_model extends CI_Model{
 					  </script>';
 					$fb_share_key = '';//$this->encrypt('fb_share');
 					$load_img = "<img src='". base_url('/'). "img/load_white.gif' />";
-					$register_btn = "<a href='".site_url('/')."members/register/' class='btn btn-inverse btn-block'> Join My Na</a>";
-					$claim_btn = "<a onclick='claim_deal(".$row->ID.")' href='javascript:void(0)' id='claim_btn".$row->ID."' class='btn btn-block btn-inverse'><i class='icon-star-empty icon-white'></i> Grab Deal</a>";
+					$register_btn = "<a href='".site_url('/')."members/register/' class='btn btn-dark btn-block'> Join My Na</a>";
+					$claim_btn = "<a onclick='claim_deal(".$row->ID.")' href='javascript:void(0)' id='claim_btn".$row->ID."' class='btn btn-block btn-dark'><i class='icon-star-empty icon-white'></i> Grab Deal</a>";
 			echo ' <script type="text/javascript">
   
 						
