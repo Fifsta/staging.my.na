@@ -66,7 +66,7 @@ $route["b/(:num)/(:any)"] = 'business/view/$1/$2';
 $route["b/(:num)"] = 'business/view/$1/';
 
 //CLEAN DEALS
-$route["deal/(:any)"] = 'deals/show/$1';
+$route["deal/(:num)/(:any)"] = 'deals/show/$1/$2';
 //$route["^((?!\b".implode('\b|\b', $controller_exceptions)."\b).*)$"] = 'page/$1';
 
 //CLEAN PRODUCTS
