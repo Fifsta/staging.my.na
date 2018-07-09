@@ -58,14 +58,8 @@
 </div> 
 
 
-<?php
-if($this->input->get('debug')){
 
-	$this->output->enable_profiler(true);
-
-
-}
-?>
+<?php $this->output->enable_profiler(true); ?>
 
 <?php if($this->config->item('analytics')){ echo $this->config->item('analytics');}?>
 
