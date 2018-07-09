@@ -93,35 +93,34 @@ class Deals extends CI_Controller {
 	public function instant_deal($key)
 	{
 			
-			$this->deal_model->search_ajax_deal($key);
+		$this->deal_model->search_ajax_deal($key);
 			
 	}
+
 	//+++++++++++++++++++++++++++
 	//GET DEAL
 	public function show($deal_id)
 	{
 		 
-          //redirect SEO friendly url
+        //redirect SEO friendly url
 		
-		  $this->db->where('u_special_component.ID', $deal_id);
-		  $this->db->join('a_map_location', 'a_map_location.ID = u_special_component.LOCATION', 'left');
-		  $query = $this->db->get('u_special_component');  
+		$this->db->where('u_special_component.ID', $deal_id);
+		$this->db->join('a_map_location', 'a_map_location.ID = u_special_component.LOCATION', 'left');
+		$query = $this->db->get('u_special_component');  
 		  
-			  if($query->result()){
-				  
-				  $row = $query->row_array();
-				  $row['ID'] = $deal_id;
-				  $this->load->view('deals/single', $row);
-				  
-			  }else{
-				  
-				  $data['heading'] = 'Deals in Namibia';
-				  //$data['id'] = $this->session->userdata('id');
-				  $this->load->view('deals/results', $data);	
-				  
-			  }
-	
-		  	
+		if($query->result()){
+			  
+			$row = $query->row_array();
+			$row['ID'] = $deal_id;
+			$this->load->view('deals/single', $row);
+			  
+		  }else{
+			  
+			$data['heading'] = 'Deals in Namibia';
+			//$data['id'] = $this->session->userdata('id');
+			$this->load->view('deals/results', $data);	
+			  
+		}	  	
 	}
 		
 	//+++++++++++++++++++++++++++
