@@ -54,7 +54,7 @@ class Members extends CI_Controller {
 
 			}
 			$data['error'] = 'Please login below';
-		    $this->load->view('login', $data);
+		    $this->load->view('home', $data);
 		 }
 	}
 	
@@ -95,7 +95,7 @@ class Members extends CI_Controller {
 			//echo 'No: Nothing exists';
 		
 				$data['error'] = 'Please login below';
-			    $this->load->view('login', $data);
+			    $this->load->view('home', $data);
 			  
 		 }	
 	}
@@ -127,7 +127,7 @@ class Members extends CI_Controller {
 		}else{
 			
 			$data['error'] = 'Please login below';
-		    $this->load->view('login', $data);
+		    $this->load->view('home', $data);
 			  
 		 }
 			
@@ -154,7 +154,7 @@ class Members extends CI_Controller {
 		}else{
 			
 			$data['error'] = 'Please login below';
-		    $this->load->view('login', $data);
+		    $this->load->view('home', $data);
 			  
 		 }
 			
@@ -187,7 +187,7 @@ class Members extends CI_Controller {
 		}else{
 			
 			$data['error'] = 'Please login below';
-		    $this->load->view('login', $data);
+		    $this->load->view('home', $data);
 			  
 		 }
 			
@@ -232,7 +232,7 @@ class Members extends CI_Controller {
 		} else {
 			
 			$data['error'] = 'Please login below';
-		    $this->load->view('login', $data);
+		    $this->load->view('home', $data);
 			  
 		}
 			
@@ -1269,7 +1269,7 @@ class Members extends CI_Controller {
 			$data['basicmsg'] = 'Thank you, we have verified your account. Please login below';
 			$data['id'] = $id;
 			$data['first'] = 'Y';
-			$this->load->view('login',$data);
+			$this->load->view('home',$data);
 			
 		}else{
 			
@@ -1304,7 +1304,7 @@ class Members extends CI_Controller {
 		}else{
 				
 				$data['error'] = 'Sorry, you have been logged out of My.Na';
-				$this->load->view('login' , $data);
+				$this->load->view('home' , $data);
 			  
 		 }
 		
@@ -1333,7 +1333,7 @@ class Members extends CI_Controller {
 		}else{
 				
 				$data['error'] = 'Sorry, you have been logged out of My.Na';
-				$this->load->view('login' , $data);
+				$this->load->view('home' , $data);
 			  
 		 }
 		
@@ -1488,7 +1488,7 @@ class Members extends CI_Controller {
 		
 		}else{
 			
-				$this->load->view('login');
+				$this->load->view('home');
 			  
 		 }
 	
@@ -1554,7 +1554,7 @@ class Members extends CI_Controller {
 		
 		}else{
 				
-				$this->load->view('login');
+				$this->load->view('home');
 			  
 		 }
 	
@@ -1911,7 +1911,7 @@ class Members extends CI_Controller {
 		
 		}else{
 			
-			$this->load->view('login');
+			$this->load->view('home');
 			  
 		 }
 	
@@ -2343,7 +2343,7 @@ class Members extends CI_Controller {
 		}else{
 				
 				$data['error'] = 'Sorry, you have been logged out of My.Na';
-				$this->load->view('login' , $data);
+				$this->load->view('home' , $data);
 			  
 		 }
 		
@@ -2377,7 +2377,7 @@ class Members extends CI_Controller {
 		}else{
 				
 				$data['error'] = 'Sorry, you have been logged out of My.Na';
-				$this->load->view('login' , $data);
+				$this->load->view('home' , $data);
 			  
 		 }
 		
@@ -2400,7 +2400,7 @@ class Members extends CI_Controller {
 		}else{
 			
 				$data['error'] = 'Please login below';
-			    $this->load->view('login', $data);
+			    $this->load->view('home', $data);
 			  
 		 }
 		
@@ -2421,7 +2421,7 @@ class Members extends CI_Controller {
 		}else{ 
 			
 				$data['error'] = 'Please login below';
-			    $this->load->view('login', $data);
+			    $this->load->view('home', $data);
 			  
 		 }
 		
@@ -3247,7 +3247,7 @@ function un_clean_url($str)
 
 
 				$data['redirect'] = '';
-				$this->load->view('login' , $data);
+				$this->load->view('home' , $data);
 				
 			}
 	}
@@ -3295,7 +3295,7 @@ function un_clean_url($str)
 			$data['redirect'] =  $referer;
 			$this->session->sess_destroy();
 			$data['basicmsg'] = 'Please log in below!';
-			$this->load->view('login' , $data);
+			$this->load->view('home' , $data);
 			
 		}else{
 			
@@ -3308,13 +3308,13 @@ function un_clean_url($str)
 
 	function forgot_password(){
 
-		$this->load->view('login' , $data);
+		$this->load->view('home' , $data);
 	}
 	
 	function unsubscribe_daily($id = ''){
 
 		$data['unsubscribe_daily'] = 'Y';
-		$this->load->view('login' , $data);
+		$this->load->view('home' , $data);
 	}
 	
 	public function encrypt()
@@ -3521,7 +3521,7 @@ function un_clean_url($str)
 				 $this->new_password_email($row);
 				
 				 $data['basicmsg'] = 'We have sent an email with the password link to: ' .$email;
-				 $this->load->view('login', $data); 
+				 $this->load->view('home', $data); 
 				
 				
 			}else{
@@ -3529,12 +3529,12 @@ function un_clean_url($str)
 				 
 				 $data['error'] = 'No records found for ' .$email .'. Please create a new user account <a href="'.site_url('/').'members/register/">here</a>' ;
 				  
-				 $this->load->view('login', $data);
+				 $this->load->view('home', $data);
 			}
         
 		}else{
 			
-			$this->load->view('login');
+			$this->load->view('home');
 		}
 
 	}
@@ -3551,13 +3551,13 @@ function un_clean_url($str)
 			    $data['step1'] = 'true';
 				$data['token'] = $token;
 				$data['client_id'] = $row['client_id'];
-				$this->load->view('login', $data);
+				$this->load->view('home', $data);
 			
 		}else{
 			 
 			 $data['type'] = 'teacher';
 			 $data['error'] = 'Sorry that link has expired';
-			 $this->load->view('login', $data); 
+			 $this->load->view('home', $data); 
 			
 		}
    
@@ -3591,12 +3591,12 @@ function un_clean_url($str)
 		   
 			$data['basicmsg'] = 'Your password has been reset. Please login';
 			$data['client_id'] = $client_id;
-			$this->load->view('login', $data); 	
+			$this->load->view('home', $data); 	
 			
 			
 		}else{
 			
-			$this->load->view('login', $data); 
+			$this->load->view('home', $data); 
 		}
 		
        
