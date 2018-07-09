@@ -1,6 +1,6 @@
-<div class="row-fluid">
+<div class="row">
 
-    <div class="span6">
+    <div class="col-md-5">
         <div class="easyhtml5video white_box" style="position:relative;max-width:1280px;margin-top:20px">
 
 
@@ -22,7 +22,7 @@
         </div>
 
     </div>
-    <div class="span6">
+    <div class="col-md-7">
         <div class="clearfix" style="height:40px;"></div>
         <h3 class="na_script upper">Online <span class="yellow"> Auctions</span> Are here!</h3>
         <p>Auctions allow you to easily list and sell your stuff online. The <strong class="yellow">interactive</strong> aspect lets people engage in the selling process.
@@ -32,7 +32,7 @@
         </p>
         <p>Have something old you want to get rid of? Make some <strong class="yellow">Moola today</strong>
         </p>
-        <p><a href="<?php echo site_url('/').'sell/?auction=true';?>" class="btn btn-large white_back upper na_script"><i class="icon-gift"></i> Create Auction Now</a>
+        <p><a href="<?php echo site_url('/').'sell/?auction=true';?>" class="btn btn-lg btn-dark"><i class="icon-gift"></i> Create Auction Now</a>
         </p>
     </div>
 </div>
