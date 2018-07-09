@@ -91,6 +91,7 @@ $this->load->view('inc/header', $header);
 <?php $this->load->view('inc/footer');?>  
 
 <script src="<?php echo base_url('/');?>js/custom/fb.js?v=2"></script>
+<script src="<?php echo S3_URL;?>video/video/eh5v.files/html5video/html5ext.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 
