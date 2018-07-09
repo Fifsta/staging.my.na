@@ -1,8 +1,7 @@
 <div class="row">
 
     <div class="col-md-5">
-        <div class="easyhtml5video white_box" style="position:relative;max-width:1280px;margin-top:20px">
-
+        <div class="easyhtml5video" style="position:relative;max-width:1280px;">
 
             <video controls  poster="<?php echo S3_URL;?>video/video/acution_stick_man.jpg" style="width:100%" title="acution_stick_man">
                 <source src="<?php echo S3_URL;?>video/video/acution_stick_man.mp4" type="video/mp4" />
@@ -18,12 +17,10 @@
                 </object>
             </video>
 
-
         </div>
 
     </div>
     <div class="col-md-7">
-        <div class="clearfix" style="height:40px;"></div>
         <h3 class="na_script upper">Online <span class="yellow"> Auctions</span> Are here!</h3>
         <p>Auctions allow you to easily list and sell your stuff online. The <strong class="yellow">interactive</strong> aspect lets people engage in the selling process.
         </p>
