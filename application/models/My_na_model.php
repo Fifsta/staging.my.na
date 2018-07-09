@@ -471,11 +471,11 @@ class My_na_model extends CI_Model{
         //Get Main
         $main = $this->db->query("SELECT i_tourism_category.CATEGORY_ID, COUNT(i_tourism_category.CATEGORY_ID) as num,
                                 a_tourism_category_sub.*,a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME,a_tourism_category.CATEGORY_ICON as CAT_ICON,
-                                group_concat(DISTINCT(sub_table.ID),'_-_',sub_table.CATEGORY_NAME) as cats
+                                group_concat(DISTINCT(sub_table.ID),'|',sub_table.CATEGORY_NAME) as cats
                                 FROM i_tourism_category 
                                 JOIN a_tourism_category_sub ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID 
                                 JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
-                                LEFT JOIN a_tourism_category_sub as sub_table ON sub_table.CATEGORY_TYPE_ID = a_tourism_category.ID  
+                                LEFT JOIN a_tourism_category_sub as sub_table ON sub_table.CATEGORY_TYPE_ID = a_tourism_category.ID
                                 GROUP BY a_tourism_category_sub.CATEGORY_TYPE_ID ORDER BY num DESC LIMIT 12", FALSE);
         
             
@@ -484,14 +484,27 @@ class My_na_model extends CI_Model{
             $main_id = $row->CATEGORY_TYPE_ID;
             $main_name = $row->MAIN_CAT_NAME;
             $icon = $row->CAT_ICON;
+            $sub_cats = '';
 
-            $subs = $this->show_sub_cats($main_id);
-            
+            $sub_cats_array = explode(',',$row->cats);
+
+            foreach($sub_cats_array as $sub_cat){
+
+                list($first, $last) = explode("|", $sub_cat);
+
+                $sub_cats .= '<a href="'.site_url('/').'a/cat/'.$first.'/'.$this->clean_url_str($last).'">'.$last.'</a>, ';
+               //$sub_cats .= $sub_cat.', ';
+
+            }         
+
+
+            //$subs = $this->show_sub_cats($main_id);
+            $subs = '';
             echo '
             <div class="col-xs-6 col-sm-6 col-md-4 category">
                 <a href="#" data-icon="'.$icon.' text-'.$typ.'"></a>
                 <h3>'.$row->MAIN_CAT_NAME.'</h3>
-                <p>'.$subs.'</p>
+                <p>'.$sub_cats.'</p>
             </div>
             ';
             
