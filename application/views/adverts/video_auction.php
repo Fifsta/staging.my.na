@@ -29,7 +29,7 @@
         </p>
         <p>Have something old you want to get rid of? Make some <strong class="yellow">Moola today</strong>
         </p>
-        <p><a href="<?php echo site_url('/').'sell/?auction=true';?>" class="btn btn-lg btn-dark"><i class="icon-gift"></i> Create Auction Now</a>
-        </p>
+        <!--<p><a href="<?php echo site_url('/').'sell/?auction=true';?>" class="btn btn-lg btn-dark"><i class="icon-gift"></i> Create Auction Now</a>
+        </p>-->
     </div>
 </div>
