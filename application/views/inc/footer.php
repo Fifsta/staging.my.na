@@ -66,14 +66,14 @@
 <script type="text/javascript" src="<?php echo base_url('/');?>js/custom/results_page.js?v2"></script>
 <script  type="text/javascript">
 
-<?php 
-	
-    $qstr = '';
-    if($qstr = $this->input->get()){
-        $qstr = http_build_query($qstr);
-    }
-    
-?>
+	<?php 
+
+		$qstr = '';
+		if($qstr = $this->input->get()){
+		    $qstr = http_build_query($qstr);
+		}
+
+	?>
 
     $(document).on('click', '.gdpr_decline', function(e) {
 
@@ -117,168 +117,168 @@
     }
 
 
-$(document).ready( function(){
+	$(document).ready( function(){
 
 
-	check_gdpr();
+		check_gdpr();
 
-	
-	// Call weather function
-	get_weather('na','windhoek');
+		
+		// Call weather function
+		get_weather('na','windhoek');
 
-	// Prepend user profile after login
-	/*$.get( "<?php echo site_url();?>my_na/nav/?url=<?php echo $_SERVER['REQUEST_URI']; ?>", function( data ) {
-	  
-	  	if(data == 'FALSE'){
+		// Prepend user profile after login
+		/*$.get( "<?php echo site_url();?>my_na/nav/?url=<?php echo $_SERVER['REQUEST_URI']; ?>", function( data ) {
+		  
+		  	if(data == 'FALSE'){
 
-		}else{
+			}else{
 
-			$('#sidebar').prepend( data );
-		}
+				$('#sidebar').prepend( data );
+			}
 
-	});*/
+		});*/
 
-	$.post('<?php echo site_url();?>my_na/nav/', { url: "<?php echo $_SERVER['REQUEST_URI']; ?>"}, function(data){
+		$.post('<?php echo site_url();?>my_na/nav/', { url: "<?php echo $_SERVER['REQUEST_URI']; ?>"}, function(data){
 
 
-	  	if(data == 'FALSE'){
+		  	if(data == 'FALSE'){
 
-		}else{
+			}else{
 
-			$('#sidebar').prepend( data );
-		}
+				$('#sidebar').prepend( data );
+			}
 
-	});
-
-});
-
-//Call weather from NMH HUB
-function get_weather(cont,city){
-
-	$.getJSON( "<?php echo HUB_URL;?>weather/display_block/"+cont+"/"+city, function( data ) {
-
-		if(data.success){
-
-			//$('#weather_cont').html(data.html);
-			$('.city-weather').unbind('click').bind('click', function(e){
-				var city = $(this).data('location');
-
-				get_weather('na', city);
-			});
-		}
+		});
 
 	});
 
-}
+	//Call weather from NMH HUB
+	function get_weather(cont,city){
+
+		$.getJSON( "<?php echo HUB_URL;?>weather/display_block/"+cont+"/"+city, function( data ) {
+
+			if(data.success){
+
+				//$('#weather_cont').html(data.html);
+				$('.city-weather').unbind('click').bind('click', function(e){
+					var city = $(this).data('location');
+
+					get_weather('na', city);
+				});
+			}
+
+		});
+
+	}
 
 
-function initialise_owl() {
+	function initialise_owl() {
 
-	// INITIALIZE OWL
-	$('.owl-carousel').owlCarousel({
-	    loop:false,
-	    lazyLoad: true,
-	    navRewind:false,
-	    margin:10,
-	    nav: true,
-	    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
-	    responsiveClass:true,
-	    responsive:{
-	        0:{
-	            items:1,
-	            nav:true
-	        },
-	        600:{
-	            items:1,
-	            nav:true
-	        },
-	        1000:{
-	            items:3,
-	            nav:true,
-	            loop:false
-	        },
+		// INITIALIZE OWL
+		$('.owl-carousel').owlCarousel({
+		    loop:false,
+		    lazyLoad: true,
+		    navRewind:false,
+		    margin:10,
+		    nav: true,
+		    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
+		    responsiveClass:true,
+		    responsive:{
+		        0:{
+		            items:1,
+		            nav:true
+		        },
+		        600:{
+		            items:1,
+		            nav:true
+		        },
+		        1000:{
+		            items:3,
+		            nav:true,
+		            loop:false
+		        },
 
-	        1600:{
-	            items:4,
-	            nav:true,
-	            loop:false
-	        }		        
-	    }
-	});
+		        1600:{
+		            items:4,
+		            nav:true,
+		            loop:false
+		        }		        
+		    }
+		});
 
-}
+	}
 
-function initialise_bus_owl() {
+	function initialise_bus_owl() {
 
-	// INITIALIZE OWL
-	$('#bus-carousel').owlCarousel({
-	    loop:false,
-	    lazyLoad: true,
-	    navRewind:false,
-	    margin:10,
-	    nav: true,
-	    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
-	    responsiveClass:true,
-	    responsive:{
-	        0:{
-	            items:1,
-	            nav:true
-	        },
-	        600:{
-	            items:1,
-	            nav:true
-	        },
-	        1000:{
-	            items:2,
-	            nav:true,
-	            loop:false
-	        },
+		// INITIALIZE OWL
+		$('#bus-carousel').owlCarousel({
+		    loop:false,
+		    lazyLoad: true,
+		    navRewind:false,
+		    margin:10,
+		    nav: true,
+		    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
+		    responsiveClass:true,
+		    responsive:{
+		        0:{
+		            items:1,
+		            nav:true
+		        },
+		        600:{
+		            items:1,
+		            nav:true
+		        },
+		        1000:{
+		            items:2,
+		            nav:true,
+		            loop:false
+		        },
 
-	        1600:{
-	            items:3,
-	            nav:true,
-	            loop:false
-	        }		        
-	    }
-	});
+		        1600:{
+		            items:3,
+		            nav:true,
+		            loop:false
+		        }		        
+		    }
+		});
 
-}
+	}
 
-function initialise_prod_owl() {
+	function initialise_prod_owl() {
 
-	// INITIALIZE OWL
-	$('#prod-carousel').owlCarousel({
-	    loop:false,
-	    lazyLoad: true,
-	    navRewind:false,
-	    margin:10,
-	    nav: true,
-	    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
-	    responsiveClass:true,
-	    responsive:{
-	        0:{
-	            items:1,
-	            nav:true
-	        },
-	        600:{
-	            items:1,
-	            nav:true
-	        },
-	        1000:{
-	            items:2,
-	            nav:true,
-	            loop:false
-	        },
+		// INITIALIZE OWL
+		$('#prod-carousel').owlCarousel({
+		    loop:false,
+		    lazyLoad: true,
+		    navRewind:false,
+		    margin:10,
+		    nav: true,
+		    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
+		    responsiveClass:true,
+		    responsive:{
+		        0:{
+		            items:1,
+		            nav:true
+		        },
+		        600:{
+		            items:1,
+		            nav:true
+		        },
+		        1000:{
+		            items:2,
+		            nav:true,
+		            loop:false
+		        },
 
-	        1600:{
-	            items:3,
-	            nav:true,
-	            loop:false
-	        }		        
-	    }
-	});
+		        1600:{
+		            items:3,
+		            nav:true,
+		            loop:false
+		        }		        
+		    }
+		});
 
-}
+	}
 
 
 </script>
