@@ -290,17 +290,17 @@
 <!-- Calatz -->
 <!-- The "browse to" file input fields -->
 
-
+<script src="js/jquery.fileInput.js"></script>
 <script src="js/owl.carousel.js"></script>
 
 <script src="js/jquery.lazysizes.min.js"></script>
 <script src="js/jquery.fancybox.min.js"></script>
-
+<script src="js/bootstrap-select.min.js"></script>
 
 
 <!-- Datepicker -->
 <script src="js/moment.min.js"></script>
-
+<script src="js/bootstrap-datetimepicker.min.js"></script>
 
 <!-- Custom Js -->
 <script src="js/jquery.custom.js"></script>
