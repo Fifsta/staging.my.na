@@ -1355,7 +1355,7 @@ class Search_model extends CI_Model{
 			
         $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
-        if ( ! $output = $this->cache->get('bus_categories'))
+        if ( ! $output = $this->cache->get('business_categories'))
         {
 
             //Get Main
@@ -1401,7 +1401,7 @@ class Search_model extends CI_Model{
                 
             }
 
-            $this->cache->save('bus_categories', $output, 2628000);
+            $this->cache->save('business_categories', $output, 2628000);
 
         }
 
