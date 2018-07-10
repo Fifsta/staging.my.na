@@ -44,6 +44,8 @@ $(document).ready(function(){
 			$('#btn_list_view2').fadeIn();
 	        initialise_map("map-top");
 
+	        load_sidebar();
+
 	});
 
 	$(document).on('click', '.t-list', function(e) {
@@ -60,6 +62,8 @@ $(document).ready(function(){
 
 
     $('#sort_asc').on('click', function(e){
+
+    	alert('hi');
 
         $('#sortby').val('ASC');
         var frm = $('#search-main_b');

@@ -1413,7 +1413,7 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//SHOW SIDEBAR - LOOP THROUGH CATEGORIES
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
-	function show_sidebar($query){
+	function show_sidebar(){
 			
 		//Get Main
 		$main = $this->db->query("SELECT i_tourism_category.CATEGORY_ID, COUNT(i_tourism_category.CATEGORY_ID) as num,
@@ -1425,7 +1425,7 @@ class Search_model extends CI_Model{
 								LEFT JOIN a_tourism_category_sub as sub_table ON sub_table.CATEGORY_TYPE_ID = a_tourism_category.ID  
 								GROUP BY a_tourism_category_sub.CATEGORY_TYPE_ID ORDER BY num DESC LIMIT 30", FALSE);
 		
-		echo '<div class="panel-group" id="category_acc" role="tablist" aria-multiselectable="true">
+		$output = '<div class="panel-group" id="category_acc" role="tablist" aria-multiselectable="true">
 				<div class="panel panel-default"> 
 			 ';
 			
@@ -1435,7 +1435,7 @@ class Search_model extends CI_Model{
 			$main_name = $row->MAIN_CAT_NAME;
 			
 
-			echo '
+			$output .= '
 
                     <div class="panel-heading" role="tab">
                       <h3 class="panel-title"><a class="" role="button" data-toggle="collapse" data-parent="#map-accordion" href="#cat'.$main_id.'" aria-expanded="true" aria-controls="cat'.$main_id.'">'.$main_name.'</a></h3>
@@ -1456,19 +1456,18 @@ class Search_model extends CI_Model{
 						}
 
 
-            echo '
+            $output .= '
                         </ul>
                       </div>
                     </div>
-
-
-			';
+					';
 
 
 			
 		}
-		echo '</div></div>';
+		$output .= '</div></div>';
 			
+		return $output;	
 			
 	}
 

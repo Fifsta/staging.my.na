@@ -57,6 +57,22 @@ class My_na extends CI_Controller {
 	}
 
 
+	public function load_sidebar() {
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+					
+		if ( ! $output = $this->cache->get('load_sidebar'))
+		{
+
+			$output = $this->search_model->show_sidebar();
+	
+		}
+		
+		$this->output
+		        ->set_content_type('application/json')
+		        ->set_output(json_encode(array('cats' => $o)));	
+
+	}
 
 
 	public function gdpr_accept() {
