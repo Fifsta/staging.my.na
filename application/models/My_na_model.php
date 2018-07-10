@@ -470,7 +470,7 @@ class My_na_model extends CI_Model{
             
         $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
-        if ( ! $output = $this->cache->get('home_categories'))
+        if ( ! $output = $this->cache->get('home_categories_'.$typ))
         {
 
             //Get Main
@@ -516,7 +516,7 @@ class My_na_model extends CI_Model{
                 
             }
 
-            $this->cache->save('home_categories', $output, 2628000);
+            $this->cache->save('home_categories_'.$typ, $output, 2628000);
 
         }
 

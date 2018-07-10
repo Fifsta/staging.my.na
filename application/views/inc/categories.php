@@ -5,7 +5,9 @@
 		<h2 data-icon="fa-briefcase"><strong>Business</strong> Directory</h2>
 		<p></p>
 		<ul class="options">
-			<!--<li><a href="<?php //echo site_url('/').'members/add_business'; ?>" data-icon="fa-edit">List my own</a></li>-->
+            <!--<button class="btn btn-dark pull-right t-map" id="btn_map_view" style="" rel="tooltip" title="" data-original-title="Show Map View">
+              <i class="fa fa-map-marker"></i> MAP VIEW
+            </button>-->			
 		</ul>
 	</div>
 
