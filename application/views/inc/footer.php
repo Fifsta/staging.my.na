@@ -285,7 +285,7 @@
 
 
 <!-- Bootstrap -->
-<link href="https://s3.amazonaws.com/mynamibia/packages/css/weather-icons.min.css" rel="stylesheet" type="text/css">
+<!--<link href="https://s3.amazonaws.com/mynamibia/packages/css/weather-icons.min.css" rel="stylesheet" type="text/css">-->
 
 <!-- Calatz -->
 <!-- The "browse to" file input fields -->
