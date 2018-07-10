@@ -243,7 +243,7 @@ function load_sidebar() {
       'dataType': "json",
       'success': function (data) {
         
-        $('#sidebar-box').html(data.cats)
+        $('#sidebar-box').append(data.cats)
 
       }
     });

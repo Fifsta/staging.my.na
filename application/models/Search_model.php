@@ -1401,7 +1401,7 @@ class Search_model extends CI_Model{
                 
             }
 
-            $this->cache->save('bus_cats', $output, 0);
+            $this->cache->save('bus_cats', $output, 2628000);
 
         }
 
