@@ -16,7 +16,7 @@ $(document).ready(function(){
 			        'dataType': "json",
 			        'success': function (data) {
 			          json = data;
-			        }
+			        } 
 			      });
 
 			    return json;

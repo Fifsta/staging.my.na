@@ -119,7 +119,7 @@ $this->load->view('inc/header', $header);
               if(isset($pages)){  echo $pages ;} 
             ?>   
 
-        </section>  
+        </section>   
 
         <div class="spacer"></div>
 

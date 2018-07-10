@@ -1430,7 +1430,7 @@ class Search_model extends CI_Model{
 			 ';
 			
 		foreach($main->result() as $row){
-		
+		 
 			$main_id = $row->CATEGORY_TYPE_ID;
 			$main_name = $row->MAIN_CAT_NAME;
 			
