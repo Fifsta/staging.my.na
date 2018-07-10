@@ -501,14 +501,10 @@ class My_na_model extends CI_Model{
                     $first = @$split[0];
                     $last = @$split[1];
 
-                        $sub_cats .= '<a href="'.site_url('/').'a/cat/'.$first.'/'.$this->clean_url_str($last).'">'.$last.'</a>, ';
-                       //$sub_cats .= $sub_cat.', ';
+                    $sub_cats .= '<a href="'.site_url('/').'a/cat/'.$first.'/'.$this->clean_url_str($last).'">'.$last.'</a>, ';
 
                 }         
 
-                //echo $sub_cats;
-
-                //$subs = $this->show_sub_cats($main_id);
                 $subs = '';
                 $output .= '
                 <div class="col-xs-6 col-sm-6 col-md-4 category">
@@ -524,7 +520,7 @@ class My_na_model extends CI_Model{
 
         }
 
-        echo $output
+        echo $output;
 
     }
 
