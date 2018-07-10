@@ -62,10 +62,12 @@ class My_na extends CI_Controller {
 
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 					
-		if ( ! $output = $this->cache->get('load_sidebar'))
+		if ( ! $o = $this->cache->get('load_sidebar'))
 		{
 
-			$output = $this->search_model->show_sidebar();
+			$o = $this->search_model->show_sidebar();
+
+			$this->cache->save('load_sidebar'., 600);
 	
 		}
 		
