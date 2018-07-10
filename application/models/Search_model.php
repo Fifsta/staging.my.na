@@ -1355,7 +1355,7 @@ class Search_model extends CI_Model{
 			
         $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
-        if ( ! $output = $this->cache->get('business_categories'))
+        if ( ! $output = $this->cache->get('bus_cats'))
         {
 
             //Get Main
@@ -1393,7 +1393,7 @@ class Search_model extends CI_Model{
                 $subs = '';
                 $output .= '
                 <div class="col-xs-6 col-sm-6 col-md-4 category">
-                    <a href="#" data-icon="'.$icon.'" class="text-dark"></a>
+                    <a href="#" data-icon="'.$icon.' text-dark"></a>
                     <h3>'.$row->MAIN_CAT_NAME.'</h3>
                     <p>'.$sub_cats.'</p>
                 </div>
@@ -1401,7 +1401,7 @@ class Search_model extends CI_Model{
                 
             }
 
-            $this->cache->save('business_categories', $output, 0);
+            $this->cache->save('bus_cats', $output, 0);
 
         }
 
