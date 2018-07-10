@@ -67,7 +67,7 @@ class My_na extends CI_Controller {
 
 			$o = $this->search_model->show_sidebar();
 
-			$this->cache->save('load_sidebar'., 600);
+			$this->cache->save('load_sidebar', 600);
 	
 		}
 		
