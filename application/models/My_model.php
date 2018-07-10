@@ -13,7 +13,7 @@ class My_model extends CI_Model{
 
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
-        if ( ! $output = $this->cache->get('namibian_news_'.$type))
+        if ( ! $output = $this->cache->get('namibian_news_'.$type.'_'.$main_id))
         {
 			
 			if($type == 'product'){
@@ -38,7 +38,7 @@ class My_model extends CI_Model{
 			}
 			
 				
-			//$this->cache->save('namibian_news_'.$type, $output, 3600);
+			$this->cache->save('namibian_news_'.$type.'_'.$main_id, $output, 3600);
 			         		
 		}
 
