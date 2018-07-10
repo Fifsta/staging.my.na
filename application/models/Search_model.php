@@ -1405,7 +1405,7 @@ class Search_model extends CI_Model{
 
         }
 
-        echo $output;
+        return $output;
 		
 	}
 
