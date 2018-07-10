@@ -326,139 +326,149 @@ class My_na_model extends CI_Model{
     public function get_feature_businesses($featured,$cat1,$cat2, $limit, $offset)
     {
         
-        $this->load->model('image_model'); 
-        $this->load->library('thumborp');
 
-        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-        $width = 360;
-        $height = 230;
+        $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
-        $l_width = 100;
-        $l_height = 100;
-        
-        $likeSQL = '';
-        $sql = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
-                            group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats, city.MAP_LOCATION as city_name,
-                            country.COUNTRY_NAME as country_name
-                            FROM u_business
-                            LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
-                            JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
-                            JOIN i_tourism_category as categories ON u_business.ID = categories.BUSINESS_ID
-                            JOIN a_tourism_category_sub as cat_names ON cat_names.ID = categories.CATEGORY_ID
-                            LEFT JOIN a_map_location AS city ON city.ID = u_business.BUSINESS_MAP_CITY_ID
-                            LEFT JOIN a_country AS country ON country.ID = u_business.BUSINESS_COUNTRY_ID
-                        WHERE u_business.ISACTIVE = 'Y' ".$likeSQL." AND u_business.PAID_STATUS > 0
-                        GROUP BY u_business.ID  ORDER BY RAND() LIMIT ".$limit." OFFSET ".$offset." ";
-        $my = $this->db->query($sql, TRUE);
-        
-        if($my->result()){
-       
-            $res = '<div class="owl-carousel bus-carousel" id="bus-carousel" style="margin-top:20px">';
+        if ( ! $output = $this->cache->get('featured_businesses'))
+        {
 
-            foreach($my->result() as $row){
+            $this->load->model('image_model'); 
+            $this->load->library('thumborp');
 
-                $name = $row->BUSINESS_NAME;
-                $logo = $row->BUSINESS_LOGO_IMAGE_NAME;
-                $cover = $row->BUSINESS_COVER_PHOTO;
-                $id = $row->ID;
-                $email = $row->BUSINESS_EMAIL;
-                $tel = $row->BUSINESS_TELEPHONE;
-                $description = $row->BUSINESS_DESCRIPTION;
-                $url = $row->BUSINESS_URL;
-                $address = $row->BUSINESS_PHYSICAL_ADDRESS;
+            $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+            $width = 360;
+            $height = 230;
 
-                if ($logo != '')
-                {
-
-                    if (strpos($logo, '.') == 0)
-                    {
-
-                        $format = '.jpg';
-                        $logo_str = 'assets/business/photos/' . $logo . $format;
-                        $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
-                        $b_logo = '<img title="Product is listed by ' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';
-                    }
-                    else
-                    {
-
-                        $logo_str = 'assets/business/photos/' . $logo;
-                        $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
-                        $b_logo = '<img title="Product is listed by ' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';
-
-                    }
-
-                }
-                else
-                {
-                    $logo_url = base_url('/').'images/bus_blank.png';
-                    $b_logo = '<img title="' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';
-
-                }
-
-
-                if ($cover != '')
-                {
-
-                    if (strpos($cover, '.') == 0)
-                    {
-
-                        $format = '.jpg';
-                        $cover_str = 'assets/business/photos/' . $cover . $format;
-                        $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
-
-                    }
-                    else
-                    {
-
-                        $cover_str = 'assets/business/photos/' . $cover;
-                        $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
-
-                    }
-
-                }
-                else
-                {
-                    $cover_str = 'assets/business/photos/listing-placeholder.jpg';
-                    $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
-                }
-
-
-                list($first, $last) = explode(",", $row->cats);
-
-
-                $res .= '
-                <div> 
-                    <figure class="loader">
-                        <div class="ribbon-wrapper">
-                            <div class="product_ribbon_ft"><small style="color:#ff9900; font-size:14px">'.$name.'</small>'.$row->city_name.'</div>
-                            <div class="product_ribbon_ft_orng"><small>'.$first.'</small></div>
-                        </div>
-
-                        <div class="slideshow-block">
-                            <a href="' . site_url('/') . 'b/' . $id . '/' . $this->clean_url_str($name) . '/"><img class="" src="' . $cover_url . '" alt="' . $name . '"></a>
-                        </div>
-
-                        <div>
-                        
-                            '.$b_logo.'  
-
-                        </div>
-                    </figure>           
-                </div>
-                ';
-
-            }     
-
-
-            $res .= '</div>';
-
-        }else{
+            $l_width = 100;
+            $l_height = 100;
             
+            $likeSQL = '';
+            $sql = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
+                                group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats, city.MAP_LOCATION as city_name,
+                                country.COUNTRY_NAME as country_name
+                                FROM u_business
+                                LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
+                                JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
+                                JOIN i_tourism_category as categories ON u_business.ID = categories.BUSINESS_ID
+                                JOIN a_tourism_category_sub as cat_names ON cat_names.ID = categories.CATEGORY_ID
+                                LEFT JOIN a_map_location AS city ON city.ID = u_business.BUSINESS_MAP_CITY_ID
+                                LEFT JOIN a_country AS country ON country.ID = u_business.BUSINESS_COUNTRY_ID
+                            WHERE u_business.ISACTIVE = 'Y' ".$likeSQL." AND u_business.PAID_STATUS > 0
+                            GROUP BY u_business.ID  ORDER BY RAND() LIMIT ".$limit." OFFSET ".$offset." ";
+            $my = $this->db->query($sql, TRUE);
+            
+            if($my->result()){
+           
+                $output = '<div class="owl-carousel bus-carousel" id="bus-carousel" style="margin-top:20px">';
 
+                foreach($my->result() as $row){
+
+                    $name = $row->BUSINESS_NAME;
+                    $logo = $row->BUSINESS_LOGO_IMAGE_NAME;
+                    $cover = $row->BUSINESS_COVER_PHOTO;
+                    $id = $row->ID;
+                    $email = $row->BUSINESS_EMAIL;
+                    $tel = $row->BUSINESS_TELEPHONE;
+                    $description = $row->BUSINESS_DESCRIPTION;
+                    $url = $row->BUSINESS_URL;
+                    $address = $row->BUSINESS_PHYSICAL_ADDRESS;
+
+                    if ($logo != '')
+                    {
+
+                        if (strpos($logo, '.') == 0)
+                        {
+
+                            $format = '.jpg';
+                            $logo_str = 'assets/business/photos/' . $logo . $format;
+                            $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+                            $b_logo = '<img title="Product is listed by ' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';
+                        }
+                        else
+                        {
+
+                            $logo_str = 'assets/business/photos/' . $logo;
+                            $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+                            $b_logo = '<img title="Product is listed by ' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';
+
+                        }
+
+                    }
+                    else
+                    {
+                        $logo_url = base_url('/').'images/bus_blank.png';
+                        $b_logo = '<img title="' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';
+
+                    }
+
+
+                    if ($cover != '')
+                    {
+
+                        if (strpos($cover, '.') == 0)
+                        {
+
+                            $format = '.jpg';
+                            $cover_str = 'assets/business/photos/' . $cover . $format;
+                            $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+
+                        }
+                        else
+                        {
+
+                            $cover_str = 'assets/business/photos/' . $cover;
+                            $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+
+                        }
+
+                    }
+                    else
+                    {
+                        $cover_str = 'assets/business/photos/listing-placeholder.jpg';
+                        $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+                    }
+
+
+                    list($first, $last) = explode(",", $row->cats);
+
+
+                    $output .= '
+                    <div> 
+                        <figure class="loader">
+                            <div class="ribbon-wrapper">
+                                <div class="product_ribbon_ft"><small style="color:#ff9900; font-size:14px">'.$name.'</small>'.$row->city_name.'</div>
+                                <div class="product_ribbon_ft_orng"><small>'.$first.'</small></div>
+                            </div>
+
+                            <div class="slideshow-block">
+                                <a href="' . site_url('/') . 'b/' . $id . '/' . $this->clean_url_str($name) . '/"><img class="" src="' . $cover_url . '" alt="' . $name . '"></a>
+                            </div>
+
+                            <div>
+                            
+                                '.$b_logo.'  
+
+                            </div>
+                        </figure>           
+                    </div>
+                    ';
+
+                }     
+
+
+                $output .= '</div>';
+
+            }else{
                 
-        }
 
-        return $res;
+                    
+            }
+
+            $this->cache->save('featured_businesses', $output, 3600);
+
+        }    
+
+        return $output;
     } 
 
 

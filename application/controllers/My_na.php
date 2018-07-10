@@ -15,7 +15,7 @@ class My_na extends CI_Controller {
 	}
 	
 
-	//+++++++++++++++++++++++++++
+	//+++++++++++++++++++++++++++ 
 	//GET FEATURED BUSINESS JSON
 	//++++++++++++++++++++++++++
 	public function get_feature_business($featured = 'N',$cat1 = false,$cat2 = false, $limit = 10, $offset = 0) {
