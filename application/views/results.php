@@ -144,7 +144,7 @@ $this->load->view('inc/header', $header);
             <div class="namibia-map">
               <div class="map-left" id="sidebar-box">
 
-                <?php //echo $this->search_model->show_sidebar($query); ?>
+                <?php echo $this->search_model->show_sidebar(); ?>
 
               </div>
               <div class="map-right">

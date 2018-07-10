@@ -44,7 +44,7 @@ $(document).ready(function(){
 			$('#btn_list_view2').fadeIn();
 	        initialise_map("map-top");
 
-	        load_sidebar();
+	        //load_sidebar();
 
 	});
 
