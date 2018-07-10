@@ -1467,7 +1467,7 @@ class Search_model extends CI_Model{
 		}
 		$output .= '</div></div>';
 			
-		return $output;	
+		echo $output;	
 			
 	}
 
