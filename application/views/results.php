@@ -119,7 +119,7 @@ $this->load->view('inc/header', $header);
               if(isset($pages)){  echo $pages ;} 
             ?>   
 
-        </section>   
+        </section>  
 
         <div class="spacer"></div>
 
@@ -142,9 +142,9 @@ $this->load->view('inc/header', $header);
         <section id="namibia-map"> 
             <button id="map-toggle" class="btn btn-primary"><i class="fa fa-angle-double-right"></i></button>
             <div class="namibia-map">
-              <div class="map-left" id="sidebar-box">
+              <div class="map-left">
 
-                <?php echo $this->search_model->show_sidebar(); ?>
+                <?php echo $this->search_model->show_sidebar($query); ?>
 
               </div>
               <div class="map-right">
@@ -233,22 +233,6 @@ var geocoder;
 var map;
 var markers = [];      
 
-
-function load_sidebar() {
-
-    $.ajax({
-      'async': false,
-      'type': "get",
-      'url': "<?php echo site_url('/').'my_na/load_sidebar/';?>",
-      'dataType': "json",
-      'success': function (data) {
-        
-        $('#sidebar-box').append(data.cats)
-
-      }
-    });
-
-}
 
 
 function initialise_map(id) {

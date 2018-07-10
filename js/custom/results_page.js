@@ -16,7 +16,7 @@ $(document).ready(function(){
 			        'dataType': "json",
 			        'success': function (data) {
 			          json = data;
-			        } 
+			        }
 			      });
 
 			    return json;
@@ -43,8 +43,6 @@ $(document).ready(function(){
 	        $('#btn_list_view').removeClass('disabled');
 			$('#btn_list_view2').fadeIn();
 	        initialise_map("map-top");
-
-	        //load_sidebar();
 
 	});
 
