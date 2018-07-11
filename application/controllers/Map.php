@@ -2,12 +2,13 @@
 
 class Map extends CI_Controller {
 
-	function map()
-	{
-		parent::__construct();
-		$this->load->model('map_model');
-		
-	}
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model('map_model');
+    }
+
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//MAP HOME
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		

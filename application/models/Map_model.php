@@ -1,11 +1,11 @@
 <?php
 class Map_model extends CI_Model{
 	
- 	function map_model(){
-  		//parent::CI_model();
-			
- 	}
-
+    public function __construct()
+    {
+        
+    }
+    
 
 	//+++++++++++++++++++++++++++
 	//GET BUSINESS RESULTS
@@ -340,161 +340,170 @@ class Map_model extends CI_Model{
 	function show_map_info($id, $size){
 
 
-        $this->load->model('image_model'); 
-        $this->load->library('thumborp');
+        $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-        $width = 320;
-        $height = 320;
-			
-			//$query = $this->db->where('ID',$id);
-			$query = $this->db->query("SELECT u_business.*, group_concat(u_gallery_component.GALLERY_PHOTO_NAME) as GALLERY_IMAGES,
-										group_concat(DISTINCT(a_tourism_category_sub.CATEGORY_NAME)) as CATEGORIES
-										FROM u_business
-										LEFT JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
-										LEFT JOIN a_tourism_category_sub ON i_tourism_category.CATEGORY_ID = a_tourism_category_sub.ID
-										LEFT JOIN u_gallery_component ON u_business.ID = u_gallery_component.BUSINESS_ID
-										WHERE u_business.ID = '".$id."'
-										GROUP BY u_business.ID  
-										");
+        if ( ! $output = $this->cache->get('show_map_info'.$id.'_'.$size))
+        {       
 
-            
+            $output = '';
+            $this->load->model('image_model'); 
+            $this->load->library('thumborp');
 
-			//If has results
-			if($query->num_rows() != 0){
-					
-					$row = $query->row();
-					
-					$id = trim($row->ID);
-					$name = str_replace("'",' ',preg_replace("[^A-Za-z0-9]", '', $row->BUSINESS_NAME));
-					$img = $row->BUSINESS_LOGO_IMAGE_NAME;
-					$cover_img = $row->BUSINESS_COVER_PHOTO;
-					$email = $row->BUSINESS_EMAIL;
-					$tel = $row->BUSINESS_TELEPHONE;
-					$description = str_replace("'",' ',preg_replace("[^A-Za-z0-9]", '', filter_var(utf8_decode($row->BUSINESS_DESCRIPTION), FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW)));
-					$url = $row->BUSINESS_URL;
-					$address = $row->BUSINESS_PHYSICAL_ADDRESS;
-					
-					//GET CATEGORIES
-					$cats = '';
-					if($row->CATEGORIES != null){
-						$ac = 0;
-						$catA = explode(',',$row->CATEGORIES);
-						foreach($catA as $catR){
+            $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+            $width = 320;
+            $height = 320;
+    			
+    			//$query = $this->db->where('ID',$id);
+    			$query = $this->db->query("SELECT u_business.*, group_concat(u_gallery_component.GALLERY_PHOTO_NAME) as GALLERY_IMAGES,
+    										group_concat(DISTINCT(a_tourism_category_sub.CATEGORY_NAME)) as CATEGORIES
+    										FROM u_business
+    										LEFT JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
+    										LEFT JOIN a_tourism_category_sub ON i_tourism_category.CATEGORY_ID = a_tourism_category_sub.ID
+    										LEFT JOIN u_gallery_component ON u_business.ID = u_gallery_component.BUSINESS_ID
+    										WHERE u_business.ID = '".$id."'
+    										GROUP BY u_business.ID  
+    										");
 
-                            if($ac >= 2){
+                
 
-                            }else{
-                                $cats .= '<span class="badge btn-dark" style="padding:1px;">'.$catR.'</span> ';
+    			//If has results
+    			if($query->num_rows() != 0){
+    					
+    					$row = $query->row();
+    					
+    					$id = trim($row->ID);
+    					$name = str_replace("'",' ',preg_replace("[^A-Za-z0-9]", '', $row->BUSINESS_NAME));
+    					$img = $row->BUSINESS_LOGO_IMAGE_NAME;
+    					$cover_img = $row->BUSINESS_COVER_PHOTO;
+    					$email = $row->BUSINESS_EMAIL;
+    					$tel = $row->BUSINESS_TELEPHONE;
+    					$description = str_replace("'",' ',preg_replace("[^A-Za-z0-9]", '', filter_var(utf8_decode($row->BUSINESS_DESCRIPTION), FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW)));
+    					$url = $row->BUSINESS_URL;
+    					$address = $row->BUSINESS_PHYSICAL_ADDRESS;
+    					
+    					//GET CATEGORIES
+    					$cats = '';
+    					if($row->CATEGORIES != null){
+    						$ac = 0;
+    						$catA = explode(',',$row->CATEGORIES);
+    						foreach($catA as $catR){
 
-                            }
+                                if($ac >= 2){
 
-						}
-						
-					}
+                                }else{
+                                    $cats .= '<span class="badge btn-dark" style="padding:1px;">'.$catR.'</span> ';
 
-					
-					//Build image string
-					$format = substr($img,(strlen($img) - 4),4);
-					$str = substr($img,0,(strlen($img) - 4));
-					
-					if($img != ''){
-						
-						if(strpos($img,'.') == 0){
+                                }
 
-                            $format = '.jpg';
-                            $img_str = 'assets/business/photos/' . $img . $format;
+    						}
+    						
+    					}
+
+    					
+    					//Build image string
+    					$format = substr($img,(strlen($img) - 4),4);
+    					$str = substr($img,0,(strlen($img) - 4));
+    					
+    					if($img != ''){
+    						
+    						if(strpos($img,'.') == 0){
+
+                                $format = '.jpg';
+                                $img_str = 'assets/business/photos/' . $img . $format;
+                                $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'80','80', $crop = '');
+    							
+    						}else{
+    							
+                                $img_str = 'assets/business/photos/' . $img;
+                                $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'80','80', $crop = '');
+    							
+    						}
+    						
+    					}else{
+    						
+                            $img_str = 'assets/business/photos/bus_blank.jpg';
                             $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'80','80', $crop = '');
-							
-						}else{
-							
-                            $img_str = 'assets/business/photos/' . $img;
-                            $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'80','80', $crop = '');
-							
-						}
-						
-					}else{
-						
-                        $img_str = 'assets/business/photos/bus_blank.jpg';
-                        $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'80','80', $crop = '');
-						
-					}
+    						
+    					}
 
 
-					if($cover_img != ''){
-						
-						if(strpos($cover_img,'.') == 0){
-				
-                            $format2 = '.jpg';
-                            $cover_str = 'assets/business/photos/' . $cover_img . $format2;
+    					if($cover_img != ''){
+    						
+    						if(strpos($cover_img,'.') == 0){
+    				
+                                $format2 = '.jpg';
+                                $cover_str = 'assets/business/photos/' . $cover_img . $format2;
+                                $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'340','180', $crop = '');
+    							
+    						}else{
+    							
+                                $cover_str = 'assets/business/photos/' . $cover_img;
+                                $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'340','180', $crop = '');
+    							
+    						}
+    						
+    					}else{
+    						
+    						$cover_str = 'assets/business/photos/business_cover_blank.jpg';	
                             $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'340','180', $crop = '');
-							
-						}else{
-							
-                            $cover_str = 'assets/business/photos/' . $cover_img;
-                            $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'340','180', $crop = '');
-							
-						}
-						
-					}else{
-						
-						$cover_str = 'assets/business/photos/business_cover_blank.jpg';	
-                        $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,'340','180', $crop = '');
-						
-					}
+    						
+    					}
 
 
-                    $star = '';
-                    if($row->STAR_RATING != null && $row->STAR_RATING != 0){
+                        $star = '';
+                        if($row->STAR_RATING != null && $row->STAR_RATING != 0){
 
-                        $star = '<img src="'.base_url('/').'images/icons/star'.round($row->STAR_RATING).'.png" alt="'.round($row->STAR_RATING) .' Stars Rating">';
+                            $star = '<img src="'.base_url('/').'images/icons/star'.round($row->STAR_RATING).'.png" alt="'.round($row->STAR_RATING) .' Stars Rating">';
 
-                    } else {
+                        } else {
 
-                        $star = 'No Reviews added';
+                            $star = 'No Reviews added';
 
-                    }
+                        }
 
 
-                    $html = '
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-4"><img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'"></div>
-                            <div class="col-md-8">
-                                <strong>'.$name.'</strong><br>
-                                <small><i class="fa fa-map-marker text-dark"></i> <em>'. $this->my_na_model->shorten_string($address, 5) .'</em></small>
-                                 <hr>
-                                '.$star.'
-                               
+                        $output .= '
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-4"><img class="img-thumbnail" src="'.$img_url.'" alt="'.$name.'"></div>
+                                <div class="col-md-8">
+                                    <strong>'.$name.'</strong><br>
+                                    <small><i class="fa fa-map-marker text-dark"></i> <em>'. $this->my_na_model->shorten_string($address, 5) .'</em></small>
+                                     <hr>
+                                    '.$star.'
+                                   
+                                </div>
                             </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a class="btn btn-xs btn-dark btn-block" href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/">
+                                        <i class="fa fa-info-circle"></i> View
+                                    </a>
+                                </div>    
+                            </div>                        
                         </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <a class="btn btn-xs btn-dark btn-block" href="'.site_url('/') . 'b/'. $id .'/'.$this->my_na_model->clean_url_str($name).'/">
-                                    <i class="fa fa-info-circle"></i> View
-                                </a>
-                            </div>    
-                        </div>                        
-                    </div>
-                    ';
+                        ';
 
-			
-				//DISPLAY
-				echo $html;
+    			
 
-				
-			//No Results	
-			}else{
-				
-				echo "<div style='text-align:center'>
-							  <h1>Ooops, no results found</h1>
-							  <p>We could'nt find any results for the specified criteria.</p>
-								<img src='".base_url('/')."img/bground/my-na-700-silver.png' alt='My Namibia'/>
-							  <p></p>
-					  </div>";
-				
-			}
+    				
+    			//No Results	
+    			}else{
+    				
+    				$output .= "<div style='text-align:center'>
+    							  <h1>Ooops, no results found</h1>
+    							  <p>We could'nt find any results for the specified criteria.</p>
+    								<img src='".base_url('/')."img/bground/my-na-700-silver.png' alt='My Namibia'/>
+    							  <p></p>
+    					  </div>";
+    				
+    			}
+
+                $this->cache->save('show_map_info'.$id.'_'.$size, $output, 0);
+            } 
+
+            echo $output;   
 	
 	}
 	
