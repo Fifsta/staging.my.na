@@ -13,7 +13,10 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function get_cat_loc_bus($category,$c_id, $location, $l_id ,$business, $limit, $offset, $sort){
 			
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 			
+		if ( ! $output = $this->cache->get('get_cat_loc_bus_'.$category.'_'.$c_id.'_'.$location.'_'.$business.'_'.$offset.'_'.$limit))
+		{			
 			if($offset == ''){
 				
 				$offset = 0;
@@ -55,14 +58,18 @@ class Search_model extends CI_Model{
                             WHERE u_business.ISACTIVE = 'Y' AND ( a_map_location.ID = '".$l_id."') AND
 							i_tourism_category.CATEGORY_ID = '". $c_id."' ".$likeSQL."
 							GROUP BY i_tourism_category.BUSINESS_ID " .$sort."  LIMIT ".$limit." OFFSET ".$offset." ";
-        //echo $query;
+        	//echo $query;
 			//INSERT IMPRESSION COUNT
 			$data['QUERY'] = $impquery;
 			$this->db->insert('u_business_imp_queue',$data);
 			
-			$query = $this->db->query($query, FALSE);
-			
-			return $query;
+			$output = $this->db->query($query, FALSE);
+
+			$this->cache->save('get_cat_loc_bus_'.$category.'_'.$c_id.'_'.$location.'_'.$business.'_'.$offset.'_'.$limit, $output, 1440);
+
+		}	
+
+		return $output;
 	
 	}
 	

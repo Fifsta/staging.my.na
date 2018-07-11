@@ -28,7 +28,7 @@ class My_na extends CI_Controller {
 
 			$output = $this->my_na_model->get_feature_businesses($featured,$cat1,$cat2, $limit, $offset);
 
-			$this->cache->save('my_na_business_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit, $output, 0);
+			$this->cache->save('my_na_business_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit, $output, 600);
 		}
 
 		echo json_encode($output);
