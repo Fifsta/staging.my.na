@@ -1451,60 +1451,69 @@ class Search_model extends CI_Model{
 	//SHOW SIDEBAR - LOOP THROUGH CATEGORIES
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function show_sidebar($query){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('show_sidebar'))
+		{		
 			
-		//Get Main
-		$main = $this->db->query("SELECT i_tourism_category.CATEGORY_ID, COUNT(i_tourism_category.CATEGORY_ID) as num,
-								a_tourism_category_sub.*,a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME,
-								group_concat(DISTINCT(sub_table.ID),'_-_',sub_table.CATEGORY_NAME) as cats
-								 FROM i_tourism_category 
-								JOIN a_tourism_category_sub ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID 
-								JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
-								LEFT JOIN a_tourism_category_sub as sub_table ON sub_table.CATEGORY_TYPE_ID = a_tourism_category.ID  
-								GROUP BY a_tourism_category_sub.CATEGORY_TYPE_ID ORDER BY num DESC LIMIT 30", FALSE);
-		
-		echo '<div class="panel-group" id="category_acc" role="tablist" aria-multiselectable="true">
-				<div class="panel panel-default"> 
-			 ';
+			//Get Main
+			$main = $this->db->query("SELECT i_tourism_category.CATEGORY_ID, COUNT(i_tourism_category.CATEGORY_ID) as num,
+									a_tourism_category_sub.*,a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME,
+									group_concat(DISTINCT(sub_table.ID),'_-_',sub_table.CATEGORY_NAME) as cats
+									 FROM i_tourism_category 
+									JOIN a_tourism_category_sub ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID 
+									JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
+									LEFT JOIN a_tourism_category_sub as sub_table ON sub_table.CATEGORY_TYPE_ID = a_tourism_category.ID  
+									GROUP BY a_tourism_category_sub.CATEGORY_TYPE_ID ORDER BY num DESC LIMIT 30", FALSE);
 			
-		foreach($main->result() as $row){
-		
-			$main_id = $row->CATEGORY_TYPE_ID;
-			$main_name = $row->MAIN_CAT_NAME;
+			$output = '<div class="panel-group" id="category_acc" role="tablist" aria-multiselectable="true">
+					<div class="panel panel-default"> 
+				 ';
+				
+			foreach($main->result() as $row){
 			
+				$main_id = $row->CATEGORY_TYPE_ID;
+				$main_name = $row->MAIN_CAT_NAME;
+				
 
-			echo '
+				$output .= '
 
-                    <div class="panel-heading" role="tab">
-                      <h3 class="panel-title"><a class="" role="button" data-toggle="collapse" data-parent="#map-accordion" href="#cat'.$main_id.'" aria-expanded="true" aria-controls="cat'.$main_id.'">'.$main_name.'</a></h3>
-                    </div>
+	                    <div class="panel-heading" role="tab">
+	                      <h3 class="panel-title"><a class="" role="button" data-toggle="collapse" data-parent="#map-accordion" href="#cat'.$main_id.'" aria-expanded="true" aria-controls="cat'.$main_id.'">'.$main_name.'</a></h3>
+	                    </div>
 
-                    <div id="cat'.$main_id.'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="cat'.$main_id.'">
-                      <div class="panel-body">
-                        <ul>';
+	                    <div id="cat'.$main_id.'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="cat'.$main_id.'">
+	                      <div class="panel-body">
+	                        <ul>';
 
-						$subA = explode(',',$row->cats);
-						foreach($subA as $sub_row){
-							//echo $sub_row;
-							$id = substr($sub_row, 0, strpos($sub_row,'_-_', 0));
-							$name = substr($sub_row, stripos($sub_row,'_-_') + 3, strlen($sub_row));
-							
-							echo '<li><a href="javascript:void(0)" data-id="'.$id.'" class="map-link">'.$name.'</a></li>';
-							
-						}
-
-
-            echo '
-                        </ul>
-                      </div>
-                    </div>
+							$subA = explode(',',$row->cats);
+							foreach($subA as $sub_row){
+								//echo $sub_row;
+								$id = substr($sub_row, 0, strpos($sub_row,'_-_', 0));
+								$name = substr($sub_row, stripos($sub_row,'_-_') + 3, strlen($sub_row));
+								
+								echo '<li><a href="javascript:void(0)" data-id="'.$id.'" class="map-link">'.$name.'</a></li>';
+								
+							}
 
 
-			';
+	            $output .= '
+	                        </ul>
+	                      </div>
+	                    </div>
 
 
-			
+				';
+
+				$this->cache->save('show_sidebar', $output, 600);
+				
+			}
+			$output .= '</div></div>';
+
 		}
-		echo '</div></div>';
+
+		echo $output;
 			
 			
 	}
@@ -1838,135 +1847,170 @@ class Search_model extends CI_Model{
     //++++++++++++++++++++++++++
     public function get_categories_select($type, $id, $current_id){
 
-        $out = '';
-        if($type == 'main'){
 
-            $test = $this->db->query("SELECT DISTINCT(a_tourism_category_sub.ID) as ID,a_tourism_category_sub.CATEGORY_TYPE_ID,
-										a_tourism_category_sub.CATEGORY_NAME, a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME
-										FROM a_tourism_category_sub
-                                      	JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
-                                     ", TRUE);
-            $str = 'main';
-      
-        }else{
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-            $test = $this->db->query("SELECT DISTINCT(a_tourism_category_sub.ID) as ID, a_tourism_category_sub.*, a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME
-										FROM a_tourism_category_sub
-                                      	JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
-                                     ", TRUE);
-            $str = '';
-        }
+		if ( ! $output = $this->cache->get('get_categories_select_'.$type.'_'.$id.'_'.$current_id))
+		{    	
 
-        if($test->num_rows() > 0){
+	        $output = '';
+	        if($type == 'main'){
 
-            $out .= '<option value="">Looking For...</option>';
-			$temp_main_cat = 0;
-            foreach($test->result() as $row){
-				
-				$cat_id = $row->ID;
-				$arrT = array(
-						'cat_id' => $cat_id,
-						'cat_name' => htmlentities($row->CATEGORY_NAME),
-						'main_cat_id' => $row->CATEGORY_TYPE_ID,
-						'main_cat_name' => htmlentities($row->MAIN_CAT_NAME),
-						'c_type' => 'main'
-				);
-				//SHO TOP LEVEl
-				if($temp_main_cat == $row->CATEGORY_TYPE_ID){
-					if($type == 'main' && $row->CATEGORY_TYPE_ID == $current_id){
-						//$out .= "<option value='".json_encode($arrT) ."' selected='selected'>".htmlentities($row->MAIN_CAT_NAME)."</option>";
-						
-					}
+	            $test = $this->db->query("SELECT DISTINCT(a_tourism_category_sub.ID) as ID,a_tourism_category_sub.CATEGORY_TYPE_ID,
+											a_tourism_category_sub.CATEGORY_NAME, a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME
+											FROM a_tourism_category_sub
+	                                      	JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
+	                                     ", TRUE);
+	            $str = 'main';
+	      
+	        }else{
+
+	            $test = $this->db->query("SELECT DISTINCT(a_tourism_category_sub.ID) as ID, a_tourism_category_sub.*, a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME
+											FROM a_tourism_category_sub
+	                                      	JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
+	                                     ", TRUE);
+	            $str = '';
+	        }
+
+	        if($test->num_rows() > 0){
+
+	            $output .= '<option value="">Looking For...</option>';
+				$temp_main_cat = 0;
+	            foreach($test->result() as $row){
 					
-				}else{
-					
-					
-					if($type == 'main' && $row->CATEGORY_TYPE_ID  == $current_id){
-						$out .= "<option value='".json_encode($arrT) ."' selected='selected'>".htmlentities($row->MAIN_CAT_NAME)."</option>";
+					$cat_id = $row->ID;
+					$arrT = array(
+							'cat_id' => $cat_id,
+							'cat_name' => htmlentities($row->CATEGORY_NAME),
+							'main_cat_id' => $row->CATEGORY_TYPE_ID,
+							'main_cat_name' => htmlentities($row->MAIN_CAT_NAME),
+							'c_type' => 'main'
+					);
+					//SHO TOP LEVEl
+					if($temp_main_cat == $row->CATEGORY_TYPE_ID){
+						if($type == 'main' && $row->CATEGORY_TYPE_ID == $current_id){
+							//$out .= "<option value='".json_encode($arrT) ."' selected='selected'>".htmlentities($row->MAIN_CAT_NAME)."</option>";
+							
+						}
 						
 					}else{
-						$out .= "<option value='".json_encode($arrT) ."'>".htmlentities($row->MAIN_CAT_NAME)."</option>";
+						
+						
+						if($type == 'main' && $row->CATEGORY_TYPE_ID  == $current_id){
+							$output .= "<option value='".json_encode($arrT) ."' selected='selected'>".htmlentities($row->MAIN_CAT_NAME)."</option>";
+							
+						}else{
+							$output .= "<option value='".json_encode($arrT) ."'>".htmlentities($row->MAIN_CAT_NAME)."</option>";
+							
+						}
+							
+						
 						
 					}
-						
-					
-					
-				}
-			
-				$arr = array(
-					'cat_id' => $cat_id,
-					'cat_name' => htmlentities($row->CATEGORY_NAME),
-					'main_cat_id' => $row->CATEGORY_TYPE_ID,
-					'main_cat_name' => htmlentities($row->MAIN_CAT_NAME),
-					'c_type' => ''
-				);
-				//$arr = "[{'cat_id':".$cat_id.", 'cat_name':'".htmlentities($row->CATEGORY_NAME)."','main_cat_id':".$row->CATEGORY_TYPE_ID.",'main_cat_name':'".htmlentities($row->MAIN_CAT_NAME)."'}]";
-				if($cat_id == $current_id && $type != 'main'){
 
-					$out .= "<option value='".json_encode($arr) ."' selected='selected'>".htmlentities($row->CATEGORY_NAME)."</option>";
+					$catname = str_replace("/","", $row->CATEGORY_NAME);
+					$maincatname = str_replace("/","", $row->MAIN_CAT_NAME);
 
-				}else{
-
-					$out .= "<option value='".json_encode($arr) ."'>".htmlentities($row->CATEGORY_NAME)."</option>";
-
-				}
-				$temp_main_cat = $row->CATEGORY_TYPE_ID;
-
-            }
-
-            $out .= '';
-
-        }else{
+				
+					$arr = array(
+						'cat_id' => $cat_id,
+						'cat_name' => htmlentities($catname),
+						'main_cat_id' => $row->CATEGORY_TYPE_ID,
+						'main_cat_name' => htmlentities($maincatname),
+						'c_type' => ''
+					);
 
 
-            $out .= '<option value="0">No options</option>';
 
-        }
-        return $out;
+					if($cat_id == $current_id && $type != 'main'){
+
+						$output .= "<option value='".json_encode($arr) ."' selected='selected'>".htmlentities($catname)."</option>";
+
+					}else{
+
+						$output .= "<option value='".json_encode($arr) ."'>".htmlentities($catname)."</option>";
+
+					}
+					$temp_main_cat = $row->CATEGORY_TYPE_ID;
+
+	            }
+
+	            $output .= '';
+
+	        }else{
+
+
+	            $output .= '<option value="0">No options</option>';
+
+	        }
+
+	        $this->cache->save('get_categories_select_'.$type.'_'.$id.'_'.$current_id, $output, 600);
+
+	    }    
+
+	    return $output;
     }
+
+
+
+
     //+++++++++++++++++++++++++++
     //POPULATE FILTERS PER CATEGORY
     //++++++++++++++++++++++++++
     public function get_cities_select($current_id){
 
-        $test = $this->db->get('a_map_location');
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-        $out ='';
+		if ( ! $output = $this->cache->get('a_map_location_'.$current_id))
+		{    	
 
-        if($test->num_rows() > 0){
-            $out .= '
-					<option value="">Where...in Namibia?</option>
-			';
-            foreach($test->result() as $row){
+	        $test = $this->db->get('a_map_location');
 
-                $cat_id = $row->ID;
+	        $output ='';
 
-                if($cat_id == $current_id){
+	        if($test->num_rows() > 0){
+	            $out .= '
+						<option value="">Where...in Namibia?</option>
+				';
+	            foreach($test->result() as $row){
 
-                    $out .= '<option value="'.$cat_id.'_'. htmlentities($row->MAP_LOCATION) .'" selected="selected">'.htmlentities($row->MAP_LOCATION).'</option>';
+	                $cat_id = $row->ID;
 
-                }else{
+	                if($cat_id == $current_id){
 
-                    $out .= '<option value="'.$cat_id.'_'. htmlentities($row->MAP_LOCATION) .'">'.htmlentities($row->MAP_LOCATION).'</option>';
+	                    $output .= '<option value="'.$cat_id.'_'. htmlentities($row->MAP_LOCATION) .'" selected="selected">'.htmlentities($row->MAP_LOCATION).'</option>';
 
-                }
+	                }else{
 
+	                	if($row->ID == 16) { $selected = 'selected="selected"'; } else { $selected = ''; }
 
+	                    $output .= '<option value="'.$cat_id.'_'. htmlentities($row->MAP_LOCATION) .'" '.$selected.'>'.htmlentities($row->MAP_LOCATION).'</option>';
 
-            }
-
-            $out .= '
-
-			';
-
-        }else{
+	                }
 
 
-            $out .= '<option value="0">No options</option>';
 
-        }
-        return $out;
+	            }
+
+	            $output .= '
+
+				';
+
+	        }else{
+
+
+	            $output .= '<option value="0">No options</option>';
+
+	        }
+
+	        $this->cache->save('a_map_location_'.$current_id, $output, 525600);
+
+	    }
+	       
+        return $output;
     }
+
+
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //GET BUSINESS COORDINATES FOR MAP
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
