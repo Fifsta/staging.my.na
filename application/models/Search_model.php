@@ -13,7 +13,7 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function get_cat_loc_bus($category,$c_id, $location, $l_id ,$business, $limit, $offset, $sort){
 			
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 			
 		if ( ! $output = $this->cache->get('get_cat_loc_bus_'.$category.'_'.$c_id.'_'.$location.'_'.$business.'_'.$offset.'_'.$limit))
 		{			
