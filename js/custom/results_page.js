@@ -61,8 +61,6 @@ $(document).ready(function(){
 
     $('#sort_asc').on('click', function(e){
 
-    	alert('hi');
-
         $('#sortby').val('ASC');
         var frm = $('#search-main_b');
 
