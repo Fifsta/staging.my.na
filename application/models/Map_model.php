@@ -12,64 +12,74 @@ class Map_model extends CI_Model{
 	//++++++++++++++++++++++++++
 	public function get_business_results($cat, $type, $l_id = 0, $loc = ''){
 		
-		$catSQL ='';
-        $limitSQL = ' LIMIT 100';
-        if($type == 'main' && $cat != 'all'){
+        $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-            //$cat_id = 3;
-            $catSQL = " AND a_tourism_category_sub.CATEGORY_TYPE_ID = '".$cat."'";
-            $limitSQL = ' ';
-        }elseif($type == 'sub'  && $cat != 'all'){
+        if ( ! $output = $this->cache->get('map_business_results_'.$cat.'_'.$type))
+        {
 
-            $catSQL = " AND a_tourism_category_sub.ID = '".$cat."'";
+    		$catSQL ='';
+            $limitSQL = ' LIMIT 100';
+            if($type == 'main' && $cat != 'all'){
 
-        }else{
+                //$cat_id = 3;
+                $catSQL = " AND a_tourism_category_sub.CATEGORY_TYPE_ID = '".$cat."'";
+                $limitSQL = ' ';
+            }elseif($type == 'sub'  && $cat != 'all'){
 
+                $catSQL = " AND a_tourism_category_sub.ID = '".$cat."'";
+
+            }else{
+
+
+            }
+    		$lSQL = " ";
+    		if($l_id != 0 &&  $l_id != 'all' ){
+    			
+    			if($catSQL != ''){
+    			 	$lSQL = " AND u_business.BUSINESS_MAP_CITY_ID = '".$l_id."'";
+    			}else{
+    				
+    				$lSQL = " AND u_business.BUSINESS_MAP_CITY_ID = '".$l_id."'";
+    			}
+    			
+    		}
+
+    		$q = "SELECT u_business.ID,u_business.STAR_RATING,u_business.BUSINESS_NAME,  u_business_map.BUSINESS_MAP_LATITUDE as LAT,
+    								  u_business_map.BUSINESS_MAP_LONGITUDE as LON FROM u_business											
+    								  JOIN u_business_map ON u_business.ID = u_business_map.BUSINESS_ID
+    								  LEFT JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
+    								  JOIN a_tourism_category_sub ON i_tourism_category.CATEGORY_ID = a_tourism_category_sub.ID
+    								  JOIN a_tourism_category ON a_tourism_category_sub.CATEGORY_TYPE_ID = a_tourism_category.ID
+    								  WHERE u_business_map.BUSINESS_MAP_LATITUDE != ''
+    								 ".$catSQL." ".$lSQL."
+    								  GROUP BY u_business.ID
+    								  ".$limitSQL."";
+
+    		//Get FEATURED PRODUCTS
+    		$main = $this->db->query($q);
+    		
+    		$output = array();
+    		if($main->result()){
+    			$x = 0;
+    			
+    			
+    			foreach($main->result() as $row){
+    				
+    				
+    			}
+    			
+    			$output = json_encode($main->result());
+    		
+    		}else{
+    			
+    				
+    			
+    		}
+
+            $this->cache->save('map_business_results_'.$cat.'_'.$type, $output, 1440);
 
         }
-		$lSQL = " ";
-		if($l_id != 0 &&  $l_id != 'all' ){
-			
-			if($catSQL != ''){
-			 	$lSQL = " AND u_business.BUSINESS_MAP_CITY_ID = '".$l_id."'";
-			}else{
-				
-				$lSQL = " AND u_business.BUSINESS_MAP_CITY_ID = '".$l_id."'";
-			}
-			
-		}
-
-		$q = "SELECT u_business.ID,u_business.STAR_RATING,u_business.BUSINESS_NAME,  u_business_map.BUSINESS_MAP_LATITUDE as LAT,
-								  u_business_map.BUSINESS_MAP_LONGITUDE as LON FROM u_business											
-								  JOIN u_business_map ON u_business.ID = u_business_map.BUSINESS_ID
-								  LEFT JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
-								  JOIN a_tourism_category_sub ON i_tourism_category.CATEGORY_ID = a_tourism_category_sub.ID
-								  JOIN a_tourism_category ON a_tourism_category_sub.CATEGORY_TYPE_ID = a_tourism_category.ID
-								  WHERE u_business_map.BUSINESS_MAP_LATITUDE != ''
-								 ".$catSQL." ".$lSQL."
-								  GROUP BY u_business.ID
-								  ".$limitSQL."";
-
-		//Get FEATURED PRODUCTS
-		$main = $this->db->query($q);
-		
-		$output = array();
-		if($main->result()){
-			$x = 0;
-			
-			
-			foreach($main->result() as $row){
-				
-				
-			}
-			
-			$output = json_encode($main->result());
-		
-		}else{
-			
-				
-			
-		}
+           
 		return $output;
 		$this->output->set_content_type('application/json');
 		
