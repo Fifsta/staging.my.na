@@ -1454,7 +1454,7 @@ class Search_model extends CI_Model{
 
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-		if ( ! $output = $this->cache->get('show_sidebar'))
+		if ( ! $output = $this->cache->get('show_sidebar_map'))
 		{		
 			
 			//Get Main
@@ -1506,10 +1506,12 @@ class Search_model extends CI_Model{
 
 				';
 
-				$this->cache->save('show_sidebar', $output, 600);
+
 				
 			}
 			$output .= '</div></div>';
+
+			$this->cache->save('show_sidebar_map', $output, 43200);
 
 		}
 
