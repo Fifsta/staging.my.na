@@ -250,6 +250,11 @@ class Search_model extends CI_Model{
 	// 3 Category & BUsiness
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function get_cat_bus($category, $c_id, $business, $limit, $offset ,$sort){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('get_cat_bus_'.$category.'_'.$c_id.'_'.$business.'_'.$offset.'_'.$limit))
+		{		
 			
 			if($offset == ''){
 				
@@ -286,9 +291,13 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);
 			
-			$query = $this->db->query($query, FALSE);				
+			$output = $this->db->query($query, FALSE);		
 
-			return $query;
+			$this->cache->save('get_cat_bus_'.$category.'_'.$c_id.'_'.$business.'_'.$offset.'_'.$limit, $output, 1440);		
+
+		}
+		
+		return $output;
 	
 	}
 	
@@ -339,6 +348,11 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function get_loc_bus($location, $l_id ,$business, $limit, $offset, $sort){
 			
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('get_loc_bus_'.$location.'_'.$l_id.'_'.$business.'_'.$offset.'_'.$limit))
+		{	
+
 			if($offset == ''){
 				
 				$offset = 0;
@@ -377,9 +391,14 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);
 
-			$query = $this->db->query($query, FALSE);		
+			$output = $this->db->query($query, FALSE);	
 
-			return $query;
+			$this->cache->save('get_loc_bus_'.$location.'_'.$l_id.'_'.$business.'_'.$offset.'_'.$limit, $output, 1440);		
+
+
+		}		
+
+		return $output;
 	
 	}
 	
@@ -1135,6 +1154,8 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function show_results($query, $main_c_id = '', $main_category = '', $category = '', $sortby = ''){
 			
+
+			$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
 			$this->load->model('image_model'); 
 			$this->load->library('thumborp');
