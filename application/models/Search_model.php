@@ -1765,7 +1765,7 @@ class Search_model extends CI_Model{
 
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-		if ( ! $output = $this->cache->get('show_sidebar_map'))
+		if ( ! $output = $this->cache->get('show_sidebar_map_nav'))
 		{		
 			
 			//Get Main
@@ -1804,7 +1804,7 @@ class Search_model extends CI_Model{
 								$id = substr($sub_row, 0, strpos($sub_row,'_-_', 0));
 								$name = substr($sub_row, stripos($sub_row,'_-_') + 3, strlen($sub_row));
 								
-								echo '<li><a href="javascript:void(0)" data-id="'.$id.'" class="map-link">'.$name.'</a></li>';
+								$output .= '<li><a href="javascript:void(0)" data-id="'.$id.'" class="map-link">'.$name.'</a></li>';
 								
 							}
 
@@ -1822,7 +1822,7 @@ class Search_model extends CI_Model{
 			}
 			$output .= '</div></div>';
 
-			$this->cache->save('show_sidebar_map', $output, 43200);
+			$this->cache->save('show_sidebar_map_nav', $output, 43200);
 
 		}
 
