@@ -74,6 +74,13 @@ class Search_model extends CI_Model{
 	}
 	
 	function Cget_cat_loc_bus($category,$c_id, $location, $l_id, $business){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Cget_cat_loc_bus_'.$category.'_'.$c_id.'_'.$location.'_'.$business))
+		{
+
+
             //LIKE STR
             $likeSQL = $this->get_like_string($business);
             $query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL FROM u_business
@@ -84,18 +91,27 @@ class Search_model extends CI_Model{
 							i_tourism_category.CATEGORY_ID = '". $c_id."' ".$likeSQL."
 							GROUP BY u_business.ID ";
 			
-			//INSERT IMPRESSION COUNT
-			//$data['QUERY'] = $query;
-			//$this->db->insert('u_business_imp_queue',$data);
 			
 			$query = $this->db->query($query,FALSE);
 			
-			return $query->num_rows();
+			$output = $query->num_rows();
+
+			$this->cache->save('Cget_cat_loc_bus_'.$category.'_'.$c_id.'_'.$location.'_'.$business, $output, 1440);
+
+		}	
+
+		return $output;
 	
 	}
 	
 	
 	function Aget_cat_loc_bus($category, $location ,$business){
+
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Aget_cat_loc_bus_'.$category.'_'.$location.'_'.$business))
+		{		
             //LIKE STR
             $likeSQL = $this->get_like_string($business);
 			$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
@@ -114,11 +130,17 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);
 			
-			$query = $this->db->query($query,FALSE);
+			$output = $this->db->query($query,FALSE);
+
+			$this->cache->save('Aget_cat_loc_bus_'.$category.'_'.$location.'_'.$business, $output, 1440);
+
+		}	
 			
-			return $query;
+		return $output;
 	
 	}
+
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// 2 Category & Location
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
@@ -178,6 +200,11 @@ class Search_model extends CI_Model{
 	}
 	
 	function Cget_cat_loc($category, $c_id, $location, $l_id ){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Cget_cat_loc_'.$category.'_'.$c_id.'_'.$location))
+		{		
 			
 			$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.* FROM u_business
 							LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
@@ -193,14 +220,26 @@ class Search_model extends CI_Model{
 			
 			$query = $this->db->query($query,FALSE);
 			
-			return $query->num_rows();
+			$output = $query->num_rows();
+
+			$this->cache->save('Cget_cat_loc_'.$category.'_'.$c_id.'_'.$location, $output, 1440);
+
+		}
+		
+		return $output;	
 	
 	}
 	
 	
 	function Aget_cat_loc($category, $c_id, $location, $l_id ){
 
-        $query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Aget_cat_loc_'.$category.'_'.$c_id.'_'.$location))
+		{
+
+
+        	$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
                             group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
                             FROM u_business
 							LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
@@ -216,13 +255,25 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);
 			
-			$query = $this->db->query($query,FALSE);	
+			$output = $this->db->query($query,FALSE);
+
+			$this->cache->save('Aget_cat_loc_'.$category.'_'.$c_id.'_'.$location, $output, 1440);
+
+		}		
 			
-			return $query;
+		return $output;
 	
 	}
+
+
 	//FOR category searches
 	function Bget_cat_loc($category, $c_id, $location, $l_id ){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Bget_cat_loc_'.$category.'_'.$c_id.'_'.$location))
+		{
+
 			
 			$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
                             group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
@@ -241,9 +292,13 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);
 			
-			$query = $this->db->query($query,FALSE);	
+			$output = $this->db->query($query,FALSE);	
+
+			$this->cache->save('Bget_cat_loc_'.$category.'_'.$c_id.'_'.$location, $output, 1440);
+
+		}	
 			
-			return $query;
+		return $output;
 	
 	}
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -302,6 +357,12 @@ class Search_model extends CI_Model{
 	}
 	
 	function Cget_cat_bus($category, $c_id, $business){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Cget_cat_bus_'.$category.'_'.$c_id.'_'.$business))
+		{		
+
             //LIKE STR
             $likeSQL = $this->get_like_string($business);
 			$query = "SELECT u_business.* FROM u_business JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
@@ -314,11 +375,22 @@ class Search_model extends CI_Model{
 			
 			$query = $this->db->query($query,FALSE);	
 			
-			return $query->num_rows();
+			$output = $query->num_rows();
+
+			$this->cache->save('Cget_cat_bus_'.$category.'_'.$c_id.'_'.$business, $output, 1440);		
+
+		}
+		
+		return $output;	
 	
 	}
 	
 	function Aget_cat_bus($category, $c_id ,$business){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Aget_cat_bus_'.$category.'_'.$c_id.'_'.$business))
+		{	
 
             //LIKE STR
             $likeSQL = $this->get_like_string($business);
@@ -337,9 +409,13 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);	
 			
-			$query = $this->db->query($query,FALSE);
+			$output = $this->db->query($query,FALSE);
+
+			$this->cache->save('Aget_cat_buss_'.$category.'_'.$c_id.'_'.$business, $output, 1440);	
 			
-			return $query;
+		}	
+
+		return $output;
 	
 	}
 	
@@ -404,6 +480,10 @@ class Search_model extends CI_Model{
 	
 	function Cget_loc_bus($location, $l_id, $business){
 
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Cget_loc_bus_'.$location.'_'.$l_id.'_'.$business))
+		{
 
             //LIKE STR
             $likeSQL = $this->get_like_string($business);
@@ -420,12 +500,24 @@ class Search_model extends CI_Model{
 				
 			$query = $this->db->query($query,FALSE);	
 					
-			return $query->num_rows();
+			$output = $query->num_rows();
+
+			$this->cache->save('Cget_loc_bus_'.$location.'_'.$l_id.'_'.$business, $output, 1440);	
+
+		}
+		
+		return $output;	
 	
 	}
 	
 	
 	function Aget_loc_bus($location, $l_id ,$business){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Aget_loc_bus_'.$location.'_'.$l_id.'_'.$business))
+		{
+
             //LIKE STR
             $likeSQL = $this-> get_like_string($business);
 			$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
@@ -443,15 +535,27 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);	
 			
-			$query = $this->db->query($query,FALSE);		
-			return $query;
-	
+			$output = $this->db->query($query,FALSE);
+
+			$this->cache->save('Aget_loc_bus_'.$location.'_'.$l_id.'_'.$business, $output, 1440);
+
+		}	
+
+		return $output;
 	}
+
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// 5 Location 
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function get_loc($location, $l_id, $limit, $offset, $sort){
 			
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('get_loc_'.$location.'_'.$l_id.'_'.$limit.'_'.$offset.'_'.$sort))
+		{
+
 			if($offset == ''){
 				
 				$offset = 0;
@@ -487,14 +591,24 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);
 
-			$query = $this->db->query($query, FALSE);					
+			$output = $this->db->query($query, FALSE);
 
-			return $query;
+			$this->cache->save('get_loc_'.$location.'_'.$l_id.'_'.$limit.'_'.$offset.'_'.$sort, $output, 1440);					
+
+		}
+		
+		return $output;
 	
 	}
 	
+
+
 	function Cget_loc($location, $l_id){
 			
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Cget_loc_'.$location.'_'.$l_id)) {
+
 			$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.* FROM u_business
 						LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
 						LEFT JOIN a_map_location ON a_map_location.ID = u_business.BUSINESS_MAP_CITY_ID
@@ -509,11 +623,23 @@ class Search_model extends CI_Model{
 			
 			$query = $this->db->query($query,FALSE);
 			
-			return $query->num_rows();
+			$output = $query->num_rows();
+
+			$this->cache->save('Cget_loc_'.$location.'_'.$l_id, $output, 1440);	
+
+		}
+
+		return $output;
 	
 	}
 	
+
+
 	function Aget_loc($l_id, $location){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Aget_loc_'.$location.'_'.$l_id)) {
 
              $q = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
                             group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
@@ -526,8 +652,14 @@ class Search_model extends CI_Model{
 						WHERE u_business.ISACTIVE = 'Y'
 						AND ( a_map_location.ID = '".$l_id."')
 						GROUP BY u_business.ID ";
-            $query = $this->db->query($q);
-			return $query;
+
+            $output = $this->db->query($q);
+
+            $this->cache->save('Aget_loc_'.$location.'_'.$l_id, $output, 1440);	
+
+         }
+            
+		return $output;
 	
 	}
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -535,6 +667,11 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function get_category($category, $c_id, $limit, $offset, $sort){
 			
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('get_category_'.$category.'_'.$c_id.'_'.$limit.'_'.$offset.'_'.$sort)) {
+
+
 			if($offset == ''){
 				
 				$offset = ' OFFSET 0';
@@ -569,14 +706,22 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);
 			
-			$query = $this->db->query($query ,FALSE);			
+			$output = $this->db->query($query ,FALSE);
 
-			return $query;
+			$this->cache->save('get_category_'.$category.'_'.$c_id.'_'.$limit.'_'.$offset.'_'.$sort, $output, 1440);	
+
+		}			
+
+		return $output;
 	
 	}
 	
 	function Cget_category($category, $c_id){
 			
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Cget_category_'.$category.'_'.$c_id)) {
+
 			$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.* FROM u_business
 					LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
 					JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
@@ -590,11 +735,21 @@ class Search_model extends CI_Model{
 			
 			$query = $this->db->query($query,FALSE);
 			
-			return $query->num_rows();
+			$output = $query->num_rows();
+
+			$this->cache->save('Cget_category_'.$category.'_'.$c_id, $output, 1440);	
+
+		}
+
+		return $output;
 	
 	}
 	
 	function Aget_category($category, $c_id){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Aget_category_'.$category.'_'.$c_id)) {		
 			
 			$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
                             group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
@@ -608,33 +763,55 @@ class Search_model extends CI_Model{
 					i_tourism_category.CATEGORY_ID = '".$c_id."'
 					GROUP BY u_business.ID ";	
 					
-			$query = $this->db->query($query,FALSE);
+			$output = $this->db->query($query,FALSE);
+
+			$this->cache->save('Aget_category_'.$category.'_'.$c_id, $output, 1440);	
+
+		}	
 			
-			return $query;
+		return $output;
 	
 	}
+
 	
 	function Bget_category($cat_id){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Bget_category_'.$cat_id)) {			
 			
 			$query = $this->db->query("SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
-                            group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
-                            FROM u_business
+	                        group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
+	                        FROM u_business
 							LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
 							JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
 							JOIN i_tourism_category as categories ON u_business.ID = categories.BUSINESS_ID
 							JOIN a_tourism_category_sub as cat_names ON cat_names.ID = categories.CATEGORY_ID
 							LEFT JOIN a_map_location ON a_map_location.ID = u_business.BUSINESS_MAP_CITY_ID
-                                      WHERE i_tourism_category.CATEGORY_ID = '".$cat_id."'
-                                      AND (u_business.ISACTIVE = 'Y') ",FALSE);
-			return $query;
-	
+	                        WHERE i_tourism_category.CATEGORY_ID = '".$cat_id."'
+	                        AND (u_business.ISACTIVE = 'Y') ",FALSE);
+
+			$output = $query;
+
+			$this->cache->save('Bget_category_'.$cat_id, $output, 1440);	
+
+
+		}
+
+		return $output;
+		
 	}
+
+
 	
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// 7 ONLY business Name
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function get_bus($business, $limit, $offset, $sort){
 
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('get_bus_'.$business.'_'.$limit.'_'.$offset.'_'.$sort)) {	
 
             if($offset == ''){
 
@@ -654,6 +831,7 @@ class Search_model extends CI_Model{
                 $sort = ' ORDER BY u_business.PAID_STATUS DESC, TOTAL DESC ';
 
             }
+
             //like SQL
             $likeSQL = $this-> get_like_string($business);
             $q = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
@@ -668,12 +846,22 @@ class Search_model extends CI_Model{
 						GROUP BY u_business.ID ".$sort." LIMIT ".$limit." OFFSET ".$offset." ";
 
 
-            $query = $this->db->query($q,FALSE);
-            return $query;
+            $output = $this->db->query($q,FALSE);
+
+            $this->cache->save('get_bus_'.$business.'_'.$limit.'_'.$offset.'_'.$sort, $output, 1440);
+
+        }
+            
+        return $output;
 	
 	}
+
 	
 	function Cget_bus($business){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Cget_bus_'.$business)) {	
 
             //like SQL
             $likeSQL = $this-> get_like_string($business);
@@ -689,19 +877,36 @@ class Search_model extends CI_Model{
             $this->db->insert('u_business_imp_queue',$data);
 
 			
-			return $query->num_rows();
+			$output = $query->num_rows();
+
+			$this->cache->save('Cget_bus_'.$business, $output, 1440);
+
+		}
+		
+		return $output;	
 	
 	}
 	
 	
 	function Aget_bus($business){
 			
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Aget_bus_'.$business)) {	
+
 			//$this->db->limit($limit,$offset);
 			$this->db->where('ISACTIVE','Y');
 			$this->db->like('BUSINESS_NAME', $business); 
-			$query = $this->db->get('u_business');
-			return $query;
+			$output = $this->db->get('u_business');
+
+
+			$this->cache->save('Aget_bus_'.$business, $output, 1440);
+			
 	
+		}
+
+		return $output;
+
 	}
 				   
 
@@ -709,6 +914,10 @@ class Search_model extends CI_Model{
 	// 8 No Criteria - All businesses
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function get_all($limit, $offset, $sort){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('get_all_'.$limit.'_'.$offset.'_'.$sort)) {		
 			
 			if($offset == ''){
 				
@@ -744,12 +953,22 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);
 			
-			$query = $this->db->query($query);
-			return $query;
+			$output = $this->db->query($query);
+
+			$this->cache->save('get_all_'.$limit.'_'.$offset.'_'.$sort, $output, 1440);
+
+		}
+			
+		return $output;
 	
 	}
+
 	function count_get_all(){
 			
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('count_get_all')) {	
+
 			$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.* FROM u_business
                               LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
                               WHERE u_business.ISACTIVE = 'Y'
@@ -762,10 +981,22 @@ class Search_model extends CI_Model{
 			
 			$query = $this->db->query($query,FALSE);
 			
-			return $query->num_rows();
+			$output = $query->num_rows();
+
+			$this->cache->save('count_get_all', $output, 600);
+		}
+
+		return $output;
 	
 	}
+
+
 	function Aget_all(){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Aget_all')) {	
+
 			
 			$query = $this->db->query("SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
                             group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
@@ -776,7 +1007,13 @@ class Search_model extends CI_Model{
 							JOIN a_tourism_category_sub as cat_names ON cat_names.ID = categories.CATEGORY_ID
 							LEFT JOIN a_map_location ON a_map_location.ID = u_business.BUSINESS_MAP_CITY_IDWHERE u_business.ISACTIVE = 'Y'
 							GROUP BY u_business.ID ORDER BY u_business.PAID_STATUS DESC, TOTAL DESC");
-			return $query;
+			$output = $query;
+
+			$this->cache->save('Aget_all', $output, 600);
+
+		}	
+
+		return $output;
 	
 	}
 
@@ -784,7 +1021,10 @@ class Search_model extends CI_Model{
 	//All businesses For Category
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function get_cat($cat_id, $limit, $offset, $sort){
+	
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 			
+		if ( ! $output = $this->cache->get('get_cat_'.$cat_id.'_'.$limit.'_'.$offset.'_'.$sort)) {	
 
 			if($offset == ''){
 				
@@ -824,11 +1064,18 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);
 			
-			$query = $this->db->query($query ,FALSE);	
+			$output = $this->db->query($query ,FALSE);
+
+			$this->cache->save('get_cat_'.$cat_id.'_'.$limit.'_'.$offset.'_'.$sort, $output, 600);
+
+		}
+				
 			
-			return $query;
+		return $output;
 	
 	}
+
+
 	function count_get_cat($cat_id){
 			
 			$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.* FROM u_business
@@ -855,6 +1102,9 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function get_cat_main($cat_id, $limit, $offset ,$sort){
 			
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('get_cat_main_'.$cat_id.'_'.$limit.'_'.$offset.'_'.$sort)) {	
 
 			if($offset == ''){
 			
@@ -892,15 +1142,26 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);
 			
-			$query = $this->db->query($query,FALSE);
+			$output = $this->db->query($query,FALSE);
+
+			$this->cache->save('get_cat_main_'.$cat_id.'_'.$limit.'_'.$offset.'_'.$sort, $output, 600);
 			
-			return $query;
+
+		}
+			
+		return $output;
 	
 	}
+
+
 	
 	function count_get_cat_main($cat_id){
 			
 	
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('count_get_cat_main_'.$cat_id)) {	
+
 				 $query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.* FROM u_business 
 							LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID 
 							JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
@@ -916,15 +1177,26 @@ class Search_model extends CI_Model{
 			//$this->db->insert('u_business_imp_queue',$data);
 			
 			$query = $this->db->query($query,FALSE);
-			$z = $query->num_rows();
-			return $z;
+			$output = $query->num_rows();
+
+			$this->cache->save('get_cat_main_'.$cat_id, $output, 600);
+
+		}	
+			
+		return $output;
 	
 	}
+
+
 	//MAP
 	function Bget_cat_main($cat_id){
 			
 	
-			$query = $this->db->query("SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Bget_cat_main_'.$cat_id)) {				
+	
+			$output = $this->db->query("SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
                             group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
                             FROM u_business
 							LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
@@ -936,9 +1208,11 @@ class Search_model extends CI_Model{
 							a_tourism_category_sub.CATEGORY_TYPE_ID = '".$cat_id."'
 							GROUP BY u_business.ID ORDER BY u_business.PAID_STATUS DESC, TOTAL DESC" ,FALSE);
 				 
+			$this->cache->save('Bget_cat_main_'.$cat_id, $output, 600);
 
-			
-			return $query;
+		}	
+
+		return $output;
 	
 	}
 	
@@ -947,6 +1221,9 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
 	function get_cat_main_loc($cat_id, $limit, $l_id, $location, $offset){
 			
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('get_cat_main_loc_'.$cat_id.'_'.$l_id.'_'.$location.'_'.$limit.'_'.$offset)) {				
 
 			if($offset == ''){
 			
@@ -984,14 +1261,23 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);
 			
-			$query = $this->db->query($query ,FALSE);				
+			$output = $this->db->query($query ,FALSE);	
 
-			return $query;
+			$this->cache->save('get_cat_main_loc_'.$cat_id.'_'.$l_id.'_'.$location.'_'.$limit.'_'.$offset, $output, 600);
+
+		}				
+
+		return $output;
 	
 	}
 	
 	function count_get_cat_main_loc($cat_id,$l_id, $location){
 			
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('count_get_cat_main_loc_'.$cat_id.'_'.$l_id.'_'.$location)) {	
+
+
 				if($location == 'namibia'){
 					
 					$loc_str = "";
@@ -1016,13 +1302,14 @@ class Search_model extends CI_Model{
 				 
 
 			
-			//INSERT IMPRESSION COUNT
-			//$data['QUERY'] = $query;
-			//$this->db->insert('u_business_imp_queue',$data);
-			
 			$query = $this->db->query($query,FALSE);
-			$z = $query->num_rows();
-			return $z;
+			$output = $query->num_rows();
+
+			$this->cache->save('count_get_cat_main_loc_'.$cat_id.'_'.$l_id.'_'.$location, $output, 600);
+
+		}
+			
+		return $output;
 	
 	}
 
@@ -1031,87 +1318,107 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	function get_cat_main_loc_bus($cat_id, $limit, $l_id,$location, $business, $offset ,$sort){
 
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('get_cat_main_loc_bus_'.$cat_id.'_'.$l_id.'_'.$location.'_'.$business.'_'.$limit.'_'.$offset.'_'.$sort)) {
 
-		if($offset == ''){
 
-			$str = ' OFFSET 0';
+			if($offset == ''){
 
-		}else{
+				$str = ' OFFSET 0';
 
-			$str = ' OFFSET ' . $offset;
+			}else{
 
-		}
+				$str = ' OFFSET ' . $offset;
 
-		if($location == 'namibia'){
+			}
 
-			$loc_str = "";
+			if($location == 'namibia'){
 
-		}else{
+				$loc_str = "";
 
-			$loc_str = "AND u_business.BUSINESS_MAP_CITY_ID = ".$l_id."";
+			}else{
 
-		}
-		$likeSQL = $this-> get_like_string($business);
-		$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
-                            group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
-                            FROM u_business
-							LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
-							JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
-							JOIN i_tourism_category as categories ON u_business.ID = categories.BUSINESS_ID
-							JOIN a_tourism_category_sub as cat_names ON cat_names.ID = categories.CATEGORY_ID
-							LEFT JOIN a_map_location ON a_map_location.ID = u_business.BUSINESS_MAP_CITY_ID
-                            WHERE u_business.ISACTIVE = 'Y' ".$loc_str." AND
-							cat_names.CATEGORY_TYPE_ID = '".$cat_id."' ".$likeSQL."
-							GROUP BY u_business.ID ORDER BY u_business.PAID_STATUS DESC, TOTAL DESC LIMIT ".$limit.$str;
+				$loc_str = "AND u_business.BUSINESS_MAP_CITY_ID = ".$l_id."";
 
-		//INSERT IMPRESSION COUNT
-		$data['QUERY'] = $query;
-		$this->db->insert('u_business_imp_queue',$data);
+			}
+			$likeSQL = $this-> get_like_string($business);
+			$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
+	                            group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
+	                            FROM u_business
+								LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
+								JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
+								JOIN i_tourism_category as categories ON u_business.ID = categories.BUSINESS_ID
+								JOIN a_tourism_category_sub as cat_names ON cat_names.ID = categories.CATEGORY_ID
+								LEFT JOIN a_map_location ON a_map_location.ID = u_business.BUSINESS_MAP_CITY_ID
+	                            WHERE u_business.ISACTIVE = 'Y' ".$loc_str." AND
+								cat_names.CATEGORY_TYPE_ID = '".$cat_id."' ".$likeSQL."
+								GROUP BY u_business.ID ORDER BY u_business.PAID_STATUS DESC, TOTAL DESC LIMIT ".$limit.$str;
 
-		$query = $this->db->query($query ,FALSE);
+			//INSERT IMPRESSION COUNT
+			$data['QUERY'] = $query;
+			$this->db->insert('u_business_imp_queue',$data);
 
-		return $query;
+			$output = $this->db->query($query ,FALSE);
+
+			$this->cache->save('get_cat_main_loc_bus_'.$cat_id.'_'.$l_id.'_'.$location.'_'.$business.'_'.$limit.'_'.$offset.'_'.$sort, $output, 600);
+
+		}	
+
+		return $output;
 
 	}
 
 	function count_get_cat_main_loc_bus($cat_id,$l_id, $location, $business){
 
-		if($location == 'namibia'){
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('count_get_cat_main_loc_bus_'.$cat_id.'_'.$l_id.'_'.$location.'_'.$business)) {
 
-			$loc_str = "";
+			if($location == 'namibia'){
 
-		}else{
+				$loc_str = "";
 
-			$loc_str = "AND u_business.BUSINESS_MAP_CITY_ID = ".$l_id."";
+			}else{
+
+				$loc_str = "AND u_business.BUSINESS_MAP_CITY_ID = ".$l_id."";
+
+			}
+			$likeSQL = $this-> get_like_string($business);
+			$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
+	                            group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
+	                            FROM u_business
+								LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
+								JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
+								JOIN i_tourism_category as categories ON u_business.ID = categories.BUSINESS_ID
+								JOIN a_tourism_category_sub as cat_names ON cat_names.ID = categories.CATEGORY_ID
+								LEFT JOIN a_map_location ON a_map_location.ID = u_business.BUSINESS_MAP_CITY_ID
+	                            WHERE u_business.ISACTIVE = 'Y' ".$loc_str." AND
+								cat_names.CATEGORY_TYPE_ID = '".$cat_id."' ".$likeSQL."
+								GROUP BY u_business.ID ORDER BY u_business.PAID_STATUS DESC, TOTAL DESC"   ;
+
+
+
+
+			$query = $this->db->query($query,FALSE);
+
+			$output = $query->num_rows();
+
+			$this->cache->save('count_get_cat_main_loc_bus_'.$cat_id.'_'.$l_id.'_'.$location.'_'.$business, $output, 600);
 
 		}
-		$likeSQL = $this-> get_like_string($business);
-		$query = "SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL, u_business.*,
-                            group_concat(DISTINCT(cat_names.CATEGORY_NAME)) as cats
-                            FROM u_business
-							LEFT JOIN u_business_vote ON u_business_vote.BUSINESS_ID = u_business.ID
-							JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
-							JOIN i_tourism_category as categories ON u_business.ID = categories.BUSINESS_ID
-							JOIN a_tourism_category_sub as cat_names ON cat_names.ID = categories.CATEGORY_ID
-							LEFT JOIN a_map_location ON a_map_location.ID = u_business.BUSINESS_MAP_CITY_ID
-                            WHERE u_business.ISACTIVE = 'Y' ".$loc_str." AND
-							cat_names.CATEGORY_TYPE_ID = '".$cat_id."' ".$likeSQL."
-							GROUP BY u_business.ID ORDER BY u_business.PAID_STATUS DESC, TOTAL DESC"   ;
-
-
-
-		//INSERT IMPRESSION COUNT
-		//$data['QUERY'] = $query;
-		//$this->db->insert('u_business_imp_queue',$data);
-
-		$query = $this->db->query($query,FALSE);
-		$z = $query->num_rows();
-		return $z;
+			
+		return $output;
 
 	}
 
+
 	//MAP
 	function Bget_cat_main_loc($cat_id, $location){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+			
+		if ( ! $output = $this->cache->get('Bget_cat_main_loc_'.$cat_id.'_'.$location)) {		
 				
 				if($location == 'namibia'){
 					
@@ -1142,11 +1449,16 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 		    $this->db->insert('u_business_imp_queue',$data);
 			
-			$query = $this->db->query($query,FALSE);
+			$output = $this->db->query($query,FALSE);
 
-			return $query;
+			$this->cache->save('Bget_cat_main_loc_'.$cat_id.'_'.$location, $output, 600);
+
+		}
+
+		return $output;
 	
 	}
+
 
 
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1157,19 +1469,18 @@ class Search_model extends CI_Model{
 
 			$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-			$this->load->model('image_model'); 
-			$this->load->library('thumborp');
-
-			$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-			$width = 360;
-			$height = 230;
-
-			$l_width = 100;
-			$l_height = 100;
-			$this->load->driver('cache');
-
 			if (! $html = $this->cache->get('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $sortby))
 			{
+
+				$this->load->model('image_model'); 
+				$this->load->library('thumborp');
+
+				$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+				$width = 360;
+				$height = 230;
+
+				$l_width = 100;
+				$l_height = 100;			
 
 				//If has results
 				if($query->num_rows() != 0){
@@ -1550,39 +1861,83 @@ class Search_model extends CI_Model{
 //Get Main Categories
 	function get_main_categories(){
       	
-		$test = $this->db->get('a_tourism_category');
-		return $test;	  
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('get_main_categories'))
+		{		
+
+			$output = $this->db->get('a_tourism_category');
+
+			$this->cache->save('get_main_categories', $output, 43200);
+
+		}
+			
+		return $output;	  
     }
+
+
 	//Get Main Categories
 	function get_categories_populated(){
       	
-		$test = $this->db->query("SELECT DISTINCT(i_tourism_category.CATEGORY_ID), COUNT(i_tourism_category.CATEGORY_ID) as num,
-								a_tourism_category_sub.*,a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME
-								 FROM i_tourism_category 
-								JOIN a_tourism_category_sub ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID 
-								JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID 
-								GROUP BY i_tourism_category.CATEGORY_ID ORDER BY num DESC LIMIT 20", FALSE);
-		return $test;	  
-    }		 	
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('get_categories_populated'))
+		{	
+
+			$output = $this->db->query("SELECT DISTINCT(i_tourism_category.CATEGORY_ID), COUNT(i_tourism_category.CATEGORY_ID) as num,
+									a_tourism_category_sub.*,a_tourism_category.CATEGORY_NAME as MAIN_CAT_NAME
+									 FROM i_tourism_category 
+									JOIN a_tourism_category_sub ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID 
+									JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID 
+									GROUP BY i_tourism_category.CATEGORY_ID ORDER BY num DESC LIMIT 20", FALSE);
+
+			$this->cache->save('get_categories_populated', $output, 43200);
+
+		}
+			
+		return $output;	  
+    }		 
+
+
 	//GEt sub Categories
 	function get_sub_categories($cat_id){
       	
-		$test = $this->db->query("SELECT a_tourism_category_sub.CATEGORY_NAME, a_tourism_category_sub.ID
-									FROM a_tourism_category_sub
-									JOIN a_tourism_category ON a_tourism_category_sub.CATEGORY_TYPE_ID = a_tourism_category.ID
-									WHERE a_tourism_category_sub.CATEGORY_TYPE_ID = '".$cat_id."'", FALSE);
-		return $test;
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('get_sub_categories_'.$cat_id))
+		{	
+
+			$output = $this->db->query("SELECT a_tourism_category_sub.CATEGORY_NAME, a_tourism_category_sub.ID
+										FROM a_tourism_category_sub
+										JOIN a_tourism_category ON a_tourism_category_sub.CATEGORY_TYPE_ID = a_tourism_category.ID
+										WHERE a_tourism_category_sub.CATEGORY_TYPE_ID = '".$cat_id."'", FALSE);
+
+			$this->cache->save('get_sub_categories_'.$cat_id, $output, 43200);
+
+		}
+
+		return $output;
 				  
     }
 
 	//GEt sub Categories
 	function get_sub_categories_populated(){
       	
-		$test = $this->db->query("SELECT DISTINCT(i_tourism_category.CATEGORY_ID), a_tourism_category_sub.CATEGORY_NAME, a_tourism_category_sub.ID
-									FROM a_tourism_category_sub
-									JOIN i_tourism_category ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID GROUP BY a_tourism_category_sub.ID
-									", FALSE);
-		return $test;
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('get_sub_categories_populated'))
+		{	
+
+			$output = $this->db->query("SELECT DISTINCT(i_tourism_category.CATEGORY_ID), a_tourism_category_sub.CATEGORY_NAME, a_tourism_category_sub.ID
+										FROM a_tourism_category_sub
+										JOIN i_tourism_category ON a_tourism_category_sub.ID = i_tourism_category.CATEGORY_ID GROUP BY a_tourism_category_sub.ID
+										", FALSE);
+
+			$this->cache->save('get_sub_categories_populated', $output, 43200);
+
+		}
+			
+		return $output;
 				  
     }
 
@@ -1646,10 +2001,9 @@ class Search_model extends CI_Model{
 			return '0';
 			
 		}
-		
-		
 				  
     }
+
 
     //GEt LOCATION BY ID
     public function get_location_by_id($id){
@@ -1782,65 +2136,85 @@ class Search_model extends CI_Model{
 	//Get Main Categories
 	function load_city_typehead(){
       	
-		$test = $this->db->get('a_map_location');
-		
-		$result = 'var subjects_location = [';
-		$x = 0;
-		foreach($test->result() as $row){
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('load_city_typehead'))
+		{	
+
+			$test = $this->db->get('a_map_location');
 			
-			$id = $row->ID;
-			$cat = $row->MAP_LOCATION;
-			
-			if($x == ($test->num_rows()-1)){
+			$output = 'var subjects_location = [';
+			$x = 0;
+			foreach($test->result() as $row){
 				
-				$str = '';
+				$id = $row->ID;
+				$cat = $row->MAP_LOCATION;
 				
-			}else{
-				
-				$str = ' , ';
+				if($x == ($test->num_rows()-1)){
+					
+					$str = '';
+					
+				}else{
+					
+					$str = ' , ';
+					
+				}
+					
+				$output .= "'".$cat."' ". $str;
+				$x ++; 
 				
 			}
-				
-			$result .= "'".$cat."' ". $str;
-			$x ++; 
 			
+			$output .= '];';
+
+			$this->cache->save('load_city_typehead', $output, 525600);
+
 		}
-		
-		$result .= '];';
-		return $result;
+			
+		return $output;
 			  
     }	
 
 	//Get Business Typehead
 	function load_business_typehead(){
       	
-		$test = $this->db->where('ISACTIVE','Y');
-		$test = $this->db->get('u_business');
-		
-		$result = 'var subjects_business = [';
-		$x = 0;
-		foreach($test->result() as $row){
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('load_business_typehead'))
+		{
+
+			$test = $this->db->where('ISACTIVE','Y');
+			$test = $this->db->get('u_business');
 			
-			$id = $row->ID;
-			$name = str_replace("'",' ',preg_replace("[^A-Za-z0-9]", '', $row->BUSINESS_NAME));
-			
-			if($x == ($test->num_rows()-1)){
+			$output = 'var subjects_business = [';
+			$x = 0;
+			foreach($test->result() as $row){
 				
-				$str = '';
+				$id = $row->ID;
+				$name = str_replace("'",' ',preg_replace("[^A-Za-z0-9]", '', $row->BUSINESS_NAME));
 				
-			}else{
-				
-				$str = ' , ';
+				if($x == ($test->num_rows()-1)){
+					
+					$str = '';
+					
+				}else{
+					
+					$str = ' , ';
+					
+				}
+					
+				$output .= "'".$name."' ". $str;
+				$x ++; 
 				
 			}
-				
-			$result .= "'".$name."' ". $str;
-			$x ++; 
 			
+			$output .= '];';
+
+			$this->cache->save('load_business_typehead', $output, 43200);
+
 		}
-		
-		$result .= '];';
-		return $result;
+			
+		return $output;
 			  
     }
 
