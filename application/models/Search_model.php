@@ -148,7 +148,7 @@ class Search_model extends CI_Model{
 			
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 			
-		if ( ! $output = $this->cache->get('get_cat_loc_'.$category.'_'.$c_id.'_'.$location.'_'.$offset.'_'.$limit))
+		if ( ! $output = $this->cache->get('get_cat_loc_'.$category.'_'.$c_id.'_'.$location.'_'.$offset.'_'.$sort))
 		{
 
 			if($offset == ''){
@@ -189,13 +189,13 @@ class Search_model extends CI_Model{
 			$data['QUERY'] = $query;
 			$this->db->insert('u_business_imp_queue',$data);
 			
-			$output = $this->db->query($query, FALSE);	
+			$output = $this->db->query($query, FALSE);
 
-			$this->cache->save('get_cat_loc_'.$category.'_'.$c_id.'_'.$location.'_'.$offset.'_'.$limit, $output, 1440);
+			$this->cache->save('get_cat_loc_'.$category.'_'.$c_id.'_'.$location.'_'.$offset.'_'.$sort, $output, 1440);
 
 		}	
 
-			return $output;
+		return $output;
 	
 	}
 	
@@ -271,7 +271,7 @@ class Search_model extends CI_Model{
 
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 			
-		if ( ! $output = $this->cache->get('Bget_cat_loc_'.$category.'_'.$c_id.'_'.$location))
+		if ( ! $output = $this->cache->get('Bget_cat_loc_'.$category.'_'.$c_id.'_'.$location.'_'.$lid))
 		{
 
 			
@@ -294,7 +294,7 @@ class Search_model extends CI_Model{
 			
 			$output = $this->db->query($query,FALSE);	
 
-			$this->cache->save('Bget_cat_loc_'.$category.'_'.$c_id.'_'.$location, $output, 1440);
+			$this->cache->save('Bget_cat_loc_'.$category.'_'.$c_id.'_'.$location.'_'.$lid, $output, 1440);
 
 		}	
 			
@@ -308,7 +308,7 @@ class Search_model extends CI_Model{
 
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 			
-		if ( ! $output = $this->cache->get('get_cat_bus_'.$category.'_'.$c_id.'_'.$business.'_'.$offset.'_'.$limit))
+		if ( ! $output = $this->cache->get('get_cat_bus_'.$category.'_'.$c_id.'_'.$business.'_'.$offset.'_'.$limit.'_'.$sort))
 		{		
 			
 			if($offset == ''){
@@ -348,7 +348,7 @@ class Search_model extends CI_Model{
 			
 			$output = $this->db->query($query, FALSE);		
 
-			$this->cache->save('get_cat_bus_'.$category.'_'.$c_id.'_'.$business.'_'.$offset.'_'.$limit, $output, 1440);		
+			$this->cache->save('get_cat_bus_'.$category.'_'.$c_id.'_'.$business.'_'.$offset.'_'.$limit.'_'.$sort, $output, 1440);		
 
 		}
 		
