@@ -539,7 +539,12 @@ $this->load->view('inc/header');
   "@type" : "Organization", 
   "name" : "<?php echo $title; ?>",
   "url" : "<?php echo $website; ?>",
-  "address" : "<?php echo $address; ?>"                  
+  "address" : "<?php echo $address; ?>",
+  "potentialAction" : {
+    "@type" : "SearchAction",
+    "target" : "http://elitesem.com/?s={search_term}",
+    "query-input" : "required name=search_term"
+  }                     
 }
 </script>
 	
