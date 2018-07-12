@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+ 
 class Business extends CI_Controller {
 
 	/**
@@ -86,31 +86,15 @@ class Business extends CI_Controller {
 				$data['tab_section'] = 'info';
 			}
 
-			$this->load->model('rating_model');
-			$data['bus_id'] = $bus_id;
 			$this->load->model('trade_model');
+			$this->load->model('rating_model');
+			
+			$data['bus_id'] = $bus_id;
+
 			//ADD a VIEW LISTING COUNTER
 			$this->business_model->add_business_view($bus_id);
 
-            $data['query'] =  $this->db->query("SELECT products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
-                                        u_business.IS_ESTATE_AGENT, u_business.BUSINESS_NAME, u_business.BUSINESS_LOGO_IMAGE_NAME,group_concat(product_images.img_file) as images,
-                                        MAX(product_auction_bids.amount) as current_bid,
-                                        AVG(u_business_vote.RATING) as TOTAL,
-                                        (
-                                        SELECT COUNT(u_business_vote.ID) as TOTAL_R FROM u_business_vote WHERE u_business_vote.PRODUCT_ID = products.product_id
-                                        ) as TOTAL_REVIEWS
 
-                                        FROM products
-                                        JOIN product_extras ON products.product_id = product_extras.product_id
-                                        LEFT JOIN u_business ON u_business.ID = products.bus_id
-                                        JOIN product_images ON products.product_id = product_images.product_id
-                                        LEFT JOIN product_auction_bids ON product_auction_bids.product_id = products.product_id AND product_auction_bids.type = 'bid'
-                                        LEFT JOIN u_business_vote ON u_business_vote.PRODUCT_ID = products.product_id
-                                            AND u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND u_business_vote.REVIEW_TYPE = 'product_review'
-
-                                        WHERE products.bus_id = '".$bus_id."' AND products.is_active = 'Y' AND products.status = 'live'
-                                        GROUP BY products.product_id
-                                        ORDER BY listing_date DESC LIMIT 8");
 
 			//$data['location'] = 'natonal';
 			//$data['suburb'] = 'all';
