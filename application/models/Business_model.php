@@ -514,8 +514,8 @@ class Business_model extends CI_Model{
 	//GEt Current Categories
 	function get_current_cats($bus_id){
       	
+      	$test = $this->db->limit('2');
 		$test = $this->db->where('BUSINESS_ID', $bus_id);
-		$this->db->limit('2');
 		$test = $this->db->get('i_tourism_category');
 		
 		return $test;
