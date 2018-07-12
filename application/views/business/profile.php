@@ -179,7 +179,7 @@ $this->load->view('inc/header');
                         <?php
 							echo '<p>'. implode(' ',$cats['links']).'</p>';
 						?>
-						<div class="row reveal">
+						<div class="row reveal" itemprop="contactPoint">
 							<div class="col-sm-12 col-md-6 col-lg-4">
 								<p data-icon="fa-phone text-dark"><button onClick="phone_click($(this),'phone')" class="btn btn-default"><!--T: --><span itemprop="telephone"><?php echo $tel; ?></span></button></p>
 								<p data-icon="fa-fax text-dark"><button onClick="phone_click($(this),'fax')" class="btn btn-default"><!--F: --><span itemprop="faxnumber"><?php echo $fax; ?></span></button></p>								
@@ -533,6 +533,25 @@ $this->load->view('inc/header');
 
 </script>
 
+<script type="application/ld+json">
+{ "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "legalName" : "Elite SEM",
+  "url" : "http://elitesem.com/",
+  "contactPoint" : [{
+    "@type" : "ContactPoint",
+    "telephone" : "+1-646-350-2789",
+    "contactType" : "customer service"
+  }]
+  "logo" : "http://elitesem.com/wp-content/uploads/2014/03/Elite_SEM_Logo_2014.png",
+  "sameAs" : [ "http://www.facebook.com/EliteSEM",
+    "http://www.twitter.com/elitesem",
+    "http://plus.google.com/+Elitesem",
+    "https://www.youtube.com/user/EliteSEMInc",
+    "http://www.linkedin.com/company/elite-sem",
+    "https://www.wikidata.org/wiki/Q20736641"]
+}
+</script>
 	
 </body>
 </html>
