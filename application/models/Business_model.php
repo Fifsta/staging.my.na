@@ -955,7 +955,7 @@ class Business_model extends CI_Model{
 									WHERE u_business.ID = '".$bus_id."'
 									");
 		//$test = $this->db->query("SELECT * FROM u_business WHERE ID = '". $bus_id."'", FALSE);
-		$this->db->close();
+		//$this->db->close();
 		return $test->row_array();	
 
 	}			 
