@@ -534,22 +534,16 @@ $this->load->view('inc/header');
 </script>
 
 <script type="application/ld+json">
-{ "@context" : "http://schema.org",
-  "@type" : "Organization",
-  "legalName" : "Elite SEM",
+{
+  "@context" : "http://schema.org",
+  "@type" : "WebSite", 
+  "name" : "Elite SEM",
   "url" : "http://elitesem.com/",
-  "contactPoint" : [{
-    "@type" : "ContactPoint",
-    "telephone" : "+1-646-350-2789",
-    "contactType" : "customer service"
-  }]
-  "logo" : "http://elitesem.com/wp-content/uploads/2014/03/Elite_SEM_Logo_2014.png",
-  "sameAs" : [ "http://www.facebook.com/EliteSEM",
-    "http://www.twitter.com/elitesem",
-    "http://plus.google.com/+Elitesem",
-    "https://www.youtube.com/user/EliteSEMInc",
-    "http://www.linkedin.com/company/elite-sem",
-    "https://www.wikidata.org/wiki/Q20736641"]
+  "potentialAction" : {
+    "@type" : "SearchAction",
+    "target" : "http://elitesem.com/?s={search_term}",
+    "query-input" : "required name=search_term"
+  }                     
 }
 </script>
 	
