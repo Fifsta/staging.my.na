@@ -19,7 +19,7 @@ $website = $bus_details['BUSINESS_URL'];
 $address = $bus_details['BUSINESS_PHYSICAL_ADDRESS'];
 $city = $bus_details['city']; 
 $region = $bus_details['region'];
-$latitude = $bus_details['latitude'];
+$latitude = $bus_details['latitude']; 
 $longitude = $bus_details['longitude'];
 $startdate = $bus_details['BUSINESS_DATE_CREATED'];
 //$city = $bus_details['CLIENT_CITY'];
@@ -298,7 +298,7 @@ $this->load->view('inc/header');
 					</div>
 					<div id="products_div">
 						<?php echo $this->product_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 15, $offset = 0, $title = '',$amt = 4, $advert = FALSE); ?>
-					</div>
+					</div> 
 				</section>
 
 			<?php } ?>

@@ -211,15 +211,10 @@ class Business_model extends CI_Model{
 
 
 
-			//get Categories 
-			$cats = $this->get_current_categories($id);
-
 			//Build resultset HTML
-
-
 			$html = '<div>
 						<figure class="loader">
-							<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$name.'</small></div>
+							<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$name.' '.$id.'</small></div>
 							<div class="slideshow-block">
 								<a href="' . site_url('/') . 'b/' . $id . '/' . $this->clean_url_str($name) . '/"><img class="" src="' . $cover_url . '" alt="' . $name . '"></a>
 							</div>
@@ -233,20 +228,6 @@ class Business_model extends CI_Model{
 			  		</div>
 					  ';
 
-
-			/*$html = '<div class="item">
-							<div class="" style="height:190px;">
-							   <a class="pull-right" href="#">
-								<img class="img-polaroid" src="' . $img_str . '" alt="' . $name . '" style="width: 100px; height:100px;">
-							  </a>
-							  <h5 style="height:30px;line-height:20px;">' . ucwords($name) . '</h5>
-							  <div class="span6" style="min-height:70px;height:95px;line-height:20px;">' . strip_tags($this->shorten_string($description, '10')) . '</div>
-							  <div class="clearfix"></div>
-							  
-							      <a class="btn btn-inverse" href="' . site_url('/') . 'b/' . $id . '/' . $this->clean_url_str($name) . '/"><i class="icon-info-sign icon-white"></i> View listing &raquo;</a>
-							  	  
-							</div>
-						</div>';*/
 
 			echo $html;
 
@@ -1484,58 +1465,98 @@ function get_map_details($ID){
     }		
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 //GET BUSINESS CATEGORIES
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		 	
-//Get Main Categories
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
+
+
+	//Get Main Categories
 	function get_main_categories(){
-      	
-		$test = $this->db->get('a_tourism_category');
-		return $test;	  
-    }		 	
-//GEt sub Categories
-	function get_sub_categories($cat_id){
-      	
-		$test = $this->db->where('CATEGORY_TYPE_ID', $cat_id);
-		$test = $this->db->get('a_tourism_category_sub');
-		return $test;
-				  
-    }			
-	//GEt Current Categories
-	function get_current_categories($bus_id){
-      	
-		$test = $this->db->query("SELECT a_tourism_category.CATEGORY_NAME as MAINCAT, a_tourism_category.ID as MAINCAT_ID, a_tourism_category_sub.CATEGORY_NAME as CATEGORY, a_tourism_category_sub.ID as SUBCAT_ID
-								FROM  i_tourism_category 
-								JOIN a_tourism_category_sub ON i_tourism_category.CATEGORY_ID = a_tourism_category_sub.ID
-								JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
-								WHERE BUSINESS_ID = '".$bus_id."'", FALSE);
-		
-		if($test->num_rows() > 0){
-			$y = 0;
-			foreach($test->result() as $row){
-				
-				$cat_id = $row->SUBCAT_ID;
-				$x['links'][$y] = '<a href="'.site_url('/').'a/cat/'.$cat_id.'/'.$this->clean_url_str($row->CATEGORY).'/"><span class="badge badge-secondary">'.$row->CATEGORY.'</span></a>';
-				
-				if($y == 0){
-					
-					$x['breadcrumb'][$y] = '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="'.site_url('/').'a/c/'.$row->MAINCAT_ID.'/'.$this->clean_url_str($row->MAINCAT).'/" itemprop="url"><span itemprop="title">'.$row->MAINCAT.'</span></a><span class="divider">/</span></li>
-											<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="'.site_url('/').'a/cat/'.$row->SUBCAT_ID.'/'.$this->clean_url_str($row->CATEGORY).'/" itemprop="url"><span itemprop="title">'.$row->CATEGORY.'</span></a><span class="divider">/</span></li>
-					';
-				
-				}
-				$y ++;	
-			}
-			return $x;
-			
-		}else{
-			
-			$x['links'][0] = '<span class="label">No category</span>';
-			$x['links'][1] = '';
-			$x['breadcrumb'][0] = '';
-			$x['breadcrumb'][1] = '';
-			return $x;
-			
+   
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('bus_get_main_categories'))
+		{
+
+			$output = $this->db->get('a_tourism_category');
+
+			$this->cache->save('bus_get_main_categories', $output, 43200);
+
 		}
 			
+		return $output;	  
+    }	
+
+
+	//GEt sub Categories
+	function get_sub_categories($cat_id){
+      
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('bus_get_sub_categories'))
+		{
+
+			$this->db->where('CATEGORY_TYPE_ID', $cat_id);
+			$output = $this->db->get('a_tourism_category_sub');
+
+			$this->cache->save('bus_get_sub_categories', $output, 43200);
+
+		}
+
+		return $output;
+				  
+    }	
+
+
+	//GEt Current Categories
+	function get_current_categories($bus_id){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $query = $this->cache->get('bus_get_current_categories_'.$bus_id))
+		{		
+      	
+			$query = $this->db->query("SELECT a_tourism_category.CATEGORY_NAME as MAINCAT, a_tourism_category.ID as MAINCAT_ID, a_tourism_category_sub.CATEGORY_NAME as CATEGORY, a_tourism_category_sub.ID as SUBCAT_ID
+									FROM  i_tourism_category 
+									JOIN a_tourism_category_sub ON i_tourism_category.CATEGORY_ID = a_tourism_category_sub.ID
+									JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
+									WHERE BUSINESS_ID = '".$bus_id."'", FALSE);
+
+
+			$query = $query->result();
+
+			$this->cache->save('bus_get_current_categories_'.$bus_id, $query, 43200);
+
+		}
+
+
+			if($query){
+				$y = 0;
+				foreach($query as $row){
+					
+					$cat_id = $row->SUBCAT_ID;
+					$x['links'][$y] = '<a href="'.site_url('/').'a/cat/'.$cat_id.'/'.$this->clean_url_str($row->CATEGORY).'/"><span class="badge badge-secondary">'.$row->CATEGORY.'</span></a>';
+					
+					if($y == 0){
+						
+						$x['breadcrumb'][$y] = '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="'.site_url('/').'a/c/'.$row->MAINCAT_ID.'/'.$this->clean_url_str($row->MAINCAT).'/" itemprop="url"><span itemprop="title">'.$row->MAINCAT.'</span></a><span class="divider">/</span></li>
+												<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="'.site_url('/').'a/cat/'.$row->SUBCAT_ID.'/'.$this->clean_url_str($row->CATEGORY).'/" itemprop="url"><span itemprop="title">'.$row->CATEGORY.'</span></a><span class="divider">/</span></li>
+						';
+					
+					}
+					$y ++;	
+				}
+				return $x;
+				
+			}else{
+				
+				$x['links'][0] = '<span class="label">No category</span>';
+				$x['links'][1] = '';
+				$x['breadcrumb'][0] = '';
+				$x['breadcrumb'][1] = '';
+				return $x;
+				
+			}
+			
+		
 				  
     }
 
