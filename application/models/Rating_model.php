@@ -279,124 +279,141 @@ class Rating_model extends CI_Model{
 
 	function show_reviews($bus_id, $external = 'no'){
 
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-        $query = $this->db->query("SELECT u_business_vote.*,
-									(SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL FROM u_business WHERE ID = '".$bus_id."') as TOTAL,
-									(SELECT AVG(u_business.STAR_RATING) as AVG_TOTAL FROM u_business WHERE ID = '".$bus_id."') as AVG_TOTAL,
-									u_business.BUSINESS_NAME,u_business.BUSINESS_LOGO_IMAGE_NAME,u_business.IS_HAN_MEMBER,u_business.IS_NTB_MEMBER,
-									u_client.CLIENT_NAME, u_client.CLIENT_SURNAME,
-									u_client.CLIENT_PROFILE_PICTURE_NAME as user_image
- 									FROM u_business_vote
- 									JOIN u_business ON u_business_vote.BUSINESS_ID = u_business.ID
- 									LEFT JOIN u_client ON u_business_vote.CLIENT_ID = u_client.ID
- 									WHERE u_business_vote.BUSINESS_ID = '".$bus_id."' AND u_business_vote.IS_ACTIVE = 'Y'
- 									AND  u_business_vote.REVIEW_TYPE = 'business_review'
- 									ORDER BY u_business_vote.TIME_VOTED DESC
-									");
+		if ( ! $output = $this->cache->get('show_reviews_'.$bus_id.'_'.$external))
+		{
 
-		$out = '';
-        $response = array();
-		if($query->num_rows() > 0){
+	        $query = $this->db->query("SELECT u_business_vote.*,
+										(SELECT (AVG(u_business.STAR_RATING) * u_business.NO_OF_REVIEWS) as TOTAL FROM u_business WHERE ID = '".$bus_id."') as TOTAL,
+										(SELECT AVG(u_business.STAR_RATING) as AVG_TOTAL FROM u_business WHERE ID = '".$bus_id."') as AVG_TOTAL,
+										u_business.BUSINESS_NAME,u_business.BUSINESS_LOGO_IMAGE_NAME,u_business.IS_HAN_MEMBER,u_business.IS_NTB_MEMBER,
+										u_client.CLIENT_NAME, u_client.CLIENT_SURNAME,
+										u_client.CLIENT_PROFILE_PICTURE_NAME as user_image
+	 									FROM u_business_vote
+	 									JOIN u_business ON u_business_vote.BUSINESS_ID = u_business.ID
+	 									LEFT JOIN u_client ON u_business_vote.CLIENT_ID = u_client.ID
+	 									WHERE u_business_vote.BUSINESS_ID = '".$bus_id."' AND u_business_vote.IS_ACTIVE = 'Y'
+	 									AND  u_business_vote.REVIEW_TYPE = 'business_review'
+	 									ORDER BY u_business_vote.TIME_VOTED DESC
+										");
 
-			$summary = $this->get_summary($query);
-			//echo $summary;
+			$output = '';
+	        $response = array();
+			if($query->num_rows() > 0){
 
-			$first = $query->row();
-			$name = $first->BUSINESS_NAME;
+				$summary = $this->get_summary($query);
+				//echo $summary;
 
-			if($external == 'external'){
-				$out .=  '<h4>'.$name.' Reviews <img src="'.base_url('/').'images/icons/fnb_irate.png" style="width:80px" class="pull-right"/></h4>';
+				$first = $query->row();
+				$name = $first->BUSINESS_NAME;
+
+				if($external == 'external'){
+					$output .=  '<h4>'.$name.' Reviews <img src="'.base_url('/').'images/icons/fnb_irate.png" style="width:80px" class="pull-right"/></h4>';
+				}else{
+					$output .=  '<h4>'.$name.' Reviews</h4>';
+				}
+				
+				$output .= $summary;
+
+	            //LOOP RESPONSES FROM SAME DTATA SET
+	            foreach($query->result() as $subrow) {
+
+	                //IF RESPONSE
+	                if ($subrow->TYPE == 'response') {
+
+	                    $response[$subrow->REVIEW_ID]['ID'] = $subrow->ID;
+	                    $response[$subrow->REVIEW_ID]['REVIEW_ID'] = $subrow->REVIEW_ID;
+	                    $response[$subrow->REVIEW_ID]['REVIEW'] = $subrow->REVIEW;
+	                    $response[$subrow->REVIEW_ID]['TIME_VOTED'] = $subrow->TIME_VOTED;
+	                    $response[$subrow->REVIEW_ID]['CLIENT_ID'] = $subrow->CLIENT_ID;
+	                    $response[$subrow->REVIEW_ID]['BUSINESS_ID'] = $subrow->BUSINESS_ID;
+
+	                }
+	            }
+				$x =0;
+				foreach($query->result() as $row){
+
+	                //IF RESPONSE
+	                if($row->TYPE == 'response'){
+
+
+
+	                }else {
+
+
+	                    $id = $row->ID;
+	                    $client_id = $row->CLIENT_ID;
+	                    $bus_id1 = $row->BUSINESS_ID;
+	                    $review = $row->REVIEW;
+	                    $review_date = $row->TIME_VOTED;
+	                    $rating = $row->RATING;
+	                    $user = $this->my_na_model->get_user_avatar_id($client_id, 100, 100, $row->user_image);
+
+	                    //CHECK RESPONSE ARRAY FOR SUBS
+	                    if(isset($response[$id]['REVIEW_ID'] )){
+
+	                        $reply = $this->get_review_response($id, $row->BUSINESS_LOGO_IMAGE_NAME, $row->BUSINESS_NAME, $response[$id]);
+
+	                    }else{
+
+	                        $reply = '';
+	                    }
+
+
+	                    $r = $this->get_review_detail($row);
+	                    if($r == ''){
+
+	                        $r = $this->get_review_stars_img($rating);
+	                    }
+
+
+	                    $output .= '
+							<div class="row review-item">
+								<div class="col-xs-3 col-sm-2 col-md-1">
+									<figure><a href="#"><img  alt="'.$row->CLIENT_NAME.' '.$row->CLIENT_SURNAME.'" src="'.$user.'"></a></figure>
+								</div>
+								<div class="col-sm-10 col-md-5">
+									<blockquote>
+										<div class="rating">'.$this->get_review_stars($rating,$client_id).'</div>
+										<p>'.$review.'</p>
+										<footer>'.$row->CLIENT_NAME.' '.$row->CLIENT_SURNAME.'<span>' .$this->time_passed(strtotime($review_date)).'</span></footer>
+									</blockquote>
+
+									'.$reply.'
+								</div>
+								 <time itemprop="dtreviewed" style="display:none;font-size:10px;font-style:italic" datetime="'.date('m-d-Y',strtotime($review_date)).'">'.date('F j, Y',strtotime($review_date)).'</time>
+								 <span itemprop="rating" style="visibility:hidden">'.(round($rating)).'</span>
+							</div>
+	                    ';
+	                }
+
+				}//end for each
+
+				$output .= '';
+
 			}else{
-				$out .=  '<h4>'.$name.' Reviews</h4>';
+
+				$output .= '<div class="alert alert-secondary">
+							<h4>No Reviews Added</h4>
+							No Reviews have been added for the current business.
+						    </div>';
 			}
-			
-			$out .= $summary;
-
-            //LOOP RESPONSES FROM SAME DTATA SET
-            foreach($query->result() as $subrow) {
-
-                //IF RESPONSE
-                if ($subrow->TYPE == 'response') {
-
-                    $response[$subrow->REVIEW_ID]['ID'] = $subrow->ID;
-                    $response[$subrow->REVIEW_ID]['REVIEW_ID'] = $subrow->REVIEW_ID;
-                    $response[$subrow->REVIEW_ID]['REVIEW'] = $subrow->REVIEW;
-                    $response[$subrow->REVIEW_ID]['TIME_VOTED'] = $subrow->TIME_VOTED;
-                    $response[$subrow->REVIEW_ID]['CLIENT_ID'] = $subrow->CLIENT_ID;
-                    $response[$subrow->REVIEW_ID]['BUSINESS_ID'] = $subrow->BUSINESS_ID;
-
-                }
-            }
-			$x =0;
-			foreach($query->result() as $row){
-
-                //IF RESPONSE
-                if($row->TYPE == 'response'){
 
 
-
-                }else {
-
-
-                    $id = $row->ID;
-                    $client_id = $row->CLIENT_ID;
-                    $bus_id1 = $row->BUSINESS_ID;
-                    $review = $row->REVIEW;
-                    $review_date = $row->TIME_VOTED;
-                    $rating = $row->RATING;
-                    $user = $this->my_na_model->get_user_avatar_id($client_id, 100, 100, $row->user_image);
-
-                    //CHECK RESPONSE ARRAY FOR SUBS
-                    if(isset($response[$id]['REVIEW_ID'] )){
-
-                        $reply = $this->get_review_response($id, $row->BUSINESS_LOGO_IMAGE_NAME, $row->BUSINESS_NAME, $response[$id]);
-
-                    }else{
-
-                        $reply = '';
-                    }
+			$this->cache->save('show_reviews_'.$bus_id.'_'.$external, $output, 1440);
 
 
-                    $r = $this->get_review_detail($row);
-                    if($r == ''){
-
-                        $r = $this->get_review_stars_img($rating);
-                    }
-
-
-                    $out .= '
-						<div class="row review-item">
-							<div class="col-xs-3 col-sm-2 col-md-1">
-								<figure><a href="#"><img  alt="'.$row->CLIENT_NAME.' '.$row->CLIENT_SURNAME.'" src="'.$user.'"></a></figure>
-							</div>
-							<div class="col-sm-10 col-md-5">
-								<blockquote>
-									<div class="rating">'.$this->get_review_stars($rating,$client_id).'</div>
-									<p>'.$review.'</p>
-									<footer>'.$row->CLIENT_NAME.' '.$row->CLIENT_SURNAME.'<span>' .$this->time_passed(strtotime($review_date)).'</span></footer>
-								</blockquote>
-
-								'.$reply.'
-							</div>
-							 <time itemprop="dtreviewed" style="display:none;font-size:10px;font-style:italic" datetime="'.date('m-d-Y',strtotime($review_date)).'">'.date('F j, Y',strtotime($review_date)).'</time>
-							 <span itemprop="rating" style="visibility:hidden">'.(round($rating)).'</span>
-						</div>
-                    ';
-                }
-
-			}//end for each
-			$out .= '';
-
-		}else{
-
-			$out .= '<div class="alert alert-secondary">
-						<h4>No Reviews Added</h4>
-						No Reviews have been added for the current business.
-					  </div>';
 		}
 
-		return $out;
+		return $output;
+
+
 	} 
+
+
+
+
 
 	function get_review_response($id, $pic, $name, $row ){
 

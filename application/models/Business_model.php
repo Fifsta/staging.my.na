@@ -75,7 +75,7 @@ class Business_model extends CI_Model{
 
 	function show_similar($bus_id){
       	
-		$test = $this->get_current_cats($bus_id);
+		//$test = $this->get_current_cats($bus_id);
 		$count = $test->num_rows();
 
 		if($count > 5){
@@ -2080,8 +2080,7 @@ FUNCTIONS
 	//CLICK BUTTON
 	 function my_na_click($bus_id, $client_id, $place) {
 		
-		$query = $this->db->query("select * FROM u_business_na  
-					WHERE CLIENT_ID = '".$client_id."' AND BUSINESS_ID = '".$bus_id."'");
+		$query = $this->db->query("select * FROM u_business_na WHERE CLIENT_ID = '".$client_id."' AND BUSINESS_ID = '".$bus_id."'");
 						   
 		if($query->num_rows() == 0){		   
 				
@@ -2419,10 +2418,15 @@ FUNCTIONS
 	function get_qr_vcard($bus_id, $w, $h)
 		{
 		 
-		 $this->db->from('u_business');
-		 $this->db->where('ID',$bus_id);
-       	 $query = $this->db->get();	
-		 $row = $query->row_array();
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('get_qr_vcard_'.$bus_id.'_'.$w.'_'.$h))
+		{
+
+			$this->db->from('u_business');
+			$this->db->where('ID',$bus_id);
+	       	$query = $this->db->get();	
+			$row = $query->row_array();
 			
 			if ($query->row_array() > 0){
 			
@@ -2469,6 +2473,9 @@ FUNCTIONS
 
 				}		
 			}
+
+			$this->cache->save('get_qr_vcard_'.$bus_id.'_'.$w.'_'.$h, $output, 600);
+		}	
 			
 		return $vcard2;		  
 			
