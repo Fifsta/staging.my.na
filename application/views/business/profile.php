@@ -536,14 +536,10 @@ $this->load->view('inc/header');
 <script type="application/ld+json">
 {
   "@context" : "http://schema.org",
-  "@type" : "WebSite", 
-  "name" : "Elite SEM",
-  "url" : "http://elitesem.com/",
-  "potentialAction" : {
-    "@type" : "SearchAction",
-    "target" : "http://elitesem.com/?s={search_term}",
-    "query-input" : "required name=search_term"
-  }                     
+  "@type" : "Organization", 
+  "name" : "<?php echo $title; ?>",
+  "url" : "<?php echo $website; ?>",
+  "address" : "<?php echo $address; ?>"                  
 }
 </script>
 	
