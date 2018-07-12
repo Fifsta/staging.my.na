@@ -539,7 +539,8 @@ $this->load->view('inc/header');
   "@type" : "Organization", 
   "name" : "<?php echo $name; ?>",
   "url" : "<?php echo $website; ?>",
-  "address" : "<?php echo $address; ?>"                    
+  "address" : "<?php echo $address; ?>" 
+  "telephone" : "<?php echo $tel; ?>"                    
 }
 </script>
 	
