@@ -75,26 +75,9 @@ class Business_model extends CI_Model{
 
 	function show_similar($bus_id){
       	
-		//$test = $this->get_current_cats($bus_id);
+		$test = $this->get_current_cats($bus_id);
 		$count = $test->num_rows();
 
-		if($count > 5){
-			
-			$limit = 1;
-			
-		}elseif($count > 3){
-			
-			$limit = 2;
-			
-		}elseif($count > 1){
-			
-			$limit = 3;
-			
-		}else{
-			
-			$limit = 5;
-			
-		}
 		echo '<div class="owl-carousel" id="similar" style="margin-top:20px">';
 		
 		foreach($test->result() as $row){
