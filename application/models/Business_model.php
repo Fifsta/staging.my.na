@@ -7,7 +7,7 @@ class Business_model extends CI_Model{
 	
  	}
 
- 
+
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+MEMBER Functions
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1741,18 +1741,30 @@ function get_map_details($ID){
    //GET BUSINESS RATING
 	public function get_rating($id){
       	
-		$query = $this->db->query("SELECT AVG(RATING)as TOTAL FROM u_business_vote WHERE BUSINESS_ID ='".$id."' AND IS_ACTIVE = 'Y' AND TYPE = 'review' ORDER BY TOTAL");
-		
-		if($query->result()){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('get_rating_'.$id))
+		{		
+
+			$query = $this->db->query("SELECT AVG(RATING)as TOTAL FROM u_business_vote WHERE BUSINESS_ID ='".$id."' AND IS_ACTIVE = 'Y' AND TYPE = 'review' ORDER BY TOTAL");
 			
-			$row = $query->row_array();
-			return round($row['TOTAL']);
-			
-		}else{
-			
-			return 0;
-			
+			if($query->result()){
+				
+				$row = $query->row_array();
+				$output = round($row['TOTAL']);
+				
+			}else{
+				
+				$output = 0;
+				
+			}
+
+			$this->cache->save('get_rating_'.$id, $output, 1440);
+
 		}
+
+		return $output;	
 			  
     }
 
@@ -1766,39 +1778,50 @@ function get_map_details($ID){
 						  
     }
 
+
+
     function get_review_stars_show($rating,$id){
 		 
-		$x = 1;
-		if(($rating != '')){
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-			//$rating = round($rating);
+		if ( ! $output = $this->cache->get('get_review_stars_show_'.$id.'_'.$rating))
+		{
 
-			while($x <= 5){
-				
-				if($rating == $x){
+			$x = 1;
+			if(($rating != '')){
+
+				//$rating = round($rating);
+
+				while($x <= 5){
 					
-					$str = 'checked="checked"';
-				}else{
+					if($rating == $x){
+						
+						$str = 'checked="checked"';
+					}else{
+						
+						$str = '';
+						
+					}
 					
-					$str = '';
-					
+					$arr[$x] = '<input name="'.$id.'-'.$rating.'" type="radio" value="'.$x.'" class="star" disabled="disabled" '.$str.'/>';	
+					$x++;
+
 				}
 				
-				$arr[$x] = '<input name="'.$id.'-'.$rating.'" type="radio" value="'.$x.'" class="star" disabled="disabled" '.$str.'/>';	
-				$x++;
-
+				$output = '<div style=";font-size:10px;font-style:italic;text-align:center" class=""><span class="text-center">'. implode($arr).'<br />Based on: <b>'.$this->get_rating_count($id).'</b> reviews</span></div>';
+				
+			}else{
+				
+				//$arr = '<a class="clearfix" href="#reviews" data-toggle="tab"><span class="label label-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</span></a><br /><br />';
+				$output = '';
+						
 			}
-			
-			$arr = '<div style=";font-size:10px;font-style:italic;text-align:center" class=""><span class="text-center">'. implode($arr).'<br />Based on: <b>'.$this->get_rating_count($id).'</b> reviews</span></div>';
-			
-		}else{
-			
-			//$arr = '<a class="clearfix" href="#reviews" data-toggle="tab"><span class="label label-warning" title="Review this business to help them feature" rel="tooltip">No reviews yet. Be the first</span></a><br /><br />';
-			$arr = '';
-					
-		}
 
-		return $arr;
+			$this->cache->save('get_review_stars_show_'.$id.'_'.$rating, $output, 1440);
+
+		}	
+
+		return $output;
     }	
 
  /**

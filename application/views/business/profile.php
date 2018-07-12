@@ -189,7 +189,7 @@ $this->load->view('inc/header');
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-4">
 								<?php if($website) { ?>
-								<p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><?php echo $website; ?></button></p>
+								<p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><a href="<?php echo $website; ?>" target="blank"><?php echo $website; ?></a></button></p>
 								<?php } ?>
 							</div>							
 						</div>
@@ -288,7 +288,7 @@ $this->load->view('inc/header');
 
 	    	</section>	
 
-			<?php if($query->result()){ ?>
+			<?php //if($query->result()){ ?>
 
 				<div class="spacer"></div>
 
@@ -297,11 +297,11 @@ $this->load->view('inc/header');
 						<h2 data-icon="fa-newspaper-o">Business <strong>Product Listings</strong></h2>
 					</div>
 					<div id="products_div">
-						<?php echo $this->product_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 15, $offset = 0, $title = '',$amt = 4, $advert = FALSE); ?>
+						<?php echo $this->product_model->get_business_products($bus_id); ?>
 					</div> 
 				</section>
 
-			<?php } ?>
+			<?php //} ?>
 
 			<div class="spacer"></div>
 
