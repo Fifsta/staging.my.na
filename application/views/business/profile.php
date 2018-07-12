@@ -181,11 +181,11 @@ $this->load->view('inc/header');
 						?>
 						<div class="row reveal">
 							<div class="col-sm-12 col-md-6 col-lg-4">
-								<p data-icon="fa-phone text-dark"><button onClick="phone_click($(this),'phone')" class="btn btn-default"><!--T: --><span itemprop="tel"><?php echo $tel; ?></span></button></p>
-								<p data-icon="fa-fax text-dark"><button onClick="phone_click($(this),'fax')" class="btn btn-default"><!--F: --><span itemprop="fax"><?php echo $fax; ?></span></button></p>								
+								<p data-icon="fa-phone text-dark"><button onClick="phone_click($(this),'phone')" class="btn btn-default"><!--T: --><span itemprop="telephone"><?php echo $tel; ?></span></button></p>
+								<p data-icon="fa-fax text-dark"><button onClick="phone_click($(this),'fax')" class="btn btn-default"><!--F: --><span itemprop="faxnumber"><?php echo $fax; ?></span></button></p>								
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-4">
-								<p data-icon="fa-tablet text-dark"><button onClick="phone_click($(this),'cell')" class="btn btn-default"><!--C: --><span itemprop="cell"><?php echo $cell; ?></span></button></p>
+								<p data-icon="fa-tablet text-dark"><button onClick="phone_click($(this),'cell')" class="btn btn-default"><!--C: --><span itemprop="cellphone"><?php echo $cell; ?></span></button></p>
 								<p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><span itemprop="email"><?php echo $email; ?></span></button></p>								
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-4">
@@ -205,7 +205,7 @@ $this->load->view('inc/header');
 
 					</div>
 				</div>
-				
+
                 <span itemprop="geo" itemscope itemtype="http://www.data-vocabulary.org/Geo/" style="display:none">
 				 	<span itemprop="latitude"><?php echo $latitude ;?></span>
 				 	<span itemprop="longitude"><?php echo $longitude ;?></span>
