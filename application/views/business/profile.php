@@ -180,16 +180,16 @@ $this->load->view('inc/header');
 						?>
 						<div class="row reveal">
 							<div class="col-sm-12 col-md-6 col-lg-4">
-								<p data-icon="fa-phone text-dark"><button class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
-								<p data-icon="fa-fax text-dark"><button class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>								
+								<p data-icon="fa-phone text-dark"><button onClick="phone_click($(this),'phone')" class="btn btn-default"><!--T: --><span itemprop="tel"><?php echo $tel; ?></span></button></p>
+								<p data-icon="fa-fax text-dark"><button onClick="phone_click($(this),'fax')" class="btn btn-default"><!--F: --><span itemprop="fax"><?php echo $fax; ?></span></button></p>								
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-4">
-								<p data-icon="fa-tablet text-dark"><button class="btn btn-default"><!--C: --><?php echo $cell; ?></button></p>
-								<p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><?php echo $email; ?></button></p>								
+								<p data-icon="fa-tablet text-dark"><button onClick="phone_click($(this),'cell')" class="btn btn-default"><!--C: --><span itemprop="cell"><?php echo $cell; ?></span></button></p>
+								<p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><span itemprop="email"><?php echo $email; ?></span></button></p>								
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-4">
 								<?php if($website) { ?>
-								<p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><a href="<?php echo $website; ?>" target="blank"><?php echo $website; ?></a></button></p>
+								<p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><a href="<?php echo $website; ?>" target="blank"><span itemprop="website"><?php echo $website; ?></span></a></button></p>
 								<?php } ?>
 							</div>							
 						</div>
@@ -468,6 +468,17 @@ $this->load->view('inc/header');
 	}
 
 
+	function phone_click(n,type){
+			 
+			$.ajax({
+				type: 'get',
+				url: '<?php echo site_url('/').'business/add_business_phone_click/'.$bus_id.'/';?>'+type ,
+				success: function (data) {	
+					
+				}
+			});	
+
+	}
 
 	function my_na(id){
 		
