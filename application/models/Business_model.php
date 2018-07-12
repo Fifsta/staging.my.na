@@ -945,18 +945,31 @@ class Business_model extends CI_Model{
 		 
 	function get_business_details($bus_id){
 
-		//$this->db->where('ID', $bus_id);
-		$test = $this->db->query("SELECT  u_business.*, a_map_location.MAP_LOCATION as city, a_map_region.REGION_NAME as region,
-									u_business_map.BUSINESS_MAP_LATITUDE as latitude, u_business_map.BUSINESS_MAP_LONGITUDE as longitude
-									FROM u_business
-									LEFT JOIN a_map_location ON u_business.BUSINESS_MAP_CITY_ID = a_map_location.ID
-									LEFT JOIN a_map_region ON a_map_location.MAP_REGION_ID = a_map_region.ID
-									LEFT JOIN u_business_map ON u_business.ID = u_business_map.BUSINESS_ID
-									WHERE u_business.ID = '".$bus_id."'
-									");
-		//$test = $this->db->query("SELECT * FROM u_business WHERE ID = '". $bus_id."'", FALSE);
-		//$this->db->close();
-		return $test->row_array();	
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('get_business_details_'.$bus_id))
+		{
+
+
+			//$this->db->where('ID', $bus_id);
+			$test = $this->db->query("SELECT  u_business.*, a_map_location.MAP_LOCATION as city, a_map_region.REGION_NAME as region,
+										u_business_map.BUSINESS_MAP_LATITUDE as latitude, u_business_map.BUSINESS_MAP_LONGITUDE as longitude
+										FROM u_business
+										LEFT JOIN a_map_location ON u_business.BUSINESS_MAP_CITY_ID = a_map_location.ID
+										LEFT JOIN a_map_region ON a_map_location.MAP_REGION_ID = a_map_region.ID
+										LEFT JOIN u_business_map ON u_business.ID = u_business_map.BUSINESS_ID
+										WHERE u_business.ID = '".$bus_id."'
+										");
+			//$test = $this->db->query("SELECT * FROM u_business WHERE ID = '". $bus_id."'", FALSE);
+			//$this->db->close();
+
+			$output = $test->row_array();
+
+			$this->cache->save('get_business_details_'.$bus_id, $output, 600);
+
+		}
+
+		return $output;
 
 	}			 
 	
@@ -1399,10 +1412,14 @@ class Business_model extends CI_Model{
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		 	
 //Get MAP Details
 function get_map_details($ID){
+
+
   	
 	$test = $this->db->where('BUSINESS_ID', $ID);
 	$test = $this->db->get('u_business_map');
-	return $test->row_array();		  
+	return $test->row_array();		
+
+
 }
     		 	
 //UPDATE MAP COORDINATES
