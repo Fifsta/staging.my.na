@@ -175,10 +175,6 @@ $this->load->view('inc/header');
                             <span itemprop="region"><?php echo $region ;?></span>
                             <span itemprop="country-name">Namibia</span>
                         </div>
-                        <span itemprop="geo" itemscope itemtype="http://www.data-vocabulary.org/Geo/" style="display:none">
-						 	<span itemprop="latitude"><?php echo $latitude ;?></span>
-						 	<span itemprop="longitude"><?php echo $longitude ;?></span>
-						</span>	 
 
                         <?php
 							echo '<p>'. implode(' ',$cats['links']).'</p>';
@@ -209,6 +205,12 @@ $this->load->view('inc/header');
 
 					</div>
 				</div>
+				
+                <span itemprop="geo" itemscope itemtype="http://www.data-vocabulary.org/Geo/" style="display:none">
+				 	<span itemprop="latitude"><?php echo $latitude ;?></span>
+				 	<span itemprop="longitude"><?php echo $longitude ;?></span>
+				</span>	 
+
 				<!--details-->
 
 				<div class="spacer"></div>
