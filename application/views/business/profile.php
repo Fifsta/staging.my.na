@@ -167,7 +167,7 @@ $this->load->view('inc/header');
 						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>	
 				 
 					</div>
-					<div class="details-right">
+					<div itemscope class="details-right" itemtype="http://data-vocabulary.org/Organization">
 						<h2><?php echo $address ;?></h2>
 						<div itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
                             <span itemprop="street-address"><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
@@ -175,6 +175,11 @@ $this->load->view('inc/header');
                             <span itemprop="region"><?php echo $region ;?></span>
                             <span itemprop="country-name">Namibia</span>
                         </div>
+                        <span itemprop="geo" itemscope itemtype="http://www.data-vocabulary.org/Geo/" style="display:none">
+						 	<span itemprop="latitude"><?php echo $latitude ;?></span>
+						 	<span itemprop="longitude"><?php echo $longitude ;?></span>
+						</span>	 
+
                         <?php
 							echo '<p>'. implode(' ',$cats['links']).'</p>';
 						?>
