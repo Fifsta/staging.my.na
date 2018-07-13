@@ -537,10 +537,19 @@ $this->load->view('inc/header');
 {
   "@context" : "http://schema.org",
   "@type" : "Organization", 
+  "contactPoint": {
+	    "@type": "ContactPoint",
+	    "telephone" : "<?php echo $tel; ?>" ,
+	    "fax" : "<?php echo $fax; ?>" ,
+	    "cellphone" : "<?php echo $cell; ?>" ,
+	    "email" : "<?php echo $email; ?>" ,
+	    "url" : "<?php echo $website; ?>"
+  },
+
   "name" : "<?php echo $name; ?>",
   "url" : "<?php echo $website; ?>",
-  "address" : "<?php echo $address; ?>",
-  "telephone" : "<?php echo $tel; ?>" ,
+  "address" : "<?php echo $address; ?>"
+
 
 }
 
@@ -556,6 +565,7 @@ $this->load->view('inc/header');
 }
 
 </script>
+
 
 </body>
 </html>
