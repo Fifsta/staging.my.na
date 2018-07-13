@@ -540,7 +540,8 @@ $this->load->view('inc/header');
   "name" : "<?php echo $name; ?>",
   "url" : "<?php echo $website; ?>",
   "address" : "<?php echo $address; ?>",
-  "telephone" : "<?php echo $tel; ?>"                      
+  "telephone" : "<?php echo $tel; ?>"  
+                      
 }
 
 </script>
@@ -549,7 +550,7 @@ $this->load->view('inc/header');
 
 {
   "@context" : "http://schema.org",
-  "@type" : "GEO", 
+  "@type" : "GeoCoordinates", 
   "latitude" : "<?php echo $latitude; ?>",
   "longitude" : "<?php echo $longitude; ?>"                      
 }
