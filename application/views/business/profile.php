@@ -543,9 +543,9 @@ $this->load->view('inc/header');
 	    "telephone" : "<?php echo $tel; ?>" ,
 	    "faxNumber" : "<?php echo $fax; ?>" ,
 	    "email" : "<?php echo $email; ?>" ,
-	    "url" : "<?php echo $website; ?>"
-  },
-  "streetAddress":  "<?php echo $address; ?>"
+	    "url" : "<?php echo $website; ?>",
+	    "place" : "<?php echo $address; ?>"
+  }
 
 }
 
@@ -565,4 +565,3 @@ $this->load->view('inc/header');
 
 </body>
 </html>
-
