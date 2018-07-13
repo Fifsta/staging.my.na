@@ -539,6 +539,7 @@ $this->load->view('inc/header');
   "@type" : "Organization", 
   "contactPoint": {
 	    "@type": "ContactPoint",
+	    "contactType" : "Support" ,
 	    "telephone" : "<?php echo $tel; ?>" ,
 	    "faxNumber" : "<?php echo $fax; ?>" ,
 	    "email" : "<?php echo $email; ?>" ,
