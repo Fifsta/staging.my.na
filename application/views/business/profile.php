@@ -167,30 +167,30 @@ $this->load->view('inc/header');
 						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>	
 				 
 					</div>
-					<div itemscope class="details-right" itemtype="http://data-vocabulary.org/Organization">
+					<divclass="details-right">
 						<h2><?php echo $address ;?></h2>
-						<div itemprop="address" itemscope itemtype="http://data-vocabulary.org/Address">
-                            <span itemprop="street-address"><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
-                            <span itemprop="locality"><?php echo $city ;?></span>
-                            <span itemprop="region"><?php echo $region ;?></span>
-                            <span itemprop="country-name">Namibia</span>
+						<div itemprop="address">
+                            <span><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
+                            <span><?php echo $city ;?></span>
+                            <span><?php echo $region ;?></span>
+                            <span>Namibia</span>
                         </div>
 
                         <?php
 							echo '<p>'. implode(' ',$cats['links']).'</p>';
 						?>
-						<div class="row reveal" itemprop="contactPoint">
+						<div class="row reveal">
 							<div class="col-sm-12 col-md-6 col-lg-4">
-								<p data-icon="fa-phone text-dark"><button onClick="phone_click($(this),'phone')" class="btn btn-default"><!--T: --><span itemprop="telephone"><?php echo $tel; ?></span></button></p>
-								<p data-icon="fa-fax text-dark"><button onClick="phone_click($(this),'fax')" class="btn btn-default"><!--F: --><span itemprop="faxnumber"><?php echo $fax; ?></span></button></p>								
+								<p data-icon="fa-phone text-dark"><button onClick="phone_click($(this),'phone')" class="btn btn-default"><!--T: --><span><?php echo $tel; ?></span></button></p>
+								<p data-icon="fa-fax text-dark"><button onClick="phone_click($(this),'fax')" class="btn btn-default"><!--F: --><span><?php echo $fax; ?></span></button></p>								
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-4">
-								<p data-icon="fa-tablet text-dark"><button onClick="phone_click($(this),'cell')" class="btn btn-default"><!--C: --><span itemprop="cellphone"><?php echo $cell; ?></span></button></p>
-								<p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><span itemprop="email"><?php echo $email; ?></span></button></p>								
+								<p data-icon="fa-tablet text-dark"><button onClick="phone_click($(this),'cell')" class="btn btn-default"><!--C: --><span><?php echo $cell; ?></span></button></p>
+								<p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><span><?php echo $email; ?></span></button></p>								
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-4">
 								<?php if($website) { ?>
-								<p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><a href="<?php echo $website; ?>" target="blank"><span itemprop="website"><?php echo $website; ?></span></a></button></p>
+								<p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><a href="<?php echo $website; ?>" target="blank"><span><?php echo $website; ?></span></a></button></p>
 								<?php } ?>
 							</div>							
 						</div>
@@ -205,11 +205,6 @@ $this->load->view('inc/header');
 
 					</div>
 				</div>
-
-                <span itemprop="geo" itemscope itemtype="http://www.data-vocabulary.org/Geo/" style="display:none">
-				 	<span itemprop="latitude"><?php echo $latitude ;?></span>
-				 	<span itemprop="longitude"><?php echo $longitude ;?></span>
-				</span>	 
 
 				<!--details-->
 
