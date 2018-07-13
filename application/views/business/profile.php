@@ -169,7 +169,7 @@ $this->load->view('inc/header');
 						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>	
 				 
 					</div>
-					<divclass="details-right">
+					<div class="details-right">
 						<h2><?php echo $address ;?></h2>
 						<div itemprop="address">
                             <span><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
@@ -556,7 +556,6 @@ $this->load->view('inc/header');
     "ratingValue": "<?php echo $rating; ?>",
     "ratingCount": "<?php echo $rating_count; ?>"
   }
-
 }
 
 </script>
