@@ -561,7 +561,7 @@ $this->load->view('inc/header');
   "@type" : "GeoCoordinates", 
   "latitude" : "<?php echo $latitude; ?>",
   "longitude" : "<?php echo $longitude; ?>"                      
-}
+} 
 
 </script>
 
