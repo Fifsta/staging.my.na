@@ -541,19 +541,17 @@ $this->load->view('inc/header');
   "url" : "<?php echo $website; ?>",
   "address" : "<?php echo $address; ?>",
   "telephone" : "<?php echo $tel; ?>"                      
-}
-
-</script>
-<script type="application/ld+json">
+},
 {
-
+  "@context" : "http://schema.org",
   "@type" : "GEO", 
   "latitude" : "<?php echo $latitude; ?>",
   "longitude" : "<?php echo $longitude; ?>"                      
 }
 
+
 </script>
-	
+
 </body>
 </html>
 
