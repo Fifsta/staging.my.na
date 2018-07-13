@@ -33,6 +33,8 @@ $rand = rand(0,9999);
 $format = substr($img,(strlen($img) - 4),4);
 $str = substr($img,0,(strlen($img) - 4));
 
+$rating_count = $this->business_model->get_rating_count($bus_id);
+
 
 if($img != ''){
 	
@@ -551,7 +553,8 @@ $this->load->view('inc/header');
   } ,
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "<?php echo $rating; ?>"
+    "ratingValue": "<?php echo $rating; ?>",
+    "ratingCount": "<?php echo $rating_count; ?>"
   }
 
 }
