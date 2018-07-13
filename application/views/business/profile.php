@@ -551,8 +551,8 @@ $this->load->view('inc/header');
 	    "url" : "<?php echo $website; ?>"
   },
   "address": {
-	    "@type": "postalAddress",
-	    "address" : "<?php echo $address; ?>"
+	    "@type": "Text",
+	    "location" : "<?php echo $address; ?>"
   }
 
 }
