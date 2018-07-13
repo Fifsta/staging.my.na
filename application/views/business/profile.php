@@ -539,6 +539,7 @@ $this->load->view('inc/header');
   "@type" : "Organization", 
   "description" : "<?php echo $description ?>",
   "brand" : { 
+  		"@type": "brand",
 		"image" : "<?php echo $img_url; ?>"
   },
   "contactPoint": {
