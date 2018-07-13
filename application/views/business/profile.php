@@ -543,13 +543,16 @@ $this->load->view('inc/header');
 	    "telephone" : "<?php echo $tel; ?>" ,
 	    "faxNumber" : "<?php echo $fax; ?>" ,
 	    "email" : "<?php echo $email; ?>" ,
-	    "url" : "<?php echo $website; ?>",
-	    "place" : "<?php echo $address; ?>"
+	    "url" : "<?php echo $website; ?>"
   },
   "address": {
 	    "@type": "PostalAddress",
 	    "streetAddress": "<?php echo $address; ?>"
-  } 
+  } ,
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "<?php echo $rating; ?>"
+  },  
 
 }
 
