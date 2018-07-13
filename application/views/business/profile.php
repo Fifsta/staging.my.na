@@ -544,13 +544,12 @@ $this->load->view('inc/header');
 }
 {
   "@context" : "http://schema.org",
-  "@type" : "Organization", 
-  "name" : "<?php echo $name; ?>",
-  "url" : "<?php echo $website; ?>",
-  "address" : "<?php echo $address; ?>",
-  "telephone" : "<?php echo $tel; ?>"                    
+  "@type" : "GEO", 
+  "latitude" : "<?php echo $latitude; ?>",
+  "longitude" : "<?php echo $longitude; ?>"                 
 }
 </script>
 	
 </body>
 </html>
+
