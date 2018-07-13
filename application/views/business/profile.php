@@ -552,7 +552,7 @@ $this->load->view('inc/header');
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "<?php echo $rating; ?>"
-  },  
+  }
 
 }
 
