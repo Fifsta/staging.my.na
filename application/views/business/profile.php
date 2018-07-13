@@ -547,7 +547,7 @@ $this->load->view('inc/header');
   },
   "address": {
 	    "@type": "Text",
-	    "location" : "<?php echo $address; ?>"
+	    "streetAddress" : "<?php echo $address; ?>"
   }
 
 }
