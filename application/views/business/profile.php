@@ -537,16 +537,19 @@ $this->load->view('inc/header');
 {
   "@context" : "http://schema.org",
   "@type" : "Organization", 
+  "description" : "<?php echo $description ?>",
+  "brand" : { 
+		"image" : "<?php echo $img_url; ?>"
+  },
   "contactPoint": {
 	    "@type": "ContactPoint",
 	    "contactType" : "Customer service" ,
 	    "telephone" : "<?php echo $tel; ?>" ,
 	    "faxNumber" : "<?php echo $fax; ?>" ,
 	    "email" : "<?php echo $email; ?>" ,
-
 	    "url" : "<?php echo $website; ?>"
   },
-  "location" : "<?php echo $address; ?>"
+  "address" : "<?php echo $address; ?>"
 
 
 }
