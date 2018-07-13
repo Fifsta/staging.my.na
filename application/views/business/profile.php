@@ -532,7 +532,7 @@ $this->load->view('inc/header');
 {
   "@context" : "http://schema.org",
   "@type" : "Organization", 
-  "description" : "<?php echo $description ?>",
+  "description" : "<?php echo strip_tags($description); ?>",
   "brand" : { 
   		"@type": "brand",
 		"image" : "<?php echo $img_url; ?>"
@@ -545,10 +545,7 @@ $this->load->view('inc/header');
 	    "email" : "<?php echo $email; ?>" ,
 	    "url" : "<?php echo $website; ?>"
   },
-  "streetAddress": {
-	    "@type": "streetAddress",
-	    "address" : "<?php echo $address; ?>"
-  }
+  "streetAddress":  "<?php echo $address; ?>"
 
 }
 
