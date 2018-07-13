@@ -541,7 +541,6 @@ $this->load->view('inc/header');
 	    "@type": "ContactPoint",
 	    "telephone" : "<?php echo $tel; ?>" ,
 	    "faxNumber" : "<?php echo $fax; ?>" ,
-	    "telephone" : "<?php echo $cell; ?>" ,
 	    "email" : "<?php echo $email; ?>" ,
 	    "url" : "<?php echo $website; ?>"
   }
