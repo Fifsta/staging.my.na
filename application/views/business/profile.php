@@ -534,6 +534,7 @@ $this->load->view('inc/header');
 {
   "@context" : "http://schema.org",
   "@type" : "Organization", 
+  "name" : "<?php echo $name; ?>",
   "description" : "<?php echo strip_tags($description); ?>",
   "brand" : { 
   		"@type": "brand",

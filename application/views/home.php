@@ -13,7 +13,7 @@
 		  </ol>
 	</div>
 </nav>
-
+ 
 <div class="container"> 
 	<div class="row">
 		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-3 order-xl-3" id="sidebar">
@@ -153,6 +153,23 @@
 
 </script>
 
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "name" : "My Namibia",
+  "description" : "The biggest online portal for Namibians to find what they are lookin for. Business, Products, Services. Find What you !na.",
+  "brand" : { 
+  		"@type": "brand",
+		"image" : "https://my.na/images/logo-main.png"
+  },
+  "contactPoint": {
+	    "@type": "ContactPoint",
+	    "url" : "https://www.my.na"
+  }
+}
+
+</script>
 
 </body>
 </html>
