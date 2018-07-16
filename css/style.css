@@ -592,7 +592,7 @@ Light Orange ff9900
 	.sub.card ul .btn{ padding:2px 2px}
 	.sub.card ul a:before{ font-family:'FontAwesome'; content:'\f114'; margin-right:5px; list-style:none; }
 	
-	.rating{direction:rtl; font-size:18px; display:block; white-space:nowrap;}
+	.rating{font-size:18px; display:block; white-space:nowrap;}
 	.rating span{display:inline-block; font-family:'FontAwesome'; padding:0 1px; cursor:default}
 	.rating span:before{color:#ccc; content:'\f006'; width:10px; height:10px; text-align:center}
 	.rating span:hover:before, .rating span:hover ~ span:before,.rating span.active:before,.rating span.active ~ span:before{color:#ff9900; content:'\f005'}
