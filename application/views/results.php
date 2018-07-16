@@ -592,5 +592,35 @@ function identify_marker(str){
 
 </script>
 
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "name" : "My Namibia",
+  "description" : "The biggest online portal for Namibians to find what Business they are lookin for.",
+  "brand" : { 
+      "@type": "brand",
+    "image" : "https://my.na/images/logo-main.png"
+  },
+  "sameAs": [
+    "https://www.facebook.com/mynamibia/",
+    "https://twitter.com/MyNamibia"
+  ],  
+  "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "11B Genl. Murtala Muhammed Ave Windhoek, Namibia"
+  },  
+  "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType" : "customer service",
+      "email" : "info@my.na",
+      "url" : "https://www.my.na/",
+      "telephone" : "+264 61 309 591"
+  }
+}
+
+</script>
+
+
 </body>
 </html>
