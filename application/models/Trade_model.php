@@ -7260,7 +7260,7 @@ class Trade_model extends CI_Model
 		else
 		{
 
-			$arr = '<div style="text-align:center; font-size:10px">No reviews yet. Be the first</div></a></p>';
+			$arr = '<div style="text-align:center; font-size:10px">No reviews yet.<br>Be the first</div></a></p>';
 
 			return $arr;
 

@@ -129,10 +129,10 @@ class Classifieds extends CI_Controller {
 		$config['last_link'] = false; 
 		$config['first_tag_open'] = '<li class="page-item">';
 		$config['first_tag_close'] = '</li>';
-		$config['prev_link'] = '<i class="fa fa-chevron-left icon-light"></i>';
+		$config['prev_link'] = '<i class="fa fa-chevron-left text-dark"></i>';
 		$config['prev_tag_open'] = '<li class="page-item prev">';
 		$config['prev_tag_close'] = '</li>';
-		$config['next_link'] = '<i class="fa fa-chevron-right icon-light"></i>';
+		$config['next_link'] = '<i class="fa fa-chevron-right text-dark"></i>';
 		$config['next_tag_open'] = '<li class="page-item">';
 		$config['next_tag_close'] = '</li>';
 		$config['last_tag_open'] = '<li class="page-item">';
