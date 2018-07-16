@@ -1002,404 +1002,410 @@ class Trade_model extends CI_Model
 	//+GET PRODUCTS
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-	public function get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = '', $offset = 0, $title = '', $amt = '', $advert = true, $pages = '')
+	public function get_products($main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = '', $offset = 0, $title = '', $amt = '', $advert = true, $pages = '')
 	{
+ 
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-		$this->load->model('image_model'); 
+		if ( ! $output = $this->cache->get('get_products_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$count.'_'.$offset.'_'.$limit))
+		{
 
-		$this->load->library('thumborp');
-		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-		$width = 360;
-		$height = 230;
+			$output = '';
 
-		$l_width = 60;
-		$l_height = 60;
+			$this->load->model('image_model'); 
 
-		if ($query == '')
-		{	
+			$this->load->library('thumborp');
+			$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+			$width = 360;
+			$height = 230;
+
+			$l_width = 60;
+			$l_height = 60;
+
+		
 			$this->load->database();
 			//$query = $this->db->query("SELECT * FROM products WHERE is_active = 'Y' ORDER BY listing_date DESC" ,FALSE);
 			$query = $this->db->query("SELECT products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
-                                        u_business.IS_ESTATE_AGENT, u_business.BUSINESS_NAME, u_business.BUSINESS_LOGO_IMAGE_NAME,group_concat(product_images.img_file) as images,
-                                        MAX(product_auction_bids.amount) as current_bid,products_buy_now.amount,
-                                        AVG(u_business_vote.RATING) as TOTAL,
-                                        (
-                                          SELECT COUNT(u_business_vote.ID) as TOTAL_R FROM u_business_vote WHERE u_business_vote.PRODUCT_ID = products.product_id
-                                        ) as TOTAL_REVIEWS
+	                                    u_business.IS_ESTATE_AGENT, u_business.BUSINESS_NAME, u_business.BUSINESS_LOGO_IMAGE_NAME,group_concat(product_images.img_file) as images,
+	                                    MAX(product_auction_bids.amount) as current_bid,products_buy_now.amount,
+	                                    AVG(u_business_vote.RATING) as TOTAL,
+	                                    (
+	                                      SELECT COUNT(u_business_vote.ID) as TOTAL_R FROM u_business_vote WHERE u_business_vote.PRODUCT_ID = products.product_id
+	                                    ) as TOTAL_REVIEWS
 
-                                        FROM products
-                                        JOIN product_extras ON products.product_id = product_extras.product_id
-                                        LEFT JOIN u_business ON u_business.ID = products.bus_id
-                                        LEFT JOIN product_images ON products.product_id = product_images.product_id
-                                        LEFT JOIN product_auction_bids ON product_auction_bids.product_id = products.product_id AND product_auction_bids.type = 'bid'
-                                        LEFT JOIN products_buy_now ON products_buy_now.product_id = products.product_id
-                                        LEFT JOIN u_business_vote ON u_business_vote.PRODUCT_ID = products.product_id
-                                              AND u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND u_business_vote.REVIEW_TYPE = 'product_review'
-                                        WHERE products.is_active = 'Y' AND products.status = 'live'
-                                        GROUP BY products.product_id
-                                        ORDER BY products.listing_date DESC LIMIT 30", false);
-
-
-		} else {
-			$query = $query;
-		}
+	                                    FROM products
+	                                    JOIN product_extras ON products.product_id = product_extras.product_id
+	                                    LEFT JOIN u_business ON u_business.ID = products.bus_id
+	                                    LEFT JOIN product_images ON products.product_id = product_images.product_id
+	                                    LEFT JOIN product_auction_bids ON product_auction_bids.product_id = products.product_id AND product_auction_bids.type = 'bid'
+	                                    LEFT JOIN products_buy_now ON products_buy_now.product_id = products.product_id
+	                                    LEFT JOIN u_business_vote ON u_business_vote.PRODUCT_ID = products.product_id
+	                                          AND u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND u_business_vote.REVIEW_TYPE = 'product_review'
+	                                    WHERE products.is_active = 'Y' AND products.status = 'live'
+	                                    GROUP BY products.product_id
+	                                    ORDER BY products.listing_date DESC LIMIT 30", false);
 
 
-		if ($query->result())
-		{
-
-			$sorting = '';
-
-			$current = $query->num_rows();
-			$count = '<strong>' . $offset . ' - ' . ($offset + $query->num_rows()) . '</strong> Results shown of <strong>' . (int) $count . '</strong>';
-
-			if ($advert)
-			{
-				$priceD = '';
-				if (strstr(current_url('/'), '/priceD'))
-				{
-					$priceD = ' active';
-				}
-				$priceA = '';
-				if (strstr(current_url('/'), '/priceA'))
-				{
-					$priceA = ' active';
-				}
 
 
-				$sorting = '<section id="props" style="margin-bottom:25px">
-								<div class="heading">
-							        <h2 data-icon="fa-newspaper-o">' .$title. ' <strong>Listings</strong></h2>
-							        <p>'.$count.'</p>
-							    </div>
-							</section>';
-
-				/*$sorting.='<section class="text-right" style="padding:5px">
-								
-								 <div class="btn-group">
-									<button class="btn btn-dark"><i class="icon-resize-vertical icon-white"></i> Sort By</button>
-									<button class="btn btn-dark dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-									<ul class="dropdown-menu pull-right">
-									  <li><a href="' . site_url('/') . 'trade/sortby/price/priceD/?url=' . $this->uri->uri_string() . '/?' . urlencode(json_encode($this->input->get())) . '" class=" ' . $priceD . '"><i class="icon-arrow-up"></i> Highest Price First</a></li>
-									  <li><a href="' . site_url('/') . 'trade/sortby/price/priceA/?url=' . $this->uri->uri_string() . '/?' . urlencode(json_encode($this->input->get())) . '" class="' . $priceA . '"><i class="icon-arrow-down"></i> Lowest Price First</a></li>
-									  <li class="divider"></li>
-									  
-									</ul>
-								  </div>
-								  
-							</section>';*/
-
-			} else {
-
-				$advert = '';
-
-			}
-
-			echo $sorting . '
-				<div class="row">	  
-			 		
-			';
-			$x2 = 0;
-
-			// var_dump($advert);
-			foreach ($query->result() as $row)
+			if ($query->result())
 			{
 
-				//get images
-				$xx = 0;
-				$img = array();
-				$img_Cycle = '';
-				if ($row->images != null)
+				$sorting = '';
+
+				$current = $query->num_rows();
+				$count = '<strong>' . $offset . ' - ' . ($offset + $query->num_rows()) . '</strong> Results shown of <strong>' . (int) $count . '</strong>';
+
+				if ($advert)
 				{
-
-					$imgA = explode(',', $row->images);
-					$imgAa = array();
-
-					foreach ($imgA as $imgR)
+					$priceD = '';
+					if (strstr(current_url('/'), '/priceD'))
 					{
-						$lazy = '';
-						if ($xx == 0)
+						$priceD = ' active';
+					}
+					$priceA = '';
+					if (strstr(current_url('/'), '/priceA'))
+					{
+						$priceA = ' active';
+					}
+
+
+					$sorting = '<section id="props" style="margin-bottom:25px">
+									<div class="heading">
+								        <h2 data-icon="fa-newspaper-o">' .$title. ' <strong>Listings</strong></h2>
+								        <p>'.$count.'</p>
+								    </div>
+								</section>';
+
+					/*$sorting.='<section class="text-right" style="padding:5px">
+									
+									 <div class="btn-group">
+										<button class="btn btn-dark"><i class="icon-resize-vertical icon-white"></i> Sort By</button>
+										<button class="btn btn-dark dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+										<ul class="dropdown-menu pull-right">
+										  <li><a href="' . site_url('/') . 'trade/sortby/price/priceD/?url=' . $this->uri->uri_string() . '/?' . urlencode(json_encode($this->input->get())) . '" class=" ' . $priceD . '"><i class="icon-arrow-up"></i> Highest Price First</a></li>
+										  <li><a href="' . site_url('/') . 'trade/sortby/price/priceA/?url=' . $this->uri->uri_string() . '/?' . urlencode(json_encode($this->input->get())) . '" class="' . $priceA . '"><i class="icon-arrow-down"></i> Lowest Price First</a></li>
+										  <li class="divider"></li>
+										  
+										</ul>
+									  </div>
+									  
+								</section>';*/
+
+				} else {
+
+					$advert = '';
+
+				}
+
+				$output .= $sorting . '
+					<div class="row">	  
+				 		
+				';
+				$x2 = 0;
+
+				// var_dump($advert);
+				foreach ($query->result() as $row)
+				{
+
+					//get images
+					$xx = 0;
+					$img = array();
+					$img_Cycle = '';
+					if ($row->images != null)
+					{
+
+						$imgA = explode(',', $row->images);
+						$imgAa = array();
+
+						foreach ($imgA as $imgR)
 						{
-							$lazy = 'lazy active';
-							$img_str = 'assets/products/images/' . $imgR;
+							$lazy = '';
+							if ($xx == 0)
+							{
+								$lazy = 'lazy active';
+								$img_str = 'assets/products/images/' . $imgR;
 
-							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+								$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-							$img[$xx] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic" src="'.$img_url.'" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a>';
+								$img[$xx] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic" src="'.$img_url.'" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a>';
+							}
+							else
+							{
+
+								$at = '<img class="vignette" alt="' . strip_tags($row->title) . '" src="'.$img_url.'"/>';
+								array_push($imgAa, $at);
+
+							}
+
+
+							$xx++;
+						}
+
+						$img_Cycle = '<script id="images_' . $row->product_id . '" type="text/cycle">' . json_encode($imgAa) . '</script>';
+
+					}
+					else
+					{
+
+
+						$img_str = 'assets/products/images/product_blank.jpg';
+
+						$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
+						$img[0] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic" src="'.$img_url.'" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a>';
+						
+					}
+
+					//CHECK IF AGENCY PROPERTY LISTING
+					$b_logo = '';
+					if ($row->IS_ESTATE_AGENT == 'Y')
+					{
+						if (trim($row->BUSINESS_LOGO_IMAGE_NAME) != '')
+						{
+							$img_str = 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME;
+							$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
+							$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right img-thumbnail" />';
 						}
 						else
 						{
+							$img_str = 'assets/business/photos/bus_blank.jpg';
+							$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
+							$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right img-thumbnail" />';
+						}
+					}
 
-							$at = '<img class="vignette" alt="' . strip_tags($row->title) . '" src="'.$img_url.'"/>';
-							array_push($imgAa, $at);
+					$btn_txt = 'Buy Now';
+					if ($row->main_cat_id == 3408)
+					{
+						$btn_txt = 'Enquire Now';
+					}
+
+					//Check Price
+					//Fixed price
+					if ($row->listing_type == 'S')
+					{
+
+						$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
+									<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
+
+						if ($row->sub_cat_id == 3410)
+						{
+							$price = 'N$ ' . $this->smooth_price($row->sale_price) . ' pm';
+						}
+						else
+						{
+							$price = 'N$ ' . $this->smooth_price($row->sale_price);
+						}
+						if ($row->por == 'Y')
+						{
+
+							$price = 'POR:Price On Request';
+
+						}
+						//Auction	
+					}
+					elseif ($row->listing_type == 'A')
+					{
+
+						//$price = '<span style=" font-size:18px">N$</span> '.$this->smooth_price($row->sale_price);
+						$price = $this->get_current_bid($row->current_bid);
+
+						if ($price['str'] != 'No Bids')
+						{
+							$price = 'BID: ' . $price['str'];
+
+						}
+						else
+						{
+							$price = $price['str'];
+						}
+
+						$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">Place Bid</a>&nbsp;
+									<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
+
+
+						//SERVICE
+					}
+					elseif ($row->listing_type == 'C')
+					{
+
+						$btn = '';
+						$reserve = '';
+						$count = '';
+
+
+						if ($row->sub_cat_id == 3410)
+						{
+							$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div> pm';
+						}
+						else
+						{
+							$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div>';
+						}
+						if ($row->por == 'Y')
+						{
+
+							$price = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
 
 						}
 
+						$btn_txt = 'Order Now';
 
-						$xx++;
+
+						$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
+									<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 					}
 
-					$img_Cycle = '<script id="images_' . $row->product_id . '" type="text/cycle">' . json_encode($imgAa) . '</script>';
+					$private = '';
+					if ($row->bus_id == 0)
+					{
+
+						$private = '<span class="private" rel="tooltip" title="This item is listed Privately"><i class="icon-star"></i></span>';
+
+					}
+
+					$fb = "postToFeed(" . $row->product_id . ", '" . ucwords(trim($this->clean_url_str($row->title, " ", " "))) . "','" . trim($img_str) . "', '" . ucwords(trim($this->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->shorten_string(strip_tags($this->clean_url_str($row->description, " ", " ")), 50)))) . "', '" . site_url('/') . 'product/' . $row->product_id . '/' . trim($this->clean_url_str($row->title)) . "')";
+
+					$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter');
+					$tweet_url = 'https://twitter.com/share?url=' . site_url('/') . $this->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
+
+
+					//LOCATION
+					$location = '';
+					if ($row->location != '')
+					{
+
+						$location = '<div itemprop="address">' . $row->location . '</div>';
+
+						if ($row->suburb != 0 && $row->suburb != '')
+						{
+							$location = '<div itemprop="address" >' . $row->location . ' / ' . $row->suburb . '</div>';
+						}
+
+					}
+
+					//get REVIEWS
+					$rating = 0;
+					$total_reviews = 0;
+					if ($row->TOTAL != null)
+					{
+
+						$rating = $row->TOTAL;
+						if (isset($row->TOTAL_REVIEWS))
+						{
+							$total_reviews = $row->TOTAL_REVIEWS;
+						}
+						else
+						{
+							$total_reviews = 0;
+						}
+
+					}
+
+					$a_count = 0;
+					if (isset($advert['count']))
+					{
+						$a_count = $advert['count'];
+					}
+
+					$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
+					
+					$output .= ' <div class="col-sm-12 col-md-6 col-lg-4  col-xg-3">
+								<figure class="loader">
+									<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
+									<div class="slideshow-block">
+										<a href="#" class="link"></a>
+										<div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides="> li">
+										' .implode($img). '
+										</div>
+										' .$img_Cycle. '
+									</div> 
+
+									<div>
+									
+										<a href="'.site_url('/').'b/'.$row->ID.'/'.$this->clean_url_str($row->BUSINESS_NAME).'">'. $b_logo . '</a>
+
+									</div>
+								</figure>			
+						  </div>
+						  ';
+
+					$x2++;
+
+				}
+
+				$output .= '</div>';
+
+
+				if ($this->input->is_ajax_request())
+				{
+
+					$output .= '
+					 <script data-cfasync="false" type="text/javascript">
+
+						$(document).ready(function(){
+							$("img.pic").lazyload({
+								  effect : "fadeIn"
+							  });
+							//window.setTimeout(initiate_pagination, 100);
+							$(".cycle-slideshow").cycle();
+							var c = $(".cycle-slideshow").cycle("pause");
+							c.hover(function () {
+								//mouse enter - Resume the slideshow
+								$(this).cycle("resume");
+							},
+							function () {
+								//mouse leave - Pause the slideshow
+								$(this).cycle("pause");
+							});
+						});
+
+					 </script>';
 
 				}
 				else
 				{
 
+					 $output .= '
+					 <script type="text/javascript">
 
-					$img_str = 'assets/products/images/product_blank.jpg';
+						$(document).ready(function(){
+							$("img.pic").lazyload({
+								effect : "fadeIn"
+							});
 
-					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
-
-					$img[0] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic" src="'.$img_url.'" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a>';
-					
-				}
-
-				//CHECK IF AGENCY PROPERTY LISTING
-				$b_logo = '';
-				if ($row->IS_ESTATE_AGENT == 'Y')
-				{
-					if (trim($row->BUSINESS_LOGO_IMAGE_NAME) != '')
-					{
-						$img_str = 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME;
-						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right img-thumbnail" />';
-					}
-					else
-					{
-						$img_str = 'assets/business/photos/bus_blank.jpg';
-						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="pull-right img-thumbnail" />';
-					}
-				}
-
-				$btn_txt = 'Buy Now';
-				if ($row->main_cat_id == 3408)
-				{
-					$btn_txt = 'Enquire Now';
-				}
-
-				//Check Price
-				//Fixed price
-				if ($row->listing_type == 'S')
-				{
-
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
-								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
-
-					if ($row->sub_cat_id == 3410)
-					{
-						$price = 'N$ ' . $this->smooth_price($row->sale_price) . ' pm';
-					}
-					else
-					{
-						$price = 'N$ ' . $this->smooth_price($row->sale_price);
-					}
-					if ($row->por == 'Y')
-					{
-
-						$price = 'POR:Price On Request';
-
-					}
-					//Auction	
-				}
-				elseif ($row->listing_type == 'A')
-				{
-
-					//$price = '<span style=" font-size:18px">N$</span> '.$this->smooth_price($row->sale_price);
-					$price = $this->get_current_bid($row->current_bid);
-
-					if ($price['str'] != 'No Bids')
-					{
-						$price = 'BID: ' . $price['str'];
-
-					}
-					else
-					{
-						$price = $price['str'];
-					}
-
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">Place Bid</a>&nbsp;
-								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
-
-
-					//SERVICE
-				}
-				elseif ($row->listing_type == 'C')
-				{
-
-					$btn = '';
-					$reserve = '';
-					$count = '';
-
-
-					if ($row->sub_cat_id == 3410)
-					{
-						$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div> pm';
-					}
-					else
-					{
-						$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div>';
-					}
-					if ($row->por == 'Y')
-					{
-
-						$price = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
-
-					}
-
-					$btn_txt = 'Order Now';
-
-
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
-								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
-				}
-
-				$private = '';
-				if ($row->bus_id == 0)
-				{
-
-					$private = '<span class="private" rel="tooltip" title="This item is listed Privately"><i class="icon-star"></i></span>';
-
-				}
-
-				$fb = "postToFeed(" . $row->product_id . ", '" . ucwords(trim($this->clean_url_str($row->title, " ", " "))) . "','" . trim($img_str) . "', '" . ucwords(trim($this->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->shorten_string(strip_tags($this->clean_url_str($row->description, " ", " ")), 50)))) . "', '" . site_url('/') . 'product/' . $row->product_id . '/' . trim($this->clean_url_str($row->title)) . "')";
-
-				$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter');
-				$tweet_url = 'https://twitter.com/share?url=' . site_url('/') . $this->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
-
-
-				//LOCATION
-				$location = '';
-				if ($row->location != '')
-				{
-
-					$location = '<div itemprop="address">' . $row->location . '</div>';
-
-					if ($row->suburb != 0 && $row->suburb != '')
-					{
-						$location = '<div itemprop="address" >' . $row->location . ' / ' . $row->suburb . '</div>';
-					}
-
-				}
-
-				//get REVIEWS
-				$rating = 0;
-				$total_reviews = 0;
-				if ($row->TOTAL != null)
-				{
-
-					$rating = $row->TOTAL;
-					if (isset($row->TOTAL_REVIEWS))
-					{
-						$total_reviews = $row->TOTAL_REVIEWS;
-					}
-					else
-					{
-						$total_reviews = 0;
-					}
-
-				}
-
-				$a_count = 0;
-				if (isset($advert['count']))
-				{
-					$a_count = $advert['count'];
-				}
-
-				$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
-				echo ' <div class="col-sm-12 col-md-6 col-lg-4  col-xg-3">
-							<figure class="loader">
-								<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
-								<div class="slideshow-block">
-									<a href="#" class="link"></a>
-									<div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides="> li">
-									' .implode($img). '
-									</div>
-									' .$img_Cycle. '
-								</div> 
-
-								<div>
-								
-									<a href="'.site_url('/').'b/'.$row->ID.'/'.$this->clean_url_str($row->BUSINESS_NAME).'">'. $b_logo . '</a>
-
-								</div>
-							</figure>			
-					  </div>
-					  ';
-
-				$x2++;
-
-			}
-
-			echo '</div>';
-
-
-			if ($this->input->is_ajax_request())
-			{
-
-				echo '
-				 <script data-cfasync="false" type="text/javascript">
-
-					$(document).ready(function(){
-						$("img.pic").lazyload({
-							  effect : "fadeIn"
-						  });
-						//window.setTimeout(initiate_pagination, 100);
-						$(".cycle-slideshow").cycle();
-						var c = $(".cycle-slideshow").cycle("pause");
-						c.hover(function () {
-							//mouse enter - Resume the slideshow
-							$(this).cycle("resume");
-						},
-						function () {
-							//mouse leave - Pause the slideshow
-							$(this).cycle("pause");
+							//PAGINATION
+							window.setTimeout(initiate_slides, 200);
+							//window.setTimeout(initiate_pagination, 400);
 						});
-					});
 
-				 </script>';
+					 </script>';
 
+				}
 			}
 			else
 			{
 
-				 echo '
-				 <script type="text/javascript">
-
-					$(document).ready(function(){
-						$("img.pic").lazyload({
-							effect : "fadeIn"
-						});
-
-						//PAGINATION
-						window.setTimeout(initiate_slides, 200);
-						//window.setTimeout(initiate_pagination, 400);
-					});
-
-				 </script>';
+				$output .= '<div class="row">
+						<div class="col-md-12">
+							<div class="alert alert-secondary">
+							 <h2><strong>No matches found!</strong></h2> We could not find any matching items for the current search criteria.
+							 <p>Please refine your search by changing the search criteria above.</p>
+							 <h3>but here are some similar items...</h3>
+							</div>
+						</div>
+					 </div>
+					 <br>
+					 ';
 
 			}
-		}
-		else
-		{
 
-			echo '<div class="row">
-					<div class="col-md-12">
-						<div class="alert alert-secondary">
-						 <h2><strong>No matches found!</strong></h2> We could not find any matching items for the current search criteria.
-						 <p>Please refine your search by changing the search criteria above.</p>
-						 <h3>but here are some similar items...</h3>
-						</div>
-					</div>
-				 </div>
-				 <br>
-				 ';
-
-			$query = "SELECT * FROM products JOIN product_extras ON products.product_id = product_extras.product_id WHERE main_cat_id = '" . $main_cat_id . "' ORDER BY listing_date DESC LIMIT 9";
-			$this->get_products($query = '', $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $amt = '');
+			$this->cache->save('get_products_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$count.'_'.$offset.'_'.$limit, $output, 600);
 
 		}
 
+		return $output;
 
 	}
 

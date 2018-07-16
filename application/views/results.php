@@ -596,7 +596,7 @@ function identify_marker(str){
 {
   "@context" : "http://schema.org",
   "@type" : "Organization",
-  "name" : "My Namibia",
+  "name" : "My Namibia Business Listings",
   "description" : "The biggest online portal for Namibians to find what Business they are lookin for.",
   "brand" : { 
       "@type": "brand",
