@@ -1816,13 +1816,13 @@ class Trade_model extends CI_Model
 				{
 
 					$output .= '<script data-cfasync="false" type="text/javascript">
-							$(document).ready(function(){
-							$.getScript("' . base_url('/') . 'js/jquery.rating.pack.js", function(){
+								$(document).ready(function(){
+								$.getScript("' . base_url('/') . 'js/jquery.rating.pack.js", function(){
 
-								$("input .star").rating();
+									$("input .star").rating();
 
-							});
-							';
+								});
+								';
 
 				}
 				else
@@ -7530,7 +7530,7 @@ class Trade_model extends CI_Model
 
 			}
 
-			$this->cache->save('get_product_category_name_'.$id, 1440);
+			$this->cache->save('get_product_category_name_'.$id, $output, 1440);
 
 		}
 
