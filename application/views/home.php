@@ -165,9 +165,7 @@
   },
   "sameAs": [
     "https://www.facebook.com/mynamibia/",
-    "http://instagram.com/yourProfile",
-    "http://www.linkedin.com/in/yourprofile",
-    "http://plus.google.com/your_profile"
+    "https://twitter.com/MyNamibia"
   ],  
   "address": {
 	    "@type": "PostalAddress",
@@ -181,6 +179,17 @@
 	    "telephone" : "+264 61 309 591"
   }
 }
+
+</script>
+
+<script type="application/ld+json">
+
+{
+  "@context" : "http://schema.org",
+  "@type" : "GeoCoordinates", 
+  "latitude" : "-22.5480965",
+  "longitude" : "17.0872937"                      
+} 
 
 </script>
 
