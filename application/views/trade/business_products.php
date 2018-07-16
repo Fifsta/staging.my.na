@@ -202,14 +202,19 @@ if($cover_img != ''){
 						 echo '<p>'. implode(' ',$cats['links']).'</p>';
 						 ?>
 						<div class="row reveal">
-							<div class="col-sm-12 col-md-6">
-								<p data-icon="fa-phone text-dark"><button class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
-								<p data-icon="fa-fax text-dark"><button class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>
+							<div class="col-sm-12 col-md-6 col-lg-4">
+								<p data-icon="fa-phone text-dark"><button onClick="phone_click($(this),'phone')" class="btn btn-default"><!--T: --><span><?php echo $tel; ?></span></button></p>
+								<p data-icon="fa-fax text-dark"><button onClick="phone_click($(this),'fax')" class="btn btn-default"><!--F: --><span><?php echo $fax; ?></span></button></p>								
 							</div>
-							<div class="col-sm-12 col-md-6">
-								<p data-icon="fa-tablet text-dark"><button class="btn btn-default"><!--C: --><?php echo $cell; ?></button></p>
-								<p data-icon="fa-globe text-dark"><a href="http://www.website.com.na" class="btn btn-default" target="_blank"><!--W: --><?php echo $email; ?></a></p>
+							<div class="col-sm-12 col-md-6 col-lg-4">
+								<p data-icon="fa-tablet text-dark"><button onClick="phone_click($(this),'cell')" class="btn btn-default"><!--C: --><span><?php echo $cell; ?></span></button></p>
+								<p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><span><?php echo $email; ?></span></button></p>								
 							</div>
+							<div class="col-sm-12 col-md-6 col-lg-4">
+								<?php if($website) { ?>
+								<p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><a href="<?php echo $website; ?>" target="blank"><span><?php echo $website; ?></span></a></button></p>
+								<?php } ?>
+							</div>							
 						</div>
 					</div>
 				</div>
@@ -249,6 +254,7 @@ if($cover_img != ''){
 	              /*Search Results
 	              Loop through the search results in the query array
 	              */  
+
 	              $this->trade_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 15, $offset = 0, $title = '',$amt = 4, $advert = FALSE);
     
 	              ?> 
@@ -281,24 +287,7 @@ if($cover_img != ''){
 	$(document).ready(function(){
 		$('[rel=tooltip]').tooltip();
 
-		// Cycle plugin
-		$('.slides').cycle({
-			fx:     'fade',
-			speed:   400,
-			timeout: 200
-		}).cycle("pause");
 	
-		// Pause & play on hover
-		$('.slideshow-block').hover(function(){
-
-			$(this).find('.slides').addClass('active').cycle('resume');
-			$(this).find('.slides li img').each(function (e) {
-				$(this).attr('src', $(this).attr('data-original'));
-			});
-
-		}, function(){
-			$(this).find('.slides').removeClass('active').cycle('pause');
-		});
 		
 		$('.my_na_c').addClass('loading_img');
 	    //load_similar();
@@ -307,25 +296,6 @@ if($cover_img != ''){
 	});
 
 
-    function initiate_slides(){
-        // Cycle plugin
-
-        // Pause & play on hover
-        var c = $('.cycle-slideshow').cycle('pause');
-        c.hover(function () {
-                //mouse enter - Resume the slideshow
-                $(this).cycle('resume');
-            },
-            function () {
-                //mouse leave - Pause the slideshow
-                $(this).cycle('pause');
-            });
-
-        //$("input .star").rating();
-
-        window.setTimeout(initiate_rating, 100);
-
-    }
 
 	function initiate_rating(){
 		
