@@ -14,7 +14,7 @@ class My_na extends CI_Controller {
 		$this->load->model('product_model');
 		$this->load->model('search_model');
 	}
-	
+		
 
 	//+++++++++++++++++++++++++++ 
 	//GET FEATURED BUSINESS JSON

@@ -603,11 +603,12 @@ class Trade extends CI_Controller {
 
 			if($this->uri->segment(3) != ''){
 
-				//$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+				$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-				//if ( ! $output = $this->cache->get('trade/single_'.$id))
-				//{
+				if ( ! $output = $this->cache->get('single_product_'.$id))
+				{
 
+					$row = '';
 						  /*$this->db->select('*');
 						  $this->db->where('products.product_id', $id);
 						  $this->db->join('product_extras','product_extras.product_id = products.product_id', 'left');
@@ -619,7 +620,16 @@ class Trade extends CI_Controller {
 
 						  $query = $this->db->query("SELECT products.*, product_extras.extras, u_business.*, a_map_location.MAP_LOCATION as city, a_map_region.REGION_NAME as region,
 						  							(SELECT img_file FROM product_images WHERE product_id = ".$id." ORDER by sequence ASC LIMIT 1) as img_file,
-                                                     MAX(product_auction_bids.bid_id) as max_bid, MAX(product_auction_bids.amount) as amount, product_extras.featured, product_extras.property_agent FROM products
+                                                     MAX(product_auction_bids.bid_id) as max_bid, MAX(product_auction_bids.amount) as amount, product_extras.featured, product_extras.property_agent,
+
+
+                                   					AVG(u_business_vote.RATING) as TOTAL,
+			                                        (
+			                                          SELECT COUNT(u_business_vote.ID) as TOTAL_R FROM u_business_vote WHERE u_business_vote.PRODUCT_ID = products.product_id
+			                                        ) as TOTAL_REVIEWS
+
+                                                    FROM products
+			    
 
                                                     LEFT JOIN u_business on products.bus_id = u_business.ID
                                                     LEFT JOIN a_map_location ON u_business.BUSINESS_MAP_CITY_ID = a_map_location.ID
@@ -628,11 +638,15 @@ class Trade extends CI_Controller {
 													LEFT JOIN product_extras on products.product_id = product_extras.product_id
 													LEFT JOIN product_images on products.product_id = product_images.product_id
 													LEFT JOIN product_auction_bids ON products.product_id = product_auction_bids.product_id AND product_auction_bids.type = 'bid'
+			                                        LEFT JOIN u_business_vote ON u_business_vote.PRODUCT_ID = products.product_id
+			                                              AND u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND u_business_vote.REVIEW_TYPE = 'product_review'	
+			                                              												
 													WHERE products.product_id = ".$id."
 													GROUP BY products.product_id
 													ORDER BY product_auction_bids.datetime DESC
 													LIMIT 1", FALSE);
-
+                         
+				
 
 						  if($query->result()){
 
@@ -645,23 +659,17 @@ class Trade extends CI_Controller {
 								$row['sub_sub_cat'] = $this->trade_model->get_category_name($row['sub_sub_cat_id']);
 								$row['sub_sub_sub_cat'] = $this->trade_model->get_category_name($row['sub_sub_sub_cat_id']);
 
-							  $this->load->library('user_agent');
-							  if ($this->agent->is_mobile())
-							  {
-								  $output = $this->load->view('trade/single', $row, TRUE);
-							  }else{
-
-								  $output = $this->load->view('trade/single', $row, TRUE);
-							  }
-
-
-
-
 						  }
-                          //$this->cache->save('trade/single_'.$id, $output, 3600);
-				//}
-				//$this->output->set_output($output);
-				echo $output;
+					  
+
+						   $output = $row;
+
+						   $this->cache->save('single_product_'.$id, $output, 3600);
+	
+				}		  
+
+				
+				echo $this->load->view('trade/single', $output, TRUE);
 
 			}else{
 

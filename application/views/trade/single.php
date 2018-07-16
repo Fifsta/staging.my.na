@@ -38,11 +38,17 @@
   $address = $BUSINESS_PHYSICAL_ADDRESS;
   $city = $city;
   $region = $region;
-  $startdate = $BUSINESS_DATE_CREATED;
+  $startdate = $BUSINESS_DATE_CREATED; 
   //$city = $bus_details['CLIENT_CITY'];
   $img = $BUSINESS_LOGO_IMAGE_NAME;
   $vt = $BUSINESS_VIRTUAL_TOUR_NAME;
   $advertorial = $ADVERTORIAL;
+
+  $price = $start_price;
+
+          $rating = $TOTAL;
+          $total_reviews = $TOTAL_REVIEWS;
+
   //Get categories
 
   $rand = rand(0,9999);
@@ -188,12 +194,7 @@
           <?php if($toggle_map == 'Y') { ?>
           <div class="list-map-right" id="map_container">
             <iframe src="<?php echo site_url('/'); ?>trade/load_product_map/<?php echo $product_id; ?>" frameborder="0" allowtransparency="true"></iframe>
-            <?php //echo $this->trade_model->get_product_map($product_id, $extras); ?>
-            <div> 
 
-            <?php //echo $this->trade_model->show_images_mason($product_id); ?>  
-
-            </div>
             <div style="display:none"><iframe src="<?php echo site_url('/').'trade/load_product_map/'.$product_id; ?>" frameborder="0" allowtransparency="true"></iframe></div>
           </div>
           <?php } ?>
@@ -563,6 +564,27 @@ if($end > $now){ ?>
 }
 
 
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Product",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "<?php echo $rating; ?>",
+    "reviewCount": "<?php echo $total_reviews; ?>"
+  },
+  "description": "<?php echo $description; ?>",
+  "name": "<?php echo $name; ?>",
+  "image": "<?php echo $img_url; ?>",
+  "offers": {
+    "@type": "Offer",
+    "availability": "http://schema.org/InStock",
+    "price": "<?php echo $price; ?>",
+    "priceCurrency": "NAD"
+  }
+}
 </script>
 
 </body>

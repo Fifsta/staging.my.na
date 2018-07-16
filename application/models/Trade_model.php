@@ -21,55 +21,66 @@ class Trade_model extends CI_Model
 
 	//Get MAP Details
 	function get_map_details($ID){
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+
+		if ( ! $output = $this->cache->get('get_product_map_details_'.$ID))
+		{		
 	  	
-		$query = $this->db->where('product_id', $ID);
-		$query = $this->db->get('product_extras');
+			$query = $this->db->where('product_id', $ID);
+			$query = $this->db->get('product_extras');
 
-		$row = $query->row();
+			$row = $query->row();
 
-		$arr = (array) json_decode($row->extras);
+			$arr = (array) json_decode($row->extras);
 
-		$lat = '';
-		$long = '';
-		$toggle = 'N';
+			$lat = '';
+			$long = '';
+			$toggle = 'N';
 
-		if (array_key_exists("toggle_map", $arr))
-		{
-
-			//GET LAT AND LONG
-			foreach ($arr as $key => $value)
+			if (array_key_exists("toggle_map", $arr))
 			{
 
-				if ($key == 'prop_lat')
+				//GET LAT AND LONG
+				foreach ($arr as $key => $value)
 				{
 
-					$lat = $value;
+					if ($key == 'prop_lat')
+					{
+
+						$lat = $value;
+
+					}
+					if ($key == 'prop_lon')
+					{
+
+						$long = $value;
+
+					}
+					if ($key == 'toggle_map')
+					{
+
+						$toggle = $value;
+
+					}
+
 
 				}
-				if ($key == 'prop_lon')
-				{
+			
+			} 
 
-					$long = $value;
+			$data['PRODUCT_MAP_LATITUDE'] = $lat;
+			$data['PRODUCT_MAP_LONGITUDE'] = $long;
+			$data['PRODUCT_MAP_TOGGLE'] = $toggle;
+			$data['PRODUCT_MAP_ZOOM_LEVEL'] = 13;
 
-				}
-				if ($key == 'toggle_map')
-				{
+			$output = $data;
 
-					$toggle = $value;
+			$this->cache->save('get_product_map_details_'.$ID, $output, 1440);
 
-				}
+		}
 
-
-			}
-		
-		} 
-
-		$data['PRODUCT_MAP_LATITUDE'] = $lat;
-		$data['PRODUCT_MAP_LONGITUDE'] = $long;
-		$data['PRODUCT_MAP_TOGGLE'] = $toggle;
-		$data['PRODUCT_MAP_ZOOM_LEVEL'] = 13;
-
-		return $data;
+		return $output;
 
 	}	
 
@@ -1406,566 +1417,577 @@ class Trade_model extends CI_Model
 	function show_product($product_id, $img_url)
 	{
 
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-		//Get Main
-		$query = $this->db->query("SELECT products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
-                                        u_business.IS_ESTATE_AGENT, u_business.BUSINESS_NAME, u_business.BUSINESS_LOGO_IMAGE_NAME,group_concat(product_images.img_file) as images,
-                                        AVG(u_business_vote.RATING) as TOTAL,MAX(product_auction_bids.amount) as current_bid,
-                                        (
-                                          SELECT COUNT(u_business_vote.ID) as TOTAL_R FROM u_business_vote WHERE u_business_vote.PRODUCT_ID = products.product_id
-                                        ) as TOTAL_REVIEWS
-
-                                        FROM products
-                                        JOIN product_extras ON products.product_id = product_extras.product_id
-                                        LEFT JOIN u_business ON u_business.ID = products.bus_id
-                                        LEFT JOIN product_images ON products.product_id = product_images.product_id
-                                        LEFT JOIN u_business_vote ON u_business_vote.PRODUCT_ID = products.product_id
-                                              AND u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND u_business_vote.REVIEW_TYPE = 'product_review'
-                                        LEFT JOIN product_auction_bids ON product_auction_bids.product_id = products.product_id AND product_auction_bids.type = 'bid'
-                                        WHERE products.product_id = '" . $product_id . "'
-                                        GROUP BY products.product_id
-                                        ORDER BY products.listing_date DESC LIMIT 1", false);
-
-		if ($query->result())
+		if ( ! $output = $this->cache->get('show_product_'.$product_id))
 		{
 
-			$row = $query->row();
 
+			//Get Main
+			$query = $this->db->query("SELECT products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
+	                                        u_business.IS_ESTATE_AGENT, u_business.BUSINESS_NAME, u_business.BUSINESS_LOGO_IMAGE_NAME,group_concat(product_images.img_file) as images,
+	                                        AVG(u_business_vote.RATING) as TOTAL,MAX(product_auction_bids.amount) as current_bid,
+	                                        (
+	                                          SELECT COUNT(u_business_vote.ID) as TOTAL_R FROM u_business_vote WHERE u_business_vote.PRODUCT_ID = products.product_id
+	                                        ) as TOTAL_REVIEWS
 
-			echo '<div id="product_msg_"></div>';
+	                                        FROM products
+	                                        JOIN product_extras ON products.product_id = product_extras.product_id
+	                                        LEFT JOIN u_business ON u_business.ID = products.bus_id
+	                                        LEFT JOIN product_images ON products.product_id = product_images.product_id
+	                                        LEFT JOIN u_business_vote ON u_business_vote.PRODUCT_ID = products.product_id
+	                                              AND u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND u_business_vote.REVIEW_TYPE = 'product_review'
+	                                        LEFT JOIN product_auction_bids ON product_auction_bids.product_id = products.product_id AND product_auction_bids.type = 'bid'
+	                                        WHERE products.product_id = '" . $product_id . "'
+	                                        GROUP BY products.product_id
+	                                        ORDER BY products.listing_date DESC LIMIT 1", false);
 
-			$fb = "postToFeed(" . $row->product_id . ", '" . $row->title . "', '" . $row->title . "', '" . $row->title . " - My Namibia','" . $this->shorten_string(strip_tags($row->description), 50) . "', '" . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . "')";
-			$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter'
-			);
-
-			$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-lg pull-right btn-dark">
-						<i class="fa-star-o text-light"></i> Grab Product
-					</a>';
-
-			//IF LOGGED IN
-			if ($this->session->userdata('id'))
+			if ($query->result())
 			{
+
+				$row = $query->row();
+
+
+				$output .= '<div id="product_msg_"></div>';
+
+				$fb = "postToFeed(" . $row->product_id . ", '" . $row->title . "', '" . $row->title . "', '" . $row->title . " - My Namibia','" . $this->shorten_string(strip_tags($row->description), 50) . "', '" . site_url('/') . 'product/' . $row->product_id . '/' . $this->clean_url_str($row->title) . "')";
+				$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter'
+				);
 
 				$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-lg pull-right btn-dark">
 							<i class="fa-star-o text-light"></i> Grab Product
 						</a>';
-			}
 
-
-			$tweet_url = $this->clean_url_str($row->title) . '&text=' . substr(strip_tags($row->title . ' ' . $row->description), 0, 60) . ' ' . site_url('/') . 'product/' . $row->product_id . '&via=MyNamibia';
-			$c = '';
-
-			//STOCK TICKER
-			if ($row->total_quantity > 1)
-			{
-
-				$t_stock = $row->total_quantity;
-				$s_perc = ($row->quantity / $t_stock) * 100;
-
-				$stock_ticker = '
-				<div class="card" style="padding:2px 10px 0px 10px"><small>' . $row->quantity . ' Currently In Stock </small>
-				    <div class="progress  progress-warning" title="' . $row->quantity . ' of ' . $row->total_quantity . ' products are available" rel="tooltip">
-					  <div class="bar" style="width:' . $s_perc . '%"></div>
-					</div><small class="pull-right"><em>Stock Counter</em></small>
-				</div>
-				';
-
-			}
-			else
-			{
-				$stock_ticker = '';
-			}
-
-			//IF BUY NOW
-			if ($row->listing_type == 'S')
-			{
-
-				$count = '';
-				$reserve = '';
-
-				if ($row->status == 'sold')
+				//IF LOGGED IN
+				if ($this->session->userdata('id'))
 				{
-					$price['str'] = '<span itemprop="price" class="hide">' . $this->smooth_price($row->sale_price) . '</span> Sold';
+
+					$btn = '<a onclick="claim_deal_un(' . $row->product_id . ');" href="javascript:void(0)" id="claim_btn' . $row->product_id . '"  class="btn btn-lg pull-right btn-dark">
+								<i class="fa-star-o text-light"></i> Grab Product
+							</a>';
+				}
+
+
+				$tweet_url = $this->clean_url_str($row->title) . '&text=' . substr(strip_tags($row->title . ' ' . $row->description), 0, 60) . ' ' . site_url('/') . 'product/' . $row->product_id . '&via=MyNamibia';
+				$c = '';
+
+				//STOCK TICKER
+				if ($row->total_quantity > 1)
+				{
+
+					$t_stock = $row->total_quantity;
+					$s_perc = ($row->quantity / $t_stock) * 100;
+
+					$stock_ticker = '
+					<div class="card" style="padding:2px 10px 0px 10px"><small>' . $row->quantity . ' Currently In Stock </small>
+					    <div class="progress  progress-warning" title="' . $row->quantity . ' of ' . $row->total_quantity . ' products are available" rel="tooltip">
+						  <div class="bar" style="width:' . $s_perc . '%"></div>
+						</div><small class="pull-right"><em>Stock Counter</em></small>
+					</div>
+					';
+
 				}
 				else
 				{
-					if ($row->sub_cat_id == 3410)
+					$stock_ticker = '';
+				}
+
+				//IF BUY NOW
+				if ($row->listing_type == 'S')
+				{
+
+					$count = '';
+					$reserve = '';
+
+					if ($row->status == 'sold')
 					{
-						$price['str'] = '<span style=" font-size:12px">N$</span><span itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</span> pm';
+						$price['str'] = '<span itemprop="price" class="hide">' . $this->smooth_price($row->sale_price) . '</span> Sold';
 					}
 					else
 					{
-						$price['str'] = '<span style=" font-size:12px">N$</span><span itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</span>';
+						if ($row->sub_cat_id == 3410)
+						{
+							$price['str'] = '<span style=" font-size:12px">N$</span><span itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</span> pm';
+						}
+						else
+						{
+							$price['str'] = '<span style=" font-size:12px">N$</span><span itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</span>';
+						}
+						if ($row->por == 'Y')
+						{
+
+							$price['str'] = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
+
+						}
+
 					}
-					if ($row->por == 'Y')
-					{
+					$btn_txt = 'Buy Now';
 
-						$price['str'] = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
-
-					}
-
-				}
-				$btn_txt = 'Buy Now';
-
-				if ($row->main_cat_id == 3408 || $row->sub_cat_id == 352 || $row->quantity == 0)
-				{
-
-					$btn_txt = 'Enquire Now';
-
-				}
-				//SEE IF OWN PRODUCT
-				if ($row->client_id == $this->session->userdata('id'))
-				{
-
-					$btn = '<div class="pull-right" style="margin-top:10px;" rel="tooltip" title="Sorry, this is your item!">
-							  <form id="buy_now_frm" method="post" style="margin-bottom:0">
-								  <input type="hidden" name="product_id" value="' . $product_id . '" />
-								  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
-								  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
-								  <button class="btn btn-dark btn-lg" type="submit" disabled="disabled">' . $btn_txt . '</button>
-							  </form>
-							</div>';
-
-				}
-				else
-				{
 					if ($row->main_cat_id == 3408 || $row->sub_cat_id == 352 || $row->quantity == 0)
 					{
 
-						$btn = '';
+						$btn_txt = 'Enquire Now';
+
+					}
+					//SEE IF OWN PRODUCT
+					if ($row->client_id == $this->session->userdata('id'))
+					{
+
+						$btn = '<div class="pull-right" style="margin-top:10px;" rel="tooltip" title="Sorry, this is your item!">
+								  <form id="buy_now_frm" method="post" style="margin-bottom:0">
+									  <input type="hidden" name="product_id" value="' . $product_id . '" />
+									  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
+									  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
+									  <button class="btn btn-dark btn-lg" type="submit" disabled="disabled">' . $btn_txt . '</button>
+								  </form>
+								</div>';
 
 					}
 					else
 					{
-						$btn = '<div class="pull-right" style="margin-top:10px;">
-								  <form action="' . site_url('/') . 'trade/buy_now/" id="buy_now_frm" method="post"  style="margin-bottom:0">
+						if ($row->main_cat_id == 3408 || $row->sub_cat_id == 352 || $row->quantity == 0)
+						{
+
+							$btn = '';
+
+						}
+						else
+						{
+							$btn = '<div class="pull-right" style="margin-top:10px;">
+									  <form action="' . site_url('/') . 'trade/buy_now/" id="buy_now_frm" method="post"  style="margin-bottom:0">
+										  <input type="hidden" name="product_id" value="' . $product_id . '" />
+										  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
+										  <input type="hidden" name="title" value="' . $row->title . '" />
+										  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
+										  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
+										  <button class="btn btn-dark btn-lg" id="buy_now_btn" type="submit">' . $btn_txt . '</button>
+									  </form>
+									</div>';
+						}
+
+					}
+					//AUCTION	
+				}
+				elseif ($row->listing_type == 'A')
+				{
+
+					if ($this->input->is_ajax_request())
+					{
+
+					}
+					else
+					{
+
+						$output .= '<script type="text/javascript" src="' . base_url('/') . 'js/jquery.countdown.min.js"></script>';
+
+					}
+
+
+					$count = '<div class="text-center"><div id="ctdwn_' . $product_id . '" class="CT-tmer"></div></div>';
+					$reserve = '<div class="card text-center"><div class="card-block"><span style=" font-size:12px">Reserve</span> <span style=" font-size:12px">N$</span> <br /><span style="font-size:20px;color:#FF9F01; font-weight:bold;">' . $row->reserve . '</span></div></div>';
+					$price = $this->get_current_bid($row->current_bid);
+
+					//TEST RESERVE
+					$resT = '<p>&nbsp;</p><p>&nbsp;</p><div class="alert clearfix"><h4>Reserve has not been met</h4>The reserve price has to be reached for the item to qualify as sold. If the reserve is not met by the auction end the item will not be sold.</div>';
+					if ($price['current'] > $row->reserve)
+					{
+
+						$resT = '';
+
+					}
+
+
+					//SEE IF OWN PRODUCT
+					if ($row->client_id == $this->session->userdata('id'))
+					{
+
+						$btn =  $resT . '
+								<div class="input-append">
+								  <form action="' . current_url() . '" id="auction_frm" method="post"  rel="tooltip" title="Sorry, this is your item!">
+									  <input class="col-md-4" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold" name="bid_amount" value="Not Allowed"  disabled>
 									  <input type="hidden" name="product_id" value="' . $product_id . '" />
 									  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
-									  <input type="hidden" name="title" value="' . $row->title . '" />
-									  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
-									  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
-									  <button class="btn btn-dark btn-lg" id="buy_now_btn" type="submit">' . $btn_txt . '</button>
+									  <input type="hidden" name="reserve" value="' . $row->reserve . '" />
+									  <input type="hidden" name="current_bid" value="' . $price['current'] . '" />
+									  <button class="btn btn-dark btn-lg disabled" id="auction_btn1" type="submit">N$ Bid Now</button>
 								  </form>
 								</div>';
 					}
+					else
+					{
+
+						//IF EXPIRED
+						$now = date('Y-m-d H:i:s');
+						$end = date('Y-m-d H:i:s', strtotime($row->end_date));
+
+						if ($end < $now)
+						{
+
+							$btn = '<div class="row">
+										<div class="col-xl-12"><div class="alert alert-info" role="alert"><h3 style="font-size:20px">Auction has Ended</h3>The auction has ended and all bidding has been suspended. Better luck next time</div></div>
+									</div>';
+						}
+						else
+						{
+
+
+							$btn = '<div style="min-height:100px; ">
+									' . $resT . '
+									<div class="row">
+										<div class="col-md-8">
+											<div class="input-append" id="bid_box">
+											  <form action="' . site_url('/') . 'trade/place_bid/" id="auction_frm" method="post">
+												  <input class="col-md-3" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold; width:30%" name="bid_amount" value="' . $price['price'] . '">
+												  <input type="hidden" name="product_id" value="' . $product_id . '" />
+												  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
+												  <input type="hidden" name="reserve" value="' . $row->reserve . '" />
+												  <input type="hidden" name="title" value="' . $row->title . '" />
+												  <input type="hidden" name="auto_bid" value="0" />
+												  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
+												  <input type="hidden" name="current_bid" value="' . $price['current'] . '" />
+												  <button class="btn btn-dark btn-lg" id="auction_btn" type="submit">N$ Bid Now</button>
+											  </form>
+											</div>
+
+											<div class="input-append hide" id="auto_bid_box">
+											  <form action="' . site_url('/') . 'trade/place_bid/" id="auction_frm_auto" method="post">
+												  <input class="col-md-3" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold;width:30%" name="bid_amount" value="' . $price['price'] . '">
+												  <input type="hidden" name="product_id" value="' . $product_id . '" />
+												  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
+												  <input type="hidden" name="reserve" value="' . $row->reserve . '" />
+												  <input type="hidden" name="title" value="' . $row->title . '" />
+												  <input type="hidden" name="auto_bid" value="1" />
+												  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
+												  <input type="hidden" name="current_bid" value="' . $price['current'] . '" />
+												  <button class="btn btn-dark btn-lg" id="auction_btn_auto" type="submit">N$ Auto Bid</button>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<a href="javascript:void(0)" onClick="switch_auto_bid()" class="btn btn-dark pull-right">Auto Bid</a>
+										</div>
+									</div>
+									<div class="alert alert-block clearfix hide" id="auto_help_txt"><strong>Please Note:</strong> Auto bid will automatically place your bid until your auto bid value is met.</div>
+							   </div>
+								';
+
+						}
+						$btn .= $this->get_bid_history($row->product_id);
+					}
+
+
+					//SERVICE
+				}
+				elseif ($row->listing_type == 'C')
+				{
+
+					$btn = '';
+					$reserve = '';
+					$count = '';
+
+					//SEE IF OWN PRODUCT
+					if ($row->client_id == $this->session->userdata('id'))
+					{
+						$price['str'] = '<span itemprop="price">N$' . $this->smooth_price($row->sale_price) . '</span>';
+						$btn_txt = 'Your Own Service';
+					}
+					else
+					{
+
+						if ($row->sub_cat_id == 3410)
+						{
+							$price['str'] = '<span itemprop="price">N$ ' . $this->smooth_price($row->sale_price) . '</span> pm';
+						}
+						else
+						{
+							$price['str'] = '<span itemprop="price">N$' . $this->smooth_price($row->sale_price) . '</span>';
+						}
+						if ($row->por == 'Y')
+						{
+
+							$price['str'] = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
+
+						}
+
+						$btn_txt = 'Order Now';
+
+					}
+
+					$btn = '<div class="pull-right" style="margin-top:10px;">
+									  <form action="' . site_url('/') . 'trade/order_service/" id="order_now_frm" method="post"  style="margin-bottom:0">
+										  <input type="hidden" name="product_id" value="' . $product_id . '" />
+										  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
+										  <input type="hidden" name="title" value="' . $row->title . '" />
+										  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
+										  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
+										  <button class="btn btn-dark btn-lg" id="order_now_btn" type="submit">' . $btn_txt . '</button>
+									  </form>
+									</div>';
 
 				}
-				//AUCTION	
-			}
-			elseif ($row->listing_type == 'A')
-			{
+				$agent_ref = '<span class="badge badge-secondary" rel="tooltip"  title="Product Reference"  itemprop="sku">MYNA' . $row->product_id . '</span>';
+				//PROPERTY REFERENCE
+				if (count(json_decode($row->extras)) > 0)
+				{
+
+					foreach (json_decode($row->extras) as $exr => $exv)
+					{
+
+						if ($exr == 'agency' && $exv != '')
+						{
+
+							$agent_ref = '<span  class="badge badge-secondary" rel="tooltip"  title="Product Reference">Ref: <strong itemprop="sku">' . $exv . '</strong></span>';
+						}
+
+					}
+
+				}
+				//get REVIEWS
+				//get REVIEWS
+				$rating = 0;
+				$total_reviews = 0;
+				if ($row->TOTAL != null)
+				{
+
+					$rating = $row->TOTAL;
+					$total_reviews = $row->TOTAL_REVIEWS;
+				}
+				//LOCATION
+				$location = '';
+				if ($row->location != '')
+				{
+
+					$location = '<span class="badge badge-secondary">' . $row->location . '</span>';
+
+					if ($row->suburb != 0 && $row->suburb != '')
+					{
+						$location = '<span class="badge badge-secondary">' . $row->location . ' / ' . $row->suburb . '</span>';
+					}
+
+				}
+
+				$order_now_btn = "<a href='javascript:void(0)' id='order_now_btn_do'  class='btn btn-lg btn-block btn-dark'>Yes Order Now</a>";
+				$buy_now_btn = "<a href='javascript:void(0)' id='buy_now_btn_do'  class='btn btn-lg btn-block btn-dark'>Yes Buy Now</a>";
+				$bid_btn = "<a href='javascript:void(0)' id='bid_btn_do'  class='btn btn-lg btn-block btn-dark'>Yes Place My Bid</a>";
+
+				$watchlist = $this->watch_list_test($product_id);
+
+				$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
+
+				$output .= '
+		        <div class="details">
+		          <div class="details-left">
+		            <figure>
+		              <a href="'.site_url('/').'b/'.$row->bus_id.'/'.$this->clean_url_str($row->BUSINESS_NAME).'"><img src="'.$img_url.'"></a>
+		            </figure>
+		            <div class="rating">
+		              '.$this->get_review_stars_show($rating, $product_id, 0, $total_reviews).'
+		            </div>
+		            <div>' . $reserve . '</div>
+		          </div>
+		          <div class="details-right">
+		          	'.$ribbon.'			
+					<h2>' . $row->title . '</h2>
+		            <p class="cost"><span itemprop="offers" itemscope itemtype="http://schema.org/Offer">' . $price['str'] . '</span></p>
+					' . $agent_ref . '
+
+					' . $location . '	            
+		            <p class="desc"><span itemprop="description">' . $row->description . '</span></p>
+		            <div class="feat" itemprop="description">
+		              ' . $this->show_extras($row->extras) . '
+		            </div>
+		            <!--watchlist/print-->
+		            <div class="text-left">
+		              <a href="javascript:void(0);" title="Print this Page" rel="tooltip" class="btn btn-dark btnPrint"><i class="fa fa-print text-light"></i></a>
+		              '.$watchlist.'
+		            </div>
+		            <!--watchlist/print-->
+		            <div class="spacer"></div>
+		            ' . $count . '
+		            <div class="clearfix"></div>
+		            <div class="clearfix">' . $btn . '</div>
+		          </div>
+		        </div>
+				';
+
+
+				//ENDING DATE
+				$listE = new DateTime(date('Y-m-d H:i:s', strtotime($row->end_date)));
 
 				if ($this->input->is_ajax_request())
 				{
 
-				}
-				else
-				{
+					$output .= '<script data-cfasync="false" type="text/javascript">
+							$(document).ready(function(){
+							$.getScript("' . base_url('/') . 'js/jquery.rating.pack.js", function(){
 
-					echo '<script type="text/javascript" src="' . base_url('/') . 'js/jquery.countdown.min.js"></script>';
+								$("input .star").rating();
 
-				}
-
-
-				$count = '<div class="text-center"><div id="ctdwn_' . $product_id . '" class="CT-tmer"></div></div>';
-				$reserve = '<div class="card text-center"><div class="card-block"><span style=" font-size:12px">Reserve</span> <span style=" font-size:12px">N$</span> <br /><span style="font-size:20px;color:#FF9F01; font-weight:bold;">' . $row->reserve . '</span></div></div>';
-				$price = $this->get_current_bid($row->current_bid);
-
-				//TEST RESERVE
-				$resT = '<p>&nbsp;</p><p>&nbsp;</p><div class="alert clearfix"><h4>Reserve has not been met</h4>The reserve price has to be reached for the item to qualify as sold. If the reserve is not met by the auction end the item will not be sold.</div>';
-				if ($price['current'] > $row->reserve)
-				{
-
-					$resT = '';
-
-				}
-
-
-				//SEE IF OWN PRODUCT
-				if ($row->client_id == $this->session->userdata('id'))
-				{
-
-					$btn =  $resT . '
-							<div class="input-append">
-							  <form action="' . current_url() . '" id="auction_frm" method="post"  rel="tooltip" title="Sorry, this is your item!">
-								  <input class="col-md-4" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold" name="bid_amount" value="Not Allowed"  disabled>
-								  <input type="hidden" name="product_id" value="' . $product_id . '" />
-								  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
-								  <input type="hidden" name="reserve" value="' . $row->reserve . '" />
-								  <input type="hidden" name="current_bid" value="' . $price['current'] . '" />
-								  <button class="btn btn-dark btn-lg disabled" id="auction_btn1" type="submit">N$ Bid Now</button>
-							  </form>
-							</div>';
-				}
-				else
-				{
-
-					//IF EXPIRED
-					$now = date('Y-m-d H:i:s');
-					$end = date('Y-m-d H:i:s', strtotime($row->end_date));
-
-					if ($end < $now)
-					{
-
-						$btn = '<div class="row">
-									<div class="col-xl-12"><div class="alert alert-info" role="alert"><h3 style="font-size:20px">Auction has Ended</h3>The auction has ended and all bidding has been suspended. Better luck next time</div></div>
-								</div>';
-					}
-					else
-					{
-
-
-						$btn = '<div style="min-height:100px; ">
-								' . $resT . '
-								<div class="row">
-									<div class="col-md-8">
-										<div class="input-append" id="bid_box">
-										  <form action="' . site_url('/') . 'trade/place_bid/" id="auction_frm" method="post">
-											  <input class="col-md-3" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold; width:30%" name="bid_amount" value="' . $price['price'] . '">
-											  <input type="hidden" name="product_id" value="' . $product_id . '" />
-											  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
-											  <input type="hidden" name="reserve" value="' . $row->reserve . '" />
-											  <input type="hidden" name="title" value="' . $row->title . '" />
-											  <input type="hidden" name="auto_bid" value="0" />
-											  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
-											  <input type="hidden" name="current_bid" value="' . $price['current'] . '" />
-											  <button class="btn btn-dark btn-lg" id="auction_btn" type="submit">N$ Bid Now</button>
-										  </form>
-										</div>
-
-										<div class="input-append hide" id="auto_bid_box">
-										  <form action="' . site_url('/') . 'trade/place_bid/" id="auction_frm_auto" method="post">
-											  <input class="col-md-3" type="text" onkeypress="return isNumberKey(event)" style="height:45px;font-size:16px;color:#FF9F01;font-weight:bold;width:30%" name="bid_amount" value="' . $price['price'] . '">
-											  <input type="hidden" name="product_id" value="' . $product_id . '" />
-											  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
-											  <input type="hidden" name="reserve" value="' . $row->reserve . '" />
-											  <input type="hidden" name="title" value="' . $row->title . '" />
-											  <input type="hidden" name="auto_bid" value="1" />
-											  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
-											  <input type="hidden" name="current_bid" value="' . $price['current'] . '" />
-											  <button class="btn btn-dark btn-lg" id="auction_btn_auto" type="submit">N$ Auto Bid</button>
-										</div>
-									</div>
-									<div class="col-md-4">
-										<a href="javascript:void(0)" onClick="switch_auto_bid()" class="btn btn-dark pull-right">Auto Bid</a>
-									</div>
-								</div>
-								<div class="alert alert-block clearfix hide" id="auto_help_txt"><strong>Please Note:</strong> Auto bid will automatically place your bid until your auto bid value is met.</div>
-						   </div>
+							});
 							';
 
-					}
-					$btn .= $this->get_bid_history($row->product_id);
-				}
-
-
-				//SERVICE
-			}
-			elseif ($row->listing_type == 'C')
-			{
-
-				$btn = '';
-				$reserve = '';
-				$count = '';
-
-				//SEE IF OWN PRODUCT
-				if ($row->client_id == $this->session->userdata('id'))
-				{
-					$price['str'] = '<span itemprop="price">N$' . $this->smooth_price($row->sale_price) . '</span>';
-					$btn_txt = 'Your Own Service';
 				}
 				else
 				{
 
-					if ($row->sub_cat_id == 3410)
-					{
-						$price['str'] = '<span itemprop="price">N$ ' . $this->smooth_price($row->sale_price) . '</span> pm';
-					}
-					else
-					{
-						$price['str'] = '<span itemprop="price">N$' . $this->smooth_price($row->sale_price) . '</span>';
-					}
-					if ($row->por == 'Y')
-					{
-
-						$price['str'] = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
-
-					}
-
-					$btn_txt = 'Order Now';
+					$output .= '<script type="text/javascript">
+							$(document).ready(function(){
+						 ';
 
 				}
 
-				$btn = '<div class="pull-right" style="margin-top:10px;">
-								  <form action="' . site_url('/') . 'trade/order_service/" id="order_now_frm" method="post"  style="margin-bottom:0">
-									  <input type="hidden" name="product_id" value="' . $product_id . '" />
-									  <input type="hidden" name="bus_id" value="' . $row->bus_id . '" />
-									  <input type="hidden" name="title" value="' . $row->title . '" />
-									  <input type="hidden" name="seller_id" value="' . $row->client_id . '" />
-									  <input type="hidden" name="amount" value="' . $row->sale_price . '" />
-									  <button class="btn btn-dark btn-lg" id="order_now_btn" type="submit">' . $btn_txt . '</button>
-								  </form>
-								</div>';
 
-			}
-			$agent_ref = '<span class="badge badge-secondary" rel="tooltip"  title="Product Reference"  itemprop="sku">MYNA' . $row->product_id . '</span>';
-			//PROPERTY REFERENCE
-			if (count(json_decode($row->extras)) > 0)
-			{
-
-				foreach (json_decode($row->extras) as $exr => $exv)
+				if ($row->listing_type == 'A')
 				{
 
-					if ($exr == 'agency' && $exv != '')
-					{
-
-						$agent_ref = '<span  class="badge badge-secondary" rel="tooltip"  title="Product Reference">Ref: <strong itemprop="sku">' . $exv . '</strong></span>';
-					}
-
+					$output .= '	$(function () {
+										
+								ctdwn_' . $product_id . ' = new Date(' . ($listE->format('Y')) . ', ' . ($listE->format('m') - 1) . ', ' . ($listE->format('d')) . ', ' . ($listE->format('H')) . ', ' . ($listE->format('i')) . ');
+								$(".CT-tmer").countdown({until: ctdwn_' . $product_id . '});
+								
+							});';
 				}
 
-			}
-			//get REVIEWS
-			//get REVIEWS
-			$rating = 0;
-			$total_reviews = 0;
-			if ($row->TOTAL != null)
-			{
+				$output .= '
 
-				$rating = $row->TOTAL;
-				$total_reviews = $row->TOTAL_REVIEWS;
-			}
-			//LOCATION
-			$location = '';
-			if ($row->location != '')
-			{
+									$("#auction_btn").bind("click", function(e){
 
-				$location = '<span class="badge badge-secondary">' . $row->location . '</span>';
-
-				if ($row->suburb != 0 && $row->suburb != '')
-				{
-					$location = '<span class="badge badge-secondary">' . $row->location . ' / ' . $row->suburb . '</span>';
-				}
-
-			}
-
-			$order_now_btn = "<a href='javascript:void(0)' id='order_now_btn_do'  class='btn btn-lg btn-block btn-dark'>Yes Order Now</a>";
-			$buy_now_btn = "<a href='javascript:void(0)' id='buy_now_btn_do'  class='btn btn-lg btn-block btn-dark'>Yes Buy Now</a>";
-			$bid_btn = "<a href='javascript:void(0)' id='bid_btn_do'  class='btn btn-lg btn-block btn-dark'>Yes Place My Bid</a>";
-
-			$watchlist = $this->watch_list_test($product_id);
-
-			$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
-
-			echo '
-	        <div class="details">
-	          <div class="details-left">
-	            <figure>
-	              <a href="'.site_url('/').'b/'.$row->bus_id.'/'.$this->clean_url_str($row->BUSINESS_NAME).'"><img src="'.$img_url.'"></a>
-	            </figure>
-	            <div class="rating">
-	              '.$this->get_review_stars_show($rating, $product_id, 0, $total_reviews).'
-	            </div>
-	            <div>' . $reserve . '</div>
-	          </div>
-	          <div class="details-right">
-	          	'.$ribbon.'			
-				<h2>' . $row->title . '</h2>
-	            <p class="cost"><span itemprop="offers" itemscope itemtype="http://schema.org/Offer">' . $price['str'] . '</span></p>
-				' . $agent_ref . '
-
-				' . $location . '	            
-	            <p class="desc"><span itemprop="description">' . $row->description . '</span></p>
-	            <div class="feat" itemprop="description">
-	              ' . $this->show_extras($row->extras) . '
-	            </div>
-	            <!--watchlist/print-->
-	            <div class="text-left">
-	              <a href="javascript:void(0);" title="Print this Page" rel="tooltip" class="btn btn-dark btnPrint"><i class="fa fa-print text-light"></i></a>
-	              '.$watchlist.'
-	            </div>
-	            <!--watchlist/print-->
-	            <div class="spacer"></div>
-	            ' . $count . '
-	            <div class="clearfix"></div>
-	            <div class="clearfix">' . $btn . '</div>
-	          </div>
-	        </div>
-			';
+											e.preventDefault();
+											var x = $(this);
+											x.popover({  delay: { show: 100, hide: 3000 },placement:"top",html: true,trigger: "manual",title:"Are You Sure?", content:"<p>Please confirm!</p><br />' . $bid_btn . '"});
+											x.popover("show");
+											$("html, body").animate({
+												 scrollTop: (x.offset().top - 300)
+											 }, 300);
+											 $("#bid_btn_do").attr("href", "javascript:place_bid()");
+									});
 
 
-			//ENDING DATE
-			$listE = new DateTime(date('Y-m-d H:i:s', strtotime($row->end_date)));
 
-			if ($this->input->is_ajax_request())
-			{
+									$("#auction_btn_auto").bind("click", function(e){
 
-				echo '<script data-cfasync="false" type="text/javascript">
-						$(document).ready(function(){
-						$.getScript("' . base_url('/') . 'js/jquery.rating.pack.js", function(){
+											e.preventDefault();
+											var x = $(this);
+											x.popover({  delay: { show: 100, hide: 3000 },placement:"top",html: true,trigger: "manual",title:"Are You Sure?", content:"<p>Please confirm!</p><br />' . $bid_btn . '"});
+											x.popover("show");
+											$("html, body").animate({
+												 scrollTop: (x.offset().top - 300)
+											 }, 300);
+											 $("#bid_btn_do").attr("href", "javascript:place_bid_auto()");
+									});
 
-							$("input .star").rating();
+									$("#buy_now_btn").bind("click", function(e){
 
-						});
-						';
+											e.preventDefault();
+											var x = $(this);
+											x.popover({  delay: { show: 100, hide: 3000 },
+											 placement:"top",html: true,trigger: "manual",title:"Are You Sure?", content:"<p>Please confirm!</p><br />' . $buy_now_btn . '"});
+											x.popover("show");
+											$("html, body").animate({
+												 scrollTop: (x.offset().top - 300)
+											 }, 300);
+											 $("#buy_now_btn_do").attr("href", "javascript:buy_now()");
+									});
+
+									$("#order_now_btn").bind("click", function(e){
+
+											e.preventDefault();
+											var x = $(this);
+											x.popover({  delay: { show: 100, hide: 3000 },
+											 placement:"top",html: true,trigger: "manual",title:"Are You Sure?", content:"<p>Please confirm!</p><br />' . $order_now_btn . '"});
+											x.popover("show");
+											$("html, body").animate({
+												 scrollTop: (x.offset().top - 300)
+											 }, 300);
+											 $("#order_now_btn_do").attr("href", "javascript:order_now()");
+									});
+							});
+
+							function place_bid(){
+
+									var frm = $("#auction_frm"), btn = $("#auction_btn"), bbtn = $("#bid_btn_do");
+									btn.html("Adding Bid...");
+									bbtn.html("<img src=' . "'" . base_url('/') . 'img/load_black.gif' . "'" . '> Please Wait...");
+									$.ajax({
+										type: "post",
+										cache: false,
+										url: "' . site_url("/") . 'trade/place_bid_ajax/" ,
+										data: frm.serialize(),
+										success: function (data) {
+											btn.html("Bid Now");
+											$("#product_msg").html(data);
+	                                        $("#auction_btn").popover("destroy");
+										}
+									});
+
+							}
+							function buy_now(){
+
+									var frm = $("#buy_now_frm"), btn = $("#buy_now_btn");
+									btn.html("Purchasing...");
+									$.ajax({
+										type: "post",
+										cache: false,
+										url: "' . site_url("/") . 'trade/buy_now/" ,
+										data: frm.serialize(),
+										success: function (data) {
+											btn.html("Buy Now");
+											$("#product_msg").html(data);
+	 										btn.popover("destroy");
+										}
+									});
+
+							}
+							function place_bid_auto(){
+
+									var frm = $("#auction_frm_auto"), btn = $("#auction_btn_auto");
+									btn.html("Adding Bid...");
+									$.ajax({
+										type: "post",
+										cache: false,
+										url: "' . site_url("/") . 'trade/place_bid_ajax/" ,
+										data: frm.serialize(),
+										success: function (data) {
+											btn.html("Bid Now");
+											$("#product_msg").html(data);
+
+										}
+									});
+
+							}
+							function order_now(){
+
+									var frm = $("#order_now_frm"), btn = $("#order_now_btn");
+									btn.html("Ordering...");
+									$.ajax({
+										type: "post",
+										cache: false,
+										url: "' . site_url("/") . 'trade/order_now/" ,
+										data: frm.serialize(),
+										success: function (data) {
+											btn.html("Order Now");
+											$("#product_msg").html(data);
+	 										btn.popover("destroy");
+										}
+									});
+
+							}
+							</script>';
+
 
 			}
 			else
 			{
 
-				echo '<script type="text/javascript">
-						$(document).ready(function(){
-					 ';
+				$output .= 'Product Not Found';
 
 			}
 
+			$this->cache->save('show_product_'.$product_id, $output, 600);
 
-			if ($row->listing_type == 'A')
-			{
-
-				echo '	$(function () {
-									
-							ctdwn_' . $product_id . ' = new Date(' . ($listE->format('Y')) . ', ' . ($listE->format('m') - 1) . ', ' . ($listE->format('d')) . ', ' . ($listE->format('H')) . ', ' . ($listE->format('i')) . ');
-							$(".CT-tmer").countdown({until: ctdwn_' . $product_id . '});
-							
-						});';
-			}
-
-			echo '
-
-								$("#auction_btn").bind("click", function(e){
-
-										e.preventDefault();
-										var x = $(this);
-										x.popover({  delay: { show: 100, hide: 3000 },placement:"top",html: true,trigger: "manual",title:"Are You Sure?", content:"<p>Please confirm!</p><br />' . $bid_btn . '"});
-										x.popover("show");
-										$("html, body").animate({
-											 scrollTop: (x.offset().top - 300)
-										 }, 300);
-										 $("#bid_btn_do").attr("href", "javascript:place_bid()");
-								});
-
-
-
-								$("#auction_btn_auto").bind("click", function(e){
-
-										e.preventDefault();
-										var x = $(this);
-										x.popover({  delay: { show: 100, hide: 3000 },placement:"top",html: true,trigger: "manual",title:"Are You Sure?", content:"<p>Please confirm!</p><br />' . $bid_btn . '"});
-										x.popover("show");
-										$("html, body").animate({
-											 scrollTop: (x.offset().top - 300)
-										 }, 300);
-										 $("#bid_btn_do").attr("href", "javascript:place_bid_auto()");
-								});
-
-								$("#buy_now_btn").bind("click", function(e){
-
-										e.preventDefault();
-										var x = $(this);
-										x.popover({  delay: { show: 100, hide: 3000 },
-										 placement:"top",html: true,trigger: "manual",title:"Are You Sure?", content:"<p>Please confirm!</p><br />' . $buy_now_btn . '"});
-										x.popover("show");
-										$("html, body").animate({
-											 scrollTop: (x.offset().top - 300)
-										 }, 300);
-										 $("#buy_now_btn_do").attr("href", "javascript:buy_now()");
-								});
-
-								$("#order_now_btn").bind("click", function(e){
-
-										e.preventDefault();
-										var x = $(this);
-										x.popover({  delay: { show: 100, hide: 3000 },
-										 placement:"top",html: true,trigger: "manual",title:"Are You Sure?", content:"<p>Please confirm!</p><br />' . $order_now_btn . '"});
-										x.popover("show");
-										$("html, body").animate({
-											 scrollTop: (x.offset().top - 300)
-										 }, 300);
-										 $("#order_now_btn_do").attr("href", "javascript:order_now()");
-								});
-						});
-
-						function place_bid(){
-
-								var frm = $("#auction_frm"), btn = $("#auction_btn"), bbtn = $("#bid_btn_do");
-								btn.html("Adding Bid...");
-								bbtn.html("<img src=' . "'" . base_url('/') . 'img/load_black.gif' . "'" . '> Please Wait...");
-								$.ajax({
-									type: "post",
-									cache: false,
-									url: "' . site_url("/") . 'trade/place_bid_ajax/" ,
-									data: frm.serialize(),
-									success: function (data) {
-										btn.html("Bid Now");
-										$("#product_msg").html(data);
-                                        $("#auction_btn").popover("destroy");
-									}
-								});
-
-						}
-						function buy_now(){
-
-								var frm = $("#buy_now_frm"), btn = $("#buy_now_btn");
-								btn.html("Purchasing...");
-								$.ajax({
-									type: "post",
-									cache: false,
-									url: "' . site_url("/") . 'trade/buy_now/" ,
-									data: frm.serialize(),
-									success: function (data) {
-										btn.html("Buy Now");
-										$("#product_msg").html(data);
- 										btn.popover("destroy");
-									}
-								});
-
-						}
-						function place_bid_auto(){
-
-								var frm = $("#auction_frm_auto"), btn = $("#auction_btn_auto");
-								btn.html("Adding Bid...");
-								$.ajax({
-									type: "post",
-									cache: false,
-									url: "' . site_url("/") . 'trade/place_bid_ajax/" ,
-									data: frm.serialize(),
-									success: function (data) {
-										btn.html("Bid Now");
-										$("#product_msg").html(data);
-
-									}
-								});
-
-						}
-						function order_now(){
-
-								var frm = $("#order_now_frm"), btn = $("#order_now_btn");
-								btn.html("Ordering...");
-								$.ajax({
-									type: "post",
-									cache: false,
-									url: "' . site_url("/") . 'trade/order_now/" ,
-									data: frm.serialize(),
-									success: function (data) {
-										btn.html("Order Now");
-										$("#product_msg").html(data);
- 										btn.popover("destroy");
-									}
-								});
-
-						}
-						</script>';
-
-
-		}
-		else
-		{
-
-			echo 'Product Not Found';
-
+		
 		}
 
+		echo $output;
 
 	}
 
@@ -3801,101 +3823,114 @@ class Trade_model extends CI_Model
 	function show_images($product_id)
 	{
 
-		$this->load->model('image_model'); 
-
-		$this->load->library('thumborp');
-		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-
-		//get images
-		$this->db->order_by('sequence', 'ASC');
-		$this->db->where('product_id', $product_id);
-		$images = $this->db->get('product_images');
-
-		$data = '';
-		//GET MAIN IMAGE				
-		if ($images->result())
+		if ( ! $output = $this->cache->get('show_product_images_'.$product_id))
 		{
 
-			echo '<div class="owl-carousel" id="owl-gallery">';
+			$this->load->model('image_model'); 
 
-			foreach ($images->result() as $row)
+			$this->load->library('thumborp');
+			$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+
+			//get images
+			$this->db->order_by('sequence', 'ASC');
+			$this->db->where('product_id', $product_id);
+			$images = $this->db->get('product_images');
+
+			$data = '';
+			//GET MAIN IMAGE				
+			if ($images->result())
 			{
 
-				//Build image string
-				$format = substr($row->img_file,(strlen($row->img_file) - 4),4);
-				$str = substr($row->img_file,0,(strlen($row->img_file) - 4));
-				
-				$width = 1000;
-				$height = 500;
+				$output .= '<div class="owl-carousel" id="owl-gallery">';
 
+				foreach ($images->result() as $row)
+				{
 
-				$n_width = 800;
-				$n_height = 0;
-
-
-				if($row->img_file != ''){
+					//Build image string
+					$format = substr($row->img_file,(strlen($row->img_file) - 4),4);
+					$str = substr($row->img_file,0,(strlen($row->img_file) - 4));
 					
-					if(strpos($row->img_file,'.') == 0){
-			
-						$format = '.jpg';
-						$img_str = 'assets/products/images/' . $row->img_file . '?' . $format;
+					$width = 1000;
+					$height = 500;
+
+
+					$n_width = 800;
+					$n_height = 0;
+
+
+					if($row->img_file != ''){
+						
+						if(strpos($row->img_file,'.') == 0){
+				
+							$format = '.jpg';
+							$img_str = 'assets/products/images/' . $row->img_file . '?' . $format;
+							
+						}else{
+							
+							$img_str = 'assets/products/images/' . $row->img_file;
+							
+						}
 						
 					}else{
 						
-						$img_str = 'assets/products/images/' . $row->img_file;
+						$img_str = base_url('/').'img/bus_blank.jpg';	
 						
 					}
-					
-				}else{
-					
-					$img_str = base_url('/').'img/bus_blank.jpg';	
-					
+
+					$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+					$img_url_o =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$n_width,$n_height, $crop = '');
+
+					$output .= '<div class="loader"><a class="fancy-images" rel="gallery" href="'.$img_url_o.'"><img class="owl-lazy" data-src="'.$img_url.'" style="width:100%;"/></a></div>';
+
+
 				}
 
-				$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
-				$img_url_o =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$n_width,$n_height, $crop = '');
-
-				echo '<div class="loader"><a class="fancy-images" rel="gallery" href="'.$img_url_o.'"><img class="owl-lazy" data-src="'.$img_url.'" style="width:100%;"/></a></div>';
-
+				$output .= '</div>';
 
 			}
 
-			echo '</div>';
+			$this->cache->save('show_product_images_'.$product_id, $output, 600);
 
 		}
 
+		return $output;
 
 	} 
 
 
 	function toggle_map($id) {
 
-		$query = $this->db->where('product_id', $id);
-		$query = $this->db->get('product_extras');
-		$row = $query->row();
-		
-		$mydata = json_decode($row->extras);
+		if ( ! $output = $this->cache->get('toggle_product_map_'.$id))
+		{
 
-		$string = 'N';
-		//var_dump($mydata);
-		
-		//If has items
-		if(count($mydata) > 0){
+			$query = $this->db->where('product_id', $id);
+			$query = $this->db->get('product_extras');
+			$row = $query->row();
 			
+			$mydata = json_decode($row->extras);
+
+			$string = 'N';
+			//var_dump($mydata);
 			
+			//If has items
+			if(count($mydata) > 0){
+				
 				foreach($mydata as $key => $val){ 
 
-				
 					if($key == 'toggle_map') { $string = $val; }
-
 				
 				}
-	
+		
+			}
+			
+			$output = $string;
 
+			$this->cache->save('toggle_product_map_'.$id, $output, 1440);
+			
 		}
-		
-		return $string;		
-		
+
+		return $output;
+			
 	}
 
 
@@ -6626,289 +6661,296 @@ class Trade_model extends CI_Model
 	public function get_similar_products($cat1, $cat2, $product_id)
 	{
 
-		$this->load->model('image_model'); 
 
-		$this->load->library('thumborp');
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-		$width = 360;
-		$height = 230;
+		if ( ! $output = $this->cache->get('get_similar_products_'.$product_id.'_'.$cat1.'_'.$cat2))
+		{		
 
-		$l_width = 60;
-		$l_height = 60;
+			$this->load->model('image_model'); 
 
-		//$query = $this->db->query("SELECT * FROM products JOIN product_extras ON products.product_id = product_extras.product_id WHERE  (products.sub_cat_id = '".$cat2."' OR products.main_cat_id = '".$cat1."') AND products.product_id <> (".$product_id.")  ORDER BY products.listing_date DESC LIMIT 8 ", FALSE);
+			$this->load->library('thumborp');
 
-		$query = $this->db->query("SELECT products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
-                                        u_business.IS_ESTATE_AGENT, u_business.BUSINESS_NAME, u_business.BUSINESS_LOGO_IMAGE_NAME,group_concat(product_images.img_file) as images,
-                                        MAX(product_auction_bids.amount) as current_bid,
-                                        AVG(u_business_vote.RATING) as TOTAL,
-                                        (
-                                          SELECT COUNT(u_business_vote.ID) as TOTAL_R FROM u_business_vote WHERE u_business_vote.PRODUCT_ID = products.product_id
-                                        ) as TOTAL_REVIEWS
+			$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+			$width = 360;
+			$height = 230;
 
-                                        FROM products
-                                        JOIN product_extras ON products.product_id = product_extras.product_id
-                                        LEFT JOIN u_business ON u_business.ID = products.bus_id
-                                        LEFT JOIN product_images ON products.product_id = product_images.product_id
-                                        LEFT JOIN product_auction_bids ON product_auction_bids.product_id = products.product_id AND product_auction_bids.type = 'bid'
-                                        LEFT JOIN u_business_vote ON u_business_vote.PRODUCT_ID = products.product_id
-                                              AND u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND u_business_vote.REVIEW_TYPE = 'product_review'
-                                        WHERE products.is_active = 'Y' AND products.status = 'live' AND  (products.sub_cat_id = '" . $cat2 . "' OR products.main_cat_id = '" . $cat1 . "') AND products.product_id <> (" . $product_id . ")
-                                        GROUP BY products.product_id
-                                        ORDER BY products.listing_date DESC LIMIT 10", false);
+			$l_width = 60;
+			$l_height = 60;
+
+			$output = '';
+
+			//$query = $this->db->query("SELECT * FROM products JOIN product_extras ON products.product_id = product_extras.product_id WHERE  (products.sub_cat_id = '".$cat2."' OR products.main_cat_id = '".$cat1."') AND products.product_id <> (".$product_id.")  ORDER BY products.listing_date DESC LIMIT 8 ", FALSE);
+
+			$query = $this->db->query("SELECT products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
+	                                        u_business.IS_ESTATE_AGENT, u_business.BUSINESS_NAME, u_business.BUSINESS_LOGO_IMAGE_NAME,group_concat(product_images.img_file) as images,
+	                                        MAX(product_auction_bids.amount) as current_bid,
+	                                        AVG(u_business_vote.RATING) as TOTAL,
+	                                        (
+	                                          SELECT COUNT(u_business_vote.ID) as TOTAL_R FROM u_business_vote WHERE u_business_vote.PRODUCT_ID = products.product_id
+	                                        ) as TOTAL_REVIEWS
+
+	                                        FROM products
+	                                        JOIN product_extras ON products.product_id = product_extras.product_id
+	                                        LEFT JOIN u_business ON u_business.ID = products.bus_id
+	                                        LEFT JOIN product_images ON products.product_id = product_images.product_id
+	                                        LEFT JOIN product_auction_bids ON product_auction_bids.product_id = products.product_id AND product_auction_bids.type = 'bid'
+	                                        LEFT JOIN u_business_vote ON u_business_vote.PRODUCT_ID = products.product_id
+	                                              AND u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND u_business_vote.REVIEW_TYPE = 'product_review'
+	                                        WHERE products.is_active = 'Y' AND products.status = 'live' AND  (products.sub_cat_id = '" . $cat2 . "' OR products.main_cat_id = '" . $cat1 . "') AND products.product_id <> (" . $product_id . ")
+	                                        GROUP BY products.product_id
+	                                        ORDER BY products.listing_date DESC LIMIT 10", false);
 
 
-		if ($query->result())
-		{
-
-			echo '
-			<div class="owl-carousel" id="similar" style="margin-top:20px">	  
-			 		
-			';
-			$x2 = 0;
-			foreach ($query->result() as $row)
+			if ($query->result())
 			{
 
-				$xx = 0;
-				$img = array();
-				$img_Cycle = '';
-				if ($row->images != null)
+				$output .= '<div class="owl-carousel" id="similar" style="margin-top:20px">';
+
+				$x2 = 0;
+				foreach ($query->result() as $row)
 				{
 
-					$imgA = explode(',', $row->images);
-					$imgAa = array();
-
-					foreach ($imgA as $imgR)
+					$xx = 0;
+					$img = array();
+					$img_Cycle = '';
+					if ($row->images != null)
 					{
-						$lazy = '';
-						if ($xx == 0)
+
+						$imgA = explode(',', $row->images);
+						$imgAa = array();
+
+						foreach ($imgA as $imgR)
 						{
-							$lazy = 'lazy active';
-							$img_str = 'assets/products/images/' . $imgR;
+							$lazy = '';
+							if ($xx == 0)
+							{
+								$lazy = 'lazy active';
+								$img_str = 'assets/products/images/' . $imgR;
 
-							$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+								$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-							$img[$xx] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic" src="'.$img_url.'" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a>';
+								$img[$xx] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic" src="'.$img_url.'" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a>';
+							}
+							else
+							{
+
+								$at = '<img class="vignette" alt="' . strip_tags($row->title) . '" src="'.$img_url.'"/>';
+								array_push($imgAa, $at);
+
+							}
+
+
+							$xx++;
+						}
+
+						$img_Cycle = '<script id="images_' . $row->product_id . '" type="text/cycle">' . json_encode($imgAa) . '</script>';
+
+					}
+					else
+					{
+
+
+						$img_str = 'assets/products/images/product_blank.jpg';
+
+						$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
+						$img[0] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic" src="'.$img_url.'" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a>';
+						
+					}
+
+					//CHECK IF AGENCY PROPERTY LISTING
+					$b_logo = '';
+					if ($row->IS_ESTATE_AGENT == 'Y')
+					{
+						if (trim($row->BUSINESS_LOGO_IMAGE_NAME) != '')
+						{
+							$img_str = 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME;
+							$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
+							$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
 						}
 						else
 						{
+							$img_str = 'assets/business/photos/bus_blank.jpg';
+							$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
+							$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
+						}
+					}
 
-							$at = '<img class="vignette" alt="' . strip_tags($row->title) . '" src="'.$img_url.'"/>';
-							array_push($imgAa, $at);
+					$btn_txt = 'Buy Now';
+					if ($row->main_cat_id == 3408)
+					{
+						$btn_txt = 'Enquire Now';
+					}
+
+					//Check Price
+					//Fixed price
+					if ($row->listing_type == 'S')
+					{
+
+						$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
+									<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
+
+						if ($row->sub_cat_id == 3410)
+						{
+							$price = 'N$ ' . $this->smooth_price($row->sale_price) . ' pm';
+						}
+						else
+						{
+							$price = 'N$ ' . $this->smooth_price($row->sale_price);
+						}
+						if ($row->por == 'Y')
+						{
+
+							$price = 'POR:Price On Request';
+
+						}
+						//Auction	
+					}
+					elseif ($row->listing_type == 'A')
+					{
+
+						//$price = '<span style=" font-size:18px">N$</span> '.$this->smooth_price($row->sale_price);
+						$price = $this->get_current_bid($row->current_bid);
+
+						if ($price['str'] != 'No Bids')
+						{
+							$price = 'BID: ' . $price['str'];
+
+						}
+						else
+						{
+							$price = $price['str'];
+						}
+
+						$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">Place Bid</a>&nbsp;
+									<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
+
+
+						//SERVICE
+					}
+					elseif ($row->listing_type == 'C')
+					{
+
+						$btn = '';
+						$reserve = '';
+						$count = '';
+
+
+						if ($row->sub_cat_id == 3410)
+						{
+							$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div> pm';
+						}
+						else
+						{
+							$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div>';
+						}
+						if ($row->por == 'Y')
+						{
+
+							$price = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
 
 						}
 
+						$btn_txt = 'Order Now';
 
-						$xx++;
+
+						$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
+									<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
 					}
 
-					$img_Cycle = '<script id="images_' . $row->product_id . '" type="text/cycle">' . json_encode($imgAa) . '</script>';
-
-				}
-				else
-				{
-
-
-					$img_str = 'assets/products/images/product_blank.jpg';
-
-					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
-
-					$img[0] = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/"><img class="pic" src="'.$img_url.'" alt="' . strip_tags($row->title) . '" data-original="'.$img_url.'" style="width:100%"/></a>';
-					
-				}
-
-				//CHECK IF AGENCY PROPERTY LISTING
-				$b_logo = '';
-				if ($row->IS_ESTATE_AGENT == 'Y')
-				{
-					if (trim($row->BUSINESS_LOGO_IMAGE_NAME) != '')
-					{
-						$img_str = 'assets/business/photos/' . $row->BUSINESS_LOGO_IMAGE_NAME;
-						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
-					}
-					else
-					{
-						$img_str = 'assets/business/photos/bus_blank.jpg';
-						$img_bus_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$l_width,$l_height, $crop = '');
-						$b_logo = '<img title="Product is listed by ' . $row->BUSINESS_NAME . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $img_bus_url . '" alt="' . $row->BUSINESS_NAME . '" class="img-thumbnail pull-right" />';
-					}
-				}
-
-				$btn_txt = 'Buy Now';
-				if ($row->main_cat_id == 3408)
-				{
-					$btn_txt = 'Enquire Now';
-				}
-
-				//Check Price
-				//Fixed price
-				if ($row->listing_type == 'S')
-				{
-
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
-								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
-
-					if ($row->sub_cat_id == 3410)
-					{
-						$price = 'N$ ' . $this->smooth_price($row->sale_price) . ' pm';
-					}
-					else
-					{
-						$price = 'N$ ' . $this->smooth_price($row->sale_price);
-					}
-					if ($row->por == 'Y')
+					$private = '';
+					if ($row->bus_id == 0)
 					{
 
-						$price = 'POR:Price On Request';
+						$private = '<span class="private" rel="tooltip" title="This item is listed Privately"><i class="icon-star"></i></span>';
 
 					}
-					//Auction	
-				}
-				elseif ($row->listing_type == 'A')
-				{
 
-					//$price = '<span style=" font-size:18px">N$</span> '.$this->smooth_price($row->sale_price);
-					$price = $this->get_current_bid($row->current_bid);
+					$fb = "postToFeed(" . $row->product_id . ", '" . ucwords(trim($this->clean_url_str($row->title, " ", " "))) . "','" . trim($img_str) . "', '" . ucwords(trim($this->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->shorten_string(strip_tags($this->clean_url_str($row->description, " ", " ")), 50)))) . "', '" . site_url('/') . 'product/' . $row->product_id . '/' . trim($this->clean_url_str($row->title)) . "')";
 
-					if ($price['str'] != 'No Bids')
-					{
-						$price = 'BID: ' . $price['str'];
-
-					}
-					else
-					{
-						$price = $price['str'];
-					}
-
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">Place Bid</a>&nbsp;
-								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
+					$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter');
+					$tweet_url = 'https://twitter.com/share?url=' . site_url('/') . $this->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
 
 
-					//SERVICE
-				}
-				elseif ($row->listing_type == 'C')
-				{
-
-					$btn = '';
-					$reserve = '';
-					$count = '';
-
-
-					if ($row->sub_cat_id == 3410)
-					{
-						$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div> pm';
-					}
-					else
-					{
-						$price = 'N$ <div itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</div>';
-					}
-					if ($row->por == 'Y')
+					//LOCATION
+					$location = '';
+					if ($row->location != '')
 					{
 
-						$price = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
+						$location = '<div itemprop="address">' . $row->location . '</div>';
+
+						if ($row->suburb != 0 && $row->suburb != '')
+						{
+							$location = '<div itemprop="address" >' . $row->location . ' / ' . $row->suburb . '</div>';
+						}
 
 					}
 
-					$btn_txt = 'Order Now';
-
-
-					$type_btn = '<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-dark pull-right">' . $btn_txt . '</a>&nbsp;
-								<a href="' . site_url('/') . 'product/' . $row->product_id . '/' . $this->my_model->clean_url_str($row->title) . '/" class="btn btn-warning pull-right" style="margin-right:5px">View</a>';
-				}
-
-				$private = '';
-				if ($row->bus_id == 0)
-				{
-
-					$private = '<span class="private" rel="tooltip" title="This item is listed Privately"><i class="icon-star"></i></span>';
-
-				}
-
-				$fb = "postToFeed(" . $row->product_id . ", '" . ucwords(trim($this->clean_url_str($row->title, " ", " "))) . "','" . trim($img_str) . "', '" . ucwords(trim($this->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->shorten_string(strip_tags($this->clean_url_str($row->description, " ", " ")), 50)))) . "', '" . site_url('/') . 'product/' . $row->product_id . '/' . trim($this->clean_url_str($row->title)) . "')";
-
-				$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter');
-				$tweet_url = 'https://twitter.com/share?url=' . site_url('/') . $this->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
-
-
-				//LOCATION
-				$location = '';
-				if ($row->location != '')
-				{
-
-					$location = '<div itemprop="address">' . $row->location . '</div>';
-
-					if ($row->suburb != 0 && $row->suburb != '')
+					//get REVIEWS
+					$rating = 0;
+					$total_reviews = 0;
+					if ($row->TOTAL != null)
 					{
-						$location = '<div itemprop="address" >' . $row->location . ' / ' . $row->suburb . '</div>';
+
+						$rating = $row->TOTAL;
+						if (isset($row->TOTAL_REVIEWS))
+						{
+							$total_reviews = $row->TOTAL_REVIEWS;
+						}
+						else
+						{
+							$total_reviews = 0;
+						}
+
 					}
 
-				}
 
-				//get REVIEWS
-				$rating = 0;
-				$total_reviews = 0;
-				if ($row->TOTAL != null)
-				{
-
-					$rating = $row->TOTAL;
-					if (isset($row->TOTAL_REVIEWS))
-					{
-						$total_reviews = $row->TOTAL_REVIEWS;
-					}
-					else
-					{
-						$total_reviews = 0;
-					}
-
-				}
-
-				$a_count = 0;
-				if (isset($advert['count']))
-				{
-					$a_count = $advert['count'];
-				}
-
-				$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
-				echo '<div>
-						<figure class="loader">
-							<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
-							<div class="slideshow-block">
-								<div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides>
-								' .implode($img). '
+					$ribbon = $this->trade_model->get_product_ribbon($row->product_id, $row->extras, $row->featured, $row->listing_type, $row->start_price, $row->sale_price, $row->start_date, $row->end_date, $row->listing_date, $row->status, '_sml');
+					$output .= '<div>
+							<figure class="loader">
+								<div class="product_ribbon_sml"><small style="color:#ff9900; font-size:14px">'.$price.'</small>'.$location.'</div>
+								<div class="slideshow-block">
+									<div class="cycle-slideshow cycle-paused" data-cycle-speed="500" data-cycle-timeout="500" data-cycle-loader=true data-cycle-progressive="#images_' . $row->product_id . '" data-cycle-slides>
+									' .implode($img). '
+									</div>
+									' .$img_Cycle. '
 								</div>
-								' .$img_Cycle. '
-							</div>
 
-							<div>
-							
-								<a href="'.site_url('/').'b/'.$row->ID.'/'.$this->clean_url_str($row->BUSINESS_NAME).'">'. $b_logo . '</a>
+								<div>
+								
+									<a href="'.site_url('/').'b/'.$row->ID.'/'.$this->clean_url_str($row->BUSINESS_NAME).'">'. $b_logo . '</a>
 
-							</div>
-						</figure>			
-			  		</div>
-					  ';
+								</div>
+							</figure>			
+				  		</div>
+						  ';
 
-				$x2++;
+					$x2++;
 
+
+				}
+
+
+				$output .= ' </div>';
+
+			}
+			else
+			{
+
+				$output .= '';
 
 			}
 
-
-			echo ' </div>';
-
-		}
-		else
-		{
-
-			echo '';
-
+			$this->cache->save('get_similar_products_'.$product_id.'_'.$cat1.'_'.$cat2, $output, 600);
 
 		}
 
+		echo $output;
 
 	}
+
+
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//+GET PRODUCT QUESTIONS
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -6917,103 +6959,115 @@ class Trade_model extends CI_Model
 	{
 
 
-		$this->load->model('image_model'); 
-		$this->load->library('thumborp');
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-		$width = 200;
-		$height = 200;
-
-
-		$id = $this->session->userdata('id');
-
-		$query = $this->db->query("SELECT product_questions.*, u_client.CLIENT_NAME, u_client.CLIENT_SURNAME, u_client.CLIENT_PROFILE_PICTURE_NAME
-                                   FROM product_questions
-                                   JOIN u_client ON u_client.Id = product_questions.asking_client_id
-                                   WHERE product_id = '" . $product_id . "' AND status = 'live'", false);
-
-		if ($query->result())
+		if ( ! $output = $this->cache->get('get_product_questions_'.$product_id))
 		{
 
-			foreach ($query->result() as $row)
+			$this->load->model('image_model'); 
+			$this->load->library('thumborp');
+
+			$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+			$width = 200;
+			$height = 200;
+
+			$output = '';
+
+
+			$id = $this->session->userdata('id');
+
+			$query = $this->db->query("SELECT product_questions.*, u_client.CLIENT_NAME, u_client.CLIENT_SURNAME, u_client.CLIENT_PROFILE_PICTURE_NAME
+	                                   FROM product_questions
+	                                   JOIN u_client ON u_client.Id = product_questions.asking_client_id
+	                                   WHERE product_id = '" . $product_id . "' AND status = 'live'", false);
+
+			if ($query->result())
 			{
 
-				$client_id = $row->client_id;
-				$bus_id1 = $row->bus_id;
-				$question = $row->question;
-				$q_date = $row->datetime;
-
-				$img = $row->CLIENT_PROFILE_PICTURE_NAME;
-
-				if (strstr($img, "http"))
+				foreach ($query->result() as $row)
 				{
 
-					$data['image'] = $img . '?width=60&height=60';
+					$client_id = $row->client_id;
+					$bus_id1 = $row->bus_id;
+					$question = $row->question;
+					$q_date = $row->datetime;
 
-				}
-				elseif ($img != '')
-				{
+					$img = $row->CLIENT_PROFILE_PICTURE_NAME;
 
-					$img_str = 'assets/users/photos/' . $img;
-					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+					if (strstr($img, "http"))
+					{
 
-				}
-				else
-				{
+						$data['image'] = $img . '?width=60&height=60';
 
-					$img_url = base_url('/') . 'images/user_blank.jpg';
+					}
+					elseif ($img != '')
+					{
 
-				}
+						$img_str = 'assets/users/photos/' . $img;
+						$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
 
-				$data['user'] = $row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME;
-				$reply = $row->answer;
+					}
+					else
+					{
 
-				if ($row->answer == '')
-				{
+						$img_url = base_url('/') . 'images/user_blank.jpg';
 
-					$answer = '
-					<div id="answer_' . $row->question_id . '">
-						<a class="btn btn-dark pull-right btn-xs" id="answer_btn_' . $row->question_id . '" onclick="reply_question(' . $row->question_id . ')" >Answer Question</a>
-					</div>	
-					';
+					}
 
-				}
-				else
-				{
-					$answer = '
-				      <div class="row" style="margin-left:20px" id="answer_' . $row->question_id . '">
-				        <div col-md-12">
+					$data['user'] = $row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME;
+					$reply = $row->answer;
+
+					if ($row->answer == '')
+					{
+
+						$answer = '
+						<div id="answer_' . $row->question_id . '">
+							<a class="btn btn-dark pull-right btn-xs" id="answer_btn_' . $row->question_id . '" onclick="reply_question(' . $row->question_id . ')" >Answer Question</a>
+						</div>	
+						';
+
+					}
+					else
+					{
+						$answer = '
+					      <div class="row" style="margin-left:20px" id="answer_' . $row->question_id . '">
+					        <div col-md-12">
+					          <blockquote>
+					            <p><strong>A: </strong>' . strip_tags($row->answer) . '</p>
+					          </blockquote>
+					        </div>
+					      </div>
+						';
+					}
+
+
+					$output .= '
+				    <div class="review-item">
+				      <div class="row">
+				        <div class="col-xs-3 col-sm-2 col-md-2">
+				          <figure><a href="#"><img class="" src="' . $img_url . '"></a></figure>
+				        </div>
+				        <div class="col-sm-10 col-md-10">
 				          <blockquote>
-				            <p><strong>A: </strong>' . strip_tags($row->answer) . '</p>
+				            <p><strong>Q: </strong>' . strip_tags($question) . '</p>
+				            <footer data-icon="fa fa-question-circle text-dark">Question by: '.$data['user'].' <span>' . date('F j, Y', strtotime($q_date)) . '</span></footer>
 				          </blockquote>
 				        </div>
 				      </div>
+				      ' . $answer . '
+				    </div>
 					';
 				}
-
-
-				echo '
-			    <div class="review-item">
-			      <div class="row">
-			        <div class="col-xs-3 col-sm-2 col-md-2">
-			          <figure><a href="#"><img class="" src="' . $img_url . '"></a></figure>
-			        </div>
-			        <div class="col-sm-10 col-md-10">
-			          <blockquote>
-			            <p><strong>Q: </strong>' . strip_tags($question) . '</p>
-			            <footer data-icon="fa fa-question-circle text-dark">Question by: '.$data['user'].' <span>' . date('F j, Y', strtotime($q_date)) . '</span></footer>
-			          </blockquote>
-			        </div>
-			      </div>
-			      ' . $answer . '
-			    </div>
-				';
 			}
+			else
+			{
+				$output .= '<div class="alert alert-warning"><h4><strong>No Questions asked</strong></h4> No queries have been made. Ask a question above.</div>';
+			}
+
+			$this->cache->save('get_product_questions_'.$product_id, $output, 600);
 		}
-		else
-		{
-			echo '<div class="alert alert-warning"><h4><strong>No Questions asked</strong></h4> No queries have been made. Ask a question above.</div>';
-		}
+		
+		echo $output;	
 	}
 
 
@@ -7115,103 +7169,116 @@ class Trade_model extends CI_Model
 	function show_reviews($product_id)
 	{
 
-		echo '<h2 class="tab-head">Reviews</h2>';
 
-		$this->load->model('image_model'); 
-		$this->load->library('thumborp');
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-		$width = 200;
-		$height = 200;
-
-
-		$query = $this->db->query("SELECT u_business_vote.*, products.product_id, products.title, u_client.CLIENT_NAME, u_client.CLIENT_SURNAME, u_client.CLIENT_PROFILE_PICTURE_NAME
-                                   FROM u_business_vote
-								   JOIN products ON products.product_id = u_business_vote.PRODUCT_ID
-								   JOIN u_client ON u_client.ID = u_business_vote.CLIENT_ID
-								   WHERE u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND
-								   u_business_vote.REVIEW_TYPE = 'product_review' AND u_business_vote.PRODUCT_ID = '" . $product_id . "'", false);
-
-		if ($query->num_rows() > 0)
+		if ( ! $output = $this->cache->get('show_product_reviews_'.$product_id))
 		{
-			echo '<h4 class="na_script">Product Reviews</h4>';
 
-			$x = 0;
-			foreach ($query->result() as $row)
+
+			$output = '<h2 class="tab-head">Reviews</h2>';
+
+			$this->load->model('image_model'); 
+			$this->load->library('thumborp');
+
+			$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+			$width = 200;
+			$height = 200;
+
+
+			$query = $this->db->query("SELECT u_business_vote.*, products.product_id, products.title, u_client.CLIENT_NAME, u_client.CLIENT_SURNAME, u_client.CLIENT_PROFILE_PICTURE_NAME
+	                                   FROM u_business_vote
+									   JOIN products ON products.product_id = u_business_vote.PRODUCT_ID
+									   JOIN u_client ON u_client.ID = u_business_vote.CLIENT_ID
+									   WHERE u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND
+									   u_business_vote.REVIEW_TYPE = 'product_review' AND u_business_vote.PRODUCT_ID = '" . $product_id . "'", false);
+
+			if ($query->num_rows() > 0)
 			{
+				$output .= '<h4 class="na_script">Product Reviews</h4>';
 
-				$id = $row->ID;
-				$client_id = $row->CLIENT_ID;
-				$product_id1 = $row->PRODUCT_ID;
-				$review = $row->REVIEW;
-				$review_date = $row->TIME_VOTED;
-				$rating = $row->RATING;
-				$img = $row->CLIENT_PROFILE_PICTURE_NAME;
-
-
-				if (strstr($img, "http"))
+				$x = 0;
+				foreach ($query->result() as $row)
 				{
 
-					$data['image'] = $img . '?width=60&height=60';
+					$id = $row->ID;
+					$client_id = $row->CLIENT_ID;
+					$product_id1 = $row->PRODUCT_ID;
+					$review = $row->REVIEW;
+					$review_date = $row->TIME_VOTED;
+					$rating = $row->RATING;
+					$img = $row->CLIENT_PROFILE_PICTURE_NAME;
+
+
+					if (strstr($img, "http"))
+					{
+
+						$data['image'] = $img . '?width=60&height=60';
+
+					}
+					elseif ($img != '')
+					{
+
+						$img_str = 'assets/users/photos/' . $img;
+
+						$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
+
+					}
+					else
+					{
+
+						$img_url = base_url('/') . 'images/user_blank.jpg';
+
+					}
+
+					$data['user'] = $row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME;
+
+
+					$output .= '
+					<div class="row review-item" itemscope itemtype="http://data-vocabulary.org/Review">
+		              <div class="col-xs-3 col-sm-2 col-md-1">
+		                <figure><a href="#"><img src="'.$img.'" class=""></a></figure>
+		              </div>
+		              <div class="col-sm-10 col-md-11">
+		                <blockquote>
+		                  <div class="rating">' . implode($this->get_review_stars($rating, $client_id)) . '</div>
+		                  <p itemprop="description">' . $review . '</p>
+		                  <footer itemprop="reviewer">' . $data['user'] . ' <span>' . date('F j, Y', strtotime($review_date)) . '</span></footer>
+		                </blockquote>
+		                <time itemprop="dtreviewed" style="display:none;" datetime="' . date('m-d-Y', strtotime($review_date)) . '">'. date('F j, Y', strtotime($review_date)) . '</time>
+		                <span itemprop="summary" style="display:none;">' . strip_tags($this->shorten_string($review, 8)) . '</span>
+		                <span itemprop="rating" style="visibility:hidden">' . ($rating / 2) . '</span>
+		              </div>
+		            </div>
+					';
 
 				}
-				elseif ($img != '')
-				{
 
-					$img_str = 'assets/users/photos/' . $img;
-
-					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
-
-
-				}
-				else
-				{
-
-					$img_url = base_url('/') . 'images/user_blank.jpg';
-
-				}
-
-				$data['user'] = $row->CLIENT_NAME . ' ' . $row->CLIENT_SURNAME;
-
-
-				echo '
-				<div class="row review-item" itemscope itemtype="http://data-vocabulary.org/Review">
-	              <div class="col-xs-3 col-sm-2 col-md-1">
-	                <figure><a href="#"><img src="'.$img.'" class=""></a></figure>
-	              </div>
-	              <div class="col-sm-10 col-md-11">
-	                <blockquote>
-	                  <div class="rating">' . implode($this->get_review_stars($rating, $client_id)) . '</div>
-	                  <p itemprop="description">' . $review . '</p>
-	                  <footer itemprop="reviewer">' . $data['user'] . ' <span>' . date('F j, Y', strtotime($review_date)) . '</span></footer>
-	                </blockquote>
-	                <time itemprop="dtreviewed" style="display:none;" datetime="' . date('m-d-Y', strtotime($review_date)) . '">'. date('F j, Y', strtotime($review_date)) . '</time>
-	                <span itemprop="summary" style="display:none;">' . strip_tags($this->shorten_string($review, 8)) . '</span>
-	                <span itemprop="rating" style="visibility:hidden">' . ($rating / 2) . '</span>
-	              </div>
-	            </div>
+				$output .= '
+				<script type="text/javascript">
+					/*$(function(){
+						$("input .star").rating();
+					});*/
+				</script>
 				';
 
 			}
+			else
+			{
 
-			echo '
-			<script type="text/javascript">
-				/*$(function(){
-					$("input .star").rating();
-				});*/
-			</script>
-			';
+				$output .= '<div class="alert alert-warning">
+						<h4><strong>No Reviews Added</strong></h4>
+						No Reviews have been added for the current product.
+					  </div>
+					  ';
+			}
+
+			$this->cache->save('show_product_reviews_'.$product_id, $output, 600);
 
 		}
-		else
-		{
-
-			echo '<div class="alert alert-warning">
-					<h4><strong>No Reviews Added</strong></h4>
-					No Reviews have been added for the current product.
-				  </div>
-				  ';
-		}
+		
+		echo $output;	
 
 	}
 
@@ -7435,29 +7502,40 @@ class Trade_model extends CI_Model
 	//++++++++++++++++++++++++++
 	public function get_category_name($id)
 	{
-		$this->db->select('category_name');
-		$this->db->where('cat_id', $id);
-		$query = $this->db->get('product_categories');
 
-		if ($query->result())
-		{
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-			$row = $query->row_array();
-			$name = $row['category_name'];
+		if ( ! $output = $this->cache->get('get_product_category_name_'.$id))
+		{		
 
-			return $name;
+			$this->db->select('category_name');
+			$this->db->where('cat_id', $id);
+			$query = $this->db->get('product_categories');
+
+			if ($query->result())
+			{
+
+				$row = $query->row_array();
+				$name = $row['category_name'];
+
+				$output = $name;
+
+			}
+			else
+			{
+
+				$data = 'No Name';
+
+				$output = $data;
+
+
+			}
+
+			$this->cache->save('get_product_category_name_'.$id, 1440);
 
 		}
-		else
-		{
 
-			$data = 'No Name';
-
-			return $data;
-
-
-		}
-
+		return $output;
 
 	}
 
@@ -7599,7 +7677,7 @@ class Trade_model extends CI_Model
 					$active = 'active';
 				}
 				//images
-				$images = $this->show_images_mosaic($row->images, $size = '');
+				//$images = $this->show_images_mosaic($row->images, $size = '');
 
 				$fb = "postToFeed(" . $row->product_id . ", '" . ucwords(trim($this->clean_url_str($row->title, " ", " "))) . "','" . trim($images['file']) . "', '" . ucwords(trim($this->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . ucwords(trim($this->shorten_string(strip_tags($this->clean_url_str($row->description, " ", " ")), 50))) . "', '" . site_url('/') . 'product/' . $row->product_id . '/' . trim($this->clean_url_str($row->title)) . "')";
 				//$fb = "window.open('https://www.facebook.com/sharer/sharer.php?app_id=287335411399195&u=". rawurlencode(site_url('/').'product/'.$row->product_id.'/'.$this->clean_url_str($row->title)) ."', '_blank', 'width=800,height=600,scrollbars=yes,status=yes,resizable=yes,screenx=20%,screeny=20%')";
@@ -8065,98 +8143,109 @@ class Trade_model extends CI_Model
 	{
 
 
-
 		if ($bus_id != 0)
 		{
 
-			//$this->db->where('ID', $bus_id);
-			$bus = $this->db->query("SELECT  u_business.*, a_map_location.MAP_LOCATION as city, a_map_region.REGION_NAME as region FROM u_business
-									LEFT JOIN a_map_location ON u_business.BUSINESS_MAP_CITY_ID = a_map_location.ID
-									LEFT JOIN a_map_region ON a_map_location.MAP_REGION_ID = a_map_region.ID
-									WHERE u_business.ID = '" . $bus_id . "'
-									");
+			$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-			if ($bus->result())
-			{
+			if ( ! $output = $this->cache->get('show_company_'.$client_id.'_'.$sub_cat_id))
+			{	
 
-				$row = $bus->row();
-				$img = $row->BUSINESS_LOGO_IMAGE_NAME;
-				//Build image string
-				$format = substr($img, (strlen($img) - 4), 4);
-				$str = substr($img, 0, (strlen($img) - 4));
+				$output = '';		
 
-				if ($img != '')
+				//$this->db->where('ID', $bus_id);
+				$bus = $this->db->query("SELECT  u_business.*, a_map_location.MAP_LOCATION as city, a_map_region.REGION_NAME as region FROM u_business
+										LEFT JOIN a_map_location ON u_business.BUSINESS_MAP_CITY_ID = a_map_location.ID
+										LEFT JOIN a_map_region ON a_map_location.MAP_REGION_ID = a_map_region.ID
+										WHERE u_business.ID = '" . $bus_id . "'
+										");
+
+				if ($bus->result())
 				{
 
-					if (strpos($img, '.') == 0)
+					$row = $bus->row();
+					$img = $row->BUSINESS_LOGO_IMAGE_NAME;
+					//Build image string
+					$format = substr($img, (strlen($img) - 4), 4);
+					$str = substr($img, 0, (strlen($img) - 4));
+
+					if ($img != '')
 					{
 
-						$format = '.jpg';
-						$img_str = base_url('/') . 'img/timbthumb.php?w=200&h=200&src=' . base_url('/') . 'assets/business/photos/' . $img . $format;
+						if (strpos($img, '.') == 0)
+						{
+
+							$format = '.jpg';
+							$img_str = base_url('/') . 'img/timbthumb.php?w=200&h=200&src=' . base_url('/') . 'assets/business/photos/' . $img . $format;
+
+						}
+						else
+						{
+
+							$img_str = base_url('/') . 'img/timbthumb.php?w=200&h=200&src=' . base_url('/') . 'assets/business/photos/' . $img;
+
+						}
 
 					}
 					else
 					{
 
-						$img_str = base_url('/') . 'img/timbthumb.php?w=200&h=200&src=' . base_url('/') . 'assets/business/photos/' . $img;
+						$img_str = base_url('/') . 'img/timbthumb.php?w=200&h=200&src=' . base_url('/') . 'img/bus_blank.png';
 
 					}
+					//COVER IMAGE
+					$cover_img = $row->BUSINESS_COVER_PHOTO;
 
-				}
-				else
-				{
-
-					$img_str = base_url('/') . 'img/timbthumb.php?w=200&h=200&src=' . base_url('/') . 'img/bus_blank.png';
-
-				}
-				//COVER IMAGE
-				$cover_img = $row->BUSINESS_COVER_PHOTO;
-
-				if ($cover_img != '')
-				{
-
-					if (strpos($cover_img, '.') == 0)
+					if ($cover_img != '')
 					{
 
-						$format2 = '.jpg';
-						$cover_str = base_url('/') . 'assets/business/photos/' . $cover_img . $format2;
+						if (strpos($cover_img, '.') == 0)
+						{
+
+							$format2 = '.jpg';
+							$cover_str = base_url('/') . 'assets/business/photos/' . $cover_img . $format2;
+
+						}
+						else
+						{
+
+							$cover_str = base_url('/') . 'assets/business/photos/' . $cover_img;
+
+						}
 
 					}
 					else
 					{
 
-						$cover_str = base_url('/') . 'assets/business/photos/' . $cover_img;
+						$cover_str = base_url('/') . 'img/business_cover_blank.jpg';
 
 					}
+					$link = site_url('/') . 'b/' . $bus_id . '/' . $this->encode_url($row->BUSINESS_NAME) . '/';
+					$agent = '<a href="' . $link . '" class="btn btn-dark pull-right"><i class="icon-share icon-white"></i> View Details</a>';
+					if ($row->IS_ESTATE_AGENT == 'Y' && $client_id != 0)
+					{
+
+						$agent = $this->show_estate_agent($client_id, $bus_id, $row->BUSINESS_NAME, false, $row->BUSINESS_PHYSICAL_ADDRESS);
+
+					}
+
+					$output = $agent; 
+
 
 				}
 				else
 				{
 
-					$cover_str = base_url('/') . 'img/business_cover_blank.jpg';
-
-				}
-				$link = site_url('/') . 'b/' . $bus_id . '/' . $this->encode_url($row->BUSINESS_NAME) . '/';
-				$agent = '<a href="' . $link . '" class="btn btn-dark pull-right"><i class="icon-share icon-white"></i> View Details</a>';
-				if ($row->IS_ESTATE_AGENT == 'Y' && $client_id != 0)
-				{
-
-					$agent = $this->show_estate_agent($client_id, $bus_id, $row->BUSINESS_NAME, false, $row->BUSINESS_PHYSICAL_ADDRESS);
 
 				}
 
-				echo $agent; 
-
-
-			}
-			else
-			{
-
-
 			}
 
+			$this->cache->save('show_company_'.$client_id.'_'.$sub_cat_id, $output, 600);	
 
 		}
+
+		echo $output;
 
 	}
 
@@ -8345,34 +8434,44 @@ class Trade_model extends CI_Model
 	public function get_extras($product_id)
 	{
 
-		$this->db->where('product_id', $product_id);
-		$query = $this->db->get('product_extras');
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-		if ($query->result())
-		{
+		if ( ! $output = $this->cache->get('get_product_extras_'.$product_id))
+		{		
 
-			$row = $query->row_array();
-			$data['extras'] = json_decode($row['extras'], true);
-			$data['property_agent'] = $row['property_agent'];
-			$data['featured'] = $row['featured'];
-			$data['adjustment'] = $row['adjustment'];
-			$data['seller_contact'] = $row['seller_contact'];
+			$this->db->where('product_id', $product_id);
+			$query = $this->db->get('product_extras');
 
-			return $data;
+			if ($query->result())
+			{
+
+				$row = $query->row_array();
+				$data['extras'] = json_decode($row['extras'], true);
+				$data['property_agent'] = $row['property_agent'];
+				$data['featured'] = $row['featured'];
+				$data['adjustment'] = $row['adjustment'];
+				$data['seller_contact'] = $row['seller_contact'];
+
+				$output = $data;
+
+			}
+			else
+			{
+				$data['property_agent'] = 0;
+				$data['featured'] = 'N';
+				$data['extras'] = '';
+				$data['adjustment'] = 'N';
+				$data['seller_contact'] = '';
+
+				$output = $data;
+
+			}
+
+			$this->cache->save('get_product_extras_'.$product_id, $output, 600);
 
 		}
-		else
-		{
-			$data['property_agent'] = 0;
-			$data['featured'] = 'N';
-			$data['extras'] = '';
-			$data['adjustment'] = 'N';
-			$data['seller_contact'] = '';
 
-			return $data;
-
-
-		}
+		return $output;
 
 	}
 
