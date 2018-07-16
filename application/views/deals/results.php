@@ -16,7 +16,7 @@ if(isset($title)){
  $header['metaD'] = '';
  $header['section'] = '';
  
-}
+} 
  
 $this->load->view('inc/header', $header);
 
