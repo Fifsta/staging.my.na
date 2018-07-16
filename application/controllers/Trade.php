@@ -192,8 +192,16 @@ class Trade extends CI_Controller {
 			unset($extras['auction']);
 		}
 
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-		$q = $this->trade_search_model->get_query($main_cat, $sub_cat, $sub_sub_cat, $sub_sub_sub_cat, $location, $suburb, $price_from, $price_to ,$main_cat_id  ,$sub_cat_id , $sub_sub_cat_id , $sub_sub_sub_cat_id, $key, $extras, $sort,  $bus_id, $limit, $offset);
+		//if ( ! $q = $this->cache->get('product_results_'.$main_cat.'_'.$sub_cat.'_'.$sub_sub_cat.'_'.$sub_sub_sub_cat))
+		//{
+
+			$q = $this->trade_search_model->get_query($main_cat, $sub_cat, $sub_sub_cat, $sub_sub_sub_cat, $location, $suburb, $price_from, $price_to ,$main_cat_id  ,$sub_cat_id , $sub_sub_cat_id , $sub_sub_sub_cat_id, $key, $extras, $sort,  $bus_id, $limit, $offset);
+
+			//$this->cache->save('product_results_'.$main_cat.'_'.$sub_cat.'_'.$sub_sub_cat.'_'.$sub_sub_sub_cat, $q, 600);
+
+		//}
 
 		//echo $q['debug'];
 		//PAGINATION
