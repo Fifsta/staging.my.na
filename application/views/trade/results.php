@@ -16,7 +16,7 @@ if(isset($title)){
  $header['metaD'] = '';
  $header['section'] = '';
  
-}
+} 
  
 $this->load->view('inc/header', $header);
 
@@ -183,6 +183,34 @@ $this->load->view('inc/header', $header);
     
   }*/
 
+</script>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "name" : "My Namibia Product Listings",
+  "description" : "The biggest online portal for Namibians to find what Products they are lookin for.",
+  "brand" : { 
+      "@type": "brand",
+    "image" : "https://my.na/images/logo-main.png"
+  },
+  "sameAs": [
+    "https://www.facebook.com/mynamibia/",
+    "https://twitter.com/MyNamibia"
+  ],  
+  "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "11B Genl. Murtala Muhammed Ave Windhoek, Namibia"
+  },  
+  "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType" : "customer service",
+      "email" : "info@my.na",
+      "url" : "https://www.my.na/",
+      "telephone" : "+264 61 309 591"
+  }
+}
 
 </script>
 

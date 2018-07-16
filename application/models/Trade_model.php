@@ -1007,7 +1007,7 @@ class Trade_model extends CI_Model
  
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-		if ( ! $output = $this->cache->get('get_products_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$count.'_'.$offset.'_'.$limit))
+		if ( ! $output = $this->cache->get('get_products_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$count.'_'.$offset))
 		{
 
 			$output = '';
@@ -1401,7 +1401,7 @@ class Trade_model extends CI_Model
 
 			}
 
-			$this->cache->save('get_products_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$count.'_'.$offset.'_'.$limit, $output, 600);
+			$this->cache->save('get_products_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$count.'_'.$offset, $output, 600);
 
 		}
 
