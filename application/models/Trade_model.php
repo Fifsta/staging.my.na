@@ -1395,9 +1395,6 @@ class Trade_model extends CI_Model
 				 <br>
 				 ';
 
-			$query = "SELECT * FROM products JOIN product_extras ON products.product_id = product_extras.product_id WHERE main_cat_id = '" . $main_cat_id . "' ORDER BY listing_date DESC LIMIT 9";
-			$this->get_products($query = '', $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $amt = '');
-
 		}
 
 
