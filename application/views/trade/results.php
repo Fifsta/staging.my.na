@@ -72,7 +72,7 @@ $this->load->view('inc/header', $header);
               /*Search Results
               Loop through the search results in the query array
               */  
-              $this->trade_model->get_products($main_cat_id, $sub_cat_id, $sub_sub_cat_id, $sub_sub_sub_cat_id, $count, $offset, $title, $amt = '', $advert = TRUE, $pages);
+              $this->trade_model->get_products($query, $main_cat_id, $sub_cat_id, $sub_sub_cat_id, $sub_sub_sub_cat_id, $count, $offset, $title, $amt = '', $advert = TRUE, $pages);
               //LOAD PAGINATION
               ?> 
 
