@@ -165,6 +165,8 @@
   },
   "contactPoint": {
 	    "@type": "ContactPoint",
+	    "contactType" : "customer service",
+	    "email" : "support.myna@nmh.com.na",
 	    "url" : "https://www.my.na"
   }
 }
