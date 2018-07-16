@@ -394,6 +394,7 @@ class Api extends CI_Controller {
 				$vcard2 = $link;
 
 			} else {
+
 				//BUILD DATA
 				$web = '';$tel = '';
 				if($subscr_row->CLIENT_TELEPHONE != ''){
@@ -406,8 +407,8 @@ class Api extends CI_Controller {
 					$tel = 'TEL;WORK;VOICE:' . trim($subscr_row->CLIENT_CELLPHONE) . "\n";
 
 				}
+				
 				// here our data
-
 				$vcard1 = 'BEGIN:VCARD'."\n";
 				$vcard1 .= 'N:' . ucwords(trim($subscr_row->CLIENT_NAME.' ' .$subscr_row->CLIENT_SURNAME)) . "\n";
 				$vcard1 .= 'EMAIL:' . trim($subscr_row->CLIENT_EMAIL) . "\n";

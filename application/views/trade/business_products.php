@@ -186,7 +186,7 @@ if($cover_img != ''){
 				<div class="details">
 					<div class="details-left">
 						<figure>
-							<a href="#"><img src="<?php echo $img_url; ?>"></a>
+							<a href="<?php echo site_url('/') . 'b/' . $bus_id . '/' . $this->trade_model->encode_url($name) . '/'; ?>"><img src="<?php echo $img_url; ?>"></a>
 							
 						</figure>
 
@@ -225,7 +225,7 @@ if($cover_img != ''){
 	    	<?php if(!$business){ ?>
 	        <!--tabs-->
 	        <ul class="nav nav-tabs" role="tablist">
-	          <li class="nav-item" role="presentation"><a href="#Contact-Agent" class="nav-link active" aria-controls="Contact-Agent" role="tab" data-toggle="tab" data-icon="fa fa-envelope-o text-dark">Contact Agent</a></li>
+	          <li class="nav-item" role="presentation"><a href="#Contact-Agent" class="nav-link active" aria-controls="Contact-Agent" role="tab" data-toggle="tab" data-icon="fa fa-envelope-o text-light">Contact Agent</a></li>
 	        </ul>
 	        <div class="tab-content">
 	          <section role="tabpanel" class="tab-pane active" id="Contact-Agent">

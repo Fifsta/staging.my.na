@@ -1500,22 +1500,22 @@ class Trade_model extends CI_Model
 
 					if ($row->status == 'sold')
 					{
-						$price['str'] = '<span itemprop="price" class="hide">' . $this->smooth_price($row->sale_price) . '</span> Sold';
+						$price['str'] = '<span class="hide">' . $this->smooth_price($row->sale_price) . '</span> Sold';
 					}
 					else
 					{
 						if ($row->sub_cat_id == 3410)
 						{
-							$price['str'] = '<span style=" font-size:12px">N$</span><span itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</span> pm';
+							$price['str'] = '<span style=" font-size:12px">N$</span><span> ' . $this->smooth_price($row->sale_price) . '</span> pm';
 						}
 						else
 						{
-							$price['str'] = '<span style=" font-size:12px">N$</span><span itemprop="price"> ' . $this->smooth_price($row->sale_price) . '</span>';
+							$price['str'] = '<span style=" font-size:12px">N$</span><span> ' . $this->smooth_price($row->sale_price) . '</span>';
 						}
 						if ($row->por == 'Y')
 						{
 
-							$price['str'] = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
+							$price['str'] = '<span> POR</span> <span style=" font-size:12px">Price On Request</span>';
 
 						}
 
@@ -1686,7 +1686,7 @@ class Trade_model extends CI_Model
 					//SEE IF OWN PRODUCT
 					if ($row->client_id == $this->session->userdata('id'))
 					{
-						$price['str'] = '<span itemprop="price">N$' . $this->smooth_price($row->sale_price) . '</span>';
+						$price['str'] = '<span>N$' . $this->smooth_price($row->sale_price) . '</span>';
 						$btn_txt = 'Your Own Service';
 					}
 					else
@@ -1694,16 +1694,16 @@ class Trade_model extends CI_Model
 
 						if ($row->sub_cat_id == 3410)
 						{
-							$price['str'] = '<span itemprop="price">N$ ' . $this->smooth_price($row->sale_price) . '</span> pm';
+							$price['str'] = '<span>N$ ' . $this->smooth_price($row->sale_price) . '</span> pm';
 						}
 						else
 						{
-							$price['str'] = '<span itemprop="price">N$' . $this->smooth_price($row->sale_price) . '</span>';
+							$price['str'] = '<span>N$' . $this->smooth_price($row->sale_price) . '</span>';
 						}
 						if ($row->por == 'Y')
 						{
 
-							$price['str'] = '<span itemprop="price"> POR</span> <span style=" font-size:12px">Price On Request</span>';
+							$price['str'] = '<span> POR</span> <span style=" font-size:12px">Price On Request</span>';
 
 						}
 
@@ -1723,7 +1723,7 @@ class Trade_model extends CI_Model
 									</div>';
 
 				}
-				$agent_ref = '<span class="badge badge-secondary" rel="tooltip"  title="Product Reference"  itemprop="sku">MYNA' . $row->product_id . '</span>';
+				$agent_ref = '<span class="badge badge-secondary" rel="tooltip"  title="Product Reference">MYNA' . $row->product_id . '</span>';
 				//PROPERTY REFERENCE
 				if (count(json_decode($row->extras)) > 0)
 				{
@@ -1734,7 +1734,7 @@ class Trade_model extends CI_Model
 						if ($exr == 'agency' && $exv != '')
 						{
 
-							$agent_ref = '<span  class="badge badge-secondary" rel="tooltip"  title="Product Reference">Ref: <strong itemprop="sku">' . $exv . '</strong></span>';
+							$agent_ref = '<span  class="badge badge-secondary" rel="tooltip"  title="Product Reference">Ref: <strong>' . $exv . '</strong></span>';
 						}
 
 					}
@@ -1786,12 +1786,12 @@ class Trade_model extends CI_Model
 		          <div class="details-right">
 		          	'.$ribbon.'			
 					<h2>' . $row->title . '</h2>
-		            <p class="cost"><span itemprop="offers" itemscope itemtype="http://schema.org/Offer">' . $price['str'] . '</span></p>
+		            <p class="cost"><span>' . $price['str'] . '</span></p>
 					' . $agent_ref . '
 
 					' . $location . '	            
-		            <p class="desc"><span itemprop="description">' . $row->description . '</span></p>
-		            <div class="feat" itemprop="description">
+		            <p class="desc"><span>' . $row->description . '</span></p>
+		            <div class="feat">
 		              ' . $this->show_extras($row->extras) . '
 		            </div>
 		            <!--watchlist/print-->

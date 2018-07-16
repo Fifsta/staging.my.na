@@ -66,8 +66,6 @@ $this->load->view('inc/header', $header);
 
             <div id="deal_content">
 
-
-
               <?php 
               /*Search Results
               Loop through the search results in the query array
