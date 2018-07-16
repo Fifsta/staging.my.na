@@ -492,6 +492,8 @@ class Trade extends CI_Controller {
 		if($agent_id == '0'){
 
 			$this->load->model('business_model');
+
+
 			//Temp redirect for NMH print edition
 			if($bus_id == 12694){
 				$name = $this->business_model->clean_url_str($this->business_model->get_business_name($bus_id));
@@ -500,7 +502,7 @@ class Trade extends CI_Controller {
 			}
 
 
-            $data['query'] =  $this->db->query("SELECT   products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
+            $data['query'] =  $this->db->query("SELECT products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
                                         u_business.IS_ESTATE_AGENT, u_business.BUSINESS_NAME, u_business.BUSINESS_LOGO_IMAGE_NAME,
                                         group_concat(product_images.img_file ORDER BY product_images.sequence ASC) as images,
                                         MAX(product_auction_bids.amount) as current_bid,
@@ -533,9 +535,12 @@ class Trade extends CI_Controller {
 			$data['cats'] = $this->business_model->get_current_categories($bus_id);
 			//get RATING
 			$data['rating'] = $this->business_model->get_rating($bus_id);
+
+
 			$this->load->view('trade/business_products', $data);
 
 		}else{
+
 			$this->load->model('business_model');
 
             $data['query'] =  $this->db->query("SELECT   products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
@@ -640,7 +645,7 @@ class Trade extends CI_Controller {
 													LEFT JOIN product_auction_bids ON products.product_id = product_auction_bids.product_id AND product_auction_bids.type = 'bid'
 			                                        LEFT JOIN u_business_vote ON u_business_vote.PRODUCT_ID = products.product_id
 			                                              AND u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND u_business_vote.REVIEW_TYPE = 'product_review'	
-			                                              												
+
 													WHERE products.product_id = ".$id."
 													GROUP BY products.product_id
 													ORDER BY product_auction_bids.datetime DESC

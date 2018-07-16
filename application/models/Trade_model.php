@@ -1383,7 +1383,6 @@ class Trade_model extends CI_Model
 						});
 
 						//PAGINATION
-						window.setTimeout(initiate_slides, 200);
 						//window.setTimeout(initiate_pagination, 400);
 					});
 

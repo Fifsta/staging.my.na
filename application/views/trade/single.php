@@ -72,7 +72,6 @@
       $img_str = 'assets/business/photos/'.$img;
       $img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,'300','300', $crop = '');
       
-      
     }
     
   }else{
@@ -575,7 +574,7 @@ if($end > $now){ ?>
     "ratingValue": "<?php echo $rating; ?>",
     "reviewCount": "<?php echo $total_reviews; ?>"
   },
-  "description": "<?php echo $description; ?>",
+  "description": "<?php echo strip_tags($description); ?>",
   "name": "<?php echo $name; ?>",
   "image": "<?php echo $img_url; ?>",
   "offers": {
