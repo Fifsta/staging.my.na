@@ -163,11 +163,22 @@
   		"@type": "brand",
 		"image" : "https://my.na/images/logo-main.png"
   },
+  "sameAs": [
+    "https://www.facebook.com/mynamibia/",
+    "http://instagram.com/yourProfile",
+    "http://www.linkedin.com/in/yourprofile",
+    "http://plus.google.com/your_profile"
+  ],  
+  "address": {
+	    "@type": "PostalAddress",
+	    "streetAddress": "11B Genl. Murtala Muhammed Ave Windhoek, Namibia"
+  },  
   "contactPoint": {
 	    "@type": "ContactPoint",
 	    "contactType" : "customer service",
-	    "email" : "support.myna@nmh.com.na",
-	    "url" : "https://www.my.na"
+	    "email" : "info@my.na",
+	    "url" : "https://www.my.na",
+	    "telephone" : "+264 61 309 591"
   }
 }
 
