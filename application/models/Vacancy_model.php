@@ -5320,7 +5320,7 @@ class Vacancy_model extends CI_Model{
     //++++++++++++++++++++++++++
 	public function render_jobs_slider($query, $size = '12')
 	{
-		 $o = '<div id="owl-bus">';
+		 $o = '<div class="owl-carousel bus-carousel" id="bus-carousel" style="margin-top:20px">';
 
 		 if($query->result()){
 
