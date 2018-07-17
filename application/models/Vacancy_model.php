@@ -5423,7 +5423,7 @@ class Vacancy_model extends CI_Model{
                     <figure class="loader">
                         <div class="ribbon-wrapper">
                             <div class="product_ribbon_ft"><small style="color:#ff9900; font-size:14px">'.$row->title.'</small>'.$row->location.'</div>
-                            <div class="product_ribbon_ft_orng"><small>'.$row->BUSINESS_NAM.'</small></div>
+                            <div class="product_ribbon_ft_orng"><small>'.$row->BUSINESS_NAME.'</small></div>
                         </div>
 
                         <div class="slideshow-block">
@@ -5442,7 +5442,7 @@ class Vacancy_model extends CI_Model{
 
 
 
-				$o .= '<div class="row-fluid  bottom-black" style="height:200px;background-image:url('.$t.');background-size:cover; z-index:88; position:relative;">
+				/*$o .= '<div class="row-fluid  bottom-black" style="height:200px;background-image:url('.$t.');background-size:cover; z-index:88; position:relative;">
 							<div class="row-fluid " style="; padding:5px 0">
 								
 								<div class="span3 vlogo" style="padding-left:25px;">
@@ -5454,7 +5454,7 @@ class Vacancy_model extends CI_Model{
 									<p class="white">'.$grade.'</p>
 								</div>
 							</div>
-						</div>';
+						</div>';*/
 
 		  }
 		  return $o;
