@@ -44,8 +44,8 @@ $this->load->view('inc/header', $header);
         <section id="classifieds" style="margin-bottom:25px">
 
 	        <div class="heading">
-	        <h2 data-icon="fa-briefcase">Find Careers <strong>in Namibia</strong></h2>
-	        <p>Browse all career listings here</p>
+	        <h2 data-icon="fa-search">Find Careers <strong>in Namibia</strong></h2>
+	        <p>Browse all vacancy listings here</p>
 
 	        </div>
 
@@ -57,14 +57,19 @@ $this->load->view('inc/header', $header);
 	         ?>
                      
         </section>
-        
+        <div class="spacer"></div>
         <section id="products" style="margin-top:10px">
+
+  				<div class="heading">
+					<h2 data-icon="fa-briefcase" itemprop="description">Featured <strong>Vacancies</strong></h2>
+					<p>Browse all listed featured vacancies here.</p>
+					<ul class="options">
+						<!--<li><a href="https://nmh.my.na/main/subscribe/?type=featured_business" target="_blank"><i class="fa fa-edit text-dark"></i> Feature my Business</a></li>-->
+					</ul>
+				</div>      	
           
-         <div class="col-md-12">
 
-            <div id="deal_content" data-display="0">
 
-            </div>   
 
 			<?php if(isset($html)){ echo $html;}
 
@@ -73,7 +78,7 @@ $this->load->view('inc/header', $header);
 
             <div class="loading_img hidden" style="width:100%" id="pre_loader"></div>
             <div class="spacer"></div>	      
-         </div>
+
 
         </section>
 
@@ -102,6 +107,10 @@ $this->load->view('inc/header', $header);
 	var agent = '';
 	
     $(document).ready(function () {
+
+
+		initialise_career_owl();
+
         $('[rel=tooltip]').tooltip();
 
 		/*$('#sub_cat_id').select2().on('change', function(e){
@@ -154,6 +163,44 @@ $this->load->view('inc/header', $header);
 
 
 	}
+
+	function initialise_career_owl() {
+
+		// INITIALIZE OWL
+		$('#career-carousel').owlCarousel({
+		    loop:false,
+		    lazyLoad: true,
+		    navRewind:false,
+		    margin:10,
+		    nav: true,
+		    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
+		    responsiveClass:true,
+		    responsive:{
+		        0:{
+		            items:1,
+		            nav:true
+		        },
+		        600:{
+		            items:1,
+		            nav:true
+		        },
+		        1000:{
+		            items:2,
+		            nav:true,
+		            loop:false
+		        },
+
+		        1600:{
+		            items:3,
+		            nav:true,
+		            loop:false
+		        }		        
+		    }
+		});
+
+	}
+
+
 </script>
 
 <script src="<?php echo base_url('/'); ?>js/custom/fb.js?v=2"></script>
