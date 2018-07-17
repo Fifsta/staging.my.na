@@ -5323,6 +5323,7 @@ class Vacancy_model extends CI_Model{
 		 $o = '<div id="owl-bus">';
 
 		 if($query->result()){
+
 			 $x = 0;
 			foreach($query->result() as $row){
 				
@@ -5333,6 +5334,90 @@ class Vacancy_model extends CI_Model{
 				$tweet_url = 'https://twitter.com/share?url=' . site_url('/') . $this->my_na_model->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
 				
 
+				$o .= $b;
+  
+				$x ++;
+			}
+			 
+		 }else{
+			 
+			 $o .= '<div class="alert alert-secondary">No results Found for the current criteria.</div>'; 
+			 
+		 }
+		  $o .= '</div>';
+		  
+		return $o;
+
+	}
+
+
+	//+++++++++++++++++++++++++++
+    //CAREERS RENDER BUSINESS? RESULTS PAGE
+    //++++++++++++++++++++++++++
+	public function render_business($row)
+	{
+
+
+	      $this->load->model('image_model'); 
+	      $this->load->library('thumborp');
+
+	      $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+	      $width = 360;
+	      $height = 230;
+
+	      $l_width = 100;
+	      $l_height = 100;
+
+		  $o = '';	
+		  if($row->bus_id != 0 && $row->bus_id != null){
+		   		
+				$t = '';
+				$grade = $this->render_education($row);
+				
+		   		if($row->COVER != '' && $row->COVER != null){
+					
+					
+					if(strpos($row->COVER, '.')){
+
+                        $cover_str = 'assets/business/photos/' . $row->COVER;
+                        $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');						
+						
+					}else{
+
+                        $cover_str = 'assets/business/photos/' . $row->COVER.'.jpg';
+                        $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');	
+						
+					}
+					
+				}else{
+	                    $cover_str = 'assets/business/photos/listing-placeholder.jpg';
+	                    $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+				}
+
+				if($row->LOGO != '' && $row->LOGO != null){
+					
+					if(strpos($row->LOGO, '.')){
+
+                        $logo_str = 'assets/business/photos/' . $row->LOGO;
+                        $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+
+						
+					}else{
+						
+
+                        $logo_str = 'assets/business/photos/' . $row->LOGO.'.jpg';
+                        $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+						
+					}
+					
+					
+				}else{
+					
+
+                        $logo_str = 'assets/business/photos/bus_logo.png';
+                        $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+				}
+				
 				$o .= '
                 <div> 
                     <figure class="loader">
@@ -5357,78 +5442,6 @@ class Vacancy_model extends CI_Model{
 
 
 
-				$o .= '<div class="span'.$size.' items white_box padding10">
-							'.$b.'
-								<h4>'.$row->title.'</h4>
-								<p><i class="icon-map-marker"></i><em>'. $row->location.' - '.$row->BUSINESS_NAME.'</em></p>
-								<div>'.$this->my_na_model->shorten_string(strip_tags($row->body), 30).'</div>
-								'.$row->sub_cat. ' ' .$row->sub_sub_cat.'
-								<div class="text-right">
-									<a href="'.site_url('/').'careers/job/'.$row->vacancy_id.'/'.$row->slug.'/" class="btn btn-inverse">View Job</a>
-								</div>
-						</div>
-						
-				      ';
-  
-				$x ++;
-			}
-			 
-		 }else{
-			 
-			 $o .= '<div class="alert alert-secondary">No results Found for the current criteria.</div>'; 
-			 
-		 }
-		  $o .= '</div>';
-		  
-		return $o;
-
-	}
-
-
-	//+++++++++++++++++++++++++++
-    //CAREERS RENDER BUSINESS? RESULTS PAGE
-    //++++++++++++++++++++++++++
-	public function render_business($row)
-	{
-		  $o = '';	
-		  if($row->bus_id != 0 && $row->bus_id != null){
-		   		
-				$t = '';
-				$grade = $this->render_education($row);
-				
-		   		if($row->COVER != '' && $row->COVER != null){
-					
-					
-					if(strpos($row->COVER, '.')){
-						$t = "'".S3_URL."assets/business/photos/".$row->COVER."'";
-						
-					}else{
-						
-						$t = "'".S3_URL."assets/business/photos/".$row->COVER.".jpg'";
-						
-					}
-					
-				}else{
-					
-					$t = "'".base_url('/')."img/business_cover_blank.jpg'";
-				}
-				if($row->LOGO != '' && $row->LOGO != null){
-					
-					if(strpos($row->LOGO, '.')){
-						$l = base_url('/') . 'img/timbthumb.php?src=' . S3_URL . 'assets/business/photos/' . $row->LOGO. '&w=200&h=200';
-						
-					}else{
-						
-						$l = base_url('/') . 'img/timbthumb.php?src=' . S3_URL . 'assets/business/photos/' . $row->LOGO. '.jpg&w=200&h=200';
-						
-					}
-					
-					
-				}else{
-					
-					$l = base_url('/')."img/bus_blank.jpg";
-				}
-				
 				$o .= '<div class="row-fluid  bottom-black" style="height:200px;background-image:url('.$t.');background-size:cover; z-index:88; position:relative;">
 							<div class="row-fluid " style="; padding:5px 0">
 								
@@ -5442,6 +5455,7 @@ class Vacancy_model extends CI_Model{
 								</div>
 							</div>
 						</div>';
+
 		  }
 		  return $o;
 	}
