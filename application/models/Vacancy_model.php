@@ -5426,7 +5426,7 @@ class Vacancy_model extends CI_Model{
                             <div class="product_ribbon_ft_orng"><small>'.$row->BUSINESS_NAME.'</small></div>
                         </div>
                         <div class="slideshow-block">
-                            <a href="'.site_url('/').'careers/job/'.$row->vacancy_id.'/'.$row->slug.'/"><img class="" src="' . $cover_url . '" alt="' . $name . '"></a>
+                            <a href="'.site_url('/').'careers/job/'.$row->vacancy_id.'/'.$row->slug.'/"><img class="" src="' . $cover_url . '" alt="' . $row->title . '"></a>
                         </div>
                         <div>      
                             '.$b_logo.'
