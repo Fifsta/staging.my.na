@@ -8,12 +8,12 @@ class Careers extends CI_Controller {
 	 * 
 	 */
 	 
-	function Careers($rep_id = '')
+
+	function __construct()
 	{
 		parent::__construct();
         $this->load->model(array('vacancy_model', 'search_model'));
-	}
-	
+	}	
 	
 
 	function delete_applicant() {

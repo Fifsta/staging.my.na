@@ -1,11 +1,11 @@
 <?php
 class Vacancy_model extends CI_Model{
 	
- 	function vacancy_model(){
+ 	public function __construct(){
+  	
   		//parent::CI_model();
 			
  	}
-
 
 
 
