@@ -48,12 +48,12 @@ $this->load->view('inc/header', $header);
 
 					$b = $this->vacancy_model->render_business($row);
 					
-					$fb = "postToFeed(" . $row->classified_id . ", '" . ucwords(trim($this->my_na_model->clean_url_str($row->title, " ", " "))) . "','" . trim('') . "', '" . ucwords(trim($this->my_na_model->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->my_na_model->shorten_string(strip_tags($this->my_na_model->clean_url_str($row->content, " ", " ")), 50)))) . "', '" . site_url('/') . 'classifieds/view/' . $row->classified_id . '/' . trim($this->my_na_model->clean_url_str($row->title)) . "')";
+					$fb = "postToFeed(" . $row->classified_id . ", '" . ucwords(trim($this->my_na_model->clean_url_str($row->title, " ", " "))) . "','" . trim('') . "', '" . ucwords(trim($this->my_na_model->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->my_na_model->shorten_string(strip_tags($this->my_na_model->clean_url_str($row->content, " ", " ")), 50)))) . "', '" . site_url('/') . 'career/view/' . $row->career_id . '/' . trim($this->my_na_model->clean_url_str($row->title)) . "')";
 	
 					//$fb = "window.open('https://www.facebook.com/sharer/sharer.php?app_id=287335411399195&u=". rawurlencode(site_url('/').'product/'.$row->product_id.'/'.$this->clean_url_str($row->title)) ."', '_blank', 'width=800,height=600,scrollbars=yes,status=yes,resizable=yes,screenx=20%,screeny=20%')";
 	
 					$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter');
-					$tweet_url = 'https://twitter.com/share?url=' . site_url('/') . 'classifieds/view/' . $row->classified_id . '/' .$this->my_na_model->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
+					$tweet_url = 'https://twitter.com/share?url=' . site_url('/') . 'career/view/' . $row->career_id . '/' .$this->my_na_model->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
 									$loc = '';
 					if(is_numeric($row->location_id)){
 						
@@ -92,7 +92,7 @@ $this->load->view('inc/header', $header);
 					echo '
 					<section id="classified_header" style="margin-bottom:10px">
 				        <div class="heading">
-				        <h2 data-icon="fa-newspaper-o">'.$row->cat_name.' <strong>'.date('jS \of F Y',strtotime($row->listing_date)).'</strong></h2>
+				        <h2 data-icon="fa-newspaper-o">'.$row->sub_cat_name.' <strong>'.date('jS \of F Y',strtotime($row->listing_date)).'</strong></h2>
 				        <p><strong>'.$row->title.'</strong></p>
 				        <div class="pull-right" style="padding:4px;"><a onClick="' . $fb . '" class="facebook pull-right"></a>' . anchor_popup('https://twitter.com/share?url=' . trim($tweet_url), ' ', $tweet) . '</div>
 			        </section>
@@ -105,7 +105,7 @@ $this->load->view('inc/header', $header);
 								'.$b.'
 								'.$loc.'
 								<div>'.$row->content.'</div>
-								<span class="badge badge-dark">'.$row->cat_name. '</span>
+								<span class="badge badge-dark">'.$row->sub_cat_name. '</span>
 								<p class="muted pull-right">'.$row->adbooking_id.'</p>
 								<hr>
 								<div class="row">
