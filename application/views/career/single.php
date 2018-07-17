@@ -5,7 +5,7 @@
 //Prepare Variables array to pass into header
 //+++++++++++++++++
 $header['title'] = $row->title.' - My Namibia &trade;';
-$header['metaD'] = $this->my_na_model->shorten_string(strip_tags($row->content), 30).'. My Namibia Classifieds - Find What you !na';
+$header['metaD'] = $this->my_na_model->shorten_string(strip_tags($row->body), 30).'. My Namibia Classifieds - Find What you !na';
 $header['section'] = 'careers';
 $this->load->view('inc/header', $header);
 
@@ -46,7 +46,7 @@ $this->load->view('inc/header', $header);
 
 					<?php 
 
-					$b = $this->classifieds_model->render_business($row);
+					$b = $this->vacancy_model->render_business($row);
 					
 					$fb = "postToFeed(" . $row->classified_id . ", '" . ucwords(trim($this->my_na_model->clean_url_str($row->title, " ", " "))) . "','" . trim('') . "', '" . ucwords(trim($this->my_na_model->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->my_na_model->shorten_string(strip_tags($this->my_na_model->clean_url_str($row->content, " ", " ")), 50)))) . "', '" . site_url('/') . 'classifieds/view/' . $row->classified_id . '/' . trim($this->my_na_model->clean_url_str($row->title)) . "')";
 	
