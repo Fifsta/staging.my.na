@@ -4,8 +4,8 @@
 //LOAD HEADER
 //Prepare Variables array to pass into header
 //+++++++++++++++++
-$header['title'] =  $cat_name.' Careers in '.$location.' - My Namibia &trade;';
-$header['metaD'] =  $cat_name.' Careers in '.$location.'. The biggest career and vacancy platform in Namibia. Find that best next ' .$cat_name.' Career in '.$location.' today. Find What you !na';
+$header['title'] =  $sub_cat_name.' Careers in '.$location.' - My Namibia &trade;';
+$header['metaD'] =  $sub_cat_name.' Careers in '.$location.'. The biggest career and vacancy platform in Namibia. Find that best next ' .$sub_cat_name.' Career in '.$location.' today. Find What you !na';
 $header['section'] = 'home';
 $this->load->view('inc/header', $header);
 
@@ -40,10 +40,6 @@ $this->load->view('inc/header', $header);
 		</div>
 
 		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
-
-		<div class="card text-center">
-			<a href="<?php echo site_url('/'); ?>sell/featured"><img alt="Feature Your Listing Online" src="https://www.my.na/img/adverts/featured_listing_banner.png" class="img-fluid"></a>	
-		</div>
 
         <div class="spacer"></div>
 
