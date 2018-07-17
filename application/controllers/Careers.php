@@ -99,7 +99,7 @@ class Careers extends CI_Controller {
 		 $data['location'] = $query['location'];
 		 $data['location_id'] = $query['location_id'];
 		 
-		 $config['base_url'] = site_url('/'). 'careers/results/?q='.$query['q'].'&sortby=&sub_cat_id='.$query['sub_cat_id'].'&sub_cat_name=&location='.$query['location_id'].'&location_text='.$query['location'];
+	    $config['base_url'] = site_url('/'). 'careers/results/?q='.$query['q'].'&sortby=&sub_cat_id='.$query['sub_cat_id'].'&sub_cat_name=&location='.$query['location_id'].'&location_text='.$query['location'];
 		$config['total_rows'] = $count;
 		$config['per_page'] = $query['limit']; 
 		$config['num_links'] = 2; 

@@ -5267,7 +5267,7 @@ class Vacancy_model extends CI_Model{
 				$tweet_url = 'https://twitter.com/share?url=' . site_url('/') . $this->my_na_model->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
 				
 				
-				$o .= $b;
+				$o .= '<div class="col-lg-4 col-md-6 col-sm-12">'.$b.'</div>';
 					  
 								
 				$x ++;
@@ -5300,7 +5300,7 @@ class Vacancy_model extends CI_Model{
 				$tweet_url = 'https://twitter.com/share?url=' . site_url('/') . $this->my_na_model->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
 				
 
-				$o .= '<div class="col-lg-4 col-md-6 col-sm-12">'.$b.'</div>';
+				$o .= '<div>'.$b.'</div>';
 
 			}
 			 
