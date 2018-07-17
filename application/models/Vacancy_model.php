@@ -5320,10 +5320,8 @@ class Vacancy_model extends CI_Model{
     //++++++++++++++++++++++++++
 	public function render_jobs_slider($query, $size = '12')
 	{
-		 $o = '<div class="row-fluid  padding5">
-		 			<div class="slider"
-    							data-cycle-pause-on-hover="true" data-cycle-pause-on-hover="true"  data-cycle-timeout="2000"
-    							 data-cycle-slides="> .items">';
+		 $o = '<div id="owl-bus">';
+
 		 if($query->result()){
 			 $x = 0;
 			foreach($query->result() as $row){
@@ -5331,14 +5329,34 @@ class Vacancy_model extends CI_Model{
 				$b = $this->render_business($row);
 				
 				$fb = "postToFeed(" . $row->vacancy_id . ", '" . ucwords(trim($this->my_na_model->clean_url_str($row->title, " ", " "))) . "','" . trim('') . "', '" . ucwords(trim($this->my_na_model->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->my_na_model->shorten_string(strip_tags($this->my_na_model->clean_url_str($row->body, " ", " ")), 50)))) . "', '" . site_url('/') . 'careers/job/' . $row->vacancy_id . '/' . trim($this->my_na_model->clean_url_str($row->title)) . "')";
-
-				//$fb = "window.open('https://www.facebook.com/sharer/sharer.php?app_id=287335411399195&u=". rawurlencode(site_url('/').'product/'.$row->product_id.'/'.$this->clean_url_str($row->title)) ."', '_blank', 'width=800,height=600,scrollbars=yes,status=yes,resizable=yes,screenx=20%,screeny=20%')";
-
 				$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter');
 				$tweet_url = 'https://twitter.com/share?url=' . site_url('/') . $this->my_na_model->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
 				
 
-				
+				$o .= '
+                <div> 
+                    <figure class="loader">
+                        <div class="ribbon-wrapper">
+                            <div class="product_ribbon_ft"><small style="color:#ff9900; font-size:14px">'.$row->title.'</small>'.$row->location.'</div>
+                            <div class="product_ribbon_ft_orng"><small>'.$row->BUSINESS_NAM.'</small></div>
+                        </div>
+
+                        <div class="slideshow-block">
+                            <a href="' . site_url('/') . 'b/' . $id . '/' . $this->clean_url_str($name) . '/"><img class="" src="' . $cover_url . '" alt="' . $name . '"></a>
+                        </div>
+
+                        <div>
+                        
+                            '.$b_logo.'  
+
+                        </div>
+                    </figure>           
+                </div>
+
+				';
+
+
+
 				$o .= '<div class="span'.$size.' items white_box padding10">
 							'.$b.'
 								<h4>'.$row->title.'</h4>
@@ -5357,13 +5375,16 @@ class Vacancy_model extends CI_Model{
 			 
 		 }else{
 			 
-			 $o .= '<div class="span12"><div class="alert">No results Found for the current criteria.</div></div>'; 
+			 $o .= '<div class="alert alert-secondary">No results Found for the current criteria.</div>'; 
 			 
 		 }
-		  $o .= '</div></div>';
+		  $o .= '</div>';
 		  
-		  return $o;
+		return $o;
+
 	}
+
+
 	//+++++++++++++++++++++++++++
     //CAREERS RENDER BUSINESS? RESULTS PAGE
     //++++++++++++++++++++++++++
