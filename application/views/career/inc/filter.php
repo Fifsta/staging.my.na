@@ -14,7 +14,7 @@ if($this->agent->browser() == 'Internet Explorer'){
 ?>
 
 <div id="filter" class="col-sm-12 d-none d-lg-block">
-    <form id="search-main_b" name="search-main-b" method="post" action="<?php echo site_url('/');?>classifieds/results/" class="input-group input-group-lg">
+    <form id="search-main_b" name="search-main-b" method="get" action="<?php echo site_url('/');?>careers/results/" class="input-group input-group-lg">
         <div class="btn-group bootstrap-select show-tick input-group-btn form-control"> 
         <input class="form-control" name="q" id="srch_vacancies" type="text" value="<?php if(isset($q)){ echo $q;}else{ echo '';}?>" autocomplete="off" placeholder="Keywords">
         <input type="hidden" name="sortby" id="sortby" value="<?php if(isset($sortby)){ echo $sortby;}else{ echo '';}?>" />
