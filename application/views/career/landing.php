@@ -62,18 +62,18 @@ $this->load->view('inc/header', $header);
 	         			<div class="card-body">
 	         				<div class="row">
 					         	<div class="col-md-4 text-center">
-									<h3 class="upper na_script">Featured <span class="na_script yellow ">Jobs </span></h3>
+									<h3 class="upper na_script">Featured<br><span class="na_script yellow ">Jobs </span></h3>
 				                    <p>The best career opportunities are right here. Browse our wide range of jobs and stay updated with the latest jobs currently on offer.</p>       		
 					         	</div>
 
 					         	<div class="col-md-4 text-center">        		
-				                    <h3 class="upper na_script">Looking for <span class="na_script yellow ">Work? </span></h3>
+				                    <h3 class="upper na_script">Looking for <span class="na_script yellow "><br>Work?</span></h3>
 				                    <p>Are you ready to face the working market? Don't worry! With us you need to look no further. With the latest, 
 				                    hottest vacancies on our our site, you are sure to find your dream job.</p>	 		                            		
 					         	</div>
 
 					         	<div class="col-md-4 text-center">   		
-				                    <h3 class="upper na_script "><span class="na_script yellow">Your</span> CV? </h3>
+				                    <h3 class="upper na_script ">Your<br><span class="na_script yellow">CV?</span></h3>
 				                    <p>Create an impressive CV online, quick and easy with our ONLINE CV GENERATOR.</p> 		         		
 					         	</div>
 
@@ -145,13 +145,6 @@ $this->load->view('inc/header', $header);
 
         $('[rel=tooltip]').tooltip();
 
-		/*$('#sub_cat_id').select2().on('change', function(e){
-			
-			console.log(this.value);
-				
-		});*/        
-
-   		load_yzx('all', 8, 'side_block_1');
     });
 
 	function load_ajax_home(str){
@@ -167,6 +160,7 @@ $this->load->view('inc/header', $header);
 				}
 			});	
 	}
+
 	function load_yzx(q, l, b){
 
 		$.getJSON( "<?php echo HUB_URL;?>main/get_adverts/"+q+"/"+l+"/?bus_id=0<?php //echo BUS_ID;?>&keywords="+encodeURI(keywords)+"&category="+encodeURI(category), function( data ) {
@@ -192,7 +186,6 @@ $this->load->view('inc/header', $header);
 			}
 			//load_content_ads();
 		});
-
 
 	}
 

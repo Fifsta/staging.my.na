@@ -1,126 +1,100 @@
-<?php
+<?php 
+
 //+++++++++++++++++
 //LOAD HEADER
 //Prepare Variables array to pass into header
 //+++++++++++++++++
-$header['title'] =  $sub_cat_name.' Jobs in '.$location.' - My Namibia &trade;';
-$header['metaD'] =  $sub_cat_name.' Jobs in '.$location.'. The biggest career and vacancy platform in Namibia. Find that best next ' .$sub_cat_name.' Jobs in '.$location.' today. Find What you !na';
+$header['title'] =  $cat_name.' Careers in '.$location.' - My Namibia &trade;';
+$header['metaD'] =  $cat_name.' Careers in '.$location.'. The biggest career and vacancy platform in Namibia. Find that best next ' .$cat_name.' Career in '.$location.' today. Find What you !na';
 $header['section'] = 'home';
 $this->load->view('inc/header', $header);
 
-//ADDITIONAL RESOURCES
-//add css, IE7 js files here before the head tag
-
 ?>
+
 <link href="<?php echo base_url('/');?>css/select/select2.css" rel="stylesheet" type="text/css" />
-<link href='<?php echo base_url('/'); ?>css/jquery.rating.css' type="text/css" rel="stylesheet"/>
-<style type="text/css">
+<link href='<?php echo base_url('/');?>css/jquery.rating.css' type="text/css" rel="stylesheet"/>
 
-	
-	
-	#side_block_1 > aside{ border:1px solid #999;padding:4px; background: #fff; margin-bottom: 15px; text-align: center;}
-	#side_block_1 > aside h2{ font-size: 100%; font-family:"Font-Bold"; color:#fff; margin:0; padding: 10px}
-	#side_block_1 > aside img{margin:20px 0 px}
-    #news_slide > div.clearfix a{display:none}
-	.bottom-black{background-color: white;
-box-shadow: inset 0 -180px 50px -50px rgba(0,0,0,0.7) /* IE6-9 */
-	}
-	.blogo{max-width:70px;}
-	.vlogo{margin-top:10%}
-	.vtitle{margin-top:10%; }
-	.vtitle h3{font-size:130%;clear:both; line-height:20px;margin-left:10px}
-	.vtitle p,.vtitle em{line-height:10px;margin-left:10px}
-	@media (min-width: 768px) and (max-width: 979px) {
-		.vtitle h3,.vtitle p{display:none}
-	}
-	@media (max-width: 767px) {
-		
-		.blogo{max-width:50px;}
-		.vtitle h3, .vtitle p{padding-right:10px;}
-		.vtitle{margin-top:0px;padding-left:25px}
-		.vlogo img{ margin-top:0%;}
-		.vlogo{margin-top:5%}
-	}
-
-</style>
 </head>
-<body>
 
-<?php
-//+++++++++++++++++
-//LOAD NAVIGATION
-//+++++++++++++++++
-$nav['section'] = '';
-$this->load->view('inc/navigation', $nav);
-?>
-<!-- END Navigation -->
-<!-- Part 1: Wrap all content here -->
-<div id="wrap">
+<body id="top">
 
-    <!-- Begin page content -->
-    <div class="container" id="home_container">
-        	<div class="clearfix hidden-phone" style="height:40px;"></div>
-       
-        	<div class="row-fluid">
+<?php $this->load->view('inc/top_bar');?>
 
-                 <h1 class=" text-center"> FIND <?php echo $sub_cat_name;?> <span class="na_script yellow big_icon">Jobs </span> IN <span class="na_script big_icon"><?php echo $location ;?></span></h1>
-                 <?php 
-                 //+++++++++++++++++
-                 //LOAD CAREER SEARCH BOX
-                 //+++++++++++++++++
-                 
-                 $this->load->view('career/inc/filter');
-                 //$this->load->view('inc/home_search_bak');
-                 //HEading Box
-                 ?>
-             </div>
+<nav id="bread">
+  <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Careers</li>
+      </ol>
+  </div> 
+</nav>
 
-            <div class="clearfix hidden-phone" style="height:20px;"></div>
-        </div>
+<div class="container">
 
-        <!-- /container - end content -->
-        <div class="container">
-        	 <div class="row-fluid">
-             	&nbsp;
-             </div>
- 		     <div class="row-fluid">
-                <div class="span9" data-display="0">
-                    
-					<?php if(isset($html)){ echo $html;}
-					
-						echo $pages;	
-					?>
-                </div>
-                <div class="span3 adverts" id="side_block_1">
-                    
-					
-                </div>
-            </div>
-    	</div>
+  <div class="row">
+
+		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-3 order-xl-3" id="sidebar">
+			<?php $this->load->view('inc/login'); ?>
+			<?php $this->load->view('inc/weather'); ?>
+			<?php $this->load->view('inc/adverts'); ?>
+		</div>
+
+		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
+
+		<div class="card text-center">
+			<a href="<?php echo site_url('/'); ?>sell/featured"><img alt="Feature Your Listing Online" src="https://www.my.na/img/adverts/featured_listing_banner.png" class="img-fluid"></a>	
+		</div>
+
+        <div class="spacer"></div>
+
+        <section id="classifieds" style="margin-bottom:25px">
+
+	        <div class="heading">
+	        <h2 data-icon="fa-newspaper-o">Find Classified <strong>in Namibia</strong></h2>
+	        <p>Browse all classified listings here</p>
+
+	        </div>
+
+	         <?php
+		        //++++++++++++++++++++++
+		        //LOAD CAREER SEARCH BOX
+		        //++++++++++++++++++++++
+		        $this->load->view('career/inc/filter');
+	         ?>
+                     
+        </section>
         
+        <section id="products" style="margin-top:10px">
+          
+         <div class="col-md-12">
 
-       
-    
-    <div class="clearfix" style="height:40px;"></div>
+            <div id="deal_content" data-display="0">
 
-    <?php
-    //+++++++++++++++++
-    //LOAD FOOTER
-    //+++++++++++++++++
-    $footer['foo'] = '';
-    $this->load->view('inc/footer', $footer);
+            </div>   
 
+			<?php if(isset($html)){ echo $html;}
+				echo $pages;	
+			?>   
 
-    ?>
+            <div class="loading_img hidden" style="width:100%" id="pre_loader"></div>
+            <div class="spacer"></div>	      
+         </div>
+
+        </section>
+
+    </div>
+
+  </div>  
+  
 </div>
-<!-- /wrap  -->
-
-
+  
+<?php $this->load->view('inc/footer');?>  
+<script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
 <!-- JAvascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="<?php echo base_url('/');?>js/jquery.inview.js" type="text/javascript"></script>
-<script src="<?php echo base_url('/');?>video/video/eh5v.files/html5video/html5ext.js" type="text/javascript"></script>
+<!--<script src="<?php echo base_url('/');?>js/jquery.inview.js" type="text/javascript"></script>
+<script src="<?php // echo base_url('/');?>video/video/eh5v.files/html5video/html5ext.js" type="text/javascript"></script>-->
 <script src='<?php echo base_url('/') ?>js/jquery.cycle2.min.js' type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo base_url('/');?>js/select2.min.js"></script>
 <script type="text/javascript">
@@ -189,5 +163,6 @@ $this->load->view('inc/navigation', $nav);
 
 <script src="<?php echo base_url('/'); ?>js/custom/fb.js?v=2"></script>
 <script src='<?php echo base_url('/') ?>js/jquery.rating.pack.js' type="text/javascript" language="javascript"></script>
+
 </body>
 </html>
