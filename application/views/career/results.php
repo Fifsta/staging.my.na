@@ -39,9 +39,7 @@ $this->load->view('inc/header', $header);
 			<?php $this->load->view('inc/adverts'); ?>
 		</div>
 
-		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
-
-        <div class="spacer"></div>
+		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">>
 
         <section id="classifieds" style="margin-bottom:25px">
 
