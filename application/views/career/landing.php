@@ -44,7 +44,7 @@ $this->load->view('inc/header', $header);
         <section id="classifieds" style="margin-bottom:25px">
 
 	        <div class="heading">
-	        <h2 data-icon="fa-search">Find Careers <strong>in Namibia</strong></h2>
+	        <h2 data-icon="fa-search">Find Jobs <strong>in Namibia</strong></h2>
 	        <p>Browse all vacancy listings here</p>
 
 	        </div>
@@ -55,10 +55,42 @@ $this->load->view('inc/header', $header);
 		        //++++++++++++++++++++++
 		        $this->load->view('career/inc/filter');
 	         ?>
+	         <div class="spacer"></div>
+	         <div class="row">
+	         	<div class="col-md-12">
+	         		<div class="card">
+	         			<div class="card-body">
+	         				<div class="row">
+					         	<div class="col-md-4 text-center">
+									<h3 class="upper na_script">Featured <span class="na_script yellow ">Jobs </span></h3>
+				                    <p>The best career opportunities are right here. Browse our wide range of jobs and stay updated with the latest jobs currently on offer.</p>       		
+					         	</div>
+
+					         	<div class="col-md-4 text-center">        		
+				                    <h3 class="upper na_script">Looking for <span class="na_script yellow ">Work? </span></h3>
+				                    <p>Are you ready to face the working market? Don't worry! With us you need to look no further. With the latest, 
+				                    hottest vacancies on our our site, you are sure to find your dream job.</p>	 		                            		
+					         	</div>
+
+					         	<div class="col-md-4 text-center">   		
+				                    <h3 class="upper na_script "><span class="na_script yellow">Your</span> CV? </h3>
+				                    <p>Create an impressive CV online, quick and easy with our ONLINE CV GENERATOR.</p> 		         		
+					         	</div>
+
+					         	<div class="col-md-12">
+				                    <a href="<?php echo site_url('/');?>vacancy/" class="btn btn-dark btn-block">Get Started Now</a>	         		
+					         	</div>
+					         </div>	
+	         			</div>
+	         		</div>		
+	         	</div>      	
+	         </div>	
                      
         </section>
+
         <div class="spacer"></div>
-        <section id="products" style="margin-top:10px">
+
+        <section id="products">
 
   				<div class="heading">
 					<h2 data-icon="fa-briefcase" itemprop="description">Featured <strong>Vacancies</strong></h2>
