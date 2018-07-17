@@ -5400,6 +5400,7 @@ class Vacancy_model extends CI_Model{
 
                         $logo_str = 'assets/business/photos/' . $row->LOGO;
                         $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+                         $b_logo = '<img title="Product is listed by ' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';                       
 
 						
 					}else{
@@ -5407,6 +5408,7 @@ class Vacancy_model extends CI_Model{
 
                         $logo_str = 'assets/business/photos/' . $row->LOGO.'.jpg';
                         $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+                        $b_logo = '<img title="Product is listed by ' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';                        
 						
 					}
 					
@@ -5416,6 +5418,7 @@ class Vacancy_model extends CI_Model{
 
                         $logo_str = 'assets/business/photos/bus_logo.png';
                         $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+                        $b_logo = '<img title="Product is listed by ' . $name . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $name . '" class="pull-right img-thumbnail" />';
 				}
 				
 				$o .= '
