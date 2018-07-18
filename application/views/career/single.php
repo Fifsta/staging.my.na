@@ -17,11 +17,11 @@ $this->load->model('image_model');
 $this->load->library('thumborp');
 
 $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-$width = 360;
-$height = 230;
+$width = 826;
+$height = 466;
 
-$l_width = 100;
-$l_height = 100;
+$l_width = 400;
+$l_height = 400;
 
 
 if($row->COVER != '' && $row->COVER != null){
@@ -130,7 +130,7 @@ if(strpos($row->LOGO, '.')){
 					<div class="details-left">
 
 						<figure>
-							<img src="<?php echo $img_url; ?>">
+							<img src="<?php echo $logo_url; ?>">
 						</figure>
 
 					</div>
