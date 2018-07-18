@@ -152,8 +152,9 @@ if(strpos($row->LOGO, '.')){
 									<input name="bus_id" type="hidden" value="'.$row->bus_id.'">
 									<input name="title" type="hidden" value="'.$row->title.'">
 									<input name="ref_no" type="hidden" value="'.$row->ref_no.'">
-									<h4>'.$row->title.'</h4>
-									<p><i class="icon-map-marker"></i><em>'. $row->location.' - '.$row->BUSINESS_NAME.'</em></p>
+									<br>
+									<h1>'.$row->title.'</h1>
+									<p><i class="fa fa-map-marker text-dark"></i><em>'. $row->location.' - '.$row->BUSINESS_NAME.'</em></p>
 									<div>'.$row->body.'</div>
 									'.$row->sub_cat. ' ' .$row->sub_sub_cat.'
 									<hr>
