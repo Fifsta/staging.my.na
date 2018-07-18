@@ -1,10 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 header("Access-Control-Allow-Origin: https://nmh.my.na");
+
 class Clients extends CI_Controller {
 
 	/**
 	 * Verify Clients Controller
 	 */
+
+	function __construct()
+	{
+		parent::__construct();
+
+	}
+
 	public function index()
 	{
 		$this->load->view('login');
@@ -269,6 +278,7 @@ class Clients extends CI_Controller {
 
 	public function verify_mobile()
 	{
+
 		if($this->session->userdata('id')){
 
 			$data['client_id'] = $this->session->userdata('id');
@@ -281,9 +291,9 @@ class Clients extends CI_Controller {
 
 			//TEST NUMBER EXISTS
 			$a = $this->db->query("SELECT * FROM u_client
-									WHERE (CLIENT_CELLPHONE = '".ltrim($number, '0')."' OR CLIENT_CELLPHONE = '".$number."')
-									AND VERIFIED = 'Y' AND ID != ".$data['client_id']."
-									", true);
+								   WHERE (CLIENT_CELLPHONE = '".ltrim($number, '0')."' OR CLIENT_CELLPHONE = '".$number."')
+								   AND VERIFIED = 'Y' AND ID != ".$data['client_id']."
+								   ", true);
 			//NUMBER EXISTS
 			if($a->result()){
 
@@ -348,11 +358,9 @@ class Clients extends CI_Controller {
 
 				}
 
-
 				echo json_encode($o);
 
 			}
-
 
 
 		}else{
