@@ -1,99 +1,5 @@
 <?php
 
-$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
-$width = 826;
-
-$height = 466;
-
-if(!$bus_details){ show_404(); }
-
-$bus_id =  $bus_details['ID'];
-$name =  $bus_details['BUSINESS_NAME'];
-$email = $bus_details['BUSINESS_EMAIL'];
-$tel = '+'.$bus_details['TEL_DIAL_CODE'].' '.$bus_details['BUSINESS_TELEPHONE'];
-$fax = '+'.$bus_details['FAX_DIAL_CODE'].' '.$bus_details['BUSINESS_FAX'];
-$cell = '+'.$bus_details['CEL_DIAL_CODE'].' '.$bus_details['BUSINESS_CELLPHONE'];
-$description = $bus_details['BUSINESS_DESCRIPTION'];
-$pobox = $bus_details['BUSINESS_POSTAL_BOX'];
-$website = $bus_details['BUSINESS_URL']; 
-$address = $bus_details['BUSINESS_PHYSICAL_ADDRESS'];
-$city = $bus_details['city']; 
-$region = $bus_details['region'];
-$latitude = $bus_details['latitude']; 
-$longitude = $bus_details['longitude'];
-$startdate = $bus_details['BUSINESS_DATE_CREATED'];
-//$city = $bus_details['CLIENT_CITY'];
-$img = $bus_details['BUSINESS_LOGO_IMAGE_NAME'];
-$vt = $bus_details['BUSINESS_VIRTUAL_TOUR_NAME'];
-$advertorial = $bus_details['ADVERTORIAL'];
-//Get categories
-$cats = $this->business_model->get_current_categories($bus_id);
-$rand = rand(0,9999);
-//Build image string
-$format = substr($img,(strlen($img) - 4),4);
-$str = substr($img,0,(strlen($img) - 4));
-
-$rating_count = $this->business_model->get_rating_count($bus_id);
-
-
-if($img != ''){
-	
-	if(strpos($img,'.') == 0){
-
-		$format = '.jpg';
-		$img_str = 'assets/business/photos/'.$img . $format;
-		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
-		
-	}else{
-		
-		$img_str = 'assets/business/photos/'.$img;
-		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
-		
-	}
-	
-}else{
-	
-	$img_str =  'assets/business/photos/logo-placeholder.jpg';
-	$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
-	
-}
-
-//COVER IMAGE
-$cover_img = $bus_details['BUSINESS_COVER_PHOTO'];
-
-if($cover_img != ''){
-	
-	if(strpos($cover_img,'.') == 0){
-
-		$format2 = '.jpg';
-		$cover_str = 'assets/business/photos/'.$cover_img . $format2;
-		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
-		
-	}else{
-		
-		$cover_str =  'assets/business/photos/'.$cover_img;
-		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
-		
-	}
-	
-}else{
-	
-	$cover_str =  'assets/business/photos/listing-placeholder.jpg';
-	$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
-	
-}
-
- 
-//BUILD OPEN GRAPH
-$header['og'] ='
-<meta property="fb:app_id" content="287335411399195"> 
-<meta property="og:type"        content="MyNamibia:business"> 
-<meta property="og:url"         content="'.site_url('/').'b/'.$bus_id.'/'.$this->uri->segment(3).'/"> 
-<meta property="og:title"       content="'.$header['title'].'"> 
-<meta property="og:description" content="'.$header['metaD'].'"> 
-<meta property="og:image"       content="'.$img_url.'">'; 
-
-
 //+++++++++++++++++
 //LOAD HEADER
 //Prepare Variables array to pass into header
@@ -118,7 +24,7 @@ $this->load->view('inc/header', $header);
 	<div class="container">
 		  <ol class="breadcrumb">
 		    <li class="breadcrumb-item"><a href="<?php echo site_url('/');?>">My</a></li>
-		    <li class="breadcrumb-item"><a href="<?php echo site_url('/');?>classifieds/">Calssifieds</a></li>
+		    <li class="breadcrumb-item"><a href="<?php echo site_url('/');?>careers/">Careers</a></li>
 		    <li class="breadcrumb-item active"><?php echo $row->title;?></li>
 		  </ol>
 	</div>
@@ -171,7 +77,7 @@ $this->load->view('inc/header', $header);
 						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>	
 				 
 					</div>
-					<div class="details-right">
+					<!--<div class="details-right">
 						<h2><?php echo $address ;?></h2>
 						<div itemprop="address">
                             <span><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
@@ -179,36 +85,11 @@ $this->load->view('inc/header', $header);
                             <span><?php echo $region ;?></span>
                             <span>Namibia</span>
                         </div>
+					</div>-->
 
-                        <?php echo '<p>'. implode(' ',$cats['links']).'</p>'; ?>
-                        
-						<div class="row reveal">
-							<div class="col-sm-12 col-md-6 col-lg-4">
-								<p data-icon="fa-phone text-dark"><button onClick="phone_click($(this),'phone')" class="btn btn-default"><!--T: --><span><?php echo $tel; ?></span></button></p>
-								<p data-icon="fa-fax text-dark"><button onClick="phone_click($(this),'fax')" class="btn btn-default"><!--F: --><span><?php echo $fax; ?></span></button></p>								
-							</div>
-							<div class="col-sm-12 col-md-6 col-lg-4">
-								<p data-icon="fa-tablet text-dark"><button onClick="phone_click($(this),'cell')" class="btn btn-default"><!--C: --><span><?php echo $cell; ?></span></button></p>
-								<p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><span><?php echo $email; ?></span></button></p>								
-							</div>
-							<div class="col-sm-12 col-md-6 col-lg-4">
-								<?php if($website) { ?>
-								<p data-icon="fa-globe text-dark"><button class="btn btn-default"><!--W: --><a href="<?php echo $website; ?>" target="blank"><span><?php echo $website; ?></span></a></button></p>
-								<?php } ?>
-							</div>							
-						</div>
-
-						<?php if($bus_details['IS_NTB_MEMBER'] == 'Y'){ ?>
-							<a href="#" data-toggle="tooltip" data-placement="top" title="NTB Member"><img src="images/ntb.png" alt="<?php echo $name;?> - NTB Member" class="img-thumbnail"></a>
-						<?php } ?>
-
-						<?php if($bus_details['IS_HAN_MEMBER'] == 'Y'){ ?>
-							<a href="#" data-toggle="tooltip" data-placement="top" title="HAN Member"><img src="images/han.png" alt="<?php echo $name;?> - HAN Member" class="img-thumbnail"></a>
-						<?php } ?>
-
-					</div>
+					<?php $b = $this->vacancy_model->render_business($row); ?>
 				</div>			
-			</section>	
+
 
 		</div>
 
