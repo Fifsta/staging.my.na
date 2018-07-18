@@ -5423,6 +5423,120 @@ class Vacancy_model extends CI_Model{
 		  return $o;
 	}
 
+
+
+	//+++++++++++++++++++++++++++
+    //CAREERS RENDER BUSINESS? RESULTS PAGE
+    //++++++++++++++++++++++++++
+	public function render_single_business($row)
+	{
+
+
+	      $this->load->model('image_model'); 
+	      $this->load->library('thumborp');
+
+	      $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+	      $width = 360;
+	      $height = 230;
+
+	      $l_width = 100;
+	      $l_height = 100;
+
+		  $o = '';	
+		  if($row->bus_id != 0 && $row->bus_id != null){
+		   		
+				$t = '';
+				$grade = $this->render_education($row);
+				
+		   		if($row->COVER != '' && $row->COVER != null){
+					
+					
+					if(strpos($row->COVER, '.')){
+
+                        $cover_str = 'assets/business/photos/' . $row->COVER;
+                        $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');						
+						
+					}else{
+
+                        $cover_str = 'assets/business/photos/' . $row->COVER.'.jpg';
+                        $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');	
+						
+					}
+					
+				}else{
+	                    $cover_str = 'assets/business/photos/listing-placeholder.jpg';
+	                    $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+				}
+
+				if($row->LOGO != '' && $row->LOGO != null){
+					
+					if(strpos($row->LOGO, '.')){
+
+                        $logo_str = 'assets/business/photos/' . $row->LOGO;
+                        $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+                         $b_logo = '<img title="Product is listed by ' . $row->title . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $row->title . '" class="pull-right img-thumbnail" />';                       
+
+						
+					}else{
+						
+
+                        $logo_str = 'assets/business/photos/' . $row->LOGO.'.jpg';
+                        $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+                        $b_logo = '<img title="Product is listed by ' . $row->title . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $row->title . '" class="pull-right img-thumbnail" />';                        
+						
+					}
+					
+					
+				}else{
+					
+
+                        $logo_str = 'assets/business/photos/bus_logo.png';
+                        $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+                        $b_logo = '<img title="Product is listed by ' . $row->title . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $row->title . '" class="pull-right img-thumbnail" />';
+				}
+				
+				$o .= '
+                <div> 
+                    <figure class="loader">
+                        <div class="ribbon-wrapper">
+                            <div class="product_ribbon_ft"><small style="color:#ff9900; font-size:14px">'.$row->title.'</small>'.$row->location.'</div>
+                            <div class="product_ribbon_ft_orng"><small>'.$row->BUSINESS_NAME.'</small></div>
+                        </div>
+                        <div class="slideshow-block">
+                            <a href="'.site_url('/').'careers/job/'.$row->vacancy_id.'/'.$row->slug.'/"><img class="" src="' . $cover_url . '" alt="' . $row->title . '"></a>
+                        </div>
+                        <div>      
+                            '.$b_logo.'
+                        </div>
+                    </figure>           
+                </div>
+				';
+
+
+
+				/*$o .= '<div class="row-fluid  bottom-black" style="height:200px;background-image:url('.$t.');background-size:cover; z-index:88; position:relative;">
+							<div class="row-fluid " style="; padding:5px 0">
+								
+								<div class="span3 vlogo" style="padding-left:25px;">
+									<img src="'.$l.'" class="blogo img-responsive img-polaroid">
+								</div>
+								<div class="span9 vtitle">
+									<h3 class="upper na_script white">'.$row->title.'</h3>
+									<p class="white"><i class="icon-map-marker icon-white"></i><em>'. $row->location.' - '.$row->BUSINESS_NAME.'</em></p>
+									<p class="white">'.$grade.'</p>
+								</div>
+							</div>
+						</div>';*/
+
+		  }
+		  return $o;
+	}
+
+
+
+
+
+
 	//+++++++++++++++++++++++++++
     //CAREERS RENDER EDUCATION? RESULTS PAGE
     //++++++++++++++++++++++++++

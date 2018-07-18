@@ -138,13 +138,9 @@ if(strpos($row->LOGO, '.')){
   					<?php 
 					
 					$fb = "postToFeed(" . $row->vacancy_id . ", '" . ucwords(trim($this->my_na_model->clean_url_str($row->title, " ", " "))) . "','" . trim('') . "', '" . ucwords(trim($this->my_na_model->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->my_na_model->shorten_string(strip_tags($this->my_na_model->clean_url_str($row->body, " ", " ")), 50)))) . "', '" . site_url('/') . 'careers/job/' . $row->vacancy_id . '/' . trim($this->my_na_model->clean_url_str($row->title)) . "')";
-	
-					//$fb = "window.open('https://www.facebook.com/sharer/sharer.php?app_id=287335411399195&u=". rawurlencode(site_url('/').'product/'.$row->product_id.'/'.$this->clean_url_str($row->title)) ."', '_blank', 'width=800,height=600,scrollbars=yes,status=yes,resizable=yes,screenx=20%,screeny=20%')";
-	
 					$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter');
 					$tweet_url = 'https://twitter.com/share?url=' . site_url('/') . $this->my_na_model->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
 					
-	
 					echo'<div class="row">
 								<div class="col-md-12">
 									<form action="'.site_url('/').'vacancy/apply_do/" method="post" enctype="multipart/form-data" name="apply" id="apply" class="form-horizontal">
@@ -153,8 +149,8 @@ if(strpos($row->LOGO, '.')){
 									<input name="title" type="hidden" value="'.$row->title.'">
 									<input name="ref_no" type="hidden" value="'.$row->ref_no.'">
 									<br>
-									<h1>'.$row->title.'</h1>
-									<p><i class="fa fa-map-marker text-dark"></i><em>'. $row->location.' - '.$row->BUSINESS_NAME.'</em></p>
+									<h3>'.$row->title.'</h3>
+									<p><i class="fa fa-map-marker text-dark"></i> <em>'. $row->location.' - '.$row->BUSINESS_NAME.'</em></p>
 									<div>'.$row->body.'</div>
 									'.$row->sub_cat. ' ' .$row->sub_sub_cat.'
 									<hr>
