@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Careers extends CI_Controller {
-	
+
 	/**
 	 * Members Functionality Controller for My.Na
 	 * Roland Ihms
@@ -12,7 +12,7 @@ class Careers extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-        $this->load->model(array('vacancy_model', 'search_model'));
+        $this->load->model(array('vacancy_model', 'search_model', 'business_model'));
 	}	
 	
 
