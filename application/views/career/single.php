@@ -136,8 +136,6 @@ if(strpos($row->LOGO, '.')){
 					</div>
 					<div class="details-right">
   					<?php 
-					//if(isset($html)){ echo $html;}
-					$b = $this->vacancy_model->render_business($row);
 					
 					$fb = "postToFeed(" . $row->vacancy_id . ", '" . ucwords(trim($this->my_na_model->clean_url_str($row->title, " ", " "))) . "','" . trim('') . "', '" . ucwords(trim($this->my_na_model->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->my_na_model->shorten_string(strip_tags($this->my_na_model->clean_url_str($row->body, " ", " ")), 50)))) . "', '" . site_url('/') . 'careers/job/' . $row->vacancy_id . '/' . trim($this->my_na_model->clean_url_str($row->title)) . "')";
 	
@@ -154,7 +152,6 @@ if(strpos($row->LOGO, '.')){
 									<input name="bus_id" type="hidden" value="'.$row->bus_id.'">
 									<input name="title" type="hidden" value="'.$row->title.'">
 									<input name="ref_no" type="hidden" value="'.$row->ref_no.'">
-									'.$b.'
 									<h4>'.$row->title.'</h4>
 									<p><i class="icon-map-marker"></i><em>'. $row->location.' - '.$row->BUSINESS_NAME.'</em></p>
 									<div>'.$row->body.'</div>
