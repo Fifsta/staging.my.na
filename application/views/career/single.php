@@ -45,9 +45,12 @@ $this->load->view('inc/header', $header);
 
 	    	<section id="listing">
 
-
-
-					<?php  echo $this->vacancy_model->render_business($row); ?>
+		        <div class="heading" style="margin-bottom:15px">
+		          <h2 data-icon="fa-briefcase"><?php echo $row->title; ?></h2>
+		          <ul class="options">    
+		            <li><a href="#Enquiry-Form" data-icon="fa-envelope text-dark">Contact Agency</a></li>
+		          </ul>
+		        </div>
 	
 
 
