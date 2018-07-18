@@ -8,7 +8,6 @@ class Vacancy_model extends CI_Model{
  	}
 
 
-
 	public function get_applicant_dump($client_id) {
 
 

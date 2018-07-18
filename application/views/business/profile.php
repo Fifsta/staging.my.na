@@ -178,9 +178,8 @@ $this->load->view('inc/header');
                             <span>Namibia</span>
                         </div>
 
-                        <?php
-							echo '<p>'. implode(' ',$cats['links']).'</p>';
-						?>
+                        <?php echo '<p>'. implode(' ',$cats['links']).'</p>'; ?>
+                        
 						<div class="row reveal">
 							<div class="col-sm-12 col-md-6 col-lg-4">
 								<p data-icon="fa-phone text-dark"><button onClick="phone_click($(this),'phone')" class="btn btn-default"><!--T: --><span><?php echo $tel; ?></span></button></p>
