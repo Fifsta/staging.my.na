@@ -132,6 +132,7 @@ if(strpos($row->LOGO, '.')){
 						<figure>
 							<img src="<?php echo $logo_url; ?>">
 						</figure>
+						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($row->rating,$row->bus_id);?></div>	
 
 					</div>
 					<div class="details-right">
@@ -139,7 +140,6 @@ if(strpos($row->LOGO, '.')){
 
 					</div>
 				</div>
-
 				<!--details-->
 
 		</div>
