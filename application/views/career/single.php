@@ -1,5 +1,99 @@
 <?php
 
+$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+$width = 826;
+
+$height = 466;
+
+if(!$bus_details){ show_404(); }
+
+$bus_id =  $bus_details['ID'];
+$name =  $bus_details['BUSINESS_NAME'];
+$email = $bus_details['BUSINESS_EMAIL'];
+$tel = '+'.$bus_details['TEL_DIAL_CODE'].' '.$bus_details['BUSINESS_TELEPHONE'];
+$fax = '+'.$bus_details['FAX_DIAL_CODE'].' '.$bus_details['BUSINESS_FAX'];
+$cell = '+'.$bus_details['CEL_DIAL_CODE'].' '.$bus_details['BUSINESS_CELLPHONE'];
+$description = $bus_details['BUSINESS_DESCRIPTION'];
+$pobox = $bus_details['BUSINESS_POSTAL_BOX'];
+$website = $bus_details['BUSINESS_URL']; 
+$address = $bus_details['BUSINESS_PHYSICAL_ADDRESS'];
+$city = $bus_details['city']; 
+$region = $bus_details['region'];
+$latitude = $bus_details['latitude']; 
+$longitude = $bus_details['longitude'];
+$startdate = $bus_details['BUSINESS_DATE_CREATED'];
+//$city = $bus_details['CLIENT_CITY'];
+$img = $bus_details['BUSINESS_LOGO_IMAGE_NAME'];
+$vt = $bus_details['BUSINESS_VIRTUAL_TOUR_NAME'];
+$advertorial = $bus_details['ADVERTORIAL'];
+//Get categories
+$cats = $this->business_model->get_current_categories($bus_id);
+$rand = rand(0,9999);
+//Build image string
+$format = substr($img,(strlen($img) - 4),4);
+$str = substr($img,0,(strlen($img) - 4));
+
+$rating_count = $this->business_model->get_rating_count($bus_id);
+
+
+if($img != ''){
+	
+	if(strpos($img,'.') == 0){
+
+		$format = '.jpg';
+		$img_str = 'assets/business/photos/'.$img . $format;
+		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
+		
+	}else{
+		
+		$img_str = 'assets/business/photos/'.$img;
+		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
+		
+	}
+	
+}else{
+	
+	$img_str =  'assets/business/photos/logo-placeholder.jpg';
+	$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
+	
+}
+
+//COVER IMAGE
+$cover_img = $bus_details['BUSINESS_COVER_PHOTO'];
+
+if($cover_img != ''){
+	
+	if(strpos($cover_img,'.') == 0){
+
+		$format2 = '.jpg';
+		$cover_str = 'assets/business/photos/'.$cover_img . $format2;
+		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
+		
+	}else{
+		
+		$cover_str =  'assets/business/photos/'.$cover_img;
+		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
+		
+	}
+	
+}else{
+	
+	$cover_str =  'assets/business/photos/listing-placeholder.jpg';
+	$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+	
+}
+
+ 
+//BUILD OPEN GRAPH
+$header['og'] ='
+<meta property="fb:app_id" content="287335411399195"> 
+<meta property="og:type"        content="MyNamibia:business"> 
+<meta property="og:url"         content="'.site_url('/').'b/'.$bus_id.'/'.$this->uri->segment(3).'/"> 
+<meta property="og:title"       content="'.$header['title'].'"> 
+<meta property="og:description" content="'.$header['metaD'].'"> 
+<meta property="og:image"       content="'.$img_url.'">'; 
+
+
 //+++++++++++++++++
 //LOAD HEADER
 //Prepare Variables array to pass into header
