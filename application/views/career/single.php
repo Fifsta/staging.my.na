@@ -12,6 +12,67 @@ $this->load->view('inc/header', $header);
 //ADDITIONAL RESOURCES
 //add css, IE7 js files here before the head tag
 
+
+$this->load->model('image_model'); 
+$this->load->library('thumborp');
+
+$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+$width = 360;
+$height = 230;
+
+$l_width = 100;
+$l_height = 100;
+
+
+if($row->COVER != '' && $row->COVER != null){
+					
+					
+if(strpos($row->COVER, '.')){
+
+    $cover_str = 'assets/business/photos/' . $row->COVER;
+    $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');						
+	
+}else{
+
+    $cover_str = 'assets/business/photos/' . $row->COVER.'.jpg';
+    $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');	
+	
+}
+
+}else{
+    $cover_str = 'assets/business/photos/listing-placeholder.jpg';
+    $cover_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $cover_str,$width,$height, $crop = '');
+}
+
+if($row->LOGO != '' && $row->LOGO != null){
+
+if(strpos($row->LOGO, '.')){
+
+    $logo_str = 'assets/business/photos/' . $row->LOGO;
+    $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+     $b_logo = '<img title="Product is listed by ' . $row->title . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $row->title . '" class="pull-right img-thumbnail" />';                       
+
+	
+}else{
+	
+
+    $logo_str = 'assets/business/photos/' . $row->LOGO.'.jpg';
+    $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+    $b_logo = '<img title="Product is listed by ' . $row->title . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $row->title . '" class="pull-right img-thumbnail" />';                        
+	
+}
+
+
+}else{
+
+
+    $logo_str = 'assets/business/photos/bus_logo.png';
+    $logo_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $logo_str,$l_width,$l_height, $crop = '');
+    $b_logo = '<img title="Product is listed by ' . $row->title . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $row->title . '" class="pull-right img-thumbnail" />';
+}
+
+
+
 ?>
 
 </head>
