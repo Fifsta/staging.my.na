@@ -45,50 +45,10 @@ $this->load->view('inc/header', $header);
 
 	    	<section id="listing">
 
-		        <div class="heading" style="margin-bottom:15px">
-		          <h2 data-icon="fa-briefcase"><?php echo $name; ?></h2>
-		          <ul class="options">    
-		            <li><a href="#Enquiry-Form" data-icon="fa-envelope text-dark">Contact Agency</a></li>
-		            <li><a href="#Gallery" data-icon="fa-file-image-o text-dark" onClick="load_gallery();">Gallery</a></li>
-		            <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
-		            <li><a href="#QR" data-icon="fa-qrcode text-dark">QR Code</a></li>
-		          </ul>
-		        </div>
 
-				<!--banner-->
-		        <div class="list-map">
-		          <div class="list-map-left">
-		              <img src="<?php echo $cover_url; ?>" class="img-fluid">
-		          </div>
-		          
-		          <div class="list-map-right" id="map_container">
-		          	<iframe src="<?php echo site_url('/'); ?>business/load_business_map/<?php echo $bus_id; ?>" frameborder="0" allowtransparency="true"></iframe>
-		          </div>
-		        </div>
-		        <!--banner-->
- 
-				<!--details-->
-				<div class="details">
-					<div class="details-left">
 
-						<figure>
-							<img src="<?php echo $img_url; ?>">
-						</figure>
-						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>	
-				 
-					</div>
-					<!--<div class="details-right">
-						<h2><?php echo $address ;?></h2>
-						<div itemprop="address">
-                            <span><i class="fa fa-map-marker text-dark"></i> <?php echo $address ;?></span>
-                            <span><?php echo $city ;?></span>
-                            <span><?php echo $region ;?></span>
-                            <span>Namibia</span>
-                        </div>
-					</div>-->
-
-					<?php $b = $this->vacancy_model->render_business($row); ?>
-				</div>			
+					<?php  echo $this->vacancy_model->render_business($row); ?>
+	
 
 
 		</div>

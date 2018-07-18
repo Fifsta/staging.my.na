@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Careers extends CI_Controller {
-
+	
 	/**
 	 * Members Functionality Controller for My.Na
 	 * Roland Ihms
