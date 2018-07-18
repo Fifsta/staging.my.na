@@ -113,7 +113,34 @@ if(strpos($row->LOGO, '.')){
 		          </ul>
 		        </div>
 	
+				<!--banner-->
+		        <div class="list-map">
+		          <div class="list-map-left">
+		              <img src="<?php echo $cover_url; ?>" class="img-fluid">
+		          </div>
+		          
+		          <div class="list-map-right" id="map_container">
+		          	<iframe src="<?php echo site_url('/'); ?>business/load_business_map/<?php echo $row->bus_id; ?>" frameborder="0" allowtransparency="true"></iframe>
+		          </div>
+		        </div>
+		        <!--banner-->
+ 
+				<!--details-->
+				<div class="details">
+					<div class="details-left">
 
+						<figure>
+							<img src="<?php echo $img_url; ?>">
+						</figure>
+
+					</div>
+					<div class="details-right">
+                        
+
+					</div>
+				</div>
+
+				<!--details-->
 
 		</div>
 
