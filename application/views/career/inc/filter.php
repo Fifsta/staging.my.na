@@ -10,7 +10,7 @@ if($this->agent->browser() == 'Internet Explorer'){
 
     $IE = 'display:block;margin-top:-30px;';
 
-}
+} 
 ?>
 
 <div id="filter" class="col-sm-12 d-none d-lg-block">

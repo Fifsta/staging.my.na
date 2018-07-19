@@ -1,5 +1,5 @@
 <?php
-
+ 
 //+++++++++++++++++
 //LOAD HEADER
 //Prepare Variables array to pass into header
@@ -149,7 +149,7 @@ if(strpos($row->LOGO, '.')){
 									<input name="title" type="hidden" value="'.$row->title.'">
 									<input name="ref_no" type="hidden" value="'.$row->ref_no.'">
 									<br>
-									<h3>'.$row->title.'</h3>
+									<h2>'.$row->title.'</h2>
 									<p><i class="fa fa-map-marker text-dark"></i> <em>'. $row->location.' - '.$row->BUSINESS_NAME.'</em></p>
 									<div>'.$row->body.'</div>
 									'.$row->sub_cat. ' ' .$row->sub_sub_cat.'

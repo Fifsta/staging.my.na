@@ -571,7 +571,7 @@ class Vacancy_model extends CI_Model{
 
 			if(!$query->result()) {
 
-				return '<button class="btn btn-inverse" id="form-submit">Apply</button>';
+				return '<button class="btn btn-dark btn-lg" id="form-submit">Apply</button>';
 
 			} else {
 
@@ -5495,6 +5495,17 @@ class Vacancy_model extends CI_Model{
                         $b_logo = '<img title="Product is listed by ' . $row->title . '" rel="tooltip" style="margin-top:-70px; margin-right:10px; z-index:1;position:relative;width:60px" src="' . $logo_url . '" alt="' . $row->title . '" class="pull-right img-thumbnail" />';
 				}
 				
+
+
+				$o .= '
+
+
+				';
+
+
+
+
+
 				$o .= '
                 <div> 
                     <figure class="loader">
@@ -5512,21 +5523,6 @@ class Vacancy_model extends CI_Model{
                 </div>
 				';
 
-
-
-				/*$o .= '<div class="row-fluid  bottom-black" style="height:200px;background-image:url('.$t.');background-size:cover; z-index:88; position:relative;">
-							<div class="row-fluid " style="; padding:5px 0">
-								
-								<div class="span3 vlogo" style="padding-left:25px;">
-									<img src="'.$l.'" class="blogo img-responsive img-polaroid">
-								</div>
-								<div class="span9 vtitle">
-									<h3 class="upper na_script white">'.$row->title.'</h3>
-									<p class="white"><i class="icon-map-marker icon-white"></i><em>'. $row->location.' - '.$row->BUSINESS_NAME.'</em></p>
-									<p class="white">'.$grade.'</p>
-								</div>
-							</div>
-						</div>';*/
 
 		  }
 		  return $o;
