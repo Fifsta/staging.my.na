@@ -176,5 +176,78 @@ if(strpos($row->LOGO, '.')){
 <?php $this->load->view('inc/footer');?>	
 <script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
 
+<script type="text/javascript">
+    var site = '<?php echo site_url('/');?>';
+    var base = '<?php echo base_url('/');?>';
+    var _throttleTimer = 0,_throttleDelay = 0;
+	var category = "<?php if(isset($categories)){echo $categories;}?>";
+	var keywords = "<?php if(isset($keywords)){echo $keywords;}?>";
+	var adverts = [];
+	var agent = '';
+    $(document).ready(function () {
+        $('[rel=tooltip]').tooltip();
+
+		/*$('#sub_cat_id').select2().on('change', function(e){
+			
+			console.log(this.value);
+				
+		});*/        
+		
+		$('#apply').on('submit', function (e) {
+
+			e.preventDefault();
+
+			$('#form-submit').html('<img src="<?php echo base_url('/').'img/load_black.gif';?>" /> Working...');
+
+
+			$.ajax({
+				type: 'post',
+				url: '<?php echo site_url('/')?>vacancy/apply_do/',
+				data: $('#apply').serialize(),
+				success: function (data) {
+
+					$('#form-submit').html('Apply');
+					$('#app-box').html(data);
+
+
+				}
+			});
+
+
+		});
+		load_yzx('all', 4, 'side_block_1');
+    });
+
+	function load_yzx(q, l, b){
+
+		$.getJSON( "<?php echo HUB_URL;?>main/get_adverts/"+q+"/"+l+"/?bus_id=0<?php //echo BUS_ID;?>&keywords="+encodeURI(keywords)+"&category="+encodeURI(category), function( data ) {
+
+			var adb = $('#'+b), xx = 0;
+			for(var i = 0; i < data.length; i++) {
+				var obj = data[i];
+				adb.append(obj.body);
+				adverts.push(obj);
+				agent = obj.user_agent;
+			}
+
+			//MOBILE FIX
+			if(agent == 'mobile'){
+
+				for(var ii = 0; ii < data.length; ii++) {
+					var obj = data[ii];
+
+					$('#adholder_'+ii).html(obj.body);
+
+				}
+
+			}
+			//load_content_ads();
+		});
+
+
+	}
+
+</script>
+
 </body>
 </html>

@@ -555,12 +555,6 @@ class Vacancy_model extends CI_Model{
 
 
 
-
-
-
-
-
-
 	function check_apply($id) {
 
 		$client_id = $this->session->userdata('id');
