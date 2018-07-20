@@ -188,7 +188,7 @@ if($this->input->get('debug')){
 		$.getJSON( link, function( data ) {
 
 			$('#owl-bus').html(data);
-			initialise_feature_owl.init('bus');
+			initialise_feature_owl('bus');
 
 		});
 
@@ -201,7 +201,7 @@ if($this->input->get('debug')){
 		$.getJSON( link, function( data ) {
 
 			$('#owl-prod').html(data);
-			initialise_feature_owl.init('prod');
+			initialise_feature_owl('prod');
 
 		});
 
