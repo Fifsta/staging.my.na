@@ -187,9 +187,8 @@ if($this->input->get('debug')){
 		var link = '<?php echo site_url('/');?>my_na/get_feature_business/Y/false/false/20/0/';
 		$.getJSON( link, function( data ) {
 
-			initialise_feature_owl('bus');
 			$('#owl-bus').html(data);
-			
+			initialise_feature_owl('bus');
 
 		});
 
@@ -201,9 +200,8 @@ if($this->input->get('debug')){
 		var link = '<?php echo site_url('/');?>my_na/get_feature_products/Y/false/false/20/0/';
 		$.getJSON( link, function( data ) {
 
-			initialise_feature_owl('prod');
 			$('#owl-prod').html(data);
-			
+			initialise_feature_owl('prod');
 
 		});
 
@@ -282,7 +280,7 @@ if($this->input->get('debug')){
 		    }
 		});
 
-		initialise_feature_owl()
+		initialise_feature_owl(owl_type)
 
 	}
 
