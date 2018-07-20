@@ -277,10 +277,10 @@ if($this->input->get('debug')){
 		            nav:true,
 		            loop:false
 		        }		        
-		    }
+		    },
+		    afterInit: initialise_feature_owl(owl_type)
 		});
 
-		initialise_feature_owl(owl_type)
 
 	}
 
