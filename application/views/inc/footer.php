@@ -215,11 +215,13 @@ if($this->input->get('debug')){
 
 	}
 
-	function initialise_bus_owl() {
+	function initialise_feature_owl(owl_type) {
+
+		var type ='#'+owl_type+'-carousel';
 
 		// INITIALIZE OWL
-		$('#bus-carousel').owlCarousel({
-		    loop:false,
+		$(type).owlCarousel({
+		    loop: false,
 		    lazyLoad: true,
 		    navRewind:false,
 		    margin:10,
@@ -248,6 +250,8 @@ if($this->input->get('debug')){
 		        }		        
 		    }
 		});
+
+		initialise_feature_owl()
 
 	}
 

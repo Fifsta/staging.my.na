@@ -29,7 +29,7 @@
 		$.getJSON( link, function( data ) {
 
 			$('#owl-prod').html(data);
-			initialise_prod_owl();
+			initialise_feature_owl('prod');
 
 		});
 
