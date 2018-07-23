@@ -907,12 +907,10 @@ class Vacancy_model extends CI_Model{
 			'expected_tcc' => $expected_tcc
 		);
 
-		if($query2->result()) {
 
-			$this->db->update('applicant_bio', $bio_update);
+		$this->db->update('applicant_bio', $bio_update);
 
-		}
-
+		$this->load->view('career/home', $data);
 
 	}
 
