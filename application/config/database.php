@@ -125,4 +125,30 @@ $db['default'] = array(
 	);
 
 
+}elseif( $_SERVER['HTTP_HOST'] == 'my.na' ){
+
+
+	$db['default'] = array(
+	'dsn'	=> '',
+	'hostname' => 'nmh-db-1-cluster.cluster-cxonbylt4aio.eu-west-1.rds.amazonaws.com',
+	'username' => 'root',
+	'password' => 'OANdyn14784',
+	'database' => 'my_na',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => 'application/db_cache/',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+	);
+
+
 }
