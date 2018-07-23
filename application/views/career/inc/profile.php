@@ -170,7 +170,7 @@
                 <hr>
 
                 <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['cv']; ?>" type="application/pdf" style="width:100%">
-                    <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['cv']; ?>"></iframe>
+                    <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['cv']; ?>" style="width:100%; height:300px"></iframe>
                 </object>
 
               </section>
@@ -187,7 +187,7 @@
                 <hr>
 
                 <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" type="application/pdf" style="width:100%">
-                    <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" style="width:100%"></iframe>
+                    <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" style="width:100%; height:300px"></iframe>
                 </object>
               </section>
 
@@ -203,7 +203,7 @@
                 <hr>
 
                 <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" type="application/pdf" style="width:100%">
-                    <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" style="width:100%"></iframe>
+                    <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" style="width:100%; height:300px"></iframe>
                 </object>
               </section>  
 
