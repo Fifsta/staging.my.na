@@ -37,7 +37,12 @@ $this->load->view('inc/header', $header);
 		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-3 order-xl-3" id="sidebar">
 			<?php $this->load->view('inc/login'); ?>
 			<?php $this->load->view('inc/weather'); ?>
-			<?php $this->load->view('inc/adverts'); ?>
+			<?php //$this->load->view('inc/adverts'); ?>
+
+			<div class="adverts hidden-sm-down" id="advert-box">
+
+			</div>
+			
 		</div>
 
 		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
@@ -135,6 +140,58 @@ $this->load->view('inc/header', $header);
 	
 <?php $this->load->view('inc/footer');?>	
 <script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
+
+<script type="text/javascript">
+    var site = '<?php echo site_url('/');?>';
+    var base = '<?php echo base_url('/');?>';
+    var _throttleTimer = 0,_throttleDelay = 0;
+	var category = "<?php if(isset($categories)){echo $categories;}?>";
+	var keywords = "<?php if(isset($keywords)){echo $keywords;}?>";
+	var adverts = [];
+	var agent = '';
+    $(document).ready(function () {
+        $('[rel=tooltip]').tooltip();
+
+		/*$('#sub_cat_id').select2().on('change', function(e){
+			
+			console.log(this.value);
+				
+		});*/        
+		
+		
+		load_yzx('all', 4, 'advert-box');
+    });
+
+	function load_yzx(q, l, b){
+
+		$.getJSON( "<?php echo HUB_URL;?>main/get_adverts/"+q+"/"+l+"/?bus_id=0<?php //echo BUS_ID;?>&keywords="+encodeURI(keywords)+"&category="+encodeURI(category), function( data ) {
+
+			var adb = $('#'+b), xx = 0;
+			for(var i = 0; i < data.length; i++) {
+				var obj = data[i];
+				adb.append(obj.body);
+				adverts.push(obj);
+				agent = obj.user_agent;
+			}
+
+			//MOBILE FIX
+			if(agent == 'mobile'){
+
+				for(var ii = 0; ii < data.length; ii++) {
+					var obj = data[ii];
+
+					$('#adholder_'+ii).html(obj.body);
+
+				}
+
+			}
+			//load_content_ads();
+		});
+
+
+	}
+
+</script>
 
 </body>
 </html>
