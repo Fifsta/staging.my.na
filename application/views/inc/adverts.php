@@ -6,7 +6,7 @@
 
 <div class="spacer"></div>
 
-<?php echo $this->uri->segment(2); ?>
+<?php echo $this->uri->segment(3); ?>
 
 <script>
 
