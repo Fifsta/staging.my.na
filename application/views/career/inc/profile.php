@@ -169,8 +169,8 @@
 
                 <hr>
 
-                <object data="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['cv']; ?>" type="application/pdf">
-                    <iframe src="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['cv']; ?>"></iframe>
+                <object data="<?php echo site_url('/')  . 'assets/vacancies/documents/'.$bio['cv']; ?>" type="application/pdf">
+                    <iframe src="<?php echo site_url('/')  . 'assets/vacancies/documents/'.$bio['cv']; ?>"></iframe>
                 </object>
 
               </section>
@@ -186,8 +186,8 @@
 
                 <hr>
 
-                <object data="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" type="application/pdf">
-                    <iframe src="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['id_doc']; ?>"></iframe>
+                <object data="<?php echo site_url('/') . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" type="application/pdf">
+                    <iframe src="<?php echo site_url('/')  . 'assets/vacancies/documents/'.$bio['id_doc']; ?>"></iframe>
                 </object>
               </section>
 
@@ -202,8 +202,8 @@
 
                 <hr>
 
-                <object data="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" type="application/pdf">
-                    <iframe src="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['license_doc']; ?>"></iframe>
+                <object data="<?php echo site_url('/')  . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" type="application/pdf">
+                    <iframe src="<?php echo site_url('/')  . 'assets/vacancies/documents/'.$bio['license_doc']; ?>"></iframe>
                 </object>
               </section>  
 
