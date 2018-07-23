@@ -74,7 +74,7 @@ $this->load->view('inc/header');
                 </form>              
                 <hr>
 
-                <object data="your_url_to_pdf" type="application/pdf">
+                <object data="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['cv']; ?>" type="application/pdf">
                     <iframe src="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['cv']; ?>"></iframe>
                 </object>
 
