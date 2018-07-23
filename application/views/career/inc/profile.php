@@ -113,8 +113,8 @@
 							<div class="form-group">
 								<label>Drivers License</label>
 			                    <select class="form-control" name="drivers" id="drivers">
-			                        <option value="N">No</option>
-			                        <option value="Y">Yes</option>
+			                        <option value="N" <?php if($bio['drivers'] == 'N') { echo 'selected'; } ?>>No</option>
+			                        <option value="Y" <?php if($bio['drivers'] == 'Y') { echo 'selected'; } ?>>Yes</option>
 			                    </select>
 							</div>
 
