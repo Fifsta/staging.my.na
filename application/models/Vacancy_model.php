@@ -910,7 +910,7 @@ class Vacancy_model extends CI_Model{
 
 		$this->db->update('applicant_bio', $bio_update);
 
-		$this->load->view('career/home', $data);
+		$this->load->view('career/home');
 
 	}
 
