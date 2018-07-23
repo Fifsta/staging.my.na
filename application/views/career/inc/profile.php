@@ -150,62 +150,64 @@
 		</div>
 	</div>
 
-            <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="nav-item"><a href="#CV" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon=""><span class="d-sm-none">CV Doc</span></a></li>
-              <li role="presentation" class="nav-item"><a href="#ID" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon=""><span class="d-sm-none">ID Doc</span></a></li>
-              <li role="presentation" class="nav-item"><a href="#Drivers" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon=""><span class="d-sm-none">Drivers License</span></a></li>
-            </ul>
+	
 
-            <div class="tab-content">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="nav-item"><a href="#CV" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon=""><span class="d-sm-none">CV Doc</span></a></li>
+      <li role="presentation" class="nav-item"><a href="#ID" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon=""><span class="d-sm-none">ID Doc</span></a></li>
+      <li role="presentation" class="nav-item"><a href="#Drivers" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon=""><span class="d-sm-none">Drivers License</span></a></li>
+    </ul>
 
-              <section role="tabpanel" class="tab-pane active" id="CV">
-                <h4>My CV Document</h4>
-                <small>Please select a file form your desktop <span style="color:#C00">(Note: Only word or pdf files allowed)</span></small>
+    <div class="tab-content">
 
-                <form action="'. site_url('/').'vacancy/add_cv_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
-                <input type="file" id="userfile" name="userfile" style="">
-                <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
-                </form>
+      <section role="tabpanel" class="tab-pane active" id="CV">
+        <h4>My CV Document</h4>
+        <small>Please select a file form your desktop <span style="color:#C00">(Note: Only word or pdf files allowed)</span></small>
 
-                <hr>
+        <form action="'. site_url('/').'vacancy/add_cv_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
+        <input type="file" id="userfile" name="userfile" style="">
+        <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
+        </form>
 
-                <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['cv']; ?>" type="application/pdf" style="width:100%">
-                    <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['cv']; ?>" style="width:100%; height:300px"></iframe>
-                </object>
+        <hr>
 
-              </section>
+        <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['cv']; ?>" type="application/pdf" style="width:100%; height:300px">
+            <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['cv']; ?>" style="width:100%; height:300px"></iframe>
+        </object>
 
-              <section role="tabpanel" class="tab-pane" id="ID">
-                <h4>My ID Document</h4>
-                <small>Please select a file form your desktop <span style="color:#C00">(Note: Only pdf or jpg files allowed)</span></small>
+      </section>
 
-                <form action="'. site_url('/').'vacancy/add_id_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
-                <input type="file" id="userfile" name="userfile" style="" >
-                <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
-                </form>
+      <section role="tabpanel" class="tab-pane" id="ID">
+        <h4>My ID Document</h4>
+        <small>Please select a file form your desktop <span style="color:#C00">(Note: Only pdf or jpg files allowed)</span></small>
 
-                <hr>
+        <form action="'. site_url('/').'vacancy/add_id_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
+        <input type="file" id="userfile" name="userfile" style="" >
+        <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
+        </form>
 
-                <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" type="application/pdf" style="width:100%">
-                    <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" style="width:100%; height:300px"></iframe>
-                </object>
-              </section>
+        <hr>
 
-              <section role="tabpanel" class="tab-pane" id="Drivers">
-                <h4>My Drivers License Document</h4>
-                <small>Please select a file form your desktop <span style="color:#C00">(Note: Only pdf or jpg files allowed)</span></small>
+        <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" type="application/pdf" style="width:100%; height:300px">
+            <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" style="width:100%; height:300px"></iframe>
+        </object>
+      </section>
 
-                <form action="'. site_url('/').'vacancy/add_license_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
-                <input type="file" id="userfile" name="userfile" style="" >
-                <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
-                </form>
+      <section role="tabpanel" class="tab-pane" id="Drivers">
+        <h4>My Drivers License Document</h4>
+        <small>Please select a file form your desktop <span style="color:#C00">(Note: Only pdf or jpg files allowed)</span></small>
 
-                <hr>
+        <form action="'. site_url('/').'vacancy/add_license_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
+        <input type="file" id="userfile" name="userfile" style="" >
+        <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
+        </form>
 
-                <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" type="application/pdf" style="width:100%">
-                    <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" style="width:100%; height:300px"></iframe>
-                </object>
-              </section>  
+        <hr>
+
+        <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" type="application/pdf" style="width:100%; height:300px">
+            <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" style="width:100%; height:300px"></iframe>
+        </object>
+      </section>  
 
 	
 </section>
