@@ -908,6 +908,7 @@ class Vacancy_model extends CI_Model{
 		);
 
 
+		$this->db->where('client_id', $client_id);
 		$this->db->update('applicant_bio', $bio_update);
 
 		$this->load->view('career/home');
