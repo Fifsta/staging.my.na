@@ -101,7 +101,7 @@
 			                    </select>
 							</div>
 
-							<?php if($disabled == 'N') { $d_show = 'display:none'; } else { $d_show = ''; } ?>
+							<?php if($bio['disabled'] == 'N') { $d_show = 'display:none'; } else { $d_show = ''; } ?>
 
 		                    <div class="form-group" id="d_toggle" style="<?php echo $d_show; ?>">
 		                        <label for="disability">What is the nature of your disability?</label>
@@ -120,7 +120,7 @@
 			                    </select>
 							</div>
 
-							<?php if($drivers == 'N') { $dr_show = 'display:none'; } else { $dr_show = ''; } ?>
+							<?php if($bio['drivers'] == 'N') { $dr_show = 'display:none'; } else { $dr_show = ''; } ?>
 
 			                <div class="form-group" style="<?php echo $dr_show; ?>" id="dr_toggle">
 			                    <label for="drivers_type">Type of License</label>
