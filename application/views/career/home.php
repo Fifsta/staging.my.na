@@ -51,6 +51,54 @@ $this->load->view('inc/header');
 
           <?php $this->load->view('career/inc/profile');?>
 
+          <div class="spacer"></div>
+
+          <section>
+
+
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="nav-item"><a href="#CV" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon=""><span class="d-sm-none">CV Doc</span></a></li>
+              <li role="presentation" class="nav-item"><a href="#ID" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon=""><span class="d-sm-none">ID Doc</span></a></li>
+              <li role="presentation" class="nav-item"><a href="#Drivers" class="nav-link" aria-controls="QR" role="tab" data-toggle="tab" data-icon=""><span class="d-sm-none">Drivers License</span></a></li>
+            </ul>
+
+            <div class="tab-content">
+
+              <section role="tabpanel" class="tab-pane active" id="CV">
+                <h4>My CV Document</h4>
+                <small>Please select a file form your desktop <span style="color:#C00">(Note: Only word or pdf files allowed)</span></small>
+
+                <form>
+                <input type="file" id="userfile" name="userfile" style="" >
+                <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
+                </form>              
+                <hr>
+
+                <object data="your_url_to_pdf" type="application/pdf">
+                    <iframe src="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['cv']; ?>"></iframe>
+                </object>
+
+
+              </section>
+
+              <section role="tabpanel" class="tab-pane" id="ID">
+                <h4>My ID Document</h4>
+                <small>Please select a file form your desktop <span style="color:#C00">(Note: Only pdf or jpg files allowed)</span></small>
+                <?php $this->vacancy_model->get_id_document(); ?>
+                <hr>
+              </section>
+
+              <section role="tabpanel" class="tab-pane" id="Drivers">
+                <h4>My Drivers License Document</h4>
+                <small>Please select a file form your desktop <span style="color:#C00">(Note: Only pdf or jpg files allowed)</span></small>
+                <?php $this->vacancy_model->get_license_document(); ?>
+                <hr>
+              </section>        
+
+            </div>
+       
+          </section>  
+
 
       </div>
 

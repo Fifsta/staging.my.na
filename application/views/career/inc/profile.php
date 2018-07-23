@@ -139,7 +139,7 @@
 
                       <div class="col-sm-12">
                         <div class="form-group">
-                          <button class="btn btn-primary btn-lg" id="but"><i class="fa fa-pencil"></i> Update Info</button>
+                          <button class="btn btn-primary btn-lg pull-right" id="but"><i class="fa fa-pencil"></i> Update Info</button>
                         </div>
                       </div>
 

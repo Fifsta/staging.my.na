@@ -2474,13 +2474,12 @@ class Vacancy_model extends CI_Model{
 						<input type="hidden" name="id" value="'. $id.'">
 
 						<div id="avatar_msg2"></div>
-					<div class="progress" id="procover2" style="display:none;margin-top:20px">
-					  <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
-					  </div>
-					</div>
+						<div class="progress" id="procover2" style="display:none;margin-top:20px">
+						  <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
+						  </div>
+						</div>
 
-						<a href="javascript:void(0)" onClick="'.$str.'" class="btn btn-default"><span class=" glyphicon-search" aria-hidden="true"></span></a>
-						<button type="submit" class="btn btn-primary" id="docbut">Add CV Document</button>
+						<button type="submit" class="btn btn-dark" id="docbut">Add CV Document</button>
 						</fieldset>
 					  </form>
 					  </div>
@@ -2503,7 +2502,6 @@ class Vacancy_model extends CI_Model{
 					  </div>
 					</div>
 
-					<a href="javascript:void(0)" onClick="'.$str.'" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
 					<button type="submit" class="btn btn-primary disabled" id="docbut">Add CV Document</button>
 					</fieldset>
 				  </form>
