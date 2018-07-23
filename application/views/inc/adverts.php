@@ -30,5 +30,5 @@ function load_advert(){
 	});	
 
 }
-
+ 
 </script>
