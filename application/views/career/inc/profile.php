@@ -163,13 +163,13 @@
                 <small>Please select a file form your desktop <span style="color:#C00">(Note: Only word or pdf files allowed)</span></small>
 
                 <form action="'. site_url('/').'vacancy/add_cv_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
-                <input type="file" id="userfile" name="userfile" style="" >
+                <input type="file" id="userfile" name="userfile" style="">
                 <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
                 </form>
 
                 <hr>
 
-                <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['cv']; ?>" type="application/pdf">
+                <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['cv']; ?>" type="application/pdf" style="width:100%">
                     <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['cv']; ?>"></iframe>
                 </object>
 
@@ -186,8 +186,8 @@
 
                 <hr>
 
-                <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" type="application/pdf">
-                    <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['id_doc']; ?>"></iframe>
+                <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" type="application/pdf" style="width:100%">
+                    <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" style="width:100%"></iframe>
                 </object>
               </section>
 
@@ -202,8 +202,8 @@
 
                 <hr>
 
-                <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" type="application/pdf">
-                    <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['license_doc']; ?>"></iframe>
+                <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" type="application/pdf" style="width:100%">
+                    <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" style="width:100%"></iframe>
                 </object>
               </section>  
 
