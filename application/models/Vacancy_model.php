@@ -8,6 +8,37 @@ class Vacancy_model extends CI_Model{
  	}
 
 
+
+ 	public function get_biography() {
+
+
+ 		$client_id = $this->session->userdata('id');
+
+ 		//First check if bio exists
+ 		$query = $this->db->query("SELECT * FROM applicant_bio WHERE client_id = '".$client_id."'  ", FALSE);		
+
+ 		if($query->result()){
+
+ 			return $query->row_array();
+
+ 		} else { //If not create an empty bio field
+
+			//populate array with values
+			$data = array(
+				'client_id' => $client_id
+			);
+
+			//insert into database
+			$this->db->insert('applicant_bio', $data);
+
+			$this->get_biography();
+
+ 		}
+
+ 	}
+
+
+
 	public function get_applicant_dump($client_id) {
 
 
