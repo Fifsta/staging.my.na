@@ -165,7 +165,8 @@
                 <form action="'. site_url('/').'vacancy/add_cv_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
                 <input type="file" id="userfile" name="userfile" style="" >
                 <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
-                </form>              
+                </form>
+
                 <hr>
 
                 <object data="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['cv']; ?>" type="application/pdf">
@@ -177,16 +178,34 @@
               <section role="tabpanel" class="tab-pane" id="ID">
                 <h4>My ID Document</h4>
                 <small>Please select a file form your desktop <span style="color:#C00">(Note: Only pdf or jpg files allowed)</span></small>
-                <?php $this->vacancy_model->get_id_document(); ?>
+
+                <form action="'. site_url('/').'vacancy/add_id_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
+                <input type="file" id="userfile" name="userfile" style="" >
+                <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
+                </form>
+
                 <hr>
+
+                <object data="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" type="application/pdf">
+                    <iframe src="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['id_doc']; ?>"></iframe>
+                </object>
               </section>
 
               <section role="tabpanel" class="tab-pane" id="Drivers">
                 <h4>My Drivers License Document</h4>
                 <small>Please select a file form your desktop <span style="color:#C00">(Note: Only pdf or jpg files allowed)</span></small>
-                <?php $this->vacancy_model->get_license_document(); ?>
+
+                <form action="'. site_url('/').'vacancy/add_license_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
+                <input type="file" id="userfile" name="userfile" style="" >
+                <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
+                </form>
+
                 <hr>
+
+                <object data="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" type="application/pdf">
+                    <iframe src="<?php echo BASE_URL . 'assets/vacancies/documents/'.$bio['license_doc']; ?>"></iframe>
+                </object>
               </section>  
-	
+
 	
 </section>
