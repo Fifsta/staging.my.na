@@ -234,7 +234,6 @@
   </div>
   <?php } ?>
 
-
   <?php if(isset($unsubscribe_daily)){?>
     <div class="tab-pane form-signin" style="display:block">
       <div class="alert alert-warning" >
