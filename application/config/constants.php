@@ -48,43 +48,36 @@ defined('FOPEN_READ_WRITE_CREATE')              OR define('FOPEN_READ_WRITE_CREA
 defined('FOPEN_WRITE_CREATE_STRICT')            OR define('FOPEN_WRITE_CREATE_STRICT', 'xb');
 defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
+
 if($_SERVER['HTTP_HOST'] == 'localhost'){
 
-	define('FILE_READ_MODE', 0644);
-	define('FILE_WRITE_MODE', 0666);
-	define('DIR_READ_MODE', 0755);
-	define('DIR_WRITE_MODE', 0777);
 	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"] .'/clients.my.na/');
 	define('CMS_URL',  'http://localhost/My_cms/');
 	define('CDN_URL',  'http://localhost/clients.my.na/');
-	define('HUB_URL', 'https://localhost/nmh/');
-}elseif($_SERVER['HTTP_HOST'] == 'aws.my.na'){
-
-	define('FILE_READ_MODE', 0644);
-	define('FILE_WRITE_MODE', 0666);
-	define('DIR_READ_MODE', 0755);
-	define('DIR_WRITE_MODE', 0777);
-	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"]);
-	define('CMS_URL',  'http://cms.my.na/');
-	define('CDN_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
+	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
+	define('NA_URL',  'http://localhost/clients.my.na/');
 	define('HUB_URL', 'https://nmh.my.na/');
+	
+}elseif($_SERVER['HTTP_HOST'] == 'jelastic.my.na'){
 
+	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"] .'/');
+	define('CMS_URL',  'http://cms.my.na/');
+	define('CDN_URL',  'https://cdn.my.na/');
+	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
+	define('NA_URL',  'https://www.my.na/');
+	define('HUB_URL',  'https://nmh.my.na/');
+	
 }else{
 
-	define('FILE_READ_MODE', 0644);
-	define('FILE_WRITE_MODE', 0666);
-	define('DIR_READ_MODE', 0755);
-	define('DIR_WRITE_MODE', 0777);
-	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"]);
+	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"] .'/');
 	define('CMS_URL',  'https://cms.my.na/');
-	define('CDN_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
-	define('HUB_URL', 'https://nmh.my.na/');
-
+	define('CDN_URL',  'https://cdn.my.na/');
+	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
+	define('NA_URL',  'https://beta.my.na/');
+	define('HUB_URL',  'https://nmh.my.na/');
 }
 define('EVENTS_URL', 'https://events.my.na/');
 define('BUS_ID', 1290);
-
-define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
 
 define('IMG_URL', 'https://img.my.na');
 define('IMG_KEY', 'hwn80200ymF57s2YQU7bd3Y61xnF');
