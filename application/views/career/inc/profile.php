@@ -150,7 +150,7 @@
 		</div>
 	</div>
 
-	
+
 
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="nav-item"><a href="#CV" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon=""><span class="d-sm-none">CV Doc</span></a></li>
@@ -164,7 +164,7 @@
         <h4>My CV Document</h4>
         <small>Please select a file form your desktop <span style="color:#C00">(Note: Only word or pdf files allowed)</span></small>
 
-        <form action="'. site_url('/').'vacancy/add_cv_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
+        <form action="<?php echo site_url('/'); ?>vacancy/add_cv_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
         <input type="file" id="userfile" name="userfile" style="">
         <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
         </form>
@@ -181,7 +181,7 @@
         <h4>My ID Document</h4>
         <small>Please select a file form your desktop <span style="color:#C00">(Note: Only pdf or jpg files allowed)</span></small>
 
-        <form action="'. site_url('/').'vacancy/add_id_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
+        <form action="<?php echo site_url('/'); ?>vacancy/add_id_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
         <input type="file" id="userfile" name="userfile" style="" >
         <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
         </form>
@@ -197,7 +197,7 @@
         <h4>My Drivers License Document</h4>
         <small>Please select a file form your desktop <span style="color:#C00">(Note: Only pdf or jpg files allowed)</span></small>
 
-        <form action="'. site_url('/').'vacancy/add_license_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
+        <form action="<?php echo site_url('/'); ?>vacancy/add_license_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
         <input type="file" id="userfile" name="userfile" style="" >
         <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
         </form>
