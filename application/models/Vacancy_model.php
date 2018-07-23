@@ -604,7 +604,7 @@ class Vacancy_model extends CI_Model{
 
 		if($query->result()){
 
-			echo '<strong>You already applied for this Vacancy</strong>';
+			echo '<div class="alert alert-secondary"><strong>You already applied for this Vacancy</strong></div>';
 
 		} else {
 
@@ -626,7 +626,7 @@ class Vacancy_model extends CI_Model{
 				//$this->send_application_email($title, $client_id, $ref_no);
 
 
-				echo '<strong>Congratulations, you qualified for the position of ' . $title . '. Application sent to our HR department for approval.</strong>';
+				echo '<div class="alert alert-success"><strong>Congratulations, you qualified for the position of ' . $title . '. Application sent to our HR department for approval.</strong></div>';
 
 			}
 

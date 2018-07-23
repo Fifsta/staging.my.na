@@ -162,7 +162,7 @@ class Nmh_model extends CI_Model{
 	}
 	
 	//+++++++++++++++++++++++++++
-	//NA CONTENT
+	//NA CONTENT 
 	//++++++++++++++++++++++++++
 	function na_content($id, $type, $client_id,$social_type)
 	{
