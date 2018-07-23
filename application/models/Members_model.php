@@ -326,9 +326,8 @@ class Members_model extends CI_Model
 				{
 
 				}
-				echo '<div class="form-group row">
-					  <label for="city" class="col-sm-1 col-form-label">City</label>
-					  	<div class="col-sm-10">
+				echo '<div class="form-group">
+					  <label for="city">City</label>
 							<select onchange="populateSuburb(this.value);" id="city" name="city"  class="form-control">
 							<option value="0">Please Select your City</option>';
 
@@ -353,7 +352,6 @@ class Members_model extends CI_Model
 
 				}
 				echo '</select>
-					</div>
 				  </div>';
 			}
 			else
@@ -386,9 +384,8 @@ class Members_model extends CI_Model
 
 			}
 
-			echo '<div class="form-group row">
-					  <label for="city" class="col-sm-1 col-form-label">Suburb</label>
-                  	  <div class="col-sm-10">
+			echo '<div class="form-group">
+					  <label for="city">Suburb</label>
               			<select id="suburb" name="suburb" class="form-control">
 						<option value="0">Please Select your Suburb</option>';
 
@@ -413,7 +410,6 @@ class Members_model extends CI_Model
 			}
 			echo '</select>
 
-                </div>
               </div>';
 		}
 		else

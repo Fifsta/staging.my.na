@@ -3867,8 +3867,6 @@ class Vacancy_model extends CI_Model{
             $this->output->set_header("Access-Control-Allow-Origin: *");
         //}
 
-		
-
 
         //$this->output->set_header("Access-Control-Allow-Origin: https://ncci.my.na");
         $this->output->set_header( "Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS" );
@@ -3908,9 +3906,7 @@ class Vacancy_model extends CI_Model{
 			{
 
 					$data['error'] =  $this->upload->display_errors();
-
-					  
-					
+		
 			}	
 			else
 			{	
