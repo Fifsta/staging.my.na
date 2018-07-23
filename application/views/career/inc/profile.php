@@ -27,14 +27,14 @@
 						<div class="col-sm-12 col-md-6 col-lg-6">
 							<div class="form-group">
 								<label>Job Title</label>
-								<input type="text" class="form-control input-sm" placeholder="Job Title" value="<?php echo $bio['job_title']; ?>">
+								<input type="text" class="form-control input-sm" placeholder="Job Title" name="job_title" value="<?php echo $bio['job_title']; ?>">
 							</div>
 						</div>
 
 						<div class="col-sm-12 col-md-6 col-lg-6">
 							<div class="form-group">
 								<label>Highest Qualification</label>
-								<input type="text" class="form-control input-sm" placeholder="Qualification" value="<?php echo $bio['qualification']; ?>">
+								<input type="text" name="qualification" class="form-control input-sm" placeholder="Qualification" value="<?php echo $bio['qualification']; ?>">
 							</div>
 						</div>
 
@@ -55,28 +55,28 @@
 						<div class="col-sm-12 col-md-6 col-lg-6">
 							<div class="form-group">
 								<label>Nationality</label>
-								<input type="text" class="form-control input-sm" placeholder="Nationality" value="<?php echo $bio['nationality']; ?>">
+								<input type="text" class="form-control input-sm" name="nationality" placeholder="Nationality" value="<?php echo $bio['nationality']; ?>">
 							</div>
 						</div>	
 
 						<div class="col-sm-12 col-md-6 col-lg-6">
 							<div class="form-group">
 								<label>Current Salary</label>
-								<input type="text" class="form-control input-sm" placeholder="Current Salary" value="<?php echo $bio['current_tcc']; ?>">
+								<input type="text" class="form-control input-sm" name="current_tcc" placeholder="Current Salary" value="<?php echo $bio['current_tcc']; ?>">
 							</div>
 						</div>
 
 						<div class="col-sm-12 col-md-6 col-lg-6">
 							<div class="form-group">
 								<label>Expected Salary</label>
-								<input type="text" class="form-control input-sm" placeholder="Expected Salary" value="<?php echo $bio['expected_tcc']; ?>">
+								<input type="text" class="form-control input-sm" name="expected_tcc" placeholder="Expected Salary" value="<?php echo $bio['expected_tcc']; ?>">
 							</div>
 						</div>	
 
 						<div class="col-sm-12 col-md-6 col-lg-6">
 							<div class="form-group">
 								<label>ID Number</label>
-								<input type="text" class="form-control input-sm" placeholder="ID Number" value="<?php echo $bio['id_number']; ?>">
+								<input type="text" class="form-control input-sm" placeholder="ID Number" name="id_number" value="<?php echo $bio['id_number']; ?>">
 							</div>
 						</div>
 
@@ -101,7 +101,9 @@
 			                    </select>
 							</div>
 
-		                    <div class="form-group" id="d_toggle" style="display:none">
+							<?php if($disabled == 'N') { $d_show = 'display:none'; } else { $d_show = ''; } ?>
+
+		                    <div class="form-group" id="d_toggle" style="<?php echo $d_show; ?>">
 		                        <label for="disability">What is the nature of your disability?</label>
 		                        <textarea name="disability" cols="" rows="" class="form-control disability"></textarea>
 	                    	</div>
@@ -118,7 +120,9 @@
 			                    </select>
 							</div>
 
-			                <div class="form-group" style="display:none" id="dr_toggle">
+							<?php if($drivers == 'N') { $dr_show = 'display:none'; } else { $dr_show = ''; } ?>
+
+			                <div class="form-group" style="<?php echo $dr_show; ?>" id="dr_toggle">
 			                    <label for="drivers_type">Type of License</label>
 		                        <select class="form-control" name="drivers_type">
 		                            <option value="B" <?php if($bio['drivers_type'] == 'B') { echo 'selected'; } ?>>B</option>
