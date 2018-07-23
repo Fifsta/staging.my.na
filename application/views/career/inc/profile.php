@@ -93,24 +93,6 @@
 
 
 						<div class="col-sm-12 col-md-6 col-lg-6">
-							<div class="form-group">
-			                    <label>Are You Disabled:</label>
-			                    <select class="form-control" name="disabled" id="disabled">
-			                        <option value="N" <?php if($bio['disabled'] == 'N') { echo 'selected'; } ?>>No</option>
-			                        <option value="Y" <?php if($bio['disabled'] == 'Y') { echo 'selected'; } ?>>Yes</option>
-			                    </select>
-							</div>
-
-							<?php if($bio['disabled'] == 'N') { $d_show = 'display:none'; } else { $d_show = ''; } ?>
-
-		                    <div class="form-group" id="d_toggle" style="<?php echo $d_show; ?>">
-		                        <label for="disability">What is the nature of your disability?</label>
-		                        <textarea name="disability" cols="" rows="" class="form-control disability"></textarea>
-	                    	</div>
-						</div>				
-
-
-						<div class="col-sm-12 col-md-6 col-lg-6">
 
 							<div class="form-group">
 								<label>Drivers License</label>
@@ -136,6 +118,24 @@
 			                </div>
 
 						</div>
+
+						<div class="col-sm-12 col-md-6 col-lg-6">
+							<div class="form-group">
+			                    <label>Are You Disabled:</label>
+			                    <select class="form-control" name="disabled" id="disabled">
+			                        <option value="N" <?php if($bio['disabled'] == 'N') { echo 'selected'; } ?>>No</option>
+			                        <option value="Y" <?php if($bio['disabled'] == 'Y') { echo 'selected'; } ?>>Yes</option>
+			                    </select>
+							</div>
+
+							<?php if($bio['disabled'] == 'N') { $d_show = 'display:none'; } else { $d_show = ''; } ?>
+
+		                    <div class="form-group" id="d_toggle" style="<?php echo $d_show; ?>">
+		                        <label for="disability">What is the nature of your disability?</label>
+		                        <textarea name="disability" cols="" rows="" class="form-control disability"></textarea>
+	                    	</div>
+						</div>				
+
 
                       <div class="col-sm-12">
                         <div class="form-group">

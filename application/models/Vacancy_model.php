@@ -873,7 +873,7 @@ class Vacancy_model extends CI_Model{
 		$expected_tcc = $this->input->post('expected_tcc', TRUE);
 		$id_number = $this->input->post('id_number', TRUE);
 		$bee = $this->input->post('bee', TRUE);
-		$marital = $this->input->post('matital', TRUE);
+		$marital = $this->input->post('marital', TRUE);
 		$nationality = $this->input->post('nationality', TRUE);
 
 		$disabled = $this->input->post('disabled', TRUE);
