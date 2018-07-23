@@ -874,6 +874,7 @@ class Vacancy_model extends CI_Model{
 		$id_number = $this->input->post('id_number', TRUE);
 		$bee = $this->input->post('bee', TRUE);
 		$marital = $this->input->post('matital', TRUE);
+		$nationality = $this->input->post('nationality', TRUE);
 
 		$disabled = $this->input->post('disabled', TRUE);
 
@@ -891,8 +892,9 @@ class Vacancy_model extends CI_Model{
 			$drivers_type = '';
 		}
 
-
 		$bio_update = array(
+			'job_title' => $job_title,
+			'qualification' => $qualification,
 			'marital_status' => $marital,
 			'nationality' => $nationality,
 			'bee' => $bee,
@@ -901,19 +903,13 @@ class Vacancy_model extends CI_Model{
 			'drivers' => $drivers,
 			'drivers_type' => $drivers_type,
 			'id_number' => $id_number,
-			'box_address' => $box_address,
-			'address' => $address
+			'current_tcc' => $current_tcc,
+			'expected_tcc' => $expected_tcc
 		);
 
 		if($query2->result()) {
 
-
-			$this->db->where('client_id', $client_id);
 			$this->db->update('applicant_bio', $bio_update);
-
-		} else {
-
-			$this->db->insert('applicant_bio', $bio_update);
 
 		}
 
