@@ -67,8 +67,8 @@ if(isset($_SERVER['MY_WORKER']) && $_SERVER['MY_WORKER'] == 'YES')
 }else{
 
   //lIVE
-  $config['site_url'] = 'https://my.na';
-  $config['base_url'] = 'https://my.na/';
+  $config['site_url'] = 'https://www.my.na';
+  $config['base_url'] = 'https://www.my.na/';
   $config['analytics'] = '<script type="text/javascript">'.$UA.'</script>';
 
 }
