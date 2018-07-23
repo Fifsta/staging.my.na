@@ -6,6 +6,8 @@
 
 <div class="spacer"></div>
 
+<?php ?>
+
 <script>
 
 $(document).ready(
