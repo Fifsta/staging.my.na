@@ -8,8 +8,8 @@ class Vacancy extends CI_Controller {
 	 * 
 	 */
 	 
-	function Vacancy($rep_id = '')
-	{
+    function __construct()
+    {
 		parent::__construct();
         $this->load->model('vacancy_model');
 	}
