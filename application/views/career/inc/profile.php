@@ -22,7 +22,7 @@
 					</figure>
 				</div>
 				<div>
-					<form action="<?php echo site_url('/')?>vacancy/update_details" method="post" accept-charset="utf-8" id="add-img" name="add-img" enctype="multipart/form-data">
+					<form action="<?php echo site_url('/')?>vacancy/update_general_details" method="post" accept-charset="utf-8" id="add-img" name="add-img" enctype="multipart/form-data">
 					<div class="row">
 						<div class="col-sm-12 col-md-6 col-lg-6">
 							<div class="form-group">
