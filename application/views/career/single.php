@@ -212,8 +212,6 @@ if(strpos($row->LOGO, '.')){
 
 				}
 			});
-
-
 		});
 		load_yzx('all', 4, 'side_block_1');
     });

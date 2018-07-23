@@ -41,7 +41,7 @@
 						<div class="col-sm-12 col-md-6 col-lg-6">
 							<div class="form-group">
 								<label>Marital Status</label>
-				                    <select name="marital" id="marital">
+				                    <select class="form-control" name="marital" id="marital">
 				                        <option value="">Choose a Option</option>
 				                        <option value="Single" <?php if($bio['marital_status'] == 'Single') { echo 'selected'; } ?>>Single</option>
 				                        <option value="Married" <?php if($bio['marital_status'] == 'Married') { echo 'selected'; } ?>>Married</option>
