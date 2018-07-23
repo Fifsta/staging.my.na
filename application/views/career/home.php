@@ -27,7 +27,9 @@ $this->load->view('inc/header');
 <nav id="bread">
   <div class="container">
     <ol class="breadcrumb">
-
+       <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>" itemprop="url"><span itemprop="title">My</span></a></li>
+       <li class="breadcrumb-item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="<?php echo site_url('/');?>careers" itemprop="url"><span itemprop="title">Careers</span></a> </li>    
+       <li class="breadcrumb-item active">Career Profile</li>
     </ol>
   </div>
 </nav>
@@ -61,8 +63,30 @@ $this->load->view('inc/header');
 <?php $this->load->view('inc/footer');?>  
 
 <script src="<?php echo base_url('/')?>redactor/redactor/redactor.min.js?v=1"></script> 
-<script src="<?php echo base_url('/');?>js/jquery.rating.pack.js" type="text/javascript"></script> 
 
+<script  type="text/javascript">
+
+    //Toggle Disadvatage
+    $("#disabled").change(function() {
+        if(this.checked) {
+            $("#d_toggle").toggle();
+        } else {
+            $("#d_toggle").toggle();
+        }
+    });
+
+
+    //Toggle Drivers
+    $("#drivers").change(function() {
+        if(this.value == 'Y') {
+            $("#dr_toggle").toggle();
+        } else {
+            $("#dr_toggle").toggle();
+        }
+    });
+
+
+</script> 
 
 <script type="application/ld+json">
 {

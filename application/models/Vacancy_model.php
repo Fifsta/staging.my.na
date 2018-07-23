@@ -867,120 +867,32 @@ class Vacancy_model extends CI_Model{
 
 		$client_id = $this->session->userdata('id');
 
-		$name = $this->input->post('name', TRUE);
-		$surname = $this->input->post('surname', TRUE);
-		$gender = $this->input->post('gender', TRUE);
-		$marital = $this->input->post('marital', TRUE);
+		$job_title = $this->input->post('job_title', TRUE);
+		$qualification = $this->input->post('qualification', TRUE);
+		$current_tcc = $this->input->post('current_tcc', TRUE);
+		$expected_tcc = $this->input->post('expected_tcc', TRUE);
 		$id_number = $this->input->post('id_number', TRUE);
-
-		$email = $this->input->post('email', TRUE);
-		$email = trim($email);
-
-		$tel = $this->input->post('tel', TRUE);
-		$cell = $this->input->post('cell', TRUE);
-
-		$country = $this->input->post('country', TRUE);
-		$region = $this->input->post('region', TRUE);
-		$city = $this->input->post('city', TRUE);
-
-		$nationality = $this->input->post('nationality', TRUE);
-
-		$address = $this->input->post('address', TRUE);
-		$box_address = $this->input->post('box_address', TRUE);
-
-		$current_employee = $this->input->post('current_employee', TRUE);
-		if($current_employee != 'Y') { $current_employee = 'N'; }
-
-		$rpl = $this->input->post('rpl', TRUE);
-		if($rpl != 'Y') { $rpl = 'N'; }
-
 		$bee = $this->input->post('bee', TRUE);
+		$marital = $this->input->post('matital', TRUE);
 
 		$disabled = $this->input->post('disabled', TRUE);
-		if($disabled != 'Y') { $disabled = 'N'; }
 
-		$disability = $this->input->post('disability', TRUE);
-
-
-		$drivers = $this->input->post('drivers', TRUE);
-		if($drivers != 'Y') { $drivers = 'N'; }
-
-		$drivers_type = $this->input->post('drivers_type', TRUE);
-
-		$temp_work = $this->input->post('temp_work', TRUE);
-		if($temp_work != 'Y') { $temp_work = 'N'; }
-
-
-		$dob = $this->input->post('dob', TRUE);
-		$dob = date('Y-m-d', strtotime($dob));
-
-		//CHECK IF USER EXISTS IN CLIENTS
-		$query = $this->db->query("SELECT * FROM u_client WHERE ID = '".$client_id."'", FALSE);
-
-
-		if($query->result()){
-
-			$row = $query->row();
-
-			$val = FALSE;
-
-
-			//UPDATE U_CLIENT TABLE
-			if($name != "") {
-				$data['CLIENT_NAME'] = $name;
-				$val = TRUE;
-			}
-			if($surname != "") {
-				$data['CLIENT_SURNAME'] = $surname;
-				$val = TRUE;
-			}
-			if($dob != "") {
-				$data['CLIENT_DATE_OF_BIRTH'] = $dob;
-				$val = TRUE;
-			}
-			if($country != "") {
-				$data['CLIENT_COUNTRY'] = $country;
-				$val = TRUE;
-			}
-			if($region != "") {
-				$data['CLIENT_REGION'] = $region;
-				$val = TRUE;
-			}
-			if($city != "") {
-				$data['CLIENT_CITY'] = $city;
-				$val = TRUE;
-			}
-			if($gender != "") {
-				$data['CLIENT_GENDER'] = $gender;
-				$val = TRUE;
-			}
-
-			if($tel != "") {
-				$data['CLIENT_TELEPHONE'] = $tel;
-				$val = TRUE;
-			}
-
-			if($row->VERIFIED == 'N') {
-				if($cell != '') {
-					$data['CLIENT_CELLPHONE'] = $cell;
-					$val = TRUE;
-				}
-			}
-
-			if($val == TRUE) {
-
-				$this->db->where('ID', $row->ID);
-				$this->db->update('u_client', $data);
-
-			}
-
+		if($disabled=='Y') {
+			$disability = $this->input->post('disability', TRUE);
+		}else{
+			$disability = '';
 		}
 
-		//CHECK IF USER EXISTS IN CLIENTS
-		$query2 = $this->db->query("SELECT * FROM applicant_bio WHERE client_id = '".$client_id."'", FALSE);
+		$drivers = $this->input->post('drivers', TRUE);
+
+		if($drivers=='Y') {
+			$drivers_type = $this->input->post('drivers_type', TRUE);
+		}else{
+			$drivers_type = '';
+		}
+
 
 		$bio_update = array(
-			'client_id' => $client_id,
 			'marital_status' => $marital,
 			'nationality' => $nationality,
 			'bee' => $bee,
