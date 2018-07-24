@@ -3597,9 +3597,7 @@ function un_clean_url($str)
 		}else{
 			
 			$this->load->view('login', $data); 
-		}
-		
-       
+		}    
 
 	}
 
