@@ -82,22 +82,15 @@ if($this->input->get('debug')){
 
 	?>
 
-	$(window).load(function () {
-
-		<?php if(!$this->session->userdata('id')){ ?>
+	function scroll_Over() {
 
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 
-	        $("body,html").animate(
-	        {
-	            scrollTop : 500
-	        }, 400);
+	        $("body,html").animate({scrollTop : 500}, 400);
 
 		}
-
-	<?php } ?>
-
-	});
+		
+	};
 
 
     $(document).on('click', '.gdpr_decline', function(e) {
@@ -143,6 +136,12 @@ if($this->input->get('debug')){
 
 
 	$(document).ready( function(){
+
+		<?php if(!$this->session->userdata('id')){ ?>
+
+			scroll_oevr();
+
+		}
 
 		load_my_na_business();
 
