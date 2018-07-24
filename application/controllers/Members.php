@@ -1269,7 +1269,7 @@ class Members extends CI_Controller {
 			$data['basicmsg'] = 'Thank you, we have verified your account. Please login below';
 			$data['id'] = $id;
 			$data['first'] = 'Y';
-			$this->load->view('home',$data);
+			$this->load->view('login',$data);
 			
 		}else{
 			
@@ -1304,7 +1304,7 @@ class Members extends CI_Controller {
 		}else{
 				
 				$data['error'] = 'Sorry, you have been logged out of My.Na';
-				$this->load->view('home' , $data);
+				$this->load->view('login' , $data);
 			  
 		 }
 		
@@ -1333,7 +1333,7 @@ class Members extends CI_Controller {
 		}else{
 				
 				$data['error'] = 'Sorry, you have been logged out of My.Na';
-				$this->load->view('home' , $data);
+				$this->load->view('login' , $data);
 			  
 		 }
 		
@@ -1488,7 +1488,7 @@ class Members extends CI_Controller {
 		
 		}else{
 			
-				$this->load->view('home');
+				$this->load->view('login');
 			  
 		 }
 	
@@ -1554,7 +1554,7 @@ class Members extends CI_Controller {
 		
 		}else{
 				
-				$this->load->view('home');
+				$this->load->view('login');
 			  
 		 }
 	
@@ -1911,7 +1911,7 @@ class Members extends CI_Controller {
 		
 		}else{
 			
-			$this->load->view('home');
+			$this->load->view('login');
 			  
 		 }
 	
@@ -2343,7 +2343,7 @@ class Members extends CI_Controller {
 		}else{
 				
 				$data['error'] = 'Sorry, you have been logged out of My.Na';
-				$this->load->view('home' , $data);
+				$this->load->view('login' , $data);
 			  
 		 }
 		
@@ -2377,7 +2377,7 @@ class Members extends CI_Controller {
 		}else{
 				
 				$data['error'] = 'Sorry, you have been logged out of My.Na';
-				$this->load->view('home' , $data);
+				$this->load->view('login' , $data);
 			  
 		 }
 		
@@ -3295,7 +3295,7 @@ function un_clean_url($str)
 			$data['redirect'] =  $referer;
 			$this->session->sess_destroy();
 			$data['basicmsg'] = 'Please log in below!';
-			$this->load->view('home' , $data);
+			$this->load->view('login' , $data);
 			
 		}else{
 			
@@ -3308,13 +3308,13 @@ function un_clean_url($str)
 
 	function forgot_password(){
 
-		$this->load->view('home' , $data);
+		$this->load->view('login' , $data);
 	}
 	
 	function unsubscribe_daily($id = ''){
 
 		$data['unsubscribe_daily'] = 'Y';
-		$this->load->view('home' , $data);
+		$this->load->view('login' , $data);
 	}
 	
 	public function encrypt()
@@ -3534,7 +3534,7 @@ function un_clean_url($str)
         
 		}else{
 			
-			$this->load->view('home');
+			$this->load->view('login');
 		}
 
 	}
