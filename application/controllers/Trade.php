@@ -194,14 +194,14 @@ class Trade extends CI_Controller {
 
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-		//if ( ! $q = $this->cache->get('product_results_'.$main_cat.'_'.$sub_cat.'_'.$sub_sub_cat.'_'.$sub_sub_sub_cat))
-		//{
+		if ( ! $q = $this->cache->get('product_q_results_'.$main_cat.'_'.$sub_cat.'_'.$sub_sub_cat.'_'.$sub_sub_sub_cat.'_'.$location.'_'.$suburb.'_'.$price_from.'_'.$price_to.'_'.$bus_id.'_'.$sort.'_'.$limit.'_'.$offset))
+		{
 
 			$q = $this->trade_search_model->get_query($main_cat, $sub_cat, $sub_sub_cat, $sub_sub_sub_cat, $location, $suburb, $price_from, $price_to ,$main_cat_id  ,$sub_cat_id , $sub_sub_cat_id , $sub_sub_sub_cat_id, $key, $extras, $sort,  $bus_id, $limit, $offset);
 
-			//$this->cache->save('product_results_'.$main_cat.'_'.$sub_cat.'_'.$sub_sub_cat.'_'.$sub_sub_sub_cat, $q, 600);
+			$this->cache->save('product_q_results_'.$main_cat.'_'.$sub_cat.'_'.$sub_sub_cat.'_'.$sub_sub_sub_cat.'_'.$location.'_'.$suburb.'_'.$price_from.'_'.$price_to.'_'.$bus_id.'_'.$sort.'_'.$limit.'_'.$offset, $q, 1440);
 
-		//}
+		}
 
 		//echo $q['debug'];
 		//PAGINATION

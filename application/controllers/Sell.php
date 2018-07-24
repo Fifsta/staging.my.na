@@ -107,8 +107,8 @@ class Sell extends CI_Controller {
 	{
 		if($this->session->userdata('id'))
 		{
-
-			redirect('/sell/my_trade/', 'refresh');
+ 
+			$this->load->view('adverts/listing_featured_page', $data);
 
 		}else{
 

@@ -83,7 +83,7 @@ class A extends CI_Controller {
 								
 			$business = $this->input->post('srch_business', TRUE);
 			$businessURL = $this->url_encode($business);					
-		}
+		} 
 
 		if(trim($c_type) == 'main'){
 			
