@@ -3086,6 +3086,8 @@ function un_clean_url($str)
 	{
 			if($email = trim($this->input->post('email', TRUE))){
 				
+					$this->load->library('encryption');
+
 					$first = $this->input->post('first_log', TRUE);
 					$pass = $this->input->post('pass', TRUE);
 					$sess = $this->input->post('rememberme', TRUE);
