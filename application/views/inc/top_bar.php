@@ -10,12 +10,10 @@
 		<div class="row">
             <div style="width:auto;display:none" id="tstbox"></div>
 			<div class="col-sm-1">
-                <a href="<?php echo site_url('/'); ?>">
 				<div class="slogo">
-					<img src="images/logo-main.png">
+					<a href="<?php echo site_url('/'); ?>"><img src="images/logo-main.png"></a>
 					<div>find • list • buy • sell</div> 
 				</div>
-                </a>
 			</div>
 			<div class="col-sm-10">
 			

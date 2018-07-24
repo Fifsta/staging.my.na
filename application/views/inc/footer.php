@@ -140,7 +140,6 @@ if($this->input->get('debug')){
 		<?php if(!$this->session->userdata('id')){ ?>
 
 			scroll_over();
-
 		
 		<?php } ?>
 
