@@ -86,7 +86,7 @@ if($this->input->get('debug')){
 
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 
-	        $("body,html").animate({scrollTop : 500}, 400);
+	        $("body,html").animate({scrollTop : 450}, 400);
 
 		}
 
