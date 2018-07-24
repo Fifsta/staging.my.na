@@ -48,7 +48,7 @@ $this->load->view('inc/header', $header);
 
   <div class="row">
 
-    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-4 order-md-2 order-sm-1 order-lg-2 order-xl-4" id="sidebar">
+    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-3 order-xl-3" id="sidebar">
 
       <?php $this->load->view('inc/login'); ?>
       <?php $this->load->view('inc/weather');?>
@@ -56,7 +56,7 @@ $this->load->view('inc/header', $header);
 
     </div>
 
-    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
+    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
 
         <section id="list">
 
