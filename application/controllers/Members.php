@@ -3201,7 +3201,7 @@ function un_clean_url($str)
 									
 								}else{
 		
-									redirect('/members/home/');
+									redirect(site_url('/'), 'refresh');
 		
 								}
 		
