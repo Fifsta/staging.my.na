@@ -52,25 +52,25 @@
 			<div class="col-sm-1 text-right">
                 <nav id="menu" class="btn-group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-icon="fa-bars"></button>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-header">My Namibia Menu</li>
-                            <li><a href="#">Business</a>
-                                <ul>
-                                    <?php $this->my_na_model->show_popular_cats($t = true); ?>
-                                </ul>    
-                            </li>
-                            <li><a href="<?php echo site_url('/'); ?>classifieds">Classifieds</a></li>
-                            <li><a href="<?php echo site_url('/'); ?>buy/property">Properties</a></li>
-                            <li><a href="<?php echo site_url('/'); ?>buy/car-bikes-and-boats">Vehicles</a></li>
-                            <!--<li><a href="<?php echo site_url('/'); ?>deals/">Deals</a></li>-->
-                            <li><a href="<?php echo site_url('/'); ?>trade/auctions/">Auctions</a></li>
-                            <div class="dropdown-divider"></div>
-                            <li><a href="<?php echo site_url('/'); ?>members/add_business">List a Business</a></li>
-                            <li><a href="<?php echo site_url('/'); ?>sell/index/0/motor">Sell a Car</a></li>
-                            <li><a href="<?php echo site_url('/'); ?>sell/index/0/property">Sell a Property</a></li>
-                            <li><a href="<?php echo site_url('/'); ?>sell/index/0/general">Sell Anything</a></li>
-                            <li><a href="<?php echo site_url('/'); ?>sell/index/0/auction">Create an Auction</a></li>
-                        </ul>                  
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">My Namibia Menu</li>
+                        <li><a href="#">Business</a>
+                            <ul>
+                                <?php $this->my_na_model->show_popular_cats($t = true); ?>
+                            </ul>    
+                        </li>
+                        <li><a href="<?php echo site_url('/'); ?>classifieds">Classifieds</a></li>
+                        <li><a href="<?php echo site_url('/'); ?>buy/property">Properties</a></li>
+                        <li><a href="<?php echo site_url('/'); ?>buy/car-bikes-and-boats">Vehicles</a></li>
+                        <!--<li><a href="<?php echo site_url('/'); ?>deals/">Deals</a></li>-->
+                        <li><a href="<?php echo site_url('/'); ?>trade/auctions/">Auctions</a></li>
+                        <div class="dropdown-divider"></div>
+                        <li><a href="<?php echo site_url('/'); ?>members/add_business">List a Business</a></li>
+                        <li><a href="<?php echo site_url('/'); ?>sell/index/0/motor">Sell a Car</a></li>
+                        <li><a href="<?php echo site_url('/'); ?>sell/index/0/property">Sell a Property</a></li>
+                        <li><a href="<?php echo site_url('/'); ?>sell/index/0/general">Sell Anything</a></li>
+                        <li><a href="<?php echo site_url('/'); ?>sell/index/0/auction">Create an Auction</a></li>
+                    </ul>                  
                 </nav>
 			</div>
 		</div>
