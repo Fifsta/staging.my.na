@@ -12,95 +12,101 @@
  //add css, IE7 js files here before the head tag
  
  ?>
-   
+ 
 </head>
-<body>
 
- <?php 
- //+++++++++++++++++
- //LOAD NAVIGATION
- //+++++++++++++++++
- $nav['section'] = '';
- $this->load->view('inc/navigation', $nav);
- ?>
-    <!-- END Navigation -->
-   <!-- Part 1: Wrap all content here -->
-    <div id="wrap">
-    
-      <!-- Begin page content -->
-       <div class="container" id="home_container">
-       	 <div class="clearfix" style="height:20px;"></div>
-		 <div class="row" style="height:auto;">
-         	<div class="span12">
-        		<h1><?php echo $heading;?> <small>My Namibia &trade;</small></h1>
-            </div>
-            <div class="clearfix" style="height:80px;"></div>
-			
-         </div>
-    
-     <!-- Example row of columns -->
-      <div class="row">
-        
-        <div class="span12">
-         	<div class="results_div">
-         		<?php echo $body;?>
-       		</div>
-        </div>
-        
-        
-      </div>
-     
-	 </div> 
-     <!-- /container - end content --> 
-		<div class="clearfix" style="height:90px;"></div>
-     	<!-- /home-bak  -->
+<body id="top">
 
-  
+<?php $this->load->view('inc/top_bar'); ?>
 
-    <?php 
- //+++++++++++++++++
- //LOAD FOOTER
- //+++++++++++++++++
- $footer['foo'] = '';
- $this->load->view('inc/footer', $footer);
- ?>  
-  </div>
-    <!-- JAvascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript">
-$('[rel=tooltip]').tooltip();
+<nav id="bread">
+	<div class="container">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="#">My.na</a></li>
+		    <li class="breadcrumb-item"><?php echo $heading; ?></li>
+		  </ol>
+	</div>
+</nav>
+ 
+<div class="container"> 
+	<div class="row">
+		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-3 order-xl-3" id="sidebar">
+			<?php $this->load->view('inc/login'); ?>
+		
+			<?php $this->load->view('inc/adverts'); ?>
+		</div>
 
-function load_sub_cats(id){
-	 
-	$('#pop_cats').html('<div style="text-align:center;padding-top:45%"><img src="<?php echo base_url('/');?>img/load.gif" /><br /><b>Loading...</b></div>');
-	$.ajax({
-			type: 'get',
-			url: '<?php echo site_url('/').'my_na/get_sub_cats/';?>'+id ,
-			success: function (data) {
-				
-				 $('#pop_cats').fadeIn().html(data);
-				
-				
-			}
-		});	
-	
+		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
+			<div class="row">
+				<div class="col-md-12">
+
+					<section id="classifieds">
+						<div class="heading" style="margin-bottom:10px">
+							<h2 data-icon="fa-newspaper-o"><?php echo $heading;?> <strong>My Namibia &trade;</strong></h2>
+							<ul class="options">
+
+							</ul>
+						</div>
+						
+						<div id="classifieds_content" class=""></div>
+						
+					</section> 
+
+		         	<div class="results_div">
+		         		<?php echo $body;?>
+		       		</div>
+
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
+
+<div class="spacer"></div>
+
+<?php $this->load->view('inc/footer');?>	
+
+<script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "name" : "My Namibia",
+  "description" : "The biggest online portal for Namibians to find what they are lookin for. Business, Products, Services. Find What you !na.",
+  "brand" : { 
+  		"@type": "brand",
+		"image" : "https://my.na/images/logo-main.png"
+  },
+  "sameAs": [
+    "https://www.facebook.com/mynamibia/",
+    "https://twitter.com/MyNamibia"
+  ],  
+  "address": {
+	    "@type": "PostalAddress",
+	    "streetAddress": "11B Genl. Murtala Muhammed Ave Windhoek, Namibia"
+  },  
+  "contactPoint": {
+	    "@type": "ContactPoint",
+	    "contactType" : "customer service",
+	    "email" : "info@my.na",
+	    "url" : "https://www.my.na",
+	    "telephone" : "+264 61 309 591"
+  }
 }
 
-$('#reload_main').live('click',function(){
+</script>
 
-	$('#pop_cats').html('<div style="text-align:center;padding-top:45%"><img src="<?php echo base_url('/');?>img/load.gif" /><br /><b>Reloading...</b></div>');
-	$.ajax({
-			type: 'get',
-			url: '<?php echo site_url('/').'my_na/reload_main_cats/';?>',
-			success: function (data) {
-				
-				 $('#pop_cats').fadeIn().html(data);
-				
-				
-			}
-		});	
-});
+<script type="application/ld+json">
+
+{
+  "@context" : "http://schema.org",
+  "@type" : "GeoCoordinates", 
+  "latitude" : "-22.5480965",
+  "longitude" : "17.0872937"                      
+} 
+
 </script>
 
 </body>

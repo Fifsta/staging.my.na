@@ -40,7 +40,7 @@
 				<li><a href="#" data-icon="fa-twitter text-dark"></a></li>
 				<li><li><a href="#" data-icon="fa-youtube text-dark"></a></li>
 			</ul>
-			<small><a href="#">Terms & Conditions</a> | <a href="#">Contact Us</a> | <a href="#">Privacy policy</a> | <?php echo date('Y'); ?> © My Namibia ™</small>
+			<small><a href="<?php echo site_url('/'); ?>page/terms-and-conditions/">Terms & Conditions</a> | <a href="#">Contact Us</a> | <a href="<?php echo site_url('/'); ?>page/privacy-policy-2018/">Privacy policy</a> | <?php echo date('Y'); ?> © My Namibia ™</small>
 		</div>
 	</div>
 </footer>
