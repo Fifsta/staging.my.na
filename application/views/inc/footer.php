@@ -82,18 +82,22 @@ if($this->input->get('debug')){
 
 	?>
 
-		$(window).load(function () {
+	$(window).load(function () {
 
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-        $("body,html").animate(
-        {
-            scrollTop : 500                       // Scroll 500px from top of body
-        }, 400);
-}
+		<?php if(!$this->session->userdata('id')){ ?>
 
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 
+	        $("body,html").animate(
+	        {
+	            scrollTop : 500
+	        }, 400);
 
-		});
+		}
+
+	<?php } ?>
+
+	});
 
 
     $(document).on('click', '.gdpr_decline', function(e) {
