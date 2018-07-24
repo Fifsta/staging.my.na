@@ -20,7 +20,7 @@
     <link rel="apple-touch-icon-precomposed" href="<?php echo base_url('/');?>images/icons/my_na_[57x57].png">
   <link href='//fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-    <script src="<?php echo base_url('/');?>bootstrap_old/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url('/');?>bootstrap/js/bootstrap.min.js"></script>
 
     <style type="text/css">
       body {
