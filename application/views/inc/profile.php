@@ -54,7 +54,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 					<ul>
 						<!--<li><a href="<?php //echo site_url('/');?>members/home/">My Dashboard</a> <span>My account overview</span></li>-->
 						<li><a href="<?php echo site_url('/');?>members/my_profile/">My Profile</a> <span>Change my profile information.</span></li>
-						<li><a href="<?php echo site_url('/');?>members/my_messages/">My Messages</a> <span>All my.na messages</span></li>
+						<!--<li><a href="<?php echo site_url('/');?>members/my_messages/">My Messages</a> <span>All my.na messages</span></li>-->
 						<li><a href="<?php echo site_url('/');?>members/my_products/">My Products</a> <span>All my private products</span></li>
 					</ul>
 				</div>
