@@ -150,7 +150,7 @@ class Nmh extends CI_Controller {
 	//GET PRODUCTS
 	//++++++++++++++++++++++++++
 
-	function get_products()
+function get_products()
 	{
 		$this->output->set_header("Access-Control-Allow-Origin: *");
 		$this->output->set_header( "Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS" );
