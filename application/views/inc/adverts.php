@@ -1,4 +1,3 @@
-<div class="spacer"></div>
 
 <div class="adverts hidden-sm-down" id="advert-box">
 
