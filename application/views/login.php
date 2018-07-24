@@ -11,7 +11,7 @@
   <title>My Namibia</title>
   <meta name="viewport" content="width=device-width">
  
-  <link rel="stylesheet" href="<?php echo base_url('/');?>bootstrap_old/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo base_url('/');?>bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo base_url('/');?>css/skin1-front.css">
   <link rel="shortcut icon" href="<?php echo base_url('/');?>favicon.ico">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo base_url('/');?>images/icons/my_na_[144x144].png">
@@ -20,7 +20,7 @@
     <link rel="apple-touch-icon-precomposed" href="<?php echo base_url('/');?>images/icons/my_na_[57x57].png">
   <link href='//fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-    <script src="<?php echo base_url('/');?>bootstrap_old/js/bootstrap.js"></script>
+    <script src="<?php echo base_url('/');?>bootstrap/js/bootstrap.js"></script>
 
     <style type="text/css">
       body {
@@ -76,7 +76,7 @@
 
 
           if(isset($password_update)){ 
-            $array = array('class' => 'form-signin white_box hide', 'id' =>'form_login');
+            $array = array('class' => 'form-signin white_box d-none', 'id' =>'form_login');
           }else{ 
             $array = array('class' => 'form-signin white_box', 'id' =>'form_login');
           }
@@ -126,7 +126,7 @@
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
-        <button class="btn btn-inverse" type="submit"><i class="icon-lock icon-white"></i> Sign in</button>
+        <button class="btn btn-dark" type="submit"><i class="icon-lock icon-white"></i> Sign in</button>
         <div class="fb-login-button pull-right" data-max-rows="1" data-size="large" data-show-faces="false" data-scope="email" onlogin="checkLoginState()" style="margin-top:-5px;padding:10px 0;" data-auto-logout-link="false"></div>
         <div class="clearfix">&nbsp;</div>
            <p>
@@ -144,7 +144,7 @@
     
     
     <?php //if(isset($pass_update)){?>
-          <div class="tab-pane <?php if(isset($pass_update)){ echo '';}else{ echo 'hide';}?>" id="pass_update">
+          <div class="tab-pane <?php if(isset($pass_update)){ echo '';}else{ echo 'd-none';}?>" id="pass_update">
            <?php echo form_open(site_url('/').'members/pass_update_one', array('class' => 'form-signin white_box', 'name' => 'formpass0'));?>   
             <div class="alert alert-warning" >
              <button type="button" class="close" data-dismiss="alert">×</button>
