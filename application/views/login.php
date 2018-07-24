@@ -11,7 +11,7 @@
   <title>My Namibia</title>
   <meta name="viewport" content="width=device-width">
  
-  <link rel="stylesheet" href="<?php echo base_url('/');?>css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo base_url('/');?>bootstrap_old/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url('/');?>css/skin1-front.css">
   <link rel="shortcut icon" href="<?php echo base_url('/');?>favicon.ico">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo base_url('/');?>img/icons/my_na_[144x144].png">
