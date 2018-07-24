@@ -1,8 +1,8 @@
 <?php
+
 //+++++++++++++++++
 //PROFILE INCLUDE
 //+++++++++++++++++
-
 
 $uris = explode('/', $url);
 
@@ -16,7 +16,6 @@ if(isset($uris[2])) {
 if(isset($uris[3])) {
 	$section_2 = $uris[3];
 }
-
 
 //Toggle My Account
 if($section_1 == 'members' && ($section_2 == 'home' || $section_2 == 'my_profile' || $section_2 == 'my_messages' || $section_2 == '')) { $my_account = 'show'; } else { $my_account = ''; }
@@ -90,31 +89,7 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 			</div>
 		</div>	
 
-		<!--<div class="panel panel-default">
-			<div class="panel-heading" role="tab">
-				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#NamibiaMap" aria-expanded="false" aria-controls="NamibiaMap" data-icon="fa-map-marker">Namibia Map</a></h3>
-			</div>
-			<div id="NamibiaMap" class="panel-collapse collapse" role="tabpanel" aria-labelledby="NamibiaMap">
-				<div class="panel-body">
-					<ul>
-						<li><a href="#">Namibia Map</a> <span>Browse all business locations</span></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading" role="tab">
 
-				<h3 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#profile-accordion" href="#EventsCalendar" aria-expanded="false" aria-controls="EventsCalendar" data-icon="fa-calendar">Events</a></h3>
-			</div>
-			<div id="EventsCalendar" class="panel-collapse collapse" role="tabpanel" aria-labelledby="EventsCalendar">
-				<div class="panel-body">
-					<ul>
-						<li><a href="#">Link</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>-->
 	</div>
 </section>
 <!--profile-->
