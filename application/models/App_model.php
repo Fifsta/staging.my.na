@@ -11,6 +11,303 @@ class App_model extends CI_Model{
 		self::__construct();
  	}
 
+
+
+//++++++++++++++++++++++++++++++ 
+    //FIND USER TYPEHEAD
+    //++++++++++++++++++++++++++++++
+    public function find_users($key)
+    {
+		if(strlen($key) < 2){
+			
+			return;
+		}
+        $key = $this->db->escape_like_str(urldecode($key));
+		
+		$str2 = " (u_client.CLIENT_NAME like '%" . $key . "%' OR u_client.CLIENT_SURNAME like '%" . $key . "%' 
+							OR u_client.CLIENT_EMAIL like '%" . $key . "%' OR u_client.CLIENT_CELLPHONE like '%" . $key . "%' ) ";
+		//MORE THAN 2 WoRDS
+		if (str_word_count($key) > 1)
+		{
+			$str1 = explode(" ", $key);
+			//echo var_dump($str1);
+			$str2 = '';	
+			
+			$c = 0;
+			foreach ($str1 as $keys)
+			{
+				if (count($str1) - 1 == $c)
+				{
+					$end = '';
+				}
+				else
+				{
+					$end = ' AND ';
+
+				}
+				$str2 .= " (u_client.CLIENT_NAME like '%" . $keys . "%' OR u_client.CLIENT_SURNAME like '%" . $keys . "%' 
+							OR u_client.CLIENT_EMAIL like '%" . $keys . "%' OR u_client.CLIENT_CELLPHONE like '%" . $keys . "%' ) " . $end;
+				$c++;
+			}
+		}
+
+		$test = $this->db->query("SELECT u_client.ID as ID,u_client.IS_ACTIVE,u_client.FB_ID, u_client.CLIENT_NAME as FNAME,u_client.VERIFIED,u_client.CLIENT_SURNAME as SNAME,CLIENT_EMAIL as EMAIL,
+								CLIENT_CELLPHONE as CELL, u_client.CLIENT_PROFILE_PICTURE_NAME as IMG
+							 FROM u_client
+							 WHERE ".$str2." LIMIT 15 ", true);
+							 
+		$o['success'] = false;
+		$o['result'] = array();
+		if ($test->result())
+		{
+			$a = array();
+			$this->load->library('encrypt');
+			$o['success'] = true;
+			foreach($test->result() as $row){
+				
+				$row->ACC_link = $this->encrypt->encode(json_encode($row));
+				array_push($a, $row);
+				
+			}
+			
+			$o['result'] = $a;
+			
+
+		} 
+
+
+        $this->output->set_content_type('application/json');
+
+    }
+
+
+
+
+	//+++++++++++++++++++++++++++
+	//REGISTER TOURISM  FUNCTIONS
+	//++++++++++++++++++++++++++
+	function register_tourism($email, $fname, $sname, $dial_code,$cell,$pass,$company,$title,$workshop)
+	{
+
+		$result['msg'] = '';
+		$result['success'] = false;
+
+		$this->load->model('members_model');
+
+		//VALIDATE INPUT
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			$val = FALSE;
+			$error = 'Email address is not valid.';
+		} elseif (($fname == '')) {
+			$val = FALSE;
+			$error = 'Please provide us with your full name.';
+		} else {
+			$val = TRUE;
+		}
+
+
+		if ($val == TRUE) {
+
+			$this->load->library('user_agent');
+
+			$agent = $agent = $this->agent->browser() . ' ver : ' . $this->agent->version();
+
+			$IP = $_SERVER['HTTP_CF_CONNECTING_IP'];
+
+			$insertdata = array(
+				'CLIENT_NAME' => $fname,
+				'CLIENT_SURNAME' => $sname,
+				'CLIENT_EMAIL' => $email,
+				'CLIENT_OCCUPATION' => $title,
+				'CLIENT_PASSWORD'=> $this->members_model->hash_password($email,$pass),
+				'CLIENT_CELLPHONE' => $cell,
+				'DIAL_CODE' => $dial_code,
+				'CLIENT_UA' => $agent,
+				'CLIENT_IP' => $IP,				
+				'IS_ACTIVE' => 'N'
+			);
+
+
+			$this->db->where('CLIENT_EMAIL', $email);
+			$this->db->from('u_client');
+			$query = $this->db->get();
+ 
+			//IF email already exists
+			if ($query->num_rows() > 0) {
+
+				$row = $query->row();
+
+				$result['msg'] = 'A member with the email address ' . $email . ' already exists!';
+				$result['success'] = false;
+				$result['client_id'] = $row->ID;
+				$result['email'] = $email;
+				$result['vcard_link'] = '<a href="'.site_url('/').'app/user_code_tourism/?client_id='.$row->ID.'">Get Vcard</a>';
+
+
+				//UPDATE CERTAIN FIELDS
+				//1. First update u_client_table
+
+				$updatedata = array(
+					'CLIENT_OCCUPATION' => $title
+				);
+				$this->db->where('ID', $row->ID);
+				$this->db->update('u_client', $updatedata);
+
+				
+				//2. Check if user is listed in the extended table
+				$this->db->where('client_id', $row->ID);
+				$this->db->from('u_client_extend');
+				$query2 = $this->db->get();
+
+
+				//IF entry already exists
+				if ($query2->num_rows() > 0) {
+
+				} else {
+
+					$insertdata2 = array(
+						'client_id' => $row->ID,
+						'company' => $company,
+						'workshop' => $workshop
+					);
+					$this->db->insert('u_client_extend', $insertdata2);
+
+					$result['success-company'] = true;
+					$result['client_id'] = $row->ID;
+					$result['email'] = $email;
+					$result['vcard_link'] = '<a href="'.site_url('/').'app/user_code_tourism/?client_id='.$row->ID.'">Get Vcard</a>';
+
+				}
+
+			} else {
+
+				//Insert into u_client
+				$this->db->insert('u_client', $insertdata);
+				$member_id = $this->db->insert_id();
+
+				//Insert into u_client_extend
+				$insertdata2 = array(
+					'client_id' => $member_id,
+					'company' => $company,
+					'workshop' => $workshop
+				);
+				$this->db->insert('u_client_extend', $insertdata2);
+
+
+				//success redirect
+				$result['msg'] = 'Thank you ' . $fname . '';
+				$result['success'] = true;
+				$result['success-company'] = true;
+				$result['client_id'] = $member_id;
+				$result['email'] = $email;
+				$result['vcard_link'] = '<a href="'.site_url('/').'app/user_code_tourism/?client_id='.$member_id.'">Get Vcard</a>';
+
+			}
+
+
+		} else {
+
+			$result['msg'] = $error;
+			$result['success'] = false;
+
+		}
+
+		return $result;
+
+	}
+
+
+//+++++++++++++++++++++++++++
+	//CREATE USER QR CODE
+	//++++++++++++++++++++++++++
+	function get_qrcode_tourism_user($id)
+	{
+		
+
+		$link = S3_URL.'assets/users/qr/'.$id.'_trsm_vcard.jpg';
+
+		
+		//CHECK IF EXISTING FILE EXISTS
+		if (file_exists( $link )) {
+
+			$vcard2 = $link;				
+			$o['success'] = true;
+			$o['qr_code_file'] = $link;
+			$o['code'] = $id.'-MYNA';
+			$o['msg'] = '';
+			
+		} else {
+			
+			//GET CLIENT
+			//$this->db->where('ID', $id);
+			//$subscr = $this->db->get('u_client');
+
+
+			$subscr = $this->db->query("SELECT A.CLIENT_NAME, A.CLIENT_SURNAME, A.CLIENT_TELEPHONE, A.CLIENT_CELLPHONE, A.CLIENT_EMAIL, A.CLIENT_OCCUPATION, B.company
+									   FROM u_client AS A 
+									   LEFT JOIN u_client_extend AS B ON A.ID = B.client_id
+									   WHERE A.ID = '".$id."'
+									   ", TRUE);
+
+
+
+			if($subscr->result()){
+				$this->load->library('ciqrcode');
+				$subscr_row = $subscr->row();
+				//BUILD DATA
+				$url = site_url('/').'vcard/'.$subscr_row->CLIENT_NAME.' ' .$subscr_row->CLIENT_SURNAME.'/'.$id.'/';
+				$web = '';$tel = '';
+				if($subscr_row->CLIENT_TELEPHONE != ''){
+
+					$tel = 'TEL;WORK;VOICE:' . trim($subscr_row->CLIENT_TELEPHONE) . "\n";
+
+				}
+				if($subscr_row->CLIENT_CELLPHONE != ''){
+
+					$tel = 'TEL;WORK;VOICE:' . trim($subscr_row->CLIENT_CELLPHONE) . "\n";
+
+				}
+
+				// here our data
+				$vcard1 = 'BEGIN:VCARD'."\n";
+				$vcard1 .= 'N:' . ucwords(trim($subscr_row->CLIENT_NAME.' ' .$subscr_row->CLIENT_SURNAME)) . "\n";
+				$vcard1 .= 'EMAIL:' . trim($subscr_row->CLIENT_EMAIL) . "\n";
+				$vcard1 .= $tel;
+				$vcard1 .= 'ORG:' . trim($subscr_row->company) . "\n";
+				$vcard1 .= 'END:VCARD';
+
+				$params['data'] = $vcard1;
+				$params['level'] = 'Q';
+				$params['size'] = 4;
+				$params['savename'] = BASE_URL .'assets/users/qr/'.$id.'_trsm_vcard.jpg';
+				$this->ciqrcode->generate($params);
+				//SEND TO BUCKET
+				$this->load->model('gcloud_model');
+				$out = $this->gcloud_model->upload_gc_bucket($params['savename'] , '/assets/users/qr/');
+				
+				$vcard2 = $link;
+				$o['success'] = true;
+				$o['qr_code_file'] = $link;
+				$o['code'] = $id.'-MYNA';
+				$o['msg'] = '';
+				
+			}else{
+		
+				$o['success'] = false;
+				$o['qr_code_file'] = '';
+				$o['code'] = $id.'-MYNA';
+				$o['msg'] = 'User not found';
+		
+			
+			}
+				
+		}
+		return $o;
+	}
+
+
+
+
 	//+++++++++++++++++++++++++++
 	//CREATE QR CODE
 	//++++++++++++++++++++++++++
@@ -62,7 +359,6 @@ class App_model extends CI_Model{
 			}
 			
 		}
-
 		$q = $this->db->query("SELECT a.ID as my_id, CONCAT(a.DIAL_CODE,a.CLIENT_CELLPHONE) as mobile,a.VERIFIED as mobile_verified, a.CLIENT_EMAIL as email, 
 							a.CLIENT_GENDER as gender,a.CLIENT_DATE_OF_BIRTH as dob, a.CLIENT_PROFILE_PICTURE_NAME as pic, 
 							a.CLIENT_NAME as name,a.CLIENT_SURNAME as lastname, a.CLIENT_OCCUPATION as profession,
@@ -72,7 +368,6 @@ class App_model extends CI_Model{
 							LEFT JOIN a_map_location ON a_map_location.ID = a.CLIENT_CITY
 							LEFT JOIN a_map_suburb ON a_map_suburb.ID = a.CLIENT_SUBURB
 							WHERE ".$sql."", true);
-		
 		//echo $this->db->last_query();
 		//TEST MULTIPLE VALIDATED RESULTS
 		$o['data'] = array();
@@ -458,7 +753,7 @@ class App_model extends CI_Model{
 			$db = $this->nmh_model->connect_nmh_db();
 
 			//".$pubSQL."
-			$str = "SELECT posts.*,publications.pub_id,posts.hits,posts.location,publications.title as publication,
+			$str = "SELECT posts.*,posts.slug as post_slug,publications.pub_id,posts.hits,posts.location,publications.title as publication,
 							  (select group_concat(images.img_file) FROM images WHERE images.type_id = posts.post_id and images.type = 'post') as images,
 							  (select images.img_file FROM images WHERE images.type_id = posts.post_id and images.type = 'post' LIMIT 1) as image,
 							  (select COUNT(my_na_na_int.type_id) FROM my_na_na_int WHERE my_na_na_int.type_id = posts.post_id AND my_na_na_int.type = 'post') as total_na,
@@ -480,7 +775,7 @@ class App_model extends CI_Model{
 							where images.type_id = posts.post_id
 							AND images.type = 'post'
                         )
-	                    ORDER BY posts.datetime DESC, posts.priority_rev DESC LIMIT " . $limit . " OFFSET " . $offset;
+	                    ORDER BY posts.datetime DESC, posts.priority_rev DESC, posts.pub_id ASC LIMIT " . $limit . " OFFSET " . $offset;
 
 			//echo $str;
 			/*$str = "SELECT posts.*,publication_content_int.bus_id,publications.pub_id,posts.hits,posts.location,publications.title as publication,group_concat(images.img_file) as images,images.img_file as image,
@@ -1027,133 +1322,6 @@ class App_model extends CI_Model{
 
 
 	}
-
-
-
-	//+++++++++++++++++++++++++++
-	//REGISTER TOURISM  FUNCTIONS
-	//++++++++++++++++++++++++++
-	function register_tourism($email, $fname, $sname, $dial_code,$cell,$pass,$company,$title)
-	{
-
-		$result['msg'] = '';
-		$result['success'] = false;
-
-		$this->load->model('members_model');
-
-		//VALIDATE INPUT
-		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			$val = FALSE;
-			$error = 'Email address is not valid.';
-		} elseif (($fname == '')) {
-			$val = FALSE;
-			$error = 'Please provide us with your full name.';
-		} else {
-			$val = TRUE;
-		}
-
-
-		if ($val == TRUE) {
-
-			$this->load->library('user_agent');
-
-			$agent = $agent = $this->agent->browser() . ' ver : ' . $this->agent->version();
-
-			$IP = $_SERVER['HTTP_CF_CONNECTING_IP'];
-
-			$insertdata = array(
-				'CLIENT_NAME' => $fname,
-				'CLIENT_SURNAME' => $sname,
-				'CLIENT_EMAIL' => $email,
-				'CLIENT_OCCUPATION' => $title,
-				'CLIENT_PASSWORD'=> $this->members_model->hash_password($email,$pass),
-				'CLIENT_CELLPHONE' => $cell,
-				'DIAL_CODE' => $dial_code,
-				'CLIENT_UA' => $agent,
-				'CLIENT_IP' => $IP,				
-				'IS_ACTIVE' => 'N'
-			);
-
-
-			$this->db->where('CLIENT_EMAIL', $email);
-			$this->db->from('u_client');
-			$query = $this->db->get();
-
-			//IF email already exists
-			if ($query->num_rows() > 0) {
-
-				$row = $query->row();
-
-				$result['msg'] = 'A member with the email address ' . $email . ' already exists!';
-				$result['success'] = false;
-
-
-				//UPDATE CERTAIN FIELDS
-				//1. First update u_client_table
-
-				$updatedata = array(
-					'CLIENT_OCCUPATION' => $title
-				);
-				$this->db->where('ID', $row->ID);
-				$this->db->update('u_client', $updatedata);
-
-				
-				//2. Check if user is listed in the extended table
-				$this->db->where('client_id', $row->ID);
-				$this->db->from('u_client_extend');
-				$query2 = $this->db->get();
-
-
-				//IF entry already exists
-				if ($query2->num_rows() > 0) {
-
-				} else {
-
-					$insertdata2 = array(
-						'client_id' => $row->ID,
-						'company' => $title
-					);
-					$this->db->insert('u_client_extend', $insertdata2);
-
-				}
-
-			} else {
-
-				//Insert into u_client
-				$this->db->insert('u_client', $insertdata);
-				$member_id = $this->db->insert_id();
-
-				//Insert into u_client_extend
-				$insertdata2 = array(
-					'client_id' => $member_id,
-					'company' => $title
-				);
-				$this->db->insert('u_client_extend', $insertdata2);
-
-
-				//success redirect
-				$result['msg'] = 'Thank you ' . $fname . '';
-				$result['success'] = true;
-				$result['client_id'] = $member_id;
-				$result['email'] = $email;
-
-			}
-
-
-		} else {
-
-			$result['msg'] = $error;
-			$result['success'] = false;
-
-		}
-
-		return $result;
-
-	}
-
-
-
-
 
 	//+++++++++++++++++++++++++++
 	//REGISTER FUNCTIONS
