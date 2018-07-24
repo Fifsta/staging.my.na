@@ -3247,7 +3247,7 @@ function un_clean_url($str)
 
 
 				$data['redirect'] = '';
-				$this->load->view('home' , $data);
+				$this->load->view('login' , $data);
 				
 			}
 	}
