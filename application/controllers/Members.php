@@ -54,7 +54,7 @@ class Members extends CI_Controller {
 
 			}
 			$data['error'] = 'Please login below';
-		    $this->load->view('home', $data);
+		    $this->load->view('login', $data);
 		 }
 	}
 	
@@ -95,7 +95,7 @@ class Members extends CI_Controller {
 			//echo 'No: Nothing exists';
 		
 				$data['error'] = 'Please login below';
-			    $this->load->view('home', $data);
+			    $this->load->view('login', $data);
 			  
 		 }	
 	}
@@ -127,7 +127,7 @@ class Members extends CI_Controller {
 		}else{
 			
 			$data['error'] = 'Please login below';
-		    $this->load->view('home', $data);
+		    $this->load->view('login', $data);
 			  
 		 }
 			
@@ -154,7 +154,7 @@ class Members extends CI_Controller {
 		}else{
 			
 			$data['error'] = 'Please login below';
-		    $this->load->view('home', $data);
+		    $this->load->view('login', $data);
 			  
 		 }
 			
@@ -187,7 +187,7 @@ class Members extends CI_Controller {
 		}else{
 			
 			$data['error'] = 'Please login below';
-		    $this->load->view('home', $data);
+		    $this->load->view('login', $data);
 			  
 		 }
 			
@@ -232,7 +232,7 @@ class Members extends CI_Controller {
 		} else {
 			
 			$data['error'] = 'Please login below';
-		    $this->load->view('home', $data);
+		    $this->load->view('login', $data);
 			  
 		}
 			
@@ -2400,7 +2400,7 @@ class Members extends CI_Controller {
 		}else{
 			
 				$data['error'] = 'Please login below';
-			    $this->load->view('home', $data);
+			    $this->load->view('login', $data);
 			  
 		 }
 		
@@ -2421,7 +2421,7 @@ class Members extends CI_Controller {
 		}else{ 
 			
 				$data['error'] = 'Please login below';
-			    $this->load->view('home', $data);
+			    $this->load->view('login', $data);
 			  
 		 }
 		
@@ -3521,7 +3521,7 @@ function un_clean_url($str)
 				 $this->new_password_email($row);
 				
 				 $data['basicmsg'] = 'We have sent an email with the password link to: ' .$email;
-				 $this->load->view('home', $data); 
+				 $this->load->view('login', $data); 
 				
 				
 			}else{
@@ -3529,7 +3529,7 @@ function un_clean_url($str)
 				 
 				 $data['error'] = 'No records found for ' .$email .'. Please create a new user account <a href="'.site_url('/').'members/register/">here</a>' ;
 				  
-				 $this->load->view('home', $data);
+				 $this->load->view('login', $data);
 			}
         
 		}else{
@@ -3551,13 +3551,13 @@ function un_clean_url($str)
 			    $data['step1'] = 'true';
 				$data['token'] = $token;
 				$data['client_id'] = $row['client_id'];
-				$this->load->view('home', $data);
+				$this->load->view('login', $data);
 			
 		}else{
 			 
 			 $data['type'] = 'teacher';
 			 $data['error'] = 'Sorry that link has expired';
-			 $this->load->view('home', $data); 
+			 $this->load->view('login', $data); 
 			
 		}
    
@@ -3591,12 +3591,12 @@ function un_clean_url($str)
 		   
 			$data['basicmsg'] = 'Your password has been reset. Please login';
 			$data['client_id'] = $client_id;
-			$this->load->view('home', $data); 	
+			$this->load->view('login', $data); 	
 			
 			
 		}else{
 			
-			$this->load->view('home', $data); 
+			$this->load->view('login', $data); 
 		}
 		
        
