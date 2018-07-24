@@ -111,7 +111,6 @@ class Sell extends CI_Controller {
             $data['heading'] = 'Feature your listing to get more exposure';
             $data['metaD'] = 'Feature your product listing - Try it today.';
             $this->load->view('adverts/listing_featured_page', $data);
-			$this->load->view('adverts/listing_featured_page', $data);
 
 		}else{
 
