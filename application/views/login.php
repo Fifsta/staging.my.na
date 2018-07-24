@@ -21,6 +21,7 @@
   <link href='//fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script src="<?php echo base_url('/');?>bootstrap/js/bootstrap.js"></script>
+    <script src="<?php echo base_url('/');?>bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <style type="text/css">
       body {
@@ -117,6 +118,7 @@
                     <?php
                     }
                     ?>
+
         <input type="text" class="input-block-level" name="email" id="email" placeholder="Email address">
         <input type="password" class="input-block-level" name="pass" id="pass" placeholder="Password">
         <input type="hidden" name="first_log" value="<?php if (isset($first)){ echo $first;}else{ echo 'N';}?>" />
