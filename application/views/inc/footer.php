@@ -89,7 +89,7 @@ if($this->input->get('debug')){
 	        $("body,html").animate({scrollTop : 500}, 400);
 
 		}
-		
+
 	};
 
 
@@ -141,7 +141,8 @@ if($this->input->get('debug')){
 
 			scroll_oevr();
 
-		}
+		
+		<?php } ?>
 
 		load_my_na_business();
 
