@@ -107,13 +107,16 @@ class Sell extends CI_Controller {
 	{
 		if($this->session->userdata('id'))
 		{
- 
+            $data['title'] = 'Feature your listing';
+            $data['heading'] = 'Feature your listing to get more exposure';
+            $data['metaD'] = 'Feature your product listing - Try it today.';
+            $this->load->view('adverts/listing_featured_page', $data);
 			$this->load->view('adverts/listing_featured_page', $data);
 
 		}else{
 
 
-            $data['error'] = 'Sorry, please login to continue';
+            //$data['error'] = 'Sorry, please login to continue';
             $data['title'] = 'Feature your listing';
             $data['heading'] = 'Feature your listing to get more exposure';
             $data['metaD'] = 'Feature your product listing - Try it today.';
