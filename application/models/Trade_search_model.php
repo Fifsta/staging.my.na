@@ -991,7 +991,19 @@ class Trade_search_model extends CI_Model{
 
 
 
-	function get_api_product($product_id) {
+	function get_api_product($product_id, $bus_id) {
+
+
+		if($bus_id != 'null') {
+
+			$qry = " AND products.bus_id = '".$bus_id."'";
+
+		} else {
+
+			$qry = '';
+
+		}
+
 
 		$temp = $this->db->query("SELECT  products.*,product_extras.extras,product_extras.featured, product_extras.property_agent, u_business.ID,
 								  u_business.IS_ESTATE_AGENT, u_business.BUSINESS_NAME, u_business.BUSINESS_LOGO_IMAGE_NAME,group_concat(product_images.img_file) as images,
@@ -1010,7 +1022,7 @@ class Trade_search_model extends CI_Model{
 								  LEFT JOIN u_business_vote ON u_business_vote.PRODUCT_ID = products.product_id
 									  AND u_business_vote.IS_ACTIVE = 'Y' AND u_business_vote.TYPE = 'review' AND u_business_vote.REVIEW_TYPE = 'product_review'
 									  AND products.status = 'live' AND products.is_active = 'Y'
-								 WHERE products.product_id = '".$product_id."'
+								 WHERE products.product_id = '".$product_id."' ".$qry."
 								 GROUP BY products.product_id
 								 ", TRUE);
 
@@ -1082,7 +1094,7 @@ class Trade_search_model extends CI_Model{
 		$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
 		$clean = str_replace(" ", '-', $clean);
 		$clean = strtolower(trim($clean));
-		$clean = str_replace("&", 'and',$clean);
+		$clean = str_replace("&", 'and',$clean); 
 	
 		return $clean;
 	}

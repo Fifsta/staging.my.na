@@ -5,7 +5,7 @@ class Api_model extends CI_Model{
     {
         // Constructor's functionality here, if you have any.
     }
-	//self::__construct();
+	self::__construct();
 	
  	function api_model(){
   		//parent::CI_model();
