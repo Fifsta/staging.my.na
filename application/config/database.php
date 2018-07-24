@@ -96,6 +96,7 @@ if( $nmh_worker)
 {
 
 	//LOCAL
+	$db['default']['hostname'] = 'localhost';
 	$db['default']['username'] = 'root';
 	$db['default']['password'] = '';
 	$db['default']['database'] = 'my_na';
