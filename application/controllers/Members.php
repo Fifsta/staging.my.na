@@ -3191,7 +3191,7 @@ function un_clean_url($str)
 										$d['points'] = $sess['points'];
 										$d['subscriptions'] = $subA;
 										$d['register_date'] = $row['REGISTER_DATE'];
-										$redirect = $redirect.'&sess='.$this->encrypt->encode(json_encode($d));
+										$redirect = $redirect.'&sess='.$this->encryption->encrypt(json_encode($d));
 									}
 									redirect($redirect, 301);
 									
