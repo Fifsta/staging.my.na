@@ -82,7 +82,7 @@ if($this->input->get('debug')){
 
 	?>
 
-	function scroll_Over() {
+	function scroll_over() {
 
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 
@@ -139,7 +139,7 @@ if($this->input->get('debug')){
 
 		<?php if(!$this->session->userdata('id')){ ?>
 
-			scroll_oevr();
+			scroll_over();
 
 		
 		<?php } ?>
