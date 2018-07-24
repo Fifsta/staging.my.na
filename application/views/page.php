@@ -53,6 +53,7 @@
 					</section> 
 
 		         	<div class="results_div">
+		         		<div class="spacer"></div>
 		         		<?php echo $body;?>
 		       		</div>
 
