@@ -51,7 +51,7 @@ defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREA
 
 if($_SERVER['HTTP_HOST'] == 'localhost'){
 
-	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"] .'/beta.my.na/');
+	define('BASE_URL', $_SERVER["DOCUMENT_ROOT"] .'/clients.my.na/');
 	define('CMS_URL',  'http://localhost/My_cms/');
 	define('CDN_URL',  'http://localhost/clients.my.na/');
 	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
@@ -64,7 +64,7 @@ if($_SERVER['HTTP_HOST'] == 'localhost'){
 	define('CMS_URL',  'http://cms.my.na/');
 	define('CDN_URL',  'https://cdn.my.na/');
 	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
-	define('NA_URL',  'https://beta.my.na/');
+	define('NA_URL',  'https://www.my.na/');
 	define('HUB_URL',  'https://nmh.my.na/');
 	
 }else{
@@ -73,9 +73,11 @@ if($_SERVER['HTTP_HOST'] == 'localhost'){
 	define('CMS_URL',  'https://cms.my.na/');
 	define('CDN_URL',  'https://cdn.my.na/');
 	define('S3_URL',  'https://d3rp5jatom3eyn.cloudfront.net/');
-	define('NA_URL',  'https://beta.my.na/');
+	define('NA_URL',  'https://www.my.na/');
 	define('HUB_URL',  'https://nmh.my.na/');
 }
+define('EVENTS_URL', 'https://events.my.na/');
+define('BUS_ID', 1290);
 
 define('IMG_URL', 'https://img.my.na');
 define('IMG_KEY', 'hwn80200ymF57s2YQU7bd3Y61xnF');

@@ -2,11 +2,11 @@ Options FollowSymLinks
 AddDefaultCharset utf-8
 <IfModule mod_rewrite.c>
     RewriteEngine On
-	
-    #RewriteCond %{HTTP_HOST} ^my.na$ [NC]
-    #RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+    
+    RewriteCond %{HTTP_HOST} ^my.na$ [NC]
+    RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
 
-	#RewriteRule ^assets/(.*)$ https://d3rp5jatom3eyn.cloudfront.net/assets/$1 [R=301,NC,L]
+    RewriteRule ^assets/(.*)$ https://d3rp5jatom3eyn.cloudfront.net/assets/$1 [R=301,NC,L]
 
     RewriteCond %{REQUEST_URI} ^system.*
     RewriteRule ^(.*)$ /index.php?/$1 [L]
@@ -69,5 +69,5 @@ Options All -Indexes
 # secure directory by disabling script execution
 AddHandler cgi-script .php .pl .py .jsp .asp .htm .shtml .sh .cgi
 Options -ExecCGI
-AuthName beta.my.na
+AuthName www.my.na
 

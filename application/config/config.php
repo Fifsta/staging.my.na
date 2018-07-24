@@ -57,11 +57,18 @@ if(isset($_SERVER['MY_WORKER']) && $_SERVER['MY_WORKER'] == 'YES')
   $config['base_url']	= 'http://localhost/beta.my.na/';
   $config['analytics'] = '<script type="text/javascript"></script>';
 
-}else{
+}elseif($_SERVER['HTTP_HOST'] == 'beta.my.na'){
 
   //lIVE
   $config['site_url']	= 'https://beta.my.na';
   $config['base_url']	= 'https://beta.my.na/';
+  $config['analytics'] = '<script type="text/javascript">'.$UA.'</script>';
+
+}else{
+
+  //lIVE
+  $config['site_url'] = 'https://www.my.na';
+  $config['base_url'] = 'https://www.my.na/';
   $config['analytics'] = '<script type="text/javascript">'.$UA.'</script>';
 
 }
