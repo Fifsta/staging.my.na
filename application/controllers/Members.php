@@ -17,6 +17,15 @@ class Members extends CI_Controller {
 	    $this->section_2 = $this->uri->segment(2);				
 	}
 
+
+	public function test_encode($val) {
+
+		$ot = $this->encrypt->encode($val);
+
+		echo $ot;
+
+	}
+
 	
 	public function index()
 	{ 
