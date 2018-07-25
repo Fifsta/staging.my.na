@@ -38,8 +38,13 @@ class Members extends CI_Controller {
 				$d['country'] = $this->session->userdata('country');
 				$d['points'] = $this->session->userdata('points');
 				$d['register_date'] = $this->session->userdata('register_date');
-				echo "<script>window.location.href = '".$url.'&sess='.$this->encrypt->encode(json_encode($d))."';</script>";
+
+				print_r($d);
+
+				//echo "<script>window.location.href = '".$url.'&sess='.$this->encrypt->encode(json_encode($d))."';</script>";
 				
+
+
 				//echo $url.'&sess='.$this->encrypt->encode(json_encode($d))."&url=";
 				
 				//var_dump($this->input->get());
