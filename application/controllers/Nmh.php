@@ -90,6 +90,9 @@ class Nmh extends CI_Controller {
 
 	function check_me()
 	{
+
+		$this->load->library('encryption');
+		
 		$this->output->set_header("Access-Control-Allow-Origin: *");
 		$this->output->set_header( "Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS" );
 		$this->output->set_header( 'Access-Control-Allow-Headers: content-type' );
@@ -116,7 +119,7 @@ class Nmh extends CI_Controller {
 						
 					}
 
-					$this->load->library('encryption');
+
 					
 					$d['my_na_id'] = $id;
 					$d['u_name'] = $this->session->userdata('u_name');
