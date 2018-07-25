@@ -20,7 +20,9 @@ class Members extends CI_Controller {
 
 	public function test_encode($val) {
 
-		$ot = $this->encrypt->encode($val);
+		$this->load->library('encryption');
+
+		$ot = $this->encryption->encrypt($val);
 
 		echo $ot;
 
