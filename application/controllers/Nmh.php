@@ -150,7 +150,7 @@ class Nmh extends CI_Controller {
 	//GET PRODUCTS
 	//++++++++++++++++++++++++++
 
-function get_products()
+	function get_products()
 	{
 		$this->output->set_header("Access-Control-Allow-Origin: *");
 		$this->output->set_header( "Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS" );
@@ -353,20 +353,20 @@ function get_products()
 
 					}
 					$row->rating = $this->trade_model->get_review_stars_show($rating, $row->product_id, 0, $total_reviews);
-					$row->cat_link = site_url('/').'buy/'.$this->trade_model->encode_url($row->main_cat_name).'/'
-						.$this->trade_model->encode_url($row->sub_cat_name).'/';
+					$row->cat_link = site_url('/').'buy/'.$this->trade_model->encode_url($main_cat_name).'/'
+						.$this->trade_model->encode_url($sub_cat_name).'/';
 						//.$this->trade_model->encode_url($row->sub_sub_cat_name).'/';
 					$row->cat_name = $row->sub_cat_name;
 
-					if($row->sub_sub_sub_cat_name == ''){
+					if($sub_sub_sub_cat_name == ''){
 
 						$ln = 'no-name';
 					}else{
-						$ln = $this->trade_model->encode_url($row->sub_sub_sub_cat_name);
+						$ln = $this->trade_model->encode_url($sub_sub_sub_cat_name);
 
 					}
 
-					$row->location_link = $row->cat_link.$this->trade_model->encode_url($row->sub_sub_cat_name).'/'.$ln.'/'.$location.'/';
+					$row->location_link = $row->cat_link.$this->trade_model->encode_url($sub_sub_cat_name).'/'.$ln.'/'.$location.'/';
 
 					array_push($o, $row);
 
