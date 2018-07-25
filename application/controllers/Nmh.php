@@ -229,7 +229,7 @@ class Nmh extends CI_Controller {
 			$query = $this->db->query("select products.*,
 									       product_extras.featured,
 									       product_extras.extras,
-									       product_extras.property_agent,  
+									       product_extras.property_agent,
 									        u_business.ID,
 									        u_business.IS_ESTATE_AGENT, 
 									        u_business.BUSINESS_NAME, 
@@ -353,6 +353,25 @@ class Nmh extends CI_Controller {
 
 					}
 					$row->rating = $this->trade_model->get_review_stars_show($rating, $row->product_id, 0, $total_reviews);
+					/*$row->cat_link = site_url('/').'buy/'.$this->trade_model->encode_url($row->main_cat_name).'/'
+						.$this->trade_model->encode_url($row->sub_cat_name).'/';
+						//.$this->trade_model->encode_url($row->sub_sub_cat_name).'/';
+
+					$row->cat_name = $row->sub_cat_name;
+
+					if($row->sub_sub_sub_cat_name == ''){
+
+						$ln = 'no-name';
+					}else{
+						$ln = $this->trade_model->encode_url($row->sub_sub_sub_cat_name);
+
+					}*/
+
+					//$row->location_link = $row->cat_link.$this->trade_model->encode_url($row->sub_sub_cat_name).'/'.$ln.'/'.$location.'/';
+
+					$row->location_link = '';
+					$row->cat_link = '';
+					$row->cat_name = '';
 
 					array_push($o, $row);
 
