@@ -91,7 +91,8 @@ class Nmh extends CI_Controller {
 	function check_me()
 	{
 
-		$this->load->library('encryption');
+		$this->load->library('encrypt');
+
 
 		$this->output->set_header("Access-Control-Allow-Origin: *");
 		$this->output->set_header( "Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS" );
@@ -118,8 +119,6 @@ class Nmh extends CI_Controller {
 						
 						
 					}
-
-
 					
 					$d['my_na_id'] = $id;
 					$d['u_name'] = $this->session->userdata('u_name');
@@ -130,11 +129,8 @@ class Nmh extends CI_Controller {
 					$d['points'] = $this->session->userdata('points');
 					$d['subscriptions'] = $this->session->userdata('subscriptions');
 					$d['register_date'] = $this->session->userdata('register_date');
-					echo "'".$url.'?redirect='.$redirect.'&sess='.$this->encryption->encrypt(json_encode($d))."<br />Redirect: ".$redirect."
-					<script>window.top.location.href = '".$url.'?redirect='.$redirect.'&sess='.$this->encryption->encrypt(json_encode($d))."';</script>";
-
-					//$redirect = $redirect.'&sess='.$this->encryption->encrypt(json_encode($d));
-					//redirect($redirect, 301);
+					echo "'".$url.'?redirect='.$redirect.'&sess='.$this->encrypt->encode(json_encode($d))."<br />Redirect: ".$redirect."
+					<script>window.top.location.href = '".$url.'?redirect='.$redirect.'&sess='.$this->encrypt->encode(json_encode($d))."';</script>";
 				}
 
 				//echo json_encode($this->session->all_userdata());
@@ -144,6 +140,7 @@ class Nmh extends CI_Controller {
 				//$d['msg'] = 'No session present';
 				//echo json_encode($d);
 			}
+
 
 		}else{
 
