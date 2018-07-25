@@ -1,4 +1,4 @@
-<?php if(!$this->session->userdata('id')) { ?>
+<?php if($this->session->userdata('id') === NULL) { ?>
 <!--login-->
 <section class="sidenav" id="my_login">
 
