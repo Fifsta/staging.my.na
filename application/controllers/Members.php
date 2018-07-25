@@ -32,7 +32,7 @@ class Members extends CI_Controller {
 	public function index()
 	{ 
 		
-		$this->load->library('encrypt');
+		$this->load->library('encryption');
 
 		if($id = $this->session->userdata('id')){
 
@@ -49,7 +49,7 @@ class Members extends CI_Controller {
 				$d['country'] = $this->session->userdata('country');
 				$d['points'] = $this->session->userdata('points');
 				$d['register_date'] = $this->session->userdata('register_date');
-				echo "<script>window.location.href = '".$url.'&sess='.$this->encrypt->encode(json_encode($d))."';</script>";
+				echo "<script>window.location.href = '".$url.'&sess='.$this->encryption->encrypt(json_encode($d))."';</script>";
 				
 				//echo $url.'&sess='.$this->encrypt->encode(json_encode($d))."&url=";
 				
@@ -3099,7 +3099,7 @@ function un_clean_url($str)
 	{
 			if($email = trim($this->input->post('email', TRUE))){
 				
-					$this->load->library('encrypt');
+					$this->load->library('encryption');
 
 					$first = $this->input->post('first_log', TRUE);
 					$pass = $this->input->post('pass', TRUE);
@@ -3206,7 +3206,7 @@ function un_clean_url($str)
 										$d['points'] = $sess['points'];
 										$d['subscriptions'] = $subA;
 										$d['register_date'] = $row['REGISTER_DATE'];
-										$redirect = $redirect.'&sess='.$this->encrypt->encode(json_encode($d));
+										$redirect = $redirect.'&sess='.$this->encryption->encrypt(json_encode($d));
 									}
 									redirect($redirect, 301);
 									
