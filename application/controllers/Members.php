@@ -38,7 +38,7 @@ class Members extends CI_Controller {
 				$d['country'] = $this->session->userdata('country');
 				$d['points'] = $this->session->userdata('points');
 				$d['register_date'] = $this->session->userdata('register_date');
-				echo "<script>window.location.href = '".$url.'&sess='.$this->encrypt->encode(json_encode($d))."';</script>";
+				echo "<script>window.location.href = '".$url.'&sess='.$this->encrypt->encryption(json_encode($d))."';</script>";
 				
 				//echo $url.'&sess='.$this->encrypt->encode(json_encode($d))."&url=";
 				
@@ -3195,7 +3195,7 @@ function un_clean_url($str)
 										$d['points'] = $sess['points'];
 										$d['subscriptions'] = $subA;
 										$d['register_date'] = $row['REGISTER_DATE'];
-										$redirect = $redirect.'&sess='.$this->encryption->encode(json_encode($d));
+										$redirect = $redirect.'&sess='.$this->encrypt->encryption(json_encode($d));
 									}
 									redirect($redirect, 301);
 									
