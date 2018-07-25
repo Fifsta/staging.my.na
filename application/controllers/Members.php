@@ -32,7 +32,7 @@ class Members extends CI_Controller {
 	public function index()
 	{ 
 		
-		$this->load->library('encrypt');
+		$this->load->library('encryption');
 
 		if($id = $this->session->userdata('id')){
 
@@ -3099,7 +3099,7 @@ function un_clean_url($str)
 	{
 			if($email = trim($this->input->post('email', TRUE))){
 				
-					$this->load->library('encrypt');
+					$this->load->library('encryption');
 
 					$first = $this->input->post('first_log', TRUE);
 					$pass = $this->input->post('pass', TRUE);
