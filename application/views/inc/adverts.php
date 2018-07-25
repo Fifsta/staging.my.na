@@ -4,7 +4,19 @@
 
 <div class="spacer"></div>
 
+<?php 
 
+if($this->uri->segment(2) == '') {
+
+	$amnt = 8;
+
+} else {
+
+	$amnt = 5;
+
+}
+
+?>
 <script type="text/javascript">
     var site = '<?php echo site_url('/');?>';
     var base = '<?php echo base_url('/');?>';
@@ -23,7 +35,7 @@
 		});*/        
 		
 		
-		load_yzx('all', 5, 'advert-box');
+		load_yzx('all', <?php echo $amnt; ?>, 'advert-box');
     });
 
 	function load_yzx(q, l, b){
