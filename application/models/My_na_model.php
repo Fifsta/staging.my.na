@@ -516,7 +516,7 @@ class My_na_model extends CI_Model{
                 
             }
 
-            $this->cache->save('home_categories_'.$typ, $output, 60);
+            $this->cache->save('home_categories_'.$typ, $output, 2628000);
 
         }
 
