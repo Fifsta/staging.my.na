@@ -115,6 +115,8 @@ class Nmh extends CI_Controller {
 						
 						
 					}
+
+					$this->load->library('encryption');
 					
 					$d['my_na_id'] = $id;
 					$d['u_name'] = $this->session->userdata('u_name');
