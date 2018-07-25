@@ -88,6 +88,7 @@ class Nmh extends CI_Controller {
 	//CHECK LOGIN STATUS
 	//++++++++++++++++++++++++++
 
+
 	function check_me()
 	{
 		$this->output->set_header("Access-Control-Allow-Origin: *");
@@ -113,8 +114,10 @@ class Nmh extends CI_Controller {
 					
 					if($redirect = $this->input->get('redirect')){
 						
-						
+						 
 					}
+
+					$this->load->library('encryption');
 					
 					$d['my_na_id'] = $id;
 					$d['u_name'] = $this->session->userdata('u_name');
@@ -125,14 +128,14 @@ class Nmh extends CI_Controller {
 					$d['points'] = $this->session->userdata('points');
 					$d['subscriptions'] = $this->session->userdata('subscriptions');
 					$d['register_date'] = $this->session->userdata('register_date');
-					echo "'".$url.'?redirect='.$redirect.'&sess='.$this->encrypt->encode(json_encode($d))."<br />Redirect: ".$redirect."
-					<script>window.top.location.href = '".$url.'?redirect='.$redirect.'&sess='.$this->encrypt->encode(json_encode($d))."';</script>";
+					echo "'".$url.'?redirect='.$redirect.'&sess='.$this->encryption->encrypt(json_encode($d))."<br />Redirect: ".$redirect."
+					<script>window.top.location.href = '".$url.'?redirect='.$redirect.'&sess='.$this->encryption->encrypt(json_encode($d))."';</script>";
 				}
 
 				//echo json_encode($this->session->all_userdata());
 			}else{
 
-				//$d['success'] = false;
+			 	//$d['success'] = false;
 				//$d['msg'] = 'No session present';
 				//echo json_encode($d);
 			}
@@ -144,7 +147,6 @@ class Nmh extends CI_Controller {
 
 		}//end preflight
 	}
-
 
 	//+++++++++++++++++++++++++++
 	//GET PRODUCTS
