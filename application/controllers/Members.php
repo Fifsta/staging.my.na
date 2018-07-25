@@ -3197,7 +3197,7 @@ function un_clean_url($str)
 								if(strlen($redirect) > 2){
 									
 									if(strstr($redirect,'check_me_back')){
-										$d['id'] = $row['ID'];
+										
 										$d['my_na_id'] = $row['ID'];
 										$d['u_name'] = $row['CLIENT_NAME']. ' ' .$row['CLIENT_SURNAME'];
 										$d['u_email'] = $row['CLIENT_EMAIL'];
