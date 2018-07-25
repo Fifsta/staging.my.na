@@ -416,7 +416,7 @@ $config['encryption_key'] = 'myna535354refdt53';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_driver'] = 'my_na';
+$config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 0;
 $config['sess_save_path'] = NULL;
