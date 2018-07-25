@@ -353,20 +353,6 @@ class Nmh extends CI_Controller {
 
 					}
 					$row->rating = $this->trade_model->get_review_stars_show($rating, $row->product_id, 0, $total_reviews);
-					$row->cat_link = site_url('/').'buy/'.$this->trade_model->encode_url($main_cat_name).'/'
-						.$this->trade_model->encode_url($sub_cat_name).'/';
-						//.$this->trade_model->encode_url($row->sub_sub_cat_name).'/';
-					$row->cat_name = $row->sub_cat_name;
-
-					if($sub_sub_sub_cat_name == ''){
-
-						$ln = 'no-name';
-					}else{
-						$ln = $this->trade_model->encode_url($sub_sub_sub_cat_name);
-
-					}
-
-					$row->location_link = $row->cat_link.$this->trade_model->encode_url($sub_sub_cat_name).'/'.$ln.'/'.$location.'/';
 
 					array_push($o, $row);
 
