@@ -3,7 +3,7 @@
 
         <div class="row">
         	<div class="col-lg-6" style="margin-top:10px">
-                <input type="hidden"  name="redirect" id="redirect" value="<?php echo site_url(). $_SERVER['REQUEST_URI'];?>">
+                <input type="hidden"  name="redirect" id="redirect-2" value="<?php echo site_url(). $_SERVER['REQUEST_URI'];?>">
                 <input type="text" class="form-control" name="email" placeholder="Email">
             </div>
             <div class="col-lg-6" style="margin-top:10px">
