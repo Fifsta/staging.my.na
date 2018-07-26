@@ -75,7 +75,7 @@
 
 			load_my_na_products();	
 
-			//load_classifieds();
+			load_classifieds();
 	});		
 
 	$(document).on('click', '.cat-slide', function(e) {
@@ -161,45 +161,7 @@
 
 </script>
 
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Organization",
-  "name" : "My Namibia",
-  "description" : "The biggest online portal for Namibians to find what they are lookin for. Business, Products, Services. Find What you !na.",
-  "brand" : { 
-  		"@type": "brand",
-		"image" : "https://my.na/images/logo-main.png"
-  },
-  "sameAs": [
-    "https://www.facebook.com/mynamibia/",
-    "https://twitter.com/MyNamibia"
-  ],  
-  "address": {
-	    "@type": "PostalAddress",
-	    "streetAddress": "11B Genl. Murtala Muhammed Ave Windhoek, Namibia"
-  },  
-  "contactPoint": {
-	    "@type": "ContactPoint",
-	    "contactType" : "customer service",
-	    "email" : "info@my.na",
-	    "url" : "https://www.my.na",
-	    "telephone" : "+264 61 309 591"
-  }
-}
 
-</script>
-
-<script type="application/ld+json">
-
-{
-  "@context" : "http://schema.org",
-  "@type" : "GeoCoordinates", 
-  "latitude" : "-22.5480965",
-  "longitude" : "17.0872937"                      
-} 
-
-</script>
 
 </body>
 </html>
