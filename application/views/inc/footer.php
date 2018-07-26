@@ -104,6 +104,34 @@ if($this->input->get('debug')){
 
 	?>
 
+	$(document).ready( function(){
+
+
+		$.get( "<?php echo site_url('/');?>my_na/nav/?url=<?php echo site_url('/'). uri_string().'/?'.$qstr;?>", function( data ) {
+		  	if(data == 'FALSE'){
+
+			}else{
+
+				$('#sidebar').prepend( data );
+			}
+
+		});
+
+
+		<?php if($this->session->userdata('id') === NULL){ ?>
+
+			scroll_over();
+		
+		<?php } ?>
+
+		check_gdpr();
+
+		// Call weather function
+		//get_weather('na','windhoek');		
+
+	});
+	
+
 	function scroll_over() {
 
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -157,34 +185,7 @@ if($this->input->get('debug')){
     }
 
 
-	$(document).ready( function(){
 
-
-		$.post('<?php echo site_url();?>my_na/nav/', { url: "<?php echo $_SERVER['REQUEST_URI']; ?>"}, function(data){
-
-
-		  	if(data == 'FALSE'){
-
-			}else{
-
-				$('#sidebar').prepend( data );
-			}
-
-		});
-
-
-		<?php if($this->session->userdata('id') === NULL){ ?>
-
-			scroll_over();
-		
-		<?php } ?>
-
-		check_gdpr();
-
-		// Call weather function
-		//get_weather('na','windhoek');		
-
-	});
 
 	function load_classifieds(){
 
