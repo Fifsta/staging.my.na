@@ -70,6 +70,28 @@ if($this->input->get('debug')){
 
 <?php if($this->config->item('analytics')){ echo $this->config->item('analytics');}?>
 
+
+<!-- Bootstrap -->
+<!--<link href="https://s3.amazonaws.com/mynamibia/packages/css/weather-icons.min.css" rel="stylesheet" type="text/css">-->
+
+<!-- Calatz -->
+<!-- The "browse to" file input fields -->
+
+<script src="js/jquery.fileInput.js"></script>
+<script src="js/owl.carousel.js"></script>
+
+<script src="js/jquery.lazysizes.min.js"></script>
+<script src="js/jquery.fancybox.min.js"></script>
+<script src="js/bootstrap-select.min.js"></script>
+
+
+<!-- Datepicker -->
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- Custom Js -->
+<script src="js/jquery.custom.js"></script>
+
 <script type="text/javascript" src="<?php echo base_url('/');?>js/custom/results_page.js?v2"></script>
 <script  type="text/javascript">
 
@@ -164,7 +186,7 @@ if($this->input->get('debug')){
 
 	});
 
-	function load_classifieds() {
+	function load_classifieds(){
 
 		// LOAD CLASSIFIEDS
 		$.ajax({
@@ -306,25 +328,3 @@ if($this->input->get('debug')){
 
 
 </script>
-
-
-<!-- Bootstrap -->
-<!--<link href="https://s3.amazonaws.com/mynamibia/packages/css/weather-icons.min.css" rel="stylesheet" type="text/css">-->
-
-<!-- Calatz -->
-<!-- The "browse to" file input fields -->
-
-<script src="js/jquery.fileInput.js"></script>
-<script src="js/owl.carousel.js"></script>
-
-<script src="js/jquery.lazysizes.min.js"></script>
-<script src="js/jquery.fancybox.min.js"></script>
-<script src="js/bootstrap-select.min.js"></script>
-
-
-<!-- Datepicker -->
-<script src="js/moment.min.js"></script>
-<script src="js/bootstrap-datetimepicker.min.js"></script>
-
-<!-- Custom Js -->
-<script src="js/jquery.custom.js"></script>
