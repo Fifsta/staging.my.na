@@ -3097,9 +3097,13 @@ function un_clean_url($str)
 	//++++++++++++++++++++++++++
 	function login()
 	{
+
+			$this->load->library('encrypt');
+
 			if($email = trim($this->input->post('email', TRUE))){
 				
-					$this->load->library('encrypt');
+
+					$this->session->sess_destroy();
 
 					$first = $this->input->post('first_log', TRUE);
 					$pass = $this->input->post('pass', TRUE);
