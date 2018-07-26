@@ -52,7 +52,7 @@
 					<div class="spacer"></div>
 					<?php $this->load->view('inc/auctions'); ?>					
 					<div class="spacer"></div>
-					<?php //$this->load->view('inc/news'); ?>
+					<?php $this->load->view('inc/news'); ?>
 					<div class="spacer"></div>
 
 				</div>
