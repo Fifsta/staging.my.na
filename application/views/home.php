@@ -69,6 +69,14 @@
 
 <script type="text/javascript">
 
+	$(document).ready( function(){
+
+			load_my_na_business();
+
+			load_my_na_products();	
+
+
+	});		
 
 	$(document).on('click', '.cat-slide', function(e) {
 
