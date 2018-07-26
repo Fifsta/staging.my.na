@@ -63,7 +63,7 @@
 	
 <?php $this->load->view('inc/footer');?>	
 
-<script src="<?php echo base_url('/');?>js/custom/fb.js?v=33"></script>
+<script src="<?php echo base_url('/');?>js/custom/fb.js?v=99"></script>
 
 <!--<script src='<?php //echo base_url('/')?>js/jquery.cycle2.min.js' type="text/javascript" language="javascript"></script>-->
 
@@ -132,7 +132,7 @@
 	});
 
 
-  function initiate_slides(){
+  /*function initiate_slides(){
 
     // Cycle plugin
     // Pause & play on hover
@@ -149,7 +149,7 @@
     
     //$("input .star").rating();          
 
-  }	
+  }	*/
 
 </script>
 
