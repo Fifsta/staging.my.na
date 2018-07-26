@@ -151,7 +151,7 @@ if($this->input->get('debug')){
 		});
 
 
-		<?php if(!$this->session->userdata('id')){ ?>
+		<?php if($this->session->userdata('id') !== NULL){ ?>
 
 			scroll_over();
 		
