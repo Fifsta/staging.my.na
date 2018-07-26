@@ -54,7 +54,7 @@ class Trade extends CI_Controller {
 
 			if ( ! $output = $this->cache->get('trade/index'))
 			{
-					$output = $this->load->view('trade/home', $data, TRUE);
+					$output = $this->load->view('trade/results', $data, TRUE);
 					$this->cache->save('trade/index', $output, 3600);
 
 			}
