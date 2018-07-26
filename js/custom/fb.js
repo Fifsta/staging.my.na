@@ -23,7 +23,7 @@
 		
 		}
 	  }
-	 
+	
 	  // This function is called when someone finishes with the Login
 	  // Button.  See the onlogin handler attached to it in the sample
 	  // code below.
@@ -42,7 +42,7 @@
 			  xfbml      : true,
 			  cookie     : true,
 			  status     : true,  
-			  version    : 'v2.11' 
+			  version    : 'v2.11'
 			});
 	
 			// ADD ADDITIONAL FACEBOOK CODE HERE
@@ -93,7 +93,7 @@
 					type: 'POST',
 					data: response,
 					cache: false,
-					url: 'https://beta.my.na/fb/login/register/',
+					url: 'https://www.my.na/fb/login/register/?redirect='+document.URL,
 					success: function (data) {
 
 						if(data === 'TRUE'){
@@ -116,7 +116,7 @@
 					type: 'POST',
 					data: response,
 					cache: false,
-					url: 'https://beta.my.na/fb/login/',
+					url: 'https://www.my.na/fb/login/?redirect='+document.URL,
 					success: function (data) {
 						console.log('FB Gologin response '+data);
 						if(data === 'TRUE'){
@@ -161,7 +161,7 @@
 		$.ajax({
 			type: 'post',
 			data: response,
-			url: 'https://beta.my.na/fb/fb_share_callback/',
+			url: 'https://www.my.na/fb/fb_share_callback/',
 			success: function(data) {
 
 				console.log(data);
