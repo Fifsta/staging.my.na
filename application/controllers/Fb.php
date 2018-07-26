@@ -106,7 +106,7 @@ class Fb extends CI_Controller {
 			
 			//IF EMAIL FOUND
 			if($query->result()){
-				$row = $query->row_array();
+				$row = $query->row_array(); 
 				
 				if($row['FB_LOGOUT'] == 'N'){
 					
