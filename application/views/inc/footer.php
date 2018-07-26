@@ -145,15 +145,21 @@ if($this->input->get('debug')){
 
 			}else{
 
+				alert('go');
+
 				$('#sidebar').prepend( data );
 			}
 
 		});
 
 
+		<?php if($this->session->userdata('id') !== NULL){ ?>
 
+			//scroll_over();
+		
+		<?php } ?>
 
-		check_gdpr();
+		//check_gdpr();
 
 		// Call weather function
 		//get_weather('na','windhoek');		
