@@ -328,6 +328,7 @@ $this->load->view('inc/header');
 
 <script src="<?php echo base_url('/')?>redactor/redactor/redactor.min.js?v=1"></script> 
 <script src="<?php echo base_url('/');?>js/jquery.rating.pack.js" type="text/javascript"></script> 
+<script src="<?php echo base_url('/');?>js/custom/fb.js?v=33"></script>
 
 <script type="text/javascript">
 
