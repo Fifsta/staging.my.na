@@ -3103,7 +3103,7 @@ function un_clean_url($str)
 			if($email = trim($this->input->post('email', TRUE))){
 				
 
-					$this->session->sess_destroy();
+
 
 					$first = $this->input->post('first_log', TRUE);
 					$pass = $this->input->post('pass', TRUE);
@@ -3175,6 +3175,9 @@ function un_clean_url($str)
 								'register_date' => $row['REGISTER_DATE']
 		
 							);
+
+							$this->session->sess_destroy();
+							
 							$this->session->set_userdata($sess);
 							$this->session->set_flashdata('login', 'Y');
 		
