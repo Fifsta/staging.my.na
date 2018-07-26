@@ -22,7 +22,7 @@
             type: "GET",
             success: function(data) {
 				var pre = $("#classifieds_content");
-                pre.removeClass('loading_img min400');
+                //pre.removeClass('loading_img min400');
                 pre.append(data.classifieds);
 
                 initialise_owl();

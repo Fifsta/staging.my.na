@@ -71,7 +71,7 @@ class Classifieds extends CI_Controller {
     //+++++++++++++++++++++++++++++++++
 
 	public function get_latest()
-	{
+	{ 
 
          $query = $this->classifieds_model->get_classifieds();
 

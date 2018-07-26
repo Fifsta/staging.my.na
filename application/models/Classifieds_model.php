@@ -261,13 +261,14 @@ class Classifieds_model extends CI_Model{
 			foreach($query->result() as $row){
 				
 				$b = $this->render_business($row);
-				//$b = '';
-				$fb = "postToFeed(" . $row->classified_id . ", '" . ucwords(trim($this->my_model->clean_url_str($row->title, " ", " "))) . "','" . trim('') . "', '" . ucwords(trim($this->my_model->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->my_model->shorten_string(strip_tags($this->my_model->clean_url_str($row->content, " ", " ")), 50)))) . "', '" . site_url('/') . 'classifieds/view/' . $row->classified_id . '/' . trim($this->my_model->clean_url_str($row->title)) . "')";
 
-				//$fb = "window.open('https://www.facebook.com/sharer/sharer.php?app_id=287335411399195&u=". rawurlencode(site_url('/').'product/'.$row->product_id.'/'.$this->clean_url_str($row->title)) ."', '_blank', 'width=800,height=600,scrollbars=yes,status=yes,resizable=yes,screenx=20%,screeny=20%')";
+				/*$fb = "postToFeed(" . $row->classified_id . ", '" . ucwords(trim($this->my_model->clean_url_str($row->title, " ", " "))) . "','" . trim('') . "', '" . ucwords(trim($this->my_model->clean_url_str($row->title, " ", " "))) . " - My Namibia','" . preg_replace("/[^0-9a-zA-Z -]/", "", ucwords(trim($this->my_model->shorten_string(strip_tags($this->my_model->clean_url_str($row->content, " ", " ")), 50)))) . "', '" . site_url('/') . 'classifieds/view/' . $row->classified_id . '/' . trim($this->my_model->clean_url_str($row->title)) . "')";
 
 				$tweet = array('scrollbars' => 'yes', 'status' => 'yes', 'resizable' => 'yes', 'screenx' => '20%', 'screeny' => '20%', 'class' => 'twitter');
-				$tweet_url = 'https://twitter.com/share?url=' . site_url('/') .'classifieds/view/'. $this->my_model->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';
+				$tweet_url = 'https://twitter.com/share?url=' . site_url('/') .'classifieds/view/'. $this->my_model->clean_url_str($row->title) . '&text=' . trim(str_replace("'", " ", substr(strip_tags($row->title), 0, 100))) . '&via=MyNamibia';*/
+
+				$fb = '';
+				$tweet = '';
 				
 
 
@@ -312,11 +313,10 @@ class Classifieds_model extends CI_Model{
 					}
 					
 				}
-
-				$social = '<span class="pull-right" style="margin-top:0px">
+/*$social = '<span class="pull-right" style="margin-top:0px">
 							<a onClick="' . $fb . '" class="facebook"></a>
 							' . anchor_popup('https://twitter.com/share?url=' . trim($tweet_url), ' ', $tweet) . '
-						   </span>';
+						   </span>';*/
 
 				$social = '';		   
 				
