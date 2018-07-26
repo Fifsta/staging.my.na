@@ -35,9 +35,8 @@ $this->load->view('inc/header', $header);
 <nav id="bread">
   <div class="container">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Library</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Data</li>
+        <li class="breadcrumb-item"><a href="<?php echo site_url('/'); ?>">My.na</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Trade</li>
       </ol>
   </div>
 </nav>
@@ -46,7 +45,7 @@ $this->load->view('inc/header', $header);
 
   <div class="row">
 
-    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-4 order-md-2 order-sm-1 order-lg-2 order-xl-4" id="sidebar">
+    <div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-3 order-xl-3" id="sidebar">
 
       <?php $this->load->view('inc/login'); ?>
       <?php $this->load->view('inc/weather');?>
@@ -54,7 +53,7 @@ $this->load->view('inc/header', $header);
 
     </div>
 
-    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-8 order-md-1 order-sm-2">
+    <div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
 
         <!--SEARCH/FILTER SECTION -->
         <?php // $this->load->view('trade/inc/filter/filter_'.$group); ?> 
@@ -96,7 +95,7 @@ $this->load->view('inc/header', $header);
 <script type="text/javascript" src="<?php echo base_url('/');?>js/select2.min.js"></script>    
 <script src='<?php echo base_url('/')?>js/jquery.cycle2.min.js' type="text/javascript" language="javascript"></script>
 <script src='<?php echo base_url('/')?>js/jquery.rating.pack.js' type="text/javascript" language="javascript"></script>
-<script src="<?php echo base_url('/');?>js/custom/fb.js?v=1"></script>
+<script src="<?php echo base_url('/');?>js/custom/fb.js?v=55"></script>
 
 <script type="text/javascript">
   $(document).ready(function(){
