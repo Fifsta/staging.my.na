@@ -3176,8 +3176,6 @@ function un_clean_url($str)
 		
 							);
 
-							$this->session->sess_destroy();
-							
 							$this->session->set_userdata($sess);
 							$this->session->set_flashdata('login', 'Y');
 		
@@ -3244,12 +3242,10 @@ function un_clean_url($str)
 							$this->load->view('login' , $data);
 		
 						}
-		
-		
+
 						
 					//NO MATCHING CREDENTIALS
 					}else{
-						$data['redirect'] = $redirect;
 						
 						$data['redirect'] = $redirect;
 						$data['error'] = 'Your credentials did not match. Please ensure you have the correct email address and password.';
@@ -3278,6 +3274,10 @@ function un_clean_url($str)
 
 	function logout($referer = ''){
 
+		//$this->session->sess_destroy();  
+		//redirect(site_url('/'),'refresh');
+		//if user clicks logout
+		if($this->input->get('redirect')){
 			
 			$log['FB_LOGOUT'] = 'Y';
 			$this->db->where('ID', $this->session->userdata('id'));
@@ -3285,7 +3285,37 @@ function un_clean_url($str)
 			
 			$this->session->sess_destroy();
 			
+			$data['redirect'] = $this->input->get('redirect');
+			if($data['redirect'] == ''){
+				
+				redirect(site_url('/'), 301);
+			}else{
+				
+				redirect($data['redirect'], 301);
+			}
+			
+		
+		//if session expired	
+		}elseif($referer != ''){
+			
+			$data['redirect'] =  $referer;
+			/*$this->session->unset_userdata('id');
+			$this->session->unset_userdata('u_name');
+			$this->session->unset_userdata('last_login');
+			$this->session->unset_userdata('img_file');
+			$this->session->unset_userdata('points');*/
+			$this->session->sess_destroy();
+			$data['basicmsg'] = 'Please log in below!';
+			$this->load->view('login' , $data);
+			
+		}else{
+			
+			$this->session->sess_destroy();
 			redirect(site_url('/'), 301);
+			
+		}
+		
+
 		
 	}
 
