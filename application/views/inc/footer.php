@@ -137,6 +137,20 @@ if($this->input->get('debug')){
 
 	$(document).ready( function(){
 
+
+		$.post('<?php echo site_url();?>my_na/nav/', { url: "<?php echo $_SERVER['REQUEST_URI']; ?>"}, function(data){
+
+
+		  	if(data == 'FALSE'){
+
+			}else{
+
+				$('#sidebar').prepend( data );
+			}
+
+		});
+
+
 		<?php if(!$this->session->userdata('id')){ ?>
 
 			scroll_over();
@@ -150,20 +164,7 @@ if($this->input->get('debug')){
 		check_gdpr();
 
 		// Call weather function
-		get_weather('na','windhoek');
-
-
-		$.post('<?php echo site_url();?>my_na/nav/', { url: "<?php echo $_SERVER['REQUEST_URI']; ?>"}, function(data){
-
-
-		  	if(data == 'FALSE'){
-
-			}else{
-
-				$('#sidebar').prepend( data );
-			}
-
-		});
+		get_weather('na','windhoek');		
 
 	});
 
