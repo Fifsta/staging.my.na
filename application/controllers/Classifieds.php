@@ -86,9 +86,11 @@ class Classifieds extends CI_Controller {
 
 		 $o = $this->classifieds_model->render_latest_classifieds($query['query']);
 		
-		 $this->output
+		 /*$this->output
 	        ->set_content_type('application/json')
-	        ->set_output(json_encode(array('classifieds' => $o)));
+	        ->set_output(json_encode(array('classifieds' => $o)));*/
+
+	    return $o;    
 	
 	}
 
