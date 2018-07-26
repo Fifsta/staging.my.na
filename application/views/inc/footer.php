@@ -107,7 +107,9 @@ if($this->input->get('debug')){
 	$(document).ready( function(){
 
 
-		$.get( "<?php echo site_url('/');?>my_na/nav/?url=<?php echo site_url('/'). uri_string().'/?'.$qstr;?>", function( data ) {
+		$.post('<?php echo site_url();?>my_na/nav/', { url: "<?php echo $_SERVER['REQUEST_URI'].'/?'.$qstr; ?>"}, function(data){
+
+
 		  	if(data == 'FALSE'){
 
 			}else{
@@ -130,7 +132,7 @@ if($this->input->get('debug')){
 		//get_weather('na','windhoek');		
 
 	});
-	
+
 
 	function scroll_over() {
 
