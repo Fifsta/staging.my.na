@@ -37,23 +37,7 @@
 					    <a href="#news" type="button" class="btn btn-dark jumper"><i class="fa fa-newspaper-o"></i> Latest News</a>
 					</div>
 
-					<div class="spacer"></div>
-		 			<?php $this->load->view('inc/featured_business'); ?>
-					<div class="spacer"></div>
-					<?php $this->load->view('inc/featured_listings'); ?>
-					<div class="spacer"></div>
-					<?php $this->load->view('inc/categories'); ?>
-					<div class="spacer"></div>
-					<?php $this->load->view('inc/classifieds'); ?>
-					<div class="spacer"></div>
-					<?php $prop['type'] = '3408'; $this->load->view('inc/products', $prop); ?>
-					<div class="spacer"></div>
-					<?php $cars['type'] = '348'; $this->load->view('inc/products', $cars); ?>
-					<div class="spacer"></div>
-					<?php $this->load->view('inc/auctions'); ?>					
-					<div class="spacer"></div>
-					<?php $this->load->view('inc/news'); ?>
-					<div class="spacer"></div>
+
 
 				</div>
 			</div>
