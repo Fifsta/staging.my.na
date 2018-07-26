@@ -153,18 +153,18 @@ if($this->input->get('debug')){
 
 		<?php if($this->session->userdata('id') !== NULL){ ?>
 
-			scroll_over();
+			//scroll_over();
 		
 		<?php } ?>
 
-		load_my_na_business();
+		//load_my_na_business();
 
-		load_my_na_products();	
+		//load_my_na_products();	
 
-		check_gdpr();
+		//check_gdpr();
 
 		// Call weather function
-		get_weather('na','windhoek');		
+		//get_weather('na','windhoek');		
 
 	});
 
