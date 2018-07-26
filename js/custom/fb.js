@@ -98,7 +98,7 @@
 
 						if(data === 'TRUE'){
 							
-							window.location.reload(true);
+							window.location.reload();
 							
 						}   	
 					}
@@ -121,7 +121,7 @@
 						console.log('FB Gologin response '+data);
 						if(data === 'TRUE'){
 							
-							window.location.reload(true);
+							window.location.reload();
 							
 						}
 					}
