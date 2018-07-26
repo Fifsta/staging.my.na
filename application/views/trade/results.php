@@ -36,7 +36,7 @@ $this->load->view('inc/header', $header);
   <div class="container">
       <ol class="breadcrumb">
            <?php $this->trade_model->show_categories_breadcrumb($main_cat_id, $sub_cat_id, $sub_sub_cat_id, $sub_sub_sub_cat_id, $location, $suburb); ?>
-           <li class="active current"><?php echo $heading;?></li>
+           <li class="breadcrumb-item" class="active current"><?php echo $heading;?></li>
       </ol>
   </div>
 </nav>
