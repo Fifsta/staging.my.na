@@ -11,22 +11,3 @@
 	<div id="classifieds_content" class=""></div>
 	
 </section> 
-
-<script>
-	$(document).ready(function(){
-
-		// LOAD CLASSIFIEDS
-		$.ajax({
-            url: '<?php echo site_url('/');?>classifieds/get_latest/',
-            dataType: "json",
-            type: "GET",
-            success: function(data) {
-				var pre = $("#classifieds_content");
-                //pre.removeClass('loading_img min400');
-                pre.append(data.classifieds);
-
-                initialise_owl();
-            }
-        });
-	});	
-</script> 
