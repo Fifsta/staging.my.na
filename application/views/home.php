@@ -71,11 +71,11 @@
 
 	$(document).ready( function(){
 
-			load_my_na_business();
+			//load_my_na_business();
 
-			load_my_na_products();	
+			//load_my_na_products();	
 
-			load_classifieds();
+			//load_classifieds();
 	});		
 
 	$(document).on('click', '.cat-slide', function(e) {
