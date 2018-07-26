@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url('/');?>css/animate.css">
+
 <style>
 
     .footer-modal{
@@ -313,7 +313,7 @@ if($this->input->get('debug')){
 <script src="js/jquery.fileInput.js"></script>
 <script src="js/owl.carousel.js"></script>
 
-<script src="js/jquery.lazysizes.min.js"></script>
+<!--<script src="js/jquery.lazysizes.min.js"></script>-->
 <script src="js/jquery.fancybox.min.js"></script>
 <script src="js/bootstrap-select.min.js"></script>
 

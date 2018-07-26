@@ -61,6 +61,7 @@
 	<link href="css/icons.css" rel="stylesheet" type="text/css">
 	<link href="<?php echo base_url('/'); ?>css/style.css?v=3" rel="stylesheet" type="text/css">
 	<link href="<?php echo base_url('/'); ?>css/typeahead.css" rel="stylesheet" type="text/css">
+	<link href="<?php echo base_url('/');?>css/animate.css" rel="stylesheet">
 
 	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="bootstrap/js/popper.min.js"></script>
