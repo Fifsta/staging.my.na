@@ -69,7 +69,7 @@ $(document).ready(function(){
 
 	
 	//OPTIONS to TABS JUMP IN LISTINGS
-	$("#listing .options a[href*=#]").click(function(event){
+	/*$("#listing .options a[href*=#]").click(function(event){
 		var link = $(this).attr('href');
 		setTimeout(function() {
 			$(link).trigger('click');
@@ -83,10 +83,10 @@ $(document).ready(function(){
 		var header_height = $('#header').height();
 		var target_top = target_offset.top-header_height-70;
 		$('html, body').animate({scrollTop:target_top}, 500);
-	});
+	});*/
  
 	// BACK TO TOP
-	$("a.jumper[href*=#]").click(function(event){
+	/*$("a.jumper[href*=#]").click(function(event){
 
 		var link = $(this).attr('href');
 		setTimeout(function() {
@@ -101,7 +101,7 @@ $(document).ready(function(){
 		var header_height = $('#heading').height();
 		var target_top = target_offset.top-header_height-110;
 		$('html, body').animate({scrollTop:target_top}, 800);
-	});
+	});*/
 	
 	//DROP
 	$('.main-menu > ul > li').has('ul').find(' > a').append('<i class="fa fa-angle-down"></i>');

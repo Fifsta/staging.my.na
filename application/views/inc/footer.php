@@ -327,5 +327,9 @@
 <script src="js/bootstrap-select.min.js"></script>
 
 
+<!-- Datepicker -->
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+
 <!-- Custom Js -->
 <script src="js/jquery.custom.js"></script>
