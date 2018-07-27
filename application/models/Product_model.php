@@ -738,7 +738,7 @@ class Product_model extends CI_Model{
 	{
 
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('get_business_products_'.$bus_id))
 		{
@@ -1025,7 +1025,7 @@ class Product_model extends CI_Model{
 				
 			}
 
-			$this->cache->save('get_business_products_'.$bus_id, $output, 600);
+			$this->cache->save('get_business_products_'.$bus_id, $output, 4000);
 
 		}
 			
