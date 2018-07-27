@@ -9,7 +9,7 @@
         </div>
         <div class="collapse show" id="collapse_login">
             <form class="form-signin" method="post" action="<?php echo site_url('/'); ?>members/login/">
-                <input type="hidden" name="redirect" id="redirect" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
+                <input type="hidden" name="redirect" id="redirect" value="<?php echo site_url('/') . uri_string(); ?>">
 
     			<div class="form-group">
     				<strong>Login to your Account</strong>
