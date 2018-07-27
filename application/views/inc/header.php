@@ -28,7 +28,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo base_url('/');?>img/icons/my_na_[72x72].png">
     <link rel="apple-touch-icon-precomposed" href="<?php echo base_url('/');?>img/icons/my_na_[57x57].png">
 
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!--<script src="<?php echo base_url('/'); ?>js/jquery-3.3.1.js"></script>-->
 
@@ -51,7 +51,7 @@
 	<![endif]-->
 	
 	<!--[if (gte IE 9) | (!IE)]><!--> 
-	<script src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<!--<![endif]-->
 	<!-- css -->
 
