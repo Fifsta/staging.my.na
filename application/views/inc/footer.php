@@ -107,7 +107,7 @@ if($this->input->get('debug')){
 	$(document).ready( function(){
 
 
-		$.post('<?php echo site_url();?>my_na/nav/', { url: "<?php echo $_SERVER['REQUEST_URI'].'/?'.$qstr; ?>"}, function(data){
+		$.post('<?php echo site_url();?>my_na/nav/', { url: "<?php echo $_SERVER['REQUEST_URI']; ?>"}, function(data){
 
 
 		  	if(data == 'FALSE'){
