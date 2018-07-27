@@ -104,9 +104,8 @@
 
 	?>
 
+	$(document).ready( function(){
 
-
-	$(window).load(function() {
 
 		$.post('<?php echo site_url();?>my_na/nav/', { url: "<?php echo $_SERVER['REQUEST_URI']; ?>"}, function(data){
 
@@ -119,11 +118,6 @@
 			}
 
 		});
-
-	});
-
-
-	$(document).ready( function(){
 
 
 		<?php if($this->session->userdata('id') === NULL){ ?>
