@@ -44,7 +44,7 @@
 					<div class="spacer"></div>
 					<?php $this->load->view('inc/categories'); ?>
 					<div class="spacer"></div>
-					<?php //$this->load->view('inc/classifieds'); ?>
+					<?php $this->load->view('inc/classifieds'); ?>
 					<div class="spacer"></div>
 					<?php $prop['type'] = '3408'; $this->load->view('inc/products', $prop); ?>
 					<div class="spacer"></div>
@@ -71,11 +71,11 @@
 
 	$(document).ready( function(){
 
-			//load_my_na_business();
+			load_my_na_business();
 
-			//load_my_na_products();	
+			load_my_na_products();	
 
-			//load_classifieds();
+			load_classifieds();
 	});		
 
 	$(document).on('click', '.cat-slide', function(e) {
