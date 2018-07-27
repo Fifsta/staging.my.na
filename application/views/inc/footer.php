@@ -312,6 +312,8 @@
 		        }		        
 		    }
 		});
+
+
 	}
 
 
@@ -330,4 +332,4 @@
 <script src="js/bootstrap-datetimepicker.min.js"></script>
 
 <!-- Custom Js --> 
-<!--<script src="js/jquery.custom.js"></script>-->
+<script src="js/jquery.custom.js"></script>
