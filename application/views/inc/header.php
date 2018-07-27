@@ -51,7 +51,7 @@
 	<![endif]-->
 	
 	<!--[if (gte IE 9) | (!IE)]><!--> 
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="js/jquery-2.1.1.min.js"></script>
 	<!--<![endif]-->
 	<!-- css -->
 
