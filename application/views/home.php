@@ -19,7 +19,7 @@
 		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-3 order-md-2 order-sm-1 order-lg-3 order-xl-3" id="sidebar">
 			<?php $this->load->view('inc/login'); ?>
 		
-			<?php $this->load->view('inc/adverts'); ?>
+			<?php //$this->load->view('inc/adverts'); ?>
 		</div>
 
 		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
@@ -37,23 +37,7 @@
 					    <a href="#news" type="button" class="btn btn-dark jumper"><i class="fa fa-newspaper-o"></i> Latest News</a>
 					</div>
 
-					<div class="spacer"></div>
-		 			<?php $this->load->view('inc/featured_business'); ?>
-					<div class="spacer"></div>
-					<?php $this->load->view('inc/featured_listings'); ?>
-					<div class="spacer"></div>
-					<?php $this->load->view('inc/categories'); ?>
-					<div class="spacer"></div>
-					<?php $this->load->view('inc/classifieds'); ?>
-					<div class="spacer"></div>
-					<?php $prop['type'] = '3408'; $this->load->view('inc/products', $prop); ?>
-					<div class="spacer"></div>
-					<?php $cars['type'] = '348'; $this->load->view('inc/products', $cars); ?>
-					<div class="spacer"></div>
-					<?php $this->load->view('inc/auctions'); ?>					
-					<div class="spacer"></div>
-					<?php $this->load->view('inc/news'); ?>
-					<div class="spacer"></div>
+
 
 				</div>
 			</div>
@@ -69,75 +53,9 @@
 
 <script type="text/javascript">
 
-	$(document).ready( function(){
-
-			load_my_na_business();
-
-			load_my_na_products();	
-
-			load_classifieds();
-	});		
-
-	$(document).on('click', '.cat-slide', function(e) {
-
-		$('.cat-slide').html('<img src="<?php echo base_url('/'); ?>images/load.gif"> Loading...</a>');
-
-	    $.ajax({
-	        'async': false,
-	        'type': "get",
-	        'url': "<?php echo site_url('/'); ?>my_na/bus_categories/",
-	        'dataType': "json",
-	        'success': function (data) {
-
-	        	$('.cat-slide').hide();
-	        	$('#cat-box').html(data.cats);
-
-	        }
-	    });
-
-	});
 
 
-	$(document).ready(function(){
 
-		// INITIALIZE OWL
-		$('#owl-banners').owlCarousel({
-		    loop:false,
-		    lazyLoad: true,
-		    navRewind:false,
-		    margin:10,
-		    nav: true,
-		    navText : ["<button class='btn owl-prev-next-button previous'></button>","<button class='btn owl-prev-next-button next'></button>"],
-		    responsiveClass:true,
-		    responsive:{
-		        0:{
-		            items:1,
-		            nav:false,
-		            loop:true
-		        },
-		        600:{
-		            items:1,
-		            nav:false,
-		            loop:true
-		        },
-		        1000:{
-		            items:1,
-		            nav:true,
-		            loop:true
-		        },
-
-		        1600:{
-		            items:1,
-		            nav:true,
-		            loop:true
-		        }		        
-		    }
-		});
-
-
-		initialise_owl();	
-		
-	});
 
 
   /*function initiate_slides(){
