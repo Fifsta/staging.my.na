@@ -14,21 +14,21 @@ class My_na extends CI_Controller {
 		$this->load->model('product_model');
 		$this->load->model('search_model');
 	}
-		
+		 
 
 	//+++++++++++++++++++++++++++ 
 	//GET FEATURED BUSINESS JSON
 	//++++++++++++++++++++++++++
 	public function get_feature_business($featured = 'N',$cat1 = false,$cat2 = false, $limit = 10, $offset = 0) {
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('my_na_business_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit))
 		{
 
 			$output = $this->my_na_model->get_feature_businesses($featured,$cat1,$cat2, $limit, $offset);
 
-			$this->cache->save('my_na_business_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit, $output, 600);
+			$this->cache->save('my_na_business_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit, $output, 14000);
 		}
 
 		echo json_encode($output);
@@ -42,14 +42,14 @@ class My_na extends CI_Controller {
 	public function get_feature_products($featured = 'Y',$cat1 = false,$cat2 = false, $limit = 10, $offset = 0)
 	{
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('my_na_products_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit))
 		{
 
 			$output = $this->my_na_model->get_feature_products($featured,$cat1,$cat2, $limit, $offset);
 
-			$this->cache->save('my_na_products_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit, $output, 600);
+			$this->cache->save('my_na_products_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit, $output, 14000);
 		}
 
 		echo json_encode($output);
