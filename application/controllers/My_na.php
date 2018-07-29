@@ -183,6 +183,23 @@ class My_na extends CI_Controller {
 
 	public function nav()
 	{
+		if($this->session->userdata('id')){
+		
+			$data['url'] = $this->input->get('url');
+			if($str = $this->input->get('srch_bar')){
+
+				$data['str'] = urldecode($str);
+			}
+			$this->load->view('inc/profile', $data);
+		}else{
+			
+			echo 'FALSE';	
+		}
+
+	}
+
+	public function nav_old()
+	{
 		
 		if($this->session->userdata('id') === null){
 
