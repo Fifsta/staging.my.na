@@ -601,7 +601,7 @@ class Trade extends CI_Controller {
 
 		}elseif($this->uri->segment(1) == 'trade' && $this->uri->segment(3) != ''){
 
-			redirect('/product/'.$this->uri->segment(3).'/d','location',301);
+			redirect('/product/'.$this->uri->segment(3).'/','location',301);
 
 		}else{
 
