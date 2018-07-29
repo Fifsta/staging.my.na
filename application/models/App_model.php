@@ -1,17 +1,12 @@
 <?php
 class App_model extends CI_Model{
 		
-	public function __construct()
-    {
-        // Constructor's functionality here, if you have any.
-        self::__construct();
-    }
+
 	
- 	/*function app_model(){
+ 	function app_model(){
   		//parent::CI_model();
 		self::__construct();
- 	}*/
-
+ 	}
 
 
 //++++++++++++++++++++++++++++++ 
@@ -716,7 +711,10 @@ class App_model extends CI_Model{
 	//+++++++++++++++++++++++++++
 	//GET CATEGORIES CONTENT
 	//++++++++++++++++++++++++++
-function get_category_content($id,$pub_id, $limit, $offset, $title_group, $post_id)
+	//+++++++++++++++++++++++++++
+	//GET CATEGORIES CONTENT
+	//++++++++++++++++++++++++++
+	function get_category_content($id,$pub_id, $limit, $offset, $title_group, $post_id)
 	{
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
