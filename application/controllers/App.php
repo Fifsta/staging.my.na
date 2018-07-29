@@ -727,7 +727,7 @@ class App extends REST_Controller{
 		}
 		$this->load->model('nmh_model');
 		$this->load->model('app_model');
-		$o = $this->app_model->get_category_content($id,$pub_id, $limit , $offset, $title_group);
+		$o = $this->app_model->get_category_content($id,$pub_id, $limit , $offset, $title_group, $post_id);
 
 		$this->response($o, 200);
 	}
