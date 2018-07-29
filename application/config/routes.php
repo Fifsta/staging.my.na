@@ -71,7 +71,7 @@ $route["deal/(:num)/(:any)"] = 'deals/show/$1/$2';
 
 //CLEAN PRODUCTS
 $route["product"] = 'trade/product/';
-$route["product/(:num)/(:any)"] = 'trade/product/$1';
+$route["product/(:any)"] = 'trade/product/$1';
 
 //CLEAN PRODUCT CATEGORIES
 $route["cat/(:any)"] = 'trade/cat/$1';
@@ -86,4 +86,4 @@ $route["assets/(:any)"] = 'assets/index/$1';
 $route["restaurants"] = 'my_na/restaurants';
 
 //URL SHORTENER
-$route["u/(:any)"] = 'u/index/$1';
+$route["u/(:any)"] = 'u/index/$1'; 
