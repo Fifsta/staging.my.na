@@ -4,6 +4,7 @@ class App_model extends CI_Model{
 	public function __construct()
     {
         // Constructor's functionality here, if you have any.
+        self::__construct();
     }
 	
  	/*function app_model(){
