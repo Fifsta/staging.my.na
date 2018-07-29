@@ -4,12 +4,6 @@ require APPPATH.'/libraries/REST_Controller.php';
 
 class App extends REST_Controller{
 
-
-    public function __construct()
-    {
-
-
-    }
 	/**
 	 * REST Controller for My.na App.
 	 *
