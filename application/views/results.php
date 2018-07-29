@@ -23,7 +23,7 @@ $this->load->view('inc/header', $header);
 ?>
 
 <link href='<?php echo base_url('/');?>css/jquery.rating.css' type="text/css" rel="stylesheet"/>
-<link href="<?php echo base_url('/');?>css/select/select2.css" rel="stylesheet" type="text/css" />
+<link href="css/select/select2.css" rel="stylesheet" type="text/css" />
 <link rel="canonical" href="<?php $this->search_model->build_canonical();?>" />
 
 <style type="text/css">
