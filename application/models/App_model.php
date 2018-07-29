@@ -715,7 +715,7 @@ class App_model extends CI_Model{
 	//+++++++++++++++++++++++++++
 	//GET CATEGORIES CONTENT
 	//++++++++++++++++++++++++++
-	function get_category_content($id,$pub_id, $limit, $offset, $title_group, $post_id)
+function get_category_content($id,$pub_id, $limit, $offset, $title_group, $post_id)
 	{
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
