@@ -71,7 +71,7 @@ $route["deal/(:num)/(:any)"] = 'deals/show/$1/$2';
 
 //CLEAN PRODUCTS
 $route["product"] = 'trade/product/';
-$route["product/(:num)"] = 'trade/product/$1';
+$route["product/(:num)/(:any)"] = 'trade/product/$1/$2';
 
 //CLEAN PRODUCT CATEGORIES
 $route["cat/(:any)"] = 'trade/cat/$1';
