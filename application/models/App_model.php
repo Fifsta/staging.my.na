@@ -1,12 +1,15 @@
 <?php
 class App_model extends CI_Model{
 		
-
+	public function __construct()
+    {
+        // Constructor's functionality here, if you have any.
+    }
 	
- 	function app_model(){
+ 	/*function app_model(){
   		//parent::CI_model();
 		self::__construct();
- 	}
+ 	}*/
 
 
 //++++++++++++++++++++++++++++++ 
