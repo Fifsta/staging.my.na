@@ -2006,7 +2006,7 @@ class My_na_model extends CI_Model{
 			}		
 		}
 	}
-	
+	 
 
 	//++++++++++++++++++++++++++++++
 	//Instant Search 
@@ -2014,7 +2014,7 @@ class My_na_model extends CI_Model{
     public function instant_search_json($type,$mid,$sid,$query)
     { 
 
-        $this->load->model('image_model'); 
+       /* $this->load->model('image_model'); 
 
         $this->load->library('thumborp');
         $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
@@ -2057,9 +2057,7 @@ class My_na_model extends CI_Model{
         
         if($str = $query){
 
-                    /*if($this->input->get('location') != 'national'){
-                        $locationSQL = " AND location = '".$this->input->get('location')."' ";  
-                    }*/
+
                     $strSQL = '';
                     if($sid != 0){
                         $strSQL = " sub_cat_id = '".$sid."' ";   
@@ -2177,7 +2175,15 @@ class My_na_model extends CI_Model{
             echo json_encode($out);
             
             $this->output->set_content_type('application/json');
-        }
+        }*/
+
+            $out - array();
+
+            echo json_encode($out);
+            
+            $this->output->set_content_type('application/json');
+
+
     }
 		
 

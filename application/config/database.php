@@ -176,7 +176,7 @@ if( $nmh_worker)
 	$db['default']['username'] = 'my_na_db_user';
 	$db['default']['password'] = 'sasas62621h2gy156sa6^&GG';
 	$db['default']['database'] = 'my_na_db';
-	$db['default']['dbdriver'] = 'mysql';
+	$db['default']['dbdriver'] = 'mysqli';
 	$db['default']['dbprefix'] = '';
 	$db['default']['pconnect'] = FALSE;
 	$db['default']['db_debug'] = TRUE;
