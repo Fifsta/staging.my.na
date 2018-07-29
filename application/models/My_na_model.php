@@ -2177,7 +2177,7 @@ class My_na_model extends CI_Model{
             $this->output->set_content_type('application/json');
         }*/
 
-            $out - array();
+            $out = array();
 
             echo json_encode($out);
             
