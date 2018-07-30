@@ -21,7 +21,7 @@ class Sse extends CI_Controller {
  	//+++++++++++++++++++++++++++
 	//PRODUCT PAGES
 	//++++++++++++++++++++++++++
-	public function product($product_id = 0, $current_bid = '')
+	public function product($product_id = 0, $current_bid = 0)
 	{
 
         header('Content-Type: text/event-stream');

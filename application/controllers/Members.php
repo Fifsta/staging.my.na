@@ -263,7 +263,7 @@ class Members extends CI_Controller {
 	//+++++++++++++++++++++++++++
 	//LOAD HOME FEED
 	//++++++++++++++++++++++++++
-	public function load_home_feed($x)
+	public function load_home_feed($x=0)
 	{
 		//IF fisrt load
 		if($x == 0){
