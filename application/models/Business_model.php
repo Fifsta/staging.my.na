@@ -1759,12 +1759,12 @@ function get_map_details($ID){
 	public function get_rating($id){
       	
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('get_rating_'.$id))
 		{		
 
-			$query = $this->db->query("SELECT AVG(RATING)as TOTAL FROM u_business_vote WHERE BUSINESS_ID ='".$id."' AND IS_ACTIVE = 'Y' AND TYPE = 'review' ORDER BY TOTAL");
+			$query = $this->db->query("SELECT AVG(RATING) AS TOTAL FROM u_business_vote WHERE BUSINESS_ID ='".$id."' AND IS_ACTIVE = 'Y' AND TYPE = 'review' ORDER BY TOTAL");
 			
 			if($query->result()){
 				
@@ -1799,7 +1799,7 @@ function get_map_details($ID){
 
     function get_review_stars_show($rating,$id){
 		 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('get_review_stars_show_'.$id.'_'.$rating))
 		{

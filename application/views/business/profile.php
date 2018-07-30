@@ -284,7 +284,7 @@ $this->load->view('inc/header');
 						<?php $this->rating_model->rate_business($bus_id);?>
 					
 					</section>
-					
+					 
 				</div>
 				<!--tabs-->
 
@@ -335,8 +335,8 @@ $this->load->view('inc/header');
 	$(document).ready(function(){
 
 		//Load Similar loading icon
-		var loader = '<img src="<?php echo base_url('/'); ?>images/load.gif"/>';
-		$('#similar_div').html(loader);
+		//var loader = '<img src="<?php echo base_url('/'); ?>images/load.gif"/>';
+		//$('#similar_div').html(loader);
 
 
 		$('#b-about img').addClass('img-fluid');
