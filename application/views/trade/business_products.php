@@ -255,7 +255,7 @@ if($cover_img != ''){
 	              Loop through the search results in the query array
 	              */  
 
-	              $this->trade_model->get_products($query, $main_cat_id = 0, $sub_cat_id = 0, $sub_sub_cat_id = 0, $sub_sub_sub_cat_id = 0, $count = 15, $offset = 0, $title = '',$amt = 4, $advert = FALSE);
+	              $this->trade_model->get_agency_products($bus_id);
     
 	              ?> 
 
