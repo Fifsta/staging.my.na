@@ -22,7 +22,7 @@ class Trade_model extends CI_Model
 	//Get MAP Details
 	function get_map_details($ID){
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('get_product_map_details_'.$ID))
 		{		
@@ -76,7 +76,7 @@ class Trade_model extends CI_Model
 
 			$output = $data;
 
-			$this->cache->save('get_product_map_details_'.$ID, $output, 1440);
+			$this->cache->save('get_product_map_details_'.$ID, $output, 86400);
 
 		}
 
@@ -1017,7 +1017,7 @@ class Trade_model extends CI_Model
 	{
 
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('get_trade_products_'.$main_cat_id.'_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$offset))
 		{
@@ -1414,7 +1414,7 @@ class Trade_model extends CI_Model
 
 			}
 
-			$this->cache->save('get_trade_products_'.$main_cat_id.'_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$offset, $output, 60);
+			$this->cache->save('get_trade_products_'.$main_cat_id.'_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$offset, $output, 43200);
 
 		}
 
@@ -1431,7 +1431,7 @@ class Trade_model extends CI_Model
 	{
 
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('get_trade_agency_products_'.$bus_id.'_'.$main_cat_id.'_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$offset))
 		{
@@ -1828,7 +1828,7 @@ class Trade_model extends CI_Model
 
 			}
 
-			$this->cache->save('get_trade_agency_products_'.$bus_id.'_'.$main_cat_id.'_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$offset, $output, 60);
+			$this->cache->save('get_trade_agency_products_'.$bus_id.'_'.$main_cat_id.'_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$offset, $output, 43200);
 
 		}
 
@@ -1846,7 +1846,7 @@ class Trade_model extends CI_Model
 	function show_product($product_id, $img_url)
 	{
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('show_product_'.$product_id))
 		{
@@ -2411,7 +2411,7 @@ class Trade_model extends CI_Model
 
 			}
 
-			$this->cache->save('show_product_'.$product_id, $output, 600);
+			$this->cache->save('show_product_'.$product_id, $output, 86400);
 
 		
 		}
@@ -4320,7 +4320,7 @@ class Trade_model extends CI_Model
 
 			}
 
-			$this->cache->save('show_product_images_'.$product_id, $output, 600);
+			$this->cache->save('show_product_images_'.$product_id, $output, 86400);
 
 		}
 
@@ -4358,7 +4358,7 @@ class Trade_model extends CI_Model
 			
 			$output = $string;
 
-			$this->cache->save('toggle_product_map_'.$id, $output, 1440);
+			$this->cache->save('toggle_product_map_'.$id, $output, 86400);
 			
 		}
 
@@ -4943,7 +4943,7 @@ class Trade_model extends CI_Model
 				}
 
 			}
-			$this->cache->save('trade/show_categories_breadcrumb_' . $main_cat_id . '_' . $sub_cat_id . '_' . $sub_sub_cat_id . '_' . $sub_sub_sub_cat_id . '_' . $location . '_' . $suburb, $output, 3600);
+			$this->cache->save('trade/show_categories_breadcrumb_' . $main_cat_id . '_' . $sub_cat_id . '_' . $sub_sub_cat_id . '_' . $sub_sub_sub_cat_id . '_' . $location . '_' . $suburb, $output, 86400);
 		}
 		//$this->output->set_output($output);
 		echo $output;
@@ -7095,7 +7095,7 @@ class Trade_model extends CI_Model
 	{
 
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('get_similar_products_'.$product_id.'_'.$cat1.'_'.$cat2))
 		{		
@@ -7375,7 +7375,7 @@ class Trade_model extends CI_Model
 
 			}
 
-			$this->cache->save('get_similar_products_'.$product_id.'_'.$cat1.'_'.$cat2, $output, 600);
+			$this->cache->save('get_similar_products_'.$product_id.'_'.$cat1.'_'.$cat2, $output, 86400);
 
 		}
 
@@ -7392,7 +7392,7 @@ class Trade_model extends CI_Model
 	{
 
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('get_product_questions_'.$product_id))
 		{
@@ -7497,7 +7497,7 @@ class Trade_model extends CI_Model
 				$output .= '<div class="alert alert-warning"><h4><strong>No Questions asked</strong></h4> No queries have been made. Ask a question above.</div>';
 			}
 
-			$this->cache->save('get_product_questions_'.$product_id, $output, 600);
+			$this->cache->save('get_product_questions_'.$product_id, $output, 86400);
 		}
 		
 		echo $output;	
@@ -7603,7 +7603,7 @@ class Trade_model extends CI_Model
 	{
 
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('show_product_reviews_'.$product_id))
 		{
@@ -7707,7 +7707,7 @@ class Trade_model extends CI_Model
 					  ';
 			}
 
-			$this->cache->save('show_product_reviews_'.$product_id, $output, 600);
+			$this->cache->save('show_product_reviews_'.$product_id, $output, 86400);
 
 		}
 		
@@ -7936,7 +7936,7 @@ class Trade_model extends CI_Model
 	public function get_category_name($id)
 	{
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('get_product_category_name_'.$id))
 		{		
@@ -7964,7 +7964,7 @@ class Trade_model extends CI_Model
 
 			}
 
-			$this->cache->save('get_product_category_name_'.$id, $output, 1440);
+			$this->cache->save('get_product_category_name_'.$id, $output, 86400);
 
 		}
 
@@ -8226,7 +8226,7 @@ class Trade_model extends CI_Model
 
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
-		if (! $output = $this->cache->get('trade/show_popular_cats_' . $id . '_' . $type . '_' . $location))
+		if (! $output = $this->cache->get('trade_show_popular_cats_' . $id . '_' . $type . '_' . $location))
 		{
 			$output = '';
 			if ($id == 0)
@@ -8350,7 +8350,7 @@ class Trade_model extends CI_Model
 
 			}
 
-			$this->cache->save('trade/show_popular_cats_' . $id . '_' . $type . '_' . $location, $output, 3600);
+			$this->cache->save('trade_show_popular_cats_' . $id . '_' . $type . '_' . $location, $output, 86400);
 		}
 		//$this->output->set_output($output);
 		echo $output;
@@ -8445,7 +8445,7 @@ class Trade_model extends CI_Model
 				}
 
 			}
-			$this->cache->save('trade/show_location_items_' . $main_cat_id . '_' . $sub_cat_id . '_' . $sub_sub_cat_id . '_' . $sub_sub_sub_cat_id . '_' . $location . '_' . $suburb, $output, 3600);
+			$this->cache->save('trade/show_location_items_' . $main_cat_id . '_' . $sub_cat_id . '_' . $sub_sub_cat_id . '_' . $sub_sub_sub_cat_id . '_' . $location . '_' . $suburb, $output, 86400);
 		}
 		//$this->output->set_output($output);
 		echo $output;
@@ -8579,7 +8579,7 @@ class Trade_model extends CI_Model
 		if ($bus_id != 0)
 		{
 
-			$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+			$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 			if ( ! $output = $this->cache->get('show_company_'.$client_id.'_'.$sub_cat_id))
 			{	
@@ -8674,7 +8674,7 @@ class Trade_model extends CI_Model
 
 			}
 
-			$this->cache->save('show_company_'.$client_id.'_'.$sub_cat_id, $output, 600);	
+			$this->cache->save('show_company_'.$client_id.'_'.$sub_cat_id, $output, 86400);	
 
 		}
 
@@ -8867,7 +8867,7 @@ class Trade_model extends CI_Model
 	public function get_extras($product_id)
 	{
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('get_product_extras_'.$product_id))
 		{		
@@ -8900,7 +8900,7 @@ class Trade_model extends CI_Model
 
 			}
 
-			$this->cache->save('get_product_extras_'.$product_id, $output, 600);
+			$this->cache->save('get_product_extras_'.$product_id, $output, 86400);
 
 		}
 

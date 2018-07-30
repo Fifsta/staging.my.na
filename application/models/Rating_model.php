@@ -22,7 +22,9 @@ class Rating_model extends CI_Model{
 							JOIN a_tourism_category on a_tourism_category_sub.CATEGORY_TYPE_ID = a_tourism_category.ID
 							WHERE u_business.ID = '".$bus_id."'
 							");
+			
             $type['bus_id'] = $bus_id;
+
 			if($q->result()){
 
 				//SEE IF LOGGED IN
@@ -297,7 +299,7 @@ class Rating_model extends CI_Model{
 	 									AND  u_business_vote.REVIEW_TYPE = 'business_review'
 	 									ORDER BY u_business_vote.TIME_VOTED DESC
 										");
-
+ 
 			$output = '';
 	        $response = array();
 			if($query->num_rows() > 0){
