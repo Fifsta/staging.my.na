@@ -1761,7 +1761,7 @@ function get_map_details($ID){
 
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
-		if ( ! $output = $this->cache->get('get_rating_'.$id))
+		if ( ! $output = $this->cache->get('get_bus_rating_'.$id))
 		{		
 
 			$query = $this->db->query("SELECT AVG(RATING) AS TOTAL FROM u_business_vote WHERE BUSINESS_ID ='".$id."' AND IS_ACTIVE = 'Y' AND TYPE = 'review' ORDER BY TOTAL");
@@ -1777,7 +1777,7 @@ function get_map_details($ID){
 				
 			}
 
-			$this->cache->save('get_rating_'.$id, $output, 86400);
+			$this->cache->save('get_bus_rating_'.$id, $output, 86400);
 
 		}
 

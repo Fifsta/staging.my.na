@@ -8986,24 +8986,34 @@ class Trade_model extends CI_Model
 	public function get_rating($id)
 	{
 
-		$query = $this->db->query("SELECT AVG(RATING)as TOTAL FROM u_business_vote WHERE PRODUCT_ID ='" . $id . "' AND IS_ACTIVE = 'Y' AND TYPE = 'review' ORDER BY TOTAL ");
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+
+		if ( ! $output = $this->cache->get('get_trade_rating_'.$id))
+		{			
+
+			$query = $this->db->query("SELECT AVG(RATING)as TOTAL FROM u_business_vote WHERE PRODUCT_ID ='" . $id . "' AND IS_ACTIVE = 'Y' AND TYPE = 'review' ORDER BY TOTAL ");
 
 
-		if ($query->result())
-		{
+			if ($query->result())
+			{
 
-			$row = $query->row_array();
+				$row = $query->row_array();
 
-			return round($row['TOTAL']);
+				$output = round($row['TOTAL']);
 
-		}
-		else
-		{
+			}
+			else
+			{
 
-			return 0;
+				$output = 0;
 
-		}
+			}
 
+			$this->cache->save('get_trade_rating_'.$id, $output, 86400);
+
+		}	
+
+		return $output;
 
 	}
 
@@ -9011,10 +9021,20 @@ class Trade_model extends CI_Model
 	public function get_rating_count($id)
 	{
 
-		$query = $this->db->query("SELECT RATING FROM u_business_vote WHERE PRODUCT_ID ='" . $id . "' AND IS_ACTIVE = 'Y' AND TYPE = 'review'");
+  		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
-		return $query->num_rows();
+		if ( ! $output = $this->cache->get('get_trade_rating_count_'.$id))
+		{			
 
+			$query = $this->db->query("SELECT RATING FROM u_business_vote WHERE PRODUCT_ID ='" . $id . "' AND IS_ACTIVE = 'Y' AND TYPE = 'review'");
+
+			$output = $query->num_rows();
+
+			$this->cache->save('get_trade_rating_count_'.$id, $output, 86400);
+
+		}
+
+		return $output;
 
 	}
 
