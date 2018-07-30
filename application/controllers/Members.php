@@ -3659,6 +3659,7 @@ function un_clean_url($str)
 
 
 		$this->load->library('user_agent');
+		$this->load->library('encrypt');
 
 		if(isset($_SERVER['HTTP_CF_CONNECTING_IP'])){
 
