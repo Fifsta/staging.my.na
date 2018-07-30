@@ -3832,7 +3832,9 @@ class Trade_model extends CI_Model
 	//GET IMAGES
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	function show_images($product_id)
-	{
+	{ 
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('show_product_images_'.$product_id))
 		{
@@ -3910,6 +3912,8 @@ class Trade_model extends CI_Model
 
 
 	function toggle_map($id) {
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('toggle_product_map_'.$id))
 		{
