@@ -89,7 +89,6 @@ $this->load->view('inc/header', $header);
 </div>
   
 <?php $this->load->view('inc/footer');?>  
-<script src="<?php echo base_url('/');?>js/custom/fb.js?v=99"></script>
 <!-- JAvascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

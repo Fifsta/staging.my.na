@@ -87,7 +87,8 @@ if($section_1 == 'members' && $section_2 == 'business') { $my_bus = 'show'; } el
 					</ul>
 				</div>
 			</div>
-		</div>	
+		</div>
+			
 
 
 	</div>

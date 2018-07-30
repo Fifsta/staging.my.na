@@ -124,7 +124,7 @@ $this->load->view('inc/header', $header);
 					<?php $this->load->view('inc/classifieds'); ?>	
 					
 				</div>	
-
+ 
 			</div>
 					
 		</div>
@@ -134,7 +134,6 @@ $this->load->view('inc/header', $header);
 </div>
 	
 <?php $this->load->view('inc/footer');?>	
-<script src="<?php echo base_url('/');?>js/custom/fb.js?v=99"></script>
 
 </body>
 </html>

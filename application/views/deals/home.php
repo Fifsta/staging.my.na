@@ -105,8 +105,6 @@ $this->load->view('inc/header', $header);
 
 <?php $this->load->view('inc/footer');?>  
 
-<script src="<?php echo base_url('/');?>js/custom/fb.js?v=2"></script>
-
 <script type="text/javascript">
   $(document).ready(function(){
     $('[rel=tooltip]').tooltip();
