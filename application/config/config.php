@@ -417,7 +417,7 @@ $config['encryption_key'] = 'myna535354refdt53';
 |
 */
 
-$config['sess_cookie_name']   = 'my_na';
+$config['sess_cookie_name']   = 'my_namibia';
 $config['sess_expiration']    = 604800;
 $config['sess_expire_on_close'] = FALSE;
 $config['sess_encrypt_cookie']  = TRUE;
