@@ -1789,9 +1789,20 @@ function get_map_details($ID){
 	//GET BUSINESS RATING COUNT
 	public function get_rating_count($id){
       	
-		$query = $this->db->query("SELECT RATING FROM u_business_vote WHERE BUSINESS_ID ='".$id."' AND IS_ACTIVE = 'Y' AND TYPE = 'review'");
+  		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+
+		if ( ! $output = $this->cache->get('get_rating_count'.$id))
+		{	
+		    	
+			$query = $this->db->query("SELECT RATING FROM u_business_vote WHERE BUSINESS_ID ='".$id."' AND IS_ACTIVE = 'Y' AND TYPE = 'review'");
+
+			$output = $query->num_rows();
+
+			$this->cache->save('get_rating_count'.$id, $output, 1440);
+
+		}	
 			
-		return $query->num_rows();
+		return $output;
 						  
     }
 
