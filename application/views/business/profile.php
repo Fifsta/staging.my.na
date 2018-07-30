@@ -334,6 +334,10 @@ $this->load->view('inc/header');
 
 	$(document).ready(function(){
 
+		//Load Similar loading icon
+		var loader = '<img src="<?php echo base_url('/'); ?>images/load.gif"/>';
+		$('#similar_div').html(loader);
+
 
 		$('#b-about img').addClass('img-fluid');
 
@@ -396,7 +400,7 @@ $this->load->view('inc/header');
 				 initialise_owl();
 
 			}
-		});	
+		});
 	 
 	}
 
