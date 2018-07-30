@@ -41,53 +41,6 @@ $this->load->view('inc/header', $header);
 
 		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
 
-        <section id="classifieds" style="margin-bottom:25px">
-
-	        <div class="heading">
-	        <h2 data-icon="fa-search">Find Jobs <strong>in Namibia</strong></h2>
-	        <p>Browse all vacancy listings here</p>
-
-	        </div>
-
-	         <?php
-		        //++++++++++++++++++++++
-		        //LOAD CAREER SEARCH BOX
-		        //++++++++++++++++++++++
-		        $this->load->view('career/inc/filter');
-	         ?>
-	         <div class="spacer"></div>
-	         <div class="row">
-	         	<div class="col-md-12">
-	         		<div class="card">
-	         			<div class="card-body">
-	         				<div class="row">
-					         	<div class="col-md-4 text-center">
-									<h3 class="upper na_script">Featured<br><span class="na_script yellow ">Jobs </span></h3>
-				                    <p>The best career opportunities are right here. Browse our wide range of jobs and stay updated with the latest jobs currently on offer.</p>       		
-					         	</div>
-
-					         	<div class="col-md-4 text-center">        		
-				                    <h3 class="upper na_script">Looking for <span class="na_script yellow "><br>Work?</span></h3>
-				                    <p>Are you ready to face the working market? Don't worry! With us you need to look no further. With the latest, 
-				                    hottest vacancies on our our site, you are sure to find your dream job.</p>	 		                            		
-					         	</div>
-
-					         	<div class="col-md-4 text-center">   		
-				                    <h3 class="upper na_script ">Your<br><span class="na_script yellow">CV?</span></h3>
-				                    <p>Create an impressive CV online, quick and easy with our ONLINE CV GENERATOR.</p> 		         		
-					         	</div>
-
-					         	<div class="col-md-12">
-				                    <a href="<?php echo site_url('/');?>vacancy/" class="btn btn-dark btn-block">Get Started Now</a>	         		
-					         	</div>
-					         </div>	
-	         			</div>
-	         		</div>		
-	         	</div>      	
-	         </div>	
-                     
-        </section>
-
         <div class="spacer"></div>
 
         <section id="products">
@@ -112,7 +65,54 @@ $this->load->view('inc/header', $header);
             <div class="spacer"></div>	      
 
 
-        </section>
+	        </section>
+
+	          <section id="classifieds" style="margin-bottom:25px">
+
+		        <div class="heading">
+		        <h2 data-icon="fa-search">Find Jobs <strong>in Namibia</strong></h2>
+		        <p>Browse all vacancy listings here</p>
+
+		        </div>
+
+		         <?php
+			        //++++++++++++++++++++++
+			        //LOAD CAREER SEARCH BOX
+			        //++++++++++++++++++++++
+			        $this->load->view('career/inc/filter');
+		         ?>
+		         <div class="spacer"></div>
+		         <div class="row">
+		         	<div class="col-md-12">
+		         		<div class="card">
+		         			<div class="card-body">
+		         				<div class="row">
+						         	<div class="col-md-4 text-center">
+										<h3 class="upper na_script">Featured<br><span class="na_script yellow ">Jobs </span></h3>
+					                    <p>The best career opportunities are right here. Browse our wide range of jobs and stay updated with the latest jobs currently on offer.</p>       		
+						         	</div>
+
+						         	<div class="col-md-4 text-center">        		
+					                    <h3 class="upper na_script">Looking for <span class="na_script yellow "><br>Work?</span></h3>
+					                    <p>Are you ready to face the working market? Don't worry! With us you need to look no further. With the latest, 
+					                    hottest vacancies on our our site, you are sure to find your dream job.</p>	 		                            		
+						         	</div>
+
+						         	<div class="col-md-4 text-center">   		
+					                    <h3 class="upper na_script ">Your<br><span class="na_script yellow">CV?</span></h3>
+					                    <p>Create an impressive CV online, quick and easy with our ONLINE CV GENERATOR.</p> 		         		
+						         	</div>
+
+						         	<div class="col-md-12">
+					                    <a href="<?php echo site_url('/');?>vacancy/" class="btn btn-dark btn-block">Get Started Now</a>	         		
+						         	</div>
+						         </div>	
+		         			</div>
+		         		</div>		
+		         	</div>      	
+		         </div>	
+	                     
+	        </section>      
 
     </div>
 
