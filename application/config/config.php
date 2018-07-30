@@ -53,8 +53,8 @@ if(isset($_SERVER['MY_WORKER']) && $_SERVER['MY_WORKER'] == 'YES')
 }elseif($_SERVER['HTTP_HOST'] == 'localhost'){
 
   //lIVE
-  $config['site_url']	= 'http://localhost/beta.my.na/index.php';
-  $config['base_url']	= 'http://localhost/beta.my.na/';
+  $config['site_url']	= 'http://localhost/my.na/index.php';
+  $config['base_url']	= 'http://localhost/my.na/';
   $config['analytics'] = '<script type="text/javascript"></script>';
 
 }elseif($_SERVER['HTTP_HOST'] == 'beta.my.na'){
@@ -418,7 +418,7 @@ $config['encryption_key'] = 'myna535354refdt53';
 */
 
 $config['sess_cookie_name']   = 'my_na';
-$config['sess_expiration']    = 0;
+$config['sess_expiration']    = 604800;
 $config['sess_expire_on_close'] = FALSE;
 $config['sess_encrypt_cookie']  = TRUE;
 $config['sess_use_database']  = FALSE;
