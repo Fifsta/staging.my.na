@@ -482,7 +482,7 @@ class Trade extends CI_Controller {
 	//+++++++++++++++++++++++++++
 	//VIEW ALL AGENT PROPERTIES
 	//++++++++++++++++++++++++++
-	public function agent( $bus_id, $agent_id, $agency, $name = '')
+	public function agent( $bus_id, $agent_id = 0, $agency, $name = '')
 	{
 
 		$this->load->model('image_model'); 
