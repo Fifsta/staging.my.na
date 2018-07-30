@@ -67,6 +67,14 @@ class Business extends CI_Controller {
 			$name = $this->clean_url_str($this->business_model->get_business_name($bus_id));
 			redirect('/trade/agent/'.$bus_id.'/0/'.$name.'/','location',301);
 
+		//Non existing MZ motirs 30-07-2018
+		}elseif($bus_id == 12362){
+
+			$bus_id = 2706;
+			$name = $this->clean_url_str($this->business_model->get_business_name($bus_id));
+			redirect('/trade/agent/'.$bus_id.'/0/'.$name.'/','location',301);
+
+
 		}elseif($bus_id == 5211){
 
 			$name = $this->clean_url_str($this->business_model->get_business_name($bus_id));
