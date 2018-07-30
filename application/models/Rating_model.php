@@ -22,7 +22,7 @@ class Rating_model extends CI_Model{
 							JOIN a_tourism_category on a_tourism_category_sub.CATEGORY_TYPE_ID = a_tourism_category.ID
 							WHERE u_business.ID = '".$bus_id."'
 							");
-
+			
             $type['bus_id'] = $bus_id;
 
 			if($q->result()){
@@ -580,11 +580,6 @@ class Rating_model extends CI_Model{
 
 		if($this->session->userdata('id')){
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
-
-		if ( ! $q = $this->cache->get('rate_business_show_'.$bus_id))
-		{	
-
 			$q = $this->db->query("SELECT u_business.*,
 							group_concat(a_tourism_category_sub.CATEGORY_TYPE_ID) category FROM u_business
 							LEFT JOIN i_tourism_category ON u_business.ID = i_tourism_category.BUSINESS_ID
@@ -593,13 +588,7 @@ class Rating_model extends CI_Model{
 							WHERE u_business.ID = '".$bus_id."'
 							");
 
-			$q = $q->result();
-
-			$this->cache->save('rate_business_show_'.$bus_id, $q, 604800);
-
-		}
-
-			if($q)
+			if($q->result())
 			{
 
 				$row = $q->row();
