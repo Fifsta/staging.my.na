@@ -1,6 +1,6 @@
 <?php 
 
-$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+//$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
 $width = 826;
 
 $height = 466;

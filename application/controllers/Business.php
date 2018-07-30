@@ -105,6 +105,7 @@ class Business extends CI_Controller {
 			$data['cats'] = $this->business_model->get_current_categories($bus_id);
 			//get RATING
 			$data['rating'] = $this->business_model->get_rating($bus_id);
+			$data['thumbnailUrlFactory'] = $this->image_model->thumborp->create_factory();
 			//$this->load->view('trade/business_products', $data);
 
 
@@ -1011,7 +1012,7 @@ ANALYTICS SECTION
 ++++++++++++++++++++++++++++++++++++++++++++
 
 ++++++++++++++++++++++++++++++++++++++++++++	
- */ 
+ */  
     function add_business_phone_click($bus_id, $type) {
 		
 		$this->business_model->add_business_phone_click($bus_id, $type);
