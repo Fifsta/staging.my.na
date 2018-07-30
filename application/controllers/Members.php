@@ -3678,7 +3678,8 @@ function un_clean_url($str)
 		//$data['referrer'] = $this->agent->referrer();
 
 		//create key
-		$token = $this->encrypt->sha1($row['ID']);
+		//$token = $this->encrypt->sha256($row['ID']);
+		$token = hash( "sha256", $row['ID'] );
 		
 		//insert data
 		$link = '<a href="'.site_url('/').'members/pass_update_two/'.$token.'" >Reset Password Here</a>';
