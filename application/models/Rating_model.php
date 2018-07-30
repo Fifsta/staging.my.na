@@ -595,7 +595,7 @@ class Rating_model extends CI_Model{
 
 			$q = $q->result();
 
-			$this->cache->save('bus_get_current_categories_'.$bus_id, $q, 604800);
+			$this->cache->save('rate_business_show_'.$bus_id, $q, 604800);
 
 		}
 
