@@ -41,7 +41,6 @@ $this->load->view('inc/header', $header);
 
 		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
 
-        <div class="spacer"></div>
 
         <section id="products">
 
