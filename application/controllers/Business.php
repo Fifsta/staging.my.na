@@ -14,11 +14,12 @@ class Business extends CI_Controller {
 		$this->load->model('business_model');
 		$this->load->model('my_na_model');
 		$this->load->model('product_model');
+		$this->load->model('rating_model');
 	}
 	
 	
 	public function index()
-	{
+	{ 
 		if($this->session->userdata('id')){
 			 	
 				$data['id'] = $this->session->userdata('id');
@@ -839,9 +840,9 @@ class Business extends CI_Controller {
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	function reload_reviews($bus_id) {
 		
-		$this->business_model->show_reviews($bus_id);
+		$this->rating_model->show_reviews($bus_id);
 		
-	}
+	} 
 	
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 	//SHOW VIRTUAL TOUR
