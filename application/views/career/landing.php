@@ -44,6 +44,20 @@ $this->load->view('inc/header', $header);
 
         <section id="products">
 
+		        <div class="heading">
+		        <h2 data-icon="fa-search">Find Jobs <strong>in Namibia</strong></h2>
+		        <p>Browse all vacancy listings here</p>
+
+		        </div>
+
+		         <?php
+			        //++++++++++++++++++++++
+			        //LOAD CAREER SEARCH BOX
+			        //++++++++++++++++++++++
+			        $this->load->view('career/inc/filter');
+		         ?>
+        	
+
   				<div class="heading">
 					<h2 data-icon="fa-briefcase" itemprop="description">Featured <strong>Vacancies</strong></h2>
 					<p>Browse all listed featured vacancies here.</p>
@@ -68,18 +82,7 @@ $this->load->view('inc/header', $header);
 
 	          <section id="classifieds" style="margin-bottom:25px">
 
-		        <div class="heading">
-		        <h2 data-icon="fa-search">Find Jobs <strong>in Namibia</strong></h2>
-		        <p>Browse all vacancy listings here</p>
 
-		        </div>
-
-		         <?php
-			        //++++++++++++++++++++++
-			        //LOAD CAREER SEARCH BOX
-			        //++++++++++++++++++++++
-			        $this->load->view('career/inc/filter');
-		         ?>
 		         <div class="spacer"></div>
 		         <div class="row">
 		         	<div class="col-md-12">
