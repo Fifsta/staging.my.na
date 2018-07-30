@@ -18,16 +18,6 @@ class Members extends CI_Controller {
 	}
 
 
-	public function test_encode($val) {
-
-		$this->load->library('encryption');
-
-		$ot = $this->encryption->encrypt($val);
-
-		echo $ot;
-
-	}
-
 	
 	public function index()
 	{ 
@@ -1528,7 +1518,7 @@ class Members extends CI_Controller {
 	//++++++++++++++++++++++++++
 	public function business($bus_id, $section = '',$msg_id = '')
 	{
-
+ 
 		
 		if($this->members_model->check_business_user($bus_id)){
 				

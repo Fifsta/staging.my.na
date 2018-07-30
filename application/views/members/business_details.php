@@ -197,11 +197,11 @@ $this->load->view('inc/header', $header);
                  ?>
                 <div class="row reveal">
                   <div class="col-sm-12 col-md-6 col-lg-4">
-                    <p data-icon="fa-phone text-dark"><button class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
-                    <p data-icon="fa-fax text-dark"><button class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>
+                    <p data-icon="fa-phone text-dark"><button onClick="phone_click('phone')" class="btn btn-default"><!--T: --><?php echo $tel; ?></button></p>
+                    <p data-icon="fa-fax text-dark"><button onClick="phone_click('fax')" class="btn btn-default"><!--F: --><?php echo $fax; ?></button></p>
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-4">
-                    <p data-icon="fa-tablet text-dark"><button class="btn btn-default"><!--C: --><?php echo $cell; ?></button></p>
+                    <p data-icon="fa-tablet text-dark"><button class="btn btn-default" onClick="phone_click('cell')"><!--C: --><?php echo $cell; ?></button></p>
                     <p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><?php echo $email; ?></button></p>
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-4">
@@ -761,6 +761,18 @@ function load_tab(id, str){
     }
    
  }
+
+  function phone_click(type){
+       
+      $.ajax({
+        type: 'get',
+        url: '<?php echo site_url('/').'business/add_business_phone_click/'.$bus_id.'/';?>'+type ,
+        success: function (data) {  
+          
+        }
+      }); 
+
+  }
 
 
 function cover_upload_success(url, btn_link){
