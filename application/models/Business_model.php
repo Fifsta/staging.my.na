@@ -945,7 +945,7 @@ class Business_model extends CI_Model{
 		 
 	function get_business_details($bus_id){
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('get_business_details_'.$bus_id))
 		{
@@ -965,7 +965,7 @@ class Business_model extends CI_Model{
 
 			$output = $test->row_array();
 
-			$this->cache->save('get_business_details_'.$bus_id, $output, 600);
+			$this->cache->save('get_business_details_'.$bus_id, $output, 86400);
 
 		}
 
@@ -1471,14 +1471,14 @@ function get_map_details($ID){
 	//Get Main Categories
 	function get_main_categories(){
    
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('bus_get_main_categories'))
 		{
 
 			$output = $this->db->get('a_tourism_category');
 
-			$this->cache->save('bus_get_main_categories', $output, 43200);
+			$this->cache->save('bus_get_main_categories', $output, 604800);
 
 		}
 			
@@ -1489,7 +1489,7 @@ function get_map_details($ID){
 	//GEt sub Categories
 	function get_sub_categories($cat_id){
       
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('bus_get_sub_categories'))
 		{
@@ -1497,7 +1497,7 @@ function get_map_details($ID){
 			$this->db->where('CATEGORY_TYPE_ID', $cat_id);
 			$output = $this->db->get('a_tourism_category_sub');
 
-			$this->cache->save('bus_get_sub_categories', $output, 43200);
+			$this->cache->save('bus_get_sub_categories', $output, 604800);
 
 		}
 
@@ -1509,7 +1509,7 @@ function get_map_details($ID){
 	//GEt Current Categories
 	function get_current_categories($bus_id){
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $query = $this->cache->get('bus_get_current_categories_'.$bus_id))
 		{		
@@ -1523,7 +1523,7 @@ function get_map_details($ID){
 
 			$query = $query->result();
 
-			$this->cache->save('bus_get_current_categories_'.$bus_id, $query, 43200);
+			$this->cache->save('bus_get_current_categories_'.$bus_id, $query, 604800);
 
 		}
 
@@ -1777,7 +1777,7 @@ function get_map_details($ID){
 				
 			}
 
-			$this->cache->save('get_rating_'.$id, $output, 1440);
+			$this->cache->save('get_rating_'.$id, $output, 86400);
 
 		}
 
@@ -1798,7 +1798,7 @@ function get_map_details($ID){
 
 			$output = $query->num_rows();
 
-			$this->cache->save('get_rating_count'.$id, $output, 1440);
+			$this->cache->save('get_rating_count'.$id, $output, 86400);
 
 		}	
 			
@@ -1845,7 +1845,7 @@ function get_map_details($ID){
 						
 			}
 
-			$this->cache->save('get_review_stars_show_'.$id.'_'.$rating, $output, 1440);
+			$this->cache->save('get_review_stars_show_'.$id.'_'.$rating, $output, 86400);
 
 		}	
 
@@ -2452,7 +2452,7 @@ FUNCTIONS
 	function get_qr_vcard($bus_id, $w, $h)
 		{
 		 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
 		if ( ! $output = $this->cache->get('get_qr_vcard_'.$bus_id.'_'.$w.'_'.$h))
 		{
@@ -2508,7 +2508,7 @@ FUNCTIONS
 				}		
 			}
 
-			$this->cache->save('get_qr_vcard_'.$bus_id.'_'.$w.'_'.$h, $output, 600);
+			$this->cache->save('get_qr_vcard_'.$bus_id.'_'.$w.'_'.$h, $output, 604800);
 		}	
 			
 		return $vcard2;		  
