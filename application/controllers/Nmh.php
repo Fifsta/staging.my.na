@@ -156,6 +156,15 @@ class Nmh extends CI_Controller {
 
 	function get_products()
 	{
+
+
+		$this->load->model('image_model'); 
+		$this->load->library('thumborp');
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 360;
+		$height = 230;
+
+
 		$this->output->set_header("Access-Control-Allow-Origin: *");
 		$this->output->set_header( "Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS" );
 		$this->output->set_header( 'Access-Control-Allow-Headers: content-type' );
@@ -289,7 +298,14 @@ class Nmh extends CI_Controller {
 						$img = null;
 					}
 
-					$row->image = $img;
+					
+
+					$img_str = 'assets/products/images/' . $img;
+
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
+					$row->image = $img_url;
+
 
 					//LISTING TYPE
 					if ($row->listing_type == 'S' || $row->listing_type == 'C')
