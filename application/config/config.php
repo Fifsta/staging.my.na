@@ -419,7 +419,7 @@ $config['encryption_key'] = 'myna535354refdt53';
 
 //$config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'my_na';
-$config['sess_expiration'] = 0;
+$config['sess_expiration'] = 604800;
 //$config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
