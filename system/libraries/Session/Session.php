@@ -158,7 +158,7 @@ class CI_Session {
 		}
 		// Another work-around ... PHP doesn't seem to send the session cookie
 		// unless it is being currently created or regenerated
-		elseif (isset($_COOKIE[$this->_config['cookie_name']]) && $_COOKIE[$this->_config['cookie_name']] === session_id())
+		if (isset($_COOKIE[$this->_config['cookie_name']]) && $_COOKIE[$this->_config['cookie_name']] === session_id())
 		{
 			setcookie(
 				$this->_config['cookie_name'],
