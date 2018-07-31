@@ -413,7 +413,7 @@ class A extends CI_Controller {
 	//SEARCH  BY MAIN CATEGORY && LOCATION
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 
-	public function d($cat_id, $cat_name,$l_id, $location,$business = 'all', $sort = 'none', $offset = '')
+	public function d($cat_id, $cat_name,$l_id, $location, $business = 'all', $sort = 'none', $offset = 0)
 	{
 
 
