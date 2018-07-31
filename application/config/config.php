@@ -417,7 +417,7 @@ $config['encryption_key'] = 'myna535354refdt53';
 |
 */
 
-//$config['sess_driver'] = 'files';
+$config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'my_na';
 $config['sess_expiration'] = 604800;
 $config['sess_save_path'] = BASEPATH . 'sessions';
