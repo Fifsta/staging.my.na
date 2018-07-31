@@ -201,14 +201,13 @@ $content_hide = '';
                 <div class="row">
                     <div class="col-md-12">
 
-                        <div class="heading">
-                            <?php echo $head; ?>
-                            <ul class="options">
+                        <div class="<?php if(isset($action) && $action == 'update') { echo 'd-none'; } ?>">
+                            <div class="heading">
+                                <?php echo $head; ?>
+                                <ul class="options">
 
-                            </ul>
-                        </div>
-
-                        <div id="desc-content"">
+                                </ul>
+                            </div>
 
                             <br>    
                             <div id="describe">
@@ -217,7 +216,12 @@ $content_hide = '';
                             There are two different ways to list a product. You can list a product privately or under a business you manage.<br>
                             Please select if you want to proceed listing a product privately or under a business.
                             </p>
-                            </div>
+                            </div>       
+                        </div>                    
+
+                        <div id="desc-content"">
+
+
 
                             <?php 
 
