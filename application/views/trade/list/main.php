@@ -235,6 +235,9 @@ $content_hide = '';
                                         </div>
                                     </div>';
 
+                                    $content_hide = 'd-none';
+                                    $next_hide = '';
+
                                 }elseif($bus_id==0){
 
                                     echo '
