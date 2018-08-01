@@ -980,7 +980,7 @@ class Business extends CI_Controller {
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 	
-	function my_na($bus_id, $place) {
+	function my_na($bus_id, $place='') {
 		
 		if($this->session->userdata('id')){
 			
@@ -997,7 +997,7 @@ class Business extends CI_Controller {
 		
 		
 	}
-	function my_na_click($bus_id, $place) {
+	function my_na_click($bus_id, $place = '') {
 		
 		if($this->session->userdata('id')){
 			
