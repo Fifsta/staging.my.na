@@ -13,6 +13,7 @@ class Deals extends CI_Controller {
     {
   		parent::__construct();
   		$this->load->model('deal_model');
+  		$this->load->model('trade_model');
 			
  	}	
 	
