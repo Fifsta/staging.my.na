@@ -1469,7 +1469,7 @@ class Search_model extends CI_Model{
 
 			$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
-			if (! $html = $this->cache->get('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $offset))
+			if (! $html = $this->cache->get('show_bus_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $offset))
 			{
 
 				$this->load->model('image_model'); 
@@ -1687,7 +1687,7 @@ class Search_model extends CI_Model{
 
 				}
 
-				$this->cache->save('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $offset, $html, 3600);
+				$this->cache->save('show_bus_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $offset, $html, 3600);
 
 			}
 
