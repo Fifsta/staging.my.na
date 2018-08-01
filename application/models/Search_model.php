@@ -1469,8 +1469,8 @@ class Search_model extends CI_Model{
 
 			$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
-			if (! $html = $this->cache->get('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $sortby))
-			{
+			//if (! $html = $this->cache->get('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $sortby))
+			//{
 
 				$this->load->model('image_model'); 
 				$this->load->library('thumborp');
@@ -1685,9 +1685,9 @@ class Search_model extends CI_Model{
 
 					$this->show_results($query);
 
-				}
+				//}
 
-				$this->cache->save('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $sortby, $html, 3600);
+				//$this->cache->save('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $sortby, $html, 3600);
 
 			}
 
