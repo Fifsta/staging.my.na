@@ -44,7 +44,7 @@
 					<div class="spacer"></div>
 					<?php $this->load->view('inc/categories'); ?>
 					<div class="spacer"></div>
-					<?php //$this->load->view('inc/classifieds'); ?>
+					<?php $this->load->view('inc/classifieds'); ?>
 					<div class="spacer"></div>
 					<?php $prop['type'] = '3408'; $this->load->view('inc/products', $prop); ?>
 					<div class="spacer"></div>
