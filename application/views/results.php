@@ -16,11 +16,13 @@ if(isset($heading)){
  $header['metaD'] = '';
  $header['section'] = '';
  
+
+
 }
 
 $this->load->view('inc/header', $header);
 
-?>
+?> 
 
 <link href='<?php echo base_url('/');?>css/jquery.rating.css' type="text/css" rel="stylesheet"/>
 <link href="css/select/select2.css" rel="stylesheet" type="text/css" />
@@ -110,7 +112,7 @@ $this->load->view('inc/header', $header);
 
             <div class="results-list">
             
-              <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category, $sortby); ?>
+              <?php $this->search_model->show_results($query, $main_c_id, $main_category, $category, $sortby, $offset); ?>
               
             </div>
 

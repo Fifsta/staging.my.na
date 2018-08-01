@@ -354,6 +354,7 @@ class A extends CI_Controller {
 		$data['MAINlocM'] = '0';
 		$data['MAINcatM'] = '0';
 		$data['sortby'] = $sort;
+		$data['offset'] = $offset;
 		$this->load->view('results',$data);
 		
 	}

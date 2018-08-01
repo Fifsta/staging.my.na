@@ -1464,13 +1464,13 @@ class Search_model extends CI_Model{
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	//SHOW RESULTS - LOOP THROUGH EACH RESULT IN QUERY ARRAY
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
-	function show_results($query, $main_c_id = '', $main_category = '', $category = '', $sortby = ''){
+	function show_results($query, $main_c_id = '', $main_category = '', $category = '', $sortby = '', $offset = ''){
 			
 
-			$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+			$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
-			//if (! $html = $this->cache->get('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $sortby))
-			//{
+			if (! $html = $this->cache->get('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $offset))
+			{
 
 				$this->load->model('image_model'); 
 				$this->load->library('thumborp');
@@ -1685,9 +1685,9 @@ class Search_model extends CI_Model{
 
 					$this->show_results($query);
 
-				//}
+				}
 
-				//$this->cache->save('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $sortby, $html, 3600);
+				$this->cache->save('show_results_' . $main_c_id . '_' . $main_category . '_' . $category. '_' . $offset, $html, 3600);
 
 			}
 
