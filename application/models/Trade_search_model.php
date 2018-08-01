@@ -982,9 +982,35 @@ class Trade_search_model extends CI_Model{
 		//GET TOTAL RESULTS FOR PAGHINATION
 		$query['count'] = $query['count']->num_rows();
 		
-		//$query['debug'] = $debug;
+		//$query['debug'] = $debug; 
 		//echo $debug ;
 		return $query;
+
+	}
+
+
+
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	//GET PRODUCT CATEGORIES
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	public function get_categories($data){
+
+		//GET
+		$this->db->where('cat_id', $data['cat_id']);
+		$q = $this->db->get('product_categories');
+		if($q->result()){
+
+			$o['categories'] = $q->result();
+
+
+		}else{
+
+			$o['success'] = false;
+			$o['msg'] = 'Something went wrong';
+		}
+
+		return $o;
 
 	}
 
