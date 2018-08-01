@@ -552,7 +552,7 @@ class Products_api extends REST_Controller{
 		}
 
 		$this->load->model('product_model');
-		$o = $this->trade_search_model->get_categories($data);
+		$o = $this->product_model->get_categories($data);
 		$this->response($o, 200);
 
 
