@@ -1022,7 +1022,7 @@ ANALYTICS SECTION
 
 ++++++++++++++++++++++++++++++++++++++++++++	
  */  
-    function add_business_phone_click($bus_id, $type) {
+    function add_business_phone_click($bus_id, $type = '') {
 		
 		$this->business_model->add_business_phone_click($bus_id, $type);
 		
