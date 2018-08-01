@@ -1015,6 +1015,29 @@ class Trade_search_model extends CI_Model{
 	}
 
 
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	//GET PRODUCT CATEGORIES
+	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	public function get_category($data){
+
+		//GET
+		$this->db->where('cat_id', $data['cat_id']);
+		$q = $this->db->get('product_categories');
+		if($q->result()){
+
+			$o['categories'] = $q->result();
+
+
+		}else{
+
+			$o['success'] = false;
+			$o['msg'] = 'Something went wrong';
+		}
+
+		return $o;
+
+	}
 
 
 	function get_api_product($product_id, $bus_id) {

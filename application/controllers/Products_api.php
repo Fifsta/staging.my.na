@@ -558,6 +558,25 @@ class Products_api extends REST_Controller{
 
 
 	}
+
+
+	//+++++++++++++++++++++++++++
+	//TRADE/CATEGORIES - GET ALL
+	//++++++++++++++++++++++++++
+	public function category_get()
+	{
+
+		
+		//CAT
+		$data['cat_id'] = $this->get('cat_id');
+
+		$this->load->model('trade_search_model');
+		$o = $this->trade_search_model->get_category($data);
+		$this->response($o, 200);
+
+
+
+	}	
 	
 	
 	function agents_get() {
