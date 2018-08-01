@@ -369,6 +369,8 @@ $this->load->view('inc/header');
 
 	    load_similar();
 
+	    my_na(<?php echo $bus_id;?>);
+
 
 		$('.popovers').popover({
 			placement : 'right',
