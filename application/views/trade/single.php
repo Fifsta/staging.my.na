@@ -269,17 +269,30 @@
   </div>  
 </div>
 
- <div class="modal hide fade in" id="img_modal_div" style="width:auto">
-    <img style="display*: inline;display:inline-block" src="<?php echo base_url('/');?>images/deal_place_load.gif" id="img_modal" />
- </div>
+ <!--<div class="modal hide fade in" id="img_modal_div" style="width:auto">
+    <img style="display*: inline;display:inline-block" src="<?php //echo base_url('/');?>images/deal_place_load.gif" id="img_modal" />
+ </div>-->
 
- <div class="modal hide fade" id="notification_modal">
 
-     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin:5px 10px 0 0">&times;</button>
-     <div class="modal-body" id="notification_modal_body">
+<div class="modal fade" id="img_modal_div" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <img style="display*: inline;display:inline-block" src="<?php echo base_url('/');?>images/deal_place_load.gif" id="img_modal" />
+    </div>
+  </div>
+</div>
 
+<div class="modal fade" id="notification_modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Bid</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
           <img src="<?php echo base_url('/');?>images/bground/stick_man.png" class="pull-right" alt="List and buy anything namibian" />
-          <h2>New Bid</h2>
           <p>A new bid has just been placed. Act quick to avoid disappointment</p>
           <div class="container-fluid">
               <div class="row-fluid">
@@ -290,10 +303,12 @@
                   </div>
               </div>
           </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-     </div>
 
- </div>
 <div class="spacer"></div>
 
 <?php $this->load->view('inc/footer');?>  
@@ -311,7 +326,7 @@ $(document).ready(function(){
 
     //PRINT PAGE//
     $(".btnPrint").printPage({
-      url: "<?php echo site_url('/');?>trade/print_product/"+<?php print $product_id; ?>,
+      url: "<?php echo site_url('/');?>trade/print_product/"+<?php echo $product_id; ?>,
       attr: "href",
       message:"Your document is being created"
     });
