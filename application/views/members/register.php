@@ -200,10 +200,20 @@
 	                </div>	
 	                <!-- end step2 -->
 
+                     <div class="control-group <?php if(isset($semi)){echo 'd-none';}?>" id="Gcaptcha" >
+                        <label class="control-label"></label>
+                        <div class="controls">
+                            <?php if(!isset($semi)){
+                                    $this->my_na_model->build_captcha();
+                                  }
+                            ?>
+                        </div>
+                    </div>                   
+
                     <input type="hidden" id="client_id" name="client_id" value="<?php echo $client_id;?>"/>
                     <input type="hidden" id="email_" name="email_" value="<?php echo $email;?>"/>
 
-                    <div class="control-group <?php if(isset($semi)){echo 'hide';}?>">
+                    <div class="control-group <?php if(isset($semi)){echo 'd-none';}?>">
                         <label class="control-label" for="i_agree">Accept T&amp;C's</label>
                         <div class="controls">
                             <input type="checkbox" id="i_agree" name="i_agree">
