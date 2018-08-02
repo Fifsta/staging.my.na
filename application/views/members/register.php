@@ -467,7 +467,7 @@
         
         $('#Gcaptcha').hide();
         $('#step1').slideUp();
-        $('#step2').removeClass('hide');
+        $('#step2').removeClass('d-none');
         //$('#but_step1').attr('id', 'but');
 
         $('#but_step1').unbind().bind('click', function(e) {
