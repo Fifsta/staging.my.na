@@ -6,10 +6,6 @@ class Ntb_model extends CI_Model{
         // Constructor's functionality here, if you have any.
     }
 	
- 	function ntb_model(){
-  		//parent::CI_model();
-		self::__construct();	
- 	}
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //SHOW EMAIL RECIPIENTS
