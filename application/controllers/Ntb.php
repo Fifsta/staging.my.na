@@ -7,11 +7,11 @@ class Ntb extends CI_Controller {
 	 *
 	 * Roland Ihms
 	 */
-	function Ntb()
+	function __construct()
 	{
 		parent::__construct();
 	}
-
+ 
 	
 	public function index()
 	{
