@@ -59,7 +59,7 @@ select{height:45px;font-size:20px; line-height:40px;margin-top:-10px;}
            		</div>
                 <div class="span4">
 
-                   <img src="<?php echo base_url('/');?>img/icons/ntb_big.png" />
+                   <img src="<?php echo base_url('/');?>images/icons/ntb_big.png" />
            		</div> 
       </div>
 
@@ -300,7 +300,7 @@ select{height:45px;font-size:20px; line-height:40px;margin-top:-10px;}
  //LOAD FOOTER
  //+++++++++++++++++
  $footer['foo'] = '';
- $this->load->view('inc/footer', $footer);
+ $this->load->view('inc/footer_old', $footer);
  ?>
 </div>
     <!-- JAvascript
@@ -532,7 +532,7 @@ function submit_form(){
 		
 		var frm = $('#member-register');
 		//frm.submit();
-		$('#but').html('<img src="<?php echo base_url('/').'img/load.gif';?>" /> Working...');
+		$('#but').html('<img src="<?php echo base_url('/').'images/load.gif';?>" /> Working...');
 		$.ajax({
 			type: 'post',
 			url: '<?php echo site_url('/').'ntb/register_do_ajax';?>' ,
@@ -540,7 +540,7 @@ function submit_form(){
 			success: function (data) {
 				
 				 $('#result_msg').html(data);
-				 $('#but').html('<b>Join</b> <img src="<?php echo base_url('/');?>img/icons/my-na-favicon.png" />');
+				 $('#but').html('<b>Join</b> <img src="<?php echo base_url('/');?>images/icons/my-na-favicon.png" />');
 				
 			}
 		});	
@@ -549,7 +549,7 @@ function submit_form(){
 
 function redirectpreview(){
 	
-	$('#but').html('<img src="<?php echo base_url('/').'img/load.gif';?>" /> Redirecting...');
+	$('#but').html('<img src="<?php echo base_url('/').'images/load.gif';?>" /> Redirecting...');
 	
 		setTimeout(function() {
 		  window.location.href = "<?php echo site_url('/');?>ntb/";
@@ -589,7 +589,7 @@ function checkCellphoneValidity()
 	{	
 		
 		if(countryID == 151){
-		$("#region_div").html('<div class="control-group"><div class="span8" style="text-align:center;"><img src="<?php echo base_url('/').'img/load.gif';?>" /> Getting Cities...</div></div>');
+		$("#region_div").html('<div class="control-group"><div class="span8" style="text-align:center;"><img src="<?php echo base_url('/').'images/load.gif';?>" /> Getting Cities...</div></div>');
 		}
 		$.ajax({
 		  url: "<?php echo site_url('/');?>members/populate_city/"+countryID+"/0/",
@@ -602,7 +602,7 @@ function checkCellphoneValidity()
 	
 	function populateSuburb(cityID)
 	{
-		$("#suburb_div").html('<div class="control-group"><div class="span8" style="text-align:center;"><img src="<?php echo base_url('/').'img/load.gif';?>" /> Getting Suburbs...</div></div>');
+		$("#suburb_div").html('<div class="control-group"><div class="span8" style="text-align:center;"><img src="<?php echo base_url('/').'images/load.gif';?>" /> Getting Suburbs...</div></div>');
 		$.ajax({
 		   url: "<?php echo site_url('/');?>members/populate_suburb/"+cityID+"/0",
 		  success: function(data) {
