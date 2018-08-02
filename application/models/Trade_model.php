@@ -8602,10 +8602,15 @@ class Trade_model extends CI_Model
 					$format = substr($img, (strlen($img) - 4), 4);
 					$str = substr($img, 0, (strlen($img) - 4));
 
+
 					if ($img != '')
 					{
 
-						if (strpos($img, '.') == 0)
+						if(strstr($img_file, "http")){
+							
+							$img_str = $img_file;
+						
+						}elseif (strpos($img, '.') == 0)
 						{
 
 							$format = '.jpg';
