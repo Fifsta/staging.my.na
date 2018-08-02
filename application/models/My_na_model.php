@@ -1586,9 +1586,9 @@ class My_na_model extends CI_Model{
 		}
 		 echo   '<div id="scratch_slider" class="carousel slide">
 					  <div class="carousel-inner">
-						<div class="active item"><a href="'.$link.'"><img src="'.base_url('/').'img/scratch/scratch_1a.png" /></a></div>
-						<div class="item"><a href="'.$link.'"><img src="'.base_url('/').'img/scratch/scratch_2a.png" /></a></div>
-						<div class="item"><a href="'.$link.'"><img src="'.base_url('/').'img/scratch/scratch_3a.png" /></a></div>
+						<div class="active item"><a href="'.$link.'"><img src="'.base_url('/').'images/scratch/scratch_1a.png" /></a></div>
+						<div class="item"><a href="'.$link.'"><img src="'.base_url('/').'images/scratch/scratch_2a.png" /></a></div>
+						<div class="item"><a href="'.$link.'"><img src="'.base_url('/').'images/scratch/scratch_3a.png" /></a></div>
 					  </div>
 					</div>';		
 		 echo ' <script type="text/javascript">
@@ -1620,7 +1620,7 @@ class My_na_model extends CI_Model{
 		}
 		 echo   '<div id="scratch_slider" class="carousel slide">
 					  <div class="carousel-inner">
-						<div class="active item"><a href="'.$link.'"><img src="'.base_url('/').'img/scratch/scratch_1a.png" /></a></div>
+						<div class="active item"><a href="'.$link.'"><img src="'.base_url('/').'images/scratch/scratch_1a.png" /></a></div>
 						
 					  </div>
 					</div>';		
@@ -1811,7 +1811,7 @@ class My_na_model extends CI_Model{
 
 			}
 
-			$load_img = "<img src='". base_url('/'). "img/load_white.gif' />";
+			$load_img = "<img src='". base_url('/'). "images/load_white.gif' />";
 
 		 }else{
 		
@@ -1899,7 +1899,7 @@ class My_na_model extends CI_Model{
 				
         if($row->ADVERTS_IMAGE_NAME == ''){
 
-            $img = base_url('/').'img/user_blank.jpg';
+            $img = base_url('/').'images/user_blank.jpg';
 
         }else{
 
