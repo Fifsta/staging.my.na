@@ -1942,7 +1942,7 @@ class Members extends CI_Controller {
 			$city = $this->input->post('city', TRUE);
 			$suburb = $this->input->post('suburb', TRUE);
 
-			if(isset($suburb) && $suburb != NULL) {
+			if(isset($suburb) && $suburb != '') {
 
 				$suburb = $suburb;
 
