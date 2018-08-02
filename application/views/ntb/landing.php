@@ -210,17 +210,17 @@
 										if(strpos($img,'.') == 0){
 								
 											$format = '.jpg';
-											$img_str = base_url('/').'images/timbthumb.php?w=60&h=60&src='.S3_URL.'assets/business/photos/'.$img . $format;
+											$img_str = base_url('/').'img/timbthumb.php?w=60&h=60&src='.S3_URL.'assets/business/photos/'.$img . $format;
 											
 										}else{
 											
-											$img_str =  base_url('/').'images/timbthumb.php?w=60&h=60&src='.S3_URL.'assets/business/photos/'.$img;
+											$img_str =  base_url('/').'img/timbthumb.php?w=60&h=60&src='.S3_URL.'assets/business/photos/'.$img;
 											
 										}
 										
 									}else{
 										
-										$img_str = base_url('/').'images/timbthumb.php?w=60&h=60&src='.base_url('/').'img/bus_blank.png';	
+										$img_str = base_url('/').'img/timbthumb.php?w=60&h=60&src='.base_url('/').'img/bus_blank.png';	
 										
 									}
 									$str = '';
