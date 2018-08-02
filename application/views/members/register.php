@@ -196,6 +196,19 @@
 						    </div>
 						</div>
 
+                        <div class="control-group">
+                            <label class="control-label" for="pass1">Password</label>
+                            <div class="controls">
+                                <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="pass2">Confirm</label>
+                            <div class="controls">
+                                <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirm Password">
+                                <span class="help-block" style="font-size:11px">Confirm your password and choose a safe combination<br /> of letters, symbols and numbers</span>
+                            </div>
+                        </div>
 
 	                </div>	
 	                <!-- end step2 -->
