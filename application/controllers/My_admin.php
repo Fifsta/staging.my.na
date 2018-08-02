@@ -15,7 +15,7 @@ class My_admin extends CI_Controller
         $this->load->model('admin_model');
         $this->load->helper('ssl_helper');
         //force_ssl();
-        //$this->load->library('encrypt');
+        $this->load->library('encrypt');
         //$this->load->library('PasswordHash',array(8, FALSE));
     }
 
