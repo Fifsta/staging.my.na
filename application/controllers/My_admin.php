@@ -9,7 +9,7 @@ class My_admin extends CI_Controller
      *
      */
 
-    function my_admin()
+    function __construct()
     {
         parent::__construct();
         $this->load->model('admin_model');
