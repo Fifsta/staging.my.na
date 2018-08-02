@@ -84,7 +84,7 @@
             
              <div class="row-fluid">
            		<div class="span12 text-center">
-                	<img src="<?php echo base_url('/');?>img/icons/ntb-sml.png" />
+                	<img src="<?php echo base_url('/');?>images/icons/ntb-sml.png" />
            		</div>
            </div>              
 		<?php echo form_open(site_url('/').'ntb/login_do/', array('class' => 'form-signin form-signin-ntb'));?>		
