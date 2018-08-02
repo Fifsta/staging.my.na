@@ -85,7 +85,7 @@ class Print_model extends CI_Model{
 					
 				}else{
 					
-					$cover_str = base_url('/').'img/business_cover_blank.jpg';	
+					$cover_str = base_url('/').'images/business_cover_blank.jpg';	
 					
 				}
 				$link = site_url('/').'b/'.$bus_id.'/'.$this->trade_model->encode_url($row->BUSINESS_NAME).'/';
@@ -310,7 +310,7 @@ class Print_model extends CI_Model{
 				echo '<div style="width:100%">
 						<div style="width:55%;float:left;">
 							<br/><br/><br/><br/><br/>
-							<img src="'. base_url('/').'img/my-na-logo-black.png" style="width:90px;height:auto;float:left;page-break-inside:avoid;"/>
+							<img src="'. base_url('/').'images/my-na-logo-black.png" style="width:90px;height:auto;float:left;page-break-inside:avoid;"/>
 						</div>
 						<div style="width:40%;float:right">
 							'.$agent . '
@@ -389,7 +389,7 @@ class Print_model extends CI_Model{
 				$imgrow = $images->row();
 
 				echo '<div style="width:100%">
-						<img class="img-polaroid" src="'.base_url('/').'img/timbthumb.php?src='.S3_URL.'assets/products/images/'.$imgrow->img_file.'&w=800&h=400&q=100" style="width:800px;height:400px">
+						<img class="img-polaroid" src="'.base_url('/').'images/timbthumb.php?src='.S3_URL.'assets/products/images/'.$imgrow->img_file.'&w=800&h=400&q=100" style="width:800px;height:400px">
 					  </div>';
 
 			}
@@ -409,7 +409,7 @@ class Print_model extends CI_Model{
 				echo '<div style="width:100%">
 						<div style="width:55%;float:left;">
 							<br/><br/><br/><br/><br/>
-							<img src="'. base_url('/').'img/my-na-logo-black.png" style="width:90px;height:auto;"/>
+							<img src="'. base_url('/').'images/my-na-logo-black.png" style="width:90px;height:auto;"/>
 						</div>
 						<div style="width:40%;float:right">
 							'.$agent . '
@@ -566,7 +566,7 @@ class Print_model extends CI_Model{
 
 					<div itemprop="description">
 
-						<div style="height:15px"><img style="width:15px;height:15px;" src="'.base_url('/').'img/icons/trade/icn_map.png"/>'.$row->location.' '. $suburb.'</div>
+						<div style="height:15px"><img style="width:15px;height:15px;" src="'.base_url('/').'images/icons/trade/icn_map.png"/>'.$row->location.' '. $suburb.'</div>
 						'.$descr.'
 						'.$extras['extras'].'
 					</div>
@@ -803,7 +803,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_chk.png" style="width:20px;height:20px">
+											<img src="'.base_url('/').'images/icons/trade/icn_chk.png" style="width:20px;height:20px">
 											'.ucfirst(str_replace('_', ' ',$row)).'
 											</td>
 										</tr>
@@ -817,7 +817,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_size.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_size.png" style="width:20px;height:20px" >
 											'.ucfirst(str_replace('_', ' ',$row)). ' '.ucfirst(number_format((int)$value)) .' m<sup>2</sup>
 											</td>
 										</tr>
@@ -827,7 +827,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_beds.png" style="width:20px;height:20px">
+											<img src="'.base_url('/').'images/icons/trade/icn_beds.png" style="width:20px;height:20px">
 											'.ucwords($value).' '.'
 											</td>
 										</tr>
@@ -838,7 +838,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_baths.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_baths.png" style="width:20px;height:20px" >
 											'.ucwords($value).' ' .'
 											</td>
 										</tr>
@@ -849,7 +849,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_park.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_park.png" style="width:20px;height:20px" >
 											'.ucwords($value).' ' .'
 											</td>
 										</tr>
@@ -875,7 +875,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_car_doors.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_car_doors.png" style="width:20px;height:20px" >
 											'.ucfirst(number_format((int)$value)) .' '.$row.'
 											</td>
 										</tr>
@@ -885,7 +885,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_car_body.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_car_body.png" style="width:20px;height:20px" >
 											'.ucfirst($value) .'
 											</td>
 										</tr>
@@ -895,7 +895,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_car_petrol.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_car_petrol.png" style="width:20px;height:20px" >
 											'.ucfirst($value) .'
 											</td>
 										</tr>
@@ -905,7 +905,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_car_transmission.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_car_transmission.png" style="width:20px;height:20px" >
 											'.ucfirst($value) .'
 											</td>
 										</tr>
@@ -917,7 +917,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_car_cylinders.png"style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_car_cylinders.png"style="width:20px;height:20px" >
 											'.ucfirst(number_format((int)$value)) .' '.$row.'
 											</td>
 										</tr>
@@ -927,7 +927,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_car_engine.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_car_engine.png" style="width:20px;height:20px" >
 											'.ucfirst(number_format((int)$value)) .' '.$row.'
 											</td>
 										</tr>
@@ -937,7 +937,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_car_year.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_car_year.png" style="width:20px;height:20px" >
 											'.ucfirst((int)$value) .' model
 											</td>
 										</tr>
@@ -947,7 +947,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_car_kilometers.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_car_kilometers.png" style="width:20px;height:20px" >
 											'.ucfirst(number_format((int)$value)) .' km
 											</td>
 										</tr>
@@ -957,7 +957,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_car_color.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_car_color.png" style="width:20px;height:20px" >
 											'.ucfirst($value).'
 											</td>
 										</tr>
@@ -967,7 +967,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_car_4x4.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_car_4x4.png" style="width:20px;height:20px" >
 											'.ucfirst($value).'
 											</td>
 										</tr>
@@ -977,7 +977,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_car_owner.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_car_owner.png" style="width:20px;height:20px" >
 											'.ucfirst($value).'
 											</td>
 										</tr>
@@ -987,7 +987,7 @@ class Print_model extends CI_Model{
 
 						$output .= '<tr>
 											<td colspan="2">
-											<img src="'.base_url('/').'img/icons/trade/icn_cash.png" style="width:20px;height:20px" >
+											<img src="'.base_url('/').'images/icons/trade/icn_cash.png" style="width:20px;height:20px" >
 											N$ '.ucfirst(number_format((int)$value)) .'
 											</td>
 										</tr>
@@ -1137,10 +1137,10 @@ class Print_model extends CI_Model{
 			}else{
 				if($size != ''){
 
-					$str = '<img alt="" class="white_box padding2 img-thumbnail" src="'.base_url('/').'img/product_blank.jpg" style="width: 250x; height: 150px; float:left;margin-right:20px">';
+					$str = '<img alt="" class="white_box padding2 img-thumbnail" src="'.base_url('/').'images/product_blank.jpg" style="width: 250x; height: 150px; float:left;margin-right:20px">';
 				}else{
 
-					$str = '<img alt="" class="white_box padding2 img-thumbnail" src="'.base_url('/').'img/product_blank.jpg" style="width: 325px; height: 250px; float:left;margin-right:20px">';
+					$str = '<img alt="" class="white_box padding2 img-thumbnail" src="'.base_url('/').'images/product_blank.jpg" style="width: 325px; height: 250px; float:left;margin-right:20px">';
 				}
 
 				
