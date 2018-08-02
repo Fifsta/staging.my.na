@@ -343,7 +343,7 @@ class A extends CI_Controller {
 		$data['catM'] = $category;
 		$data['busM'] = $business;
         $data['l_id'] = $l_id;
-        $data['location'] = $location;
+        $data['location'] = $location; 
         $data['c_type'] = '';
 		$data['c_id'] = $c_id;
         $data['category'] = $category;
@@ -414,7 +414,7 @@ class A extends CI_Controller {
 	//SEARCH  BY MAIN CATEGORY && LOCATION
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++	
 
-	public function d($cat_id, $cat_name,$l_id = '', $location = '', $business = 'all', $sort = 'none', $offset = 0)
+	public function d($cat_id, $cat_name, $l_id = '', $location = '', $business = 'all', $sort = 'none', $offset = 0)
 	{
 
 
@@ -498,6 +498,7 @@ class A extends CI_Controller {
 		$data['main_category'] = $cat_name;
         $data['business'] = $business;
 		$data['busM'] = $business;
+		$data['offset'] = $offset;
 		$data['sortby'] = $sort;
 		$data['pages'] = $this->pagination->create_links();
 		$data['count'] = $count;
