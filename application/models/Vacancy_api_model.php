@@ -58,7 +58,7 @@ class Vacancy_api_model extends CI_Model{
 
 			//create key
 			//$token = $this->encrypt->sha1($row->ID);
-			$token = hash( "sha256", $row['ID'] );
+			$token = hash( "sha256", $row->ID );
 
 			//insert data
 			$link = site_url('/').'careerupdatepass/pass_update_two/'.$token;
