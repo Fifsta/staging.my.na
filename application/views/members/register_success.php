@@ -39,10 +39,10 @@
 
     <div class="col-sm-8 col-md-8 col-lg-9 col-xl-9 order-md-1 order-sm-2">
       <div class="row">
-        <div class="col-md-12">
-            <h1>Thanks for registering at My.Namibia<small>&trade;</small> </h1>
+        <div class="col-md-12 text-center">
+            <h5>Thanks for registering at My.Namibia<small>&trade;</small> </h5>
             <p>You have just become an official ambassador of My Namibia. Please check your inbox for the verification link.</p>
-            <img src="<?php echo base_url('/');?>img/bground/my-na-700-silver.png" alt="My Namibia"/>
+            <img src="<?php echo base_url('/');?>images/bground/my-na-700-silver.png" alt="My Namibia"/>
             <p></p>
     
         </div>
