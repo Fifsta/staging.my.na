@@ -179,7 +179,7 @@
                                 <div style="padding:5px 20px">
                                     <a class="btn btn-block btn-inverse"
                                        href="<?php echo site_url('/'); ?>members/register"><b>Join</b> <img
-                                            src="<?php echo base_url('/'); ?>img/icons/my-na-favicon.png"></a>
+                                            src="<?php echo base_url('/'); ?>images/icons/my-na-favicon.png"></a>
                                 </div>
                             </li>
                         </ul>
