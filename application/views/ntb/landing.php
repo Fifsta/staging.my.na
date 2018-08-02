@@ -78,7 +78,7 @@
                     <li class="home <?php if ($subnav['subsection'] == 'myinfo') {  echo 'active'; }?>"><a href="<?php echo site_url('/');?>members/home/"><i class="icon-home"></i> Dashboard</a></li>
                     <!--<li class="general"><a href="javascript:load_ajax('general')"><i class="icon-info-sign"></i> General Info</a></li>-->
                     
-                    <li <?php if ($subnav['subsection'] == 'scratch') {  echo 'class="active"'; }?>><a href="<?php echo site_url('/');?>win/scratch_and_win/"><i class="icon-barcode"></i> Scratch &amp; Win</a></li>
+                    <!--<li <?php if ($subnav['subsection'] == 'scratch') {  echo 'class="active"'; }?>><a href="<?php echo site_url('/');?>win/scratch_and_win/"><i class="icon-barcode"></i> Scratch &amp; Win</a></li>
                     <li class="msgs"><a href="#enquiries"  onClick="load_ajax('msgs')" data-toggle="tab"><div class="notification_member_msg_count">
                     <?php $this->my_na_model->msg_notifications_member();?></div>
                     <i class="icon-envelope"></i> Messages</a></li>
@@ -122,7 +122,7 @@
                          
                          
                       </ul>
-                    </li>
+                    </li>-->
                     <?php } ?>
                     <!--<li class="trade"><a href="javascript:void(0)" class="disabled" onClick="soon()"><i class="icon-shopping-cart"></i> Buy/Sell</a></li> -->
                   </ul>
