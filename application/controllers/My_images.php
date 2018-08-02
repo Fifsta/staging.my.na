@@ -8,6 +8,7 @@ class My_images extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('image_model');
+		$this->load->library('encrypt');
 		
 	}
 
