@@ -257,7 +257,7 @@ class Email_model extends CI_Model{
 	//SEND ENQUIRY EMAIL TO BUSINESS
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //HTML 
-	function send_enquiry($var, $row)
+	function send_enquiry($var, $row='')
 	{
 /*			$config['mailtype'] = 'html';
 			$this->email->initialize($config);
