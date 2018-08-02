@@ -7,7 +7,7 @@
  if($this->session->userdata('u_name')){ $_uname = ' - '.ucfirst($this->session->userdata('u_name'));}
  $header['title'] = $_uname;
  $header['metaD'] = 'NTB Home feed for '. $_uname;
- $this->load->view('members/inc/header', $header);
+ $this->load->view('members/inc/header_old', $header);
  
  //ADDITIONAL RESOURCES
  //add css, IE7 js files here before the head tag
