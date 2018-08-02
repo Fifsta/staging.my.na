@@ -5,7 +5,7 @@
  //+++++++++++++++++
  $header['title'] = 'Create an Account - My Namibia &trade;';
  $header['metaD'] = '';
- $this->load->view('inc/header', $header);
+ $this->load->view('inc/header_old', $header);
  
  //ADDITIONAL RESOURCES
  //add css, IE7 js files here before the head tag
