@@ -2140,6 +2140,18 @@ class Members extends CI_Controller {
 			$city = $this->input->post('city', TRUE);
 			$suburb = $this->input->post('suburb', TRUE);
 
+
+			if(isset($suburb) && $suburb != '') {
+
+				$suburb = $suburb;
+
+			} else {
+
+
+				$suburb = 0;
+
+			}			
+
 			//clean cell
 			$cell = $this->clean_contact($cell2);
 			//clean tel
