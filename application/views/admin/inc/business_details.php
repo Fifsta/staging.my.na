@@ -34,7 +34,7 @@
 		$img_str = base_url('/').'img/timbthumb.php?w=200&h=200&src='.base_url('/').'img/bus_blank.png';	
 		
 	}
-
+ 
 	$cover_img = $BUSINESS_COVER_PHOTO;
 
 	if($cover_img != ''){

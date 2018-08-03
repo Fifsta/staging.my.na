@@ -2014,7 +2014,7 @@ class My_na_model extends CI_Model{
     public function instant_search_json($type,$mid,$sid,$query)
     { 
 
-       /* $this->load->model('image_model'); 
+       $this->load->model('image_model'); 
 
         $this->load->library('thumborp');
         $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
@@ -2175,7 +2175,7 @@ class My_na_model extends CI_Model{
             echo json_encode($out);
             
             $this->output->set_content_type('application/json');
-        }*/
+        }
 
             $out = array();
 
