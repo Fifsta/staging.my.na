@@ -714,7 +714,7 @@ class My_na extends CI_Controller {
 	} 
 	//++++++++++++++++++++++++++++++
 	//Instant Search 
-	//++++++++++++++++++++++++++++++
+	//++++++++++++++++++++++++++++++ 
 	public function ajax_search()
 	{
 			$this->my_na_model->instant_search(FALSE);
@@ -775,6 +775,8 @@ class My_na extends CI_Controller {
 		$sub_sub_sub_cat_id = $this->input->post('sub_sub_sub_cat_id', TRUE);
 
  		$q = $this->input->post('srch_bar',TRUE);
+
+ 		$q = addslashes($q);
 
 		$data['title'] = rawurldecode($q);
 		$data['key'] = $data['title']; 
