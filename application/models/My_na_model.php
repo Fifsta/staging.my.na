@@ -2179,7 +2179,7 @@ class My_na_model extends CI_Model{
 
             $out = array();
 
-            echo json_encode($out);
+            //echo json_encode($out);
             
             $this->output->set_content_type('application/json');
 
