@@ -916,6 +916,7 @@ class Sell extends CI_Controller {
 
 				}
 
+				$row['action'] = 'update';
 				$row['step'] = 2;
 				$row['cat1'] = $row['main_cat_id'];
 				$row['cat1name'] = '';
@@ -935,6 +936,7 @@ class Sell extends CI_Controller {
 				}else{
 					
 					$this->load->view('trade/list/main', $row);
+
 					
 				}
 				

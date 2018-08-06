@@ -667,7 +667,7 @@ class News_model extends CI_Model
 
     }
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    //+GET NAMIBIAN NEWS FEEDS
+    //+GET NAMIBIAN NEWS FEEDS 
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     public function get_namibian($offset = 0, $limit = 0, $type, $span = 4)
@@ -707,6 +707,7 @@ class News_model extends CI_Model
 
             $channel_link = '';
         }
+        
         $channel_desc = $channel->getElementsByTagName('description')
             ->item(0)->childNodes->item(0)->nodeValue;
 

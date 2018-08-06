@@ -12,7 +12,7 @@
  
  ?>
  <link rel="stylesheet" href="<?php echo base_url('/');?>redactor/redactor/redactor.css" />
-  <link href="<?php echo base_url('/');?>css/jplayer/jplayer.pink.flag.css" rel="stylesheet" type="text/css" /> 
+ <link href="<?php echo base_url('/');?>css/jplayer/jplayer.pink.flag.css" rel="stylesheet" type="text/css" />
  <link href="<?php echo base_url('/');?>css/datatables.css" rel="stylesheet" type="text/css" />
  <style type="text/css">
  #loading_img{position:relative;min-height:600px}

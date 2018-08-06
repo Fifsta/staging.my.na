@@ -181,7 +181,7 @@ class Map extends CI_Controller {
         $cat = $this->input->post('cat', true);
         $type = $this->input->post('type', true);
         $l_id = 0;
-        $loc = '';
+        $loc = ''; 
 
         echo $this->map_model->get_business_results($cat, $type, $l_id, $loc);
         

@@ -222,7 +222,6 @@ $content_hide = '';
                         <div id="desc-content"">
 
 
-
                             <?php 
 
                                 if($bus_id == 0 && $private == 'yes') {

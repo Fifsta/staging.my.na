@@ -14,7 +14,7 @@
  //add css, IE7 js files here before the head tag
 
  ?>
-
+ 
  <style type="text/css">
     #wrap, html, body,.table td, table th{background:#fff; border:none; height: 99%;}
 	#prod_carousel .item {max-height:550px;overflow:hidden;}
@@ -58,7 +58,7 @@
 			   <table class="table" border="0" style="border:none">
 				   <tr>
 					   <td style="width:70%; border:none"><h1 class="na_script"><?php echo $Ptitle;?></h1></td>
-					   <td style="width:30%; text-align:right; border:none"><img src="<?php echo base_url('/');?>img/my-na-logo-black.png" /></td>
+					   <td style="width:30%; text-align:right; border:none"><img src="<?php echo base_url('/');?>images/my-na-logo-black.png" /></td>
 				   </tr>
 			   </table>
 		   <?php

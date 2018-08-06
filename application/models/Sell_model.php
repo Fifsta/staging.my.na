@@ -393,9 +393,10 @@ class Sell_model extends CI_Model{
 				<thead>
 					<tr style="font-weight:bold">
 						<th style="width:8%;min-width:40px"></th>
-           				<th style="width:15%">Title</th>
+           				<th style="width:10%">Ref</th>
+           				<th style="width:10%">Title</th>
 						<th style="width:10%">Type</th>
-						<th style="width:15%">Price</th>
+						<th style="width:10%">Price</th>
 						<th style="width:10%">End</th>
 						'.$col4H .'
 						<th style="width:30%;min-width:140px"></th>
@@ -557,6 +558,7 @@ class Sell_model extends CI_Model{
 
 						<td style="width:8%;min-width:40px"><img src="'.base_url('/').'img/timbthumb.php?src='.$img.'&w=190&h=130"
 							alt="" style="width:80%;height:auto" class="img-polaroid"/> </td>
+						<td style="width:15%">'.$row->category_name.' > '.$row->title .'</td>
 						<td style="width:15%">'.$row->category_name.' > '.$row->title .'</td>
 						<td style="width:10%">'.$type.'</td>
 						<td style="width:15%">'.$price .'</td>

@@ -7,7 +7,7 @@ class A extends CI_Controller {
 		parent::__construct();
 		$this->load->model('search_model');
 		$this->load->library('pagination');
-
+ 
 	}
 
 	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -369,7 +369,7 @@ class A extends CI_Controller {
 	{
         //GET TOP LEVEL
         $q = $this->db->query("SELECT a_tourism_category_sub.CATEGORY_TYPE_ID, a_tourism_category.CATEGORY_NAME,a_tourism_category.ID
-                            FROM a_tourism_category_sub
+                            	FROM a_tourism_category_sub
                             JOIN a_tourism_category ON a_tourism_category.ID = a_tourism_category_sub.CATEGORY_TYPE_ID
                             WHERE a_tourism_category_sub.ID = '".$cat_id."'"
                             );

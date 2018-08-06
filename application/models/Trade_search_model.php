@@ -1024,6 +1024,7 @@ class Trade_search_model extends CI_Model{
 		//GET
 		$this->db->where('cat_id', $data['cat_id']);
 		$q = $this->db->get('product_categories');
+		
 		if($q->result()){
 
 			$o['categories'] = $q->result();

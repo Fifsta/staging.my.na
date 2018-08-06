@@ -478,7 +478,7 @@ class Vacancy_api_model extends CI_Model{
 			'type'=> 'confirmation',
 			'email_to' => array($email),
 			'subject' => $subject,
-			'attachments'=>$attachments
+			'attachments'=>$attachments 
 		);
 
 

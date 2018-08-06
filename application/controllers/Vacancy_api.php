@@ -69,7 +69,7 @@ class Vacancy_api extends REST_Controller{
         echo $this->response($o, 200);
 
     }
-
+ 
 
 
     function register_get() {

@@ -369,7 +369,7 @@ class Members extends CI_Controller {
 
 		$o = $this->sell_model->get_client_products($bus_id, $section); 
 
-
+ 
 	}
 
 
