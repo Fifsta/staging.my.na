@@ -57,6 +57,13 @@ class My_na extends CI_Controller {
 
 	}
 
+	public function monitor()
+	{
+		$this->output->set_header('HTTP/1.1 200 OK');
+		
+	}	
+	
+
 
 	public function gdpr_accept() {
 
