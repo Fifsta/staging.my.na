@@ -88,7 +88,7 @@
 	          <a href="<?php echo site_url('/'); ?>"><img src="<?php echo base_url('/'); ?>images/logo-main.png" style="text-align: center"></a>
 	        </div>
 
-			<h2>Verify your Account</h2>
+			<h2 class="form-signin-heading">Verify your Account</h2>
 
 			<p>Keep your account secure by completing this 2 step mobile phone verification.
 				<ol>
@@ -154,7 +154,7 @@
 				<small>Verifying your cellular number helps us keep our platform and you as the end-user safe. This information will help you recover your account</small>
 			</p>
 			<small>
-				<a href="<?php echo site_url('/'); ?>members/" class="pull-right muted">Skip</a>
+				<a href="<?php echo site_url('/'); ?>" class="pull-right muted">Skip</a>
 				<a href="<?php echo site_url('/'); ?>page/terms-and-conditions/" class="pull-left muted">My Na Terms</a>
 			</small>
 			</form>
