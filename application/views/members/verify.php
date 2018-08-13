@@ -71,6 +71,23 @@
     -khtml-border-radius: 5px; /* for old Konqueror browsers */
   }}
     </style>
+
+
+	<?php
+	if ($VERIFIED == 'Y')
+	{
+
+		$verifiedHTML = '<button id="verify_btn" class="btn btn-success pull-right"><i class="icon-ok icon-white"></i> Verified</button>';
+
+	}
+	else
+	{
+
+		$verifiedHTML = '<buttons id="verify_btn" onclick="do_verify()" class="btn btn-danger  pull-right"><i class="icon-refresh icon-white"></i> Send Code</button>';
+
+	}
+	?>
+    
 </head>
 
 <body>
@@ -282,7 +299,7 @@
 					}else{
 
 						$('#result_msg').html(data.html);
-						$('#verify_btn').html('<i class="icon-refresh icon-white"></i> Send Code');
+						$('#verify_btn').html('<i class="fa fa-refresh text-lighte"></i> Send Code');
 
 					}
 
