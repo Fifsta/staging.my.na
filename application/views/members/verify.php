@@ -180,7 +180,7 @@
 				{
 					echo $email;
 				} ?>"/>
-				<button class="btn btn-inverse" type="submit"><b>Proceed</b></button>
+				<button class="btn btn-dark" type="submit"><b>Proceed</b></button>
 				<div class="clearfix" style="height:10px"></div>
 				<small><a href="javascript:void(0)" onClick="pass_update()" class="pull-right muted">Login?</a>
 					<a href="<?php echo site_url('/'); ?>page/terms-and-conditions/" class="pull-left muted">My Na Terms</a>
@@ -202,7 +202,7 @@
 					<input type="password" class="form-control" name="pass1" value=""/>
 					<input type="hidden" name="token" value="<?php echo $token; ?>"/>
 					<input type="hidden" name="client_id" value="<?php echo $client_id; ?>"/>
-					<button class="btn btn-inverse" type="submit"><b>Set new password</b></button>
+					<button class="btn btn-dark" type="submit"><b>Set new password</b></button>
 					<div class="clearfix" style="height:10px"></div>
 					<small>
 						<a href="<?php echo site_url('/'); ?>page/terms-and-conditions/" class="pull-left muted">My Na Terms</a>
@@ -277,7 +277,7 @@
 						$('.add-on').html('<i class="icon-lock"></i>');
 						$('#result_msg').html(data.html);
 						$('#cell').val('').attr('placeholder', 'eg: 0000');
-						$('#verify_btn').html('Enter Code').removeClass('btn-danger').addClass('btn-inverse').attr('onclick', 'do_unlock()');
+						$('#verify_btn').html('Enter Code').removeClass('btn-danger').addClass('btn-dark').attr('onclick', 'do_unlock()');
 
 					}else{
 
