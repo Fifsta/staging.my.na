@@ -112,7 +112,7 @@
   <meta property="og:url"         content="'.site_url('/').'product/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/"> 
   <meta property="og:title"       content="'.$header['title'].'"> 
   <meta property="og:description" content="'.$header['metaD'].'"> 
-  <meta property="og:image"       content="'.str_replace('https://','http://',$img_str).'">';
+  <meta property="og:image"       content="'.str_replace('https://','http://',$img_url).'">';
 
   $this->load->view('inc/header', $header);
    
