@@ -733,7 +733,7 @@ class My_na extends CI_Controller {
 	//++++++++++++++++++++++++++++++
 	public function ajax_search_json($type,$mid,$sid,$query)
 	{ 
-			$this->my_na_model->instant_search_json($type,$mid,$sid,$query);
+			$this->my_na_model->instant_search_json($type,$mid,$sid,$query); 
 			
 	}
 	//++++++++++++++++++++++++++++++

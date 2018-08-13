@@ -2009,7 +2009,7 @@ class My_na_model extends CI_Model{
 	 
 
 	//++++++++++++++++++++++++++++++
-	//Instant Search 
+	//Instant Search  
 	//++++++++++++++++++++++++++++++
     public function instant_search_json($type,$mid,$sid,$query)
     { 

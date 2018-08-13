@@ -1414,7 +1414,7 @@ class Trade_model extends CI_Model
 
 			}
 
-			$this->cache->save('get_trade_products_'.$main_cat_id.'_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$offset, $output, 43200);
+			$this->cache->save('get_trade_products_'.$main_cat_id.'_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$offset, $output, 86400);
 
 		}
 

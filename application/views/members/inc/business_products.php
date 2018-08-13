@@ -13,6 +13,7 @@
   <thead>
     <tr style="font-weight:bold">
       <th style="width:100px"></th>
+      <th style="">Ref</th>
       <th style="">Title</th>
       <th style="">Price</th>
       <th style="">End</th>
@@ -26,7 +27,7 @@
 
     $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
     $width = 60;
-    $height = 60;   
+    $height = 60;    
 
     foreach($products->result() as $row){ 
 

@@ -1903,7 +1903,7 @@ class Trade extends CI_Controller {
 
 	//PRINT PRODUCT
 	function print_product($product_id){
-
+ 
 		$this->load->model('print_model');
 		$data['product_id'] = $product_id;
 		$this->db->select('*');
