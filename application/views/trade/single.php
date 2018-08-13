@@ -56,7 +56,7 @@
   $format = substr($img,(strlen($img) - 4),4);
   $str = substr($img,0,(strlen($img) - 4));
   
-  $img_str = S3_URL.'assets/products/images/'.$image;
+  $img_og = S3_URL.'assets/products/images/'.$image;
 
   if($img != ''){
     
@@ -112,7 +112,7 @@
   <meta property="og:url"         content="'.site_url('/').'product/'.$this->uri->segment(2).'/'.$this->uri->segment(3).'/"> 
   <meta property="og:title"       content="'.$header['title'].'"> 
   <meta property="og:description" content="'.$header['metaD'].'"> 
-  <meta property="og:image"       content="'.str_replace('https://','http://',$img_url).'">';
+  <meta property="og:image"       content="'.str_replace('https://','http://',$img_og).'">';
 
   $this->load->view('inc/header', $header);
    
