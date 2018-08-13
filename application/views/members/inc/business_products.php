@@ -51,7 +51,7 @@
 
         }
 
-
+       } 
 
       $col4 = '<td style="width:12%">'.$agent_ref.'</td>';
 
