@@ -79,13 +79,14 @@
 	<div id="home-bak" style="padding-top:0;width:100%;height:100%;bottom:0;">
 		<div class="container" style="position:relative;z-index:999;">
 
-	        <div class="text-center"> 
-	          <a href="<?php echo site_url('/'); ?>"><img src="<?php echo base_url('/'); ?>images/logo-main.png" style="text-align: center"></a>
-	        </div>
 
 			<div class="hidden-desktop" style="height:40px;">&nbsp;</div>
 
 			<?php echo form_open(site_url('/') . 'clients/verify_mobile/', array('class' => 'form-signin white_box', 'id' => 'form-verify')); ?>
+
+	        <div class="text-center"> 
+	          <a href="<?php echo site_url('/'); ?>"><img src="<?php echo base_url('/'); ?>images/logo-main.png" style="text-align: center"></a>
+	        </div>
 
 			<h2>Verify your Account</h2>
 
