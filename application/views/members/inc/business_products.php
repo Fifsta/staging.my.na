@@ -29,10 +29,36 @@
     $width = 60;
     $height = 60;    
 
+    $agent_ref = '';
+
     foreach($products->result() as $row){ 
 
+
+      if($section == 'live_agent' || $section == 'sold_agent' || $bus_id != 0){
+
+        //PROPERTY REFERENCE
+        if(count(json_decode($row->extras)) > 0){
+
+          foreach(json_decode($row->extras) as $exr => $exv){
+
+            if($exr == 'agency' && $exv != ''){
+
+              $agent_ref = '<span  class="label" rel="tooltip"  title="Product Reference">Ref: <strong itemprop="sku">'.$exv.'</strong></span>';
+              //$col4 = $agent_ref;
+            }
+
+          }
+
+        }
+
+
+
+      $col4 = '<td style="width:12%">'.$agent_ref.'</td>';
+
+
+
       $t = explode(',', $row->images);
-      $image_path = reset($t);
+      $image_path = reset($t); 
 
       if($image_path != ''){
         
@@ -46,7 +72,6 @@
 
       }
 
-      $agent_ref = '';
       $agent = '';
 
       //GET AGENT DETAILS
@@ -58,15 +83,11 @@
         if($agent_q->result()){
 
           $agentR = $agent_q->row();  
-          $agent = $agent_ref.' '.$agentR->CLIENT_NAME. ' ' .$agentR->CLIENT_SURNAME;
+          $agent = $agentR->CLIENT_NAME. ' ' .$agentR->CLIENT_SURNAME;
 
         }
 
-      }else{
-
-        $agent = $agent_ref;
-
-      }      
+      }    
 
 
       //Check Price
@@ -180,6 +201,7 @@
       echo '
         <tr id="row-'.$row->product_id.'">
           <td style="width:100px"><img rel="tooltip"src="' . $img_url . '" alt="' . $row->title . '" class="img-thumbnail" /></td>
+          '.$col4.'
           <td id="appadd">'.$row->title.'</td>
           <td style="width:100px">'.$price.'</td>
           <td style="width:100px">'.date('Y-m-d',strtotime($row->end_date)).'</td>
