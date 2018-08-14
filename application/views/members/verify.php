@@ -14,17 +14,23 @@
 <link rel="stylesheet" href="<?php echo base_url('/');?>bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="<?php echo base_url('/');?>css/style.css">
 <link rel="shortcut icon" href="<?php echo base_url('/');?>favicon.ico">
+<link href="<?php echo base_url('/');?>css/style.combo.css" rel="stylesheet" type="text/css">
+<link href="<?php echo base_url('/');?>css/icons.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="<?php echo base_url('/'); ?>css/flags/flags.css">
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo base_url('/');?>images/icons/my_na_[144x144].png">
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo base_url('/');?>images/icons/my_na_[114x114].png">
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo base_url('/');?>images/icons/my_na_[72x72].png">
 <link rel="apple-touch-icon-precomposed" href="<?php echo base_url('/');?>images/icons/my_na_[57x57].png">
 
+
 <link href='//fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script src="<?php echo base_url('/');?>bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo base_url('/');?>bootstrap/js/popper.min.js"></script>
+
+
 
     <style type="text/css">
       body {
@@ -77,13 +83,13 @@
 	if ($VERIFIED == 'Y')
 	{
 
-		$verifiedHTML = '<button id="verify_btn" type="submit" class="btn btn-success pull-right"><i class="fa fa-check text-light"></i> Verified</button>';
+		$verifiedHTML = '<button id="verify_btn" class="btn btn-success"><i class="fa fa-check text-light"></i> Verified</button>';
 
 	}
 	else
 	{
 
-		$verifiedHTML = '<buttons id="verify_btn" type="submit" onclick="do_verify()" class="btn btn-danger pull-right"><i class="fa fa-refresh text-light"></i> Send Code</button>';
+		$verifiedHTML = '<buttons id="verify_btn"  onclick="do_verify()" class="btn btn-danger"><i class="fa fa-refresh text-light"></i> Send Code</button>';
 
 	}
 	?>
@@ -158,9 +164,9 @@
 			<input type="hidden" name="url" value="<?php echo $this->agent->referrer(); ?>">
 
 			<div class="control-group">
-				<div class="form-group">
-					<?php echo $this->my_na_model->get_countries($DIAL_CODE, false, false, $class = '', $id = '');?>
-					<input type="text" id="cell" name="number" style="margin-top:10px; width:95%" class="form-control" placeholder="eg: 0811234567" value="<?php if (isset($CLIENT_CELLPHONE)) { echo $CLIENT_CELLPHONE; } ?>">
+				<div class="form-group input-group">
+					<?php echo $this->my_na_model->get_countries($DIAL_CODE, false, false, $class = '', $id = ''); ?>
+					<input type="text" id="cell" name="number" class="form-control input-md" placeholder="eg: 0811234567" value="<?php if (isset($CLIENT_CELLPHONE)) { echo $CLIENT_CELLPHONE; } ?>">
 				</div>
 				<?php echo $verifiedHTML; ?>
 			</div>

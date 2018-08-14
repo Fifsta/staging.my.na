@@ -912,10 +912,9 @@ class My_na_model extends CI_Model{
                     {
 
                         echo '<input type="hidden" id="dial_code" name="dial_code" value="' . $row1->phonecode . '">
-                            <div class="btn-group">
-                              <button type="button" class="btn btn-secondary" id="fl_select"><img src="' . base_url('/') . 'images/blank.gif" class="flag flag-' . strtolower($row1->iso) . '" > +' . $row1->phonecode . ' </button>
-                              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span>
+                            <div class="">
+                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" style="height:40px">
+                                <img src="' . base_url('/') . 'images/blank.gif" class="flag flag-' . strtolower($row1->iso) . '" > +' . $row1->phonecode . '
                               </button>
                               <ul class="dropdown-menu" style="max-height:200px;overflow-y: scroll; overflow-x: hidden" role="menu" aria-labelledby="dLabel">';
                         $found = true;
