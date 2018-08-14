@@ -4,7 +4,7 @@
 		<div class="dot"></div>
 		<div class="dot"></div>
 	</div>
-</div>--> 
+</div>-->
 <header id="header" class="grad-orange">
 	<div class="container">
 		<div class="row">

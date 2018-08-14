@@ -2107,11 +2107,9 @@ class My_na_model extends CI_Model{
                         //echo $keyF;
 
                         $tq1 = "SELECT title ,link, type, body,
-                                MATCH(title) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance,
-                                MATCH(title) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance2
                                 FROM search_index
                                 WHERE ".$strType." MATCH(title) AGAINST ('".$keyF."' IN BOOLEAN MODE) 
-                                ORDER BY relevance2 DESC, relevance DESC LIMIT 8";
+                                LIMIT 8";
 
                         /*$tq1 = "SELECT title ,link, type, body
                                 FROM search_index
