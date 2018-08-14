@@ -3115,8 +3115,6 @@ function un_clean_url($str)
 			if($email = trim($this->input->post('email', TRUE))){
 				
 
-
-
 					$first = $this->input->post('first_log', TRUE);
 					$pass = $this->input->post('pass', TRUE);
 					$sess = $this->input->post('rememberme', TRUE);
@@ -3275,7 +3273,6 @@ function un_clean_url($str)
 								//NO MATCHING CREDENTIALS
 			}else{
 				
-
 
 				$data['redirect'] = '';
 				$this->load->view('login' , $data);
