@@ -2106,7 +2106,7 @@ class My_na_model extends CI_Model{
 
                         //echo $keyF;
 
-                        $tq1 = "SELECT title ,link, type, body,
+                        $tq1 = "SELECT title ,link, type, body
                                 FROM search_index
                                 WHERE ".$strType." MATCH(title) AGAINST ('".$keyF."' IN BOOLEAN MODE) 
                                 LIMIT 8";
