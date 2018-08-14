@@ -1017,7 +1017,7 @@ class Trade_model extends CI_Model
 	{
 
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
 		if ( ! $output = $this->cache->get('get_trade_products_'.$main_cat_id.'_'.$main_cat_id.'_'.$sub_cat_id.'_'.$sub_sub_cat_id.'_'.$sub_sub_sub_cat_id.'_'.$offset))
 		{

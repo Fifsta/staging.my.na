@@ -228,8 +228,9 @@ if($verified == 'Y'){
                         
                         <div class="btn-group" data-toggle="buttons-radio">
                           <button type="button" id="daily_y" onclick="javascript:toggle_note_check('Y');" class="btn btn-dark <?php if(isset($daily_mail)){ if($daily_mail == 'Y'){echo 'active';}}else{ echo '';}?>">Yes</button>
-                          <button type="button" id="daily_n" onclick="javascript:toggle_note_check('N');" class="btn btn-dark  <?php if(isset($daily_mail)){ if($daily_mail == 'N'){echo 'active';}}else{ echo '';}?>">No</button>
+                          <button type="button" id="daily_n" onclick="javascript:toggle_note_check('N');" class="btn btn-dark <?php if(isset($daily_mail)){ if($daily_mail == 'N'){echo 'active';}}else{ echo '';}?>">No</button>
                         </div>
+
                         <input type="hidden" name="daily_mail" id="daily_mail" value="<?php echo $daily_mail;?>" />
 
                       </div>

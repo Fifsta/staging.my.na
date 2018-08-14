@@ -360,8 +360,7 @@ class Members extends CI_Controller {
 	//LOAD BUSINESS PRODUCTS
 	//++++++++++++++++++++++++++
 	public function load_bus_products()
-	{
-
+	{ 
 		$bus_id = trim($this->input->post('bus_id', TRUE));
 		$section = trim($this->input->post('section', TRUE));
 
@@ -2331,7 +2330,7 @@ class Members extends CI_Controller {
 	
 	public function add_cover()
 	{
-			 if($this->session->userdata('admin_id')){
+			 if($this->session->userdata('admin_id')){ 
 				 	
 				$this->output->set_header("Access-Control-Allow-Origin: http://cms.my.na");
 				$this->members_model->add_cover();
@@ -3625,11 +3624,10 @@ function un_clean_url($str)
 			 $data['error'] = 'Sorry that link has expired';
 			 $this->load->view('login', $data); 
 			
-		}
-   
-       
+		}   
 
 	}
+	
 	
 	function pass_update_three()
 	{

@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon-precomposed" href="<?php echo base_url('/');?>images/icons/my_na_[57x57].png">
 
 <link href='//fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script src="<?php echo base_url('/');?>bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo base_url('/');?>bootstrap/js/popper.min.js"></script>
@@ -77,13 +77,13 @@
 	if ($VERIFIED == 'Y')
 	{
 
-		$verifiedHTML = '<button id="verify_btn" class="btn btn-success pull-right"><i class="icon-ok icon-white"></i> Verified</button>';
+		$verifiedHTML = '<button id="verify_btn" type="submit" class="btn btn-success pull-right"><i class="fa fa-check text-light"></i> Verified</button>';
 
 	}
 	else
 	{
 
-		$verifiedHTML = '<buttons id="verify_btn" onclick="do_verify()" class="btn btn-danger  pull-right"><i class="icon-refresh icon-white"></i> Send Code</button>';
+		$verifiedHTML = '<buttons id="verify_btn" type="submit" onclick="do_verify()" class="btn btn-danger pull-right"><i class="fa fa-refresh text-light"></i> Send Code</button>';
 
 	}
 	?>
@@ -104,7 +104,7 @@
 	        <div class="text-center"> 
 	          <a href="<?php echo site_url('/'); ?>"><img src="<?php echo base_url('/'); ?>images/logo-main.png" style="text-align: center"></a>
 	        </div>
-
+	        <hr>
 			<h2 class="form-signin-heading">Verify your Account</h2>
 
 			<p>Keep your account secure by completing this 2 step mobile phone verification.
@@ -158,20 +158,19 @@
 			<input type="hidden" name="url" value="<?php echo $this->agent->referrer(); ?>">
 
 			<div class="control-group">
-				<?php echo $this->my_na_model->get_countries($DIAL_CODE, false, false, $class = '', $id = '');?>
-				<input type="text" id="cell" name="number" style="margin-top:10px; width:95%" class="form-control" placeholder="eg: 0811234567" value="<?php if (isset($CLIENT_CELLPHONE))
-				{
-					echo $CLIENT_CELLPHONE;
-				} ?>">
-
+				<div class="form-group">
+					<?php echo $this->my_na_model->get_countries($DIAL_CODE, false, false, $class = '', $id = '');?>
+					<input type="text" id="cell" name="number" style="margin-top:10px; width:95%" class="form-control" placeholder="eg: 0811234567" value="<?php if (isset($CLIENT_CELLPHONE)) { echo $CLIENT_CELLPHONE; } ?>">
+				</div>
 				<?php echo $verifiedHTML; ?>
 			</div>
+
 			<p class="clearfix">&nbsp;</p>
 			<p class="clearfix">
 				<small>Verifying your cellular number helps us keep our platform and you as the end-user safe. This information will help you recover your account</small>
 			</p>
 			<small>
-				<a href="<?php echo site_url('/'); ?>" class="pull-right muted">Skip</a>
+				<a href="<?php echo site_url('/'); ?>" class="pull-right muted">Skip</a> | 
 				<a href="<?php echo site_url('/'); ?>page/terms-and-conditions/" class="pull-left muted">My Na Terms</a>
 			</small>
 			</form>
@@ -184,7 +183,7 @@
 			}
 			else
 			{
-				echo 'hide';
+				echo 'd-none';
 			} ?>" id="pass_update">
 				<?php echo form_open(site_url('/') . 'members/pass_update_one', array('class' => 'form-signin white_box', 'name' => 'formpass0')); ?>
 				<div class="alert alert-warning">
@@ -299,7 +298,7 @@
 					}else{
 
 						$('#result_msg').html(data.html);
-						$('#verify_btn').html('<i class="fa fa-refresh text-lighte"></i> Send Code');
+						$('#verify_btn').html('<i class="fa fa-refresh text-light"></i> Send Code');
 
 					}
 

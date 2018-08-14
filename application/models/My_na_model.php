@@ -900,6 +900,7 @@ class My_na_model extends CI_Model{
 
                 $code = 'NA';
             }
+
             $found = false;
             //BUILD CURRENT VALUE
             foreach($q->result() as $row1){
@@ -910,10 +911,10 @@ class My_na_model extends CI_Model{
                     if($selected == $row1->phonecode )
                     {
 
-                        echo '<input type="hidden" id="dial_code"  name="dial_code"  value="' . $row1->phonecode . '">
+                        echo '<input type="hidden" id="dial_code" name="dial_code" value="' . $row1->phonecode . '">
                             <div class="btn-group">
-                              <button class="btn btn-secondary" id="fl_select"><img src="' . base_url('/') . 'images/blank.gif" class="flag flag-' . strtolower($row1->iso) . '" > +' . $row1->phonecode . ' </button>
-                              <button class="btn dropdown-toggle" data-toggle="dropdown">
+                              <button type="button" class="btn btn-secondary" id="fl_select"><img src="' . base_url('/') . 'images/blank.gif" class="flag flag-' . strtolower($row1->iso) . '" > +' . $row1->phonecode . ' </button>
+                              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu" style="max-height:200px;overflow-y: scroll; overflow-x: hidden" role="menu" aria-labelledby="dLabel">';
@@ -922,10 +923,10 @@ class My_na_model extends CI_Model{
                     }
                 }elseif($row1->iso == $code){
                    
-                    echo '<input type="hidden" id="dial_code"  name="dial_code"  value="'.$row1->phonecode.'">
+                    echo '<input type="hidden" id="dial_code" name="dial_code" value="'.$row1->phonecode.'">
                             <div class="btn-group">
-                              <button class="btn btn-secondary" id="fl_select"><img src="'.base_url('/').'images/blank.gif" class="flag flag-'.strtolower($row1->iso).'" > +'.$row1->phonecode.' </button>
-                              <button class="btn dropdown-toggle" data-toggle="dropdown">
+                              <button type="button" class="btn btn-secondary" id="fl_select"><img src="'.base_url('/').'images/blank.gif" class="flag flag-'.strtolower($row1->iso).'" > +'.$row1->phonecode.' </button>
+                              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu" style="max-height:200px;overflow-y: scroll; overflow-x: hidden" role="menu" aria-labelledby="dLabel">';
@@ -940,8 +941,8 @@ class My_na_model extends CI_Model{
             if(!($found)){
                 echo '<input type="hidden" id="dial_code" name="dial_code" value="264">
                         <div class="btn-group">
-                              <button class="btn" id="fl_select">+264 <img src="'.base_url('/').'images/blank.gif" class="flag flag-na" ></button>
-                              <button class="btn dropdown-toggle" data-toggle="dropdown">
+                              <button type="button" class="btn" id="fl_select">+264 <img src="'.base_url('/').'images/blank.gif" class="flag flag-na" ></button>
+                              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu" style="max-height:200px;overflow-y: scroll; overflow-x: hidden" role="menu" aria-labelledby="dLabel">';
@@ -2014,9 +2015,10 @@ class My_na_model extends CI_Model{
     public function instant_search_json($type,$mid,$sid,$query)
     { 
 
-       $this->load->model('image_model'); 
+        $this->load->model('image_model'); 
 
         $this->load->library('thumborp');
+        
         $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
         $width = 20;
         $height = 20;

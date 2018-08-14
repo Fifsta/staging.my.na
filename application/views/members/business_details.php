@@ -152,18 +152,17 @@ $this->load->view('inc/header', $header);
               <div class="list-map-left" style="background:#ccc; position:relative">
                   <img src="<?php echo $cover_url; ?>" class="img-fluid">
 
-                 <!-- <form action="<?php echo site_url('/')?>members/add_cover/<?php echo $bus_id;?>" method="post" accept-charset="utf-8" id="add-cover" name="add-cover" enctype="multipart/form-data"> 
+                 <form action="<?php echo site_url('/')?>members/add_cover/<?php echo $bus_id;?>" method="post" accept-charset="utf-8" id="add-cover" name="add-cover" enctype="multipart/form-data" style="position:absolute; top:10px; right:"> 
                     <input type="file" style="width:0px; height:0px;" id="cover_file" name="userfile1">
                     <input type="hidden" id="cover_msg" name="" value="">
                     <input type="hidden" id="id1" name="id1" value="<?php echo $this->session->userdata('admin_id');?>">
                     <input type="hidden" id="bus_id1" name="bus_id1" value="<?php echo $bus_id;?>">
                     <input type="hidden" id="bus_name1" name="bus_name1" value="<?php echo $name;?>">
 
-                    <button type="submit" style="margin:5px"  class="btn btn-dark pull-right" id="coverbut"><i class="fa fa-picture"></i> <?php //if($cover_img != ''){ echo 'Upload New Cover';}else{ echo 'Add Cover';} ?></button>
+                    <button type="submit" style="margin:5px"  class="btn btn-dark pull-right" id="coverbut"><i class="fa fa-picture"></i> <?php if($cover_img != ''){ echo 'Upload New Cover';}else{ echo 'Add Cover';} ?></button>
                     <a class="btn btn-dark pull-right" rel="tooltip" title="Cover Image 750 pixels x 300 pixels" style="margin:5px" onclick="select_cover()" href="javascript:void(0)"><i class="fa fa-search"></i> Browse Cover</a>
 
-
-                  </form>-->
+                  </form>
 
               </div>
               
@@ -698,7 +697,7 @@ function load_products_do(bus_id, section) {
     $('#products-result-'+section).html("<img src='<?php echo base_url('/').'images/load.gif';?>'>");
 
     $.ajax({
-        type: "POST",
+        type: "POST", 
         url: base+'members/load_bus_products/', 
         cache: false,
         data: { 
