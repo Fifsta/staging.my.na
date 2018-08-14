@@ -95,7 +95,7 @@ if($verified == 'Y'){
                 <form action="<?php echo site_url('/')?>members/add_avatar" method="post" accept-charset="utf-8" id="add-img" name="add-img" enctype="multipart/form-data">
                   <input type="hidden" id="user_id" name="user_id" value="<?php echo $this->session->userdata('id');?>">
                     <div>
-                      <figure>
+                      <figure style="width:200px">
                         <a href="#"><img src="<?php echo $fake_file; ?>" class="img-responsive"></a>
                       </figure>
 
