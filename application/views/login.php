@@ -21,7 +21,7 @@
 <link rel="apple-touch-icon-precomposed" href="<?php echo base_url('/');?>images/icons/my_na_[57x57].png">
 
 <link href='//fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script src="<?php echo base_url('/');?>bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo base_url('/');?>bootstrap/js/popper.min.js"></script>
