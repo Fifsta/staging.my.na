@@ -2104,7 +2104,7 @@ class My_na_model extends CI_Model{
                             }
                         }
 
-                        $tq1 = "SELECT title ,link, type, img_file ,body,
+                        $tq1 = "SELECT title ,link, type, body,
                                 MATCH(title, body) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance,
                                 MATCH(title) AGAINST ('".$keyF."' IN BOOLEAN MODE) AS relevance2
                                 FROM search_index
@@ -2117,12 +2117,12 @@ class My_na_model extends CI_Model{
 
                         //BIGGER THAN 3 CHARS
                     }elseif(str_word_count($key) == 1 && strlen($key) > 3){
-                        $tq1 = "SELECT title ,link, type, img_file ,body FROM search_index WHERE ".$strType." ".$strSQL." body LIKE '%".$key."%' OR title LIKE '%".$key."%' ORDER BY title ASC LIMIT 8";
+                        $tq1 = "SELECT title ,link, type, body FROM search_index WHERE ".$strType." ".$strSQL." body LIKE '%".$key."%' AND title LIKE '%".$key."%' ORDER BY title ASC LIMIT 8";
                         $query = $this->db->query($tq1, FALSE);
                         $go = true;
                         //BIGGER THAN 2 CHARS
                     }elseif(strlen($key) > 2){
-                        $tq1 = "SELECT title ,link, type, img_file ,body FROM search_index WHERE ".$strType." ".$strSQL." body LIKE '%".$key."%' OR title LIKE '%".$key."%' ORDER BY title ASC LIMIT 8";
+                        $tq1 = "SELECT title ,link, type, body FROM search_index WHERE ".$strType." ".$strSQL." body LIKE '%".$key."%' AND title LIKE '%".$key."%' ORDER BY title ASC LIMIT 8";
                         $query = $this->db->query($tq1, FALSE);
                         $go = true;
                     }else{
