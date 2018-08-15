@@ -230,7 +230,7 @@
         <ul class="nav nav-tabs" role="tablist">
           <li role="reviews" class="nav-item"><a href="#Reviews" class="nav-link active" aria-controls="Reviews" role="tab" data-toggle="tab" data-icon="fa fa-star-o"><span class="d-sm-none">Reviews</span></a></li>
           <li role="submit-review" class="nav-item"><a href="#Submit-Review" class="nav-link" aria-controls="Submit-Review" role="tab" data-toggle="tab" data-icon="fa fa-star"><span class="d-sm-none">Submit Review</span></a></li>
-          <li role="question" class="nav-item"><a href="#Questions" class="nav-link" aria-controls="Question" role="tab" data-toggle="tab" data-icon="fa fa-question"><span class="d-sm-none">Ask a Question</span></a></li>
+          <li role="question" class="nav-item"><a href="#Questions" class="nav-link" aria-controls="Question" role="tab" data-toggle="tab" data-icon="fa fa-question"><span class="d-sm-none">Questions</span></a></li>
         </ul>
         <div class="tab-content">
         
