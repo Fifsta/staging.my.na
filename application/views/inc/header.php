@@ -55,18 +55,18 @@
 	<!--<![endif]-->
 	<!-- css -->
 
-	<link href="bootstrap/css/bootstrap.css?v=2" rel="stylesheet">
+	<link href="bootstrap/css/bootstrap.css?v=22" rel="stylesheet">
 	
 	<link href="css/owl.carousel.min.css" rel="stylesheet" type="text/css">
 	<link href="css/owl.theme.default.min.css" rel="stylesheet" type="text/css">
 	<link href="css/style.combo.css" rel="stylesheet" type="text/css">
 	<link href="css/icons.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo base_url('/'); ?>css/style.css?v=3" rel="stylesheet" type="text/css">
+	<link href="<?php echo base_url('/'); ?>css/style.css?v=33" rel="stylesheet" type="text/css">
 	<link href="<?php echo base_url('/'); ?>css/typeahead.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="<?php echo base_url('/');?>css/animate.css">
 
-	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="bootstrap/js/popper.min.js"></script>
+	<script src="bootstrap/js/bootstrap.bundle.min.js?v=2"></script>
+	<script src="bootstrap/js/popper.min.js?v2"></script>
 	
 	<script src="js/jquery.lazyload.min.js"></script>
 
