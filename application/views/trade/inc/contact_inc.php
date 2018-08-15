@@ -1,5 +1,10 @@
 <h2 class="tab-head">Contact Agent/Seller</h2>
-<form action="<?php echo site_url('/')?>trade/contact/" method="post" accept-charset="utf-8" id="contact-us" name="contact-us">
+<form action="<?php echo site_url('/')?>trade/contact_agent/" method="post" accept-charset="utf-8" id="contact-us" name="contact-us">
+  <input type="hidden" name="bemail" value="<?php echo $email; ?>">
+  <input type="hidden" name="bname" value="<?php echo $name; ?>">
+  <input type="hidden" name="product" value="<?php echo $product; ?>">
+  <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+  <input type="hidden" name="link" value="<?php echo $link; ?>">
   <div class="row">
     <div class="col-sm-4 col-md-3 col-lg-3 col-xl-4">
       <div class="form-group">
@@ -26,11 +31,13 @@
          </div>
        </div>
 
-      <button type="submit" class="btn btn-primary btn-block" id="contactbut" data-icon="fa-envelope-o">Send</button>
+      <div class="row" id="contact_msg" style="margin-top:10px">
+        
 
-      <div class="row" id="contact_msg" style="margin-top:10px"></div>
+      </div>
+
     </div>
-    
+    <button type="submit" class="btn btn-primary btn-block" id="contactbut" data-icon="fa-envelope-o" style="z-index:9999">Send</button>
   </div>
 </form>
 
@@ -47,12 +54,12 @@
 			$('#contactbut').html('<img src="<?php echo base_url('/').'img/load.gif';?>" /> Sending...');
 			$.ajax({
 				type: 'post',
-				url: '<?php echo site_url('/').'trade/contact/';?>' ,
+				url: '<?php echo site_url('/').'trade/contact_agent/';?>' ,
 				data: frm.serialize(),
 				success: function (data) {
 
 					$('#contact_msg').html(data);
-					$('#contactbut').html('<i class="icon-envelope"></i> Ask Question');
+					$('#contactbut').html('<i class="icon-envelope"></i> Send');
 
 
 				}

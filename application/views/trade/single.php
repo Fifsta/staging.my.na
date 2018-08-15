@@ -44,6 +44,8 @@
   $vt = $BUSINESS_VIRTUAL_TOUR_NAME;
   $advertorial = $ADVERTORIAL;
 
+
+
   $price = $start_price;
 
           $rating = $TOTAL;
@@ -102,6 +104,12 @@
     $cover_str = S3_URL.'assets/business/photos/listing-placeholder.jpg';  
     
   }
+
+  $bcontact['email'] = $email;
+  $bcontact['name'] = $name;
+  $bcontact['product'] = $title;
+  $bcontact['product_id'] = $product_id;
+  $bcontact['link'] = current_url();
 
  
   //BUILD OPEN GRAPH <meta property="og:image:secure_url" content="'.$img_str.'" />
@@ -215,8 +223,8 @@
           <section role="tabpanel" class="tab-pane active" id="Contact-Agent">
 
             <?php $this->trade_model->show_company($bus_id, $property_agent, $sub_cat_id); ?>
-
-            <?php $this->load->view('trade/inc/contact_inc'); ?>
+ 
+            <?php $this->load->view('trade/inc/contact_inc', $bcontact); ?>
 
           </section>
         </div>

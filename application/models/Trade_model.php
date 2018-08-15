@@ -19,6 +19,151 @@ class Trade_model extends CI_Model
 
 
 
+
+	//+++++++++++++++++++++++++++
+	//CONTACT AGENT
+	//++++++++++++++++++++++++++
+	//+++++++++++++++++++++++++++
+	//BUSINESS ENQUIRY
+	//++++++++++++++++++++++++++
+	public function contact($bus_id)
+	{
+		$this->load->library('user_agent');
+		//TEST IF ROBOT
+		if ($this->agent->is_robot())
+		{
+			echo '<div class="alert alert-error">
+         			<button type="button" class="close" data-dismiss="alert">×</button>
+            		Sorry, only humans can submit an enquiry!</div>';	
+		
+		//IS HUMAN
+		}else{
+
+			$this->load->library('recaptcha');
+			$bool = json_decode($this->recaptcha->recaptcha_check_answer());
+
+			//var_dump ($bool);
+			//CAPTCHA FALSE
+			if(!$bool->success) {
+
+				$data['error'] = 'PLease tick the box above to prove you are human';
+				echo '<div class="alert alert-error">
+								<button type="button" class="close" data-dismiss="alert">×</button>
+								'.$data['error'].'</div>';
+
+
+					$bemail = $this->input->post('bemail', TRUE);
+					$bname = $this->input->post('bname', TRUE);
+					$product = $this->input->post('product', TRUE);
+					$product_id = $this->input->post('product_id', TRUE);
+					$link = $this->input->post('link', TRUE);
+					$email = $this->input->post('email', TRUE);
+					$name = $this->input->post('name', TRUE);
+					$msg = $this->input->post('msg', TRUE);
+					//$captcha = $this->input->post('captcha', TRUE);
+					
+					//VALIDATE INPUT
+					if(!filter_var( $email, FILTER_VALIDATE_EMAIL )){
+						$val = FALSE;
+						$error = 'Email address is not valid.';	
+						
+					}elseif($name == ''){
+						$val = FALSE;
+						$error = 'Please provide us with your full name.';	
+					//CORRECT CAPTCHA
+					}elseif(($x + $y) != $captcha){
+						$val = FALSE;
+						$error = 'Your answer did not match.';
+									
+					}else{
+						$val = TRUE;
+					}
+					
+					//IF VALIDATED
+					if($val == TRUE){									
+						
+
+						$msg = $msg.'<br><br>View Product here<br><a href="'.$link.'" target="_blank">';
+
+						$email = 'christian@intouch.com.na';
+
+						$data1 = array(
+						  'name'=> $name ,
+						  'email'=> $email ,
+						  'msg'=> $msg ,
+						  'bmail'=> $bmail,
+						  'bname'=> $bname
+						);
+							
+						//SEND EMAIL LINK
+						$this->load->model('email_model');	
+						$this->email_model->send_enquiry($data1, $row);	
+						
+						if($this->session->userdata('id')){
+							
+							$client_id = $this->session->userdata('id');
+						}else{
+						
+							$client_id = '0';	
+						}
+						
+						
+
+						//INSERT INTO MESSAGES TABLE
+						/*$data2 = array(
+							  'bus_id'=> $bus_id ,
+							  'client_id'=> $client_id ,
+							  'nameFROM'=> $name ,
+							  'nameTO'=> $bname ,
+							  'email'=> $email ,
+							  'emailTO'=> $bmail ,
+							  'body'=> $msg,
+							  'status'=> 'unread',
+							  'status_client'=> 'sent',
+							  'subject' => 'Product Enquiry from ' .$bname. 'for ' .$product
+							);
+						
+						$this->db->insert('u_business_messages',$data2);*/
+						
+						$data['bus_id'] = $bus_id;
+						$data['basicmsg'] = 'Thanks, '. $name. '! We have succesfully sent your enquiry.' ;
+						$data['fb_conversion'] = '
+												<script  data-cfasync="false">(function() {
+												  var _fbq = window._fbq || (window._fbq = []);
+												  if (!_fbq.loaded) {
+												    var fbds = document.createElement("script");
+												    fbds.async = true;
+												    fbds.src = "//connect.facebook.net/en_US/fbds.js";
+												    var s = document.getElementsByTagName("script")[0];
+												    s.parentNode.insertBefore(fbds, s);
+												    _fbq.loaded = true;
+												  }
+												})();
+												window._fbq = window._fbq || [];
+												window._fbq.push(["track", "6020352901773", {"value":"10.00","currency":"ZAR"}]);
+												</script>
+												<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6020352901773&amp;cd[value]=0.00&amp;cd[currency]=ZAR&amp;noscript=1" /></noscript>';
+
+						//$this->load->view('product/profile', $data);		
+				
+					//IF NOT VALIDATED	
+					}else{
+						
+						$data['bus_id'] = $bus_id;
+						$data['error'] = $error;
+						//$this->load->view('business/profile', $data);	
+						
+					}
+
+					return $data;
+
+			}//RECAPTCHA VALID
+		}
+			
+	}
+
+
+
 	//Get MAP Details
 	function get_map_details($ID){
 
@@ -646,8 +791,7 @@ class Trade_model extends CI_Model
 
 				$msg = $this->input->post('msg', true);
 				$captcha = $this->input->post('captcha', true);
-				$x = $this->input->post('x', true);
-				$y = $this->input->post('y', true);
+
 				$product_id = $this->input->post('product_id', true);
 				$product_title = $this->input->post('product_title', true);
 				$client_id = $this->input->post('client_id', true);
@@ -655,18 +799,8 @@ class Trade_model extends CI_Model
 				$sender_client_id = $this->session->userdata('id');
 				$name = $this->session->userdata('u_name');
 
+				$val = true;
 
-				//VALIDATE INPUT
-				if (($x + $y) != $captcha)
-				{
-					$val = false;
-					$error = 'Your security answer did not match. What is ' . $x . ' + ' . $y;
-
-				}
-				else
-				{
-					$val = true;
-				}
 
 				//IF VALIDATED
 				if ($val == true)
@@ -2782,6 +2916,9 @@ class Trade_model extends CI_Model
 			return 0;
 		}
 	}
+
+
+
 	//+++++++++++++++++++++++++++
 	//BUY NOW BUTTON
 	//++++++++++++++++++++++++++
@@ -3035,6 +3172,8 @@ class Trade_model extends CI_Model
 
 
 	}
+
+
 	//+++++++++++++++++++++++++++
 	//ORDER NOW BUTTON
 	//++++++++++++++++++++++++++

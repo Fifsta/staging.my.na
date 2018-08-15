@@ -1496,10 +1496,21 @@ class Trade extends CI_Controller {
 		$this->trade_model->order_now();
 
 	}
+
+	//+++++++++++++++++++++++++++
+	//CONTACT AGENT
+	//++++++++++++++++++++++++++
+	public function contact_agent() 
+	{
+		$this->trade_model->contact_agent();
+
+	}
+
+
 	//+++++++++++++++++++++++++++
 	//ASK Question
 	//++++++++++++++++++++++++++
-	public function contact()
+	public function contact() 
 	{
 		$this->trade_model->ask_question();
 
