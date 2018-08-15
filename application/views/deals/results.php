@@ -22,7 +22,7 @@ $this->load->view('inc/header', $header);
 
 ?>
 
-<link href="<?php echo base_url('/');?>css/select/select2.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('/');?>css/select/select2.css?v=2" rel="stylesheet" type="text/css" />
 <link href='<?php echo base_url('/');?>css/jquery.rating.css' type="text/css" rel="stylesheet"/>
 <link rel="canonical" href="<?php $this->trade_model->build_canonical();?>" />
 
