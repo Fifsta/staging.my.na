@@ -105,12 +105,6 @@
     
   }
 
-  $bcontact['email'] = $email;
-  $bcontact['name'] = $name;
-  $bcontact['product'] = $title;
-  $bcontact['product_id'] = $product_id;
-  $bcontact['link'] = current_url();
-
  
   //BUILD OPEN GRAPH <meta property="og:image:secure_url" content="'.$img_str.'" />
   $header['og'] ='
@@ -224,7 +218,7 @@
 
             <?php $this->trade_model->show_company($bus_id, $property_agent, $sub_cat_id); ?>
  
-            <?php $this->load->view('trade/inc/contact_inc', $bcontact); ?>
+            <?php $this->load->view('trade/inc/contact_inc', $product); ?>
 
           </section>
         </div>

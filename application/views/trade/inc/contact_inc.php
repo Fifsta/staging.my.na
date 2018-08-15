@@ -1,10 +1,10 @@
 <h2 class="tab-head">Contact Agent/Seller</h2>
-<form action="<?php echo site_url('/')?>trade/contact_agent/" method="post" accept-charset="utf-8" id="contact-us" name="contact-us">
-  <input type="hidden" name="bemail" value="<?php echo $email; ?>">
-  <input type="hidden" name="bname" value="<?php echo $name; ?>">
-  <input type="hidden" name="product" value="<?php echo $product; ?>">
+
+<form action="<?php echo site_url('/')?>trade/contact/" method="post" accept-charset="utf-8" id="contact-us" name="contact-us">
+  <input type="hidden" name="product_title" value="<?php echo $product_title; ?>">
   <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-  <input type="hidden" name="link" value="<?php echo $link; ?>">
+  <input type="hidden" name="client_id" value="<?php echo $client_id; ?>">
+  <input type="hidden" name="bus_id" value="<?php echo $bus_id; ?>">
   <div class="row">
     <div class="col-sm-4 col-md-3 col-lg-3 col-xl-4">
       <div class="form-group">
@@ -44,30 +44,30 @@
  
 <script data-cfasync="false" type="text/javascript">
 
-	$(document).ready(function(){
+  $(document).ready(function(){
 
-		$('#contactbut').click(function(e) {
+    $('#contactbut').click(function(e) {
 
-			e.preventDefault();
-			var frm = $('#contact-us');
-			//frm.submit();
-			$('#contactbut').html('<img src="<?php echo base_url('/').'img/load.gif';?>" /> Sending...');
-			$.ajax({
-				type: 'post',
-				url: '<?php echo site_url('/').'trade/contact_agent/';?>' ,
-				data: frm.serialize(),
-				success: function (data) {
+      e.preventDefault();
+      var frm = $('#contact-us');
+      //frm.submit();
+      $('#contactbut').html('<img src="<?php echo base_url('/').'img/load.gif';?>" /> Sending...');
+      $.ajax({
+        type: 'post',
+        url: '<?php echo site_url('/').'trade/contact/';?>' ,
+        data: frm.serialize(),
+        success: function (data) {
 
-					$('#contact_msg').html(data);
-					$('#contactbut').html('<i class="icon-envelope"></i> Send');
+          $('#contact_msg').html(data);
+          $('#contactbut').html('<i class="icon-envelope"></i> Send');
 
 
-				}
-			});
+        }
+      });
 
-		});
+    });
 
-	});
+  });
 
 
 </script>

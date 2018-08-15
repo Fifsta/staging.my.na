@@ -110,7 +110,7 @@ class Trade_model extends CI_Model
 						
 
 						//INSERT INTO MESSAGES TABLE
-						/*$data2 = array(
+						$data2 = array(
 							  'bus_id'=> $bus_id ,
 							  'client_id'=> $client_id ,
 							  'nameFROM'=> $name ,
@@ -123,7 +123,7 @@ class Trade_model extends CI_Model
 							  'subject' => 'Product Enquiry from ' .$bname. 'for ' .$product
 							);
 						
-						$this->db->insert('u_business_messages',$data2);*/
+						$this->db->insert('u_business_messages',$data2);
 						
 						$data['bus_id'] = $bus_id;
 						$data['basicmsg'] = 'Thanks, '. $name. '! We have succesfully sent your enquiry.' ;
@@ -790,7 +790,7 @@ class Trade_model extends CI_Model
 			{
 
 				$msg = $this->input->post('msg', true);
-				$captcha = $this->input->post('captcha', true);
+				//$captcha = $this->input->post('captcha', true);
 
 				$product_id = $this->input->post('product_id', true);
 				$product_title = $this->input->post('product_title', true);

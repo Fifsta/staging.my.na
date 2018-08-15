@@ -22,7 +22,7 @@
 	body,*{font-size:12px;}
     .container{
 
-	    page-break-after: always;
+	    page-break-after: always; 
 	    overlfow:hidden;
     }
 	 .print_end{

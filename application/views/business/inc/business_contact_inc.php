@@ -26,11 +26,11 @@
 			   </div>
 		   </div>
 
-			<button type="submit" class="btn btn-primary btn-block" id="contactbut" data-icon="fa-envelope-o">Send</button>
+			
 
 			<div class="row" id="contact_msg" style="margin-top:10px"></div>
 		</div>
-		
+		<button type="submit" class="btn btn-primary btn-block" id="contactbut" data-icon="fa-envelope-o">Send</button>
 	</div>
 </form>
 
@@ -49,7 +49,7 @@
 			success: function (data) {
 				
 				 $('#contact_msg').html(data);
-				 $('#contactbut').html('<i class="icon-envelope"></i> Send Message');
+				 $('#contactbut').html('<i class="icon-envelope"></i> Send');
 				 
 				 
 			}
