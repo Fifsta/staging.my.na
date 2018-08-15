@@ -87,7 +87,7 @@ class A extends CI_Controller {
 
 		if(trim($c_type) == 'main'){
 			
-			if($l_id == 'national'){
+			if($l_id == 'national'){ 
 				$l_id = 'all';
 				$locationURL = 'namibia';
 					
@@ -126,6 +126,7 @@ class A extends CI_Controller {
   		$offsetorg = ($this->uri->segment(11));
 		//$x = $this->uri->segment(3);
 		//MAIN CATS
+		
 		if($main_cat_id = $this->url_decode($this->uri->segment(3))){
             //NO CATEGORY BUT ID THEN 301 redirect
             if(!$main_category = $this->url_decode($this->uri->segment(4))) {
@@ -459,25 +460,25 @@ class A extends CI_Controller {
 		$config['per_page'] = $limit; 
 		$config['num_links'] = 2; 
 		//Styling
-		$config['full_tag_open'] = '<div class="pagination pull-right"><ul>';
-		$config['full_tag_close'] = '</ul></div>';
+		$config['full_tag_open'] = '<nav aria-label="Page navigation example"><ul class="pagination">';
+		$config['full_tag_close'] = '</ul></nav>';
 		$config['first_link'] = false;
 		$config['last_link'] = false;
-		$config['first_tag_open'] = '<li>';
+		$config['first_tag_open'] = '<li class="page-item">';
 		$config['first_tag_close'] = '</li>';
-		$config['prev_link'] = '<i class="icon-chevron-left"></i>';
-		$config['prev_tag_open'] = '<li class="prev">';
+		$config['prev_link'] = '<i class="fa fa-chevron-left text-dark"></i>';
+		$config['prev_tag_open'] = '<li class="page-item prev">';
 		$config['prev_tag_close'] = '</li>';
-		$config['next_link'] = '<i class="icon-chevron-right"></i>';
-		$config['next_tag_open'] = '<li>';
+		$config['next_link'] = '<i class="fa fa-chevron-right text-dark"></i>';
+		$config['next_tag_open'] = '<li class="page-item">';
 		$config['next_tag_close'] = '</li>';
-		$config['last_tag_open'] = '<li>';
+		$config['last_tag_open'] = '<li class="page-item">';
 		$config['last_tag_close'] = '</li>';
-		$config['cur_tag_open'] =  '<li class="active"><a href="#">';
+		$config['cur_tag_open'] =  '<li class="page-item bg-light text"><a href="#" class="page-link bg-light text-dark">';
 		$config['cur_tag_close'] = '</a></li>';
-		$config['num_tag_open'] = '<li>';
+		$config['num_tag_open'] = '<li class="page-item">';
 		$config['num_tag_close'] = '</li>';
-		$config['uri_segment'] = 9;
+		$config['uri_segment'] = 11;
 		$this->pagination->initialize($config);
 
 		if($business == 'all'){
