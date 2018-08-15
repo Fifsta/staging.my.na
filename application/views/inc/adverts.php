@@ -40,7 +40,7 @@ if($this->uri->segment(2) == '') {
 
 	function load_yzx(q, l, b){
 
-		$.getJSON( "<?php echo HUB_URL;?>main/get_picsad_hub/"+q+"/"+l+"/?bus_id=0&keywords="+encodeURI(JSON.stringify(keywords))+"&category="+encodeURI(category), function( data ) {
+		$.getJSON( "<?php echo HUB_URL;?>main/get_picsad_hub/"+q+"/"+l+"/?bus_id=3454&keywords="+encodeURI(JSON.stringify(keywords))+"&category="+encodeURI(category), function( data ) {
 
 			var adb = $('#'+b), xx = 0;
 			for(var i = 0; i < data.length; i++) {
