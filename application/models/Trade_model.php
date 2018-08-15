@@ -8606,9 +8606,9 @@ class Trade_model extends CI_Model
 					if ($img != '')
 					{
 
-						if(strstr($img_file, "http")){
+						if(strstr($img, "http")){
 							
-							$img_str = $img_file;
+							$img_str = $img;
 						
 						}elseif (strpos($img, '.') == 0)
 						{
