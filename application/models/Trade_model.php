@@ -26,7 +26,7 @@ class Trade_model extends CI_Model
 	//+++++++++++++++++++++++++++
 	//BUSINESS ENQUIRY
 	//++++++++++++++++++++++++++
-	public function contact($bus_id)
+	public function contact_agent()
 	{
 		$this->load->library('user_agent');
 		//TEST IF ROBOT
@@ -91,7 +91,7 @@ class Trade_model extends CI_Model
 						  'name'=> $name ,
 						  'email'=> $email ,
 						  'msg'=> $msg ,
-						  'bmail'=> $bmail,
+						  'bmail'=> $email,
 						  'bname'=> $bname
 						);
 							
