@@ -55,12 +55,6 @@
 	        <?php }else{ ?>
 		        <!--<iframe class="loading_img" style="width:100%; min-height:400px" id="advert_content"></iframe>-->
 	            <div class="alert alert-secondary">
-
-		            <h2 style="font-size:18px">Item is Live</h2>
-	                <p>The product is live and showing on the website. You can automatically publish the item to the My Namibia facebook page to get that extra exposure.</p>
-		            <div class="clearfix">&nbsp;</div>
-		            <?php echo $fb_btn;?>
-		            <div class="btn btn-warning fb-share-button" data-href="<?php echo site_url('/').'product/'.$product_id; ?>/" data-layout="button_count"></div>
 		            <a href="<?php echo site_url('/').'product/'.$product_id;?>/" class="btn btn-dark clearfix"  target="_blank">Preview <?php echo $title;?></a>
 	            </div>
 	       <?php }?>
