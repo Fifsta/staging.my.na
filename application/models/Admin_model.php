@@ -3614,6 +3614,14 @@ function get_business_xaxis_30($bus_id) {
     {
 
 
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 580;
+		$height = 300;  	
+
+
         if($type == 'products') {
 
             $this->load->model('trade_model');
@@ -3644,12 +3652,14 @@ function get_business_xaxis_30($bus_id) {
                 //IMAGES
                 if ($row->img_file != '') {
 
-                    $img1 = base_url('/') . 'img/timbthumb.php?src=' . S3_URL . 'assets/products/images/' . $row->img_file . '&w=580&h=300';
+					$img_str = 'assets/products/images/' . $row->img_file;
+
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');               	
 
 
                 } else {
 
-                    $img1 = base_url('/') . 'img/product_blank.jpg';
+                    $img_url = base_url('/') . 'img/product_blank.jpg';
                 }
 
                 $url = site_url('/') . 'product/' . $row->product_id . '/' . $this->my_na_model->clean_url_str($row->title, '', '_') . '/';
@@ -3713,7 +3723,7 @@ function get_business_xaxis_30($bus_id) {
 							</tr>
 							<tr >
 								<td colspan="2" style="padding: 10px"  class="white_box">
-									<img src="' . $img1 . '" class="inline_img" style="max-width:580px" alt="Download Image To view" title="Download Image To view">
+									<img src="' . $img_url . '" class="inline_img" style="max-width:580px" alt="Download Image To view" title="Download Image To view">
 									<br />
 								</td>
 							</tr>
@@ -3755,12 +3765,14 @@ function get_business_xaxis_30($bus_id) {
                 //IMAGES
                 if ($row->SPECIALS_IMAGE_NAME != '') {
 
-                    $img1 = base_url('/') . 'img/timbthumb.php?src=' . S3_URL . 'assets/deals/images/' . $row->SPECIALS_IMAGE_NAME . '&w=580&h=300';
+					$img_str = 'assets/deals/images/' . $row->SPECIALS_IMAGE_NAME;
+
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');    
 
 
                 } else {
 
-                    $img1 = base_url('/') . 'img/product_blank.jpg';
+                    $img_url = base_url('/') . 'img/product_blank.jpg';
                 }
 
 
@@ -3791,7 +3803,7 @@ function get_business_xaxis_30($bus_id) {
 							</tr>
 							<tr >
 								<td colspan="2" style="padding: 10px"  class="white_box">
-									<img src="' . $img1 . '" class="inline_img" style="max-width:580px" alt="Download Image To view" title="Download Image To view">
+									<img src="' . $img_url . '" class="inline_img" style="max-width:580px" alt="Download Image To view" title="Download Image To view">
 									<br />
 								</td>
 							</tr>
