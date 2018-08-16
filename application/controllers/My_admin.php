@@ -21,7 +21,7 @@ class My_admin extends CI_Controller
 
 
     public function index()
-    {
+    { 
 
         if ($this->session->userdata('admin_id')) {
 
@@ -1634,6 +1634,15 @@ class My_admin extends CI_Controller
     //++++++++++++++++++++++++++
     function approve_product($id, $str){
 
+
+        $this->load->model('image_model'); 
+
+        $this->load->library('thumborp');
+        $thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+        $width = 580;
+        $height = 300;
+
+
         if($this->session->userdata('admin_id') || $this->input->get('nmh_hub_referral')){
 
             //$data['end_date'] = date('Y-m-d', strtotime("+30 days"));
@@ -1662,7 +1671,11 @@ class My_admin extends CI_Controller
 										<tr>';
                 foreach ($images->result() as $img_row) {
 
-                    $img_str .= '<td class="white_box"><img src="' .base_url('/').'img/timbthumb.php?src='. base_url('/') . 'assets/products/images/' . $img_row->img_file . '&w=580&h=300" style="width:580px;height:auto" /></td>';
+                    $img = 'assets/products/images/' . $img_row->img_file;
+
+                    $img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img,$width,$height, $crop = '');                   
+
+                    $img_str .= '<td class="white_box"><img src="'.$img_url.'" /></td>';
 
                 }
 

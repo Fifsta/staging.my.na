@@ -1075,6 +1075,14 @@ class Admin_model extends CI_Model{
 		if($section == ''){
 			$section = 'live';
 		}
+ 
+		$this->load->model('image_model'); 
+
+		$this->load->library('thumborp');
+		$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
+		$width = 190;
+		$height = 130;
+
 
 		//JOUBERT BALT PRIVATE
 		$strSQL = '';
@@ -1301,12 +1309,17 @@ class Admin_model extends CI_Model{
 
                 if($row->img_file != null){
 
+					$img_str = 'assets/products/images/' . $row->img_file;
 
-                    $img = S3_URL.'assets/products/images/'.$row->img_file;
+					$img_url = $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,$width,$height, $crop = '');
+
                 }else{
 
-                    $img = base_url('/').'img/product_blank.jpg';
+                    $img_url = base_url('/').'img/product_blank.jpg';
                 }
+
+
+
 
 				//CHECK SOLD BUTTON
 				$soldBTN = '';
@@ -1396,7 +1409,7 @@ class Admin_model extends CI_Model{
 				$fb = "window.open('https://www.facebook.com/sharer/sharer.php?app_id=287335411399195&u=". rawurlencode(site_url('/').'product/'.$row->product_id.'/'.$this->trade_model->clean_url_str($row->title)) ."', '_blank', 'width=800,height=600,scrollbars=yes,status=yes,resizable=yes,screenx=20%,screeny=20%')";
 
 				echo '<tr id="row_'.$row->product_id.'">
-						<td style="width:8%;min-width:40px"><img src="'.base_url('/').'img/timbthumb.php?src='.$img.'&w=190&h=130"
+						<td style="width:8%;min-width:40px"><img src="'.$img_url.'"
 							alt="" style="width:80%;height:auto" class="img-polaroid"/> </td>
 						<td style="width:20%">'.$row->category_name.' > '.$row->title .'</td>
 						<td style="width:10%">'.$type.'</td>
