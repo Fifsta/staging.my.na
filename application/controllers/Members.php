@@ -18,6 +18,15 @@ class Members extends CI_Controller {
 	    		
 	}
 
+	//+++++++++++++++++++++++++++
+	//MAIN
+	//++++++++++++++++++++++++++
+	public function get_cache($item)
+	{
+
+		var_dump($this->main_model->get_memcache($item));
+
+	}
 
 
 function get_all_cache() {
@@ -70,6 +79,7 @@ function get_all_cache() {
 		echo json_encode($o);
 
 	}
+
 	function delete_all_cache() {
 
 		// Load the memcached library config
