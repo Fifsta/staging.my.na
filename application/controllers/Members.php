@@ -19,15 +19,6 @@ class Members extends CI_Controller {
 	}
 
 
-	public function memtest()
-	{
-
-		$this->load->view('memtest');
-
-	}
-
-
-
 function get_all_cache() {
 
 		// Load the memcached library config

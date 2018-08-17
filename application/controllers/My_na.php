@@ -16,26 +16,6 @@ class My_na extends CI_Controller {
 	}
 		 
 
-	//+++++++++++++++++++++++++++
-	//MAIN
-	//++++++++++++++++++++++++++
-	public function get_cache($item)
-	{
-
-		var_dump($this->my_na_model->get_memcache($item));
-
-	}
-
-
-	public function memtest($item)
-	{
-
-		$this->load->view('memtest');
-
-	}
-
-
-
 	//+++++++++++++++++++++++++++ 
 	//GET FEATURED BUSINESS JSON
 	//++++++++++++++++++++++++++
