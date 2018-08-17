@@ -19,6 +19,7 @@ class Members extends CI_Controller {
 	}
 
 
+
 function get_all_cache() {
 
 		// Load the memcached library config

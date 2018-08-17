@@ -27,7 +27,7 @@ if($_SERVER['HTTP_HOST'] == 'www.my.na' || $_SERVER['HTTP_HOST'] == 'my.na'){
 
         ],
 ];
-
+ 
 	
 }else{
 
