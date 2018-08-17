@@ -16,12 +16,32 @@ class My_na extends CI_Controller {
 	}
 		 
 
+	//+++++++++++++++++++++++++++
+	//MAIN
+	//++++++++++++++++++++++++++
+	public function get_cache($item)
+	{
+
+		var_dump($this->my_na_model->get_memcache($item));
+
+	}
+
+
+	public function memtest($item)
+	{
+
+		$this->load->view('memtest');
+
+	}
+
+
+
 	//+++++++++++++++++++++++++++ 
 	//GET FEATURED BUSINESS JSON
 	//++++++++++++++++++++++++++
 	public function get_feature_business($featured = 'N',$cat1 = false,$cat2 = false, $limit = 10, $offset = 0) {
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
 		if ( ! $output = $this->cache->get('my_na_business_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit))
 		{
@@ -42,7 +62,7 @@ class My_na extends CI_Controller {
 	public function get_feature_products($featured = 'Y',$cat1 = false,$cat2 = false, $limit = 10, $offset = 0)
 	{
 
-		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
 		if ( ! $output = $this->cache->get('my_na_products_'.$featured.'_'.$cat1.'_'.$cat2.'_'.$offset.'_'.$limit))
 		{
