@@ -14,8 +14,18 @@ class Members extends CI_Controller {
 		$this->load->model('business_model');
 		$this->load->model('trade_model');	
 	    $this->section_1 = $this->uri->segment(1);
-	    $this->section_2 = $this->uri->segment(2);				
+	    $this->section_2 = $this->uri->segment(2);
+	    		
 	}
+
+
+	public function memtest()
+	{
+
+		$this->load->view('memtest');
+
+	}
+
 
 
 function get_all_cache() {
@@ -33,7 +43,7 @@ function get_all_cache() {
 		$c = $this->config->item('memcached');
 		$host = $c['servers']['default']['host'];
 
-		$memcache = new Memcache;
+		$memcache = new Memcached;
 		$memcache->connect($host, 11211)
 		or $o['error'] = "Could not connect to memcache server";
 
