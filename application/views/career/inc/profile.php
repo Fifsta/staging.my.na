@@ -171,9 +171,9 @@
 
         <hr>
 
-        <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['cv']; ?>" type="application/pdf" style="width:100%; height:300px">
+        <!--<object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['cv']; ?>" type="application/pdf" style="width:100%; height:300px">
             <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['cv']; ?>" style="width:100%; height:300px"></iframe>
-        </object>
+        </object>-->
 
       </section>
 
@@ -188,9 +188,9 @@
 
         <hr>
 
-        <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" type="application/pdf" style="width:100%; height:300px">
+        <!--<object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" type="application/pdf" style="width:100%; height:300px">
             <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['id_doc']; ?>" style="width:100%; height:300px"></iframe>
-        </object>
+        </object>-->
       </section>
 
       <section role="tabpanel" class="tab-pane" id="Drivers">
@@ -204,9 +204,9 @@
 
         <hr>
 
-        <object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" type="application/pdf" style="width:100%; height:300px">
+        <!--<object data="<?php echo S3_URL . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" type="application/pdf" style="width:100%; height:300px">
             <iframe src="<?php echo S3_URL  . 'assets/vacancies/documents/'.$bio['license_doc']; ?>" style="width:100%; height:300px"></iframe>
-        </object>
+        </object>-->
       </section>  
 
 	
