@@ -167,6 +167,10 @@
         <form action="<?php echo site_url('/'); ?>vacancy/add_cv_document/" method="post" accept-charset="utf-8" id="add-doc" name="add-doc" enctype="multipart/form-data">
         <input type="file" id="userfile" name="userfile" style="">
         <button class="btn btn-default" id="imgbut" data-icon="fa-upload text-dark"></button>
+        <hr>
+        <div class="alert alert-secondary">
+        	<?php echo $bio['cv']; ?>
+        </div>
         </form>
 
         <hr>
