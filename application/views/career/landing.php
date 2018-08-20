@@ -58,7 +58,7 @@ $this->load->view('inc/header', $header);
 		         ?>
         	
 
-  				<div class="heading">
+  				<div class="heading" style="margin-top:40px">
 					<h2 data-icon="fa-briefcase" itemprop="description">Featured <strong>Vacancies</strong></h2>
 					<p>Browse all listed featured vacancies here.</p>
 					<ul class="options">
