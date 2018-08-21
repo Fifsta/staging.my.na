@@ -143,7 +143,7 @@ function get_all_cache() {
 			}
 			
 			$data['id'] = $id;
-			$this->load->view('members/home', $data);	
+			$this->load->view('members/profile', $data);	
 		
 		}else{ 
 
@@ -182,7 +182,7 @@ function get_all_cache() {
 
 			
 			$data['id'] = $this->session->userdata('id');
-			$this->load->view('members/home', $data);
+			$this->load->view('members/profile', $data);
 				
 		/*}elseif($this->session->userdata('session_id')){
 			 	
@@ -1387,7 +1387,7 @@ function get_all_cache() {
 			 	
 				$this->members_model->add_avatar();
 				$data['basicmsg'] = 'Avatar added successfully!';
-				redirect('/members/home/');
+				redirect('/members/profile/');
 		
 		//ADMIN LOGGED IN
 		}elseif($this->session->userdata('admin_id')){
