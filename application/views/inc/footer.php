@@ -1,5 +1,5 @@
 
-<section id="mobile_ads" class="hidden-sm-up">
+<section id="mobile_ads" class="d-sm-none">
 
 </section>
 
