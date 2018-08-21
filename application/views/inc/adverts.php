@@ -56,16 +56,14 @@ if($this->uri->segment(2) == '') {
 			}
 
 			//MOBILE FIX
-			/*if(agent == 'mobile'){
 
-				for(var ii = 0; ii < data.length; ii++) {
-					var obj = data[ii];
+			for(var ii = 0; ii < data.length; ii++) {
+				var obj2 = data[ii];
+				$('#mobile_ads').append('<div class="row" style="margin-bottom:40px; '+size+'"><div class="col-md-12">'+obj.body+'</div></div>');
 
-					$('#adholder_'+ii).html(obj.body);
+			}
 
-				}
-
-			}*/
+			
 			//load_content_ads();
 		});
 

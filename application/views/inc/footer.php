@@ -1,4 +1,8 @@
 
+<section id="mobile_ads" class="hidden-sm-up">
+
+</section>
+
 <style>
 
     .footer-modal{
