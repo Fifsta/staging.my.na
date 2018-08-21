@@ -59,7 +59,7 @@ if($this->uri->segment(2) == '') {
 
 			for(var ii = 0; ii < data.length; ii++) {
 				var obj2 = data[ii];
-				$('#mobile_ads').append('<div class="row" style="margin-bottom:40px; '+size+'"><div class="col-md-12">'+obj.body+'</div></div>');
+				$('#mobile_ads').append('<div class="row" style="margin-bottom:40px; '+size+'"><div class="col-md-12">'+obj2.body+'</div></div>');
 
 			}
 
