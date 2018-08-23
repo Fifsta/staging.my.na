@@ -101,7 +101,7 @@ class Business_model extends CI_Model{
 				$x++;
 			}
 			
-		}
+		} 
 		echo '</div>';
     }		
 	
@@ -965,7 +965,7 @@ class Business_model extends CI_Model{
 
 			$output = $test->row_array();
 
-			$this->cache->save('get_business_details_'.$bus_id, $output, 86400);
+			$this->cache->save('get_business_details_'.$bus_id, $output, 36000);
 
 		}
 
