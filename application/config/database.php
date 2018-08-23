@@ -112,7 +112,7 @@ if( $nmh_worker)
 	$db['default']['autoinit'] = true;
 	$db['default']['stricton'] = false;
 
-}elseif($_SERVER['HTTP_HOST'] == 'my.na' || $_SERVER['HTTP_HOST'] == 'www.my.na' || $_SERVER['HTTP_HOST'] == 'beta.my.na' ){
+}elseif($_SERVER['HTTP_HOST'] == 'my.na' || $_SERVER['HTTP_HOST'] == 'www.my.na' || $_SERVER['HTTP_HOST'] == 'beta.my.na' || $_SERVER['HTTP_HOST'] == 'www.beta.my.na' ){
 
 	//LOCAL
 	/*$db['default']['hostname'] = 'localhost';
