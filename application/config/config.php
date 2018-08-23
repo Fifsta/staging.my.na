@@ -60,8 +60,8 @@ if(isset($_SERVER['MY_WORKER']) && $_SERVER['MY_WORKER'] == 'YES')
 }elseif($_SERVER['HTTP_HOST'] == 'beta.my.na'){
 
   //Beta
-  $config['site_url'] = 'https://beta.my.na';
-  $config['base_url'] = 'https://beta.my.na/';
+  $config['site_url'] = 'http://beta.my.na';
+  $config['base_url'] = 'http://beta.my.na/';
   $config['analytics'] = '<script type="text/javascript">'.$UA.'</script>';
 
 }else{
