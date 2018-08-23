@@ -57,6 +57,13 @@ if(isset($_SERVER['MY_WORKER']) && $_SERVER['MY_WORKER'] == 'YES')
   $config['base_url']	= 'http://localhost/my.na/';
   $config['analytics'] = '<script type="text/javascript"></script>';
 
+}elseif($_SERVER['HTTP_HOST'] == 'beta.my.na'){
+
+  //Beta
+  $config['site_url'] = 'https://beta.my.na';
+  $config['base_url'] = 'https://beta.my.na/';
+  $config['analytics'] = '<script type="text/javascript">'.$UA.'</script>';
+
 }else{
 
   //lIVE
@@ -177,7 +184,8 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+$config['composer_autoload'] = APPPATH.'../vendor/autoload.php';
+require_once APPPATH.'../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
