@@ -13,6 +13,45 @@ class My_na_model extends CI_Model{
         
     }
 
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //GET MEMCACHED
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    function get_memcache($name) {
+
+        // Load the memcached library config
+        $this->load->config('memcached');
+        $this->config->item('memcached');
+
+        $c = $this->config->item('memcached');
+        $host = $c['servers']['default']['host'];
+
+        if($_SERVER['HTTP_HOST'] == 'localhost')
+        {
+            return false;
+
+        }else{
+
+            $memcache_obj = new Memcache;
+            /* connect to memcached server */
+            $memcache_obj->connect($host);
+            /*
+            set value of item with key 'var_key', using on-the-fly compression
+            expire time is 50 seconds
+            */
+            if($o = $memcache_obj->get($name.BUS_ID)){
+
+                return $o;
+            }else{
+
+                return false;
+
+            }
+
+        }
+
+
+
+    }
 
 
     //+++++++++++++++++++++++++++
@@ -2043,8 +2082,6 @@ class My_na_model extends CI_Model{
             //if($type == 'auction') { $s_type = 'product'; }
 
             if($type == 'classified') { $s_type = 'classified'; }
-
-
 
             $strType = " type = '".$s_type."' AND ";
 
