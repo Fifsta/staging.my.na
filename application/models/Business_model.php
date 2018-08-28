@@ -18,7 +18,7 @@ class Business_model extends CI_Model{
 		$test = $this->db->get('a_country');
 		return $test;		  
     }
-	
+	 
 	//Get Account Details
 	function get_my_account($id){
       	
@@ -947,8 +947,8 @@ class Business_model extends CI_Model{
 
 		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'apc'));
 
-		if ( ! $output = $this->cache->get('get_business_details_'.$bus_id))
-		{
+		//if ( ! $output = $this->cache->get('get_business_details_'.$bus_id))
+		//{
 
 
 			//$this->db->where('ID', $bus_id);
@@ -965,9 +965,9 @@ class Business_model extends CI_Model{
 
 			$output = $test->row_array();
 
-			$this->cache->save('get_business_details_'.$bus_id, $output, 36000);
+			//$this->cache->save('get_business_details_'.$bus_id, $output, 36000);
 
-		}
+		//}
 
 		return $output;
 
