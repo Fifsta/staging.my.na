@@ -35,18 +35,21 @@ $str = substr($img,0,(strlen($img) - 4));
 
 $rating_count = $this->business_model->get_rating_count($bus_id);
 
+$rand = rand(5, 100);
 
 if($img != ''){
 	
 	if(strpos($img,'.') == 0){
 
+		
+
 		$format = '.jpg';
-		$img_str = 'assets/business/photos/'.$img . $format;
+		$img_str = 'assets/business/photos/'.$img . $format.'?v='.$rand;
 		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
 		
 	}else{
 		
-		$img_str = 'assets/business/photos/'.$img;
+		$img_str = 'assets/business/photos/'.$img.'?v='.$rand;
 		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
 		
 	}
@@ -63,15 +66,15 @@ $cover_img = $bus_details['BUSINESS_COVER_PHOTO'];
 
 if($cover_img != ''){
 	
-	if(strpos($cover_img,'.') == 0){
+	if(strpos($cover_img,'.') == 0){ 
 
 		$format2 = '.jpg';
-		$cover_str = 'assets/business/photos/'.$cover_img . $format2;
+		$cover_str = 'assets/business/photos/'.$cover_img . $format2.'?v='.$rand;
 		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
 		
 	}else{
 		
-		$cover_str =  'assets/business/photos/'.$cover_img;
+		$cover_str =  'assets/business/photos/'.$cover_img.'?v='.$rand;
 		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
 		
 	}
@@ -535,6 +538,7 @@ $this->load->view('inc/header');
 </script>
 
 <script type="application/ld+json">
+	
 {
   "@context" : "http://schema.org",
   "@type" : "Organization", 
