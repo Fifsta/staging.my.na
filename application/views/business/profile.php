@@ -152,7 +152,7 @@ $this->load->view('inc/header');
 				<!--banner-->
 		        <div class="list-map">
 		          <div class="list-map-left">
-		              <img src="<?php echo $cover_url.'?='.$rand; ?>" class="img-fluid">
+		              <img src="<?php echo $cover_url; ?>" class="img-fluid">
 		          </div>
 		          
 		          <div class="list-map-right" id="map_container">
@@ -166,7 +166,7 @@ $this->load->view('inc/header');
 					<div class="details-left">
 
 						<figure>
-							<img src="<?php echo $img_url.'?='.$rand; ?>">
+							<img src="<?php echo $img_url; ?>">
 						</figure>
 						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>	
 				 
