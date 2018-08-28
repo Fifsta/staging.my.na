@@ -69,7 +69,7 @@ if($cover_img != ''){
 	if(strpos($cover_img,'.') == 0){ 
 
 		$format2 = '.jpg';
-		$cover_str = 'assets/business/photos/'.$cover_img . $format2
+		$cover_str = 'assets/business/photos/'.$cover_img . $format2;
 		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
 		
 	}else{
@@ -152,7 +152,7 @@ $this->load->view('inc/header');
 				<!--banner-->
 		        <div class="list-map">
 		          <div class="list-map-left">
-		              <img src="<?php echo $cover_url; ?>" class="img-fluid">
+		              <img src="<?php echo $cover_url.'?='.$rand; ?>" class="img-fluid">
 		          </div>
 		          
 		          <div class="list-map-right" id="map_container">
@@ -166,7 +166,7 @@ $this->load->view('inc/header');
 					<div class="details-left">
 
 						<figure>
-							<img src="<?php echo $img_url; ?>">
+							<img src="<?php echo $img_url.'?='.$rand; ?>">
 						</figure>
 						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>	
 				 
