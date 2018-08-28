@@ -44,12 +44,12 @@ if($img != ''){
 		
 
 		$format = '.jpg';
-		$img_str = 'assets/business/photos/'.$img . $format.'?v='.$rand;
+		$img_str = 'assets/business/photos/'.$img . $format;
 		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
 		
 	}else{
 		
-		$img_str = 'assets/business/photos/'.$img.'?v='.$rand;
+		$img_str = 'assets/business/photos/'.$img;
 		$img_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory, $img_str,300,300, $crop = '');
 		
 	}
@@ -69,12 +69,12 @@ if($cover_img != ''){
 	if(strpos($cover_img,'.') == 0){ 
 
 		$format2 = '.jpg';
-		$cover_str = 'assets/business/photos/'.$cover_img . $format2.'?v='.$rand;
+		$cover_str = 'assets/business/photos/'.$cover_img . $format2
 		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
 		
 	}else{
 		
-		$cover_str =  'assets/business/photos/'.$cover_img.'?v='.$rand;
+		$cover_str =  'assets/business/photos/'.$cover_img;
 		$cover_url =  $this->image_model->get_image_url_param($thumbnailUrlFactory,$cover_str,$width,$height, $crop = '');
 		
 	}
@@ -152,7 +152,7 @@ $this->load->view('inc/header');
 				<!--banner-->
 		        <div class="list-map">
 		          <div class="list-map-left">
-		              <img src="<?php echo $cover_url; ?>" class="img-fluid">
+		              <img src="<?php echo $cover_url.'?='.$rand; ?>" class="img-fluid">
 		          </div>
 		          
 		          <div class="list-map-right" id="map_container">
@@ -166,7 +166,7 @@ $this->load->view('inc/header');
 					<div class="details-left">
 
 						<figure>
-							<img src="<?php echo $img_url; ?>">
+							<img src="<?php echo $img_url.'?='.$rand; ?>">
 						</figure>
 						<div style="" class="text-center"><?php echo $this->business_model->get_review_stars_show($rating,$bus_id);?></div>	
 				 
