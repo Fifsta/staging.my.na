@@ -21,10 +21,34 @@ class Members extends CI_Controller {
 	//+++++++++++++++++++++++++++
 	//MAIN
 	//++++++++++++++++++++++++++
+	public function send_my_mail()
+	{
+		$this->load->model('email_model');	
+
+		$this->email_model->send_enquiry2();
+
+	}
+
+
+	//+++++++++++++++++++++++++++
+	//MAIN
+	//++++++++++++++++++++++++++
 	public function get_cache($item)
 	{
 
 		var_dump($this->main_model->get_memcache($item));
+
+	}
+
+
+	public function test()
+	{
+
+
+
+		$r = $this->load->library('predis');
+
+		$r = $this->predis->test();
 
 	}
 
