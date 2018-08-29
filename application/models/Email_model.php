@@ -43,7 +43,7 @@ class Email_model extends CI_Model{
 		    'smtp_port' => 465,
 		    'smtp_user' => 'AKIAIEDWIYXIABCFGGFQ',
 		    'smtp_pass' => 'Ahxb1+zvPa8Eq6zgDuZEkdhNwPBZSRQPOBSVQ/AqW7YA',
-		    'mailtype'  => 'html', 
+		    'mailtype'  => $var['mailtype'], 
 		    'charset'   => 'iso-8859-1'
 		);
 

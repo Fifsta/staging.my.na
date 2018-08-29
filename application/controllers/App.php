@@ -44,6 +44,7 @@ class App extends REST_Controller{
 		$email_to = $this->get('email_to');
 		$email_cc = $this->get('email_cc');
 		$subject = $this->get('subject');
+		$mailtype = $this->get('mailtype');
 		$attachments = $this->get('attachments');
 
 		 $data1 = array(
@@ -55,6 +56,7 @@ class App extends REST_Controller{
 		  'email_to' => $email_to,
 		  'email_cc'=> $email_cc,
 		  'subject' => $subject,
+		  'mailtype' => $mailtype,
 		  'attachments'=>$attachments
 		  );		
 
