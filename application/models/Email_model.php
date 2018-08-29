@@ -32,7 +32,7 @@ class Email_model extends CI_Model{
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-	function send_web_mail_get($var)
+	function send_website_enquiries($var)
 	{
 
 
@@ -45,6 +45,7 @@ class Email_model extends CI_Model{
 		    'mailtype'  => 'html', 
 		    'charset'   => 'iso-8859-1'
 		);
+		
 		$this->load->library('email', $config);
 		$this->email->set_newline("\r\n");
 
