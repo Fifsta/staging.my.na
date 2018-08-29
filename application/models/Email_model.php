@@ -41,7 +41,7 @@ class Email_model extends CI_Model{
 			$mailtype = "'text'";
 		}
 
-		if($var['mailtype'] == 'text') {
+		if($var['mailtype'] == 'html') {
 
 			$mailtype = "'html'";
 		}		
@@ -62,7 +62,6 @@ class Email_model extends CI_Model{
 
 		// Set to, from, message, etc.
 
-		$this->email->from('no-reply@intouchsrv.com');
 		$this->email->from('no-reply@intouchsrv.com');
 		$this->email->to($var['email_to']);
 		$this->email->subject($var['subject']);
