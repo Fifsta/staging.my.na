@@ -36,6 +36,15 @@ class Email_model extends CI_Model{
 	{
 	
 
+		if($var['mailtype'] == 'text') {
+
+			$mailtype = "'text'";
+		}
+
+		if($var['mailtype'] == 'text') {
+
+			$mailtype = "'html'";
+		}		
 
 		$config = Array(
 		    'protocol' => 'smtp',
@@ -43,8 +52,9 @@ class Email_model extends CI_Model{
 		    'smtp_port' => 465,
 		    'smtp_user' => 'AKIAIEDWIYXIABCFGGFQ',
 		    'smtp_pass' => 'Ahxb1+zvPa8Eq6zgDuZEkdhNwPBZSRQPOBSVQ/AqW7YA',
-		    'mailtype'  => $var['mailtype'], 
-		    'charset'   => 'iso-8859-1'
+		    'mailtype'  => $mailtype, 
+		    'charset'   => 'iso-8859-1',
+		    'wordwrap' => TRUE
 		);
 
 		$this->load->library('email', $config);
@@ -52,6 +62,7 @@ class Email_model extends CI_Model{
 
 		// Set to, from, message, etc.
 
+		$this->email->from('no-reply@intouchsrv.com');
 		$this->email->from('no-reply@intouchsrv.com');
 		$this->email->to($var['email_to']);
 		$this->email->subject($var['subject']);
