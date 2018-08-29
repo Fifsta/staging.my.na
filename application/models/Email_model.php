@@ -53,8 +53,8 @@ class Email_model extends CI_Model{
 		    'smtp_user' => 'AKIAIEDWIYXIABCFGGFQ',
 		    'smtp_pass' => 'Ahxb1+zvPa8Eq6zgDuZEkdhNwPBZSRQPOBSVQ/AqW7YA',
 		    'mailtype'  => $mailtype, 
-		    'charset'   => 'iso-8859-1',
-		    'wordwrap' => TRUE
+		    'charset'   => 'utf-8',
+		    'priority' => '1'
 		);
 
 		$this->load->library('email', $config);
