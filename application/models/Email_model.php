@@ -34,22 +34,7 @@ class Email_model extends CI_Model{
 
 	function send_website_enquiries($var)
 	{
-
-		$toAddresses = $var['email_to'];
-		$toNames = $var['email_to'];
-
-		$mandrillTO = array_map( function ($toaddress, $toname) {
-			return array(
-				'email' => $toaddress,
-				'name' => $toname,
-				'type' => 'to'
-			);
-		},
-			$toAddresses,
-			$toNames
-		);
-
-		$sendTo = $mandrillTO;		
+	
 
 
 		$config = Array(
@@ -68,7 +53,7 @@ class Email_model extends CI_Model{
 		// Set to, from, message, etc.
 
 		$this->email->from('no-reply@intouchsrv.com');
-		$this->email->to($sendTo);
+		$this->email->to($var['email_to']);
 		$this->email->subject($var['subject']);
 		$this->email->message($var['body']);
 
