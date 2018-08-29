@@ -35,6 +35,22 @@ class Email_model extends CI_Model{
 	function send_website_enquiries($var)
 	{
 
+		$toAddresses = $var['email_to'];
+		$toNames = $var['email_to'];
+
+		$mandrillTO = array_map( function ($toaddress, $toname) {
+			return array(
+				'email' => $toaddress,
+				'name' => $toname,
+				'type' => 'to'
+			);
+		},
+			$toAddresses,
+			$toNames
+		);
+
+		$sendTo = $mandrillTO;		
+
 
 		$config = Array(
 		    'protocol' => 'smtp',
@@ -45,16 +61,16 @@ class Email_model extends CI_Model{
 		    'mailtype'  => 'html', 
 		    'charset'   => 'iso-8859-1'
 		);
-		
+
 		$this->load->library('email', $config);
 		$this->email->set_newline("\r\n");
 
 		// Set to, from, message, etc.
 
 		$this->email->from('no-reply@intouchsrv.com');
-		$this->email->to('christian@intouch.com.na');
-		$this->email->subject('test');
-		$this->email->message('test');
+		$this->email->to($sendTo);
+		$this->email->subject($var['subject']);
+		$this->email->message($var['body']);
 
 		$this->email->send();		
 
