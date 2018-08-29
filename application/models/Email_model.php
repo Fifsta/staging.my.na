@@ -33,10 +33,10 @@ class Email_model extends CI_Model{
 
 
 	//NEW SERVER
-	function send_enquiry2()
+	function send_website_enquiries($var)
 	{
 
-		/*$toAddresses = $var['email_to'];
+		$toAddresses = $var['email_to'];
 		$toNames = $var['email_to'];
 
 		$mandrillTO = array_map( function ($toaddress, $toname) {
@@ -50,30 +50,6 @@ class Email_model extends CI_Model{
 			$toNames
 		);
 
-		$sendTo = $mandrillTO;*/
-
-
-		/*$this->load->library('email');
-
-		$this->email->initialize(array(
-		'protocol' => 'smtp',
-		'mailtype'  => 'html', 
-		'charset'   => 'iso-8859-1'
-		'smtp_host' => 'ssl://email-smtp.eu-west-1.amazonaws.com',
-		'smtp_port' => '465',
-		'smtp_user' => 'AKIAIEDWIYXIABCFGGFQ',
-		'smtp_pass' => 'Ahxb1+zvPa8Eq6zgDuZEkdhNwPBZSRQPOBSVQ/AqW7YA'));
-
-
-		$this->email->set_newline("\r\n");
-
-		$this->email->from('no-reply@intouchsrv.com');
-		$this->email->to('christian@intouch.com.na');
-		$this->email->subject('test');
-		$this->email->message('test');
-
-		$this->email->send();*/
-
 
 		$config = Array(
 		    'protocol' => 'smtp',
@@ -84,6 +60,7 @@ class Email_model extends CI_Model{
 		    'mailtype'  => 'html', 
 		    'charset'   => 'iso-8859-1'
 		);
+		
 		$this->load->library('email', $config);
 		$this->email->set_newline("\r\n");
 
@@ -91,25 +68,10 @@ class Email_model extends CI_Model{
 
 		$this->email->from('no-reply@intouchsrv.com');
 		$this->email->to('christian@intouch.com.na');
-		$this->email->subject('test');
-		$this->email->message('test');
+		$this->email->subject($var['subject']);
+		$this->email->message($var['body']);
 
 		$this->email->send();		
-
-		//$result = $this->email->send();
-
-
-
-		echo $this->email->print_debugger();
-
-			/*$email = array(
-				'html' => $var['body'], //Consider using a view file
-				'subject' => $var['subject'],
-				'headers' => array('Reply-To' => $var['from_email']),
-				'from_email' => 'vw-no-reply@my.na',
-				'from_name' => $var['name'],
-				'to' => $sendTo
-			);*/	
 
 	}	
 

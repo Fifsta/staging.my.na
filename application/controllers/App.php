@@ -29,6 +29,45 @@ class App extends REST_Controller{
 	}
 
 
+
+
+	public function send_web_mail_get() {
+
+		//VALIDATE INPUT
+		$o['success'] = false;
+		
+		$name = $this->get('name');
+		$email = $this->get('email');
+		$from_email = $this->get('from_email');
+		$body = $this->get('body');
+		$type = $this->get('type');
+		$email_to = $this->get('email_to');
+		$email_cc = $this->get('email_cc');
+		$subject = $this->get('subject');
+		$attachments = $this->get('attachments');
+
+		 $data1 = array(
+		  'name'=>  $name,
+		  'email'=> $email,
+		  'from_email'=> $from_email,
+		  'body'=> $body ,
+		  'type'=> $type,
+		  'email_to' => $email_to,
+		  'email_cc'=> $email_cc,
+		  'subject' => $subject,
+		  'attachments'=>$attachments
+		  );		
+
+		$this->load->model('email_model');
+
+		$o = $this->email_model->send_website_enquiries($data1);
+
+		$this->response($o, 200);
+
+	}
+
+
+
 	//+++++++++++++++++++++++++++
 	//USERS - FIND USERS GET
 	//++++++++++++++++++++++++++
