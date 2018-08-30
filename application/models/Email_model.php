@@ -109,7 +109,7 @@ class Email_model extends CI_Model{
 	            );
 	        }
 
-			$this->email->from($FROM_EMAIL);
+			$this->email->from('no-reply@intouchsrv.com');
 			$this->email->to($mandrill);
 			$this->email->cc($email_cc);
 			$this->email->subject($subject);
