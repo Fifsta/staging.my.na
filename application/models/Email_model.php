@@ -96,7 +96,7 @@ class Email_model extends CI_Model{
 		
 
 		$this->email->initialize(array(
-			'protocol' => 'mail' , //Protocol SMTP on shared hosting issue
+			'protocol' => 'smtp' , //Protocol SMTP on shared hosting issue
 			'smtp_host' => 'tls://email-smtp.eu-west-1.amazonaws.com',
 			'smtp_port' => '587',
 			'mailtype' => 'html',
@@ -105,7 +105,7 @@ class Email_model extends CI_Model{
 
 		$this->email->set_newline("\r\n");
 
-			print_r($mandrill);
+			//print_r($mandrill);
 
 			$attachments = array();
 	        if($attachment != null){
@@ -133,7 +133,7 @@ class Email_model extends CI_Model{
 			
 			$this->email->send();
 
-			echo $this->email->print_debugger();
+			//echo $this->email->print_debugger();
 
 		
 	}
