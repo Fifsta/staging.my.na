@@ -134,90 +134,33 @@ class Email_model extends CI_Model{
 	//PASS PARAMETERS AND SEND EMAIL
 	//++++++++++++++++++++++++++++++++++++++++++++		
 	function send_mail($HTML, $subject, $mandrill,$FROM_EMAIL, $FROM_NAME, $TAG, $important = true, $global_merge = '', $merge = '', $from = 'no-reply', $attachment = null, $file_name = '', $mime = ''){
-
-			$this->load->config('mandrill');
-	
-			$this->load->library('mandrill');
-			
-			$mandrill_ready = NULL;
-            $result = '';
-			try {
-			
-				$this->mandrill->init( $this->config->item('mandrill_api_key') );
-				$mandrill_ready = TRUE;
-			
-			} catch(Mandrill_Exception $e) {
-			
-				$mandrill_ready = FALSE;
 				
+			$attachments = array();
+	        if($attachment != null){
+
+
+	            $attachment_encoded =$attachment;
+	            
+	            //echo $raw;
+
+	            $attachments[] = array(
+	                'content' => $attachment_encoded,
+	                'type' => $mime,
+	                'name' => $file_name
+	            );
+	        }
+
+			$this->email->from($FROM_EMAIL);
+			$this->email->to($mandrill);
+			$this->email->cc($email_cc);
+			$this->email->subject($subject);
+			$this->email->message($HTML);
+
+			if($attachments != '') {
+				$this->email->attach($attachments);
 			}
 			
-			if( $mandrill_ready ) {
-				
-				$attachments[] = array();
-	            if($attachment != null){
-
-					//echo 'Has attachment';
-	                /*$attachment = str_replace('[removed]', '',   $attachment);
-	                $raw = $attachment;
-	                $attachment = substr($attachment,strpos($attachment, ',') +1,strlen($attachment));
-	                //$encoded_string = rawurldecode( $attachment);
-	                $encoded_string = $attachment;
-	                $filedata = base64_decode($raw);
-
-	                $f = finfo_open();
-
-	                $mime_type = finfo_buffer($f, $filedata, FILEINFO_MIME_TYPE);
-
-	                $ext = substr($mime_type,strpos($mime_type, '/') + 1, strlen($mime_type));
-	                $ext = substr($mime,strpos($mime, '/') + 1, strlen($mime));*/
-
-	                //$file_name = md5(date('Y-m-d h:i:s'));
-	                //$file_path = BASE_URL.'assets/'.$file_name.'.'.$ext;
-	                //file_put_contents($file_path, $filedata);
-
-	                //echo $raw. ' ---- '.$file_name. ' - '.$ext.' - '. $mime_type . ' post mime: '.$mime;
-	               //WORKING!!!
-	               /* $tmp = str_replace('data:image/png;base64,', '',rawurldecode( $attachment));
-	                $tmp = str_replace(' ', '', $tmp);
-	                $tmp = str_replace('[removed]', '', $tmp);
-	                $data = base64_decode($tmp);
-	                file_put_contents(BASE_URL.'assets/test.png', $data);*/
-
-	                $attachment_encoded =$attachment;
-	                
-	                //echo $raw;
-
-	                $attachments[] = array(
-	                    'content' => $attachment_encoded,
-	                    'type' => $mime,
-	                    'name' => $file_name
-	                );
-	            }
-
-
-				//Send us some email!
-				$email = array(
-					  'html' => $HTML, //Consider using a view file
-					  'text' =>  strip_tags(strip_tags($HTML)),
-					  'headers' => array('Reply-To' => $FROM_EMAIL),
-					  'subject' => $subject,
-					  'from_email' => $from.'@my.na',
-					  'from_name' => $FROM_NAME,
-					  'tags' => $TAG,
-					  'to' => $mandrill,
-					  'signing_domain' => 'my.na',
-					  'google_analytics_domains' => array('my.na'),
-        			  'google_analytics_campaign' => 'mail',
-                      'important' => $important ,
-                      'global_merge_vars' => $global_merge,
-                      'merge_vars' => $merge,
-                      'attachments' => $attachments
-					  );
-					  
-				  $result = $this->mandrill->messages_send($email);	
-				
-			}
+			$result = $this->email->send();
 
             return $result;
 		
@@ -228,6 +171,18 @@ class Email_model extends CI_Model{
 	//PLAIN TEXT
 	function send_register_link_plain($member)
 	{
+
+
+		$this->email->initialize(array(
+			'protocol' => 'mail' , //Protocol SMTP on shared hosting issue
+			'smtp_host' => 'tls://email-smtp.eu-west-1.amazonaws.com',
+			'smtp_port' => '587',
+			'mailtype' => 'html',
+			'smtp_user' => 'AKIAIEDWIYXIABCFGGFQ',
+			'smtp_pass' => 'Ahxb1+zvPa8Eq6zgDuZEkdhNwPBZSRQPOBSVQ/AqW7YA'));
+
+			$this->email->set_newline("\r\n");		
+
 			$config['mailtype'] = 'text';
 			$this->email->initialize($config);
 			$this->email->from('no-reply@my.na','My Namibia');
@@ -268,6 +223,16 @@ class Email_model extends CI_Model{
 	function send_register_link($member)
 	{
 
+		$this->email->initialize(array(
+			'protocol' => 'mail' , //Protocol SMTP on shared hosting issue
+			'smtp_host' => 'tls://email-smtp.eu-west-1.amazonaws.com',
+			'smtp_port' => '587',
+			'mailtype' => 'html',
+			'smtp_user' => 'AKIAIEDWIYXIABCFGGFQ',
+			'smtp_pass' => 'Ahxb1+zvPa8Eq6zgDuZEkdhNwPBZSRQPOBSVQ/AqW7YA'));
+
+			$this->email->set_newline("\r\n");			
+
 			//build body
 			if(isset($member['pass1'])){
 				
@@ -304,48 +269,18 @@ class Email_model extends CI_Model{
 
 			$FROM_NAME = $data['fname'];
 			$FROM_EMAIL = $member['email'];
-			$mandrill = array(array('email' => $member['email']) , array('email' => 'info@my.na'));
+			$mandrill = array($member['email'],'info@my.na');
 			$subject = 'Welcome to My Namibia';
 			$TAG = array('tags' => 'member_registration');
 
-            $this->load->config('mandrill');
 
-            $this->load->library('mandrill');
+			$this->email->from('no-reply@intouchsrv.com');
+			$this->email->to($mandrill);
+			$this->email->subject($subject);
+			$this->email->message($body1);
 
-            $mandrill_ready = NULL;
-            $result = '';
-            try {
-
-                $this->mandrill->init( $this->config->item('mandrill_api_key') );
-                $mandrill_ready = TRUE;
-
-            } catch(Mandrill_Exception $e) {
-
-                $mandrill_ready = FALSE;
-
-            }
-
-            if( $mandrill_ready ) {
-
-                //Send us some email!
-                $email = array(
-                    //Consider using a view file
-                    'text' =>   $body1,
-                    'subject' => $subject,
-                    'from_email' => 'no-reply@my.na',
-                    'headers' => array('Reply-To' => $FROM_EMAIL),
-                    'from_name' => $FROM_NAME,
-                    'tags' => $TAG,
-                    'to' => $mandrill,
-                    'google_analytics_domains' => array('my.na'),
-                    'google_analytics_campaign' => 'mail',
-                    'important' => true
-
-                );
-
-                $result = $this->mandrill->messages_send($email);
-
-            }
+			$result = $this->email->send();
+            
 
             return $result;
 		
@@ -358,31 +293,19 @@ class Email_model extends CI_Model{
     //HTML 
 	function send_enquiry($var, $row='')
 	{
-/*			$config['mailtype'] = 'html';
-			$this->email->initialize($config);
-			$this->email->from($var['email'],$var['name']);
-			$this->email->reply_to($var['email'],$var['bname']);
-			$this->email->to($var['bmail']);
-			//$this->email->cc('another@another-example.com'); 
-			//$this->email->bcc('them@their-example.com'); 
-			//build body
 
-			$data['email'] = $var['email'];
-			$data['base'] = base_url('/');
-			$data['name'] = $var['name'];
-			$data['bname'] = $var['bname'];
-			$data['bmail'] = $var['bmail'];
-			$data['msg'] = $var['msg'];
-			
-			$body1 = $this->load->view('email/body_enquiry',$data , true);
-				
-				
-			$this->email->subject('Enquiry via My Namibia');
-			$this->email->message($body1); 
-			//$this->email->attach('./img/icons/logo.png');
-			
-			$this->email->send();
-			return;*/
+
+
+		$this->email->initialize(array(
+			'protocol' => 'mail' , //Protocol SMTP on shared hosting issue
+			'smtp_host' => 'tls://email-smtp.eu-west-1.amazonaws.com',
+			'smtp_port' => '587',
+			'mailtype' => 'html',
+			'smtp_user' => 'AKIAIEDWIYXIABCFGGFQ',
+			'smtp_pass' => 'Ahxb1+zvPa8Eq6zgDuZEkdhNwPBZSRQPOBSVQ/AqW7YA'));
+
+		$this->email->set_newline("\r\n");
+
             $location = '';
             if($country = $this->session->userdata('country')){
                 $location .= $country .' ';
@@ -408,7 +331,7 @@ class Email_model extends CI_Model{
 			
 			}else{
 				
-				$img_str = base_url('/').'img/bus_blank.png';	
+				$img_str = base_url('/').'images/bus_blank.png';	
 				
 			}
 			$this->load->model('rating_model');
@@ -417,7 +340,7 @@ class Email_model extends CI_Model{
 				$u = $this->my_na_model->get_user_avatar_id($this->session->userdata('id'),60, 60, '');
 				
 			}else{
-				$u = base_url('/').'img/user_blank.jpg';	
+				$u = base_url('/').'images/user_blank.jpg';	
 			}
 			$claim = '';
 			if(strlen($row['emails']) <= 0){
@@ -523,7 +446,7 @@ class Email_model extends CI_Model{
 
 			$FROM_NAME = 'My Namibia';
 			$FROM_EMAIL = 'no-reply@my.na';
-			$mandrill = array(array('email' => 'roland@my.na') , array('email' => 'info@my.na'), array('email' => 'wilko@my.na'));
+			$mandrill = array('roland@my.na','info@my.na','christian@intouch.com.na');
 			$subject = 'Business Review via My Namibia';
 			$TAG = array('tags' => 'review_notification');
 			
@@ -608,8 +531,9 @@ class Email_model extends CI_Model{
 					
 					;
 			$emails = array();
-			$bemail = array('email' => $var['BUSINESS_EMAIL']);
+			$bemail = $var['BUSINESS_EMAIL'];
 			array_push($emails, $bemail);
+
 			if(strlen($var['emails']) > 0){
 				
 				$a = explode(',' ,$var['emails']);
@@ -617,7 +541,7 @@ class Email_model extends CI_Model{
 					
 					foreach($a as $row){
 						//$t = $d['email'] = $row;
-						$t = array('email' => $row);
+						$t = $row;
 						array_push($emails, $t);
 							
 					}
@@ -626,7 +550,7 @@ class Email_model extends CI_Model{
 				
 			}
 			//info
-			$b = array('email' => 'info@my.na');
+			$b = 'info@my.na';
 			array_push($emails, $b);
 			$data['email'] = 'no-reply@my.na';
 			$data['base'] = base_url('/');
@@ -701,9 +625,9 @@ class Email_model extends CI_Model{
 			
 
 			//info
-			$b = array('email' => 'info@my.na');
+			$b = array('info@my.na');
 			//array_push($emails, $b);
-			$emailTO = array(array('email' => $product['CLIENT_EMAIL'] )); 
+			$emailTO = array($product['CLIENT_EMAIL']); 
 				
 			//BUILD BODY EMAIL TO SELLER
 			$body_seller = 'Hi '.$product['CLIENT_NAME'] .',<br /><br />
@@ -757,7 +681,7 @@ class Email_model extends CI_Model{
 					Have a !na day!<br />
 					My Namibia';
 			
-			$emailTO_reviewer = array(array('email' => $var['CLIENT_EMAIL'] )); 		
+			$emailTO_reviewer = array($var['CLIENT_EMAIL']); 		
 			$data_view2['body'] = $body_reviewer;
 			$body_reviewer_final = $this->load->view('email/body_news',$data_view2,true);
 			$subject_reviewer = 'Your Review: '.$product['title'];
@@ -794,7 +718,7 @@ class Email_model extends CI_Model{
 
             }else{
 
-                $mandrill = array(array('email' => $emailTO));
+                $mandrill = array($emailTO);
 
             }
 
