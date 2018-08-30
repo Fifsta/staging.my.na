@@ -254,17 +254,6 @@ class Email_model extends CI_Model{
 	{
 
 
-
-		$this->email->initialize(array(
-			'protocol' => 'mail' , //Protocol SMTP on shared hosting issue
-			'smtp_host' => 'tls://email-smtp.eu-west-1.amazonaws.com',
-			'smtp_port' => '587',
-			'mailtype' => 'html',
-			'smtp_user' => 'AKIAIEDWIYXIABCFGGFQ',
-			'smtp_pass' => 'Ahxb1+zvPa8Eq6zgDuZEkdhNwPBZSRQPOBSVQ/AqW7YA'));
-
-		$this->email->set_newline("\r\n");
-
             $location = '';
             if($country = $this->session->userdata('country')){
                 $location .= $country .' ';
@@ -353,7 +342,7 @@ class Email_model extends CI_Model{
 
                             My Namibia';
 			$emails = array();
-			$bemail = array($row['BUSINESS_EMAIL']);
+			$bemail = $row['BUSINESS_EMAIL'];
 			array_push($emails, $bemail);
 			if(strlen($row['emails']) > 0){
 				
@@ -362,7 +351,7 @@ class Email_model extends CI_Model{
 					
 					foreach($a as $row1){
 						//$t = $d['email'] = $row;
-						$t = array($row1);
+						$t = $row1;
 						array_push($emails, $t);
 							
 					}
@@ -371,7 +360,7 @@ class Email_model extends CI_Model{
 				
 			}
 			//info
-			$b = array('info@my.na');
+			$b = 'info@my.na';
 			array_push($emails, $b);
 			$emailTO = $emails;
 			$data_view['body'] = $body;
