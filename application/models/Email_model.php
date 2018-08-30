@@ -98,7 +98,7 @@ class Email_model extends CI_Model{
 		$this->email->initialize(array(
 			'protocol' => 'smtp' , //Protocol SMTP on shared hosting issue
 			'smtp_host' => 'tls://email-smtp.eu-west-1.amazonaws.com',
-			'smtp_port' => '587',
+			'smtp_port' => '465',
 			'mailtype' => 'html',
 			'smtp_user' => 'AKIAIEDWIYXIABCFGGFQ',
 			'smtp_pass' => 'Ahxb1+zvPa8Eq6zgDuZEkdhNwPBZSRQPOBSVQ/AqW7YA'));
