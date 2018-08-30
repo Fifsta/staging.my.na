@@ -686,7 +686,7 @@
         
     }else{
         
-        $img_str = base_url('/').'img/timbthumb.php?w=200&h=200&src='.base_url('/').'img/bus_blank.png';    
+        $img_str = base_url('/').'img/timbthumb.php?w=200&h=200&src='.base_url('/').'images/bus_blank.png';    
         
     }
     //COVER IMAGE
@@ -707,7 +707,7 @@
         
     }else{
         
-        $cover_str = base_url('/').'img/business_cover_blank.jpg';  
+        $cover_str = base_url('/').'images/business_cover_blank.jpg';  
         
     }
     
@@ -746,7 +746,7 @@
                             <tr>
                                 <td valign="top" class="headerContent" style="text-align:center;margin:0;padding:0;background-color:#F4F4F4;border:none;padding-top:10px;">
                                     
-                                     <img align="center" src="<?php echo base_url('/');?>img/logo_black.png" style="width:97px;height:24px;padding:0;margin:0" alt="Download images to view"/>
+                                     <img align="center" src="<?php echo base_url('/');?>images/logo_black.png" style="width:97px;height:24px;padding:0;margin:0" alt="Download images to view"/>
                                     <p>
                                         <small>Performance reports</small>
                                     </p>
@@ -844,9 +844,9 @@
 
                             <tr>
                                 <td valign="top" style="padding:10px;width:40%;" mc:edit="footer_content00">
-                                    <a href="https://twitter.com/MyNamibia"><img src="<?php echo site_url('/')?>img/icons/twitter_white.png" class="footer_icons" alt="Follow Us on Twitter" /></a>
-                                    <a href="http://www.facebook.com/mynamibia"><img src="<?php echo site_url('/')?>img/icons/facebook_white.png" class="footer_icons" alt="Friend Us on Facebook" /></a>
-                                    <a href="http://www.youtube.com/user/mynamibiatourism"><img src="<?php echo site_url('/')?>img/icons/youtube_white.png" class="footer_icons" alt="View Our Videos" /></a>
+                                    <a href="https://twitter.com/MyNamibia"><img src="<?php echo site_url('/')?>images/icons/twitter_white.png" class="footer_icons" alt="Follow Us on Twitter" /></a>
+                                    <a href="http://www.facebook.com/mynamibia"><img src="<?php echo site_url('/')?>images/icons/facebook_white.png" class="footer_icons" alt="Friend Us on Facebook" /></a>
+                                    <a href="http://www.youtube.com/user/mynamibiatourism"><img src="<?php echo site_url('/')?>images/icons/youtube_white.png" class="footer_icons" alt="View Our Videos" /></a>
                                 </td>
                                 <td valign="top" class="footerContent"  style="padding:10px;width:60%;" mc:edit="footer_content01">
                                     <em>Copyright &copy; <?php echo date('Y');?> My Namibia &trade;, All rights reserved.</em>
@@ -873,7 +873,7 @@
 
                             <tr>
                                 <td valign="top">
-                                    <img src="<?php echo site_url('/')?>img/bground/email_bottom_shadow3.jpg?v1" style="max-width:640px;max-height:252px" class="columnImage" alt="Download images to view"/>
+                                    <img src="<?php echo site_url('/')?>images/bground/email_bottom_shadow3.jpg?v1" style="max-width:640px;max-height:252px" class="columnImage" alt="Download images to view"/>
                                 </td>
                             </tr>
 

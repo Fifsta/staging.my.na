@@ -49,7 +49,7 @@ border:1px solid #666666;
     <td><table width="700px" border="0" bgcolor="#FFFFFF" cellspacing="0" cellpadding="0" align="center" style="background-color:#FFF;border: 3px solid #000">
   
   <tr>
-    <td bgcolor="#000" style="background-color: #000; text-align: left"><?php if(isset($logo)){echo $logo; }else{ echo '<img src="'.base_url('/').'img/my-na-logo-black.png" style="float:left;width:auto;margin:10px 20px 15px 20px" />';}?></td>
+    <td bgcolor="#000" style="background-color: #000; text-align: left"><?php if(isset($logo)){echo $logo; }else{ echo '<img src="'.base_url('/').'images/my-na-logo-black.png" style="float:left;width:auto;margin:10px 20px 15px 20px" />';}?></td>
   </tr>
   <tr>
     <td bgcolor="#FFFFFF"><table width="630" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -82,7 +82,7 @@ border:1px solid #666666;
     <td style="font-family:Arial, Helvetica, sans-serif; font-size:10px; " align="center">&nbsp;</td>
   </tr>
    <tr style="background-color: #000">
-    <td style="font-family:Arial, Helvetica, sans-serif; font-size:10px;" align="center"><img src="<?php echo $base;?>/img/bground/my-na-bottom-mail.jpg" style="float:none;width:700px;margin:0px" /></td>
+    <td style="font-family:Arial, Helvetica, sans-serif; font-size:10px;" align="center"><img src="<?php echo $base;?>/images/bground/my-na-bottom-mail.jpg" style="float:none;width:700px;margin:0px" /></td>
   </tr>
 </table>
 </td>

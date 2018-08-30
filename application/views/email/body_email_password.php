@@ -588,7 +588,7 @@
                                         <tr>
                                             <td valign="top" class="headerContent" style="margin:0;padding:0;background-color:#F4F4F4;border:none;">
                                             	
-                                            	<?php if(isset($logo)){echo $logo; }else{ echo '<img src="'.base_url('/').'img/bground/email_banner.jpg" style="max-width:600px; padding:0;margin:0" id="headerImage" alt="Download images to view"/>';}?>
+                                            	<?php if(isset($logo)){echo $logo; }else{ echo '<img src="'.base_url('/').'images/bground/email_banner.jpg" style="max-width:600px; padding:0;margin:0" id="headerImage" alt="Download images to view"/>';}?>
                                             </td>
                                         </tr>
                                     </table>
@@ -621,7 +621,7 @@
                                 </td>
                             </tr>
                             <tr>
-                              <td valign="top" style="padding-top:0;margin:0;padding:0;background-color:#000"><img src="<?php echo base_url('/');?>img/bground/email_bottom_shadow.jpg" style="max-width:600px;" alt="Download images to view"/></td>
+                              <td valign="top" style="padding-top:0;margin:0;padding:0;background-color:#000"><img src="<?php echo base_url('/');?>images/bground/email_bottom_shadow.jpg" style="max-width:600px;" alt="Download images to view"/></td>
                             </tr>
                         	<tr>
                             	<td align="center" valign="top">
@@ -630,10 +630,10 @@
 
                                         <tr>
                                             <td valign="top" class="footerContent" mc:edit="footer_content00">
-                                            	<a href="https://twitter.com/MyNamibia"><img src="<?php echo base_url('/');?>img/icons/twitter_round.png" alt="Follow Us on Twitter" /></a>
-                                                <a href="http://www.facebook.com/mynamibia"><img src="<?php echo base_url('/');?>img/icons/facebook_round.png" alt="Friend Us on Facebook" /></a>
-                                                <a href="http://www.youtube.com/user/mynamibiatourism"><img src="<?php echo base_url('/');?>img/icons/youtube_round.png" alt="View Our Videos" /></a>
-                                                <a href=""><img src="<?php echo base_url('/');?>img/icons/google_round.png" alt="Add us to your circles" /></a>
+                                            	<a href="https://twitter.com/MyNamibia"><img src="<?php echo base_url('/');?>images/icons/twitter_round.png" alt="Follow Us on Twitter" /></a>
+                                                <a href="http://www.facebook.com/mynamibia"><img src="<?php echo base_url('/');?>images/icons/facebook_round.png" alt="Friend Us on Facebook" /></a>
+                                                <a href="http://www.youtube.com/user/mynamibiatourism"><img src="<?php echo base_url('/');?>images/icons/youtube_round.png" alt="View Our Videos" /></a>
+                                                <a href=""><img src="<?php echo base_url('/');?>images/icons/google_round.png" alt="Add us to your circles" /></a>
                                                 
                                                 
                                             </td>

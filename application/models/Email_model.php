@@ -443,7 +443,7 @@ class Email_model extends CI_Model{
 			
 			}else{
 				
-				$img_str = base_url('/').'img/bus_blank.png';	
+				$img_str = base_url('/').'images/bus_blank.png';	
 				
 			}
 			
@@ -797,7 +797,7 @@ class Email_model extends CI_Model{
 					$avatar = $this->get_avatar($row->client_id);
 				
 				}else{
-					 $avatar['image'] = base_url('/').'img/user_blank.jpg';
+					 $avatar['image'] = base_url('/').'images/user_blank.jpg';
 					 $avatar['name'] = $row->nameFROM;
 				}
 				$java = $row->msg_id.",".$row->bus_id.",'".$row->status."'";
@@ -1033,7 +1033,7 @@ class Email_model extends CI_Model{
 				}elseif($row->client_id != '0'){
 					$avatar = $this->get_avatar($row->client_id);
 				}else{
-				    $avatar['image'] = base_url('/').'img/user_blank.jpg';
+				    $avatar['image'] = base_url('/').'images/user_blank.jpg';
 					 $avatar['name'] = $row->nameFROM;
 				}
 			
@@ -1196,7 +1196,7 @@ class Email_model extends CI_Model{
 			
 		}else{
 			
-			$avatar['image'] = base_url('/').'img/user_blank.jpg';
+			$avatar['image'] = base_url('/').'images/user_blank.jpg';
 			
 		}
 		$avatar['name'] = $row['CLIENT_NAME'];

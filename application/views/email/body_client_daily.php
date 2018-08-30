@@ -125,7 +125,7 @@ a{text-decoration:none}
     <td><table width="700px" border="0" bgcolor="#FFFFFF" cellspacing="0" cellpadding="0" align="center" style="background-color:#FFF;border: 1px solid #999999; width:700px;">
   
   <tr>
-    <td bgcolor="#333" style="background-color: #333;text-align:left; height:30px;padding:10px 0px 5px 0px"><img src="<?php echo $base;?>/img/icons/my-na-favicon.png" style="float:left;width:auto;margin:10px 20px 15px 20px" alt="Download Pictures to view" /></td>
+    <td bgcolor="#333" style="background-color: #333;text-align:left; height:30px;padding:10px 0px 5px 0px"><img src="<?php echo $base;?>/images/icons/my-na-favicon.png" style="float:left;width:auto;margin:10px 20px 15px 20px" alt="Download Pictures to view" /></td>
   </tr>
   <tr>
     <td bgcolor="#FFFFFF"><table width="630" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -173,7 +173,7 @@ a{text-decoration:none}
      <td style="font-family:Arial, Helvetica, sans-serif; font-size:10px;" align="center"></td>
    </tr>
    <tr style="background-color: #f9f9f9">
-    <td style="font-family:Arial, Helvetica, sans-serif; font-size:10px;" align="center"><img src="<?php echo $base;?>/img/bground/my-na-bottom-mail.png" style="float:none;width:600px;margin:5px 20px 5px 0px" /></td>
+    <td style="font-family:Arial, Helvetica, sans-serif; font-size:10px;" align="center"><img src="<?php echo $base;?>/images/bground/my-na-bottom-mail.png" style="float:none;width:600px;margin:5px 20px 5px 0px" /></td>
   </tr>
 </table>
 </td>
