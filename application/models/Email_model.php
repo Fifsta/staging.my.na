@@ -105,6 +105,8 @@ class Email_model extends CI_Model{
 
 		$this->email->set_newline("\r\n");
 
+			print_r($mandrill);
+
 			$attachments = array();
 	        if($attachment != null){
 
@@ -130,6 +132,9 @@ class Email_model extends CI_Model{
 			}*/
 			
 			$this->email->send();
+
+			echo $this->email->print_debugger();
+
 		
 	}
 
