@@ -587,7 +587,7 @@
                                 <tr>
                                     <td valign="top" class="headerContent" style="margin:0;padding:0;background-color:#F4F4F4;border:none;">
 
-                                        <img src="https://www.my.na/img/bground/email_banner.jpg" style="max-width:600px; padding:0;margin:0" id="headerImage" alt="Download images to view"/>
+                                        <img src="https://www.my.na/images/bground/email_banner.jpg" style="max-width:600px; padding:0;margin:0" id="headerImage" alt="Download images to view"/>
                                     </td>
                                 </tr>
                             </table>
@@ -613,7 +613,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td valign="top" style="padding-top:0;margin:0;padding:0;background-color:#000"><img src="https://www.my.na/img/bground/email_bottom_shadow.jpg" style="max-width:600px;" alt="Download images to view"/></td>
+                        <td valign="top" style="padding-top:0;margin:0;padding:0;background-color:#000"><img src="https://www.my.na/images/bground/email_bottom_shadow.jpg" style="max-width:600px;" alt="Download images to view"/></td>
                     </tr>
                     <tr>
                         <td align="center" valign="top">
@@ -622,10 +622,10 @@
 
                                 <tr>
                                     <td valign="top" class="footerContent" mc:edit="footer_content00">
-                                        <a href="https://twitter.com/MyNamibia"><img src="https://www.my.na/img/icons/twitter_round.png" alt="Follow Us on Twitter" /></a>
-                                        <a href="http://www.facebook.com/mynamibia"><img src="https://www.my.na/img/icons/facebook_round.png" alt="Friend Us on Facebook" /></a>
-                                        <a href="http://www.youtube.com/user/mynamibiatourism"><img src="https://www.my.na/img/icons/youtube_round.png" alt="View Our Videos" /></a>
-                                        <a href=""><img src="https://www.my.na/img/icons/google_round.png" alt="Add us to your circles" /></a>
+                                        <a href="https://twitter.com/MyNamibia"><img src="https://www.my.na/images/icons/twitter_round.png" alt="Follow Us on Twitter" /></a>
+                                        <a href="http://www.facebook.com/mynamibia"><img src="https://www.my.na/images/icons/facebook_round.png" alt="Friend Us on Facebook" /></a>
+                                        <a href="http://www.youtube.com/user/mynamibiatourism"><img src="https://www.my.na/images/icons/youtube_round.png" alt="View Our Videos" /></a>
+                                        <a href=""><img src="https://www.my.na/images/icons/google_round.png" alt="Add us to your circles" /></a>
 
 
                                     </td>
