@@ -3380,7 +3380,7 @@ function un_clean_url($str)
 								
 								$this->session->set_flashdata('first_login', 'Y');
 									
-							} 
+							}
 		
 		
 							if($this->input->is_ajax_request())
