@@ -35,6 +35,15 @@ class Members extends CI_Controller {
 	}
 
 
+	public function path_test() {
+
+
+		$memcache = new Memcache;
+		$memcache->connect('myna-memcache.hzh6ty.0001.euw1.cache.amazonaws.com', 11211) or die ("Could not connect to memcache instance");
+
+	}
+
+
 	//+++++++++++++++++++++++++++
 	//MAIN
 	//++++++++++++++++++++++++++
