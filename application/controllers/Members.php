@@ -18,6 +18,21 @@ class Members extends CI_Controller {
 	    		
 	}
 
+
+	public function test_memcached(){
+
+		$memcached_enabled = $this->cache->memcached->is_supported();
+		if(!$memcached_enabled) 
+		{ 
+		 echo "Memcached is not installed"; 
+		 die; 
+		} else {
+			echo 'yay';
+		}
+
+	}
+
+
 	//+++++++++++++++++++++++++++
 	//MAIN
 	//++++++++++++++++++++++++++
