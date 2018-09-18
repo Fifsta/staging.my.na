@@ -3370,7 +3370,7 @@ function un_clean_url($str)
 		
 							);
 
-							$this->session->memcache_set($sess);
+							$this->session->set_userdata($sess);
 							$this->session->set_flashdata('login', 'Y');
 		
 							$this->db->where('ID', $row['ID']);
@@ -3380,7 +3380,7 @@ function un_clean_url($str)
 								
 								$this->session->set_flashdata('first_login', 'Y');
 									
-							}
+							} 
 		
 		
 							if($this->input->is_ajax_request())
