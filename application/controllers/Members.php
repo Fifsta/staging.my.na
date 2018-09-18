@@ -21,6 +21,8 @@ class Members extends CI_Controller {
 
 	public function test_memcached(){
 
+		$this->load->driver('cache');
+
 		$memcached_enabled = $this->cache->memcached->is_supported();
 		if(!$memcached_enabled) 
 		{ 
