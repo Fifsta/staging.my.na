@@ -41,44 +41,44 @@ class Members extends CI_Controller {
 		$memcache = new Memcache;
 		$memcache->connect('myna-memcache.hzh6ty.0001.euw1.cache.amazonaws.com', 11211) or die ("Could not connect to memcache instance");
 
-$version = $memcache->getVersion();
-echo "Server's version: ".$version."<br/>\n";
+		$version = $memcache->getVersion();
+		echo "Server's version: ".$version."<br/>\n";
 
-$tmp_object1 = new stdClass;
-$tmp_object1->str_attr = 'test';
-$tmp_object1->int_attr = 111;
+		$tmp_object1 = new stdClass;
+		$tmp_object1->str_attr = 'test';
+		$tmp_object1->int_attr = 111;
 
-$tmp_object2 = new stdClass;
-$tmp_object2->str_attr = time();
-$tmp_object2->int_attr = 222;
+		$tmp_object2 = new stdClass;
+		$tmp_object2->str_attr = time();
+		$tmp_object2->int_attr = 222;
 
-$tmp_object3 = new stdClass;
-$tmp_object3->str_attr = 'never_expires';
-$tmp_object3->int_attr = 333;
+		$tmp_object3 = new stdClass;
+		$tmp_object3->str_attr = 'never_expires';
+		$tmp_object3->int_attr = 333;
 
-echo "Store data (key1) in the cache (data will expire in 60 seconds)<br/>\n";
-$memcache->set('key1', $tmp_object1, false, 60) or die ("Failed to save data at the server");
+		echo "Store data (key1) in the cache (data will expire in 60 seconds)<br/>\n";
+		$memcache->set('key1', $tmp_object1, false, 60) or die ("Failed to save data at the server");
 
-echo "Store data (key2) in the cache (data will expire in 7200 seconds)<br/>\n";
-$memcache->set('key2', $tmp_object2, false, 7200) or die ("Failed to save data at the server");
+		echo "Store data (key2) in the cache (data will expire in 7200 seconds)<br/>\n";
+		$memcache->set('key2', $tmp_object2, false, 7200) or die ("Failed to save data at the server");
 
-echo "Store data (key3) in the cache (data will never expire)<br/>\n";
-$memcache->set('key3', $tmp_object3, false, 0) or die ("Failed to save data at the server");
+		echo "Store data (key3) in the cache (data will never expire)<br/>\n";
+		$memcache->set('key3', $tmp_object3, false, 0) or die ("Failed to save data at the server");
 
-$get_result = $memcache->get('key1');
+		$get_result = $memcache->get('key1');
 
-echo "Data from the cache: key1 : <br/>\n";
-var_dump($get_result);
+		echo "Data from the cache: key1 : <br/>\n";
+		var_dump($get_result);
 
-$get_result = $memcache->get('key2');
+		$get_result = $memcache->get('key2');
 
-echo "<br/>Data from the cache: key2 : <br/>\n";
-var_dump($get_result);
+		echo "<br/>Data from the cache: key2 : <br/>\n";
+		var_dump($get_result);
 
-$get_result = $memcache->get('key3');
+		$get_result = $memcache->get('key3');
 
-echo "<br/>Data from the cache: key3 : <br/>\n";
-var_dump($get_result);
+		echo "<br/>Data from the cache: key3 : <br/>\n";
+		var_dump($get_result);
 
 	}
 
@@ -3370,7 +3370,7 @@ function un_clean_url($str)
 		
 							);
 
-							$this->session->set_userdata($sess);
+							$this->session->memcache_set($sess);
 							$this->session->set_flashdata('login', 'Y');
 		
 							$this->db->where('ID', $row['ID']);
