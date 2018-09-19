@@ -19,6 +19,92 @@ class Members extends CI_Controller {
 	}
 
 
+	function get_all_cache() {
+
+		// Load the memcached library config
+		$o['memcached'] = '';
+		$o['file_cache'] = '';
+		$o['success'] = false;
+		$o['error'] = '';
+		$mem = array();
+		$file = array();
+		$this->load->config('memcached');
+		$this->config->item('memcached');
+
+		$c = $this->config->item('memcached');
+		$host = $c['servers']['default']['host'];
+
+		$memcache = new Memcache;
+		$memcache->connect($host, 11211)
+		or $o['error'] = "Could not connect to memcache server";
+
+		$list = array();
+		$allSlabs = $memcache->getExtendedStats('slabs');
+		$items = $memcache->getExtendedStats('items');
+		$xx = 0;
+		foreach($allSlabs as $server => $slabs) {
+			foreach($slabs AS $slabId => $slabMeta) {
+				$cdump = $memcache->getExtendedStats('cachedump',(int)$slabId);
+				foreach($cdump AS $keys => $arrVal) {
+					if (!is_array($arrVal)) continue;
+					foreach($arrVal AS $k => $v) {
+						//echo $k .'<br>';
+						$t =  array(0 => $k, 1 => $v);
+						//$tt = 
+						array_push($mem, $t);
+						$xx ++;
+					}
+				}
+			}
+		}
+		$o['success'] = true;
+
+		$o['memcached'] = $mem;
+
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$ci = $this->cache->cache_info();
+
+		$o['file_cache'] = $ci;
+
+		echo json_encode($o);
+
+	}
+	function delete_all_cache() {
+
+		// Load the memcached library config
+		$this->load->config('memcached');
+		$this->config->item('memcached');
+
+		$c = $this->config->item('memcached');
+		$host = $c['servers']['default']['host'];
+
+		$memcache = new Memcache;
+		$memcache->connect($host, 11211);
+
+		$memcache->flush();
+
+		$list = array();
+		$allSlabs = $memcache->getExtendedStats('slabs');
+		$items = $memcache->getExtendedStats('items');
+		foreach($allSlabs as $server => $slabs) {
+			foreach($slabs AS $slabId => $slabMeta) {
+				$cdump = $memcache->getExtendedStats('cachedump',(int)$slabId);
+				foreach($cdump AS $keys => $arrVal) {
+					if (!is_array($arrVal)) continue;
+					foreach($arrVal AS $k => $v) {
+						echo $k .'<br>';
+						$this->main_model->delete_memcache($k);
+						
+					}
+				}
+			}
+		}
+		$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+		$this->cache->clean();
+	}
+
+
+
 	public function test_memcached(){
 
 		$this->load->driver('cache');
