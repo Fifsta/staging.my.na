@@ -418,7 +418,7 @@ $config['encryption_key'] = 'myna535354refdt53';
 |
 */
 
-$config['sess_driver'] = 'memcache';
+$config['sess_driver'] = 'memcached';
 $config['sess_save_path'] = 'myna-memcache.hzh6ty.0001.euw1.cache.amazonaws.com:11211';
 
 //$config['sess_driver'] = 'files';
