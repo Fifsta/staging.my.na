@@ -160,8 +160,12 @@ $this->load->view('inc/header', $header);
    
 <?php $this->load->view('inc/footer');?>  
 
+
+
 <script src='<?php echo base_url('/')?>js/jquery.rating.pack.js' type="text/javascript" language="javascript"></script>
-<script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+
+<script src="http://maps.google.com/maps?file=api&v=2&key=AIzaSyBNrRasxiR5Oo4UZ2XsEGZghmAt_qX2nl8" type="text/javascript"></script>
+
 <script src="<?php echo base_url('/');?>js/geolocationmarker-compiled.js"></script>
 
 <script type="text/javascript">
