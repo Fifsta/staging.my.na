@@ -426,7 +426,7 @@ $config['sess_cookie_name'] = 'my_na';
 $config['sess_expiration'] = 2419200;
 //$config['sess_save_path'] = BASEPATH . 'sessions';
 $config['sess_match_ip'] = FALSE;
-$config['sess_time_to_update'] = 300;
+$config['sess_time_to_update'] = 30;
 $config['sess_regenerate_destroy'] = FALSE;
 $config['sess_use_database']  = FALSE;
 
