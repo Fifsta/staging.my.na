@@ -165,7 +165,7 @@ $this->load->view('inc/header', $header);
 <script src='<?php echo base_url('/')?>js/jquery.rating.pack.js' type="text/javascript" language="javascript"></script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNrRasxiR5Oo4UZ2XsEGZghmAt_qX2nl8&sensor=true" async defer></script>
-<script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+
 
 <script src="<?php echo base_url('/');?>js/geolocationmarker-compiled.js"></script>
 
