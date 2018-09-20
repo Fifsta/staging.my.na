@@ -19,6 +19,9 @@ class Members extends CI_Controller {
 	}
 
 
+
+
+
 	public function test_memcached(){
 
 		$this->load->driver('cache');
