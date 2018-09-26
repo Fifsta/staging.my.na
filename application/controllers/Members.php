@@ -19,7 +19,12 @@ class Members extends CI_Controller {
 	}
 
 
+	public create_sess_dir() {
 
+
+		mkdir(FCPATH."sessions", 0700);
+
+	}
 
 
 	public function test_memcached(){
