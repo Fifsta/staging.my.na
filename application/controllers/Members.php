@@ -19,7 +19,7 @@ class Members extends CI_Controller {
 	}
 
 
-	public create_sess_dir() {
+	public function create_sess_dir() {
 
 
 		mkdir(FCPATH."sessions", 0700);
