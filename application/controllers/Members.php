@@ -19,6 +19,14 @@ class Members extends CI_Controller {
 	}
 
 
+	public function view_sess_dir() {
+
+
+		echo FCPATH."sessions";
+
+	}
+
+
 	public function create_sess_dir() {
 
 
