@@ -26,6 +26,16 @@ class Members extends CI_Controller {
 
 	}
 
+	public function test_sess_dir() {
+
+		$dir = FCPATH.'assets/sessions';
+
+		$files1 = scandir($dir);
+
+		print_r($files1);
+
+	}
+
 
 	public function test_memcached(){
 
