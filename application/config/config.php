@@ -417,9 +417,9 @@ $config['encryption_key'] = 'myna535354refdt53';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
- 
-//$config['sess_driver'] = 'memcached';
-//$config['sess_save_path'] = 'mynatest-memcache.hzh6ty.cfg.euw1.cache.amazonaws.com:11211';
+
+$config['sess_driver'] = 'memcached';
+$config['sess_save_path'] = 'mynatest-memcache.hzh6ty.cfg.euw1.cache.amazonaws.com:11211';
 
 //$config['sess_driver'] = 'files';
 //$config['sess_save_path'] = FCPATH.'assets/sessions';
@@ -431,7 +431,7 @@ $config['sess_expiration'] = 2419200;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 30;
 $config['sess_regenerate_destroy'] = FALSE;
-$config['sess_use_database']  = TRUE;
+$config['sess_use_database']  = FALSE;
 
 
 
