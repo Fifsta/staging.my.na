@@ -418,20 +418,21 @@ $config['encryption_key'] = 'myna535354refdt53';
 |
 */
 
-$config['sess_driver'] = 'memcached';
-$config['sess_save_path'] = 'mynatest-memcache.hzh6ty.0001.euw1.cache.amazonaws.com:11211';
+//$config['sess_driver'] = 'memcached';
+//$config['sess_save_path'] = 'mynatest-memcache.hzh6ty.0001.euw1.cache.amazonaws.com:11211';
 
 //$config['sess_driver'] = 'files';
 //$config['sess_save_path'] = FCPATH.'assets/sessions';
 
-//$config['sess_driver'] = 'files';
+$config['sess_driver'] = 'database';
+$config['sess_save_path'] = 'ci_sessions';
 $config['sess_cookie_name'] = 'my_na';
 $config['sess_expiration'] = 2419200;
 //$config['sess_save_path'] = BASEPATH . 'sessions';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 30;
 $config['sess_regenerate_destroy'] = FALSE;
-$config['sess_use_database']  = FALSE;
+$config['sess_use_database']  = TRUE;
 
 
 
