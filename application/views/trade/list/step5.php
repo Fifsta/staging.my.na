@@ -61,7 +61,7 @@
 	            <div class="clearfix">&nbsp;</div>
 	            <?php echo $fb_btn;?>
 	            <!--<div class="btn btn-warning fb-share-button" data-href="<?php //echo site_url('/').'product/'.$product_id;?>/" data-layout="button_count"></div>-->
-	            <a href="<?php echo site_url('/').'product/'.$product_id;?>/" class="btn btn-inverse clearfix"  target="_blank">Preview <?php echo $title;?></a>
+	            <a href="<?php echo site_url('/').'product/'.$product_id;?>/" class="btn btn-dark clearfix"  target="_blank">Preview <?php echo $title;?></a>
 
             </div>
 	       <?php } ?>
