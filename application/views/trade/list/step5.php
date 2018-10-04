@@ -54,13 +54,13 @@
 	           <a href="javascript:void(0)" onclick="publish()" class="btn btn-lg btn-success pull-right">Publish <i class="fa fa-chevron-right text-light"></i></a>
 	        <?php }else{ ?>
 		        <!--<iframe class="loading_img" style="width:100%; min-height:400px" id="advert_content"></iframe>-->
-            <div class="alert alert-block">
+            <div class="alert alert-secondary">
 
 	            <h2>Item is Live</h2>
                 <p>The product is live and showing on the website. You can automatically publish the item to the My Namibia facebook page to get that extra exposure.</p>
 	            <div class="clearfix">&nbsp;</div>
 	            <?php echo $fb_btn;?>
-	            <div class="btn btn-warning fb-share-button" data-href="<?php echo site_url('/').'product/'.$product_id;?>/" data-layout="button_count"></div>
+	            <!--<div class="btn btn-warning fb-share-button" data-href="<?php //echo site_url('/').'product/'.$product_id;?>/" data-layout="button_count"></div>-->
 	            <a href="<?php echo site_url('/').'product/'.$product_id;?>/" class="btn btn-inverse clearfix"  target="_blank">Preview <?php echo $title;?></a>
 
             </div>
