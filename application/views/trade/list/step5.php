@@ -56,7 +56,7 @@
 		        <!--<iframe class="loading_img" style="width:100%; min-height:400px" id="advert_content"></iframe>-->
             <div class="alert alert-secondary">
 
-	            <h2>Item is Live</h2>
+	            <h5>Item is Live!</h5>
                 <p>The product is live and showing on the website. You can automatically publish the item to the My Namibia facebook page to get that extra exposure.</p>
 	            <div class="clearfix">&nbsp;</div>
 	            <?php echo $fb_btn;?>
