@@ -424,8 +424,8 @@ $config['encryption_key'] = 'myna535354refdt53';
 //$config['sess_driver'] = 'files';
 //$config['sess_save_path'] = FCPATH.'assets/sessions';
 
-$config['sess_driver'] = 'database';
-$config['sess_save_path'] = 'ci_sessions';
+//$config['sess_driver'] = 'database';
+//$config['sess_save_path'] = 'ci_sessions';
 $config['sess_cookie_name'] = 'my_na';
 $config['sess_expiration'] = 2419200;
 //$config['sess_save_path'] = BASEPATH . 'sessions';
