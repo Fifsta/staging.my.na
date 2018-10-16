@@ -158,7 +158,7 @@ class Email_model extends CI_Model{
 	//++++++++++++++++++++++++++++++++++++++++++++
 	//PASS PARAMETERS AND SEND EMAIL
 	//++++++++++++++++++++++++++++++++++++++++++++		
-	function send_mail($HTML, $subject, $mandrill,$FROM_EMAIL, $FROM_NAME, $TAG, $important = true, $global_merge = '', $merge = '', $from = 'no-reply', $attachment = null, $file_name = '', $mime = ''){
+	function send_mail($HTML, $subject, $mandrill,$FROM_EMAIL, $FROM_NAME){
 		
 		$protocol =  getEnv('SMTP_PASS');
 
