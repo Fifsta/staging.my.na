@@ -2345,9 +2345,9 @@ class Cron_model extends CI_Model{
 			        //$body_final = $this->load->view('email/body_news',$data_view,true);
 			        $TAGS = array('tags' => 'business_report');
 			        $attachment = '';
-			        $filename = '';
+			        $file_name = '';
 			        $mime = '';
-			        
+
 			        $emailRes = $this->email_model->send_mail($body, $subject, $array_to, 'reports@my.na', 'My Namibia', $TAGS, 
 			        											$important = true, $global_merge , $merge , $from = 'reports', 
 			        											base64_encode($attachment), $file_name , $mime);
