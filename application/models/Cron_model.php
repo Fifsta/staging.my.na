@@ -2337,11 +2337,11 @@ class Cron_model extends CI_Model{
 					//Finally Sedn the MAIL
 					$subject = 'Insights for '.$row->BUSINESS_NAME.' - '.date('M Y');
 			 		$data_view['body'] = $body;
-			 		if($attachment = file_get_contents(BASE_URL.$res->pdf_link)){
+			 		/*if($attachment = file_get_contents(BASE_URL.$res->pdf_link)){
 			 			 echo 'ATTACHMENT: <br />';
 			 		}
 			 		$file_name = $subject.'.pdf';
-					$mime = 'application/pdf';
+					$mime = 'application/pdf';*/
 			        //$body_final = $this->load->view('email/body_news',$data_view,true);
 			        $TAGS = array('tags' => 'business_report');
 			        $emailRes = $this->email_model->send_mail($body, $subject, $array_to, 'reports@my.na', 'My Namibia', $TAGS, 
