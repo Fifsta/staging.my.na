@@ -181,8 +181,8 @@ class Email_model extends CI_Model{
 
 			$this->email->from('no-reply@intouchsrv.com');
 			$this->email->to('christian@intouch.com.na');
-			$this->email->subject($subject);
-			$this->email->message($HTML);
+			$this->email->subject('test');
+			$this->email->message('test');
 
 			/*if($attachments != '') {
 				$this->email->attach($attachments);
