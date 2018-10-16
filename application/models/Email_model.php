@@ -24,12 +24,87 @@ class Email_model extends CI_Model{
 //		$config['protocol']='smtp';  
 //		$config['smtp_host']='smtp.mandrillapp.com';  
 //		$config['smtp_port']='587';  
-//		$config['smtp_timeout']='30';  
+//		$config['smtp_timeout']='30';  send_mail
 //		$config['smtp_user']='roland@my.na';  
 //		$config['smtp_pass']='d3tAlotpZNobGiCfRk3Miw'; 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //SEND VERIFICATION LINK TO NEW MEMBER AFTER SIGNUP
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	function get_send_config($mailtype = 'text')
+	{
+	
+		$protocol =  getEnv('SMTP_PASS');
+
+		$config = Array(
+			'protocol' => 'smtp' , //Protocol SMTP on shared hosting issue
+			'smtp_host' => 'smtp.gmail.com',
+			'smtp_port' => '465', 
+			'mailtype' => 'html',
+			'smtp_user' => 'mail@my.na',
+			'smtp_pass' => $protocol,
+			'smtp_crypto' => 'ssl',
+			'newline' => '\n\n',
+			'charset' => 'iso-8859-1',
+			'wordwrap' => 'true',
+			'dns' => 'false'
+		);
+		return $config;
+
+	}
+
+	function test_mail()
+	{
+			
+		$mailtype = "'text'";	
+		if(!$config = (array)json_decode($this->input->get('email_config'))){
+			$config = $this->get_send_config($mailtype);
+		}
+		
+		if(!$to = $this->input->get('to')){
+			$to = 'christian@intouch.com.na';
+		}
+		if(!$from = $this->input->get('from')){
+			$from = 'no-reply@my.na';
+		}
+		if(!$name = $this->input->get('name')){
+			$name = 'My Namibia';
+		}
+		var_dump($config);
+		$this->load->library('email');
+
+		
+		$this->email->initialize($config);
+		//$this->email->clear();
+		//var_dump($this->email);
+		$this->email->set_newline("\r\n");
+
+		// Set to, from, message, etc.
+
+		$this->email->from($from,$name);
+		$this->email->to($to);
+		//$this->email->cc('roland@ihmsmedia.com');
+		$this->email->subject('This is the subject Again');
+		$this->email->message('This is the body of the notification email.');
+
+		$this->email->send();		
+
+		//$result = $this->email->send();
+
+
+
+		echo $this->email->print_debugger();
+
+			/*$email = array(
+				'html' => $var['body'], //Consider using a view file
+				'subject' => $var['subject'],
+				'headers' => array('Reply-To' => $var['from_email']),
+				'from_email' => 'vw-no-reply@my.na',
+				'from_name' => $var['name'],
+				'to' => $sendTo
+			);*/	
+
+	}
 
 
 	function send_website_enquiries($var)
@@ -46,23 +121,14 @@ class Email_model extends CI_Model{
 			$mailtype = "'html'";
 		}		
 
-		$config = Array(
-		    'protocol' => 'smtp',
-		    'smtp_host' => 'tls://email-smtp.eu-west-1.amazonaws.com',
-		    'smtp_port' => 465,
-		    'smtp_user' => 'AKIAIEDWIYXIABCFGGFQ',
-		    'smtp_pass' => 'Ahxb1+zvPa8Eq6zgDuZEkdhNwPBZSRQPOBSVQ/AqW7YA',
-		    'mailtype'  => $mailtype, 
-		    'charset'   => 'utf-8',
-		    'priority' => '1'
-		);
+		$config = $this->get_send_config($mailtype);
 
 		$this->load->library('email', $config);
 		$this->email->set_newline("\r\n");
 
 		// Set to, from, message, etc.
 
-		$this->email->from('no-reply@intouchsrv.com');
+		$this->email->from('no-reply@my.na');
 		$this->email->to($var['email_to']);
 		$this->email->subject($var['subject']);
 		$this->email->message($var['body']);
@@ -94,36 +160,27 @@ class Email_model extends CI_Model{
 	//++++++++++++++++++++++++++++++++++++++++++++		
 	function send_mail($HTML, $subject, $mandrill,$FROM_EMAIL, $FROM_NAME, $TAG, $important = true, $global_merge = '', $merge = '', $from = 'no-reply', $attachment = null, $file_name = '', $mime = ''){
 		
+		$protocol =  getEnv('SMTP_PASS');
 
 		$this->email->initialize(array(
-			'protocol' => 'mail' , //Protocol SMTP on shared hosting issue
-			'smtp_host' => 'tls://email-smtp.eu-west-1.amazonaws.com',
-			'smtp_port' => '587',
+			'protocol' => 'smtp' , //Protocol SMTP on shared hosting issue
+			'smtp_host' => 'smtp.gmail.com',
+			'smtp_port' => '465', 
 			'mailtype' => 'html',
-			'smtp_user' => 'AKIAIEDWIYXIABCFGGFQ',
-			'smtp_pass' => 'Ahxb1+zvPa8Eq6zgDuZEkdhNwPBZSRQPOBSVQ/AqW7YA'));
+			'smtp_user' => 'mail@my.na',
+			'smtp_pass' => $protocol,
+			'smtp_crypto' => 'ssl',
+			'newline' => '\n\n',
+			'charset' => 'iso-8859-1',
+			'wordwrap' => 'true',
+			'dns' => 'false'
+		));
 
 		$this->email->set_newline("\r\n");
 
-			//print_r($mandrill);
-
-			$attachments = array();
-	        if($attachment != null){
-
-
-	            $attachment_encoded =$attachment;
-	            
-	            //echo $raw;
-
-	            $attachments[] = array(
-	                'content' => $attachment_encoded,
-	                'type' => $mime,
-	                'name' => $file_name
-	            );
-	        }
 
 			$this->email->from('no-reply@intouchsrv.com');
-			$this->email->to('christian@intouch.com.na');
+			$this->email->to($mandrill);
 			$this->email->subject($subject);
 			$this->email->message($HTML);
 
@@ -133,7 +190,7 @@ class Email_model extends CI_Model{
 			
 			$this->email->send();
 
-			echo $this->email->print_debugger();
+			//echo $this->email->print_debugger();
 
 		
 	}
@@ -144,14 +201,20 @@ class Email_model extends CI_Model{
 	function send_register_link_plain($member)
 	{
 
+		$protocol =  getEnv('SMTP_PASS');
 
 		$this->email->initialize(array(
-			'protocol' => 'mail' , //Protocol SMTP on shared hosting issue
-			'smtp_host' => 'tls://email-smtp.eu-west-1.amazonaws.com',
-			'smtp_port' => '587',
+			'protocol' => 'smtp' , //Protocol SMTP on shared hosting issue
+			'smtp_host' => 'smtp.gmail.com',
+			'smtp_port' => '465',
 			'mailtype' => 'html',
-			'smtp_user' => 'AKIAIEDWIYXIABCFGGFQ',
-			'smtp_pass' => 'Ahxb1+zvPa8Eq6zgDuZEkdhNwPBZSRQPOBSVQ/AqW7YA'));
+			'smtp_user' => 'mail@my.na',
+			'smtp_pass' => $protocol,
+			'smtp_crypto' => 'ssl',
+			'charset' => 'iso-8859-1',
+			'wordwrap' => 'true',
+			'dns' => 'false'
+		));
 
 			$this->email->set_newline("\r\n");		
 
@@ -195,15 +258,24 @@ class Email_model extends CI_Model{
 	function send_register_link($member)
 	{
 
-		$this->email->initialize(array(
-			'protocol' => 'mail' , //Protocol SMTP on shared hosting issue
-			'smtp_host' => 'tls://email-smtp.eu-west-1.amazonaws.com',
-			'smtp_port' => '587',
-			'mailtype' => 'html',
-			'smtp_user' => 'AKIAIEDWIYXIABCFGGFQ',
-			'smtp_pass' => 'Ahxb1+zvPa8Eq6zgDuZEkdhNwPBZSRQPOBSVQ/AqW7YA'));
+		$protocol =  getEnv('SMTP_PASS');
 
-			$this->email->set_newline("\r\n");			
+		$this->email->initialize(array(
+			'protocol' => 'smtp' , //Protocol SMTP on shared hosting issue
+			'smtp_host' => 'smtp.gmail.com',
+			'smtp_port' => '465',
+			'mailtype' => 'text',
+			'smtp_user' => 'mail@my.na',
+			'smtp_pass' => $protocol,
+			'smtp_crypto' => 'ssl',
+			'newline' => '\n\n',
+			'charset' => 'iso-8859-1',
+			'wordwrap' => 'true',
+			'dns' => 'false'
+		));
+
+		
+		$this->email->set_newline("\r\n");	
 
 			//build body
 			if(isset($member['pass1'])){
@@ -241,7 +313,7 @@ class Email_model extends CI_Model{
 
 			$FROM_NAME = $data['fname'];
 			$FROM_EMAIL = $member['email'];
-			$mandrill = array($member['email'],'info@my.na');
+			$mandrill = array($member['email'],'info@my.na','christian@intouch.com.na');
 			$subject = 'Welcome to My Namibia';
 			$TAG = array('tags' => 'member_registration');
 
@@ -254,7 +326,6 @@ class Email_model extends CI_Model{
 			$result = $this->email->send();
             
 
-            return $result;
 		
 	}
 	
@@ -354,7 +425,7 @@ class Email_model extends CI_Model{
                             Have a !na day.<br />
 
                             My Namibia';
-			$emails = array();
+			$emails = array(); 
 			$bemail = $row['BUSINESS_EMAIL'];
 			array_push($emails, $bemail);
 			if(strlen($row['emails']) > 0){

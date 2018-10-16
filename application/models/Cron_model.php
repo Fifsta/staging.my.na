@@ -1601,7 +1601,7 @@ class Cron_model extends CI_Model{
 			$count = 0;
 						  
 			//BUILD MANDRILL ARRAY  
-			$mandrill = array(array('email' => $row['CLIENT_EMAIL'] ));
+			$mandrill = array($row['CLIENT_EMAIL']);
 			$business = $bus_name;
 			//$business['EMAIL'] = $bus_email;
 			//SEND MANDRILL
@@ -1712,7 +1712,7 @@ class Cron_model extends CI_Model{
               }
 
 			  //SEND NOTIFICATION OF CHANGE
-			  $emailTO =  array(array('email' => $row->CLIENT_EMAIL)); 
+			  $emailTO =  array($row->CLIENT_EMAIL); 
 			  $emailFROM = 'no-reply@my.na';
 			  $name = 'My Namibia Trade';
 			  $subject = 'Your Product has Expired - '.$this->shorten_string($row->title, 3) . ' '.$agent_ref;
@@ -1794,7 +1794,7 @@ class Cron_model extends CI_Model{
 			  }
 			  
 			  //SEND NOTIFICATION OF CHANGE
-			  $emailTO =  array(array('email' => $row->CLIENT_EMAIL)); 
+			  $emailTO =  array($row->CLIENT_EMAIL); 
 			  $emailFROM = 'no-reply@my.na';
 			  $name = 'My Namibia Trade';
 			  $subject = $a.'Ending Soon - '.$row->title;
@@ -1847,7 +1847,7 @@ class Cron_model extends CI_Model{
             $image = base_url('/').'img/timbthumb.php?src='.base_url('/').'assets/products/images/'.$seller->img_file.'&w=580&h=300';
 
         }
-        $emailTO =  array(array('email' => $buyer->CLIENT_EMAIL) , array('email' => 'info@my.na'));
+        $emailTO =  array($buyer->CLIENT_EMAIL,'info@my.na');
         $emailFROM = 'no-reply@my.na';
         $name = 'My Namibia Trade';
         $subject = 'Auction Item is Yours';
@@ -1902,7 +1902,7 @@ class Cron_model extends CI_Model{
             $image = base_url('/').'img/timbthumb.php?src='.base_url('/').'assets/products/images/'.$seller->img_file.'&w=580&h=300';
 
         }
-        $emailTO =  array(array('email' => $seller->CLIENT_EMAIL) , array('email' => 'info@my.na'));
+        $emailTO =  array($seller->CLIENT_EMAIL,'info@my.na');
         $emailFROM = 'no-reply@my.na';
         $name = 'My Namibia Trade';
         $subject = 'Your Auction has Finished - Item is SOLD';
@@ -1958,7 +1958,7 @@ class Cron_model extends CI_Model{
             $image = base_url('/').'img/timbthumb.php?src='.base_url('/').'assets/products/images/'.$seller->img_file.'&w=580&h=300';
 
         }
-        $emailTO =  array(array('email' => $seller->CLIENT_EMAIL) , array('email' => 'info@my.na'));
+        $emailTO =  array($seller->CLIENT_EMAIL,'info@my.na');
         $emailFROM = 'no-reply@my.na';
         $name = 'My Namibia Trade';
         $subject = 'Your Auction has Finished - Reserve not Met';
@@ -2233,11 +2233,7 @@ class Cron_model extends CI_Model{
 
         	foreach($q->result() as $row){
 
-		        $array_to = array(
-		        	array( 
-		        		'email' => $row->BUSINESS_EMAIL 
-		        	)
-		        );
+		        $array_to = array($row->BUSINESS_EMAIL);
 
 		        $m = array(
 
@@ -2264,9 +2260,7 @@ class Cron_model extends CI_Model{
         				if($a[0] !== $row->BUSINESS_EMAIL){
 
 	 						//BUILD ARRAY FOR EMAILS
-	                        $d = array(
-	                            'email' => $a[0]
-	                        );
+	                        $d = $a[0];
 	                        array_push($array_to, $d);
 
 	                        //BUILD MERGE VARIABLES
@@ -2360,7 +2354,7 @@ class Cron_model extends CI_Model{
 			        print_r($emailRes);
 
         		}else{
-
+ 
         			echo 'PDF Failure<br />';
         		}
         		//echo $res['pdf'].'<br />';
