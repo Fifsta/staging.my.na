@@ -162,6 +162,8 @@ class Email_model extends CI_Model{
 		
 		$protocol =  getEnv('SMTP_PASS');
 
+		echo $protocol;
+
 		$this->email->initialize(array(
 			'protocol' => 'smtp' , //Protocol SMTP on shared hosting issue
 			'smtp_host' => 'smtp.gmail.com',
