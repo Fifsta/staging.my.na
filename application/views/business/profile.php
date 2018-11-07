@@ -214,7 +214,7 @@ $this->load->view('inc/header');
 				<!--tabs-->
 				<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="nav-item"><a href="#About" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info"><span class="d-sm-none">About</span></a></li>
-					<li role="presentation" class="nav-item"><a href="#Map" onClick="load_map();" class="nav-link active" aria-controls="Map" role="tab" data-toggle="tab" data-icon="fa-map-marker"><span class="d-sm-none">Map</span></a></li>					
+					<li role="presentation" class="nav-item"><a href="#Map" onClick="load_map();" class="nav-link" aria-controls="Map" role="tab" data-toggle="tab" data-icon="fa-map-marker"><span class="d-sm-none">Map</span></a></li>					
 					<li role="presentation" class="nav-item"><a href="#Enquiry-Form" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o"><span class="d-sm-none">Enquiry Form</span></a></li>
 					<!--<li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate text-dark">Deals</a></li>-->
 					<li role="presentation" class="nav-item"><a href="#Gallery" onClick="load_gallery();" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o"><span class="d-sm-none">Gallery</span></a></li>
@@ -229,6 +229,14 @@ $this->load->view('inc/header');
 						<p id="b-about"><?php echo $description; ?></p>
 
 					</section>
+
+					<section role="tabpanel" class="tab-pane" id="Map">
+						<h2 class="tab-head">Map</h2>
+						<div class="row" id="bus_map">
+							<iframe id="bus_map" frameborder="0" allowtransparency="true"></iframe>
+						</div>
+					</section>
+
 					<section role="tabpanel" class="tab-pane" id="Enquiry-Form">
 						<?php $this->load->view('business/inc/business_contact_inc', $bus_details);?>
 					</section>
@@ -242,7 +250,7 @@ $this->load->view('inc/header');
 					<section role="tabpanel" class="tab-pane" id="Gallery">
 						<h2 class="tab-head">Gallery</h2>
 						<div class="row" id="bus_gallery">
-							<?php //$this->business_model->show_gallery($bus_id);?>
+						
 						</div>
 					</section>
 
@@ -461,6 +469,15 @@ $this->load->view('inc/header');
 		});	
 
 	}	
+
+
+	function load_map() {
+
+		$("#bus_map").attr("src", "<?php echo site_url('/'); ?>business/load_business_map/<?php echo $bus_id; ?>");
+
+	}	
+
+
 
 
 	function reload_reviews(){
