@@ -155,9 +155,6 @@ $this->load->view('inc/header');
 		              <img src="<?php echo $cover_url.'?='.$rand; ?>" class="img-fluid">
 		          </div>
 		          
-		          <div class="list-map-right" id="map_container">
-		          	<iframe src="<?php echo site_url('/'); ?>business/load_business_map/<?php echo $bus_id; ?>" frameborder="0" allowtransparency="true"></iframe>
-		          </div>
 		        </div>
 		        <!--banner-->
  
