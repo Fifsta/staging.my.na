@@ -3,7 +3,7 @@
 //$thumbnailUrlFactory = $this->image_model->thumborp->create_factory();
 $width = 1200;
 
-$height = 600;
+$height = 400;
 
 if(!$bus_details){ show_404(); }
 
