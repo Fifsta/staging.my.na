@@ -473,6 +473,8 @@ $this->load->view('inc/header');
 
 	function load_map() {
 
+		alert('hi');
+
 		$("#bus_map").attr("src", "<?php echo site_url('/'); ?>business/load_business_map/<?php echo $bus_id; ?>");
 
 	}	
