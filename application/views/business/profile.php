@@ -232,7 +232,7 @@ $this->load->view('inc/header');
 
 					<section role="tabpanel" class="tab-pane" id="Map">
 						<h2 class="tab-head">Map</h2>
-						<div class="row" id="bus_map">
+						<div class="row" id="bus_map" style="height:300px">
 							
 						</div>
 					</section>
