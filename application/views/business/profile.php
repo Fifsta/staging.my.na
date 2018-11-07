@@ -142,6 +142,7 @@ $this->load->view('inc/header');
 		        <div class="heading" style="margin-bottom:15px">
 		          <h2 data-icon="fa-briefcase"><?php echo $name; ?></h2>
 		          <ul class="options">    
+		            <li><a href="#Map" data-icon="fa-map-marker text-dark" onClick="load_map();">View Map</a></li>
 		            <li><a href="#Enquiry-Form" data-icon="fa-envelope text-dark">Contact Agency</a></li>
 		            <li><a href="#Gallery" data-icon="fa-file-image-o text-dark" onClick="load_gallery();">Gallery</a></li>
 		            <li><a href="#Reviews" data-icon="fa-star text-dark">Reviews</a></li>
@@ -213,6 +214,7 @@ $this->load->view('inc/header');
 				<!--tabs-->
 				<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="nav-item"><a href="#About" class="nav-link active" aria-controls="About" role="tab" data-toggle="tab" data-icon="fa-info"><span class="d-sm-none">About</span></a></li>
+					<li role="presentation" class="nav-item"><a href="#Map" onClick="load_map();" class="nav-link active" aria-controls="Map" role="tab" data-toggle="tab" data-icon="fa-map-marker"><span class="d-sm-none">Map</span></a></li>					
 					<li role="presentation" class="nav-item"><a href="#Enquiry-Form" class="nav-link" aria-controls="Enquiry-Form" role="tab" data-toggle="tab" data-icon="fa-envelope-o"><span class="d-sm-none">Enquiry Form</span></a></li>
 					<!--<li role="presentation" class="nav-item"><a href="#Deals" class="nav-link" aria-controls="Deals" role="tab" data-toggle="tab" data-icon="fa-certificate text-dark">Deals</a></li>-->
 					<li role="presentation" class="nav-item"><a href="#Gallery" onClick="load_gallery();" class="nav-link" aria-controls="Gallery" role="tab" data-toggle="tab" data-icon="fa-file-image-o"><span class="d-sm-none">Gallery</span></a></li>
