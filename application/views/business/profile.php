@@ -233,7 +233,7 @@ $this->load->view('inc/header');
 					<section role="tabpanel" class="tab-pane" id="Map">
 						<h2 class="tab-head">Map</h2>
 						<div class="row" id="bus_map">
-							<iframe id="bus_map" src="" frameborder="0" allowtransparency="true"></iframe>
+							
 						</div>
 					</section>
 
@@ -473,7 +473,15 @@ $this->load->view('inc/header');
 
 	function load_map() {
 
-		$("#bus_map").attr("src", "<?php echo site_url('/'); ?>business/load_business_map/<?php echo $bus_id; ?>");
+		$.ajax({
+			type: 'post',
+			url: '<?php echo site_url('/'); ?>business/load_business_map/<?php echo $bus_id; ?>' ,
+			success: function (data) {
+				
+				 $('#bus_map').html(data);
+			}
+		});
+
 
 	}	
 
