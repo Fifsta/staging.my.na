@@ -152,7 +152,7 @@ class Business extends CI_Controller {
 
 		$data['ID'] = $bid;
 
-		$this->load->view('business/inc/business_map_inc.php', $data);
+		return $this->load->view('business/inc/business_map_inc.php', $data);
 
 	}
 
