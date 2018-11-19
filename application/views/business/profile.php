@@ -182,11 +182,11 @@ $this->load->view('inc/header');
                         
 						<div class="row reveal">
 							<div class="col-sm-12 col-md-6 col-lg-4">
-								<p data-icon="fa-phone text-dark"><button onClick="phone_click('phone')" class="btn btn-default"><!--T: --><span><?php echo $tel; ?></span></button></p>
+								<p data-icon="fa-phone text-dark"><button onClick="phone_click('phone')" class="btn btn-default"><!--T: --><span><a href="tel:<?php echo $tel; ?>"><?php echo $tel; ?></a></span></button></p>
 								<p data-icon="fa-fax text-dark"><button onClick="phone_click('fax')" class="btn btn-default"><!--F: --><span><?php echo $fax; ?></span></button></p>								
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-4">
-								<p data-icon="fa-tablet text-dark"><button onClick="phone_click('cell')" class="btn btn-default"><!--C: --><span><?php echo $cell; ?></span></button></p>
+								<p data-icon="fa-tablet text-dark"><button onClick="phone_click('cell')" class="btn btn-default"><!--C: --><span><a href="tel:<?php echo $cell; ?>"><?php echo $cell; ?></a></span></button></p>
 								<p data-icon="fa-envelope text-dark"><button class="btn btn-default"><!--E: --><span><?php echo $email; ?></span></button></p>								
 							</div>
 							<div class="col-sm-12 col-md-6 col-lg-4">
@@ -232,8 +232,7 @@ $this->load->view('inc/header');
 
 					<section role="tabpanel" class="tab-pane" id="Map">
 						<h2 class="tab-head">Map</h2>
-						<div class="row" id="bus_map" style="height:300px">
-							
+						<div class="row" id="bus_map" style="height:300px">							
 						</div>
 					</section>
 
@@ -250,7 +249,6 @@ $this->load->view('inc/header');
 					<section role="tabpanel" class="tab-pane" id="Gallery">
 						<h2 class="tab-head">Gallery</h2>
 						<div class="row" id="bus_gallery">
-						
 						</div>
 					</section>
 
@@ -482,10 +480,7 @@ $this->load->view('inc/header');
 			}
 		});
 
-
-	}	
-
-
+	}
 
 
 	function reload_reviews(){
