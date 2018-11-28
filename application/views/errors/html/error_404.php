@@ -5,13 +5,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 <meta charset="utf-8">
 <title>404 Page Not Found</title>
+<link href="bootstrap/css/bootstrap.css?v=22" rel="stylesheet">
 <style type="text/css">
 
 ::selection { background-color: #E13300; color: white; }
 ::-moz-selection { background-color: #E13300; color: white; }
 
 body {
-	background-color: #fff;
+	background-color: #ff9900;
 	margin: 40px;
 	font: 13px/20px normal Helvetica, Arial, sans-serif;
 	color: #4F5155;
@@ -46,6 +47,7 @@ code {
 
 #container {
 	color: #fff;
+	text-align: center;
 }
 
 p {
