@@ -24,7 +24,7 @@ a {
 }
 
 h1 {
-	color: #444;
+	color: #fff;
 	background-color: transparent;
 	border-bottom: 1px solid #D0D0D0;
 	font-size: 19px;
@@ -45,9 +45,7 @@ code {
 }
 
 #container {
-	margin: 10px;
-	border: 1px solid #D0D0D0;
-	box-shadow: 0 0 8px #D0D0D0;
+	color: #fff;
 }
 
 p {
@@ -56,7 +54,8 @@ p {
 </style>
 </head>
 <body>
-	<div id="container">
+	<div id="container text-center">
+		<a href="<?php echo site_url('/'); ?>"><img src="images/logo-main.png"></a>
 		<h1>404 Page Not Found</h1>
 		The page you requested was not found.
 	</div>
