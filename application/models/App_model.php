@@ -773,9 +773,9 @@ class App_model extends CI_Model{
 
 			if($pub_id == 12) {
 
-				$editions = (118, 110, 125, 126, 127);
+				$editions = array(118, 110, 125, 126, 127);
 
-				$edSQL = " AND posts.edition_id IN (" . $editions . ") ";	
+				$edSQL = " AND posts.edition_id IN (".implode(",",array_map("intval",$editions)).") ";	
 
 			}
 
