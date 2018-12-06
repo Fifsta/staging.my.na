@@ -771,6 +771,8 @@ class App_model extends CI_Model{
 			}
 
 
+			$edSQL = '';
+
 			if($pub_id == 12) {
 
 				$editions = array(118);
