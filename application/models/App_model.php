@@ -306,6 +306,26 @@ class App_model extends CI_Model{
 
 
 
+	//+++++++++++++++++++++++++++
+	//CREATE QR CODE
+	//++++++++++++++++++++++++++
+	function get_categories()
+	{
+
+
+		$db = $this->nmh_model->connect_nmh_db();
+
+
+		$q = $db->query("SELECT * FROM categories", true);
+
+
+		$o = $q->result();
+
+		return $o;
+
+	}
+
+
 
 	//+++++++++++++++++++++++++++
 	//CREATE QR CODE
@@ -711,9 +731,7 @@ class App_model extends CI_Model{
 	}
 
 
-	//+++++++++++++++++++++++++++
-	//GET CATEGORIES CONTENT
-	//++++++++++++++++++++++++++
+
 	//+++++++++++++++++++++++++++
 	//GET CATEGORIES CONTENT
 	//++++++++++++++++++++++++++
@@ -751,6 +769,16 @@ class App_model extends CI_Model{
 				
 				$sql = " AND posts.post_id = ".$post_id;
 			}
+
+
+			if($pub_id == 12) {
+
+				$editions = [118, 110, 125, 126, 127];
+
+				$pubSQL = " AND publications.edition_id IN (" . $editions . ") ";	
+
+			}
+
 
 			$db = $this->nmh_model->connect_nmh_db();
 
