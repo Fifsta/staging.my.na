@@ -775,7 +775,7 @@ class App_model extends CI_Model{
 
 			if($pub_id == 12) {
 
-				$editions = array(118, 110, 125, 126, 127);
+				$editions = array(118, 110, 125, 126, 127, 117);
 
 				$pub_id = 4;
 
