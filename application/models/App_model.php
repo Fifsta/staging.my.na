@@ -775,7 +775,7 @@ class App_model extends CI_Model{
 
 				$editions = [118, 110, 125, 126, 127];
 
-				$pubSQL = " AND publications.edition_id IN (" . $editions . ") ";	
+				$edSQL = " AND posts.edition_id IN (" . $editions . ") ";	
 
 			}
 
@@ -799,7 +799,7 @@ class App_model extends CI_Model{
 						INNER JOIN post_cat_int ON post_cat_int.post_id = posts.post_id
 						INNER JOIN categories ON categories.cat_id = post_cat_int.cat_id
 						
-						WHERE posts.status = 'live' ".$sql." ".$pubSQL." AND posts.show_myinfo = 'Y'
+						WHERE posts.status = 'live' ".$sql." ".$pubSQL." ".$edSQL." AND posts.show_myinfo = 'Y'
 						AND posts.datetime > DATE_SUB(NOW(), INTERVAL 3 MONTH)
 						AND  exists ( select 1 from images 
 							where images.type_id = posts.post_id
