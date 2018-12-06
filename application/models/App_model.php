@@ -781,7 +781,7 @@ class App_model extends CI_Model{
 
 				$pubSQL = " AND publications.pub_id IN (" . $pub_id . ") ";
 
-				$edSQL = " AND posts.edition_id IN (".implode(",",array_map("intval",$editions)).") ";	
+				$edSQL = " AND posts.edition_id IN (".implode(",",array_map($editions)).") ";	
 
 			}
 
