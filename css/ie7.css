@@ -1,8 +1,0 @@
-/* © copyright Intouch Interactive Marketing - Carl-Heinz Benseler :: the css gods will strike down on tables with great vengence! */
-
-.ie7_layer{width:100%; height:100%; position:fixed; top:0; left:0; background:#f3f3f3; z-index:1000; text-align:center}
-.ie7_layer .table{width:100%; height:100%; display:table}
-.ie7_layer .cell{width:100%; height:100%; display:table-cell}
-.ie7_layer p{ padding-top:20px}
-
-/* © copyright Intouch Interactive Marketing - Carl-Heinz Benseler :: the css gods will strike down on tables with great vengence! */
